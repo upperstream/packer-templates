@@ -1,0 +1,9 @@
+# Packer templates
+
+## Contents
+
+* coreos - CoreOS templates
+
+- - -
+
+Copyright &copy; 2014 Upper Stream Software.

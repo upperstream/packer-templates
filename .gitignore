@@ -1,0 +1,5 @@
+.project
+**/.vagrant/
+**/*.box
+**/Vagrantfile
+**/packer_cache/
