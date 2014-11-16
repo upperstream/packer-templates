@@ -2,6 +2,7 @@
 
 ## Contents
 
+* centos - CentOS templates
 * coreos - CoreOS templates
 
 ## Licence

@@ -1,0 +1,9 @@
+# Packer templates for CentOS
+
+## Contents
+
+* centos-6.5-minimal - template for CentOS 6.5 minimal installation
+
+- - -
+
+Copyright &copy; 2014 Upper Stream Software.

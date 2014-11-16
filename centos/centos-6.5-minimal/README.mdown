@@ -1,0 +1,37 @@
+# Packer template for CentOS 6.5
+
+This template creates a Vagrant box for CentOS 6.5 minimal installation (x86_64).
+
+## Prerequisites
+
+* [Packer](https://www.packer.io/) v0.6.1
+* [Vagrant](https://www.vagrantup.com/) v1.6.5
+* [VirtualBox](https://www.virtualbox.org/) Version 4.3.18
+
+## Provisioned software tools
+
+* VirtualBox Guest Additions
+* curl
+* sshd
+* sudo
+* rsync
+* `vagrant` user and its insecure public key
+* ... and their dependencies
+
+## How to create a box
+
+From the terminal, invoke the following command:
+
+	packer build centos-6.5-minimal.json
+
+and you will find a vagrant box file named `CentOS-6.5-x86_64-minimal.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `CentOS-6.5-x86_64-minimal` to your box list
+by the following command:
+
+	vagrant add CentOS-6.5-x86_64-minimal.box --name CentOS-6.5-x86_64-minimal
+
+- - -
+
+Copyright &copy; 2014 Upper Stream Software.
