@@ -40,7 +40,7 @@
           "on"
         ]
       ],
-      "http_directory": ".",
+      "http_directory": "../http",
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
       ]
@@ -50,9 +50,9 @@
     {
       "type": "shell",
       "scripts": [
-        "provision_base.sh",
-        "provision_vagrant.sh",
-        "provision_virtualbox.sh"
+        "../provisioners/base.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/virtualbox.sh"
       ]
     }
   ],
