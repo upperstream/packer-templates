@@ -2,7 +2,7 @@
 
 ## Contents
 
-* centos-6.5-minimal - template for CentOS 6.5 minimal installation
+* centos-6.5 - template for CentOS 6.5
 
 - - -
 
