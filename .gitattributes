@@ -1,0 +1,5 @@
+*.cfg	eol=lf
+*.json	eol=lf
+*.mdown	eol=lf
+*.sh	eol=lf
+*.txt	eol=lf
