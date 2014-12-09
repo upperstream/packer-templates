@@ -14,5 +14,3 @@ mount -o loop /root/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
 sh /mnt/VBoxLinuxAdditions.run
 umount /mnt
 rm -rf /root/VBoxGuestAdditions_*.iso
-
-yum -y erase gcc
