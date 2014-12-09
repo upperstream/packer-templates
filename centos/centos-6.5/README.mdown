@@ -32,6 +32,12 @@ by the following command:
 
 	vagrant add CentOS-6.5-x86_64-minimal.box --name CentOS-6.5-x86_64-minimal
 
+## Variants
+
+* `centos-6.5-minimal.json` - CentOS 6.5 minimal installation
+* `centos-6.5-ansible.json` - provided with [Ansible](http://www.ansible.com/home)
+  in addition to CentOS 6.5 minimal installation.
+
 - - -
 
 Copyright &copy; 2014 Upper Stream Software.
