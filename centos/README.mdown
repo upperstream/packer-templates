@@ -2,7 +2,7 @@
 
 ## Contents
 
-* centos-6.5 - template for CentOS 6.5
+* centos-6.5 - templates for CentOS 6.5
 
 - - -
 
