@@ -1,4 +1,3 @@
-.project
 **/.vagrant/
 **/*.box
 **/Vagrantfile
