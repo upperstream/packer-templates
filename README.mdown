@@ -2,8 +2,12 @@
 
 ## Contents
 
-* centos - CentOS templates
-* coreos - CoreOS templates
+* [centos](centos/README.mdown) - CentOS templates
+	* centos-6.5 - CentOS 6.5 templates
+		* CentOS 6.5 minimal
+		* CentOS 6.5 minimal + Ansible
+		* CentOS 6.5 minimal + Docker, nsenter, and Fig
+* [coreos](coreos/README.mdown) - CoreOS templates
 
 ## Licence
 
