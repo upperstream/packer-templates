@@ -1,0 +1,10 @@
+# Packer templates for Ubuntu
+
+## Contents
+
+* [ubuntu-14.04](ubuntu-14.04/README.mdown) - templates for Ubuntu 14.04
+	* Xubuntu 14.04 minimal
+
+- - -
+
+Copyright &copy; 2014 Upper Stream Software.
