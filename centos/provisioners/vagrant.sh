@@ -1,4 +1,5 @@
-yum -y install sudo-1.8.6p3-12.el6
+# vagrant stuff
+# depends: sudo
 useradd vagrant
 echo "vagrant" | passwd --stdin vagrant
 echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/vagrant

@@ -7,6 +7,10 @@
 		* CentOS 6.5 minimal
 		* CentOS 6.5 minimal + Ansible
 		* CentOS 6.5 minimal + Docker, nsenter, and Fig
+	* centos-6.6 - CentOS 6.6 templates
+		* CentOS 6.6 minimal
+		* CentOS 6.6 minimal + Ansible
+		* CentOS 6.6 minimal + Docker, nsenter, and Fig
 * [coreos](coreos/README.mdown) - CoreOS templates
 * [ubuntu](ubuntu/README.mdown) - Ubuntu templates
 	* ubuntu-14.04 - Ubuntu 14.04 templates

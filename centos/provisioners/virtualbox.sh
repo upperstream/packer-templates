@@ -1,8 +1,6 @@
-KERNEL_VERSION=$(uname -r)
+# Virtualbox
+# Depends: kernel-stuff
 VBOX_VERSION=$(cat /root/.vbox_version)
-
-rpm -iv http://ftp.iij.ad.jp/pub/linux/centos/6.5/os/x86_64/Packages/kernel-headers-$KERNEL_VERSION.rpm
-rpm -iv http://ftp.iij.ad.jp/pub/linux/centos/6.5/os/x86_64/Packages/kernel-devel-$KERNEL_VERSION.rpm
 
 yum -y install yum-plugin-priorities-1.1.30-30.el6
 rpm -U http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm

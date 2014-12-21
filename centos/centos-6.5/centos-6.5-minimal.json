@@ -51,7 +51,9 @@
       "type": "shell",
       "scripts": [
         "../provisioners/base.sh",
+        "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
+        "../provisioners/kernel_stuff-6.5.sh",
         "../provisioners/virtualbox.sh",
         "../provisioners/cleanup.sh"
       ]
@@ -64,4 +66,3 @@
     }
   ]
 }
-
