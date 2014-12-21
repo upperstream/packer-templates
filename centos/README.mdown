@@ -10,7 +10,8 @@
 	* CentOS 6.6 minimal
 	* CentOS 6.6 minimal + Ansible
 	* CentOS 6.6 minimal + Docker, nsenter, and Fig
-
+* [centos-7.0](centos-7.0/README.mdown) - template for CentOS 7.0
+	* CentOS 7.0 minimal
 
 - - -
 

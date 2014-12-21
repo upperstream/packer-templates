@@ -51,9 +51,11 @@
       "type": "shell",
       "scripts": [
         "../provisioners/base.sh",
-        "../provisioners/sudo.sh",
+        "../provisioners/sudo-6.x.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/kernel_stuff-6.6.sh",
+        "../provisioners/epel-6.x.sh",
+        "../provisioners/virtualbox_dependencies-6.x.sh",
         "../provisioners/virtualbox.sh",
         "../provisioners/docker-io.sh",
         "../provisioners/nsenter.sh",

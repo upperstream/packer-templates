@@ -10,9 +10,9 @@
       "boot_wait": "10s",
       "disk_size": 512000,
       "guest_os_type": "RedHat_64",
-      "iso_checksum": "0d9dc37b5dd4befa1c440d2174e88a87",
+      "iso_checksum": "e3afe3f1121d69c40cc23f0bafa05e5d",
       "iso_checksum_type": "md5",
-      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/6.5/isos/x86_64/CentOS-6.5-x86_64-minimal.iso",
+      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/7.0.1406/isos/x86_64/CentOS-7.0-1406-x86_64-Minimal.iso",
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
@@ -51,23 +51,20 @@
       "type": "shell",
       "scripts": [
         "../provisioners/base.sh",
-        "../provisioners/sudo-6.x.sh",
+        "../provisioners/sudo-7.0.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/kernel_stuff-6.5.sh",
-        "../provisioners/epel-6.x.sh",
-        "../provisioners/virtualbox_dependencies-6.x.sh",
-        "../provisioners/virtualbox.sh",
-        "../provisioners/docker-io.sh",
-        "../provisioners/nsenter.sh",
-        "../provisioners/fig.sh",
-        "../provisioners/cleanup.sh"
+        "../provisioners/perl.sh",
+        "../provisioners/kernel_stuff-7.0.sh",
+        "../provisioners/epel-7.0.sh",
+        "../provisioners/virtualbox_dependencies-7.0.sh",
+        "../provisioners/virtualbox.sh"
       ]
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./CentOS-6.5-x86_64-docker.box"
+      "output": "./CentOS-7.0-x86_64-minimal.box"
     }
   ]
 }
