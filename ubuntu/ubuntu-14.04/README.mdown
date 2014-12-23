@@ -28,13 +28,13 @@ From the terminal, invoke the following command:
 
 	packer build xubuntu-14.04-minimal.json
 
-and you will find a vagrant box file named `Xubuntu-14.04-x86_64-minimal.box`
+and you will find a vagrant box file named `Xubuntu-14.04-amd64-minimal.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Xubuntu-14.04-x86_64-minimal` to your box list
+Then you can add the box named `Xubuntu-14.04-amd64-minimal` to your box list
 by the following command:
 
-	vagrant add Xubuntu-14.04-x86_64-minimal.box --name Xubuntu-14.04-x86_64-minimal
+	vagrant add Xubuntu-14.04-amd64-minimal.box --name Xubuntu-14.04-amd64-minimal
 
 
 - - -

@@ -41,9 +41,9 @@
     {
       "type": "shell",
       "scripts": [
-        "provision_base.sh",
-        "provision_vagrant.sh",
-        "provision_virtualbox.sh"
+        "../provisioners/base.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/virtualbox.sh"
       ],
       "override": {
         "virtualbox-iso": {
@@ -55,7 +55,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./Xubuntu-14.04-x86_64-minimal.box"
+      "output": "./Xubuntu-14.04-amd64-minimal.box"
     }
   ]
 }
