@@ -29,7 +29,7 @@
       "http_directory": "../http",
       "boot_command": [
         "<esc> linux ",
-        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/xubuntu-preseed.cfg ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
         "debian-installer=en_US auto=true locale=en_US kbd-chooser/method=us ",
         "console-setup/ask_detect=false keyboard-configuration/layoutcode=us ",
         "hostname=vagrant ",
@@ -55,7 +55,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./Xubuntu-14.04-amd64-minimal.box"
+      "output": "./Ubuntu-server-14.04-amd64-minimal.box"
     }
   ]
 }

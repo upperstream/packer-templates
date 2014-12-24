@@ -36,6 +36,11 @@ by the following command:
 
 	vagrant add Xubuntu-14.04-amd64-minimal.box --name Xubuntu-14.04-amd64-minimal
 
+## Variants
+
+* `ubuntu-server-14.04-minimal.json` - Ubuntu Server 14.04.1 LTS
+* `xubuntu-14.04-minimal.json` - Xubuntu 14.04.1 LTS minimal installation
+
 
 - - -
 

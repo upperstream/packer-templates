@@ -16,7 +16,9 @@
 * [coreos](coreos/README.mdown) - CoreOS templates
 * [ubuntu](ubuntu/README.mdown) - Ubuntu templates
 	* ubuntu-14.04 - Ubuntu 14.04 templates
-		* Xubuntu 14.04 minimal
+		* Ubuntu Server 14.04.1 LTS
+		* Xubuntu 14.04.1 LTS minimal
+
 
 ## Licence
 

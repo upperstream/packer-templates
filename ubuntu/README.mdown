@@ -3,7 +3,8 @@
 ## Contents
 
 * [ubuntu-14.04](ubuntu-14.04/README.mdown) - templates for Ubuntu 14.04
-	* Xubuntu 14.04 minimal
+	* Ubuntu Server 14.04.1 LTS
+	* Xubuntu 14.04.1 LTS minimal
 
 - - -
 
