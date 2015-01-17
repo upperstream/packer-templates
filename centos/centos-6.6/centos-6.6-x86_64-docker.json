@@ -1,0 +1,73 @@
+{
+  "variables": {
+    "ssh_name": "root",
+    "ssh_pass": "vagrant"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "vm_name": "box",
+      "boot_wait": "10s",
+      "disk_size": 512000,
+      "guest_os_type": "RedHat_64",
+      "iso_checksum": "eb3c8be6ab668e6d83a118323a789e6c",
+      "iso_checksum_type": "md5",
+      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/6.6/isos/x86_64/CentOS-6.6-x86_64-minimal.iso",
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h now",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "512"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--rtcuseutc",
+          "on"
+        ]
+      ],
+      "http_directory": "../http",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/base.sh",
+        "../provisioners/sudo-6.x.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/kernel_stuff-6.6-x86_64.sh",
+        "../provisioners/epel-6.x-x86_64.sh",
+        "../provisioners/virtualbox_dependencies-6.x.sh",
+        "../provisioners/virtualbox.sh",
+        "../provisioners/docker-io.sh",
+        "../provisioners/nsenter.sh",
+        "../provisioners/fig.sh",
+        "../provisioners/cleanup.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "./CentOS-6.6-x86_64-docker.box"
+    }
+  ]
+}

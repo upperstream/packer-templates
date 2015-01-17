@@ -53,13 +53,12 @@
         "../provisioners/base.sh",
         "../provisioners/sudo-6.x.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/kernel_stuff-6.6.sh",
-        "../provisioners/epel-6.x.sh",
+        "../provisioners/kernel_stuff-6.6-x86_64.sh",
+        "../provisioners/epel-6.x-x86_64.sh",
         "../provisioners/virtualbox_dependencies-6.x.sh",
         "../provisioners/virtualbox.sh",
-        "../provisioners/docker-io.sh",
-        "../provisioners/nsenter.sh",
-        "../provisioners/fig.sh",
+        "../provisioners/python-devel.sh",
+        "../provisioners/ansible.sh",
         "../provisioners/cleanup.sh"
       ]
     }
@@ -67,7 +66,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./CentOS-6.6-x86_64-docker.box"
+      "output": "./CentOS-6.6-x86_64-ansible.box"
     }
   ]
 }

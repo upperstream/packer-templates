@@ -2,17 +2,17 @@
 
 ## Contents
 
-* [centos-6.5](centos-6.5/README.mdown) - templates for CentOS 6.5
+* [centos-6.5](centos-6.5/README.mdown) - templates for CentOS 6.5 (x86_64)
 	* CentOS 6.5 minimal
 	* CentOS 6.5 minimal + Ansible
 	* CentOS 6.5 minimal + Docker, nsenter, and Fig
-* [centos-6.6](centos-6.6/README.mdown) - templates for CentOS 6.6
+* [centos-6.6](centos-6.6/README.mdown) - templates for CentOS 6.6 (x86_64 and i386)
 	* CentOS 6.6 minimal
 	* CentOS 6.6 minimal + Ansible
 	* CentOS 6.6 minimal + Docker, nsenter, and Fig
-* [centos-7.0](centos-7.0/README.mdown) - template for CentOS 7.0
+* [centos-7.0](centos-7.0/README.mdown) - template for CentOS 7.0 (x86_64)
 	* CentOS 7.0 minimal
 
 - - -
 
-Copyright &copy; 2014 Upper Stream Software.
+Copyright &copy; 2014, 2015 Upper Stream Software.

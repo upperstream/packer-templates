@@ -3,15 +3,15 @@
 ## Contents
 
 * [centos](centos/README.mdown) - CentOS templates
-	* centos-6.5 - CentOS 6.5 templates
+	* centos-6.5 - CentOS 6.5 templates (x86_64)
 		* CentOS 6.5 minimal
 		* CentOS 6.5 minimal + Ansible
 		* CentOS 6.5 minimal + Docker, nsenter, and Fig
-	* centos-6.6 - CentOS 6.6 templates
+	* centos-6.6 - CentOS 6.6 templates (x86_64 and i386)
 		* CentOS 6.6 minimal
 		* CentOS 6.6 minimal + Ansible
 		* CentOS 6.6 minimal + Docker, nsenter, and Fig
-	* centos-7.0 - CentOS 7.0 templates
+	* centos-7.0 - CentOS 7.0 templates (x86_64)
 		* CentOS 7.0 minimal
 * [coreos](coreos/README.mdown) - CoreOS templates
 * [ubuntu](ubuntu/README.mdown) - Ubuntu templates
@@ -20,7 +20,7 @@
 		* Xubuntu 14.04.1 LTS minimal
 
 
-## Licence
+## Licensing
 
 All the files in this directory and descendants are provided under the Apache License,
 Version 2.0 (the "License"); unless otherwise explicitly stated.  You may not use these
@@ -35,4 +35,4 @@ permissions and limitations under the License.
 
 - - -
 
-Copyright &copy; 2014 Upper Stream Software.
+Copyright &copy; 2014, 2015 Upper Stream Software.

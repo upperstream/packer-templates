@@ -30,7 +30,7 @@ Template creating Vagrant box for CentOS 7.0 minimal installation (x86_64).
 
 From the terminal, invoke the following command:
 
-	packer build centos-7.0-minimal.json
+	packer build centos-7.0-x86_64-minimal.json
 
 and you will find a vagrant box file named `CentOS-7.0-x86_64-minimal.box`
 in the same directory after the command has succeeded.
@@ -47,4 +47,4 @@ by the following command:
 
 - - -
 
-Copyright &copy; 2014 Upper Stream Software.
+Copyright &copy; 2014, 2015 Upper Stream Software.

@@ -1,6 +1,6 @@
 # Packer templates for CentOS 6.6
 
-Templates creating Vagrant boxes for CentOS 6.6 minimal installation (x86_64).
+Templates creating Vagrant boxes for CentOS 6.6 minimal installation (x86_64 and i386).
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ Templates creating Vagrant boxes for CentOS 6.6 minimal installation (x86_64).
 
 From the terminal, invoke the following command:
 
-	packer build centos-6.6-minimal.json
+	packer build centos-6.6-x86_64-minimal.json
 
 and you will find a vagrant box file named `CentOS-6.6-x86_64-minimal.box`
 in the same directory after the command has succeeded.
@@ -42,11 +42,16 @@ by the following command:
 
 ## Variants
 
-* `centos-6.6-minimal.json` - CentOS 6.6 minimal installation
-* `centos-6.6-ansible.json` - provided with [Ansible]
-  in addition to CentOS 6.6 minimal installation
-* `centos-6.6-docker.json` - provided with [Docker], [nsenter], and [Fig];
-  in addition to CentOS 6.6 minimal installation.
+* `centos-6.6-x86_64-minimal.json` - CentOS 6.6 (x86_64) minimal installation
+* `centos-6.6-x86_64-ansible.json` - provided with [Ansible]
+  in addition to CentOS 6.6 (x86_64) minimal installation
+* `centos-6.6-x86_64-docker.json` - provided with [Docker], [nsenter], and [Fig];
+  in addition to CentOS 6.6 (x86_64) minimal installation.
+* `centos-6.6-i386-minimal.json` - CentOS 6.6 (i386) minimal installation
+* `centos-6.6-i386-ansible.json` - provided with [Ansible]
+  in addition to CentOS 6.6 (i386) minimal installation
+* `centos-6.6-i386-docker.json` - provided with [Docker], [nsenter], and [Fig];
+  in addition to CentOS 6.6 (i386) minimal installation.
 
 [Ansible]: http://www.ansible.com/home "Ansible is Simple IT Automation"
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
@@ -55,4 +60,4 @@ by the following command:
 
 - - -
 
-Copyright &copy; 2014 Upper Stream Software.
+Copyright &copy; 2014, 2015 Upper Stream Software.
