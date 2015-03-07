@@ -58,8 +58,9 @@
         "../provisioners/base.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/kernel-3.16.sh",
+        "../provisioners/docker-io.sh",
         "../provisioners/virtualbox.sh",
-        "../provisioners/docker-io.sh"
+        "../provisioners/cleanup.sh"
       ],
       "override": {
         "virtualbox-iso": {
