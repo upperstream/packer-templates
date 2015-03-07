@@ -1,0 +1,80 @@
+{
+  "variables": {
+    "os_version": "7.8.0",
+    "iso_checksum": "a91fba5001cf0fbccb44a7ae38c63b6e",
+    "vb_version": "4.3.24",
+    "ssh_name": "root",
+    "ssh_pass": "vagrant"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "vm_name": "box",
+      "boot_wait": "10s",
+      "disk_size": 512000,
+      "guest_os_type": "Debian_64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "md5",
+      "iso_url": "http://cdimage.debian.org/debian-cd/{{user `os_version`}}/amd64/iso-cd/debian-{{user `os_version`}}-amd64-netinst.iso",
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "debian-{{user `os_version`}}-amd64",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "512" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "32" ]
+      ],
+      "http_directory": "../http",
+      "boot_command": [
+        "<esc> <wait> install ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "debian-installer=en_US ",
+        "auto ",
+        "locale=en_US ",
+        "kbd-chooser/method=us ",
+        "keyboard-configuration/xkb-keymap=us ",
+        "keyboard-configuration/layoutcode=us ",
+        "netcfg/get_hostname={{ .Name }} ",
+        "netcfg/get_domain=vagrantup.com ",
+        "console-setup/ask_detect=false ",
+        "console-keymaps-at/keymap=us ",
+        "fb=false ",
+        "debconf/frontend=noninteractive ",
+        "hostname=vagrant <wait>",
+        "<enter> <wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/base.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/kernel-3.16.sh",
+        "../provisioners/virtualbox.sh",
+        "../provisioners/docker-io.sh"
+      ],
+      "override": {
+        "virtualbox-iso": {
+        }
+      },
+      "environment_vars": [
+        "VBOX_VER={{user `vb_version`}}"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "./debian-7.8-amd64-docker.box"
+    }
+  ]
+}
+
