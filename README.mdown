@@ -17,6 +17,9 @@
 * [debian](debian/README.mdown) - Debian templates
     * debian-7.8 - Debian 7.8 templates
     * debian-8.0 - Debian 8.0 templates
+* [freebsd](freebsd/README.mdown) - FreeBSD templates
+    * freebsd-9.3 - FreeBSD 9.3 templates
+    * freebsd-10.1 - FreeBSD 10.1 templates
 * [ubuntu](ubuntu/README.mdown) - Ubuntu templates
 	* ubuntu-14.04 - Ubuntu 14.04 templates
 		* Ubuntu Server 14.04.1 LTS

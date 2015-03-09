@@ -1,0 +1,12 @@
+# Packer templates for FreeBSD
+
+## Contents
+
+* [freebsd-9.3](freebsd-9.3/README.mdown) - templates for FreeBSD 9.3-RELEASE
+	* FreeBSD 9.3-RELEASE
+* [freebsd-10.1](freebsd-10.1/README.mdown) - templates for FreeBSD 10.1-RELEASE
+	* FreeBSD 10.1-RELEASE
+
+- - -
+
+Copyright &copy; 2015 Upper Stream Software.
