@@ -6,7 +6,6 @@
   "builders": [
     {
       "type": "virtualbox-iso",
-      "vm_name": "box",
       "boot_wait": "20s",
       "disk_size": 80000,
       "guest_os_type": "RedHat_64",

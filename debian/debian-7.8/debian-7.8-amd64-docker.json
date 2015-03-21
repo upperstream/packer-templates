@@ -9,7 +9,6 @@
   "builders": [
     {
       "type": "virtualbox-iso",
-      "vm_name": "box",
       "boot_wait": "10s",
       "disk_size": 512000,
       "guest_os_type": "Debian_64",
@@ -23,7 +22,6 @@
       "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "debian-{{user `os_version`}}-amd64",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "512" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
