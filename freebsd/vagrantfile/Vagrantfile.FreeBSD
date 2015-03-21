@@ -2,7 +2,9 @@
 # vi: set ft=ruby :
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
-# VAGRANTFILE_API_VERSION = "2"
+if !defined? VAGRANTFILE_API_VERSION
+  VAGRANTFILE_API_VERSION = "2"
+end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
@@ -35,6 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Default value: false
   # config.ssh.forward_agent = true
 
+  # Set the default shell for SSH session to sh
   config.ssh.shell = "/bin/sh"
 
   # Share an additional folder to the guest VM. The first argument is
