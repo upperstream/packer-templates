@@ -1,0 +1,10 @@
+# Packer template for OpenBSD
+
+## Contents
+
+* [openbsd-5.6](openbsd-5.6/README.mdown) - templates for OpenBSD 5.6 (amd64)
+	* OpenBSD 5.6
+
+- - -
+
+Copyright &copy; 2015 Upper Stream Software.

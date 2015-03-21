@@ -1,0 +1,57 @@
+# Packer template for OpenBSD 5.6
+
+Template creating Vagrant box for OpenBSD 5.6 (amd64).
+
+## Prerequisites
+
+* [Packer] v0.7.2
+* [Vagrant] v1.7.2
+* [VirtualBox]
+	* Version 4.3.26 for Windows
+	* Version 4.2.8 for Mac OS X (which allows [HAXM] to work in parallel)
+
+[Packer]: https://www.packer.io/ "Packer by HashiCorp"
+[Vagrant]: https://www.vagrantup.com/ "Vagrant"
+[VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
+[HAXM]: https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager
+        "Intel&reg; Hardware Accelerated Execution Manager"
+
+## Provisioned software tools
+
+* sshd
+* rsync
+* sharity-light
+* `vagrant` user and its insecure public key
+* ... and their dependencies
+
+## How to create a box
+
+From the terminal, invoke the following command:
+
+	packer build openbsd-5.6-amd64.json
+
+and you will find a vagrant box file named `OpenBSD-5.6-amd64.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `OpenBSD-5.6-amd64` to your box list
+by the following command:
+
+	vagrant add OpenBSD-5.6-amd64.box --name OpenBSD-5.6-amd64
+
+## Default settings
+
+These default settings are done by the file `Vagrantfile.OpenBSD` which will be included in the box.
+Users can override this setting by users' own `Vagrantfile`s.
+
+### Synced Folder
+
+Due to Vagrant limitation of OpenBSD support, Synced Folder of this box is disabled by default.
+
+### SSH Shell
+
+Because Bash is not the standard shell for OpenBSD, default shell for SSH connection of this box
+is set to "`/bin/ksh`".
+
+- - -
+
+Copyright &copy; 2015 Upper Stream Software.
