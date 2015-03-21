@@ -42,21 +42,25 @@ by the following command:
 
 ## Variants
 
+### x86_64 architecture
+
 * `centos-6.6-x86_64-minimal.json` - CentOS 6.6 (x86_64) minimal installation
 * `centos-6.6-x86_64-ansible.json` - provided with [Ansible]
   in addition to CentOS 6.6 (x86_64) minimal installation
-* `centos-6.6-x86_64-docker.json` - provided with [Docker], [nsenter], and [Fig];
+* `centos-6.6-x86_64-docker.json` - provided with [Docker], [Docker Compose], and [Fig];
   in addition to CentOS 6.6 (x86_64) minimal installation.
+  (Fig has been officially replaced by Docker Compose.) 
+
+### i386 architecture
+
 * `centos-6.6-i386-minimal.json` - CentOS 6.6 (i386) minimal installation
 * `centos-6.6-i386-ansible.json` - provided with [Ansible]
   in addition to CentOS 6.6 (i386) minimal installation
-* `centos-6.6-i386-docker.json` - provided with [Docker], [nsenter], and [Fig];
-  in addition to CentOS 6.6 (i386) minimal installation.
 
 [Ansible]: http://www.ansible.com/home "Ansible is Simple IT Automation"
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
+[Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
 [Fig]: http://www.fig.sh/ "Fig | Fast, isolated development environments using Docker"
-[nsenter]: https://github.com/jpetazzo/nsenter
 
 - - -
 

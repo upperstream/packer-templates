@@ -2,6 +2,7 @@
   "variables": {
     "ssh_name": "root",
     "ssh_pass": "vagrant",
+    "box_ver": "1",
     "path_to_iso": "6.5/isos/x86_64/CentOS-6.5-x86_64-minimal.iso"
   },
   "builders": [
@@ -63,8 +64,8 @@
         "../provisioners/virtualbox_dependencies-6.x.sh",
         "../provisioners/virtualbox.sh",
         "../provisioners/docker-io.sh",
-        "../provisioners/nsenter.sh",
         "../provisioners/fig.sh",
+        "../provisioners/nsenter.sh",
         "../provisioners/cleanup.sh"
       ]
     }
@@ -72,7 +73,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./CentOS-6.5-x86_64-docker.box"
+      "output": "./CentOS-6.5-x86_64-docker-v{{user `box_ver`}}.box"
     }
   ]
 }

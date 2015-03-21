@@ -6,11 +6,11 @@
 	* centos-6.5 - CentOS 6.5 templates (x86_64)
 		* CentOS 6.5 minimal
 		* CentOS 6.5 minimal + Ansible
-		* CentOS 6.5 minimal + Docker, nsenter, and Fig
+		* CentOS 6.5 minimal + Docker, Docker Compose, nsenter, and Fig
 	* centos-6.6 - CentOS 6.6 templates (x86_64 and i386)
 		* CentOS 6.6 minimal
 		* CentOS 6.6 minimal + Ansible
-		* CentOS 6.6 minimal + Docker, nsenter, and Fig
+		* CentOS 6.6 minimal + Docker, Docker Compose, and Fig (x86_64 only)
 	* centos-7.0 - CentOS 7.0 templates (x86_64)
 		* CentOS 7.0 minimal
 * [coreos](coreos/README.mdown) - CoreOS templates
