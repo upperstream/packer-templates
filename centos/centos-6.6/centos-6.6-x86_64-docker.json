@@ -57,7 +57,7 @@
         "../provisioners/epel-6.x-x86_64.sh",
         "../provisioners/virtualbox_dependencies-6.x.sh",
         "../provisioners/virtualbox.sh",
-        "../provisioners/docker-io.sh",
+        "../provisioners/docker-io-centos6.sh",
         "../provisioners/fig.sh",
         "../provisioners/cleanup.sh"
       ]

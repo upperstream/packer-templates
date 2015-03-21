@@ -1,13 +1,13 @@
-# Packer template for CentOS 7.0
+# Packer templates for CentOS 7.0
 
-Template creating Vagrant box for CentOS 7.0 minimal installation (x86_64).
+Template creating Vagrant boxes for CentOS 7.0 minimal installation (x86_64).
 
 ## Prerequisites
 
-* [Packer] v0.6.1
+* [Packer] v0.7.2
 * [Vagrant] v1.6.5
 * [VirtualBox]
-	* Version 4.3.16 for Windows
+	* Version 4.3.26 for Windows
 	* Version 4.2.8 for Mac OS X (which allows [HAXM] to work in parallel)
 
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
@@ -40,10 +40,16 @@ by the following command:
 
 	vagrant add CentOS-7.0-x86_64-minimal.box --name CentOS-70-x86_64-minimal
 
-[Ansible]: http://www.ansible.com/home "Ansible is Simple IT Automation"
+## Variants
+
+* `centos-7.0-x86_64-minimal.json` - CentOS 7.0 (x86_64) minimal installation
+* `centos-7.0-x86_64-docker.json` - provided with [Docker], [Docker Compose], and [Fig];
+  in addition to CentOS 7.0 (x86_64) minimal installation.
+  (Fig has been officially replaced by Docker Compose.) 
+
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
+[Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
 [Fig]: http://www.fig.sh/ "Fig | Fast, isolated development environments using Docker"
-[nsenter]: https://github.com/jpetazzo/nsenter
 
 - - -
 

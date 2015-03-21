@@ -13,6 +13,7 @@
 		* CentOS 6.6 minimal + Docker, Docker Compose, and Fig (x86_64 only)
 	* centos-7.0 - CentOS 7.0 templates (x86_64)
 		* CentOS 7.0 minimal
+		* CentOS 7.0 minimal + Docker, Docker Compose, and Fig
 * [coreos](coreos/README.mdown) - CoreOS templates
 * [debian](debian/README.mdown) - Debian templates
     * debian-7.8 - Debian 7.8 templates
