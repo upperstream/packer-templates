@@ -1,6 +1,6 @@
-# Packer template for OpenBSD 5.6
+# Packer templates for OpenBSD 5.6
 
-Template creating Vagrant box for OpenBSD 5.6 (amd64).
+Template creating Vagrant boxes for OpenBSD 5.6 (amd64 and i386).
 
 ## Prerequisites
 
