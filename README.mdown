@@ -21,6 +21,9 @@
 * [freebsd](freebsd/README.mdown) - FreeBSD templates
 	* freebsd-9.3 - FreeBSD 9.3 templates
 	* freebsd-10.1 - FreeBSD 10.1 templates
+* [netbsd](netbsd/README.mdown) - NetBSD template
+	* netbsd-5.2.3 - NetBSD 5.2.3 templates (amd64 and i386)
+	* netbsd-6.1.5 - NetBSD 6.1.5 templates (amd64 and i386)
 * [openbsd](openbsd/README.mdown) - OpenBSD templates
 	* openbsd-5.6 - OpenBSD 5.6 templates (amd64 and i386)
 * [ubuntu](ubuntu/README.mdown) - Ubuntu templates
