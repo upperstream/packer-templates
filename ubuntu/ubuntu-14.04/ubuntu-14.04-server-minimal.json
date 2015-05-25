@@ -54,7 +54,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./Ubuntu-server-14.04-amd64-minimal.box"
+      "output": "./Ubuntu-14.04-server-amd64-minimal.box"
     }
   ]
 }

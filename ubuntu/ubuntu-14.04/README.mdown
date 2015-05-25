@@ -38,10 +38,10 @@ by the following command:
 
 ## Variants
 
-* `ubuntu-server-14.04-minimal.json` - Ubuntu Server 14.04.1 LTS
+* `ubuntu-14.04-server-minimal.json` - Ubuntu Server 14.04.1 LTS
 * `xubuntu-14.04-minimal.json` - Xubuntu 14.04.1 LTS minimal installation
 
 
 - - -
 
-Copyright &copy; 2014 Upper Stream Software.
+Copyright &copy; 2014, 2015 Upper Stream Software.
