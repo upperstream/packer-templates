@@ -1,6 +1,6 @@
-# Packer templates for OpenBSD 5.6
+# Packer templates for OpenBSD 5.7
 
-Templates creating Vagrant boxes for OpenBSD 5.6 (amd64 and i386).
+Templates creating Vagrant boxes for OpenBSD 5.7 (amd64 and i386).
 
 ## Prerequisites
 
@@ -28,15 +28,15 @@ Templates creating Vagrant boxes for OpenBSD 5.6 (amd64 and i386).
 
 From the terminal, invoke the following command:
 
-	packer build openbsd-5.6-amd64.json
+	packer build openbsd-5.7-amd64.json
 
-and you will find a vagrant box file named `OpenBSD-5.6-amd64.box`
+and you will find a vagrant box file named `OpenBSD-5.7-amd64.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-5.6-amd64` to your box list
+Then you can add the box named `OpenBSD-5.7-amd64` to your box list
 by the following command:
 
-	vagrant add OpenBSD-5.6-amd64.box --name OpenBSD-5.6-amd64
+	vagrant add OpenBSD-5.7-amd64.box --name OpenBSD-5.7-amd64
 
 ## Default settings
 

@@ -4,6 +4,8 @@
 
 * [openbsd-5.6](openbsd-5.6/README.mdown) - templates for OpenBSD 5.6
 	* OpenBSD 5.6 (amd64 and i386)
+* [openbsd-5.7](openbsd-5.7/README.mdown) - templates for OpenBSD 5.7
+	* OpenBSD 5.7 (amd64 and i386)
 
 - - -
 
