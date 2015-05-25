@@ -1,7 +1,7 @@
 {
   "variables": {
-    "os_version": "7.8.0",
-    "iso_checksum": "a91fba5001cf0fbccb44a7ae38c63b6e",
+    "iso_path": "Linux/debian/debian/dists/oldstable/main/installer-amd64/20130613+deb7u2+b4/images/netboot/mini.iso",
+    "iso_checksum": "afa217cf0cf5a3e44ab02532e1d767f0",
     "vb_version": "4.3.24",
     "ssh_name": "root",
     "ssh_pass": "vagrant"
@@ -14,7 +14,9 @@
       "guest_os_type": "Debian_64",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "md5",
-      "iso_url": "http://cdimage.debian.org/debian-cd/{{user `os_version`}}/amd64/iso-cd/debian-{{user `os_version`}}-amd64-netinst.iso",
+      "iso_urls": [
+        "http://ftp.riken.jp/{{user `iso_path`}}"
+      ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
