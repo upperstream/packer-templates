@@ -4,10 +4,14 @@
 
 * [netbsd-5.2.3](netbsd-5.2.3/README.mdown) - templates for NetBSD 5.2.3
 	* NetBSD 5.2.3 (amd64)
+	* NetBSD 5.2.3 + Ansible (amd64)
 	* NetBSD 5.2.3 (i386)
+	* NetBSD 5.2.3 + Ansible (i386)
 * [netbsd-6.1.5](netbsd-6.1.5/README.mdown) - templates for NetBSD 6.1.5
 	* NetBSD 6.1.5 (amd64)
+	* NetBSD 6.1.5 + Ansible (amd64)
 	* NetBSD 6.1.5 (i386)
+	* NetBSD 6.1.5 + Ansible (i386)
 
 - - -
 

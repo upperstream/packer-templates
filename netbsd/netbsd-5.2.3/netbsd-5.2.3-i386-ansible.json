@@ -1,8 +1,8 @@
 {
   "variables": {
     "ssh_username": "root",
-    "path_to_iso_image": "NetBSD-6.1.5/iso/NetBSD-6.1.5-i386.iso",
-    "iso_checksum": "a5a1062e2092f38903d48680ad7fb8dd64597482dc658fa5b7e53c99ceab7f6af30ee89d121413e44aaffdd865b90a31465240d802de77e6d2e2ee0465a439a9",
+    "path_to_iso_image": "NetBSD-5.2.3/iso/NetBSD-5.2.3-i386.iso",
+    "iso_checksum": "0f555a7dde4d51ef82afe2e1f416d9eb3d534a04b783a6a3adc86fb400cfa0754f6fbbb6f990e04c3974ea4b6143e9a8672f8e70263d5950a91b3975bcbd8245",
     "iso_checksum_type": "sha512"
   },
   "builders": [
@@ -52,15 +52,15 @@
       ],
       "http_directory": ".",
       "boot_command": [
-        "1<wait10><wait10><wait5>",
+        "1<wait10><wait5>",
         "a<enter><wait>",
         "a<enter><wait>",
         "a<enter><wait>",
         "b<enter><wait>",
         "<enter><wait>",
-        "d<enter><wait>",
-        "g<enter><wait>",
-        "j<enter><wait>",
+        "c<enter><wait>",
+        "f<enter><wait>",
+        "i<enter><wait>",
         "x<enter><wait>",
         "a<enter><wait>",
         "b<enter><wait>",
@@ -71,17 +71,18 @@
         "b<enter><wait10>",
         "a<enter><wait>",
         "x<enter><wait>",
-        "a<enter><wait10><wait10>",
+        "a<enter><wait>",
+        "a<enter><wait>",
+        "x<enter><wait10><wait10><wait10>",
         "<enter><wait>",
+        "x<wait><enter><wait>",
         "d<enter><wait>",
         "a<enter><wait>",
         "vagrant<enter><wait>",
         "vagrant<enter><wait>",
         "vagrant<enter><wait>",
-        "g<enter><wait>",
-        "h<enter><wait>",
-        "x<enter><wait>",
-        "<enter><wait10>",
+        "a<enter><wait>",
+        "<enter><wait>",
         "x<enter><wait>",
         "dhclient<enter><wait10>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
@@ -96,11 +97,13 @@
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/rsync.sh",
+        "../provisioners/python27.sh",
+        "../provisioners/ansible.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
         "virtualbox-iso": {
-          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/`uname -r`/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
+          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/`uname -r | cut -f1 -f2 -d.`/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
         }
       }
     }
@@ -108,7 +111,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./NetBSD-6.1.5-i386.box",
+      "output": "./NetBSD-5.2.3-i386-ansible.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfile/Vagrantfile.NetBSD"

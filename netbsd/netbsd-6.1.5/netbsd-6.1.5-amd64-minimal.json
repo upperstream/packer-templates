@@ -1,8 +1,8 @@
 {
   "variables": {
     "ssh_username": "root",
-    "path_to_iso_image": "NetBSD-5.2.3/iso/NetBSD-5.2.3-i386.iso",
-    "iso_checksum": "0f555a7dde4d51ef82afe2e1f416d9eb3d534a04b783a6a3adc86fb400cfa0754f6fbbb6f990e04c3974ea4b6143e9a8672f8e70263d5950a91b3975bcbd8245",
+    "path_to_iso_image": "NetBSD-6.1.5/iso/NetBSD-6.1.5-amd64.iso",
+    "iso_checksum": "847e5338c9354dfc12f43160509480724659c5469e53cc03334bb38b3b9393fed8a0d55962c6626f6eb7d569ed4ea8d328a0db4ee2bf992def5eafc6f0c3f834",
     "iso_checksum_type": "sha512"
   },
   "builders": [
@@ -52,15 +52,15 @@
       ],
       "http_directory": ".",
       "boot_command": [
-        "1<wait10><wait5>",
+        "1<wait10><wait10><wait5>",
         "a<enter><wait>",
         "a<enter><wait>",
         "a<enter><wait>",
         "b<enter><wait>",
         "<enter><wait>",
-        "c<enter><wait>",
-        "f<enter><wait>",
-        "i<enter><wait>",
+        "d<enter><wait>",
+        "g<enter><wait>",
+        "j<enter><wait>",
         "x<enter><wait>",
         "a<enter><wait>",
         "b<enter><wait>",
@@ -71,18 +71,17 @@
         "b<enter><wait10>",
         "a<enter><wait>",
         "x<enter><wait>",
-        "a<enter><wait>",
-        "a<enter><wait>",
-        "x<enter><wait10><wait10>",
+        "a<enter><wait10><wait10>",
         "<enter><wait>",
-        "x<enter><wait>",
         "d<enter><wait>",
         "a<enter><wait>",
         "vagrant<enter><wait>",
         "vagrant<enter><wait>",
         "vagrant<enter><wait>",
-        "a<enter><wait>",
-        "<enter><wait>",
+        "g<enter><wait>",
+        "h<enter><wait>",
+        "x<enter><wait>",
+        "<enter><wait10>",
         "x<enter><wait>",
         "dhclient<enter><wait10>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
@@ -101,7 +100,7 @@
       ],
       "override": {
         "virtualbox-iso": {
-          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/`uname -r | cut -f1 -f2 -d.`/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
+          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/`uname -r`/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
         }
       }
     }
@@ -109,7 +108,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./NetBSD-5.2.3-i386.box",
+      "output": "./NetBSD-6.1.5-amd64-minimal.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfile/Vagrantfile.NetBSD"

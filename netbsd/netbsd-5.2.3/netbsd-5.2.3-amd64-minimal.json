@@ -1,0 +1,120 @@
+{
+  "variables": {
+    "ssh_username": "root",
+    "path_to_iso_image": "NetBSD-5.2.3/iso/NetBSD-5.2.3-amd64.iso",
+    "iso_checksum": "7be5fea1e3975d7bed8298a09097f5dbe5eed5c482cf3a051a871dcd7bdbe48490210162085c4449c36e68b2b63c5969f04a8181d4543987553122c9449ce84f",
+    "iso_checksum_type": "sha512"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": 10240,
+      "guest_os_type": "NetBSD_64",
+      "iso_urls": [
+        "http://ftp.netbsd.org/pub/NetBSD/{{user `path_to_iso_image`}}",
+        "http://mirror.planetunix.net/pub/NetBSD/{{user `path_to_iso_image`}}",
+        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/NetBSD/{{user `path_to_iso_image`}}",
+        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/NetBSD/{{user `path_to_iso_image`}}",
+        "http://ftp.fr.NetBSD.org/pub/NetBSD/{{user `path_to_iso_image`}}",
+        "http://ftp.availo.se/pub/NetBSD/{{user `path_to_iso_image`}}",
+        "http://ftp.fi.NetBSD.org/pub/NetBSD/{{user `path_to_iso_image`}}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "vagrant",
+      "ssh_key_path": "../key/vagrant_private_key",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo 'shutdown -p now'|su -",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": ".vbox_version",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "512"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--rtcuseutc",
+          "on"
+        ]
+      ],
+      "http_directory": ".",
+      "boot_command": [
+        "1<wait10><wait5>",
+        "a<enter><wait>",
+        "a<enter><wait>",
+        "a<enter><wait>",
+        "b<enter><wait>",
+        "<enter><wait>",
+        "c<enter><wait>",
+        "f<enter><wait>",
+        "i<enter><wait>",
+        "x<enter><wait>",
+        "a<enter><wait>",
+        "b<enter><wait>",
+        "a<enter><wait>",
+        "b<enter><wait>",
+        "x<enter><wait>",
+        "<enter><wait>",
+        "b<enter><wait10>",
+        "a<enter><wait>",
+        "x<enter><wait>",
+        "a<enter><wait>",
+        "a<enter><wait>",
+        "x<enter><wait10><wait10><wait10>",
+        "<enter><wait>",
+        "x<wait><enter><wait>",
+        "d<enter><wait>",
+        "a<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "a<enter><wait>",
+        "<enter><wait>",
+        "x<enter><wait>",
+        "dhclient<enter><wait10>",
+        "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} sh /tmp/install.sh<enter><wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/sudo.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/rsync.sh",
+        "../provisioners/cleanup.sh"
+      ],
+      "override": {
+        "virtualbox-iso": {
+          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/`uname -r | cut -f1 -f2 -d.`/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
+        }
+      }
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "./NetBSD-5.2.3-amd64-minimal.box",
+      "override": {
+        "virtualbox": {
+          "vagrantfile_template": "../vagrantfile/Vagrantfile.NetBSD"
+        }
+      }
+    }
+  ]
+}

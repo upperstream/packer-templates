@@ -1,8 +1,8 @@
 {
   "variables": {
     "ssh_username": "root",
-    "path_to_iso_image": "NetBSD-5.2.3/iso/NetBSD-5.2.3-amd64.iso",
-    "iso_checksum": "7be5fea1e3975d7bed8298a09097f5dbe5eed5c482cf3a051a871dcd7bdbe48490210162085c4449c36e68b2b63c5969f04a8181d4543987553122c9449ce84f",
+    "path_to_iso_image": "NetBSD-5.2.3/iso/NetBSD-5.2.3-i386.iso",
+    "iso_checksum": "0f555a7dde4d51ef82afe2e1f416d9eb3d534a04b783a6a3adc86fb400cfa0754f6fbbb6f990e04c3974ea4b6143e9a8672f8e70263d5950a91b3975bcbd8245",
     "iso_checksum_type": "sha512"
   },
   "builders": [
@@ -10,7 +10,7 @@
       "type": "virtualbox-iso",
       "boot_wait": "10s",
       "disk_size": 10240,
-      "guest_os_type": "NetBSD_64",
+      "guest_os_type": "NetBSD",
       "iso_urls": [
         "http://ftp.netbsd.org/pub/NetBSD/{{user `path_to_iso_image`}}",
         "http://mirror.planetunix.net/pub/NetBSD/{{user `path_to_iso_image`}}",
@@ -52,7 +52,7 @@
       ],
       "http_directory": ".",
       "boot_command": [
-        "1<wait10>",
+        "1<wait10><wait5>",
         "a<enter><wait>",
         "a<enter><wait>",
         "a<enter><wait>",
@@ -73,9 +73,9 @@
         "x<enter><wait>",
         "a<enter><wait>",
         "a<enter><wait>",
-        "x<enter><wait10><wait10>",
+        "x<enter><wait10><wait10><wait10>",
         "<enter><wait>",
-        "x<enter><wait>",
+        "x<wait><enter><wait>",
         "d<enter><wait>",
         "a<enter><wait>",
         "vagrant<enter><wait>",
@@ -109,7 +109,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./NetBSD-5.2.3-amd64.box",
+      "output": "./NetBSD-5.2.3-i386-minimal.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfile/Vagrantfile.NetBSD"

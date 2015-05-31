@@ -30,15 +30,15 @@ Templates creating Vagrant box for NetBSD 5.2.3 (amd64 and i386).
 
 From the terminal, invoke the following command:
 
-	packer build netbsd-5.2.3-amd64.json
+	packer build netbsd-5.2.3-amd64-minimal.json
 
-and you will find a vagrant box file named `NetBSD-5.2.3-amd64.box`
+and you will find a vagrant box file named `NetBSD-5.2.3-amd64-minimal.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-5.2.3-amd64` to your box list
+Then you can add the box named `NetBSD-5.2.3-amd64-minimal` to your box list
 by the following command:
 
-	vagrant add NetBSD-5.2.3-amd64.box --name NetBSD-5.2.3-amd64
+	vagrant add NetBSD-5.2.3-amd64-minimal.box --name NetBSD-5.2.3-amd64-minimal
 
 ## Default settings
 
@@ -53,6 +53,13 @@ Due to Vagrant limitation of OpenBSD support, Synced Folder of this box is disab
 
 Because Bash is not the standard shell for OpenBSD, default shell for SSH connection of this box
 is set to "`/bin/ksh`".
+
+## Variants
+
+* `netbsd-5.2.3-amd64-minimal.json` - NetBSD 5.2.3 (amd64)
+* `netbsd-5.2.3-amd64-ansible.json` - NetBSD 5.2.3 + Ansible (amd64)
+* `netbsd-5.2.3-i386-minimal.json` - NetBSD 5.2.3 (i386)
+* `netbsd-5.2.3-i386-ansible.json` - NetBSD 5.2.3 + Ansible (i386)
 
 - - -
 

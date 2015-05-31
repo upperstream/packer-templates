@@ -1,8 +1,8 @@
 {
   "variables": {
     "ssh_username": "root",
-    "path_to_iso_image": "NetBSD-6.1.5/iso/NetBSD-6.1.5-amd64.iso",
-    "iso_checksum": "847e5338c9354dfc12f43160509480724659c5469e53cc03334bb38b3b9393fed8a0d55962c6626f6eb7d569ed4ea8d328a0db4ee2bf992def5eafc6f0c3f834",
+    "path_to_iso_image": "NetBSD-6.1.5/iso/NetBSD-6.1.5-i386.iso",
+    "iso_checksum": "a5a1062e2092f38903d48680ad7fb8dd64597482dc658fa5b7e53c99ceab7f6af30ee89d121413e44aaffdd865b90a31465240d802de77e6d2e2ee0465a439a9",
     "iso_checksum_type": "sha512"
   },
   "builders": [
@@ -10,7 +10,7 @@
       "type": "virtualbox-iso",
       "boot_wait": "10s",
       "disk_size": 10240,
-      "guest_os_type": "NetBSD_64",
+      "guest_os_type": "NetBSD",
       "iso_urls": [
         "http://ftp.netbsd.org/pub/NetBSD/{{user `path_to_iso_image`}}",
         "http://mirror.planetunix.net/pub/NetBSD/{{user `path_to_iso_image`}}",
@@ -52,7 +52,7 @@
       ],
       "http_directory": ".",
       "boot_command": [
-        "1<wait10>",
+        "1<wait10><wait10><wait5>",
         "a<enter><wait>",
         "a<enter><wait>",
         "a<enter><wait>",
@@ -96,11 +96,13 @@
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/rsync.sh",
+        "../provisioners/python27.sh",
+        "../provisioners/ansible.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
         "virtualbox-iso": {
-          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/`uname -r`/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
+          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/6.1_2015Q1/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
         }
       }
     }
@@ -108,7 +110,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./NetBSD-6.1.5-amd64.box",
+      "output": "./NetBSD-6.1.5-i386-ansible.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfile/Vagrantfile.NetBSD"
