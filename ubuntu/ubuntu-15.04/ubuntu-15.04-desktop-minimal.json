@@ -1,0 +1,64 @@
+{
+  "variables": {
+    "ssh_name": "vagrant",
+    "ssh_pass": "vagrant"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": 512000,
+      "guest_os_type": "Ubuntu_64",
+      "iso_checksum": "3b00a4573b11fb1f85eaa05918971789",
+      "iso_checksum_type": "md5",
+      "iso_urls": [
+        "mini.iso",
+        "http://archive.ubuntu.com/ubuntu/dists/vivid/main/installer-amd64/current/images/netboot/mini.iso"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "512" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "32" ]
+      ],
+      "http_directory": "../http",
+      "boot_command": [
+        "<esc> linux ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu-desktop-preseed.cfg ",
+        "debian-installer=en_US auto=true locale=en_US kbd-chooser/method=us ",
+        "console-setup/ask_detect=false keyboard-configuration/layoutcode=us ",
+        "hostname=vagrant ",
+        "initrd=initrd.gz -- <enter>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/base.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/virtualbox.sh"
+      ],
+      "override": {
+        "virtualbox-iso": {
+          "execute_command": "echo 'vagrant' | sudo -S sh '{{.Path}}'"
+        }
+      }
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "./Ubuntu-15.04-desktop-amd64-minimal.box"
+    }
+  ]
+}
+
