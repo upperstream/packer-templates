@@ -1,0 +1,68 @@
+{
+  "variables": {
+    "ssh_name": "root",
+    "ssh_pass": "vagrant"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": 512000,
+      "guest_os_type": "RedHat_64",
+      "iso_checksum": "f2087f9af0d50df05144a1f0d1c5b404",
+      "iso_checksum_type": "md5",
+      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/5.11/isos/x86_64/CentOS-5.11-x86_64-netinstall.iso",
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h now",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "512"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--rtcuseutc",
+          "on"
+        ]
+      ],
+      "http_directory": "../http",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-5.11-x86_64.cfg<enter><wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/sudo.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/kernel_stuff-5.11.sh",
+        "../provisioners/epel-5.x-x86_64.sh",
+        "../provisioners/virtualbox_dependencies-5.x.sh",
+        "../provisioners/virtualbox.sh",
+        "../provisioners/cleanup.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "./CentOS-5.11-x86_64-minimal.box"
+    }
+  ]
+}
