@@ -1,21 +1,21 @@
 {
   "variables": {
-    "path_to_iso": "ISO-IMAGES-amd64/10.1/FreeBSD-10.1-RELEASE-amd64-disc1.iso",
+    "path_to_iso": "ISO-IMAGES/10.1/FreeBSD-10.1-RELEASE-amd64-disc1.iso",
     "iso_checksum": "d0d4553080b88653569e1871d57fc819",
-    "box_ver": "1"
+    "box_ver": "2"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_command": [
         "<enter>",
-        "<wait10><wait5>",
+        "<wait10><wait10><wait5>",
         "s",
         "<wait5>",
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "bsdinstall script /tmp/install.sh<enter>",
+        "DISTRIBUTIONS='base.txz kernel.txz lib32.txz ports.txz src.txz' BSDINSTALL_DISTSITE=ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/10.1-RELEASE ABI=freebsd:10:x86:64 bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10>",
         "shutdown -r now<enter>"
       ],
@@ -26,12 +26,12 @@
       "iso_checksum": "{{user `iso_checksum` }}",
       "iso_checksum_type": "md5",
       "iso_urls": [
-        "http://ftp10.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}",
-        "http://ftp.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}",
-        "http://ftp4.us.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}",
-        "http://ftp13.us.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}",
-        "http://ftp6.tw.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}",
-        "http://ftp11.tw.freebsd.org/FreeBSD/{{user `path_to_iso`}}"
+        "http://ftp10.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
+        "http://ftp.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
+        "http://ftp4.us.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
+        "http://ftp13.us.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
+        "http://ftp6.tw.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
+        "http://ftp11.tw.freebsd.org/FreeBSD/releases/{{user `path_to_iso`}}"
       ],
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
@@ -65,7 +65,7 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/vagrant.sh",
+        "../provisioners/vagrant-10.sh",
         "../provisioners/virtualbox_ose_additions.sh",
         "../provisioners/cleanup.sh"
       ],
@@ -82,7 +82,7 @@
       "type": "vagrant",
       "override": {
         "virtualbox": {
-          "vagrantfile_template": "../vagrantfile/Vagrantfile.FreeBSD"
+          "vagrantfile_template": "../vagrantfile/Vagrantfile.FreeBSD-10"
         }
       }
     }

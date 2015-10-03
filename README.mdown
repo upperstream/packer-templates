@@ -19,8 +19,8 @@
 	* debian-7.8 - Debian 7.8 templates
 	* debian-8.0 - Debian 8.0 templates
 * [freebsd](freebsd/README.mdown) - FreeBSD templates
-	* freebsd-9.3 - FreeBSD 9.3 templates
-	* freebsd-10.1 - FreeBSD 10.1 templates
+	* freebsd-9.3 - FreeBSD 9.3 templates (amd64 and i386)
+	* freebsd-10.1 - FreeBSD 10.1 templates (amd64 and i386)
 * [netbsd](netbsd/README.mdown) - NetBSD template
 	* netbsd-5.2.3 - NetBSD 5.2.3 templates (amd64 and i386)
 		* NetBSD 5.2.3 minimal

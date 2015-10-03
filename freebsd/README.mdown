@@ -3,9 +3,11 @@
 ## Contents
 
 * [freebsd-9.3](freebsd-9.3/README.mdown) - templates for FreeBSD 9.3-RELEASE
-	* FreeBSD 9.3-RELEASE
+	* FreeBSD 9.3-RELEASE (amd64)
+	* FreeBSD 9.3-RELEASE (i386)
 * [freebsd-10.1](freebsd-10.1/README.mdown) - templates for FreeBSD 10.1-RELEASE
-	* FreeBSD 10.1-RELEASE
+	* FreeBSD 10.1-RELEASE (amd64)
+	* FreeBSD 10.1-RELEASE (i386)
 
 - - -
 

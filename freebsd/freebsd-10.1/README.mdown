@@ -1,6 +1,8 @@
 # Packer templates for FreeBSD 10.1-RELEASE
 
-Templates creating Vagrant box for FreeBSD 10.1-RELEASE (amd64).
+Version 2.
+
+Templates creating Vagrant box for FreeBSD 10.1-RELEASE (amd64 and i386).
 
 ## Prerequisites
 
@@ -49,12 +51,23 @@ Users can override this setting by users' own `Vagrantfile`s.
 
 ### Synced Folder
 
-Due to Vagrant limitation of FreeBSD support, Synced Folder of this box is disabled by default.
+Due to Vagrant limitation for FreeBSD guest, VirtualBox Synced Folder is disabled by default.
+You can still use other types of synced folders:
+
+* NFS on non-Windows hosts
+* RSync on any hosts.
+
+SMB synced folder is not supported for FreeBSD guest.
 
 ### SSH Shell
 
 Because Bash is not the standard shell for FreeBSD, default Shell for SSH connection of this box
 is set to "`/bin/sh`".
+
+## Variants
+
+* `freebsd-10.1-release-amd64.json` - FreeBSD 10.1-RELEASE (amd64)
+* `freebsd-10.1-release-i386.json` - FreeBSD 10.1-RELEASE (i386)
 
 - - -
 
