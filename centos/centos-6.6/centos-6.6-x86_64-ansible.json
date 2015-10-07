@@ -1,7 +1,10 @@
 {
   "variables": {
+    "hardware": "x86_64",
+    "processor": "x86_64",
     "ssh_name": "root",
-    "ssh_pass": "vagrant"
+    "ssh_pass": "vagrant",
+    "box_ver": "2"
   },
   "builders": [
     {
@@ -11,7 +14,7 @@
       "guest_os_type": "RedHat_64",
       "iso_checksum": "eb3c8be6ab668e6d83a118323a789e6c",
       "iso_checksum_type": "md5",
-      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/6.6/isos/x86_64/CentOS-6.6-x86_64-minimal.iso",
+      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/6.6/isos/{{user `hardware`}}/CentOS-6.6-{{user `hardware`}}-minimal.iso",
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
@@ -49,11 +52,10 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/base.sh",
-        "../provisioners/sudo-6.x.sh",
+        "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/kernel_stuff-6.6-x86_64.sh",
-        "../provisioners/epel-6.x-x86_64.sh",
+        "../provisioners/kernel_stuff-6.6.sh",
+        "../provisioners/epel-6.x-{{user `hardware`}}.sh",
         "../provisioners/virtualbox_dependencies-6.x.sh",
         "../provisioners/virtualbox.sh",
         "../provisioners/python-devel.sh",
@@ -65,7 +67,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./CentOS-6.6-x86_64-ansible.box"
+      "output": "./CentOS-6.6-{{user `hardware`}}-ansible-v{{user `box_ver`}}.box"
     }
   ]
 }
