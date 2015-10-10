@@ -1,8 +1,11 @@
 {
   "variables": {
+    "hardware": "x86_64",
+    "processor": "x86_64",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
-    "path_to_iso": "6.5/isos/x86_64/CentOS-6.5-x86_64-minimal.iso"
+    "path_to_iso": "6.5/isos/x86_64/CentOS-6.5-x86_64-minimal.iso",
+    "box_ver": "2"
   },
   "builders": [
     {
@@ -55,11 +58,10 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/base.sh",
-        "../provisioners/sudo-6.x.sh",
+        "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/kernel_stuff-6.5-x86_64.sh",
-        "../provisioners/epel-6.x-x86_64.sh",
+        "../provisioners/kernel_stuff-6.5.sh",
+        "../provisioners/epel-6.x-{{user `hardware`}}.sh",
         "../provisioners/virtualbox_dependencies-6.x.sh",
         "../provisioners/virtualbox.sh",
         "../provisioners/cleanup.sh"
@@ -69,7 +71,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./CentOS-6.5-x86_64-minimal.box"
+      "output": "./CentOS-6.5-{{user `hardware`}}-minimal-v{{user `box_ver`}}.box"
     }
   ]
 }
