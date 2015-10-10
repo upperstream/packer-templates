@@ -1,12 +1,13 @@
 # nsenter
 # depends: docker-io
-if ! which docker; then
+command -v docker || (
   echo "Docker (docker-io) must be installed in advance."
   exit 1
-fi
-if ! which nsenter > /dev/null; then
+)
+command -v nsenter || (
   test -d /usr/local/bin || mkdir -p /usr/local/bin
   service docker start
   while ! service docker status; do sleep 10; done
   docker run --rm jpetazzo/nsenter cat /nsenter > /usr/local/bin/nsenter && chmod +x /usr/local/bin/nsenter && strip /usr/local/bin/nsenter
-fi
+  service docker stop
+)
