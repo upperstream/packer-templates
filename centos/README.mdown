@@ -2,6 +2,8 @@
 
 ## Contents
 
+* [centos-5.11](centos-5.11/README.mdown) - templates for CentOS 5.11 (x86_64)
+	* CentOS 5.11 minimal
 * [centos-6.5](centos-6.5/README.mdown) - templates for CentOS 6.5 (x86_64)
 	* CentOS 6.5 minimal
 	* CentOS 6.5 minimal + Ansible
