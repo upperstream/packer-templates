@@ -55,11 +55,7 @@ is set to "`/bin/ksh`".
 ### doas command
 
 This box is configured to use `doas` command instead of `sudo`, which requires Vagrant version 1.7.3 or later.
-If you want to stay with older version of Vagrant, you need to disable the following line in `Vagrantfile.OpenBSD-5.8`:
-
-    config.ssh.sudo_command = "doas %c"
-
-and need to insert `"../provisioners/sudo-5.8.sh"` to `provisioners` block in *.json file in order to enable `sudo` command.
+If you want to stay with older version of Vagrant, you can use template files `openbsd-5.8-*-sudo.json` instead.
 
 - - -
 
