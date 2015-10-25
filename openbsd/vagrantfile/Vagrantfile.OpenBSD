@@ -37,7 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Default value: false
   # config.ssh.forward_agent = true
 
-  # Set the defaulkt shell for SSH session to ksh
+  # Set the default shell for SSH session to ksh
   config.ssh.shell = "/bin/ksh"
 
   # Share an additional folder to the guest VM. The first argument is
