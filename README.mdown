@@ -4,22 +4,10 @@
 
 * [centos](centos/README.mdown) - CentOS templates
 	* centos-5.11 - CentOS 5.11 templates (x86_64 and i386)
-		* CentOS 5.11 minimal
 	* centos-6.5 - CentOS 6.5 templates (x86_64)
-		* CentOS 6.5 minimal
-		* CentOS 6.5 minimal + Ansible
-		* CentOS 6.5 minimal + Docker, Docker Compose, nsenter, and Fig
 	* centos-6.6 - CentOS 6.6 templates (x86_64 and i386)
-		* CentOS 6.6 minimal
-		* CentOS 6.6 minimal + Ansible
-		* CentOS 6.6 minimal + Docker, Docker Compose, and Fig (x86_64 only)
 	* centos-6.7 - CentOS 6.7 templates (x86_64 and i386)
-		* CentOS 6.7 minimal
-		* CentOS 6.7 minimal + Ansible
-		* CentOS 6.7 minimal + Docker, Docker Compose, and Fig (x86_64 only)
 	* centos-7.0 - CentOS 7.0 templates (x86_64)
-		* CentOS 7.0 minimal
-		* CentOS 7.0 minimal + Docker, Docker Compose, and Fig
 * [coreos](coreos/README.mdown) - CoreOS templates
 * [debian](debian/README.mdown) - Debian templates
 	* debian-7.8 - Debian 7.8 templates
@@ -29,31 +17,16 @@
 	* freebsd-10.1 - FreeBSD 10.1 templates (amd64 and i386)
 * [netbsd](netbsd/README.mdown) - NetBSD template
 	* netbsd-5.2.3 - NetBSD 5.2.3 templates (amd64 and i386)
-		* NetBSD 5.2.3 minimal
-		* NetBSD 5.2.3 + Ansible
 	* netbsd-6.1.5 - NetBSD 6.1.5 templates (amd64 and i386)
-		* NetBSD 6.1.5 minimal
-		* NetBSD 6.1.5 + Ansible
 	* netbsd-7.0 - NetBSD 7.0 templates (amd64 and i386)
-		* NetBSD 7.0 minimal
-		* NetBSD 7.0 + Ansible
 * [openbsd](openbsd/README.mdown) - OpenBSD templates
 	* openbsd-5.6 - OpenBSD 5.6 templates (amd64 and i386)
 	* openbsd-5.7 - OpenBSD 5.7 templates (amd64 and i386)
 	* openbsd-5.8 - OpenBSD 5.8 templates (amd64 and i386)
 * [ubuntu](ubuntu/README.mdown) - Ubuntu templates
 	* ubuntu-14.04 - Ubuntu 14.04 templates
-		* Ubuntu Desktop 14.04 LTS
-		* Ubuntu Server 14.04 LTS
-		* Xubuntu 14.04 LTS
 	* ubuntu-14.10 - Ubuntu 14.10 templates
-		* Ubuntu Desktop 14.10
-		* Ubuntu Server 14.10
-		* Xubuntu 14.10
 	* ubuntu-15.04 - Ubuntu 15.04 templates
-		* Ubuntu Desktop 15.04
-		* Ubuntu Server 15.04
-		* Xubuntu 15.04
 
 
 ## Licensing
