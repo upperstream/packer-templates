@@ -12,6 +12,11 @@
 	* NetBSD 6.1.5 + Ansible (amd64)
 	* NetBSD 6.1.5 (i386)
 	* NetBSD 6.1.5 + Ansible (i386)
+* [netbsd-7.0](netbsd-7.0/README.mdown) - templates for NetBSD 7.0
+	* NetBSD 7.0 (amd64)
+	* NetBSD 7.0 + Ansible (amd64)
+	* NetBSD 7.0 (i386)
+	* NetBSD 7.0 + Ansible (i386)
 
 - - -
 
