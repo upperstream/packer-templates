@@ -1,0 +1,101 @@
+{
+  "variables": {
+    "ssh_username": "root",
+    "ssh_password": "vagrant",
+    "iso_image": "alpine-mini-3.2.3-x86.iso",
+    "iso_checksum": "687134a9edaef51b53a2bda3facdb65a7879c1f4",
+    "iso_checksum_type": "sha1",
+    "os_ver": "3.2.3",
+    "cpu": "x86"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "30s",
+      "disk_size": 10240,
+      "guest_os_type": "Linux26",
+      "iso_urls": [
+        "{{user `iso_image`}}",
+        "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.2/releases/{{user `cpu`}}/{{user `iso_image`}}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_key_path": "../key/vagrant_private_key",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "poweroff",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": ".vbox_version",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "512"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--rtcuseutc",
+          "on"
+        ]
+      ],
+      "http_directory": ".",
+      "boot_command": [
+        "root<enter><wait>",
+        "setup-alpine<enter><wait>",
+        "us<enter><wait>",
+        "us<enter><wait>",
+        "localhost<enter><wait>",
+        "eth0<enter><wait>",
+        "dhcp<enter><wait>",
+        "no<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "UTC<enter><wait>",
+        "none<enter><wait>",
+        "f<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "none<enter><wait>",
+        "chrony<enter><wait10>",
+        "sda<enter><wait>",
+        "sys<enter><wait10><wait10>",
+        "y<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} sh /tmp/install.sh<enter><wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/vagrant.sh",
+        "../provisioners/cleanup.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "./Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-minimal.box",
+      "override": {
+        "virtualbox": {
+          "vagrantfile_template": "../vagrantfile/Vagrantfile.Alpine"
+        }
+      }
+    }
+  ]
+}
