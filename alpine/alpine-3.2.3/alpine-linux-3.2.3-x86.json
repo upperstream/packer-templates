@@ -2,18 +2,18 @@
   "variables": {
     "ssh_username": "root",
     "ssh_password": "vagrant",
-    "iso_image": "alpine-mini-3.2.3-x86_64.iso",
-    "iso_checksum": "a718c78537a0d416fa0b7cfcef1dfb85d1e837aa",
+    "iso_image": "alpine-mini-3.2.3-x86.iso",
+    "iso_checksum": "687134a9edaef51b53a2bda3facdb65a7879c1f4",
     "iso_checksum_type": "sha1",
     "os_ver": "3.2.3",
-    "cpu": "x86_64"
+    "cpu": "x86"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_wait": "30s",
       "disk_size": 10240,
-      "guest_os_type": "Linux26_64",
+      "guest_os_type": "Linux26",
       "iso_urls": [
         "{{user `iso_image`}}",
         "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.2/releases/{{user `cpu`}}/{{user `iso_image`}}"
