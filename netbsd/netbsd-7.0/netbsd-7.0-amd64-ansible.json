@@ -1,26 +1,27 @@
 {
   "variables": {
     "ssh_username": "root",
-    "path_to_iso_image": "NetBSD-7.0-amd64.iso",
+    "iso_file_name": "NetBSD-7.0-amd64.iso",
     "iso_checksum": "ec63aa3bfe6ddee2ae9cd801bbc2533524b29bca41266415ebd567151d19b0839f75cd75e1dd674632761a7658599684c4842e6458cd6e9171d5959d47f15ffb",
     "iso_checksum_type": "sha512",
-    "os_ver": "7.0"
+    "os_ver": "7.0",
+    "box_ver": "1.1"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_wait": "10s",
-      "disk_size": 10240,
+      "disk_size": 307200,
       "guest_os_type": "NetBSD_64",
       "iso_urls": [
-        "{{user `path_to_iso_image`}}",
-        "http://ftp.netbsd.org/pub/NetBSD/NetBSD-7.0/iso/{{user `path_to_iso_image`}}",
-        "http://mirror.planetunix.net/pub/NetBSD/NetBSD-7.0/iso/{{user `path_to_iso_image`}}",
-        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/NetBSD/NetBSD-7.0/iso/{{user `path_to_iso_image`}}",
-        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/NetBSD/NetBSD-7.0/iso/{{user `path_to_iso_image`}}",
-        "http://ftp.fr.NetBSD.org/pub/NetBSD/NetBSD-7.0/iso/{{user `path_to_iso_image`}}",
-        "http://ftp.availo.se/pub/NetBSD/NetBSD-7.0/iso/{{user `path_to_iso_image`}}",
-        "http://ftp.fi.NetBSD.org/pub/NetBSD/NetBSD-7.0/iso/{{user `path_to_iso_image`}}"
+        "{{user `iso_file_name`}}",
+        "http://ftp.netbsd.org/pub/NetBSD/NetBSD-7.0/iso/{{user `iso_file_name`}}",
+        "http://mirror.planetunix.net/pub/NetBSD/NetBSD-7.0/iso/{{user `iso_file_name`}}",
+        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/NetBSD/NetBSD-7.0/iso/{{user `iso_file_name`}}",
+        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/NetBSD/NetBSD-7.0/iso/{{user `iso_file_name`}}",
+        "http://ftp.fr.NetBSD.org/pub/NetBSD/NetBSD-7.0/iso/{{user `iso_file_name`}}",
+        "http://ftp.availo.se/pub/NetBSD/NetBSD-7.0/iso/{{user `iso_file_name`}}",
+        "http://ftp.fi.NetBSD.org/pub/NetBSD/NetBSD-7.0/iso/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -67,6 +68,7 @@
         "x<enter><wait>",
         "<enter><wait>",
         "b<enter><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "a<enter><wait>",
         "x<enter><wait>",
         "d<enter><wait>",
@@ -119,7 +121,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./NetBSD-{{user `os_ver`}}-amd64-ansible.box",
+      "output": "./NetBSD-{{user `os_ver`}}-amd64-ansible-v{{user `box_ver`}}.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfile/Vagrantfile.NetBSD"

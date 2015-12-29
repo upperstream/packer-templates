@@ -32,13 +32,13 @@ From the terminal, invoke the following command:
 
 	packer build netbsd-6.1.5-amd64-minimal.json
 
-and you will find a vagrant box file named `NetBSD-6.1.5-amd64-minimal.box`
+and you will find a vagrant box file named `NetBSD-6.1.5-amd64-minimal-v1.1.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-6.1.5-amd64-minimal` to your box list
+Then you can add the box named `NetBSD-6.1.5-amd64-minimal-v1.1` to your box list
 by the following command:
 
-	vagrant add NetBSD-6.1.5-amd64-minimal.box --name NetBSD-6.1.5-amd64-minimal
+	vagrant add NetBSD-6.1.5-amd64-minimal-v1.1.box --name NetBSD-6.1.5-amd64-minimal-v1.1
 
 ## Default settings
 
