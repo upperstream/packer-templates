@@ -18,6 +18,8 @@
 	* NetBSD 7.0 (i386)
 	* NetBSD 7.0 + Ansible (i386)
 
+VirtualBox and VMware providers are supported.
+
 - - -
 
-Copyright &copy; 2015 Upper Stream Software.
+Copyright &copy; 2015, 2016 Upper Stream Software.
