@@ -1,5 +1,5 @@
 #!/bin/sh
-mount /dev/wd0a /mnt
+mount /dev/$HDD /mnt
 sed 's/^#PermitRootLogin no/PermitRootLogin yes/' /mnt/etc/ssh/sshd_config > /tmp/sshd_config
 mv /tmp/sshd_config /mnt/etc/ssh/sshd_config
 ftp -o /mnt/root/vagrant.pub http://$HTTPSERVER/vagrant.pub

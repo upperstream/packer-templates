@@ -1,4 +1,4 @@
-# Packer template for NetBSD 7.0
+# Packer templates for NetBSD 7.0
 
 Templates creating Vagrant box for NetBSD 7.0 (amd64 and i386).
 
@@ -32,13 +32,13 @@ From the terminal, invoke the following command:
 
 	packer build netbsd-7.0-amd64-minimal.json
 
-and you will find a vagrant box file named `NetBSD-7.0-amd64-minimal-v1.1.box`
-in the same directory after the command has succeeded.
+and you will find vagrant boxes file named `NetBSD-7.0-amd64-minimal-v1.1-virtualbox.box`
+and `NetBSD-7.0-amd64-minimal-v1.1-vmware.box` in the same directory after the command has succeeded.
 
 Then you can add the box named `NetBSD-7.0-amd64-minimal-v1.1` to your box list
-by the following command:
+by the following command (for example of VirtualBox provider):
 
-	vagrant add NetBSD-7.0-amd64-minimal-v1.1.box --name NetBSD-7.0-amd64-minimal-v1.1
+	vagrant add NetBSD-7.0-amd64-minimal-v1.1-virtualbox.box --name NetBSD-7.0-amd64-minimal-v1.1
 
 ## Default settings
 
@@ -63,4 +63,4 @@ is set to "`/bin/ksh`".
 
 - - -
 
-Copyright &copy; 2015 Upper Stream Software.
+Copyright &copy; 2015, 2016 Upper Stream Software.
