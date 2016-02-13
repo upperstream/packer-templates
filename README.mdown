@@ -2,7 +2,7 @@
 
 ## Contents
 
-* [alpine](alpine/README.down) - Alpine Linux templates
+* [alpine](alpine/README.mdown) - Alpine Linux templates
     * alpine-3.2.3 - Alpine Linux 3.2.3 templates (x86_64 and x86)
 * [centos](centos/README.mdown) - CentOS templates
 	* centos-5.11 - CentOS 5.11 templates (x86_64 and i386)
@@ -46,4 +46,4 @@ permissions and limitations under the License.
 
 - - -
 
-Copyright &copy; 2014, 2015 Upper Stream Software.
+Copyright &copy; 2014-2016 Upper Stream Software.
