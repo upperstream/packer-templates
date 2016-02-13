@@ -1,9 +1,11 @@
 {
   "variables": {
-    "iso_path": "Linux/debian/debian/dists/oldstable/main/installer-amd64/20130613+deb7u2+b4/images/netboot/mini.iso",
-    "iso_checksum": "afa217cf0cf5a3e44ab02532e1d767f0",
+    "os_ver": "7.8.0",
+    "iso_path": "Linux/debian/debian-cdimage/archive/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso",
+    "iso_checksum": "a91fba5001cf0fbccb44a7ae38c63b6e",
     "ssh_name": "root",
-    "ssh_pass": "vagrant"
+    "ssh_pass": "vagrant",
+    "box_ver": "2"
   },
   "builders": [
     {
@@ -67,8 +69,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./debian-7.8-amd64-minimal.box"
+      "output": "./debian-{{user `os_ver`}}-amd64-minimal-v{{user `box_ver`}}.box"
     }
   ]
 }
-
