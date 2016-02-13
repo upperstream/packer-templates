@@ -34,7 +34,7 @@ Vagrant.configure(2) do |config|
   # config.vm.network "public_network"
 
 
-  # Set the default shell for SSH session to ksh
+  # Set the default shell for SSH session to ash
   config.ssh.shell = "/bin/ash"
 
   # Share an additional folder to the guest VM. The first argument is
