@@ -13,6 +13,7 @@
 * [coreos](coreos/README.mdown) - CoreOS templates
 * [debian](debian/README.mdown) - Debian templates
 	* debian-7.8 - Debian 7.8 templates
+	* debian-7.9 - Debian 7.9 templates
 	* debian-8.0 - Debian 8.0 templates
 * [freebsd](freebsd/README.mdown) - FreeBSD templates
 	* freebsd-9.3 - FreeBSD 9.3 templates (amd64 and i386)
