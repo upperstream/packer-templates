@@ -12,6 +12,9 @@
 * [debian-8.0](debian-8.0/README.mdown) - templates for Debian 8.0
 	* Debian 8.0 minimal
 	* Debian 8.0 + Docker
+* [debian-8.4](debian-8.4/README.mdown) - templates for Debian 8.4
+	* Debian 8.4 minimal
+	* Debian 8.4 + Docker
 
 - - -
 
