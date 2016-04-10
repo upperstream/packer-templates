@@ -1,8 +1,8 @@
 {
   "variables": {
-    "path_to_iso": "i386/cd58.iso",
-    "iso_checksum": "c2b6d8879d014ef2f568464d9ff969e80a8a558a9c13b0862ce5d5bdd07b47a6",
-    "os_ver": "5.8"
+    "path_to_iso": "i386/cd59.iso",
+    "iso_checksum": "e2cd173a8d1494e898aa0fe40684897d41170220963f56ee1424f8b05cc03d52",
+    "os_ver": "5.9"
   },
   "builders": [
     {
@@ -37,16 +37,15 @@
         "-game*<enter><wait>",
         "done<enter><wait>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "<wait10><wait10><wait10>",
-        "done<enter><wait>",
-        "yes<enter><wait>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "done<enter><wait5>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
         "ftp -o /tmp/vagrant.pub http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant.pub<enter><wait>",
         "sh /tmp/install.sh<enter><wait>",
         "reboot<enter>"
       ],
       "boot_wait": "30s",
-      "disk_size": 10240,
+      "disk_size": 102400,
       "guest_os_type": "OpenBSD",
       "http_directory": ".",
       "iso_checksum": "{{user `iso_checksum`}}",
@@ -87,7 +86,7 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/rsync.sh",
+        "../provisioners/rsync-5.9.sh",
         "../provisioners/sharity-light.sh"
       ],
       "override": {
