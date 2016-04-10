@@ -1,0 +1,92 @@
+{
+  "variables": {
+    "path_to_iso": "ISO-IMAGES/10.3/FreeBSD-10.3-RELEASE-amd64-disc1.iso",
+    "iso_checksum": "fef068cf6dea26923ab84b62ba9f21461ca0bdec90a0741c8ffb0e1ca29e410d",
+    "os_ver": "10.3",
+    "box_ver": "1"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_command": [
+        "<enter>",
+        "<wait10><wait10><wait5>",
+        "s",
+        "<wait5>",
+        "dhclient em0<enter><wait5>",
+        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "<wait>",
+        "DISTRIBUTIONS='base.txz kernel.txz lib32.txz ports.txz src.txz' ",
+        "BSDINSTALL_DISTSITE=ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/10.3-RELEASE ",
+        "ABI=FreeBSD:10:amd64 bsdinstall script /tmp/install.sh<enter>",
+        "<wait10><wait10><wait10>",
+        "shutdown -r now<enter>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 51200,
+      "guest_os_type": "FreeBSD_64",
+      "http_directory": ".",
+      "iso_checksum": "{{user `iso_checksum` }}",
+      "iso_checksum_type": "sha256",
+      "iso_urls": [
+        "http://ftp10.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
+        "http://ftp.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
+        "http://ftp4.us.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
+        "http://ftp13.us.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
+        "http://ftp6.tw.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
+        "http://ftp11.tw.freebsd.org/FreeBSD/releases/{{user `path_to_iso`}}"
+      ],
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_key_path": "../key/vagrant_private_key",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
+      "guest_additions_mode": "disable",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "1024"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--rtcuseutc",
+          "on"
+        ]
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/vagrant-10.3.sh",
+        "../provisioners/cleanup.sh"
+      ],
+      "override": {
+        "virtualbox-iso": {
+          "execute_command": "echo 'vagrant' | sudo sh '{{.Path}}'"
+        }
+      }
+    }
+  ],
+  "post-processors": [
+    {
+      "output": "./FreeBSD-{{user `os_ver`}}-RELEASE-amd64.box",
+      "type": "vagrant",
+      "override": {
+        "virtualbox": {
+          "vagrantfile_template": "../vagrantfile/Vagrantfile.FreeBSD-10.3"
+        }
+      }
+    }
+  ]
+}
