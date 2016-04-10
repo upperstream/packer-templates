@@ -4,11 +4,11 @@ Templates creating Vagrant box for Alpine Linux 3.3.3. (x86_64 and i686)
 
 ## Prerequisites
 
-* [Packer] v0.7.2
-* [Vagrant] v1.7.2
+* [Packer] v0.7.2+
+* [Vagrant] v1.7.2+
 * [VirtualBox]
-	* Version 4.3.28 for Windows
-	* Version 4.3.28 for Mac OS X (which allows [HAXM] to work in parallel)
+	* Version 4.3.28+ for Windows
+	* Version 4.3.28+ for Mac OS X (You may want to stay with 4.3.28 which allows [HAXM] to work in parallel.)
 
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
@@ -30,15 +30,15 @@ Templates creating Vagrant box for Alpine Linux 3.3.3. (x86_64 and i686)
 
 From the terminal, invoke the following command:
 
-	packer build alpine-linux-3.3.3-x86_64-minimal.json
+	packer build -only=virtualbox-iso alpine-linux-3.3.3-x86_64-minimal.json
 
-and you will find a vagrant box file named `Alpine-Linux-3.3.3-x86_64-minimal.box`
+and you will find a vagrant box file named `Alpine-Linux-3.3.3-x86_64-minimal-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-Linux-3.3.3-x86_64-minimal.box` to your box list
+Then you can add the box named `Alpine-Linux-3.3.3-x86_64-minimal-virtualbox.box` to your box list
 by the following command:
 
-	vagrant add Alpine-Linux-3.3.3-x86_64-minimal.box --name Alpine-Linux-3.3.3-x86_64-minimal
+	vagrant add Alpine-Linux-3.3.3-x86_64-minimal-virtualbox.box --name Alpine-Linux-3.3.3-x86_64-minimal
 
 ## Default settings
 
@@ -54,11 +54,26 @@ Due to Vagrant limitation of OpenBSD support, Synced Folder of this box is disab
 Because Bash is not the standard shell for Alpine Linux, default shell for SSH connection of this box
 is set to "`/bin/ash`".
 
+## Building a VM image on ESXi
+
+In order to build a VM image on ESXi, you need to provide the following environment variables:
+
+* `REMOTE_HOST` - ESXi host name or IP address
+* `REMOTE_USERNAME` - ESXi login user name
+* `REMOTE_PASSWORD` - ESXi login password
+* `REMOTE_DATASTORE` - ESXi datastore name where a VM image will be created
+
+You also have to enable SSH and VNC on ESXi host.
+
+The following command will build a VM image on your ESXi (Created VM will be unregistered from your Inventory):
+
+    packer build -only=vmware-iso alpine-linux-3.3.3-x86_64-minimal.json
+
 ## Variants
 
-* `alpine-linux-3.2.3-x86_64.json` - Alpine Linux 3.3.3 (x86_64)
-* `alpine-linux-3.2.3-x86_64-docker.json` - provided with [Docker] in addition to Alpine Linux 3.3.3 (x86_64) minimal installation.
-* `alpine-linux-3.2.3-x86.json` - Alpine Linux 3.3.3 (x86)
+* `alpine-linux-3.3.3-x86_64.json` - Alpine Linux 3.3.3 (x86_64)
+* `alpine-linux-3.3.3-x86_64-docker.json` - provided with [Docker] in addition to Alpine Linux 3.3.3 (x86_64) minimal installation.
+* `alpine-linux-3.3.3-x86.json` - Alpine Linux 3.3.3 (x86)
 
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 
