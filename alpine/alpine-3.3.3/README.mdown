@@ -30,7 +30,7 @@ Templates creating Vagrant box for Alpine Linux 3.3.3. (x86_64 and i686)
 
 From the terminal, invoke the following command:
 
-	packer build alpine-linux-3.3.3-x86_64.json
+	packer build alpine-linux-3.3.3-x86_64-minimal.json
 
 and you will find a vagrant box file named `Alpine-Linux-3.3.3-x86_64-minimal.box`
 in the same directory after the command has succeeded.
@@ -57,7 +57,10 @@ is set to "`/bin/ash`".
 ## Variants
 
 * `alpine-linux-3.2.3-x86_64.json` - Alpine Linux 3.3.3 (x86_64)
+* `alpine-linux-3.2.3-x86_64-docker.json` - provided with [Docker] in addition to Alpine Linux 3.3.3 (x86_64) minimal installation.
 * `alpine-linux-3.2.3-x86.json` - Alpine Linux 3.3.3 (x86)
+
+[Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 
 - - -
 
