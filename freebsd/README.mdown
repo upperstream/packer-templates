@@ -8,7 +8,10 @@
 * [freebsd-10.1](freebsd-10.1/README.mdown) - templates for FreeBSD 10.1-RELEASE
 	* FreeBSD 10.1-RELEASE (amd64)
 	* FreeBSD 10.1-RELEASE (i386)
+* [freebsd-10.3](freebsd-10.3/README.mdown) - templates for FreeBSD 10.3-RELEASE
+	* FreeBSD 10.3-RELEASE (amd64)
+	* FreeBSD 10.3-RELEASE (i386)
 
 - - -
 
-Copyright &copy; 2015 Upper Stream Software.
+Copyright &copy; 2015, 2016 Upper Stream Software.
