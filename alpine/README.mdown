@@ -4,7 +4,9 @@
 
 * [alpine-3.2.3](alpine-3.2.3/README.mdown) - templates for Alpine Linux 3.2.3
     * Alpine Linux 3.2.3 (x86_64 and x86)
+* [alpine-3.3.3](alpine-3.3.3/README.mdown) - templates for Alpine Linux 3.3.3
+    * Alpine Linux 3.3.3 (x86_64 and x86)
 
 - - -
 
-Copyright &copy; 2015 Upper Stream Software.
+Copyright &copy; 2015, 2016 Upper Stream Software.
