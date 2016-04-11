@@ -105,9 +105,9 @@
       "output_directory": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-minimal",
       "vm_name": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-minimal",
       "vmx_data": {
-      	"memsize": "512",
-      	"numvcpus": "2",
-      	"ethernet0.present": "TRUE",
+        "memsize": "512",
+        "numvcpus": "2",
+        "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
         "ethernet0.virtualDev": "e1000",
         "ethernet0.networkName": "VM Network",
