@@ -1,0 +1,178 @@
+{
+  "variables": {
+    "ssh_username": "root",
+    "ssh_password": "vagrant",
+    "iso_image": "alpine-3.3.3-x86_64.iso",
+    "iso_checksum": "5f842e2ff281651dc5507a78f759037661d43889",
+    "iso_checksum_type": "sha1",
+    "os_ver": "3.3.3",
+    "cpu": "x86_64",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "60s",
+      "disk_size": 51200,
+      "guest_os_type": "Linux26_64",
+      "iso_urls": [
+        "{{user `iso_image`}}",
+        "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.3/releases/{{user `cpu`}}/{{user `iso_image`}}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_key_path": "../key/vagrant_private_key",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "poweroff",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": ".vbox_version",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "512"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--rtcuseutc",
+          "on"
+        ]
+      ],
+      "http_directory": ".",
+      "boot_command": [
+        "root<enter><wait>",
+        "/sbin/setup-interfaces -i << EOF<enter>",
+        "auto lo<enter>",
+        "iface lo inet loopback<enter>",
+        "<enter>",
+        "auto eth0<enter>",
+        "iface eth0 inet dhcp<enter>",
+        "<tab>hostname localhost<enter>",
+        "EOF<enter>",
+        "/etc/init.d/networking --quiet start<enter>",
+        "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
+        "setup-alpine -f /tmp/answers.txt<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "y<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "sh /tmp/install.sh<enter><wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "60s",
+      "disk_size": 51200,
+      "disk_type_id": "thin",
+      "guest_os_type": "other3xlinux-64",
+      "iso_urls": [
+        "{{user `iso_image`}}",
+        "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.3/releases/{{user `cpu`}}/{{user `iso_image`}}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_key_path": "../key/vagrant_private_key",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "poweroff",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "tools_upload_flavor": "linux",
+      "output_directory": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker",
+      "vm_name": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker",
+      "vmx_data": {
+        "memsize": "512",
+        "numvcpus": "2",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "http_directory": ".",
+      "boot_command": [
+        "root<enter><wait>",
+        "/sbin/setup-interfaces -i << EOF<enter>",
+        "auto lo<enter>",
+        "iface lo inet loopback<enter>",
+        "<enter>",
+        "auto eth0<enter>",
+        "iface eth0 inet dhcp<enter>",
+        "<tab>hostname localhost<enter>",
+        "EOF<enter>",
+        "/etc/init.d/networking --quiet start<enter>",
+        "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
+        "setup-alpine -f /tmp/answers.txt<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "y<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "sh /tmp/install.sh<enter><wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso"],
+      "scripts": [
+        "../provisioners/vagrant.sh",
+        "../provisioners/docker.sh",
+        "../provisioners/cleanup.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["vmware-iso"],
+      "scripts": [
+        "../provisioners/vagrant.sh",
+        "../provisioners/docker.sh",
+        "../provisioners/cleanup.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox-iso"],
+      "output": "./Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker-{{ .Provider }}.box",
+      "override": {
+        "virtualbox": {
+          "vagrantfile_template": "../vagrantfile/Vagrantfile.Alpine"
+        }
+      }
+    }
+  ]
+}
