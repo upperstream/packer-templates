@@ -14,7 +14,11 @@
 	* Ubuntu Desktop 15.04
 	* Ubuntu Server 15.04
 	* Xubuntu 15.04
+* [ubuntu-15.10](ubuntu-15.10/README.mdown) - templates for Ubuntu 15.10
+	* Ubuntu Desktop 15.10
+	* Ubuntu Server 15.10
+	* Xubuntu 15.10
 
 - - -
 
-Copyright &copy; 2014, 2015 Upper Stream Software.
+Copyright &copy; 2014-2016 Upper Stream Software.
