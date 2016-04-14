@@ -5,7 +5,7 @@
 * [ubuntu-14.04](ubuntu-14.04/README.mdown) - templates for Ubuntu 14.04
 	* Ubuntu Desktop 14.04 LTS
 	* Ubuntu Server 14.04 LTS
-	* Xubuntu 14.04 LTS minimal
+	* Xubuntu 14.04 LTS
 * [ubuntu-14.10](ubuntu-14.10/README.mdown) - templates for Ubuntu 14.10
 	* Ubuntu Desktop 14.10
 	* Ubuntu Server 14.10
@@ -18,6 +18,10 @@
 	* Ubuntu Desktop 15.10
 	* Ubuntu Server 15.10
 	* Xubuntu 15.10
+* [ubuntu-16.04](ubuntu-16.04/README.mdown) - templates for Ubuntu 16.04
+	* Ubuntu Desktop 16.04 LTS
+	* Ubuntu Server 16.04 LTS
+	* Xubuntu 16.04 LTS
 
 - - -
 
