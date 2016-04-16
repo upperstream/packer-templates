@@ -5,3 +5,4 @@
 **/output-virtualbox-iso/
 **/output-vmware-iso/
 **/packer_cache/
+.DS_Store
