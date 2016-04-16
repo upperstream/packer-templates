@@ -4,11 +4,11 @@ Templates creating Vagrant boxes for OpenBSD 5.9 (amd64 and i386).
 
 ## Prerequisites
 
-* [Packer] v0.7.2
-* [Vagrant] v1.7.3 which adds `config.ssh.sudo_command` configuration
+* [Packer] v0.7.2+
+* [Vagrant] v1.7.3+ which adds `config.ssh.sudo_command` configuration
 * [VirtualBox]
-	* Version 4.3.28 for Windows
-	* Version 4.3.28 for Mac OS X (which allows [HAXM] to work in parallel)
+	* Version 4.3.28+ for Windows
+	* Version 4.3.28+ for Mac OS X (You may want to stay with 4.3.28 which allows [HAXM] to work in parallel.)
 
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
@@ -60,6 +60,23 @@ so `doas` will be used instead of `sudo` on guest side.
 
 If you want to stay with `sudo` or with an older version of Vagrant, you can use template files
 `openbsd-5.9-*-sudo.json` instead.  This has a classic `sudo` command in addition to `doas`.
+
+## Building a VM image on ESXi
+
+In order to build a VM image on ESXi, you need to provide the following environment variables:
+
+* `REMOTE_HOST` - ESXi host name or IP address
+* `REMOTE_USERNAME` - ESXi login user name
+* `REMOTE_PASSWORD` - ESXi login password
+* `REMOTE_DATASTORE` - ESXi datastore name where a VM image will be created
+
+You also have to enable SSH and VNC on ESXi host.
+
+The following command will build a VM image on your ESXi:
+
+    packer build -only=vmware-iso openbsd-5.9-amd64.json
+
+(Note that created VM will be unregistered from your Inventory.)
 
 - - -
 
