@@ -26,7 +26,7 @@ Templates creating Vagrant boxes for Ubuntu 16.04 (x86_64).
 
 From the terminal, invoke the following command:
 
-	packer build -var-file=vars-ubuntu-16.04-server-minimal.json ubuntu-16.04.json
+	packer build -var-file=vars-ubuntu-16.04-server-minimal.json ubuntu-16.04-server.json
 
 and you will find a vagrant box file named `Ubuntu-16.04-server-amd64-minimal.box`
 in the same directory after the command has succeeded.
@@ -38,9 +38,9 @@ by the following command:
 
 ## Variants
 
-* `packer build -var-file=vars-ubuntu-16.04-desktop-minimal.json ubuntu-16.04.json` - Ubuntu Desktop 16.04 LTS
-* `packer build -var-file=vars-ubuntu-16.04-server-minimal.json ubuntu-16.04.json` - Ubuntu Server 16.04 LTS
-* `packer build -var-file=vars-xubuntu-16.04-minimal.json ubuntu-16.04.json` - Xubuntu 16.04 LTS
+* `packer build -var-file=vars-ubuntu-16.04-desktop-minimal.json ubuntu-16.04-desktop.json` - Ubuntu Desktop 16.04 LTS
+* `packer build -var-file=vars-ubuntu-16.04-server-minimal.json ubuntu-16.04-server.json` - Ubuntu Server 16.04 LTS
+* `packer build -var-file=vars-xubuntu-16.04-minimal.json ubuntu-16.04-desktop.json` - Xubuntu 16.04 LTS
 
 
 - - -
