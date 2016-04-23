@@ -1,18 +1,15 @@
 {
   "variables": {
     "ssh_username": "root",
-    "iso_file_name": "NetBSD-5.2.3-i386.iso",
-    "iso_checksum": "0f555a7dde4d51ef82afe2e1f416d9eb3d534a04b783a6a3adc86fb400cfa0754f6fbbb6f990e04c3974ea4b6143e9a8672f8e70263d5950a91b3975bcbd8245",
-    "iso_checksum_type": "sha512",
     "os_ver": "5.2.3",
-    "box_ver": "1.1"
+    "variant": "minimal"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_wait": "10s",
-      "disk_size": 307200,
-      "guest_os_type": "NetBSD",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "{{user `virtualbox_geust_os_type`}}",
       "iso_urls": [
         "{{user `iso_file_name`}}",
         "http://ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
@@ -38,7 +35,7 @@
           "modifyvm",
           "{{.Name}}",
           "--memory",
-          "512"
+          "{{user `mem_size`}}"
         ],
         [
           "modifyvm",
@@ -98,9 +95,9 @@
     {
       "type": "vmware-iso",
       "boot_wait": "10s",
-      "disk_size": 307200,
+      "disk_size": "{{user `disk_size`}}",
       "disk_type_id": "0",
-      "guest_os_type": "other",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "{{user `iso_file_name`}}",
         "http://ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
@@ -120,8 +117,8 @@
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'shutdown -p now'|su -",
       "vmx_data": {
-   		"memsize": "512",
-   		"numvcpus": "2"
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "2"
       },
       "http_directory": ".",
       "boot_command": [
@@ -194,8 +191,8 @@
     {
       "type": "vagrant",
       "compression_level": 9,
-      "output": "./NetBSD-{{user `os_ver`}}-i386-minimal-v{{user `box_ver`}}-{{.Provider}}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD"
+      "output": "./NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
+      "vagrantfile_template": "../vagrantfile/Vagrantfile.NetBSD"
     }
   ]
 }

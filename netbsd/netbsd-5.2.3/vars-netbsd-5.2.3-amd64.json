@@ -1,0 +1,11 @@
+{
+  "iso_file_name": "NetBSD-5.2.3-amd64.iso",
+  "iso_checksum": "7be5fea1e3975d7bed8298a09097f5dbe5eed5c482cf3a051a871dcd7bdbe48490210162085c4449c36e68b2b63c5969f04a8181d4543987553122c9449ce84f",
+  "iso_checksum_type": "sha512",
+  "cpu": "amd64",
+  "virtualbox_geust_os_type": "NetBSD_64",
+  "vmware_guest_os_type": "other-64",
+  "mem_size": "512",
+  "disk_size": "307200",
+  "box_ver": "1.1"
+}
