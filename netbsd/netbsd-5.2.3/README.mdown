@@ -30,7 +30,7 @@ Templates creating Vagrant box for NetBSD 5.2.3 (amd64 and i386).
 
 From the terminal, invoke the following command:
 
-	packer build -var-file=netbsd-5.2.3-amd64.json netbsd-5.2.3-minimal.json
+	packer build -var-file=vars-netbsd-5.2.3-amd64.json netbsd-5.2.3-minimal.json
 
 and you will find vagrant boxes file named `NetBSD-5.2.3-amd64-minimal-v1.1-virtualbox.box`
 and `NetBSD-5.2.3-amd64-minimal-v1.1-vmware.box` in the same directory after the command has succeeded.

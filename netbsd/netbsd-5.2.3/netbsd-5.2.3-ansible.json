@@ -2,7 +2,12 @@
   "variables": {
     "ssh_username": "root",
     "os_ver": "5.2.3",
-    "variant": "ansible"
+    "variant": "ansible",
+    "box_ver": "1.1",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}"
   },
   "builders": [
     {
@@ -68,10 +73,12 @@
         "b<enter><wait>",
         "x<enter><wait>",
         "<enter><wait>",
-        "b<enter><wait10>",
+        "b<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "<wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10>",
         "a<enter><wait>",
         "x<enter><wait>",
         "a<enter><wait>",
@@ -96,7 +103,7 @@
       "type": "vmware-iso",
       "boot_wait": "10s",
       "disk_size": "{{user `disk_size`}}",
-      "disk_type_id": "0",
+      "disk_type_id": "thin",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "{{user `iso_file_name`}}",
@@ -116,9 +123,24 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'shutdown -p now'|su -",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "output_directory": "NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "vm_name": "NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2"
+        "numvcpus": "2",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "bridged",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
       },
       "http_directory": ".",
       "boot_command": [
@@ -129,6 +151,7 @@
         "b<enter><wait>",
         "<enter><wait>",
         "c<enter><wait>",
+        "d<enter><wait>",
         "f<enter><wait>",
         "i<enter><wait>",
         "x<enter><wait>",
@@ -139,11 +162,6 @@
         "x<enter><wait>",
         "<enter><wait>",
         "b<enter><wait10>",
-        "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
@@ -171,6 +189,7 @@
   "provisioners": [
     {
       "type": "shell",
+      "only": ["virtualbox-iso"],
       "scripts": [
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
@@ -182,7 +201,22 @@
       "override": {
         "virtualbox-iso": {
           "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/5.2_2015Q1/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
-        },
+        }
+      }
+    },
+    {
+      "type": "shell",
+      "only": ["vmware-iso"],
+      "scripts": [
+        "../provisioners/sudo.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/rsync.sh",
+        "../provisioners/vmware-5.2.sh",
+        "../provisioners/python27.sh",
+        "../provisioners/ansible.sh",
+        "../provisioners/cleanup.sh"
+      ],
+      "override": {
         "vmware-iso": {
           "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/5.2_2015Q1/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
         }
@@ -192,6 +226,7 @@
   "post-processors": [
     {
       "type": "vagrant",
+      "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
       "vagrantfile_template": "../vagrantfile/Vagrantfile.NetBSD"
