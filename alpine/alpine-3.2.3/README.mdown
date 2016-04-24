@@ -47,7 +47,7 @@ Users can override this setting by users' own `Vagrantfile`s.
 
 ### Synced Folder
 
-Due to Vagrant limitation of OpenBSD support, Synced Folder of this box is disabled by default.
+Due to limitation of Vagrant's support for Alpine Linux, Synced Folder of this box is disabled by default.
 
 ### SSH Shell
 
