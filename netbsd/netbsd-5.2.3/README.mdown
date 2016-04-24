@@ -47,11 +47,11 @@ Users can override this setting by users' own `Vagrantfile`s.
 
 ### Synced Folder
 
-Due to Vagrant limitation of OpenBSD support, Synced Folder of this box is disabled by default.
+Due to limitation of Vagrant's support for NetBSD, Synced Folder of this box is disabled by default.
 
 ### SSH Shell
 
-Because Bash is not the standard shell for OpenBSD, default shell for SSH connection of this box
+Because Bash is not the standard shell for NetBSD, default shell for SSH connection of this box
 is set to "`/bin/ksh`".
 
 ## Variants
