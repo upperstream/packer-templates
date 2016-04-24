@@ -1,0 +1,11 @@
+{
+  "iso_name": "Core-7.0.iso",
+  "iso_checksum": "11ee7e2a449415cec8feb5dc7dbee064",
+  "iso_checksum_type": "md5",
+  "mem_size": "512",
+  "disk_size": "102400",
+  "os_name": "Core",
+  "cpu": "x86",
+  "os_ver": "7.0",
+  "guest_os_type": "Linux26"
+}

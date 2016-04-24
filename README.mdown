@@ -30,6 +30,8 @@
 	* openbsd-5.7 - OpenBSD 5.7 templates (amd64 and i386)
 	* openbsd-5.8 - OpenBSD 5.8 templates (amd64 and i386)
 	* openbsd-5.9 - OpenBSD 5.9 templates (amd64 and i386)
+* [tinycorelinux](tinycorelinux/README.mdown) - Tiny Core Linux templates
+    * tinycorelinux-7.0 - Tiny Core Linux v7.0 templates (x86_64 and x86)
 * [ubuntu](ubuntu/README.mdown) - Ubuntu templates
 	* ubuntu-14.04 - Ubuntu 14.04 templates
 	* ubuntu-14.10 - Ubuntu 14.10 templates
