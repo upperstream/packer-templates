@@ -1,18 +1,20 @@
 {
   "variables": {
     "ssh_username": "root",
-    "iso_file_name": "NetBSD-6.1.5-amd64.iso",
-    "iso_checksum": "847e5338c9354dfc12f43160509480724659c5469e53cc03334bb38b3b9393fed8a0d55962c6626f6eb7d569ed4ea8d328a0db4ee2bf992def5eafc6f0c3f834",
-    "iso_checksum_type": "sha512",
     "os_ver": "6.1.5",
-    "box_ver": "1.1"
+    "variant": "minimal",
+    "box_ver": "1.1",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_wait": "10s",
-      "disk_size": 307200,
-      "guest_os_type": "NetBSD_64",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "{{user `virtualbox_geust_os_type`}}",
       "iso_urls": [
         "{{user `iso_file_name`}}",
         "http://ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
@@ -38,7 +40,7 @@
           "modifyvm",
           "{{.Name}}",
           "--memory",
-          "512"
+          "{{user `mem_size`}}"
         ],
         [
           "modifyvm",
@@ -71,7 +73,7 @@
         "b<enter><wait>",
         "x<enter><wait>",
         "<enter><wait>",
-        "b<enter><wait10>",
+        "b<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "a<enter><wait>",
         "x<enter><wait>",
@@ -95,9 +97,9 @@
     {
       "type": "vmware-iso",
       "boot_wait": "10s",
-      "disk_size": 307200,
-      "disk_type_id": "0",
-      "guest_os_type": "other-64",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "thin",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "{{user `iso_file_name`}}",
         "http://ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
@@ -116,19 +118,35 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'shutdown -p now'|su -",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "output_directory": "NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "vm_name": "NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vmx_data": {
-   		"memsize": "512",
-   		"numvcpus": "2"
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "2",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "bridged",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
       },
       "http_directory": ".",
       "boot_command": [
-        "1<wait10><wait10><wait5>",
+        "1<wait10><wait5>",
         "a<enter><wait>",
         "a<enter><wait>",
         "a<enter><wait>",
         "b<enter><wait>",
         "<enter><wait>",
         "d<enter><wait>",
+        "e<enter><wait>",
         "g<enter><wait>",
         "j<enter><wait>",
         "x<enter><wait>",
@@ -139,9 +157,6 @@
         "x<enter><wait>",
         "<enter><wait>",
         "b<enter><wait10>",
-        "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "a<enter><wait>",
         "x<enter><wait>",
@@ -166,18 +181,30 @@
   "provisioners": [
     {
       "type": "shell",
+      "only": ["virtualbox-iso"],
       "scripts": [
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/rsync.sh",
-        "../provisioners/python27.sh",
-        "../provisioners/ansible.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
         "virtualbox-iso": {
           "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/6.1_2015Q1/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
-        },
+        }
+      }
+    },
+    {
+      "type": "shell",
+      "only": ["vmware-iso"],
+      "scripts": [
+        "../provisioners/sudo.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/rsync.sh",
+        "../provisioners/vmware-6.1.sh",
+        "../provisioners/cleanup.sh"
+      ],
+      "override": {
         "vmware-iso": {
           "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/6.1_2015Q1/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
         }
@@ -187,8 +214,9 @@
   "post-processors": [
     {
       "type": "vagrant",
+      "only": ["virtualbox-iso"],
       "compression_level": 9,
-      "output": "./NetBSD-{{user `os_ver`}}-amd64-ansible-v{{user `box_ver`}}-{{.Provider}}.box",
+      "output": "./NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
       "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD"
     }
   ]
