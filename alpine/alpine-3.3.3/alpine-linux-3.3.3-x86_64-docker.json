@@ -12,7 +12,8 @@
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
-    "remote_datastore": "{{env `REMOTE_DATASTORE`}}"
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "box_ver": "1.1"
   },
   "builders": [
     {
@@ -104,8 +105,8 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
       "tools_upload_flavor": "linux",
-      "output_directory": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker",
-      "vm_name": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker",
+      "output_directory": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker-{{user `box_ver`}}",
+      "vm_name": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker-{{user `box_ver`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -170,7 +171,7 @@
     {
       "type": "vagrant",
       "only": ["virtualbox-iso"],
-      "output": "./Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker-{{ .Provider }}.box",
+      "output": "./Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker-{{ .Provider }}-{{user `box_ver`}}.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfile/Vagrantfile.Alpine"
