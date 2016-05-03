@@ -1,14 +1,14 @@
 {
   "variables": {
-    "ssh_username": "root",
-    "ssh_password": "vagrant",
+    "vm_name": "Alpine-Linux-3.3.3-x86-minimal",
     "iso_image": "alpine-3.3.3-x86.iso",
     "iso_checksum": "985dd59872f3ebd8a5a5fcc870e80bed5bf2a17f",
     "iso_checksum_type": "sha1",
-    "os_ver": "3.3.3",
     "cpu": "x86",
     "disk_size": "51200",
     "mem_size": "512",
+    "ssh_username": "root",
+    "ssh_password": "vagrant",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -34,6 +34,7 @@
       "shutdown_command": "poweroff",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{user `vm_name`}}",
       "vboxmanage": [
         [
           "modifyvm",
@@ -104,8 +105,8 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
       "tools_upload_flavor": "linux",
-      "output_directory": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-minimal",
-      "vm_name": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-minimal",
+      "output_directory": "{{user `vm_name`}}",
+      "vm_name": "{{user `vm_name`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -148,18 +149,15 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": ["virtualbox-iso"],
+      "only": ["vmware-iso"],
       "scripts": [
-        "../provisioners/vagrant.sh",
-        "../provisioners/cleanup.sh"
+        "../provisioners/vmware.sh"
       ]
     },
     {
       "type": "shell",
-      "only": ["vmware-iso"],
       "scripts": [
         "../provisioners/vagrant.sh",
-        "../provisioners/vmware.sh",
         "../provisioners/cleanup.sh"
       ]
     }
@@ -168,7 +166,7 @@
     {
       "type": "vagrant",
       "only": ["virtualbox-iso"],
-      "output": "./Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-minimal-{{ .Provider }}.box",
+      "output": "./{{user `vm_name`}}-{{ .Provider }}.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfile/Vagrantfile.Alpine"
