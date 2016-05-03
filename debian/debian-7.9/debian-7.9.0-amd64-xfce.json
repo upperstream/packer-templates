@@ -9,7 +9,8 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "vm_name": "debian-7.9.0-amd64-xfce"
+    "vm_name": "debian-7.9.0-amd64-xfce",
+    "box_version": "1.1"
   },
   "builders": [
     {
@@ -78,8 +79,8 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
       "tools_upload_flavor": "linux",
-      "output_directory": "{{user `vm_name`}}",
-      "vm_name": "{{user `vm_name`}}",
+      "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
       "vmx_data": {
       	"numvcpus": "2",
       	"memsize": "512",
@@ -148,8 +149,7 @@
     {
       "type": "vagrant",
       "only": ["virtualbox-iso"],
-      "output": "./{{user `vm_name`}}-{{ .Provider }}.box"
+      "output": "./{{user `vm_name`}}-{{ .Provider }}-v{{user `box_version`}}.box"
     }
   ]
 }
-
