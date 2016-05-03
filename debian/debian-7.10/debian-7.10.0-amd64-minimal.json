@@ -1,27 +1,30 @@
 {
   "variables": {
-    "os_ver": "7.9.0",	
-    "iso_path": "Linux/debian/debian-cdimage/archive/7.9.0/amd64/iso-cd/debian-7.9.0-amd64-netinst.iso",
-    "iso_checksum": "774d1fc8c5364e63b22242c33a89c1a3",
+    "vm_name": "Debian-7.10.0-amd64-minimal",
+    "mem_size": "512",
+    "disk_size": "102400",
+    "iso_name": "mini.iso",
+    "iso_path": "debian/dists/Debian7.10/main/installer-amd64/20130613+deb7u3+b1/images/netboot",
+    "iso_checksum": "7ea1828d944918b0e2c0e12887a82b68",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
-    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "vm_name": "debian-7.9.0-amd64-xfce",
-    "box_version": "1.1"
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_wait": "10s",
-      "disk_size": 512000,
+      "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "Debian_64",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "md5",
       "iso_urls": [
-        "http://ftp.riken.jp/{{user `iso_path`}}"
+        "./{{user `iso_name`}}",
+        "http://ftp.jp.debian.org/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://cdimage.debian.org/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -32,7 +35,7 @@
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm_name`}}",
       "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--memory", "512" ],
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
         [ "modifyvm", "{{.Name}}", "--vram", "32" ]
@@ -60,13 +63,15 @@
     {
       "type": "vmware-iso",
       "boot_wait": "10s",
-      "disk_size": 512000,
+      "disk_size": "{{user `disk_size`}}",
       "disk_type_id": "thin",
       "guest_os_type": "debian7-64",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "md5",
       "iso_urls": [
-        "http://ftp.riken.jp/{{user `iso_path`}}"
+        "./{{user `iso_name`}}",
+        "http://ftp.jp.debian.org/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://cdimage.debian.org/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -79,13 +84,13 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
       "tools_upload_flavor": "linux",
-      "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
-      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "output_directory": "{{user `vm_name`}}",
+      "vm_name": "{{user `vm_name`}}",
       "vmx_data": {
-      	"numvcpus": "2",
-      	"memsize": "512",
-      	"ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "nat",
+        "numvcpus": "2",
+        "memsize": "{{user `mem_size`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "bridged",
         "ethernet0.virtualDev": "e1000",
         "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
@@ -117,39 +122,26 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": ["virtualbox-iso"],
+      "only": ["vmware-iso"],
       "scripts": [
-        "../provisioners/base.sh",
-        "../provisioners/vagrant.sh",
-        "../provisioners/xfce4.sh",
-        "../provisioners/cleanup.sh"
-      ],
-      "override": {
-        "virtualbox-iso": {
-        }
-      }
+        "../provisioners/vmtools.sh"
+      ]
     },
     {
       "type": "shell",
-      "only": ["vmware-iso"],
       "scripts": [
         "../provisioners/base.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/xfce4.sh",
-        "../provisioners/vmtools.sh",
         "../provisioners/cleanup.sh"
-      ],
-      "override": {
-        "vmware-iso": {
-        }
-      }
+      ]
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
       "only": ["virtualbox-iso"],
-      "output": "./{{user `vm_name`}}-{{ .Provider }}-v{{user `box_version`}}.box"
+      "output": "./{{user `vm_name`}}-{{ .Provider }}.box"
     }
   ]
 }
+

@@ -9,6 +9,9 @@
 	* Debian 7.9 minimal
 	* Debian 7.9 + Docker
 	* Debian 7.9 + Xfce
+* [debian-7.10](debian-7.10/README.mdown) - templates for Debian 7.10
+	* Debian 7.10 minimal
+	* Debian 7.10 + Xfce
 * [debian-8.0](debian-8.0/README.mdown) - templates for Debian 8.0
 	* Debian 8.0 minimal
 	* Debian 8.0 + Docker

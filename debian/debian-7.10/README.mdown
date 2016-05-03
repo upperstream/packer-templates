@@ -1,6 +1,6 @@
-# Packer templates for Debian 7.9
+# Packer templates for Debian 7.10
 
-Templates to create Vagrant boxes for Debian 7.9 (amd64).
+Templates to create Vagrant boxes for Debian 7.10 (amd64).
 
 ## Prerequisites
 
@@ -37,15 +37,15 @@ Templates to create Vagrant boxes for Debian 7.9 (amd64).
 
 From the terminal, invoke the following command:
 
-	packer build debian-7.9.0-amd64-minimal.json
+	packer build debian-7.10.0-amd64-minimal.json
 
-and you will find a vagrant box file named `debian-7.9.0-amd64-minimal-virtualbox.box`
+and you will find a vagrant box file named `Debian-7.10.0-amd64-minimal-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `debian-7.9.0-amd64-minimal` to your box list
+Then you can add the box named `Debian-7.10.0-amd64-minimal` to your box list
 by the following command:
 
-	vagrant add debian-7.9.0-amd64-minimal-virtualbox.box --name debian-7.9.0-amd64-minimal
+	vagrant add Debian-7.10.0-amd64-minimal-virtualbox.box --name Debian-7.10.0-amd64-minimal
 
 ## Building a VM image on ESXi
 
@@ -60,15 +60,13 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi (Created VM will be unregistered from your Inventory):
 
-    packer build -only=vmware-iso debian-7.9.0-amd64-minimal.json
+    packer build -only=vmware-iso debian-7.10.0-amd64-minimal.json
 
 ## Variants
 
-* `debian-7.9.0-amd64-minimal.json` - Debian 7.9 minimal installation
-* `debian-7.9.0-amd64-docker.json` - provided with [Docker] and Kernel 3.8+ in addition to Debian 7.9 minimal installation.
-* `debian-7.9.0-amd64-xfce.json` - provided with [Xfce] and [xrdp] in addition to Debian 7.9 minimal installation.
+* `debian-7.10.0-amd64-minimal.json` - Debian 7.10 minimal installation
+* `debian-7.10.0-amd64-xfce.json` - provided with [Xfce] and [xrdp] in addition to Debian 7.10 minimal installation.
 
-[Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
 
