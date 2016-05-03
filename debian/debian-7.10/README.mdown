@@ -65,8 +65,10 @@ The following command will build a VM image on your ESXi (Created VM will be unr
 ## Variants
 
 * `debian-7.10.0-amd64-minimal.json` - Debian 7.10 minimal installation
+* `debian-7.10.0-amd64-docker.json` - provided with [Docker] and Kernel 3.10+ in addition to Debian 7.10 minimal installation.
 * `debian-7.10.0-amd64-xfce.json` - provided with [Xfce] and [xrdp] in addition to Debian 7.10 minimal installation.
 
+[Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
 
