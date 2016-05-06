@@ -10,8 +10,8 @@
     "os_name": "",
     "cpu": "",
     "os_ver": "",
-    "variant": "",
-    "guest_os_type": ""
+    "guest_os_type": "",
+    "box_version": "1.1"
   },
   "builders": [
     {
@@ -38,7 +38,8 @@
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
-        [ "modifyvm", "{{.Name}}", "--vram", "32" ]
+        [ "modifyvm", "{{.Name}}", "--vram", "32" ],
+        [ "modifyvm", "{{.Name}}", "--nictype1", "virtio" ]
       ],
       "http_directory": "../http",
       "boot_command": [
@@ -53,7 +54,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./{{user `vm_name`}}.box",
+      "output": "./{{user `vm_name`}}-v{{user `box_version`}}.box",
       "vagrantfile_template": "../vagrantfile/Vagrantfile.tc"
     }
   ]
