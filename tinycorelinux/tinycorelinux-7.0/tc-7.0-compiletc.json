@@ -11,6 +11,7 @@
     "cpu": "",
     "os_ver": "",
     "guest_os_type": "",
+    "variant": "compiletc",
     "box_version": "1.1"
   },
   "builders": [
@@ -33,7 +34,7 @@
       "shutdown_command": "sudo filetool.sh -b; sudo poweroff",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "{{user `vm_name`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
@@ -50,11 +51,18 @@
     }
   ],
   "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "tce-load -wi compiletc git python perl5",
+        "tce-load -wi linux-4.2.1_api_headers linux-kernel-sources-env"
+      ]
+    }
   ],
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./{{user `vm_name`}}-v{{user `box_version`}}.box",
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}.box",
       "vagrantfile_template": "../vagrantfile/Vagrantfile.tc"
     }
   ]
