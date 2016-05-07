@@ -65,6 +65,8 @@ Automatic SSH key pair insertion is disabled because it does not work with this 
 * `packer build -var-file=vars-core-7.0.json tc-7.0.json-minimal.json` - Core v7.0 (x86)
 * `packer build -var-file=vars-corepure64-7.0.json tc-7.0-compiletc.json` - CorePure 64 v7.0 (x86_64) with build tools
 * `packer build -var-file=vars-core-7.0.json tc-7.0.json-compiletc.json` - Core v7.0 (x86) with build tools
+* `packer build -var-file=vars-tinycorepure64-7.0.json tc-7.0-x11.json` - TinyCorePure 64 v7.0 (x86_64)
+* `packer build -var-file=vars-tinycore-7.0.json tc-7.0.json-x11.json` - TinyCore v7.0 (x86)
 
 - - -
 
