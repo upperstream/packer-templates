@@ -44,9 +44,8 @@ tce-setdrive
 tce-load -wi openssh.tcz
 sudo sh -c 'echo "usr/local/etc/ssh" >> /opt/.filetool.lst'
 
-mkdir ~/.ssh
-wget -O - "https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub" >> /home/tc/.ssh/authorized_keys
-chmod -R og-rwx /home/tc/.ssh
+sudo sh -c "sed 's/^#PermitEmptyPasswords no$/PermitEmptyPasswords yes/' /usr/local/etc/ssh/sshd_config.example > /usr/local/etc/ssh/sshd_config"
+sudo sh -c 'echo "usr/local/etc/ssh" >> /opt/.filetool.lst'
 
 tce-load -wi rsync.tcz nfs-utils.tcz
 
@@ -55,5 +54,3 @@ sudo sh -c 'cat >> /opt/bootsync.sh' << EOF
 ssh-keygen -A
 /usr/local/etc/init.d/openssh start
 EOF
-
-sudo filetool.sh -b
