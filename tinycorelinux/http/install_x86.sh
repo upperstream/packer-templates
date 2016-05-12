@@ -26,7 +26,7 @@ sudo cp -p /usr/lib/grub/i386-pc/* /mnt/sda1/boot/grub/
 sudo sh -c 'cat > /mnt/sda1/boot/grub/menu.lst' << EOF
 default 0
 timeout 10
-title $OS_NAME
+title $GRUB_ENTRY_NAME
 kernel /boot/vmlinuz restore=sda1/tce quiet
 initrd /boot/core.gz
 EOF

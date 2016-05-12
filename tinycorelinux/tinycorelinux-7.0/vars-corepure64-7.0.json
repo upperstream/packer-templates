@@ -7,5 +7,6 @@
   "os_name": "CorePure64",
   "cpu": "x86_64",
   "os_ver": "7.0",
-  "guest_os_type": "Linux26_64"
+  "guest_os_type": "Linux26_64",
+  "vm_name": "CorePure64-7.0"
 }

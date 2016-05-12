@@ -28,7 +28,7 @@ sudo grub-install --no-floppy --root-directory=/mnt/sda1 /dev/sda
 sudo sh -c 'cat > /usr/local/etc/grub.d/42_custom' << EOF
 set default=0
 set timeout=10
-menuentry "$OS_NAME" {
+menuentry "$GRUB_ENTRY_NAME" {
   set root=(hd0,msdos1)
   linux /boot/vmlinuz64 restore=sda1/tce quiet waitusb=5
   initrd /boot/corepure64.gz

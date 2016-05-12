@@ -33,6 +33,7 @@
       "shutdown_command": "sudo filetool.sh -b; sudo poweroff",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{user `vm_name`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
@@ -43,7 +44,7 @@
       "boot_command": [
         "<enter><wait10>",
         "wget -O /tmp/install_{{user `cpu`}}.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_{{user `cpu`}}.sh<enter><wait>",
-        "OS_NAME='{{user `os_name`}} {{user `os_ver`}}' sh -x /tmp/install_{{user `cpu`}}.sh<enter><wait>"
+        "GRUB_ENTRY_NAME='{{user `os_name`}} {{user `os_ver`}}' sh -x /tmp/install_{{user `cpu`}}.sh<enter><wait>"
       ]
     }
   ],
@@ -52,7 +53,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./{{user `os_name`}}-{{user `os_ver`}}.box",
+      "output": "./{{user `vm_name`}}.box",
       "vagrantfile_template": "../vagrantfile/Vagrantfile.tc"
     }
   ]
