@@ -1,0 +1,69 @@
+{
+  "variables": {
+    "mem_size": "512",
+    "disk_size": "512000", 
+    "iso_image": "debian-8.4.0-amd64-netinst.iso",
+    "iso_checksum": "8d52d1b7789cd5a464aae719f05299ec",
+    "ssh_name": "root",
+    "ssh_pass": "vagrant",
+    "vm_name": "Debian-8.4.0-amd64-xfce"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "Debian_64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "md5",
+      "iso_urls": [
+        "{{user `iso_image`}}",
+        "http://cdimage.debian.org/debian-cd/8.4.0/amd64/iso-cd/{{user `iso_image`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_key_path": "vagrant_insecure_key.txt",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
+      "guest_additions_path": "VBoxGuestAdditions_{{ .Version }}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{user `vm_name`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "32" ]
+      ],
+      "http_directory": "../http",
+      "boot_command": [
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "keymap=us <wait>",
+        "tasks=standard,xfce-desktop <wait>",
+        "<enter> <wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/base.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/linux-headers.sh",
+        "../provisioners/virtualbox.sh",
+        "../provisioners/cleanup.sh"
+      ],
+      "override": {
+        "virtualbox-iso": {
+        }
+      }
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "./{{user `vm_name`}}.box"
+    }
+  ]
+}
