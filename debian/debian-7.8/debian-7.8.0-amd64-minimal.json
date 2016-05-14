@@ -33,21 +33,9 @@
       ],
       "http_directory": "../http",
       "boot_command": [
-        "<esc> <wait> install ",
-        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-        "debian-installer=en_US ",
-        "auto ",
-        "locale=en_US ",
-        "kbd-chooser/method=us ",
-        "keyboard-configuration/xkb-keymap=us ",
-        "keyboard-configuration/layoutcode=us ",
-        "netcfg/get_hostname={{ .Name }} ",
-        "netcfg/get_domain=vagrantup.com ",
-        "console-setup/ask_detect=false ",
-        "console-keymaps-at/keymap=us ",
-        "fb=false ",
-        "debconf/frontend=noninteractive ",
-        "hostname=vagrant <wait>",
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "keymap=us <wait>",
+        "tasks=standard <wait>",
         "<enter> <wait>"
       ]
     }
