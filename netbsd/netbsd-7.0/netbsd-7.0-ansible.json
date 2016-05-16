@@ -194,34 +194,29 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": ["virtualbox-iso"],
+      "only": ["vmware-iso"],
       "scripts": [
-        "../provisioners/sudo.sh",
-        "../provisioners/vagrant-7.0.sh",
-        "../provisioners/rsync-7.0.sh",
-        "../provisioners/python27-7.0.sh",
-        "../provisioners/ansible-7.0.sh",
-        "../provisioners/cleanup-7.0.sh"
+        "../provisioners/vmware-7.0.sh"
       ],
       "override": {
-        "virtualbox-iso": {
-          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q3/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
+        "vmware-iso": {
+          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
         }
       }
     },
     {
       "type": "shell",
-      "only": ["vmware-iso"],
       "scripts": [
         "../provisioners/sudo-7.0.sh",
         "../provisioners/vagrant-7.0.sh",
         "../provisioners/rsync-7.0.sh",
-        "../provisioners/vmware-7.0.sh",
-        "../provisioners/python27-7.0.sh",
         "../provisioners/ansible-7.0.sh",
         "../provisioners/cleanup-7.0.sh"
       ],
       "override": {
+        "virtualbox-iso": {
+          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
+        },
         "vmware-iso": {
           "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
         }
