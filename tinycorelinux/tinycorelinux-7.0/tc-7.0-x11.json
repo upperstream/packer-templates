@@ -10,8 +10,9 @@
     "os_name": "",
     "cpu": "",
     "os_ver": "",
-    "variant": "",
-    "guest_os_type": ""
+    "guest_os_type": "",
+    "variant": "x11",
+    "box_version": "1.1"
   },
   "builders": [
     {
@@ -33,12 +34,13 @@
       "shutdown_command": "sudo filetool.sh -b; sudo poweroff",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "{{user `vm_name`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
-        [ "modifyvm", "{{.Name}}", "--vram", "32" ]
+        [ "modifyvm", "{{.Name}}", "--vram", "32" ],
+        [ "modifyvm", "{{.Name}}", "--nictype1", "virtio" ]
       ],
       "http_directory": "../http",
       "boot_command": [
@@ -49,11 +51,17 @@
     }
   ],
   "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "tce-load -wi Xorg-7.7 wbar flwm_topside aterm"
+      ]
+    }
   ],
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./{{user `vm_name`}}.box",
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}.box",
       "vagrantfile_template": "../vagrantfile/Vagrantfile.tc"
     }
   ]

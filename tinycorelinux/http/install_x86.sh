@@ -42,6 +42,7 @@ tce-load -wil curl.tcz make.tcz
 tce-setdrive
 
 tce-load -wi openssh.tcz
+sudo sh -c 'echo "usr/local/etc/ssh" >> /opt/.filetool.lst'
 
 mkdir ~/.ssh
 wget -O - "https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub" >> /home/tc/.ssh/authorized_keys
@@ -50,7 +51,7 @@ chmod -R og-rwx /home/tc/.ssh
 tce-load -wi rsync.tcz nfs-utils.tcz
 
 sudo /usr/local/etc/init.d/openssh start
-sudo sh -c 'cat >> /opt/bootlocal.sh' << EOF
+sudo sh -c 'cat >> /opt/bootsync.sh' << EOF
 ssh-keygen -A
 /usr/local/etc/init.d/openssh start
 EOF
