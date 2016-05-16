@@ -1,10 +1,10 @@
 {
   "variables": {
-    "vm_name": "Alpine-Linux-3.3.3-x86-minimal",
-    "iso_image": "alpine-3.3.3-x86.iso",
-    "iso_checksum": "985dd59872f3ebd8a5a5fcc870e80bed5bf2a17f",
+    "vm_name": "Alpine-Linux-3.3.3-x86_64-ansible",
+    "iso_image": "alpine-3.3.3-x86_64.iso",
+    "iso_checksum": "5f842e2ff281651dc5507a78f759037661d43889",
     "iso_checksum_type": "sha1",
-    "cpu": "x86",
+    "cpu": "x86_64",
     "disk_size": "51200",
     "mem_size": "512",
     "ssh_username": "root",
@@ -19,7 +19,7 @@
       "type": "virtualbox-iso",
       "boot_wait": "60s",
       "disk_size": "{{user `disk_size`}}",
-      "guest_os_type": "Linux26",
+      "guest_os_type": "Linux26_64",
       "iso_urls": [
         "{{user `iso_image`}}",
         "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.3/releases/{{user `cpu`}}/{{user `iso_image`}}"
@@ -86,7 +86,7 @@
       "boot_wait": "60s",
       "disk_size": "{{user `disk_size`}}",
       "disk_type_id": "thin",
-      "guest_os_type": "other3xlinux",
+      "guest_os_type": "other3xlinux-64",
       "iso_urls": [
         "{{user `iso_image`}}",
         "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.3/releases/{{user `cpu`}}/{{user `iso_image`}}"
@@ -147,6 +147,12 @@
     }
   ],
   "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/ansible.sh"
+      ]
+    },
     {
       "type": "shell",
       "only": ["vmware-iso"],

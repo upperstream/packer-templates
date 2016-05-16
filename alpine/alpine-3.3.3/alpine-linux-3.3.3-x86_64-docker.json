@@ -1,19 +1,19 @@
 {
   "variables": {
-    "ssh_username": "root",
-    "ssh_password": "vagrant",
+    "vm_name": "Alpine-Linux-3.3.3-x86_64-docker",
     "iso_image": "alpine-3.3.3-x86_64.iso",
     "iso_checksum": "5f842e2ff281651dc5507a78f759037661d43889",
     "iso_checksum_type": "sha1",
-    "os_ver": "3.3.3",
     "cpu": "x86_64",
     "disk_size": "51200",
     "mem_size": "512",
+    "ssh_username": "root",
+    "ssh_password": "vagrant",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_ver": "1.1"
+    "box_version": "1.1"
   },
   "builders": [
     {
@@ -35,6 +35,7 @@
       "shutdown_command": "poweroff",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
       "vboxmanage": [
         [
           "modifyvm",
@@ -105,8 +106,8 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
       "tools_upload_flavor": "linux",
-      "output_directory": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker-{{user `box_ver`}}",
-      "vm_name": "Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker-{{user `box_ver`}}",
+      "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -149,19 +150,15 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": ["virtualbox-iso"],
+      "only": ["vmware-iso"],
       "scripts": [
-        "../provisioners/vagrant.sh",
-        "../provisioners/docker.sh",
-        "../provisioners/cleanup.sh"
+        "../provisioners/vmware.sh"
       ]
     },
     {
       "type": "shell",
-      "only": ["vmware-iso"],
       "scripts": [
         "../provisioners/vagrant.sh",
-        "../provisioners/vmware.sh",
         "../provisioners/docker.sh",
         "../provisioners/cleanup.sh"
       ]
@@ -171,7 +168,7 @@
     {
       "type": "vagrant",
       "only": ["virtualbox-iso"],
-      "output": "./Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-docker-{{ .Provider }}-{{user `box_ver`}}.box",
+      "output": "./{{user `vm_name`}}-{{ .Provider }}-v{{user `box_version`}}.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfile/Vagrantfile.Alpine"
