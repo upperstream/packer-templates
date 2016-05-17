@@ -44,8 +44,10 @@ by the following command:
 
 * `debian-8.4-amd64-minimal.json` - Debian 8.4 minimal installation
 * `debian-8.4-amd64-docker.json` - provided with [Docker] in addition to Debian 8.4 minimal installation.
+* `debian-8.4-amd64-xfce.json` - provided with [Xfce] in addition to Debian 8.4 minimal installation.
 
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
+[Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 
 - - -
 

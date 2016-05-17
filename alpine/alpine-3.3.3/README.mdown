@@ -71,10 +71,13 @@ The following command will build a VM image on your ESXi (Created VM will be unr
 
 ## Variants
 
-* `alpine-linux-3.3.3-x86_64.json` - Alpine Linux 3.3.3 (x86_64)
+* `alpine-linux-3.3.3-x86_64-minimal.json` - Alpine Linux 3.3.3 (x86_64)
+* `alpine-linux-3.3.3-x86_64-ansible.json` - provided with [Ansible] in addition to Alpine Linux 3.3.3 (x86_64) minimal installation
 * `alpine-linux-3.3.3-x86_64-docker.json` - provided with [Docker] in addition to Alpine Linux 3.3.3 (x86_64) minimal installation.
-* `alpine-linux-3.3.3-x86.json` - Alpine Linux 3.3.3 (x86)
+* `alpine-linux-3.3.3-x86-minimal.json` - Alpine Linux 3.3.3 (x86)
+* `alpine-linux-3.3.3-x86-ansible.json` - provided with [Ansible] in addition to Alpine Linux 3.3.3 (x86) minimal installation
 
+[Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 
 - - -

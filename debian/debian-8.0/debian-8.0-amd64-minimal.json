@@ -16,7 +16,6 @@
       "iso_url": "http://cdimage.debian.org/cdimage/jessie_di_rc1/amd64/iso-cd/debian-jessie-DI-rc1-amd64-netinst.iso",
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
-      "ssh_key_path": "vagrant_insecure_key.txt",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
@@ -30,12 +29,9 @@
       ],
       "http_directory": "../http",
       "boot_command": [
-        "<esc><wait>install preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
-        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us <wait>",
-        "keyboard-configuration/xkb-keymap=us keyboard-configuration/layoutcode=us <wait>",
-        "netcfg/get_hostname={{ .Name }} netcfg/get_domain=vagrantup.com <wait>",
-        "console-setup/ask_detect=false console-keymaps-at/keymap=us <wait>",
-        "fb=false debconf/frontend=noninteractive hostname=vagrant <wait>",
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "keymap=us <wait>",
+        "tasks=standard <wait>",
         "<enter> <wait>"
       ]
     }
@@ -63,4 +59,3 @@
     }
   ]
 }
-
