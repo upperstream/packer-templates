@@ -17,18 +17,17 @@
       "boot_wait": "30s",
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
-      "http_directory": ".",
+      "http_directory": "../http",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "sha256",
       "iso_urls": [
         "{{user `iso_image`}}",
         "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
       ],
-      "ssh_username": "vagrant",
+      "ssh_username": "root",
       "ssh_password": "vagrant",
-      "ssh_key_path": "../key/vagrant_private_key",
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "doas shutdown -h -p now",
+      "shutdown_command": "shutdown -h -p now",
       "guest_additions_mode": "disable",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vboxmanage": [
@@ -71,7 +70,6 @@
         "done<enter><wait5>",
         "UTC<enter><wait>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
-        "ftp -o /tmp/vagrant.pub http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant.pub<enter><wait>",
         "sh /tmp/install.sh<enter><wait>",
         "reboot<enter>"
       ]
@@ -88,17 +86,16 @@
         "{{user `iso_image`}}",
         "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
       ],
-      "ssh_username": "vagrant",
+      "ssh_username": "root",
       "ssh_password": "vagrant",
-      "ssh_key_path": "../key/vagrant_private_key",
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "doas shutdown -h -p now",
+      "shutdown_command": "shutdown -h -p now",
       "remote_type": "esx5",
       "remote_host": "{{user `remote_host`}}",
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
-      "http_directory": ".",
+      "http_directory": "../http",
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vmx_data": {
@@ -150,7 +147,6 @@
         "UTC<enter><wait>",
         "<wait10>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
-        "ftp -o /tmp/vagrant.pub http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant.pub<enter><wait>",
         "sh /tmp/install.sh<enter><wait>",
         "reboot<enter>"
       ]
@@ -162,16 +158,13 @@
       "scripts": [
         "../provisioners/rsync-5.9.sh",
         "../provisioners/sharity-light.sh",
-	"../provisioners/sudo-5.9.sh"
+        "../provisioners/vagrant-doas.sh",
+	"../provisioners/sudo-5.9.sh",
+        "../provisioners/cleanup.sh"
       ],
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "doas sh -c 'PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/`machine -a`/ {{.Path}}'"
-        },
-        "vmware-iso": {
-          "execute_command": "doas sh -c 'PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/`machine -a`/ {{.Path}}'"
-        }
-      }
+      "environment_vars": [
+        "PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/{{user `cpu`}}/"
+      ]
     }
   ],
   "post-processors": [

@@ -2,7 +2,8 @@
   "variables": {
     "path_to_iso": "i386/cd58.iso",
     "iso_checksum": "c2b6d8879d014ef2f568464d9ff969e80a8a558a9c13b0862ce5d5bdd07b47a6",
-    "os_ver": "5.8"
+    "os_ver": "5.8",
+    "box_version": "1.1"
   },
   "builders": [
     {
@@ -41,25 +42,23 @@
         "done<enter><wait>",
         "yes<enter><wait>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
-        "ftp -o /tmp/vagrant.pub http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant.pub<enter><wait>",
         "sh /tmp/install.sh<enter><wait>",
         "reboot<enter>"
       ],
       "boot_wait": "30s",
       "disk_size": 10240,
       "guest_os_type": "OpenBSD",
-      "http_directory": ".",
+      "http_directory": "../http",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "sha256",
       "iso_urls": [
         "{{user `path_to_iso`}}",
         "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `path_to_iso`}}"
       ],
-      "ssh_username": "vagrant",
+      "ssh_username": "root",
       "ssh_password": "vagrant",
-      "ssh_key_path": "../key/vagrant_private_key",
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "doas shutdown -h -p now",
+      "shutdown_command": "shutdown -h -p now",
       "guest_additions_mode": "disable",
       "vboxmanage": [
         [
@@ -89,18 +88,18 @@
       "scripts": [
         "../provisioners/rsync.sh",
         "../provisioners/sharity-light.sh",
-	"../provisioners/sudo-5.8.sh"
+        "../provisioners/vagrant-doas.sh",
+        "../provisioners/sudo-5.8.sh",
+        "../provisioners/cleanup.sh"
       ],
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "doas sh -c 'PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/`machine -a`/ {{.Path}}'"
-        }
-      }
+      "environment_vars": [
+        "PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/i386/"
+      ]
     }
   ],
   "post-processors": [
     {
-      "output": "./OpenBSD-{{user `os_ver`}}-i386-sudo.box",
+      "output": "./OpenBSD-{{user `os_ver`}}-i386-sudo-v{{user `box_version`}}.box",
       "type": "vagrant",
       "override": {
         "virtualbox": {

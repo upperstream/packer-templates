@@ -1,7 +1,9 @@
 {
   "variables": {
-    "path_to_iso": "OpenBSD/5.7/i386/cd57.iso",
-    "iso_checksum": "41188dd5d55232c1d49975b086193d69edae0673be5cc4875e0f0e2db0c9282f"
+    "iso_image": "cd57.iso",
+    "path_to_iso": "OpenBSD/5.7/i386",
+    "iso_checksum": "41188dd5d55232c1d49975b086193d69edae0673be5cc4875e0f0e2db0c9282f",
+    "box_version": "1.1"
   },
   "builders": [
     {
@@ -32,7 +34,7 @@
         "a<enter><wait>",
         "http<enter><wait>",
         "none<enter><wait>",
-        "<enter><wait>",
+        "ftp3.usa.openbsd.org<enter><wait>",
         "<enter><wait>",
         "-x*<enter><wait>",
         "-game*<enter><wait>",
@@ -41,24 +43,24 @@
         "<wait10><wait10><wait10>",
         "done<enter><wait>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
-        "ftp -o /tmp/vagrant.pub http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant.pub<enter><wait>",
         "sh /tmp/install.sh<enter><wait>",
         "reboot<enter>"
       ],
       "boot_wait": "30s",
       "disk_size": 10240,
       "guest_os_type": "OpenBSD",
-      "http_directory": ".",
+      "http_directory": "../http",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "sha256",
       "iso_urls": [
-        "http://www.ftp.ne.jp/{{user `path_to_iso`}}"
+        "iso/{{user `iso_image`}}",
+        "http://www.ftp.ne.jp/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp3.usa.openbsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
-      "ssh_username": "vagrant",
+      "ssh_username": "root",
       "ssh_password": "vagrant",
-      "ssh_key_path": "../key/vagrant_private_key",
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo 'vagrant' | sudo halt -p",
+      "shutdown_command": "shutdown -h -p now",
       "guest_additions_mode": "disable",
       "vboxmanage": [
         [
@@ -87,19 +89,20 @@
       "type": "shell",
       "scripts": [
         "../provisioners/rsync.sh",
-        "../provisioners/sharity-light.sh"
+        "../provisioners/sharity-light.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/cleanup.sh"
       ],
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "echo 'vagrant' | sudo sh -c 'PKG_PATH=http://www.ftp.ne.jp/OpenBSD/5.7/packages/`machine -a`/ {{.Path}}'"
-        }
-      }
+      "environment_vars": [
+        "PKG_PATH=http://ftp3.usa.openbsd.org/pub/OpenBSD/5.7/packages/i386/"
+      ]
     }
   ],
   "post-processors": [
     {
-      "output": "./OpenBSD-5.7-i386.box",
+      "output": "./OpenBSD-5.7-i386-v{{user `box_version`}}.box",
       "type": "vagrant",
+      "compression_level": 9,
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD"
