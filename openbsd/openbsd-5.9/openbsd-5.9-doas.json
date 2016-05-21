@@ -1,9 +1,9 @@
 {
   "variables": {
+    "variant": "doas",
+    "box_version": "1.0",
     "iso_image": "cd59.iso",
-    "iso_checksum": "e2cd173a8d1494e898aa0fe40684897d41170220963f56ee1424f8b05cc03d52",
     "os_ver": "5.9",
-    "cpu": "i386",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -14,7 +14,7 @@
       "type": "virtualbox-iso",
       "boot_wait": "30s",
       "disk_size": 102400,
-      "guest_os_type": "OpenBSD",
+      "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
       "http_directory": ".",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "sha256",
@@ -28,6 +28,7 @@
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "doas shutdown -h -p now",
       "guest_additions_mode": "disable",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "1024" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
@@ -78,7 +79,7 @@
       "boot_wait": "50s",
       "disk_size": 102400,
       "disk_type_id": "thin",
-      "guest_os_type": "other",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "sha256",
       "iso_urls": [
@@ -96,12 +97,12 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
       "http_directory": ".",
-      "output_directory": "OpenBSD-{{user `os_ver`}}-{{user `cpu`}}",
-      "vm_name": "OpenBSD-{{user `os_ver`}}-{{user `cpu`}}",
+      "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vmx_data": {
-      	"numvcpus": "2",
-      	"memsize": "1024",
-      	"ethernet0.present": "TRUE",
+        "numvcpus": "2",
+        "memsize": "1024",
+        "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
         "ethernet0.virtualDev": "e1000",
         "ethernet0.networkName": "VM Network",
@@ -174,7 +175,7 @@
     {
       "type": "vagrant",
       "only": ["virtualbox-iso"],
-      "output": "./OpenBSD-{{user `os_ver`}}-{{user `cpu`}}.box",
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD-doas"

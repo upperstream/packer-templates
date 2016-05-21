@@ -28,15 +28,15 @@ Templates creating Vagrant boxes for OpenBSD 5.9 (amd64 and i386).
 
 From the terminal, invoke the following command:
 
-	packer build openbsd-5.9-amd64.json
+	packer build -var-file=vars-openbsd-5.9-amd64.json openbsd-5.9-doas.json
 
-and you will find a vagrant box file named `OpenBSD-5.9-amd64.box`
+and you will find a vagrant box file named `OpenBSD-5.9-amd64-doas-v1.0-Virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-5.9-amd64` to your box list
+Then you can add the box named `OpenBSD-5.9-amd64-doas-v1.0-Virtualbox` to your box list
 by the following command:
 
-	vagrant add OpenBSD-5.9-amd64.box --name OpenBSD-5.9-amd64
+	vagrant add OpenBSD-5.9-amd64-doas-v1.0-Virtualbox.box --name OpenBSD-5.9-amd64-doas-v1.0-Virtualbox
 
 ## Default settings
 
@@ -77,6 +77,13 @@ The following command will build a VM image on your ESXi:
     packer build -only=vmware-iso openbsd-5.9-amd64.json
 
 (Note that created VM will be unregistered from your Inventory.)
+
+## Variants
+
+* `packer build -var-file=vars-openbsd-5.9-amd64 oepnbsd-5.9-doas.json` - OpenBSD 5.9 (amd64)
+* `packer build -var-file=vars-openbsd-5.9-amd64 oepnbsd-5.9-sudo.json` - OpenBSD 5.9 (amd64) + sudo
+* `packer build -var-file=vars-openbsd-5.9-i386 oepnbsd-5.9-doas.json` - OpenBSD 5.9 (i386)
+* `packer build -var-file=vars-openbsd-5.9-i386 oepnbsd-5.9-sudo.json` - OpenBSD 5.9 (i386) + sudo
 
 - - -
 
