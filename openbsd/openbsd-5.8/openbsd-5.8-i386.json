@@ -103,7 +103,7 @@
       "type": "vagrant",
       "override": {
         "virtualbox": {
-          "vagrantfile_template": "../vagrantfile/Vagrantfile.OpenBSD-doas"
+          "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD-doas"
         }
       }
     }

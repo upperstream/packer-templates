@@ -177,7 +177,7 @@
       "output": "./OpenBSD-{{user `os_ver`}}-{{user `cpu`}}.box",
       "override": {
         "virtualbox": {
-          "vagrantfile_template": "../vagrantfile/Vagrantfile.OpenBSD-doas"
+          "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD-doas"
         }
       }
     }

@@ -178,7 +178,7 @@
       "output": "./OpenBSD-{{user `os_ver`}}-{{user `cpu`}}-sudo.box",
       "override": {
         "virtualbox": {
-          "vagrantfile_template": "../vagrantfile/Vagrantfile.OpenBSD"
+          "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD"
         }
       }
     }

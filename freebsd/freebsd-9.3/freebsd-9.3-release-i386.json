@@ -81,7 +81,7 @@
       "type": "vagrant",
       "override": {
         "virtualbox": {
-          "vagrantfile_template": "../vagrantfile/Vagrantfile.FreeBSD-9"
+          "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-9"
         }
       }
     }
