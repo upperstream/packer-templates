@@ -171,7 +171,7 @@
       "output": "./{{user `vm_name`}}-{{ .Provider }}-v{{user `box_version`}}.box",
       "override": {
         "virtualbox": {
-          "vagrantfile_template": "../vagrantfile/Vagrantfile.Alpine"
+          "vagrantfile_template": "../vagrantfiles/Vagrantfile.Alpine"
         }
       }
     }

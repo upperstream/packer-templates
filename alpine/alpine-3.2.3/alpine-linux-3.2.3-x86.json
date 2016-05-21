@@ -93,7 +93,7 @@
       "output": "./Alpine-Linux-{{user `os_ver`}}-{{user `cpu`}}-minimal.box",
       "override": {
         "virtualbox": {
-          "vagrantfile_template": "../vagrantfile/Vagrantfile.Alpine"
+          "vagrantfile_template": "../vagrantfiles/Vagrantfile.Alpine"
         }
       }
     }

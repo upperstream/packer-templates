@@ -63,7 +63,7 @@
     {
       "type": "vagrant",
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}.box",
-      "vagrantfile_template": "../vagrantfile/Vagrantfile.tc"
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.tc"
     }
   ]
 }
