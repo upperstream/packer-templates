@@ -1,9 +1,11 @@
 {
   "variables": {
     "variant": "doas",
-    "box_version": "1.0",
+    "box_version": "1.1",
     "iso_image": "cd59.iso",
     "os_ver": "5.9",
+    "mem_size": "512",
+    "disk_size": "40960",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -13,7 +15,7 @@
     {
       "type": "virtualbox-iso",
       "boot_wait": "30s",
-      "disk_size": 102400,
+      "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
       "http_directory": ".",
       "iso_checksum": "{{user `iso_checksum`}}",
@@ -30,7 +32,7 @@
       "guest_additions_mode": "disable",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--memory", "1024" ],
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
@@ -77,7 +79,7 @@
     {
       "type": "vmware-iso",
       "boot_wait": "50s",
-      "disk_size": 102400,
+      "disk_size": "{{user `disk_size`}}",
       "disk_type_id": "thin",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
@@ -101,7 +103,7 @@
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vmx_data": {
         "numvcpus": "2",
-        "memsize": "1024",
+        "memsize": "{{user `mem_size`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
         "ethernet0.virtualDev": "e1000",

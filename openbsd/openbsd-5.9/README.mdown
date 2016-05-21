@@ -33,10 +33,10 @@ From the terminal, invoke the following command:
 and you will find a vagrant box file named `OpenBSD-5.9-amd64-doas-v1.0-Virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-5.9-amd64-doas-v1.0-Virtualbox` to your box list
+Then you can add the box named `OpenBSD-5.9-amd64-doas-v1.1-Virtualbox` to your box list
 by the following command:
 
-	vagrant add OpenBSD-5.9-amd64-doas-v1.0-Virtualbox.box --name OpenBSD-5.9-amd64-doas-v1.0-Virtualbox
+	vagrant add OpenBSD-5.9-amd64-doas-v1.1-Virtualbox.box --name OpenBSD-5.9-amd64-doas-v1.1-Virtualbox
 
 ## Default settings
 
@@ -84,6 +84,14 @@ The following command will build a VM image on your ESXi:
 * `packer build -var-file=vars-openbsd-5.9-amd64 oepnbsd-5.9-sudo.json` - OpenBSD 5.9 (amd64) + sudo
 * `packer build -var-file=vars-openbsd-5.9-i386 oepnbsd-5.9-doas.json` - OpenBSD 5.9 (i386)
 * `packer build -var-file=vars-openbsd-5.9-i386 oepnbsd-5.9-sudo.json` - OpenBSD 5.9 (i386) + sudo
+
+## Build parameters
+
+The following parametes can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
+
+* `vm_name` - VM name.  This also affects box file name and output directory name.
+* `mem_size` - RAM size of the created VM.
+* `disk_size` - Disk size of the created VM.
 
 - - -
 
