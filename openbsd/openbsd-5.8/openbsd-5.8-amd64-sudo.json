@@ -1,8 +1,9 @@
 {
   "variables": {
-    "path_to_iso": "amd64/cd58.iso",
+    "iso_image": "cd58.iso",
     "iso_checksum": "19afc0e6ba4e22e03906364dbaf92a63bc273e5236a9be6c2cf27fc2cfe132cc",
-    "os_ver": "5.8"
+    "os_ver": "5.8",
+    "box_version": "1.1"
   },
   "builders": [
     {
@@ -41,25 +42,23 @@
         "done<enter><wait>",
         "yes<enter><wait>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
-        "ftp -o /tmp/vagrant.pub http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant.pub<enter><wait>",
         "sh /tmp/install.sh<enter><wait>",
         "reboot<enter>"
       ],
       "boot_wait": "20s",
       "disk_size": 10240,
       "guest_os_type": "OpenBSD_64",
-      "http_directory": ".",
+      "http_directory": "../http",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "sha256",
       "iso_urls": [
-        "{{user `path_to_iso`}}",
-        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `path_to_iso`}}"
+        "iso/{{user `iso_image`}}",
+        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/amd64/{{user `iso_image`}}"
       ],
-      "ssh_username": "vagrant",
+      "ssh_username": "root",
       "ssh_password": "vagrant",
-      "ssh_key_path": "../key/vagrant_private_key",
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "doas shutdown -h -p now",
+      "shutdown_command": "shutdown -h -p now",
       "guest_additions_mode": "disable",
       "vboxmanage": [
         [
@@ -89,18 +88,18 @@
       "scripts": [
         "../provisioners/rsync.sh",
         "../provisioners/sharity-light.sh",
-	"../provisioners/sudo-5.8.sh"
+        "../provisioners/vagrant-doas.sh",
+        "../provisioners/sudo-5.8.sh",
+        "../provisioners/cleanup.sh"
       ],
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "doas sh -c 'PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/`machine -a`/ {{.Path}}'"
-        }
-      }
+      "environment_vars": [
+        "PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/amd64/"
+      ]
     }
   ],
   "post-processors": [
     {
-      "output": "./OpenBSD-{{user `os_ver`}}-amd64-sudo.box",
+      "output": "./OpenBSD-{{user `os_ver`}}-amd64-sudo-v{{user `box_version`}}.box",
       "type": "vagrant",
       "override": {
         "virtualbox": {

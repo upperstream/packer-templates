@@ -1,0 +1,7 @@
+{
+  "vm_name": "OpenBSD-5.9-amd64",
+  "cpu": "amd64",
+  "virtualbox_guest_os_type": "OpenBSD_64",
+  "vmware_guest_os_type": "other-64",
+  "iso_checksum": "ea3bad95ed6975784bfc85a837820dace4147443e57cf23c1a6e4d12243d37c2"
+}
