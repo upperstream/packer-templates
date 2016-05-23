@@ -65,7 +65,7 @@ is set to "`/bin/ksh`".
 ### doas command
 
 This box is configured to use `doas` command instead of `sudo`, which requires Vagrant version 1.7.3 or later.
-When you use "rsync" type synced folder, you need to add '`rsync__rsync_path: "doas rsync"`' to rsync optinos
+When you use "rsync" type synced folder, you need to add '`rsync__rsync_path: "doas rsync"`' to rsync options
 so `doas` will be used instead of `sudo` on guest side.
 
 If you want to stay with `sudo` or with an older version of Vagrant, you can use template files
@@ -90,10 +90,10 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `packer build -var-file=vars-openbsd-5.9-amd64 oepnbsd-5.9-doas.json` - OpenBSD 5.9 (amd64)
-* `packer build -var-file=vars-openbsd-5.9-amd64 oepnbsd-5.9-sudo.json` - OpenBSD 5.9 (amd64) + sudo
-* `packer build -var-file=vars-openbsd-5.9-i386 oepnbsd-5.9-doas.json` - OpenBSD 5.9 (i386)
-* `packer build -var-file=vars-openbsd-5.9-i386 oepnbsd-5.9-sudo.json` - OpenBSD 5.9 (i386) + sudo
+* `packer build -var-file=vars-openbsd-5.9-amd64 openbsd-5.9-doas.json` - OpenBSD 5.9 (amd64)
+* `packer build -var-file=vars-openbsd-5.9-amd64 openbsd-5.9-sudo.json` - OpenBSD 5.9 (amd64) + sudo
+* `packer build -var-file=vars-openbsd-5.9-i386 openbsd-5.9-doas.json` - OpenBSD 5.9 (i386)
+* `packer build -var-file=vars-openbsd-5.9-i386 openbsd-5.9-sudo.json` - OpenBSD 5.9 (i386) + sudo
 
 ## Build parameters
 
