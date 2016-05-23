@@ -1,0 +1,267 @@
+{
+  "variables": {
+    "variant": "ansible",
+    "box_version": "1.1",
+    "iso_image": "cd59.iso",
+    "os_ver": "5.9",
+    "mem_size": "512",
+    "disk_size": "40960",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "30s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
+      "http_directory": "../http",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "sha256",
+      "iso_urls": [
+        "iso/{{user `iso_image`}}",
+        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "root",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h -p now",
+      "guest_additions_mode": "disable",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+      ],
+      "boot_command": [
+        "i<enter><wait>",
+        "default<enter><wait>",
+        "foo<enter><wait>",
+        "em0<enter><wait>",
+        "dhcp<enter><wait>",
+        "<wait10>",
+        "none<enter><wait>",
+        "done<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "yes<enter><wait>",
+        "no<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "no<enter><wait>",
+        "UTC<enter><wait>",
+        "wd0<enter><wait>",
+        "whole<enter><wait>",
+        "a<enter><wait>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "http<enter><wait>",
+        "none<enter><wait>",
+        "<enter><wait>",
+        "<enter><wait>",
+        "-x*<enter><wait>",
+        "-game*<enter><wait>",
+        "done<enter><wait>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "done<enter><wait5>",
+        "UTC<enter><wait>",
+        "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "sh /tmp/install.sh<enter><wait>",
+        "reboot<enter>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "50s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "0",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "sha256",
+      "iso_urls": [
+        "iso/{{user `iso_image`}}",
+        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "root",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h -p now",
+      "http_directory": "../http",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "vmx_data": {
+        "numvcpus": "2",
+        "memsize": "{{user `mem_size`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "boot_command": [
+        "i<enter><wait>",
+        "default<enter><wait>",
+        "foo<enter><wait>",
+        "em0<enter><wait>",
+        "dhcp<enter><wait>",
+        "<wait10>",
+        "none<enter><wait>",
+        "done<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "yes<enter><wait>",
+        "no<enter><wait>",
+        "no<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "no<enter><wait>",
+        "UTC<enter><wait>",
+        "sd0<enter><wait>",
+        "whole<enter><wait>",
+        "a<enter><wait>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "http<enter><wait>",
+        "none<enter><wait>",
+        "<enter><wait>",
+        "<enter><wait>",
+        "-x*<enter><wait>",
+        "-game*<enter><wait>",
+        "done<enter><wait>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "done<enter><wait5>",
+        "<enter><wait>",
+        "UTC<enter><wait>",
+        "<wait10>",
+        "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "sh /tmp/install.sh<enter><wait>",
+        "reboot<enter>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "name": "esxi-iso",
+      "boot_wait": "50s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "thin",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "sha256",
+      "iso_urls": [
+        "iso/{{user `iso_image`}}",
+        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "root",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h -p now",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "http_directory": "../http",
+      "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "vmx_data": {
+        "numvcpus": "2",
+        "memsize": "{{user `mem_size`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "bridged",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "boot_command": [
+        "i<enter><wait>",
+        "default<enter><wait>",
+        "foo<enter><wait>",
+        "em0<enter><wait>",
+        "dhcp<enter><wait>",
+        "<wait10>",
+        "none<enter><wait>",
+        "done<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "yes<enter><wait>",
+        "no<enter><wait>",
+        "no<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "no<enter><wait>",
+        "UTC<enter><wait>",
+        "sd0<enter><wait>",
+        "whole<enter><wait>",
+        "a<enter><wait>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "http<enter><wait>",
+        "none<enter><wait>",
+        "<enter><wait>",
+        "<enter><wait>",
+        "-x*<enter><wait>",
+        "-game*<enter><wait>",
+        "done<enter><wait>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "done<enter><wait5>",
+        "UTC<enter><wait>",
+        "<wait10>",
+        "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "sh /tmp/install.sh<enter><wait>",
+        "reboot<enter>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "pkg_add ansible-2.0.0.2",
+        "ftp -o - https://bootstrap.pypa.io/get-pip.py | python2.7 -",
+        "pip install testinfra==1.2.0"
+      ],
+      "environment_vars": [
+        "PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/{{user `cpu`}}/"
+      ]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/rsync-5.9.sh",
+        "../provisioners/sharity-light.sh",
+        "../provisioners/vagrant-doas.sh",
+        "../provisioners/sudo-5.9.sh",
+        "../provisioners/cleanup.sh"
+      ],
+      "environment_vars": [
+        "PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/{{user `cpu`}}/"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "override": {
+        "virtualbox": {
+          "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD-doas"
+        }
+      }
+    }
+  ]
+}
