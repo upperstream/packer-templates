@@ -12,7 +12,7 @@
     "os_ver": "",
     "guest_os_type": "",
     "variant": "ansible",
-    "box_version": "1.1"
+    "box_version": "1.2"
   },
   "builders": [
     {
@@ -53,6 +53,8 @@
     {
       "type": "shell",
       "scripts": [
+        "../provisioners/ansible_dependencies.sh",
+        "../provisioners/python-pip.sh",
         "../provisioners/ansible.sh"
       ]
     }
@@ -60,6 +62,7 @@
   "post-processors": [
     {
       "type": "vagrant",
+      "compression_level": "9",
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}.box",
       "vagrantfile_template": "../vagrantfiles/Vagrantfile.tc"
     }
