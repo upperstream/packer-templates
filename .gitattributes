@@ -3,4 +3,5 @@
 *.mdown	eol=lf
 *.sh	eol=lf
 *.txt	eol=lf
+*.bat	eol=crlf
 Vagrantfile.*	eol=lf
