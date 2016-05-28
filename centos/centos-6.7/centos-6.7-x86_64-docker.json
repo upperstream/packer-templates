@@ -53,7 +53,7 @@
       "scripts": [
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/kernel_stuff-6.7.sh",
+        "../provisioners/kernel_stuff-6.7+.sh",
         "../provisioners/epel-6.x-{{user `hardware`}}.sh",
         "../provisioners/virtualbox_dependencies-6.x.sh",
         "../provisioners/virtualbox.sh",

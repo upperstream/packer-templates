@@ -16,10 +16,14 @@
 	* CentOS 6.7 minimal
 	* CentOS 6.7 minimal + Ansible
 	* CentOS 6.7 minimal + Docker, Docker Compose, and Fig (x86_64 only)
+* [centos-6.8](centos-6.8/README.mdown) - templates for CentOS 6.8 (x86_64 and i386)
+	* CentOS 6.8 minimal
+	* CentOS 6.8 minimal + Ansible
+	* CentOS 6.8 minimal + Docker (x86_64 only)
 * [centos-7.0](centos-7.0/README.mdown) - templates for CentOS 7.0 (x86_64)
 	* CentOS 7.0 minimal
 	* CentOS 7.0 minimal + Docker, Docker Compose, and Fig
 
 - - -
 
-Copyright &copy; 2014, 2015 Upper Stream Software.
+Copyright &copy; 2014-2016 Upper Stream Software.

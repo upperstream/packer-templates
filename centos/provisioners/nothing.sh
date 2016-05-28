@@ -1,0 +1,1 @@
+yum history > /dev/null

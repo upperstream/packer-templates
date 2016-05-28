@@ -10,6 +10,7 @@
 	* centos-6.5 - CentOS 6.5 templates (x86_64)
 	* centos-6.6 - CentOS 6.6 templates (x86_64 and i386)
 	* centos-6.7 - CentOS 6.7 templates (x86_64 and i386)
+	* centos-6.8 - CentOS 6.8 templates (x86_64 and i386)
 	* centos-7.0 - CentOS 7.0 templates (x86_64)
 * [coreos](coreos/README.mdown) - CoreOS templates
 * [debian](debian/README.mdown) - Debian templates

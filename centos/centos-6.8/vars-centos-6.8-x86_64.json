@@ -1,0 +1,10 @@
+{
+  "vm_name": "CentOS-6.8-x86_64",
+  "hardware": "x86_64",
+  "processor": "x86_64",
+  "iso_image": "CentOS-6.8-x86_64-minimal.iso",
+  "iso_checksum": "0ca12fe5f28c2ceed4f4084b41ff8a0b",
+  "virtualbox_guest_os_type": "RedHat_64",
+  "vmware_guest_os_type": "centos-64",
+  "esxi_guest_os_type": "centos-64"
+}
