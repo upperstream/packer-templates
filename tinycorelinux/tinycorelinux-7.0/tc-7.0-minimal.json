@@ -12,7 +12,7 @@
     "os_ver": "",
     "guest_os_type": "",
     "variant": "minimal",
-    "box_version": "1.1"
+    "box_version": "1.2"
   },
   "builders": [
     {
@@ -61,6 +61,7 @@
   "post-processors": [
     {
       "type": "vagrant",
+      "compression_level": "9",
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}.box",
       "vagrantfile_template": "../vagrantfiles/Vagrantfile.tc"
     }

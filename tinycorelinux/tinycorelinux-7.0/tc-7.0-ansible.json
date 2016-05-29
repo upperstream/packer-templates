@@ -4,7 +4,7 @@
     "iso_checksum": "",
     "iso_checksum_type": "",
     "ssh_name": "tc",
-    "ssh_pass": "vagrant",
+    "ssh_pass": "",
     "mem_size": "",
     "disk_size": "",
     "os_name": "",
@@ -55,7 +55,9 @@
       "scripts": [
         "../provisioners/ansible_dependencies.sh",
         "../provisioners/python-pip.sh",
-        "../provisioners/ansible.sh"
+        "../provisioners/ansible.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/cleanup.sh"
       ]
     }
   ],

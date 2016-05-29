@@ -4,7 +4,7 @@
     "iso_checksum": "",
     "iso_checksum_type": "",
     "ssh_name": "tc",
-    "ssh_pass": "vagrant",
+    "ssh_pass": "",
     "mem_size": "",
     "disk_size": "",
     "os_name": "",
@@ -12,7 +12,7 @@
     "os_ver": "",
     "guest_os_type": "",
     "variant": "compiletc",
-    "box_version": "1.1"
+    "box_version": "1.2"
   },
   "builders": [
     {
@@ -52,15 +52,17 @@
   "provisioners": [
     {
       "type": "shell",
-      "inline": [
-        "tce-load -wi compiletc git python perl5",
-        "tce-load -wi linux-4.2.1_api_headers linux-kernel-sources-env"
+      "scripts": [
+        "../provisioners/compiletc.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/cleanup.sh"
       ]
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
+      "compression_level": "9",
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}.box",
       "vagrantfile_template": "../vagrantfiles/Vagrantfile.tc"
     }
