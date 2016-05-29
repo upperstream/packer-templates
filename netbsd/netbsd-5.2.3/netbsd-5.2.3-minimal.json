@@ -225,7 +225,7 @@
       "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
-      "vagrantfile_template": "../vagrantfile/Vagrantfile.NetBSD"
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD"
     }
   ]
 }
