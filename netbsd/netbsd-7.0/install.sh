@@ -1,11 +1,8 @@
 #!/bin/sh
 mount /dev/$HDD /mnt
-sed -I 's/^#PermitRootLogin no/PermitRootLogin yes/' /mnt/etc/ssh/sshd_config
-sed -I 's/^#PasswordAuthentication yes/PasswordAuthentication no/' /mnt/etc/ssh/sshd_config
-ftp -o /mnt/root/vagrant.pub http://$HTTPSERVER/vagrant.pub
-mkdir -p /mnt/root/.ssh
-cat /mnt/root/vagrant.pub >> /mnt/root/.ssh/authorized_keys
-chmod -R og-rwx /mnt/root/.ssh
+sed -I \
+  -e 's/^#PermitRootLogin no/PermitRootLogin yes/' \
+  -e 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /mnt/etc/ssh/sshd_config
 cat << EOF >> /mnt/etc/rc.conf
 #critical_filesystems_local=/var
 dhclient=YES
