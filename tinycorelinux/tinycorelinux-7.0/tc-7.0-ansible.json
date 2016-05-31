@@ -55,8 +55,15 @@
       "scripts": [
         "../provisioners/ansible_dependencies.sh",
         "../provisioners/python-pip.sh",
-        "../provisioners/ansible.sh",
+        "../provisioners/ansible.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "start_retry_timeout": "5m",
+      "scripts": [
         "../provisioners/vagrant.sh",
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ]
     }

@@ -70,3 +70,7 @@ tce-audit builddb
 for c in squashfs-tools python-dev gmp-dev libffi-dev gcc glibc_base-dev linux-4.2.1_api_headers; do
   tce-audit delete $c
 done
+
+sudo filetool.sh -b
+sudo reboot
+sleep 60
