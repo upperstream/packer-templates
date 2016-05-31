@@ -102,7 +102,7 @@ The following command will build a VM image on your ESXi:
 
 ## Build parameters
 
-The following parametes can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
+The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
 
 * `vm_name` - VM name.  This also affects box file name and output directory name.
 * `mem_size` - RAM size of the created VM.
