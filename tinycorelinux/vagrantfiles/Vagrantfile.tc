@@ -43,9 +43,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Set the default shell for SSH session to ash
   config.ssh.shell = "/bin/ash"
 
-  # Disable automatic SSH key pair insertion
-  config.ssh.insert_key = false
-
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
