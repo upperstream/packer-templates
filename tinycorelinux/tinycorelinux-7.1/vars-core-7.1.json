@@ -1,0 +1,12 @@
+{
+  "vm_name": "Core-7.1",
+  "os_name": "Core",
+  "os_ver": "7.1",
+  "cpu": "x86",
+  "mem_size": "512",
+  "disk_size": "40960",
+  "iso_name": "Core-7.1.iso",
+  "iso_checksum": "3d8c6fd16c5812b4b94b985f37230316",
+  "iso_checksum_type": "md5",
+  "guest_os_type": "Linux26"
+}
