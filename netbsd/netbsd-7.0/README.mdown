@@ -97,8 +97,8 @@ The following command will build a VM image on your ESXi:
 The following parametes can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
 
 * `vm_name` - VM name.  This also affects box file name and output directory name.
-* `mem_size` - RAM size of the created VM.
-* `disk_size` - Disk size of the created VM.
+* `mem_size` - RAM size of the created VM.  Default value is `512` which means 512MB.
+* `disk_size` - Disk size of the created VM.  Default value is `40960` which means 40GB.
 
 - - -
 
