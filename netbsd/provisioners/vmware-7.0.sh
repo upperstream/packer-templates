@@ -3,7 +3,7 @@
 
 test -x /usr/bin/cvs || pkg_add cvs-1.12.13nb2
 
-echo "Checking out anoncvs@anoncvs.NetBSD.org:/cvsroot at pkgsrc-2015Q4."
+echo "$(date): Checking out anoncvs@anoncvs.NetBSD.org:/cvsroot at pkgsrc-2015Q4."
 echo "This can take very long (more than 30 minutes)."
 cd /usr && cvs -q -z2 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -r pkgsrc-2015Q4 -P pkgsrc > /dev/null
 
@@ -20,4 +20,4 @@ cp /usr/pkg/share/examples/rc.d/vmtools /etc/rc.d/vmtools
 echo "vmtools=YES" >> /etc/rc.conf
 
 # Comment out if you want to keep pkgsrc files.
-#rm -rf /usr/pkgsrc
+rm -rf /usr/pkgsrc
