@@ -1,4 +1,4 @@
-# This installs X11 files in addtion
+# This installs X11 files in addition
 
 #pkg_add open-vm-tools
 

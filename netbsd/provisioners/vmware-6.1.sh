@@ -1,13 +1,8 @@
-# This installs X11 files in addtion
-#date
-#df -h
+# This installs X11 files in addition
+
 #pkg_add open-vm-tools
 #cp /usr/pkg/share/examples/rc.d/vmtools /etc/rc.d/vmtools
 #echo "vmtools=YES" >> /etc/rc.conf
-#df -h
-
-#date
-
 
 # If you want to exclude X11 files to be installed, uncomment and execute the rest of this script instead of the lines above
 
