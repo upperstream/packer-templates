@@ -4,11 +4,11 @@ Templates creating Vagrant box for NetBSD 6.1.5 (amd64 and i386).
 
 ## Prerequisites
 
-* [Packer] v0.7.2
-* [Vagrant] v1.7.2
+* [Packer] v0.7.2+
+* [Vagrant] v1.7.2+
 * [VirtualBox]
-	* Version 4.3.26 for Windows
-	* Version 4.2.8 for Mac OS X (which allows [HAXM] to work in parallel)
+	* Version 4.3.28+ for Windows
+	* Version 4.3.28+ for Mac OS X (You may want to stay with 4.3.28 which allows [HAXM] to work in parallel.)
 
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
@@ -30,7 +30,7 @@ Templates creating Vagrant box for NetBSD 6.1.5 (amd64 and i386).
 
 From the terminal, invoke the following command:
 
-	packer build netbsd-6.1.5-amd64-minimal.json
+	packer build -var-file=netbsd-6.1.5-amd64.json netbsd-6.1.5-minimal.json
 
 and you will find vagrant boxes file named `NetBSD-6.1.5-amd64-minimal-v1.1-virtualbox.box`
 and `NetBSD-6.1.5-amd64-minimal-v1.1-vmware.box` in the same directory after the command has succeeded.
@@ -56,10 +56,10 @@ is set to "`/bin/ksh`".
 
 ## Variants
 
-* `netbsd-6.1.5-amd64-minimal.json` - NetBSD 6.1.5 (amd64)
-* `netbsd-6.1.5-amd64-ansible.json` - NetBSD 6.1.5 + Ansible (amd64)
-* `netbsd-6.1.5-i386-minimal.json` - NetBSD 6.1.5 (i386)
-* `netbsd-6.1.5-i386-ansible.json` - NetBSD 6.1.5 + Ansible (i386)
+* `packer build -var-file=vars-netbsd-6.1.5-amd64.json netbsd-6.1.5-minmal.json` - NetBSD 6.1.5 (amd64)
+* `packer build -var-file=vars-netbsd-6.1.5-amd64.json netbsd-6.1.5-ansible.json` - NetBSD 6.1.5 + Ansible (amd64)
+* `packer build -var-file=vars-netbsd-6.1.5-i386.json netbsd-6.1.5-minmal.json` - NetBSD 6.1.5 (i386)
+* `packer build -var-file=vars-netbsd-6.1.5-i386.json netbsd-6.1.5-ansible.json` - NetBSD 6.1.5 + Ansible (i386)
 
 - - -
 
