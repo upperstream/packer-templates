@@ -30,7 +30,7 @@ Templates creating Vagrant box for Alpine Linux 3.3.3. (x86_64 and i686)
 
 From the terminal, invoke the following command:
 
-	packer build -only=virtualbox-iso alpine-linux-3.3.3-x86_64-minimal.json
+	packer build -only=virtualbox-iso -var-file=vars-alpine-3.3.3-x86_64.json alpine-linux-3.3.3-minimal.json
 
 and you will find a vagrant box file named `Alpine-Linux-3.3.3-x86_64-minimal-virtualbox.box`
 in the same directory after the command has succeeded.
@@ -38,7 +38,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Alpine-Linux-3.3.3-x86_64-minimal-virtualbox.box` to your box list
 by the following command:
 
-	vagrant add Alpine-Linux-3.3.3-x86_64-minimal-virtualbox.box --name Alpine-Linux-3.3.3-x86_64-minimal
+	vagrant add Alpine-Linux-3.3.3-x86_64-minimal-virtualbox.box --name Alpine-Linux-3.3.3-x86_64-minimal-virtualbox
 
 ## Default settings
 
@@ -67,15 +67,15 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi (Created VM will be unregistered from your Inventory):
 
-    packer build -only=vmware-iso alpine-linux-3.3.3-x86_64-minimal.json
+    packer build -only=vmware-iso -var-file=vars-alpine-3.3.3-x86_64.json alpine-linux-3.3.3-minimal.json
 
 ## Variants
 
-* `alpine-linux-3.3.3-x86_64-minimal.json` - Alpine Linux 3.3.3 (x86_64)
-* `alpine-linux-3.3.3-x86_64-ansible.json` - provided with [Ansible] in addition to Alpine Linux 3.3.3 (x86_64) minimal installation
-* `alpine-linux-3.3.3-x86_64-docker.json` - provided with [Docker] in addition to Alpine Linux 3.3.3 (x86_64) minimal installation.
-* `alpine-linux-3.3.3-x86-minimal.json` - Alpine Linux 3.3.3 (x86)
-* `alpine-linux-3.3.3-x86-ansible.json` - provided with [Ansible] in addition to Alpine Linux 3.3.3 (x86) minimal installation
+* `packer build -var-file=vars-alpine-3.3.3-x86_64.jsonalpine-linux-3.3.3-minimal.json` - Alpine Linux 3.3.3 (x86_64)
+* `packer build -var-file=vars-alpine-3.3.3-x86_64.json alpine-linux-3.3.3-ansible.json` - provided with [Ansible] in addition to Alpine Linux 3.3.3 (x86_64) minimal installation
+* `packer build -var-file=vars-alpine-3.3.3-x86_64.json alpine-linux-3.3.3-docker.json` - provided with [Docker] in addition to Alpine Linux 3.3.3 (x86_64) minimal installation.
+* `packer build -var-file=vars-alpine-3.3.3-x86.json alpine-linux-3.3.3-minimal.json` - Alpine Linux 3.3.3 (x86)
+* `packer build -var-file=vars-alpine-3.3.3-x86.json alpine-linux-3.3.3-ansible.json` - provided with Ansible in addition to Alpine Linux 3.3.3 (x86) minimal installation
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"

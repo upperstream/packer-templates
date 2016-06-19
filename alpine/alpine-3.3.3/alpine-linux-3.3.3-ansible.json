@@ -1,10 +1,6 @@
 {
   "variables": {
-    "vm_name": "Alpine-Linux-3.3.3-x86_64-docker",
-    "iso_image": "alpine-3.3.3-x86_64.iso",
-    "iso_checksum": "5f842e2ff281651dc5507a78f759037661d43889",
-    "iso_checksum_type": "sha1",
-    "cpu": "x86_64",
+    "variant": "ansible",
     "disk_size": "51200",
     "mem_size": "512",
     "ssh_username": "root",
@@ -13,29 +9,28 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "1.1"
+    "box_version": "2"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_wait": "60s",
       "disk_size": "{{user `disk_size`}}",
-      "guest_os_type": "Linux26_64",
+      "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
       "iso_urls": [
-        "{{user `iso_image`}}",
+        "./iso/{{user `iso_image`}}",
         "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.3/releases/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
-      "ssh_key_path": "../key/vagrant_private_key",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "poweroff",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vboxmanage": [
         [
           "modifyvm",
@@ -87,16 +82,15 @@
       "boot_wait": "60s",
       "disk_size": "{{user `disk_size`}}",
       "disk_type_id": "thin",
-      "guest_os_type": "other3xlinux-64",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
-        "{{user `iso_image`}}",
+        "./iso/{{user `iso_image`}}",
         "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.3/releases/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
-      "ssh_key_path": "../key/vagrant_private_key",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "poweroff",
@@ -106,8 +100,8 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
       "tools_upload_flavor": "linux",
-      "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
-      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -159,7 +153,14 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant.sh",
-        "../provisioners/docker.sh",
+        "../provisioners/ansible.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "start_retry_timeout": "5m",
+      "scripts": [
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ]
     }
@@ -168,7 +169,8 @@
     {
       "type": "vagrant",
       "only": ["virtualbox-iso"],
-      "output": "./{{user `vm_name`}}-{{ .Provider }}-v{{user `box_version`}}.box",
+      "compression_level": "9",
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfiles/Vagrantfile.Alpine"

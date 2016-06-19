@@ -1,5 +1,7 @@
 {
   "variables": {
+    "disk_size": "10240",
+    "mem_size": "512",
     "ssh_username": "root",
     "ssh_password": "vagrant",
     "iso_image": "alpine-mini-3.2.3-x86_64.iso",
@@ -12,17 +14,16 @@
     {
       "type": "virtualbox-iso",
       "boot_wait": "30s",
-      "disk_size": 10240,
+      "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "Linux26_64",
       "iso_urls": [
-        "{{user `iso_image`}}",
+        "./iso/{{user `iso_image`}}",
         "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.2/releases/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
-      "ssh_key_path": "../key/vagrant_private_key",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "poweroff",
@@ -33,7 +34,7 @@
           "modifyvm",
           "{{.Name}}",
           "--memory",
-          "512"
+          "{{user `mem_size`}}"
         ],
         [
           "modifyvm",
