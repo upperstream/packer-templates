@@ -1,10 +1,6 @@
 {
   "variables": {
-    "vm_name": "Alpine-Linux-3.3.3-x86_64-docker",
-    "iso_image": "alpine-3.3.3-x86_64.iso",
-    "iso_checksum": "5f842e2ff281651dc5507a78f759037661d43889",
-    "iso_checksum_type": "sha1",
-    "cpu": "x86_64",
+    "variant": "docker",
     "disk_size": "51200",
     "mem_size": "512",
     "ssh_username": "root",
@@ -20,9 +16,9 @@
       "type": "virtualbox-iso",
       "boot_wait": "60s",
       "disk_size": "{{user `disk_size`}}",
-      "guest_os_type": "Linux26_64",
+      "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
       "iso_urls": [
-        "{{user `iso_image`}}",
+        "./iso/{{user `iso_image`}}",
         "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.3/releases/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
@@ -35,7 +31,7 @@
       "shutdown_command": "poweroff",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "vboxmanage": [
         [
           "modifyvm",
@@ -87,9 +83,9 @@
       "boot_wait": "60s",
       "disk_size": "{{user `disk_size`}}",
       "disk_type_id": "thin",
-      "guest_os_type": "other3xlinux-64",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
-        "{{user `iso_image`}}",
+        "./iso/{{user `iso_image`}}",
         "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.3/releases/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
@@ -106,8 +102,8 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
       "tools_upload_flavor": "linux",
-      "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
-      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -168,7 +164,7 @@
     {
       "type": "vagrant",
       "only": ["virtualbox-iso"],
-      "output": "./{{user `vm_name`}}-{{ .Provider }}-v{{user `box_version`}}.box",
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfiles/Vagrantfile.Alpine"
