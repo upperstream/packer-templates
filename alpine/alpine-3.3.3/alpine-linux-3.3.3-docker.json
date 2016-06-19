@@ -9,7 +9,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "1.1"
+    "box_version": "2"
   },
   "builders": [
     {
@@ -30,7 +30,7 @@
       "shutdown_command": "poweroff",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vboxmanage": [
         [
           "modifyvm",
@@ -162,6 +162,7 @@
     {
       "type": "vagrant",
       "only": ["virtualbox-iso"],
+      "compression_level": "9",
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
       "override": {
         "virtualbox": {

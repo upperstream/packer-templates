@@ -8,7 +8,8 @@
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
-    "remote_datastore": "{{env `REMOTE_DATASTORE`}}"
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "box_version": "2"
   },
   "builders": [
     {
@@ -99,8 +100,8 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
       "tools_upload_flavor": "linux",
-      "output_directory": "{{user `vm_name`}}-{{user `variant`}}",
-      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -160,7 +161,8 @@
     {
       "type": "vagrant",
       "only": ["virtualbox-iso"],
-      "output": "./{{user `vm_name`}}-{{user `variant`}}-{{ .Provider }}.box",
+      "compression_level": "9",
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfiles/Vagrantfile.Alpine"
