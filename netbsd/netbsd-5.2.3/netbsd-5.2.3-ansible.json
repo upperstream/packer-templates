@@ -192,7 +192,6 @@
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/rsync.sh",
-        "../provisioners/python27.sh",
         "../provisioners/ansible.sh",
         "../provisioners/cleanup.sh"
       ],
@@ -210,8 +209,8 @@
         "../provisioners/vagrant.sh",
         "../provisioners/rsync.sh",
         "../provisioners/vmware-5.2.sh",
-        "../provisioners/python27.sh",
         "../provisioners/ansible.sh",
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {

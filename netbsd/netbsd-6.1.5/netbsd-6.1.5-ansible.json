@@ -76,7 +76,8 @@
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "a<enter><wait>",
         "x<enter><wait>",
-        "a<enter><wait10><wait10>",
+        "a<enter><wait>",
+        "<wait10><wait10>",
         "<enter><wait>",
         "d<enter><wait>",
         "a<enter><wait>",
@@ -184,7 +185,6 @@
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/rsync.sh",
-        "../provisioners/python27.sh",
         "../provisioners/ansible.sh",
         "../provisioners/cleanup.sh"
       ],
@@ -202,8 +202,8 @@
         "../provisioners/vagrant.sh",
         "../provisioners/rsync.sh",
         "../provisioners/vmware-6.1.sh",
-        "../provisioners/python27.sh",
         "../provisioners/ansible.sh",
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {

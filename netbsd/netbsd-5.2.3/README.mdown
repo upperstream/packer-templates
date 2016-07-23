@@ -57,9 +57,9 @@ is set to `/bin/ksh`.
 ## Variants
 
 * `packer build -var-file=vars-netbsd-5.2.3-amd64.json netbsd-5.2.3-minmal.json` - NetBSD 5.2.3 (amd64)
-* `packer build -var-file=vars-netbsd-5.2.3-amd64.json netbsd-5.2.3-ansible.json` - NetBSD 5.2.3 + Ansible (amd64)
+* `packer build -var-file=vars-netbsd-5.2.3-amd64.json netbsd-5.2.3-ansible.json` - NetBSD 5.2.3 + Ansible + Testinfra (amd64)
 * `packer build -var-file=vars-netbsd-5.2.3-i386.json netbsd-5.2.3-minmal.json` - NetBSD 5.2.3 (i386)
-* `packer build -var-file=vars-netbsd-5.2.3-i386.json netbsd-5.2.3-ansible.json` - NetBSD 5.2.3 + Ansible (i386)
+* `packer build -var-file=vars-netbsd-5.2.3-i386.json netbsd-5.2.3-ansible.json` - NetBSD 5.2.3 + Ansible + Testinfra (i386)
 
 - - -
 
