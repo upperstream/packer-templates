@@ -1,5 +1,5 @@
-pkg_add \
-	libyaml-0.1.6nb1 py27-yaml-3.11 \
-	gmp-6.0.0a py27-crypto-2.6.1nb1 py27-expat-2.7.9 py27-setuptools-14.2 py27-ecdsa-0.11 py27-paramiko-1.15.2 \
-	py27-markupsafe-0.23 py27-jinja2-2.7.3 \
-	ansible-1.6.10
+##ftp -o "| tar --unlink -zxpf - -C /" ftp://ftp.netbsd.org/pub/NetBSD/NetBSD-`uname -r`/`uname -m`/binary/sets/comp.tgz
+pkg_add python27-2.7.9nb1 curl-7.42.0
+curl -k https://bootstrap.pypa.io/get-pip.py | python2.7 -
+pkg_add py27-paramiko
+pip install ansible==2.1.0.0 testinfra==1.4.0

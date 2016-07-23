@@ -6,5 +6,5 @@
   "virtualbox_geust_os_type": "NetBSD",
   "vmware_guest_os_type": "other",
   "mem_size": "512",
-  "disk_size": "307200"
+  "disk_size": "40960"
 }
