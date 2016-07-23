@@ -3,7 +3,7 @@
     "ssh_username": "root",
     "os_ver": "5.2.3",
     "variant": "minimal",
-    "box_ver": "1.2",
+    "box_ver": "3.1.3",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",

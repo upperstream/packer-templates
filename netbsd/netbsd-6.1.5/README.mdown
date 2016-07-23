@@ -32,13 +32,13 @@ From the terminal, invoke the following command:
 
 	packer build -var-file=netbsd-6.1.5-amd64.json netbsd-6.1.5-minimal.json
 
-and you will find vagrant boxes file named `NetBSD-6.1.5-amd64-minimal-v1.1-virtualbox.box`
-and `NetBSD-6.1.5-amd64-minimal-v1.1-vmware.box` in the same directory after the command has succeeded.
+and you will find vagrant boxes file named `NetBSD-6.1.5-amd64-minimal-v5.1.3-virtualbox.box`
+and `NetBSD-6.1.5-amd64-minimal-v5.1.3-vmware.box` in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-6.1.5-amd64-minimal-v1.1` to your box list
+Then you can add the box named `NetBSD-6.1.5-amd64-minimal-v5.1.3` to your box list
 by the following command (for example of VirtualBox provider):
 
-	vagrant add NetBSD-6.1.5-amd64-minimal-v1.1-virtualbox.box --name NetBSD-6.1.5-amd64-minimal-v1.1
+	vagrant add NetBSD-6.1.5-amd64-minimal-v5.1.3-virtualbox.box --name NetBSD-6.1.5-amd64-minimal-v5.1.3
 
 ## Default settings
 
@@ -52,7 +52,7 @@ Due to limitation of Vagrant's support for NetBSD, Synced Folder of this box is 
 ### SSH Shell
 
 Because Bash is not the standard shell for NetBSD, default shell for SSH connection of this box
-is set to "`/bin/ksh`".
+is set to `/bin/ksh`.
 
 ## Variants
 
