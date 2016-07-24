@@ -1,7 +1,7 @@
 {
-  "vm_name": "Alpine-Linux-3.4.0-x86_64",
-  "iso_image": "alpine-3.4.0-x86_64.iso",
-  "iso_checksum": "441a5888d8252ae9ceb2c2965a2e1a3fbd40a471",
+  "vm_name": "Alpine-Linux-3.4-x86_64",
+  "iso_image": "alpine-3.4.1-x86_64.iso",
+  "iso_checksum": "7dd15b86cf5679b35dd5f1c511f6a67470293a58",
   "iso_checksum_type": "sha1",
   "cpu": "x86_64",
   "virtualbox_guest_os_type": "Linux26_64",
