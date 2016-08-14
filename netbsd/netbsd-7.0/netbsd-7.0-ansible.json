@@ -4,13 +4,15 @@
     "ssh_password": "vagrant",
     "os_ver": "7.0",
     "variant": "ansible",
-    "box_ver": "2.0",
+    "box_ver": "2.1",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "user_name": "vagrant",
-    "user_password": "vagrant"
+    "user_password": "vagrant",
+    "mem_size": "512",
+    "disk_size": "40960"
   },
   "builders": [
     {
@@ -19,14 +21,14 @@
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "{{user `virtualbox_geust_os_type`}}",
       "iso_urls": [
-        "{{user `iso_file_name`}}",
-        "http://ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://mirror.planetunix.net/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp.fr.NetBSD.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp.availo.se/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp.fi.NetBSD.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}"
+        "./iso/{{user `iso_file_name`}}",
+        "http://ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://mirror.planetunix.net/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp.fr.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp.availo.se/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp.fi.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -39,24 +41,9 @@
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "{{user `mem_size`}}"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "2"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--rtcuseutc",
-          "on"
-        ]
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
       "http_directory": ".",
       "boot_command": [
@@ -112,14 +99,14 @@
       "disk_type_id": "0",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
-        "{{user `iso_file_name`}}",
-        "http://ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://mirror.planetunix.net/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp.fr.NetBSD.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp.availo.se/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp.fi.NetBSD.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}"
+        "./iso/{{user `iso_file_name`}}",
+        "http://ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://mirror.planetunix.net/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp.fr.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp.availo.se/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp.fi.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -196,14 +183,14 @@
       "disk_type_id": "thin",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
-        "{{user `iso_file_name`}}",
-        "http://ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://mirror.planetunix.net/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp.fr.NetBSD.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp.availo.se/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}",
-        "http://ftp.fi.NetBSD.org/pub/NetBSD/NetBSD-{{user `os_ver`}}/iso/{{user `iso_file_name`}}"
+        "./iso/{{user `iso_file_name`}}",
+        "http://ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://mirror.planetunix.net/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp.fr.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp.availo.se/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
+        "http://ftp.fi.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -282,23 +269,26 @@
   "provisioners": [
     {
       "type": "shell",
+      "inline": [
+        "echo \"PKG_PATH=http://ftp.NetBSD.org/pub/pkgsrc/packages/NetBSD/amd64/7.0_2015Q4/All\" > /etc/pkg_install.conf"
+      ]
+    },
+    {
+      "type": "shell",
       "only": ["virtualbox-iso"],
       "scripts": [
-        "../provisioners/sudo-7.0.sh",
         "../provisioners/vagrant-7.0.sh",
-        "../provisioners/rsync-7.0.sh",
         "../provisioners/ansible-7.0.sh",
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup-7.0.sh"
       ],
       "override": {
         "virtualbox-iso": {
-          "execute_command": "env -i {{.Vars}} | sed 'h;s/^\\([^=]*\\)=.*$/export \\1/;H;g' | cat - {{.Path}} | su -"
+          "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}" 
         }
       },
       "environment_vars": [
-        "PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All",
-        "VAGRANT_USER={{user `user_name`}}",
-        "VAGRANT_PASSWORD={{user `user_password`}}"
+        "VAGRANT_USER={{user `user_name`}}"
       ]
     },
     {
@@ -306,22 +296,18 @@
       "only": ["vmware-iso"],
       "scripts": [
         "../provisioners/vmware-7.0.sh",
-        "../provisioners/sudo-7.0.sh",
         "../provisioners/vagrant-7.0.sh",
-        "../provisioners/rsync-7.0.sh",
         "../provisioners/ansible-7.0.sh",
         "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup-7.0.sh"
       ],
       "override": {
         "vmware-iso": {
-          "execute_command": "env -i {{.Vars}} | sed 'h;s/^\\([^=]*\\)=.*$/export \\1/;H;g' | cat - {{.Path}} | su -"
+          "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}" 
         }
       },
       "environment_vars": [
-        "PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All",
-        "VAGRANT_USER={{user `user_name`}}",
-        "VAGRANT_PASSWORD={{user `user_password`}}"
+        "VAGRANT_USER={{user `user_name`}}"
       ]
     },
     {
@@ -329,21 +315,17 @@
       "only": ["esxi-iso"],
       "scripts": [
         "../provisioners/vmware-7.0.sh",
-        "../provisioners/sudo-7.0.sh",
         "../provisioners/vagrant-7.0.sh",
-        "../provisioners/rsync-7.0.sh",
         "../provisioners/ansible-7.0.sh",
         "../provisioners/cleanup-7.0.sh"
       ],
       "override": {
         "esxi-iso": {
-          "execute_command": "env -i {{.Vars}} | sed 'h;s/^\\([^=]*\\)=.*$/export \\1/;H;g' | cat - {{.Path}} | su -"
+          "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}" 
         }
       },
       "environment_vars": [
-        "PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All",
-        "VAGRANT_USER={{user `user_name`}}",
-        "VAGRANT_PASSWORD={{user `user_password`}}"
+        "VAGRANT_USER={{user `user_name`}}"
       ]
     }
   ],

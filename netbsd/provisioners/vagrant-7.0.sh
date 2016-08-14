@@ -1,3 +1,7 @@
+#!/bin/sh -ex
+test -z "$RSYNC" && RSYNC=rsync-3.1.2
+test -z "$SUDO" && SUDO=sudo-1.8.15
+pkg_add $RSYNC $SUDO
 mkdir -p /home/$VAGRANT_USER/.ssh
 ftp -o - "https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub" >> /home/$VAGRANT_USER/.ssh/authorized_keys
 chown -R $VAGRANT_USER:users /home/$VAGRANT_USER
