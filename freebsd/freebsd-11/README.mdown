@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 11.0-BETA3
+# Packer templates for FreeBSD 11.0-BETA4
 
-Templates to create Vagrant box for FreeBSD 11.0-BETA3 (amd64 and i386).
+Templates to create Vagrant box for FreeBSD 11.0-BETA4 (amd64 and i386).
 
 ## Prerequisites
 
@@ -41,13 +41,13 @@ or:
 	packer build -only=vmware-iso -var-file=vars-freebsd-11-amd64.json freebsd-11-beta.json
 
 for VMware provider.
-You will find a vagrant box file named `FreeBSD-11.0-BETA-amd64-v3.0-virtualbox.box` or
-`FreeBSD-11.0-BETA-amd64-v3.0-vmware.box` in the same directory after the command has succeeded.
+You will find a vagrant box file named `FreeBSD-11.0-BETA-amd64-v4.0-virtualbox.box` or
+`FreeBSD-11.0-BETA-amd64-v4.0-vmware.box` in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.0-BETA-amd64-v3.0-virtualbox` to your box list
-by the following command:
+Then you can add the box named `FreeBSD-11.0-BETA-amd64-v4.0-virtualbox` to your box list
+by the following command (for example of VirtualBox provider):
 
-	vagrant add FreeBSD-11.0-BETA-amd64-v3.0-virtualbox.box --name FreeBSD-11.0-BETA-amd64-v3.0-virtualbox
+	vagrant add FreeBSD-11.0-BETA-amd64-v4.0-virtualbox.box --name FreeBSD-11.0-BETA-amd64-v4.0-virtualbox
 
 ## Default settings
 
@@ -71,8 +71,8 @@ is set to `/bin/sh`.
 
 ## Variants
 
-* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-beta.json` - FreeBSD 11.0-BETA3 (amd64)
-* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-beta.json` - FreeBSD 11.0-BETA3 (i386)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-beta.json` - FreeBSD 11.0-BETA4 (amd64)
+* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-beta.json` - FreeBSD 11.0-BETA4 (i386)
 
 ## Build parameters
 
