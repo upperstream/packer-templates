@@ -42,13 +42,13 @@ or:
 	packer build -only=vmware-iso -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-minimal.json
 
 for VMware provider.
-You will find a vagrant box file named `NetBSD-7.0-amd64-minimal-v1.2-virtualbox.box` or
-`NetBSD-7.0-amd64-minimal-v1.2-vmware.box` in the same directory after the command has succeeded.
+You will find a vagrant box file named `NetBSD-7.0-amd64-minimal-v2.0-virtualbox.box` or
+`NetBSD-7.0-amd64-minimal-v2.0-vmware.box` in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-7.0-amd64-minimal-v1.2` to your box list
+Then you can add the box named `NetBSD-7.0-amd64-minimal-v2.0` to your box list
 by the following command (for example of VirtualBox provider):
 
-	vagrant add NetBSD-7.0-amd64-minimal-v1.2-virtualbox.box --name NetBSD-7.0-amd64-minimal-v1.2
+	vagrant add NetBSD-7.0-amd64-minimal-v2.0-virtualbox.box --name NetBSD-7.0-amd64-minimal-v2.0
 
 ## Default settings
 
@@ -62,8 +62,7 @@ Due to limitation of Vagrant's support for NetBSD, Synced Folder of this box is 
 ### SSH Shell
 
 Because Bash is not the standard shell for NetBSD, default shell for SSH connection of this box
-is set to "`/bin/ksh`".
-
+is set to `/bin/ksh`.
 
 ## Building a VM image on ESXi
 
@@ -94,11 +93,15 @@ The following command will build a VM image on your ESXi:
 
 ## Build parameters
 
-The following parametes can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
+The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
 
 * `vm_name` - VM name.  This also affects box file name and output directory name.
 * `mem_size` - RAM size of the created VM.  Default value is `512` which means 512MB.
 * `disk_size` - Disk size of the created VM.  Default value is `40960` which means 40GB.
+* `ssh_user` - User name to login via SSH during build time.  Default value is `root`.
+* `ssh_password` - SSH password for `ssh_user` during build time.  Default value is `vagrant`.
+* `user_name` - User name during run time.  Vagranr box is set for this user.  Default value is `vagrant`.
+* `user_password` - Password for `user_name`.  Default value is `vagrant`.
 
 - - -
 

@@ -1,13 +1,16 @@
 {
   "variables": {
     "ssh_username": "root",
+    "ssh_password": "vagrant",
     "os_ver": "7.0",
     "variant": "minimal",
-    "box_ver": "1.2",
+    "box_ver": "2.0",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
-    "remote_datastore": "{{env `REMOTE_DATASTORE`}}"
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "user_name": "vagrant",
+    "user_password": "vagrant"
   },
   "builders": [
     {
@@ -28,13 +31,13 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_username`}}",
-      "ssh_password": "vagrant",
+      "ssh_password": "{{user `ssh_password`}}",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'shutdown -p now'|su -",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vboxmanage": [
         [
           "modifyvm",
@@ -81,18 +84,18 @@
         "<enter><wait>",
         "d<enter><wait>",
         "a<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
+        "{{user `ssh_password`}}<enter><wait>",
+        "{{user `ssh_password`}}<enter><wait>",
+        "{{user `ssh_password`}}<enter><wait>",
         "g<enter><wait>",
         "h<enter><wait>",
         "o<enter><wait>",
-        "vagrant<enter><wait>",
+        "{{user `user_name`}}<enter><wait>",
         "a<enter><wait>",
         "b<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
+        "{{user `user_password`}}<enter><wait>",
+        "{{user `user_password`}}<enter><wait>",
+        "{{user `user_password`}}<enter><wait>",
         "x<enter><wait>",
         "<enter><wait10>",
         "x<enter><wait>",
@@ -120,11 +123,11 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_username`}}",
-      "ssh_password": "vagrant",
+      "ssh_password": "{{user `ssh_password`}}",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'shutdown -p now'|su -",
-      "vm_name": "NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -164,18 +167,18 @@
         "<enter><wait>",
         "d<enter><wait5>",
         "a<enter><wait10><wait10>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait5>",
+        "{{user `ssh_password`}}<enter><wait>",
+        "{{user `ssh_password`}}<enter><wait>",
+        "{{user `ssh_password`}}<enter><wait5>",
         "g<enter><wait>",
         "h<enter><wait>",
         "o<enter><wait>",
-        "vagrant<enter><wait><wait5>",
+        "{{user `user_name`}}<enter><wait><wait5>",
         "a<enter><wait>",
         "b<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait5>",
+        "{{user `user_password`}}<enter><wait>",
+        "{{user `user_password`}}<enter><wait>",
+        "{{user `user_password`}}<enter><wait5>",
         "x<enter><wait>",
         "<enter><wait10><wait10>",
         "x<enter><wait>",
@@ -204,7 +207,7 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_username`}}",
-      "ssh_password": "vagrant",
+      "ssh_password": "{{user `ssh_password`}}",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'shutdown -p now'|su -",
@@ -213,8 +216,8 @@
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
-      "output_directory": "NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}",
-      "vm_name": "NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -254,18 +257,18 @@
         "<enter><wait>",
         "d<enter><wait>",
         "a<enter><wait10>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait5>",
+        "{{user `ssh_password`}}<enter><wait>",
+        "{{user `ssh_password`}}<enter><wait>",
+        "{{user `ssh_password`}}<enter><wait5>",
         "g<enter><wait>",
         "h<enter><wait>",
         "o<enter><wait>",
-        "vagrant<enter><wait5>",
+        "{{user `user_name`}}<enter><wait5>",
         "a<enter><wait>",
         "b<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait5>",
+        "{{user `user_password`}}<enter><wait>",
+        "{{user `user_password`}}<enter><wait>",
+        "{{user `user_password`}}<enter><wait5>",
         "x<enter><wait>",
         "<enter><wait10><wait10>",
         "x<enter><wait>",
@@ -287,13 +290,18 @@
       ],
       "override": {
         "virtualbox-iso": {
-          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
+          "execute_command": "env -i {{.Vars}} | sed 'h;s/^\\([^=]*\\)=.*$/export \\1/;H;g' | cat - {{.Path}} | su -"
         }
-      }
+      },
+      "environment_vars": [
+        "PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All",
+        "VAGRANT_USER={{user `user_name`}}",
+        "VAGRANT_PASSWORD={{user `user_password`}}"
+      ]
     },
     {
       "type": "shell",
-      "only": ["vmware-iso", "esxi-iso"],
+      "only": ["vmware-iso"],
       "scripts": [
         "../provisioners/sudo-7.0.sh",
         "../provisioners/vagrant-7.0.sh",
@@ -304,12 +312,36 @@
       ],
       "override": {
         "vmware-iso": {
-          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
-        },
-        "esxi-iso": {
-          "execute_command": "echo 'PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All/; export PKG_PATH' | cat - '{{.Path}}' | su -"
+          "execute_command": "env -i {{.Vars}} | sed 'h;s/^\\([^=]*\\)=.*$/export \\1/;H;g' | cat - {{.Path}} | su -"
         }
-      }
+      },
+      "environment_vars": [
+        "PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All",
+        "VAGRANT_USER={{user `user_name`}}",
+        "VAGRANT_PASSWORD={{user `user_password`}}"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["esxi-iso"],
+      "scripts": [
+        "../provisioners/sudo-7.0.sh",
+        "../provisioners/vagrant-7.0.sh",
+        "../provisioners/rsync-7.0.sh",
+        "../provisioners/vmware-7.0.sh",
+        "../provisioners/disk_cleanup.sh",
+        "../provisioners/cleanup-7.0.sh"
+      ],
+      "override": {
+        "esxi-iso": {
+          "execute_command": "env -i {{.Vars}} | sed 'h;s/^\\([^=]*\\)=.*$/export \\1/;H;g' | cat - {{.Path}} | su -"
+        }
+      },
+      "environment_vars": [
+        "PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/`uname -s`/`uname -m`/7.0_2015Q4/All",
+        "VAGRANT_USER={{user `user_name`}}",
+        "VAGRANT_PASSWORD={{user `user_password`}}"
+      ]
     }
   ],
   "post-processors": [
@@ -317,7 +349,7 @@
       "type": "vagrant",
       "only": ["virtualbox-iso", "vmware-iso"],
       "compression_level": 9,
-      "output": "./NetBSD-{{user `os_ver`}}-{{user `cpu`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
       "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD"
     }
   ]
