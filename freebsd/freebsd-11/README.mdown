@@ -10,7 +10,10 @@ Templates to create Vagrant box for FreeBSD 11.0-BETA4 (amd64 and i386).
 	* Version 4.3.28+ for Windows
 	* Version 4.3.28+ for Mac OS X (You may want to stay with 4.3.28 which allows [HAXM] to work in parallel.)
 * [VMware] Workstation v11.1.0+ / VMware Fusion v8.0+
+* [ESXi] (vSphere Hypervisor) v5.5+
 
+[ESXi]: http://www.vmware.com/products/vsphere-hypervisor
+        "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
 [HAXM]: https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager
         "Intel&reg; Hardware Accelerated Execution Manager"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
@@ -68,6 +71,23 @@ SMB synced folder is not supported for FreeBSD guest.
 
 Because Bash is not the standard shell for FreeBSD, default shell for SSH connection of this box
 is set to `/bin/sh`.
+
+## Building a VM image on ESXi
+
+In order to build a VM image on ESXi, you need to provide the following environment variables:
+
+* `REMOTE_HOST` - ESXi host name or IP address
+* `REMOTE_USERNAME` - ESXi login user name
+* `REMOTE_PASSWORD` - ESXi login password
+* `REMOTE_DATASTORE` - ESXi datastore name where a VM image will be created
+
+You also have to enable SSH and VNC on ESXi host.
+
+The following command will build a VM image on your ESXi:
+
+    packer build -only=esxi-iso -var-file=vars-freebsd-11-amd64.json freebsd-11-beta-minimal.json
+
+(Note that created VM will be unregistered from your Inventory.)
 
 ## Variants
 
