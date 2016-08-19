@@ -11,6 +11,9 @@
 * [freebsd-10.3](freebsd-10.3/README.mdown) - templates for FreeBSD 10.3-RELEASE
 	* FreeBSD 10.3-RELEASE (amd64)
 	* FreeBSD 10.3-RELEASE (i386)
+* [freebsd-11](freebsd-11/README.mdown) - templates for FreeBSD 11.0-BETA3
+	* FreeBSD 11.0-BETA3 (amd64)
+	* FreeBSD 11.0-BETA3 (i386)
 
 - - -
 

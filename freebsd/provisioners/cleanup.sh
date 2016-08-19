@@ -1,1 +1,1 @@
-rm -f /tmp/*
+rm -rf /tmp/*
