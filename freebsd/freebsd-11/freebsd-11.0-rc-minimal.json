@@ -4,8 +4,8 @@
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.0",
     "iso_checksum_type": "",
     "iso_checksum": "",
-    "os_version": "11.0-BETA4",
-    "box_version": "4.0",
+    "os_version": "11.0-RC1",
+    "box_version": "1.0",
     "mem_size": "1024",
     "disk_size": "51200",
     "remote_host": "{{env `REMOTE_HOST`}}",
@@ -20,7 +20,7 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "ansible"
+    "variant": "minimal"
   },
   "builders": [
     {
@@ -195,13 +195,12 @@
       "only": ["virtualbox-iso"],
       "scripts": [
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/ansible.sh",
         "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
         "virtualbox-iso": {
-          "execute_command": "env {{.Vars}} sudo -E -H sh '{{.Path}}'"
+          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
         }
       },
       "environment_vars": [
@@ -216,13 +215,12 @@
       "scripts": [
         "../provisioners/vmware.sh",
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/ansible.sh",
         "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
         "vmware-iso": {
-          "execute_command": "env {{.Vars}} sudo -E -H sh '{{.Path}}'"
+          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
         }
       },
       "environment_vars": [
@@ -237,12 +235,11 @@
       "scripts": [
         "../provisioners/vmware.sh",
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/ansible.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
         "esxi-iso": {
-          "execute_command": "env {{.Vars}} sudo -E -H sh '{{.Path}}'"
+          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
         }
       },
       "environment_vars": [
