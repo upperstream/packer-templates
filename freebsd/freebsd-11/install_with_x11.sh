@@ -1,6 +1,5 @@
 
-#!/bin/sh
-echo 'WITHOUT_X11="YES"' >> /etc/make.conf
+#!/bin/sh -x
 echo "WITH_PKGNG=yes" >> /etc/make.conf
 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
 cat >> /etc/rc.conf <<EOF
