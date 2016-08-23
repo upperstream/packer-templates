@@ -1,5 +1,5 @@
 
-#!/bin/sh
+#!/bin/sh -x
 echo 'WITHOUT_X11="YES"' >> /etc/make.conf
 echo "WITH_PKGNG=yes" >> /etc/make.conf
 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
@@ -36,7 +36,6 @@ pw groupmod wheel -m $VAGRANT_USER
 echo "$VAGRANT_USER ALL=(ALL) NOPASSWD:ALL" >> /usr/local/etc/sudoers.d/$VAGRANT_USER
 
 # SSH config
-echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
-echo "PermitRootLogin without-password" >> /etc/ssh/sshd_config
+echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 
 reboot
