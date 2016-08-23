@@ -107,6 +107,10 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 * `vm_name` - VM name.  This also affects box file name and output directory name.
 * `mem_size` - RAM size of the created VM.  Default value is `512` which means 512MB.
 * `disk_size` - Disk size of the created VM.  Default value is `40960` which means 40GB.
+* `root_password` - Password for `root` user.  Default value is `vagrant`.
+* `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
+* `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
+* `vagrant_group` - Group name that `vagrant_username` belongs to.  Default value is `vagrant`.
 
 - - -
 

@@ -57,6 +57,22 @@ is set to "`/bin/ksh`".
 This box is configured to use `doas` command instead of `sudo`, which requires Vagrant version 1.7.3 or later.
 If you want to stay with older version of Vagrant, you can use template files `openbsd-5.8-*-sudo.json` instead.
 
+## Variants
+
+* `openbsd-5.8-amd64.json` - OpenBSD 5.8 (amd64)
+* `openbsd-5.8-amd64-sudo.json` - OpenBSD 5.8 (amd64) with `sudo`
+* `openbsd-5.8-i386.json` - OpenBSD 5.8 (i386)
+* `openbsd-5.8-i386-sudo.json` - OpenBSD 5.8 (i386) with `sudo`
+
+## Build parameters
+
+The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
+
+* `root_password` - Password for `root` user.  Default value is `vagrant`.
+* `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
+* `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
+* `vagrant_group` - Group name that `vagrant_username` belongs to.  Default value is `vagrant`.
+
 - - -
 
 Copyright &copy; 2015, 2016 Upper Stream Software.

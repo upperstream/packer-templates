@@ -52,6 +52,20 @@ Due to Vagrant limitation of OpenBSD support, Synced Folder of this box is disab
 Because Bash is not the standard shell for OpenBSD, default shell for SSH connection of this box
 is set to "`/bin/ksh`".
 
+## Variants
+
+* `openbsd-5.6-amd64.json` - OpenBSD 5.6 (amd64)
+* `openbsd-5.6-i386.json` - OpenBSD 5.6 (i386)
+
+## Build parameters
+
+The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
+
+* `root_password` - Password for `root` user.  Default value is `vagrant`.
+* `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
+* `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
+* `vagrant_group` - Group name that `vagrant_username` belongs to.  Default value is `vagrant`.
+
 - - -
 
 Copyright &copy; 2015, 2016 Upper Stream Software.
