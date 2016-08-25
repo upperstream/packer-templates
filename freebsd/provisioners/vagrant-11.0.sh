@@ -7,6 +7,6 @@ chmod -R go-rwsx /home/$VAGRANT_USER/.ssh
 echo "UseDNS no" >> /etc/ssh/sshd_config
 echo "AllowUsers $VAGRANT_USER" >> /etc/ssh/sshd_config
 
-pkg install -y rsync-3.1.2_5 pkgconf-1_1 samba36-smbclient-3.6.25
+pkg install -y rsync-3.1.2_5
 
 exit

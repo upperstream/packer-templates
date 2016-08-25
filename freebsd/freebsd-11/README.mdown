@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 11.0-BETA4
+# Packer templates for FreeBSD 11.0-RC1
 
-Templates to create Vagrant box for FreeBSD 11.0-BETA4 (amd64 and i386).
+Templates to create Vagrant box for FreeBSD 11.0-RC1 (amd64 and i386).
 
 ## Prerequisites
 
@@ -27,7 +27,6 @@ Templates to create Vagrant box for FreeBSD 11.0-BETA4 (amd64 and i386).
 * sshd
 * sudo
 * rsync
-* smbclient
 * `vagrant` user and its insecure public key
 * NFS client enabled
 * ntpd enabled
@@ -37,20 +36,20 @@ Templates to create Vagrant box for FreeBSD 11.0-BETA4 (amd64 and i386).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-	packer build -only=virtualbox-iso -var-file=vars-freebsd-11-amd64.json freebsd-11-beta-minimal.json
+	packer build -only=virtualbox-iso -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-minimal.json
 
 or:
 
-	packer build -only=vmware-iso -var-file=vars-freebsd-11-amd64.json freebsd-11-beta-minimal.json
+	packer build -only=vmware-iso -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-minimal.json
 
 for VMware provider.
-You will find a vagrant box file named `FreeBSD-11.0-BETA-amd64-minimal-v4.0-virtualbox.box` or
-`FreeBSD-11.0-BETA-amd64-v4.0-vmware.box` in the same directory after the command has succeeded.
+You will find a vagrant box file named `FreeBSD-11.0-RC-amd64-minimal-v1.0-virtualbox.box` or
+`FreeBSD-11.0-RC-amd64-v1.0-vmware.box` in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.0-BETA-amd64-minimal-v4.0-virtualbox` to your box list
+Then you can add the box named `FreeBSD-11.0-RC-amd64-minimal-v1.0-virtualbox` to your box list
 by the following command (for example of VirtualBox provider):
 
-	vagrant add FreeBSD-11.0-BETA-amd64-minimal-v4.0-virtualbox.box --name FreeBSD-11.0-BETA-amd64-minimal-v4.0-virtualbox
+	vagrant add FreeBSD-11.0-RC-amd64-minimal-v1.0-virtualbox.box --name FreeBSD-11.0-RC-amd64-minimal-v1.0-virtualbox
 
 ## Default settings
 
@@ -85,19 +84,25 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso -var-file=vars-freebsd-11-amd64.json freebsd-11-beta-minimal.json
+    packer build -only=esxi-iso -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
 
 ## Variants
 
-* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-beta-minmal.json` - FreeBSD 11.0-BETA4 (amd64)
-* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-beta-ansible.json` - FreeBSD 11.0-BETA4 + [Ansible] + [Testinfra] (amd64)
-* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-beta-minmal.json` - FreeBSD 11.0-BETA4 (i386)
-* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-beta-ansible.json` - FreeBSD 11.0-BETA4 + Ansible + Testinfra (i386)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-minmal.json` - FreeBSD 11.0-RC1 (amd64)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-ansible.json` - FreeBSD 11.0-RC1 + [Ansible] + [Testinfra] (amd64)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-x11.json` - FreeBSD 11.0-RC1 + [X11] (amd64)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-xfce.json` - FreeBSD 11.0-RC1 + [Xfce] (amd64)
+* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-minmal.json` - FreeBSD 11.0-RC1 (i386)
+* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-ansible.json` - FreeBSD 11.0-RC1 + Ansible + Testinfra (i386)
+* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-x11.json` - FreeBSD 11.0-RC1 + X11 (i386)
+* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-xfce.json` - FreeBSD 11.0-RC1 + Xfce (i386)
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
-[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.1.3.dev24 documentation"
+[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.1 documentation"
+[X11]: https://www.x.org/wiki/ "X.Org"
+[Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 
 ## Build parameters
 
@@ -106,11 +111,11 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 * `vm_name` - VM name.  This also affects box file name and output directory name.
 * `mem_size` - RAM size of the created VM.  Default value is `512` which means 1GB.
 * `disk_size` - Disk size of the created VM.  Default value is `40960` which means 50GB.
-* `ssh_username` - User name to login via SSH during build time.  Default value is `root`.
-* `ssh_password` - SSH password for `ssh_user` used for build time.  Default value is `vagrant`.
 * `root_password` - Password for `root` user.  Default value is `vagrant`.
 * `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
+  This is also used for SSH user name during build time.
 * `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
+  This is also used for SSH password during build time.
 * `vagrant_group` - Group name that `vagrant_username` belongs to.  Default value is `vagrant`.
 
 - - -
