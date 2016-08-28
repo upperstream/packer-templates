@@ -1,8 +1,8 @@
 {
-  "iso_image": "FreeBSD-11.0-RC1-amd64-disc1.iso",
+  "iso_image": "FreeBSD-11.0-RC2-amd64-disc1.iso",
   "iso_checksum_type": "sha256",
-  "iso_checksum": "e0b72c94cc6d4fdde06604c3867fd4a6b5d1c34cbe8c736f93dbfab329536858",
-  "os_version": "11.0-RC1",
+  "iso_checksum": "9fb2bc0b904113d45ba77d18663ee42fa184d02e5d400315277dc6d6fa6ee5d5",
+  "os_version": "11.0-RC2",
   "virtualbox_guest_os_type": "FreeBSD_64",
   "vmware_guest_os_type": "freebsd-64",
   "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
