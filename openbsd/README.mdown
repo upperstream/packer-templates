@@ -10,6 +10,9 @@
 	* OpenBSD 5.8 (amd64 and i386)
 * [openbsd-5.9](openbsd-5.9/README.mdown) - templates for OpenBSD 5.9
 	* OpenBSD 5.9 (amd64 and i386)
+	* OpenBSD 5.9 + `sudo` (amd64 and i386)
+	* OpenBSD 5.9 + Ansible + Testinfra (amd64 and i386)
+	* OpenBSD 5.9 + X11 (amd64 and i386)
 
 - - -
 
