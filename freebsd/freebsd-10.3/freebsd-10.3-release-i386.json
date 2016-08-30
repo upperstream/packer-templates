@@ -58,6 +58,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant-10.3.sh",
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
@@ -71,6 +72,7 @@
     {
       "output": "./FreeBSD-{{user `os_ver`}}-RELEASE-i386.box",
       "type": "vagrant",
+      "compression_level": 9,
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-10.3"
