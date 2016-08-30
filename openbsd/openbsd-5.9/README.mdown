@@ -40,13 +40,13 @@ or:
 	packer build -only=vmware-iso -var-file=vars-openbsd-5.9-amd64.json openbsd-5.9-doas.json
 
 for VMware provider.
-You will find a vagrant box file named `OpenBSD-5.9-amd64-doas-v1.1-virtualbox.box`
+You will find a vagrant box file named `OpenBSD-5.9-amd64-doas-v5.9.2-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-5.9-amd64-doas-v1.1-virtualbox` to your box list
+Then you can add the box named `OpenBSD-5.9-amd64-doas-v5.9.2-virtualbox` to your box list
 by the following command:
 
-	vagrant add OpenBSD-5.9-amd64-doas-v1.1-virtualbox.box --name OpenBSD-5.9-amd64-doas-v1.1-virtualbox
+	vagrant add OpenBSD-5.9-amd64-doas-v5.9.2-virtualbox.box --name OpenBSD-5.9-amd64-doas-v5.9.2-virtualbox
 
 ## Default settings
 

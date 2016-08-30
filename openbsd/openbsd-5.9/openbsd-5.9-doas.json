@@ -1,7 +1,7 @@
 {
   "variables": {
     "variant": "doas",
-    "box_version": "1.1",
+    "box_version": "5.9.2",
     "iso_image": "cd59.iso",
     "os_ver": "5.9",
     "mem_size": "512",
