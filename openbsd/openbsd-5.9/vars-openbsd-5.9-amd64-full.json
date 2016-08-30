@@ -1,0 +1,13 @@
+{
+  "vm_name": "OpenBSD-5.9-amd64",
+  "cpu": "amd64",
+  "virtualbox_guest_os_type": "OpenBSD_64",
+  "vmware_guest_os_type": "other-64",
+  "iso_image": "install59.iso",
+  "iso_checksum": "685262fc665425c61a2952b2820389a2d331ac5558217080e6d564d2ce88eecb",
+  "source": "cd0",
+  "proxy": "",
+  "http_server": "",
+  "path": "5.9/amd64",
+  "install_without_signature": "yes<enter><wait>"
+}
