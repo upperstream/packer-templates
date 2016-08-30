@@ -235,22 +235,13 @@
   "provisioners": [
     {
       "type": "shell",
-      "inline": [
-        "pkg_add ansible-2.0.0.2",
-        "ftp -o - https://bootstrap.pypa.io/get-pip.py | python2.7 -",
-        "pip install testinfra==1.2.0"
-      ],
-      "environment_vars": [
-        "PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/{{user `cpu`}}/"
-      ]
-    },
-    {
-      "type": "shell",
       "scripts": [
+        "../provisioners/ansible.sh",
         "../provisioners/rsync-5.9.sh",
         "../provisioners/sharity-light.sh",
         "../provisioners/vagrant-doas.sh",
         "../provisioners/sudo-5.9.sh",
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
       "environment_vars": [
