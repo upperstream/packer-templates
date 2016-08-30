@@ -1,6 +1,5 @@
-PARTITIONS=ada0
 
-#!/bin/sh
+#!/bin/sh -ex
 echo 'WITHOUT_X11="YES"' >> /etc/make.conf
 echo "WITH_PKGNG=yes" >> /etc/make.conf
 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
@@ -21,6 +20,7 @@ FreeBSD: {
     enabled: true
 }
 EOF
+
 env ASSUME_ALWAYS_YES="YES" pkg bootstrap -y
 pkg update
 pkg install -y sudo-1.8.15
@@ -29,15 +29,14 @@ pkg install -y ca_root_nss-3.22.2
 
 ln -sf /usr/local/share/certs/ca-root-nss.crt /etc/ssl/cert.pem
 
-echo -n 'vagrant' | pw usermod root -h 0
-pw groupadd -n vagrant -g 1000
-echo -n 'vagrant' | pw useradd -n vagrant -u 1000 -s /bin/sh -m -d /home/vagrant/ -G vagrant -h 0
-pw groupmod wheel -m vagrant
+echo -n "$ROOT_PASSWORD" | pw usermod root -h 0
+pw groupadd -n "$VAGRANT_GROUP" -g 1000
+echo -n "$VAGRANT_PASSWORD" | pw useradd -n $VAGRANT_USER -u 1000 -s /bin/sh -m -d /home/$VAGRANT_USER -G $VAGRANT_GROUP -h 0
+pw groupmod wheel -m $VAGRANT_USER
 
-echo 'vagrant ALL=(ALL) NOPASSWD:ALL' >> /usr/local/etc/sudoers.d/vagrant
+echo "$VAGRANT_USER ALL=(ALL) NOPASSWD:ALL" >> /usr/local/etc/sudoers.d/$VAGRANT_USER
 
 # SSH config
-echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
-echo "PermitRootLogin without-password" >> /etc/ssh/sshd_config
+echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 
 reboot
