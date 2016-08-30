@@ -237,6 +237,7 @@
         "../provisioners/rsync-5.9.sh",
         "../provisioners/sharity-light.sh",
         "../provisioners/vagrant-doas.sh",
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
       "environment_vars": [
