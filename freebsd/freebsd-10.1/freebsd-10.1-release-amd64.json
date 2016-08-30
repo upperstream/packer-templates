@@ -4,7 +4,9 @@
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/10.1",
     "iso_checksum": "d0d4553080b88653569e1871d57fc819",
     "iso_checksum_type": "md5",
-    "box_ver": "2"
+    "box_ver": "2",
+    "mem_size": "1024",
+    "disk_size": "51200"
   },
   "builders": [
     {
@@ -22,7 +24,7 @@
         "shutdown -r now<enter>"
       ],
       "boot_wait": "10s",
-      "disk_size": 10240,
+      "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "FreeBSD_64",
       "http_directory": ".",
       "iso_checksum": "{{user `iso_checksum` }}",
@@ -42,24 +44,9 @@
       "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
       "guest_additions_mode": "disable",
       "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "1024"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "2"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--rtcuseutc",
-          "on"
-        ]
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ]
     }
   ],

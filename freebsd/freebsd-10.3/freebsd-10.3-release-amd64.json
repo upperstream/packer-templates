@@ -5,7 +5,9 @@
     "iso_checksum": "fef068cf6dea26923ab84b62ba9f21461ca0bdec90a0741c8ffb0e1ca29e410d",
     "iso_checksum_type": "sha256",
     "os_ver": "10.3",
-    "box_ver": "1"
+    "box_ver": "1",
+    "mem_size": "1024",
+    "disk_size": "51200"
   },
   "builders": [
     {
@@ -25,7 +27,7 @@
         "shutdown -r now<enter>"
       ],
       "boot_wait": "10s",
-      "disk_size": 51200,
+      "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "FreeBSD_64",
       "http_directory": ".",
       "iso_checksum": "{{user `iso_checksum` }}",
@@ -45,24 +47,9 @@
       "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
       "guest_additions_mode": "disable",
       "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "1024"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "2"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--rtcuseutc",
-          "on"
-        ]
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ]
     }
   ],
