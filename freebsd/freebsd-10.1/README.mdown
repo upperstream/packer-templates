@@ -71,4 +71,4 @@ is set to "`/bin/sh`".
 
 - - -
 
-Copyright &copy; 2015 Upper Stream Software.
+Copyright &copy; 2016 Upper Stream Software.
