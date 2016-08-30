@@ -13,6 +13,7 @@
 	* OpenBSD 5.9 + `sudo` (amd64 and i386)
 	* OpenBSD 5.9 + Ansible + Testinfra (amd64 and i386)
 	* OpenBSD 5.9 + X11 (amd64 and i386)
+	* OpenBSD 5.9 + Xfce (amd64 and i386)
 
 - - -
 

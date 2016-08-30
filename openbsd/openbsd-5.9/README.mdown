@@ -94,16 +94,19 @@ The following command will build a VM image on your ESXi:
 * `packer build -var-file=vars-openbsd-5.9-amd64-mini.json openbsd-5.9-sudo.json` - OpenBSD 5.9 (amd64) with `sudo`
 * `packer build -var-file=vars-openbsd-5.9-amd64-mini.json openbsd-5.9-ansible.json` - OpenBSD 5.9 (amd64) with `sudo`+[Ansible]+[Testinfra]
 * `packer build -var-file=vars-openbsd-5.9-amd64-mini.json openbsd-5.9-x11.json` - OpenBSD 5.9 (amd64) with [X11]
+* `packer build -var-file=vars-openbsd-5.9-amd64-mini.json openbsd-5.9-x11.json` - OpenBSD 5.9 (amd64) with [Xfce]
 * `packer build -var-file=vars-openbsd-5.9-i386-mini.json openbsd-5.9-doas.json` - OpenBSD 5.9 (i386)
 * `packer build -var-file=vars-openbsd-5.9-i386-mini.json openbsd-5.9-sudo.json` - OpenBSD 5.9 (i386) with `sudo`
 * `packer build -var-file=vars-openbsd-5.9-i386-mini.json openbsd-5.9-ansible.json` - OpenBSD 5.9 (i386) with `sudo`+Ansible+Testinfra
 * `packer build -var-file=vars-openbsd-5.9-i386-mini.json openbsd-5.9-x11.json` - OpenBSD 5.9 (i386) with X11
+* `packer build -var-file=vars-openbsd-5.9-i386-mini.json openbsd-5.9-x11.json` - OpenBSD 5.9 (i386) with Xfce
 
 `vars-openbsd-5.9-{amd64|i386}-mini.json` uses `cd59.iso` while `vars-openbsd-5.9-{amd64|i386}-full.json` uses `install59.iso`.
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.1.3.dev24 documentation"
 [X11]: https://www.x.org/wiki/ "X.Org"
+[Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 
 ## Build parameters
 
