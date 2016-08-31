@@ -3,7 +3,11 @@
     "iso_image": "cd56.iso",
     "path_to_iso": "OpenBSD/5.6/amd64",
     "iso_checksum": "99623a7a8c2fd26d8058a6c5b873b4e271ca97a2e8f0897209c53fea0c741b63",
-    "box_version": "1.1"
+    "box_version": "1.1",
+    "root_password": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_password": "vagrant",
+    "vagrant_fullname": "vagrant"
   },
   "builders": [
     {
@@ -16,17 +20,17 @@
         "dhcp<enter><wait>",
         "none<enter><wait>",
         "done<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
         "yes<enter><wait>",
         "no<enter><wait>",
         "no<enter><wait>",
         "no<enter><wait>",
         "no<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
+        "{{user `vagrant_username`}}<enter><wait>",
+        "{{user `vagrant_fullname`}}<enter><wait>",
+        "{{user `vagrant_password`}}<enter><wait>",
+        "{{user `vagrant_password`}}<enter><wait>",
         "yes<enter><wait>",
         "UTC<enter><wait>",
         "wd0<enter><wait>",
@@ -59,7 +63,7 @@
         "http://ftp3.usa.openbsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
-      "ssh_password": "vagrant",
+      "ssh_password": "{{user `root_password`}}",
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "shutdown -h -p now",
       "guest_additions_mode": "disable",
@@ -95,7 +99,9 @@
         "../provisioners/cleanup.sh"
       ],
       "environment_vars": [
-        "PKG_PATH=http://ftp3.usa.openbsd.org/pub/OpenBSD/5.6/packages/amd64/"
+        "PKG_PATH=http://ftp3.usa.openbsd.org/pub/OpenBSD/5.6/packages/amd64",
+        "VAGRANT_USER={{user `vagrant_username`}}",
+        "VAGRANT_GROUP={{user `vagrant_username`}}"
       ]
     }
   ],

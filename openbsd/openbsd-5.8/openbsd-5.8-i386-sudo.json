@@ -3,7 +3,11 @@
     "iso_image": "cd58.iso",
     "iso_checksum": "c2b6d8879d014ef2f568464d9ff969e80a8a558a9c13b0862ce5d5bdd07b47a6",
     "os_ver": "5.8",
-    "box_version": "1.1"
+    "box_version": "1.1",
+    "root_password": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_password": "vagrant",
+    "vagrant_fullname": "vagrant"
   },
   "builders": [
     {
@@ -16,14 +20,14 @@
         "dhcp<enter><wait>",
         "none<enter><wait>",
         "done<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
         "yes<enter><wait>",
         "no<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
+        "{{user `vagrant_username`}}<enter><wait>",
+        "{{user `vagrant_fullname`}}<enter><wait>",
+        "{{user `vagrant_password`}}<enter><wait>",
+        "{{user `vagrant_password`}}<enter><wait>",
         "no<enter><wait>",
         "UTC<enter><wait>",
         "wd0<enter><wait>",
@@ -56,7 +60,7 @@
         "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/i386/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
-      "ssh_password": "vagrant",
+      "ssh_password": "{{user `root_password`}}",
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "shutdown -h -p now",
       "guest_additions_mode": "disable",
@@ -93,7 +97,9 @@
         "../provisioners/cleanup.sh"
       ],
       "environment_vars": [
-        "PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/i386/"
+        "PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/i386",
+        "VAGRANT_USER={{user `vagrant_username`}}",
+        "VAGRANT_GROUP={{user `vagrant_username`}}"
       ]
     }
   ],

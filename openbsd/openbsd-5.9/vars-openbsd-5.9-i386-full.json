@@ -1,0 +1,13 @@
+{
+  "vm_name": "OpenBSD-5.9-i386",
+  "cpu": "i386",
+  "virtualbox_guest_os_type": "OpenBSD",
+  "vmware_guest_os_type": "other",
+  "iso_image": "install59.iso",
+  "iso_checksum": "d5579f49e1100c3131c674260959ee024b80ad579ea8fff767500652c9691030",
+  "source": "cd0",
+  "proxy": "",
+  "http_server": "",
+  "path": "5.9/i386",
+  "install_without_signature": "yes<enter><wait>"
+}

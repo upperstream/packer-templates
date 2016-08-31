@@ -1,3 +1,4 @@
+#!/bin/sh -ex
 pkg_add sudo-1.8.15.tgz
-echo 'vagrant ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+echo "$VAGRANT_USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 chmod og-rwx /etc/sudoers
