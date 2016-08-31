@@ -90,11 +90,11 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-minmal.json` - FreeBSD 11.0-RC2 (amd64)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-minimal.json` - FreeBSD 11.0-RC2 (amd64)
 * `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-ansible.json` - FreeBSD 11.0-RC2 + [Ansible] + [Testinfra] (amd64)
 * `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-x11.json` - FreeBSD 11.0-RC2 + [X11] (amd64)
 * `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-xfce.json` - FreeBSD 11.0-RC2 + [Xfce] (amd64)
-* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-minmal.json` - FreeBSD 11.0-RC2 (i386)
+* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-minimal.json` - FreeBSD 11.0-RC2 (i386)
 * `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-ansible.json` - FreeBSD 11.0-RC2 + Ansible + Testinfra (i386)
 * `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-x11.json` - FreeBSD 11.0-RC2 + X11 (i386)
 * `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-xfce.json` - FreeBSD 11.0-RC2 + Xfce (i386)
