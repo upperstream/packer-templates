@@ -14,6 +14,7 @@
 * [freebsd-11](freebsd-11/README.mdown) - templates for FreeBSD 11.0-RC2
 	* FreeBSD 11.0-RC2 (amd64)
 	* FreeBSD 11.0-RC2 + Ansible + Testinfra (amd64)
+	* FreeBSD 11.0-RC2 + Docker + Docker Compose (amd64)
 	* FreeBSD 11.0-RC2 + X11 (amd64)
 	* FreeBSD 11.0-RC2 + Xfce (amd64)
 	* FreeBSD 11.0-RC2 (i386)

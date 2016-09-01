@@ -92,6 +92,7 @@ The following command will build a VM image on your ESXi:
 
 * `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-minimal.json` - FreeBSD 11.0-RC2 (amd64)
 * `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-ansible.json` - FreeBSD 11.0-RC2 + [Ansible] + [Testinfra] (amd64)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-docker.json` - FreeBSD 11.0-RC2 + [Docker] + [Docker Compose] (amd64)
 * `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-x11.json` - FreeBSD 11.0-RC2 + [X11] (amd64)
 * `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-xfce.json` - FreeBSD 11.0-RC2 + [Xfce] (amd64)
 * `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-minimal.json` - FreeBSD 11.0-RC2 (i386)
@@ -100,6 +101,8 @@ The following command will build a VM image on your ESXi:
 * `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-xfce.json` - FreeBSD 11.0-RC2 + Xfce (i386)
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
+[Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
+[Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.1 documentation"
 [X11]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
