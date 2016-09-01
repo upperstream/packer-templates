@@ -1,0 +1,14 @@
+{
+  "vm_name": "OpenBSD-6.0-i386",
+  "cpu": "i386",
+  "virtualbox_guest_os_type": "OpenBSD",
+  "vmware_guest_os_type": "other",
+  "iso_image": "cd60.iso",
+  "iso_checksum": "9fd05ac521951d9cb5097d92f8f825cfaee76c8b530f0547527787b56c1a2ca9",
+  "source": "http",
+  "proxy": "none<enter><wait>",
+  "http_server": "",
+  "path": "pub/OpenBSD/6.0/i386",
+  "install_without_signature": "",
+  "script_postfix": "-mini"
+}

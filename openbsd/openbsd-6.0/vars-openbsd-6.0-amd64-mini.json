@@ -1,0 +1,14 @@
+{
+  "vm_name": "OpenBSD-6.0-amd64",
+  "cpu": "amd64",
+  "virtualbox_guest_os_type": "OpenBSD_64",
+  "vmware_guest_os_type": "other-64",
+  "iso_image": "cd60.iso",
+  "iso_checksum": "fe1006fb002cb14e561cddf910ba57e0f785c47ff6b04818b0767373b3145e6e",
+  "source": "http",
+  "proxy": "none<enter><wait>",
+  "http_server": "<enter><wait>",
+  "path": "pub/OpenBSD/6.0/amd64",
+  "install_without_signature": "",
+  "script_postfix": "-mini"
+}
