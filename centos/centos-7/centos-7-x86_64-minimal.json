@@ -1,7 +1,7 @@
 {
   "variables": {
-    "iso_name": "CentOS-7.0-1406-x86_64-Minimal.iso",
-    "iso_checksum": "e3afe3f1121d69c40cc23f0bafa05e5d",
+    "iso_name": "CentOS-7-x86_64-Minimal-1503-01.iso",
+    "iso_checksum": "d07ab3e615c66a8b2e9a50f4852e6a77",
     "iso_checksum_type": "md5",
     "mem_size": "512",
     "disk_size": "40960",
@@ -9,7 +9,7 @@
     "ssh_pass": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "7.0.1",
+    "box_version": "7.1.0",
     "vm_name": "CentOS-7-x86_64-minimal"
   },
   "builders": [
@@ -22,7 +22,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
-        "http://archive.kernel.org/centos-vault/7.0.1406/isos/x86_64/{{user `iso_name`}}"
+        "http://archive.kernel.org/centos-vault/7.1.1503/isos/x86_64/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -47,10 +47,11 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/base-7.0.sh",
+        "../provisioners/base-7.1.sh",
+        "../provisioners/sudo-7.1.sh",
         "../provisioners/vagrant-parameterised.sh",
-        "../provisioners/kernel_stuff-7.0-x86_64.sh",
-        "../provisioners/epel-7.0-x86_64.sh",
+        "../provisioners/kernel_stuff-7.1-x86_64.sh",
+        "../provisioners/epel-7-x86_64.sh",
         "../provisioners/virtualbox_dependencies-7.0.sh",
         "../provisioners/virtualbox.sh",
         "../provisioners/disk_cleanup.sh"

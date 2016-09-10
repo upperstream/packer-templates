@@ -20,9 +20,9 @@
 	* CentOS 6.8 minimal
 	* CentOS 6.8 minimal + Ansible
 	* CentOS 6.8 minimal + Docker (x86_64 only)
-* [centos-7](centos-7/README.mdown) - templates for CentOS 7.0 (x86_64)
-	* CentOS 7.0 minimal
-	* CentOS 7.0 minimal + Docker, Docker Compose, and Fig
+* [centos-7](centos-7/README.mdown) - templates for CentOS 7.1 1503 (x86_64)
+	* CentOS 7.1 minimal
+	* CentOS 7.1 minimal + Docker and Docker Compose
 
 - - -
 
