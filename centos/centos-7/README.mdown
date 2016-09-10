@@ -1,6 +1,6 @@
 # Packer templates for CentOS 7.0
 
-Template creating Vagrant boxes for CentOS 7.0 minimal installation (x86_64).
+Templates to create Vagrant boxes for CentOS 7.0 (x86_64).
 
 ## Prerequisites
 
@@ -32,13 +32,13 @@ From the terminal, invoke the following command:
 
 	packer build centos-7-x86_64-minimal.json
 
-and you will find a vagrant box file named `CentOS-7.0-x86_64-minimal.box`
+and you will find a vagrant box file named `CentOS-7-x86_64-minimal-v7.0.1.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `CentOS-7.0-x86_64-minimal` to your box list
+Then you can add the box named `CentOS-7-x86_64-minimal-v7.0.1` to your box list
 by the following command:
 
-	vagrant add CentOS-7.0-x86_64-minimal.box --name CentOS-70-x86_64-minimal
+	vagrant add CentOS-7-x86_64-minimal-v7.0.1.box --name CentOS-7-x86_64-minimal-v7.0.1
 
 ## Variants
 
