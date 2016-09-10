@@ -9,7 +9,7 @@ gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 EOF
 
-yum -y install docker-engine-1.9.1
+yum -y install docker-engine-1.12.1-1.el7.centos
 service docker start
 chkconfig docker on
 usermod -a -G docker vagrant

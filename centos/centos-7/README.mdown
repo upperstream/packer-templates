@@ -1,6 +1,6 @@
-# Packer templates for CentOS 7.1 1503
+# Packer templates for CentOS 7.2 1511
 
-Templates to create Vagrant boxes for CentOS 7.1 1503 (x86_64).
+Templates to create Vagrant boxes for CentOS 7.2 1511 (x86_64).
 
 ## Prerequisites
 
@@ -32,20 +32,19 @@ From the terminal, invoke the following command:
 
 	packer build centos-7-x86_64-minimal.json
 
-and you will find a vagrant box file named `CentOS-7-x86_64-minimal-v7.1.0.box`
+and you will find a vagrant box file named `CentOS-7-x86_64-minimal-v7.2.0.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `CentOS-7-x86_64-minimal-v7.1.0` to your box list
+Then you can add the box named `CentOS-7-x86_64-minimal-v7.2.0` to your box list
 by the following command:
 
-	vagrant add CentOS-7-x86_64-minimal-v7.1.0.box --name CentOS-7-x86_64-minimal-v7.1.0
+	vagrant add CentOS-7-x86_64-minimal-v7.2.0.box --name CentOS-7-x86_64-minimal-v7.2.0
 
 ## Variants
 
-* `centos-7-x86_64-minimal.json` - CentOS 7.1 (x86_64) minimal installation
+* `centos-7-x86_64-minimal.json` - CentOS 7.2 (x86_64) minimal installation
 * `centos-7-x86_64-docker.json` - provided with [Docker] and [Docker Compose];
-  in addition to CentOS 7.1 (x86_64) minimal installation.
-  (Fig has been officially replaced by Docker Compose.)
+  in addition to CentOS 7.2 (x86_64) minimal installation.
 
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 [Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
