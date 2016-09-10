@@ -30,7 +30,7 @@ Template creating Vagrant boxes for CentOS 7.0 minimal installation (x86_64).
 
 From the terminal, invoke the following command:
 
-	packer build centos-7.0-x86_64-minimal.json
+	packer build centos-7-x86_64-minimal.json
 
 and you will find a vagrant box file named `CentOS-7.0-x86_64-minimal.box`
 in the same directory after the command has succeeded.
@@ -42,10 +42,10 @@ by the following command:
 
 ## Variants
 
-* `centos-7.0-x86_64-minimal.json` - CentOS 7.0 (x86_64) minimal installation
-* `centos-7.0-x86_64-docker.json` - provided with [Docker], [Docker Compose], and [Fig];
+* `centos-7-x86_64-minimal.json` - CentOS 7.0 (x86_64) minimal installation
+* `centos-7-x86_64-docker.json` - provided with [Docker], [Docker Compose], and [Fig];
   in addition to CentOS 7.0 (x86_64) minimal installation.
-  (Fig has been officially replaced by Docker Compose.) 
+  (Fig has been officially replaced by Docker Compose.)
 
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 [Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
