@@ -1,6 +1,6 @@
 # Packer templates for CentOS 7.0
 
-Template creating Vagrant boxes for CentOS 7.0 minimal installation (x86_64).
+Templates to create Vagrant boxes for CentOS 7.0 (x86_64).
 
 ## Prerequisites
 
@@ -30,27 +30,36 @@ Template creating Vagrant boxes for CentOS 7.0 minimal installation (x86_64).
 
 From the terminal, invoke the following command:
 
-	packer build centos-7.0-x86_64-minimal.json
+	packer build centos-7-x86_64-minimal.json
 
-and you will find a vagrant box file named `CentOS-7.0-x86_64-minimal.box`
+and you will find a vagrant box file named `CentOS-7-x86_64-minimal-v7.0.1.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `CentOS-7.0-x86_64-minimal` to your box list
+Then you can add the box named `CentOS-7-x86_64-minimal-v7.0.1` to your box list
 by the following command:
 
-	vagrant add CentOS-7.0-x86_64-minimal.box --name CentOS-70-x86_64-minimal
+	vagrant add CentOS-7-x86_64-minimal-v7.0.1.box --name CentOS-7-x86_64-minimal-v7.0.1
 
 ## Variants
 
-* `centos-7.0-x86_64-minimal.json` - CentOS 7.0 (x86_64) minimal installation
-* `centos-7.0-x86_64-docker.json` - provided with [Docker], [Docker Compose], and [Fig];
+* `centos-7-x86_64-minimal.json` - CentOS 7.0 (x86_64) minimal installation
+* `centos-7-x86_64-docker.json` - provided with [Docker], [Docker Compose], and [Fig];
   in addition to CentOS 7.0 (x86_64) minimal installation.
-  (Fig has been officially replaced by Docker Compose.) 
+  (Fig has been officially replaced by Docker Compose.)
 
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 [Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
 [Fig]: http://www.fig.sh/ "Fig | Fast, isolated development environments using Docker"
 
+## Build parameters
+
+The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
+
+* `ssh_username` - User name to login via SSH during build time.  Default value is `root`.
+* `ssh_password` - SSH password for `ssh_user` used for build time.  Default value is `vagrant`.
+* `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
+* `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
+
 - - -
 
-Copyright &copy; 2014, 2015 Upper Stream Software.
+Copyright &copy; 2014-2016 Upper Stream Software.
