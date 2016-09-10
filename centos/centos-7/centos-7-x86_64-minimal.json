@@ -60,13 +60,15 @@
         "../provisioners/kernel_stuff-7.0-x86_64.sh",
         "../provisioners/epel-7.0-x86_64.sh",
         "../provisioners/virtualbox_dependencies-7.0.sh",
-        "../provisioners/virtualbox.sh"
+        "../provisioners/virtualbox.sh",
+        "../provisioners/disk_cleanup.sh"
       ]
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
+      "compression_level": 9,
       "output": "./CentOS-7.0-x86_64-minimal.box"
     }
   ]

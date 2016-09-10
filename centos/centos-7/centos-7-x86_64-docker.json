@@ -62,13 +62,15 @@
         "../provisioners/virtualbox_dependencies-7.0.sh",
         "../provisioners/virtualbox.sh",
         "../provisioners/docker-centos7.sh",
-        "../provisioners/fig.sh"
+        "../provisioners/fig.sh",
+        "../provisioners/disk_cleanup.sh"
       ]
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
+      "compression_level": 9,
       "output": "./CentOS-7.0-x86_64-docker.box"
     }
   ]
