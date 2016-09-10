@@ -51,6 +51,15 @@ by the following command:
 [Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
 [Fig]: http://www.fig.sh/ "Fig | Fast, isolated development environments using Docker"
 
+## Build parameters
+
+The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
+
+* `ssh_username` - User name to login via SSH during build time.  Default value is `root`.
+* `ssh_password` - SSH password for `ssh_user` used for build time.  Default value is `vagrant`.
+* `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
+* `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
+
 - - -
 
-Copyright &copy; 2014, 2015 Upper Stream Software.
+Copyright &copy; 2014-2016 Upper Stream Software.

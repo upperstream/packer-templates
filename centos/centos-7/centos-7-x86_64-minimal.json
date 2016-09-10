@@ -4,7 +4,9 @@
     "iso_checksum": "e3afe3f1121d69c40cc23f0bafa05e5d",
     "iso_checksum_type": "md5",
     "ssh_name": "root",
-    "ssh_pass": "vagrant"
+    "ssh_pass": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_password": "vagrant"
   },
   "builders": [
     {
@@ -56,12 +58,17 @@
       "type": "shell",
       "scripts": [
         "../provisioners/base-7.0.sh",
-        "../provisioners/vagrant.sh",
+        "../provisioners/vagrant-parameterised.sh",
         "../provisioners/kernel_stuff-7.0-x86_64.sh",
         "../provisioners/epel-7.0-x86_64.sh",
         "../provisioners/virtualbox_dependencies-7.0.sh",
         "../provisioners/virtualbox.sh",
         "../provisioners/disk_cleanup.sh"
+      ],
+      "environment_vars": [
+        "VAGRANT_USER={{user `vagrant_username`}}",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}",
+        "VAGRANT_GROUP={{user `vagrant_username`}}"
       ]
     }
   ],
