@@ -4,7 +4,7 @@
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/10.1",
     "iso_checksum": "d0d4553080b88653569e1871d57fc819",
     "iso_checksum_type": "md5",
-    "box_ver": "2",
+    "box_ver": "10.1.3",
     "mem_size": "1024",
     "disk_size": "51200"
   },

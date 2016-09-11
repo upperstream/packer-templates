@@ -4,7 +4,7 @@
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/9.3",
     "iso_checksum": "752fa8cd15f0f1e240042c342a161eb4",
     "iso_checksum_type": "md5",
-    "box_ver": "2",
+    "box_ver": "9.3.3",
     "mem_size": "1024",
     "disk_size": "51200"
   },

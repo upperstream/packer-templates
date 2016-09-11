@@ -1,16 +1,16 @@
 # Packer templates for FreeBSD 10.1-RELEASE
 
-Version 2.
+Version 10.1.3.
 
 Templates to create Vagrant boxes for FreeBSD 10.1-RELEASE (amd64 and i386).
 
 ## Prerequisites
 
-* [Packer] v0.6.1
-* [Vagrant] v1.6.5
+* [Packer] v0.8.6+
+* [Vagrant] v1.7.2+
 * [VirtualBox]
-	* Version 4.3.16 for Windows
-	* Version 4.2.8 for Mac OS X (which allows [HAXM] to work in parallel)
+	* Version 4.3.28+ for Windows
+	* Version 4.3.28+ for Mac OS X (You may want to stay with 4.3.28 which allows [HAXM] to work in parallel.)
 
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
@@ -39,13 +39,13 @@ From the terminal, invoke the following command:
 
 	packer build freebsd-10.1-release-amd64.json
 
-and you will find a vagrant box file named `FreeBSD-10.1-RELEASE-amd64.box`
+and you will find a vagrant box file named `FreeBSD-10.1-RELEASE-amd64-v10.1.3.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-10.1-RELEASE-amd64` to your box list
+Then you can add the box named `FreeBSD-10.1-RELEASE-amd64-v10.1.3` to your box list
 by the following command:
 
-	vagrant add FreeBSD-10.1-RELEASE-amd64.box --name FreeBSD-10.1-RELEASE-amd64
+	vagrant add FreeBSD-10.1-RELEASE-amd64-v10.1.3.box --name FreeBSD-10.1-RELEASE-amd64-v10.1.3
 
 ## Default settings
 
@@ -64,8 +64,8 @@ SMB synced folder is not supported for FreeBSD guest.
 
 ### SSH Shell
 
-Because Bash is not the standard shell for FreeBSD, default Shell for SSH connection of this box
-is set to "`/bin/sh`".
+Because Bash is not the standard shell for FreeBSD, default shell for SSH connection of this box
+is set to `/bin/sh`.
 
 ## Variants
 
