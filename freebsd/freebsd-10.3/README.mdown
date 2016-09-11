@@ -66,10 +66,13 @@ is set to `/bin/sh`.
 
 * `packer build -var-file=vars-freebsd-10.3-amd64.json freebsd-10.3-release-minimal.json` - FreeBSD 10.3-RELEASE (amd64)
 * `packer build -var-file=vars-freebsd-10.3-amd64.json freebsd-10.3-release-ansible.json` - FreeBSD 10.3-RELEASE + [Ansible] + [Testinfra] (amd64)
+* `packer build -var-file=vars-freebsd-10.3-amd64.json freebsd-10.3-release-docker.json` - FreeBSD 10.3-RELEASE + [Docker] + [Docker Compose] (amd64)
 * `packer build -var-file=vars-freebsd-10.3-i386.json freebsd-10.3-release-minimal.json` - FreeBSD 10.3-RELEASE (i386)
 * `packer build -var-file=vars-freebsd-10.3-i386.json freebsd-10.3-release-ansible.json` - FreeBSD 10.3-RELEASE + Ansible + Testinfra (i386)
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
+[Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
+[Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.1 documentation"
 
 ## Build parameters
