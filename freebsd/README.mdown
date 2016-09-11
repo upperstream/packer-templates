@@ -10,7 +10,9 @@
 	* FreeBSD 10.1-RELEASE (i386)
 * [freebsd-10.3](freebsd-10.3/README.mdown) - templates for FreeBSD 10.3-RELEASE
 	* FreeBSD 10.3-RELEASE (amd64)
+	* FreeBSD 10.3-RELEASE + Ansible + Testinfra (amd64)
 	* FreeBSD 10.3-RELEASE (i386)
+	* FreeBSD 10.3-RELEASE + Ansible + Testinfra (i386)
 * [freebsd-11](freebsd-11/README.mdown) - templates for FreeBSD 11.0-RC2
 	* FreeBSD 11.0-RC2 (amd64)
 	* FreeBSD 11.0-RC2 + Ansible + Testinfra (amd64)

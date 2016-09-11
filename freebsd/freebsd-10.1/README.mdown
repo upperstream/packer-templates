@@ -2,7 +2,7 @@
 
 Version 2.
 
-Templates creating Vagrant box for FreeBSD 10.1-RELEASE (amd64 and i386).
+Templates to create Vagrant boxes for FreeBSD 10.1-RELEASE (amd64 and i386).
 
 ## Prerequisites
 
@@ -20,7 +20,6 @@ Templates creating Vagrant box for FreeBSD 10.1-RELEASE (amd64 and i386).
 
 ## Provisioned software tools
 
-* VirtualBox Guest Additions
 * curl
 * sshd
 * sudo
@@ -28,7 +27,11 @@ Templates creating Vagrant box for FreeBSD 10.1-RELEASE (amd64 and i386).
 * smbclient
 * `vagrant` user and its insecure public key
 * NFS client enabled
+* ntpd enabled
 * ... and their dependencies
+
+VirtualBox Guest Additions package is no longer installed on this box since version 2.
+Instead, ntpd is enabled by default.
 
 ## How to create a box
 
@@ -69,6 +72,13 @@ is set to "`/bin/sh`".
 * `freebsd-10.1-release-amd64.json` - FreeBSD 10.1-RELEASE (amd64)
 * `freebsd-10.1-release-i386.json` - FreeBSD 10.1-RELEASE (i386)
 
+## Build parameters
+
+The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
+
+* `mem_size` - RAM size of the created VM.  Default value is `512` which means 1GB.
+* `disk_size` - Disk size of the created VM.  Default value is `40960` which means 50GB.
+
 - - -
 
-Copyright &copy; 2015 Upper Stream Software.
+Copyright &copy; 2016 Upper Stream Software.

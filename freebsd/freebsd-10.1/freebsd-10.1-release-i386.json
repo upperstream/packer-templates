@@ -1,8 +1,12 @@
 {
   "variables": {
-    "path_to_iso": "ISO-IMAGES/10.1/FreeBSD-10.1-RELEASE-i386-disc1.iso",
+    "iso_image": "FreeBSD-10.1-RELEASE-i386-disc1.iso",
+    "path_to_iso": "FreeBSD/releases/ISO-IMAGES/10.1",
     "iso_checksum": "75c7c7ed926e4c01e015a6ea917532ed",
-    "box_ver": "2"
+    "iso_checksum_type": "md5",
+    "box_ver": "2",
+    "mem_size": "1024",
+    "disk_size": "51200"
   },
   "builders": [
     {
@@ -15,49 +19,34 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "DISTRIBUTIONS='base.txz kernel.txz ports.txz src.txz' BSDINSTALL_DISTSITE=ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/i386/10.1-RELEASE ABI=freebsd:10:x86:32 bsdinstall script /tmp/install.sh<enter>",
+        "DISTRIBUTIONS='base.txz kernel.txz' BSDINSTALL_DISTSITE=ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/i386/10.1-RELEASE ABI=freebsd:10:x86:32 bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10>",
         "shutdown -r now<enter>"
       ],
       "boot_wait": "10s",
-      "disk_size": 10240,
+      "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "FreeBSD",
       "http_directory": ".",
       "iso_checksum": "{{user `iso_checksum` }}",
-      "iso_checksum_type": "md5",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
-        "http://ftp10.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
-        "http://ftp.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
-        "http://ftp4.us.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
-        "http://ftp13.us.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
-        "http://ftp6.tw.freebsd.org/pub/FreeBSD/releases/{{user `path_to_iso`}}",
-        "http://ftp11.tw.freebsd.org/FreeBSD/releases/{{user `path_to_iso`}}"
+        "./iso/{{user `iso_image`}}",
+        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_key_path": "../key/vagrant_private_key",
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
       "guest_additions_mode": "disable",
       "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "1024"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "2"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--rtcuseutc",
-          "on"
-        ]
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ]
     }
   ],
@@ -66,7 +55,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant-10.sh",
-        "../provisioners/virtualbox_ose_additions.sh",
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
@@ -80,6 +69,7 @@
     {
       "output": "./FreeBSD-10.1-RELEASE-i386-v{{user `box_ver`}}.box",
       "type": "vagrant",
+      "compression_level": 9,
       "override": {
         "virtualbox": {
           "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-10"

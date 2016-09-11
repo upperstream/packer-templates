@@ -17,11 +17,18 @@ EOF
 mkdir -p /usr/local/etc/pkg/repos/
 cat > /usr/local/etc/pkg/repos/FreeBSD.conf << EOF
 FreeBSD: {
+    url: pkg+http://pkg.freebsd.org/${ABI}/latest,
+    enabled: true
+}
+EOF
+cat /usr/local/etc/pkg/repos/FreeBSD.conf
+env ASSUME_ALWAYS_YES="YES" pkg bootstrap
+cat > /usr/local/etc/pkg/repos/FreeBSD.conf << EOF
+FreeBSD: {
     url: pkg+http://pkg.freebsd.org/${ABI}/release_3,
     enabled: true
 }
 EOF
-env ASSUME_ALWAYS_YES="YES" pkg bootstrap -y
 pkg update
 pkg install -y sudo-1.8.10.p2
 pkg install -y curl-7.36.0
