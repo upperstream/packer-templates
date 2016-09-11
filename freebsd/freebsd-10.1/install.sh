@@ -11,7 +11,7 @@ dumpdev="AUTO"
 rpcbind_enable="YES"
 nfs_client_enable="YES"
 mountd_flags="-r"
-#ntpd_enable="YES"
+ntpd_enable="YES"
 EOF
 
 mkdir -p /usr/local/etc/pkg/repos/

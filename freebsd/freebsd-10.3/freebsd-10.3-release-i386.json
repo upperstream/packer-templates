@@ -18,7 +18,7 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "DISTRIBUTIONS='base.txz kernel.txz ports.txz src.txz' ",
+        "DISTRIBUTIONS='base.txz kernel.txz' ",
         "BSDINSTALL_DISTSITE=ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/i386/10.3-RELEASE ",
         "ABI=FreeBSD:10:i386 bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10>",

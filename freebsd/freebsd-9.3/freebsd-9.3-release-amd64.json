@@ -17,7 +17,7 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "DISTRIBUTIONS='base.txz kernel.txz lib32.txz ports.txz src.txz' BSDINSTALL_DISTSITE=ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/9.3-RELEASE ABI=FreeBSD:9:amd64 bsdinstall script /tmp/install.sh<enter>",
+        "DISTRIBUTIONS='base.txz kernel.txz lib32.txz' BSDINSTALL_DISTSITE=ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/9.3-RELEASE ABI=FreeBSD:9:amd64 bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10>",
         "shutdown -r now<enter>"
       ],
