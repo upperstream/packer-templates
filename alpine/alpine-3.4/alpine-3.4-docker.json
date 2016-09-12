@@ -9,7 +9,8 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "1.1"
+    "box_version": "4.2.0",
+    "vm_name": ""
   },
   "builders": [
     {
@@ -187,7 +188,7 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": ["vmware-iso"],
+      "only": ["vmware-iso", "esxi-iso"],
       "scripts": [
         "../provisioners/vmware.sh"
       ]
@@ -196,7 +197,19 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant.sh",
-        "../provisioners/docker.sh",
+        "../provisioners/docker.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "scripts": [
+        "../provisioners/disk_cleanup.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "scripts": [
         "../provisioners/cleanup.sh"
       ]
     }
