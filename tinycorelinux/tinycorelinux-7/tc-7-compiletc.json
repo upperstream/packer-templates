@@ -11,8 +11,8 @@
     "cpu": "",
     "os_ver": "",
     "guest_os_type": "",
-    "variant": "ansible",
-    "box_version": "1"
+    "variant": "compiletc",
+    "box_version": "7.1.1"
   },
   "builders": [
     {
@@ -53,17 +53,8 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/ansible_dependencies.sh",
-        "../provisioners/python-pip.sh",
-        "../provisioners/ansible.sh"
-      ]
-    },
-    {
-      "type": "shell",
-      "start_retry_timeout": "5m",
-      "scripts": [
+        "../provisioners/compiletc.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ]
     }

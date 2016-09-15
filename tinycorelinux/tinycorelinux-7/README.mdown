@@ -27,15 +27,15 @@ Templates creating Vagrant box for Tiny Core Linux v7.1. (x86_64 and x86)
 
 From the terminal, invoke the following command:
 
-	packer build -var-file=vars-corepure64-7.1.json tc-7.1-minimal.json
+	packer build -var-file=vars-corepure64-7.json tc-7-minimal.json
 
-and you will find a vagrant box file named `CorePure64-7.1.box`
+and you will find a vagrant box file named `CorePure64-v7.1.1.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `CorePure64-7.1-minimal-v1.box` to your box list
+Then you can add the box named `CorePure64-7-minimal-v7.1.1.box` to your box list
 by the following command:
 
-	vagrant add CorePure64-7.1-minimal-v1.box --name CorePure64-7.1-minimal-v1
+	vagrant add CorePure64-7-minimal-v7.1.1.box --name CorePure64-7-minimal-v7.1.1
 
 ## Default settings
 
@@ -58,17 +58,17 @@ Since `tc` is the default user of Tiny Core Linux, this box is configured that `
 ## Variants
 
 * x86_64
-    * `packer build -var-file=vars-corepure64-7.1.json tc-7.1-minimal.json` - CorePure 64 v7.1 (x86_64)
-    * `packer build -var-file=vars-corepure64-7.1.json tc-7.1-compiletc.json` - CorePure 64 v7.1 (x86_64) with build tools
-    * `packer build -var-file=vars-corepure64-7.1.json tc-7.1-ansible.json` - CorePure 64 v7.1 (x86_64) with [Ansible] and [Testinfra]
-    * `packer build -var-file=vars-tinycorepure64-7.1.json tc-7.1-x11.json` - TinyCorePure 64 v7.1 (x86_64)
-    * `packer build -var-file=vars-tinycorepure64-7.1.json tc-7.1-compiletc+x11.json` - TinyCorePure 64 v7.1 (x86_64) with build tools
+    * `packer build -var-file=vars-corepure64-7.json tc-7-minimal.json` - CorePure 64 v7.1 (x86_64)
+    * `packer build -var-file=vars-corepure64-7.json tc-7-compiletc.json` - CorePure 64 v7.1 (x86_64) with build tools
+    * `packer build -var-file=vars-corepure64-7.json tc-7-ansible.json` - CorePure 64 v7.1 (x86_64) with [Ansible] and [Testinfra]
+    * `packer build -var-file=vars-tinycorepure64-7.json tc-7-x11.json` - TinyCorePure 64 v7.1 (x86_64)
+    * `packer build -var-file=vars-tinycorepure64-7.json tc-7-compiletc+x11.json` - TinyCorePure 64 v7.1 (x86_64) with build tools
 * x64
-    * `packer build -var-file=vars-core-7.1.json tc-7.1.json-minimal.json` - Core v7.1 (x86)
-    * `packer build -var-file=vars-core-7.1.json tc-7.1.json-compiletc.json` - Core v7.1 (x86) with build tools
-    * `packer build -var-file=vars-core-7.1.json tc-7.1.json-ansible.json` - Core v7.1 (x86) with Ansible and Testinfra
-    * `packer build -var-file=vars-tinycore-7.1.json tc-7.1.json-x11.json` - TinyCore v7.1 (x86)
-    * `packer build -var-file=vars-tinycore-7.1.json tc-7.1.json-compiletc+x11.json` - TinyCore v7.1 (x86) with build tools
+    * `packer build -var-file=vars-core-7.json tc-7.json-minimal.json` - Core v7.1 (x86)
+    * `packer build -var-file=vars-core-7.json tc-7.json-compiletc.json` - Core v7.1 (x86) with build tools
+    * `packer build -var-file=vars-core-7.json tc-7.json-ansible.json` - Core v7.1 (x86) with Ansible and Testinfra
+    * `packer build -var-file=vars-tinycore-7.json tc-7.json-x11.json` - TinyCore v7.1 (x86)
+    * `packer build -var-file=vars-tinycore-7.json tc-7.json-compiletc+x11.json` - TinyCore v7.1 (x86) with build tools
 
 Executing `build_all.sh` (or `build_all.bat`) generates all boxes above.
 

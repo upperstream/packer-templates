@@ -11,8 +11,8 @@
     "cpu": "",
     "os_ver": "",
     "guest_os_type": "",
-    "variant": "x11",
-    "box_version": "1"
+    "variant": "compiletc+x11",
+    "box_version": "7.1.1"
   },
   "builders": [
     {
@@ -53,6 +53,7 @@
     {
       "type": "shell",
       "scripts": [
+        "../provisioners/compiletc.sh",
         "../provisioners/x11.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/cleanup.sh"
