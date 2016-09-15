@@ -12,7 +12,7 @@
     "os_ver": "",
     "guest_os_type": "",
     "variant": "minimal",
-    "box_version": "7.1.1"
+    "box_version": "7.2.0"
   },
   "builders": [
     {
@@ -23,7 +23,7 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
-        "{{user `iso_name`}}",
+        "./iso/{{user `iso_name`}}",
         "http://tinycorelinux.net/7.x/{{user `cpu`}}/release/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
