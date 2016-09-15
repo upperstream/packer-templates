@@ -60,19 +60,20 @@ Since `tc` is the default user of Tiny Core Linux, this box is configured that `
 * x86_64
     * `packer build -var-file=vars-corepure64-7.json tc-7-minimal.json` - CorePure 64 v7.2 (x86_64)
     * `packer build -var-file=vars-corepure64-7.json tc-7-compiletc.json` - CorePure 64 v7.2 (x86_64) with build tools
-    * `packer build -var-file=vars-corepure64-7.json tc-7-ansible.json` - CorePure 64 v7.2 (x86_64) with [Ansible]
+    * `packer build -var-file=vars-corepure64-7.json tc-7-ansible.json` - CorePure 64 v7.2 (x86_64) with [Ansible] and [Testinfra]
     * `packer build -var-file=vars-tinycorepure64-7.json tc-7-x11.json` - TinyCorePure 64 v7.2 (x86_64)
     * `packer build -var-file=vars-tinycorepure64-7.json tc-7-compiletc+x11.json` - TinyCorePure 64 v7.2 (x86_64) with build tools
 * x64
     * `packer build -var-file=vars-core-7.json tc-7.json-minimal.json` - Core v7.2 (x86)
     * `packer build -var-file=vars-core-7.json tc-7.json-compiletc.json` - Core v7.2 (x86) with build tools
-    * `packer build -var-file=vars-core-7.json tc-7.json-ansible.json` - Core v7.2 (x86) with Ansible
+    * `packer build -var-file=vars-core-7.json tc-7.json-ansible.json` - Core v7.2 (x86) with Ansible and Testinfra
     * `packer build -var-file=vars-tinycore-7.json tc-7.json-x11.json` - TinyCore v7.2 (x86)
     * `packer build -var-file=vars-tinycore-7.json tc-7.json-compiletc+x11.json` - TinyCore v7.2 (x86) with build tools
 
 Executing `build_all.sh` (or `build_all.bat`) generates all boxes above.
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
+[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
 
 ## Build parameters
 

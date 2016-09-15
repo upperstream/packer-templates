@@ -55,7 +55,7 @@
       "scripts": [
         "../provisioners/ansible_dependencies.sh",
         "../provisioners/python-pip.sh",
-        "../provisioners/ansible.sh"
+        "../provisioners/ansible-testinfra.sh"
       ]
     },
     {
