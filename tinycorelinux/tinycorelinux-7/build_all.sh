@@ -1,11 +1,11 @@
 #!/bin/sh -x
 for f in vars-core*.json; do
-  for g in tc-7.0-ansible.json tc-7.0-compiletc.json tc-7.0-minimal.json; do
+  for g in tc-7-ansible.json tc-7-compiletc.json tc-7-minimal.json; do
     packer build -var-file=$f $g
   done
 done
 for f in vars-tinycore*.json; do
-  for g in tc-7.0-*x11.json; do
+  for g in tc-7-*x11.json; do
     packer build -var-file=$f $g
   done
 done
