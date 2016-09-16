@@ -1,5 +1,5 @@
-#!/bin/sh -e -x
-pkg install -y xfce-4.12_1 slim-1.3.6_12 slim-themes-1.0.1_1 arandr-0.1.7.1_2
+#!/bin/sh -ex
+pkg install -y xfce-4.12_1 slim-1.3.6_12 slim-themes-1.0.1 arandr-0.1.7.1_2
 echo 'slim_enable="YES"' >> /etc/rc.conf
 
 cat >> /usr/local/etc/polkit-1/rules.d/10-restart.rules << EOF
