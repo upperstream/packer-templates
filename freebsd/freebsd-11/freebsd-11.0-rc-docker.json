@@ -196,7 +196,7 @@
       "only": ["virtualbox-iso"],
       "scripts": [
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/docker.sh",
+        "../provisioners/docker-11.0.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
@@ -216,7 +216,7 @@
       "scripts": [
         "../provisioners/vmware-guest.sh",
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/docker.sh",
+        "../provisioners/docker-11.0.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
@@ -236,7 +236,7 @@
       "scripts": [
         "../provisioners/vmware-guest.sh",
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/docker.sh",
+        "../provisioners/docker-11.0.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
