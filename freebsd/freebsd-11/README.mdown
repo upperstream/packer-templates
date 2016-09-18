@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 11.0-RC2
+# Packer templates for FreeBSD 11.0-RC3
 
-Templates to create Vagrant box for FreeBSD 11.0-RC2 (amd64 and i386).
+Templates to create Vagrant box for FreeBSD 11.0-RC3 (amd64 and i386).
 
 ## Prerequisites
 
@@ -30,7 +30,6 @@ Templates to create Vagrant box for FreeBSD 11.0-RC2 (amd64 and i386).
 * `vagrant` user and its insecure public key
 * NFS client enabled
 * ntpd enabled
-* ... and their dependencies
 
 ## How to create a box
 
@@ -43,13 +42,13 @@ or:
 	packer build -only=vmware-iso -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-minimal.json
 
 for VMware provider.
-You will find a vagrant box file named `FreeBSD-11.0-RC-amd64-minimal-v2.0-virtualbox.box` or
-`FreeBSD-11.0-RC-amd64-v2.0-vmware.box` in the same directory after the command has succeeded.
+You will find a vagrant box file named `FreeBSD-11.0-RC-amd64-minimal-v3.0-virtualbox.box` or
+`FreeBSD-11.0-RC-amd64-v3.0-vmware.box` in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.0-RC-amd64-minimal-v2.0-virtualbox` to your box list
+Then you can add the box named `FreeBSD-11.0-RC-amd64-minimal-v3.0-virtualbox` to your box list
 by the following command (for example of VirtualBox provider):
 
-	vagrant add FreeBSD-11.0-RC-amd64-minimal-v2.0-virtualbox.box --name FreeBSD-11.0-RC-amd64-minimal-v2.0-virtualbox
+	vagrant add FreeBSD-11.0-RC-amd64-minimal-v3.0-virtualbox.box --name FreeBSD-11.0-RC-amd64-minimal-v3.0-virtualbox
 
 ## Default settings
 
@@ -90,17 +89,26 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-minmal.json` - FreeBSD 11.0-RC2 (amd64)
-* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-ansible.json` - FreeBSD 11.0-RC2 + [Ansible] + [Testinfra] (amd64)
-* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-x11.json` - FreeBSD 11.0-RC2 + [X11] (amd64)
-* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-xfce.json` - FreeBSD 11.0-RC2 + [Xfce] (amd64)
-* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-minmal.json` - FreeBSD 11.0-RC2 (i386)
-* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-ansible.json` - FreeBSD 11.0-RC2 + Ansible + Testinfra (i386)
-* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-x11.json` - FreeBSD 11.0-RC2 + X11 (i386)
-* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-xfce.json` - FreeBSD 11.0-RC2 + Xfce (i386)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-minimal.json` - FreeBSD 11.0-RC3 (amd64)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-ansible.json` - FreeBSD 11.0-RC3 + [Ansible] + [Testinfra] (amd64)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-docker.json` - FreeBSD 11.0-RC3 + [Docker] + [Docker Compose] (amd64)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-x11.json` - FreeBSD 11.0-RC3 + [X11] (amd64)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-dwm.json` - FreeBSD 11.0-RC3 + X11 + [dwm] + [dmenu] + [st] + [SLiM] (amd64)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-xfce.json` - FreeBSD 11.0-RC3 + [Xfce] (amd64)
+* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-minimal.json` - FreeBSD 11.0-RC3 (i386)
+* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-ansible.json` - FreeBSD 11.0-RC3 + Ansible + Testinfra (i386)
+* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-x11.json` - FreeBSD 11.0-RC3 + X11 (i386)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11-rc-dwm.json` - FreeBSD 11.0-RC3 + X11 + dwm + dmenu + st + SLiM (i386)
+* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11-rc-xfce.json` - FreeBSD 11.0-RC3 + Xfce (i386)
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
-[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.1 documentation"
+[dmenu]: http://tools.suckless.org/dmenu/ "dmenu | suckless.org tools"
+[Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
+[Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
+[dwm]: http://dwm.suckless.org/ "suckless.org dwm - dynamic window manager"
+[SLiM]: https://sourceforge.net/projects/slim.berlios/ "SLiM download | SourceForge.net"
+[st]: http://st.suckless.org/ "suckless.org st - simple terminal"
+[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
 [X11]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 

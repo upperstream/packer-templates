@@ -1,5 +1,5 @@
 #!/bin/sh -x
-pkg install -y open-vm-tools-1280544_14,1
+pkg install -y open-vm-tools-1280544_12,1
 
 cat >> /etc/rc.conf << EOF
 hald_enable="YES"

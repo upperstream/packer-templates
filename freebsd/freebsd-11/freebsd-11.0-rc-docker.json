@@ -18,7 +18,7 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "ansible"
+    "variant": "docker"
   },
   "builders": [
     {
@@ -31,7 +31,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `virtualbox_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `virtualbox_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -79,7 +80,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -135,7 +137,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -193,13 +196,12 @@
       "only": ["virtualbox-iso"],
       "scripts": [
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/ansible+testinfra.sh",
-        "../provisioners/disk_cleanup.sh",
+        "../provisioners/docker-11.0.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
         "virtualbox-iso": {
-          "execute_command": "env {{.Vars}} sudo -E -H sh '{{.Path}}'"
+          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
         }
       },
       "environment_vars": [
@@ -214,13 +216,12 @@
       "scripts": [
         "../provisioners/vmware-guest.sh",
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/ansible+testinfra.sh",
-        "../provisioners/disk_cleanup.sh",
+        "../provisioners/docker-11.0.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
         "vmware-iso": {
-          "execute_command": "env {{.Vars}} sudo -E -H sh '{{.Path}}'"
+          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
         }
       },
       "environment_vars": [
@@ -235,12 +236,12 @@
       "scripts": [
         "../provisioners/vmware-guest.sh",
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/ansible+testinfra.sh",
+        "../provisioners/docker-11.0.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
         "esxi-iso": {
-          "execute_command": "env {{.Vars}} sudo -E -H sh '{{.Path}}'"
+          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
         }
       },
       "environment_vars": [
