@@ -1,9 +1,10 @@
-(echo vagrant; echo vagrant) | adduser -s /bin/ash vagrant
-mkdir -pm 700 /home/vagrant/.ssh
-wget -O - 'https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub' >> /home/vagrant/.ssh/authorized_keys
-chown -R vagrant:vagrant /home/vagrant     
-chmod -R og-rwx /home/vagrant/.ssh
-echo 'vagrant ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/vagrant
+#!/bin/sh -ex
+(echo $VAGRANT_PASSWORD; echo $VAGRANT_PASSWORD) | adduser -s /bin/ash $VAGRANT_USERNAME
+mkdir -pm 700 /home/$VAGRANT_USERNAME/.ssh
+wget -O - 'https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub' >> /home/$VAGRANT_USERNAME/.ssh/authorized_keys
+chown -R $VAGRANT_USERNAME:$VAGRANT_USERNAME /home/$VAGRANT_USERNAME     
+chmod -R og-rwx /home/$VAGRANT_USERNAME/.ssh
+echo "$VAGRANT_USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/$VAGRANT_USERNAME
 cat > /usr/sbin/shutdown << 'EOF'
 #!/bin/sh
 while getopts "h" opt; do

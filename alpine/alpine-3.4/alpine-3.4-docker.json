@@ -5,6 +5,9 @@
     "mem_size": "512",
     "ssh_username": "root",
     "ssh_password": "vagrant",
+    "root_password": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_password": "vagrant",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -51,11 +54,11 @@
         "/etc/init.d/networking --quiet start<enter><wait10><wait10>",
         "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
         "setup-alpine -f /tmp/answers.txt<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "y<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
+        "y<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
@@ -108,11 +111,11 @@
         "/etc/init.d/networking --quiet start<enter><wait10><wait10>",
         "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
         "setup-alpine -f /tmp/answers.txt<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "y<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
+        "y<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
@@ -172,11 +175,11 @@
         "/etc/init.d/networking --quiet start<enter><wait10><wait10>",
         "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
         "setup-alpine -f /tmp/answers.txt<enter><wait>",
-        "vagrant<enter><wait>",
-        "vagrant<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "y<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
+        "y<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
@@ -198,6 +201,22 @@
       "scripts": [
         "../provisioners/vagrant.sh",
         "../provisioners/docker.sh"
+      ],
+      "override": {
+        "virtualbox-iso": {
+          "execute_command": "{{.Vars}} sudo -E sh '{{.Path}}'"
+        },
+        "vmware-iso": {
+          "execute_command": "{{.Vars}} sudo -E sh '{{.Path}}'"
+        },
+        "esxi-iso": {
+          "execute_command": "{{.Vars}} sudo -E sh '{{.Path}}'"
+        }
+      },
+      "environment_vars": [
+        "ROOT_PASSWORD={{user `root_password`}}",
+        "VAGRANT_USERNAME={{user `vagrant_username`}}",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}"
       ]
     },
     {
