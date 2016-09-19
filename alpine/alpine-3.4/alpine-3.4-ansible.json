@@ -200,7 +200,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant.sh",
-        "../provisioners/ansible.sh"
+        "../provisioners/ansible+testinfra.sh"
       ],
       "override": {
         "virtualbox-iso": {
@@ -216,7 +216,9 @@
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
-        "VAGRANT_PASSWORD={{user `vagrant_password`}}"
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}",
+        "ANSIBLE_VERSION=2.1.1.0",
+        "TESTINFRA_VERSION=1.4.2"
       ]
     },
     {

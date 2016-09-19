@@ -90,7 +90,7 @@ The following command will build a VM image on your ESXi:
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
-[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.1.3.dev24 documentation"
+[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
 
 ## Build parameters
 
