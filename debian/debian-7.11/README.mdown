@@ -70,9 +70,12 @@ The following command will build a VM image on your ESXi (Created VM will be unr
 
 * `debian-7.11-amd64-minimal.json` - Debian 7.11 minimal installation
 * `debian-7.11-amd64-ansible.json` - provided with [Ansible] + [Testinfra] in addition to Debian 7.11 minimal installation.
+* `debian-7.11-amd64-docker.json` - provided with [Docker] + [Docker Compose] in addition to Debian 7.11 minimal installation.
 * `debian-7.11-amd64-xfce.json` - provided with [Xfce] and [xrdp] in addition to Debian 7.11 minimal installation.
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
+[Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
+[Docker Compose]: https://docs.docker.com/compose/ "Docker Compose"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
