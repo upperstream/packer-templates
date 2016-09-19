@@ -14,6 +14,7 @@
 	* Debian 7.10 + Xfce
 * [debian-7.11](debian-7.11/README.mdown) - templates for Debian 7.11
 	* Debian 7.11 minimal
+	* Debian 7.11 + Ansible + Testinfra
 	* Debian 7.11 + Xfce
 * [debian-8.0](debian-8.0/README.mdown) - templates for Debian 8.0
 	* Debian 8.0 minimal
