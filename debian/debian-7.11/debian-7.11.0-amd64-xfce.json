@@ -1,0 +1,180 @@
+{
+  "variables": {
+    "vm_name": "Debian-7.11-amd64-xfce",
+    "mem_size": "1024",
+    "disk_size": "51200",
+    "iso_name": "mini.iso",
+    "iso_path": "debian/dists/Debian7.11/main/installer-amd64/20130613+deb7u3+b2/images/netboot",
+    "iso_checksum": "a4b8363bdcbe04d3e82b9531a095af96",
+    "iso_checksum_type": "md5",
+    "ssh_name": "root",
+    "ssh_pass": "vagrant",
+    "box_version": "1",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "Debian_64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "http://ftp.jp.debian.org/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://cdimage.debian.org/{{user `iso_path`}}/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{user `vm_name`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "12" ]
+      ],
+      "http_directory": "../http",
+      "boot_command": [
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "keymap=us <wait>",
+        "tasks=standard <wait>",
+        "<enter> <wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "0",
+      "guest_os_type": "debian7-64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "http://ftp.jp.debian.org/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://cdimage.debian.org/{{user `iso_path`}}/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
+      "output_directory": "{{user `vm_name`}}",
+      "vm_name": "{{user `vm_name`}}",
+      "vmx_data": {
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "2",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "12582912"
+      },
+      "http_directory": "../http",
+      "boot_command": [
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "keymap=us <wait>",
+        "tasks=standard <wait>",
+        "<enter> <wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "name": "esxi-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "thin",
+      "guest_os_type": "debian7-64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "http://ftp.jp.debian.org/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://cdimage.debian.org/{{user `iso_path`}}/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "output_directory": "{{user `vm_name`}}",
+      "vm_name": "{{user `vm_name`}}",
+      "vmx_data": {
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "2",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "bridged",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "12582912"
+      },
+      "http_directory": "../http",
+      "boot_command": [
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "keymap=us <wait>",
+        "tasks=standard <wait>",
+        "<enter> <wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "only": ["vmware-iso", "esxi-iso"],
+      "scripts": [
+        "../provisioners/vmtools.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/base.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/xfce4.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "scripts": [
+        "../provisioners/disk_cleanup.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/cleanup.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box"
+    }
+  ]
+}
