@@ -9,6 +9,9 @@
     "iso_checksum_type": "md5",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
+    "root_password": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_password": "vagrant",
     "box_version": "1",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
@@ -45,6 +48,12 @@
       "http_directory": "../http",
       "boot_command": [
         "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "passwd/root-password={{user `root_password`}} <wait>",
+        "passwd/root-password-again={{user `root_password`}} <wait>",
+        "passwd/user-fullname={{user `vagrant_username`}} <wait>",
+        "passwd/username={{user `vagrant_username`}} <wait>",
+        "passwd/user-password={{user `vagrant_password`}} <wait>",
+        "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
         "<enter> <wait>"
@@ -85,6 +94,12 @@
       "http_directory": "../http",
       "boot_command": [
         "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "passwd/root-password={{user `root_password`}} <wait>",
+        "passwd/root-password-again={{user `root_password`}} <wait>",
+        "passwd/user-fullname={{user `vagrant_username`}} <wait>",
+        "passwd/username={{user `vagrant_username`}} <wait>",
+        "passwd/user-password={{user `vagrant_password`}} <wait>",
+        "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
         "<enter> <wait>"
@@ -131,6 +146,12 @@
       "http_directory": "../http",
       "boot_command": [
         "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "passwd/root-password={{user `root_password`}} <wait>",
+        "passwd/root-password-again={{user `root_password`}} <wait>",
+        "passwd/user-fullname={{user `vagrant_username`}} <wait>",
+        "passwd/username={{user `vagrant_username`}} <wait>",
+        "passwd/user-password={{user `vagrant_password`}} <wait>",
+        "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
         "<enter> <wait>"
@@ -153,6 +174,7 @@
         "../provisioners/ansible+testinfra.sh"
       ],
       "environment_vars": [
+        "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "ANSIBLE_VERSION=2.1.1.0",
         "TESTINFRA_VERSION=1.4.2"
       ]

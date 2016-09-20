@@ -1,11 +1,16 @@
 {
   "variables": {
+    "vm_name": "Debian-7.8-amd64-minimal",
     "os_ver": "7.8.0",
-    "iso_path": "Linux/debian/debian-cdimage/archive/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso",
+    "iso_name": "debian-7.8.0-amd64-netinst.iso",
+    "iso_path": "Linux/debian/debian-cdimage/archive/7.8.0/amd64/iso-cd",
     "iso_checksum": "a91fba5001cf0fbccb44a7ae38c63b6e",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
-    "box_ver": "2"
+    "root_password": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_password": "vagrant",
+    "box_version": "3"
   },
   "builders": [
     {
@@ -16,7 +21,8 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "md5",
       "iso_urls": [
-        "http://ftp.riken.jp/{{user `iso_path`}}"
+        "./iso/{{user `iso_name`}}",
+        "http://ftp.riken.jp/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -34,6 +40,12 @@
       "http_directory": "../http",
       "boot_command": [
         "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "passwd/root-password={{user `root_password`}} <wait>",
+        "passwd/root-password-again={{user `root_password`}} <wait>",
+        "passwd/user-fullname={{user `vagrant_username`}} <wait>",
+        "passwd/username={{user `vagrant_username`}} <wait>",
+        "passwd/user-password={{user `vagrant_password`}} <wait>",
+        "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
         "<enter> <wait>"
@@ -48,16 +60,15 @@
         "../provisioners/vagrant.sh",
         "../provisioners/cleanup.sh"
       ],
-      "override": {
-        "virtualbox-iso": {
-        }
-      }
+      "environment_vars": [
+        "VAGRANT_USERNAME={{user `vagrant_username`}}"
+      ]
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./debian-{{user `os_ver`}}-amd64-minimal-v{{user `box_ver`}}.box"
+      "output": "./{{user `vm_name`}}-v{{user `box_version`}}.box"
     }
   ]
 }

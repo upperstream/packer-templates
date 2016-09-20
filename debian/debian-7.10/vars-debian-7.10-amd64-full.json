@@ -1,0 +1,6 @@
+{
+  "iso_name": "debian-7.10.0-amd64-CD-1.iso",
+  "iso_path": "cdimage/archive/7.10.0/amd64/iso-cd",
+  "iso_checksum": "dd6a96c123f6025ff67c773b65bcdfb5",
+  "iso_checksum_type": "md5"
+}
