@@ -1,0 +1,6 @@
+{
+  "iso_name": "debian-7.11.0-amd64-netinst.iso",
+  "iso_path": "cdimage/archive/7.11.0/amd64/iso-cd",
+  "iso_checksum": "096c1c18b44c269808bd815d58c53c8f",
+  "iso_checksum_type": "md5"
+}

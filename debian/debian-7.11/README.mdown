@@ -43,13 +43,13 @@ or:
 	packer build -only=vmware-iso debian-7.11.0-amd64-minimal.json
 
 for [VMware] provider.
-You will find a vagrant box file named `Debian-7.11-amd64-minimal-v7.11.0-virtualbox.box`
-or `Debian-7.11-amd64-minimal-v7.11.0-vmware.box` in the same directory after the command has succeeded.
+You will find a vagrant box file named `Debian-7.11-amd64-minimal-v1-virtualbox.box`
+or `Debian-7.11-amd64-minimal-v1-vmware.box` in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-7.11-amd64-minimal-v7.11.0-virtualbox` to your box list
+Then you can add the box named `Debian-7.11-amd64-minimal-v1-virtualbox` to your box list
 by the following command:
 
-	vagrant add Debian-7.11-amd64-minimal-v7.11.0-virtualbox.box --name Debian-7.11-amd64-minimal-v7.11.0-minimal
+	vagrant add Debian-7.11-amd64-minimal-v1-virtualbox.box --name Debian-7.11-amd64-minimal-v1-minimal
 
 ## Building a VM image on ESXi
 
@@ -79,6 +79,17 @@ The following command will build a VM image on your ESXi (Created VM will be unr
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
+
+## Installer CD images
+
+Optional var files are provided to instruct to use alternative installer CD images, i.e.,
+`vars-debian-7.11-amd64-full.json` instructs to use `debian-7.11.0-amd64-CD-1.iso` while
+`vars-debian-7.11-amd64-netinst.json` does `debian-7.11.0-amd64-netinst.iso` respectively.
+Without using these var files, `debian-7.11.0-amd64-*.json` templates use `mini.iso`.
+
+Depending on situation you can specify either of var files on the command line:
+
+    packer build -var-file=vars-debian-7.10-amd64-full.json debian-7.10.0-amd64-minimal.json
 
 ## Build parameters
 
