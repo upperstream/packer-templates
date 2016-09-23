@@ -12,8 +12,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "4.2.0",
-    "vm_name": ""
+    "box_version": "4.0.0"
   },
   "builders": [
     {
@@ -58,7 +57,7 @@
         "{{user `root_password`}}<enter><wait>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "y<enter>",
+        "y<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
@@ -115,7 +114,7 @@
         "{{user `root_password`}}<enter><wait>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "y<enter>",
+        "y<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
@@ -179,7 +178,7 @@
         "{{user `root_password`}}<enter><wait>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "y<enter>",
+        "y<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
@@ -191,7 +190,7 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": ["vmware-iso", "esxi-iso"],
+      "only": ["vmware-iso"],
       "scripts": [
         "../provisioners/vmware.sh"
       ]
@@ -199,37 +198,13 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/vagrant.sh"
+        "../provisioners/vagrant.sh",
+        "../provisioners/cleanup.sh"
       ],
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "{{.Vars}} sudo -E sh '{{.Path}}'"
-        },
-        "vmware-iso": {
-          "execute_command": "{{.Vars}} sudo -E sh '{{.Path}}'"
-        },
-        "esxi-iso": {
-          "execute_command": "{{.Vars}} sudo -E sh '{{.Path}}'"
-        }
-      },
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}"
-      ]
-    },
-    {
-      "type": "shell",
-      "start_retry_timeout": "5m",
-      "only": ["virtualbox-iso", "vmware-iso"],
-      "scripts": [
-        "../provisioners/disk_cleanup.sh"
-      ]
-    },
-    {
-      "type": "shell",
-      "scripts": [
-        "../provisioners/cleanup.sh"
       ]
     }
   ],
