@@ -46,7 +46,7 @@
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
       "http_directory": ".",
-      "iso_checksum": "{{user `iso_checksum` }}",
+      "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
@@ -96,7 +96,7 @@
       "disk_type_id": "0",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "http_directory": ".",
-      "iso_checksum": "{{user `iso_checksum` }}",
+      "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
@@ -153,7 +153,7 @@
       "disk_type_id": "thin",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "http_directory": ".",
-      "iso_checksum": "{{user `iso_checksum` }}",
+      "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
