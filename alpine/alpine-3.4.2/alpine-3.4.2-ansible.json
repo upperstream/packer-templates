@@ -1,6 +1,6 @@
 {
   "variables": {
-    "variant": "minimal",
+    "variant": "ansible",
     "disk_size": "40960",
     "mem_size": "512",
     "ssh_username": "root",
@@ -199,23 +199,15 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/vagrant.sh"
+        "../provisioners/vagrant.sh",
+        "../provisioners/ansible+testinfra.sh"
       ],
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "{{.Vars}} sudo -E sh '{{.Path}}'"
-        },
-        "vmware-iso": {
-          "execute_command": "{{.Vars}} sudo -E sh '{{.Path}}'"
-        },
-        "esxi-iso": {
-          "execute_command": "{{.Vars}} sudo -E sh '{{.Path}}'"
-        }
-      },
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
-        "VAGRANT_PASSWORD={{user `vagrant_password`}}"
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}",
+        "ANSIBLE_VERSION=2.1.1.0",
+        "TESTINFRA_VERSION=1.4.2"
       ]
     },
     {
