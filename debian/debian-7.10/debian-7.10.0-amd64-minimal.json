@@ -3,12 +3,16 @@
     "vm_name": "Debian-7.10.0-amd64-minimal",
     "mem_size": "512",
     "disk_size": "102400",
-    "iso_name": "mini.iso",
-    "iso_path": "debian/dists/Debian7.10/main/installer-amd64/20130613+deb7u3+b1/images/netboot",
-    "iso_checksum": "7ea1828d944918b0e2c0e12887a82b68",
+    "iso_name": "debian-7.10.0-amd64-netinst.iso",
+    "iso_path": "cdimage/archive/7.10.0/amd64/iso-cd",
+    "iso_checksum": "7b6e0ec52a8290b2746fe8707c20815c",
+    "iso_checksum_type": "md5",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
-    "box_version": "1.1",
+    "root_password": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_password": "vagrant",
+    "box_version": "2",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -21,10 +25,9 @@
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "Debian_64",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "md5",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
-        "./{{user `iso_name`}}",
-        "http://ftp.jp.debian.org/{{user `iso_path`}}/{{user `iso_name`}}",
+        "./iso/{{user `iso_name`}}",
         "http://cdimage.debian.org/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
@@ -44,6 +47,12 @@
       "http_directory": "../http",
       "boot_command": [
         "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "passwd/root-password={{user `root_password`}} <wait>",
+        "passwd/root-password-again={{user `root_password`}} <wait>",
+        "passwd/user-fullname={{user `vagrant_username`}} <wait>",
+        "passwd/username={{user `vagrant_username`}} <wait>",
+        "passwd/user-password={{user `vagrant_password`}} <wait>",
+        "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
         "<enter> <wait>"
@@ -56,10 +65,9 @@
       "disk_type_id": "0",
       "guest_os_type": "debian7-64",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "md5",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./{{user `iso_name`}}",
-        "http://ftp.jp.debian.org/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://cdimage.debian.org/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
@@ -84,6 +92,12 @@
       "http_directory": "../http",
       "boot_command": [
         "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "passwd/root-password={{user `root_password`}} <wait>",
+        "passwd/root-password-again={{user `root_password`}} <wait>",
+        "passwd/user-fullname={{user `vagrant_username`}} <wait>",
+        "passwd/username={{user `vagrant_username`}} <wait>",
+        "passwd/user-password={{user `vagrant_password`}} <wait>",
+        "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
         "<enter> <wait>"
@@ -97,10 +111,9 @@
       "disk_type_id": "thin",
       "guest_os_type": "debian7-64",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "md5",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./{{user `iso_name`}}",
-        "http://ftp.jp.debian.org/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://cdimage.debian.org/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
@@ -130,6 +143,12 @@
       "http_directory": "../http",
       "boot_command": [
         "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "passwd/root-password={{user `root_password`}} <wait>",
+        "passwd/root-password-again={{user `root_password`}} <wait>",
+        "passwd/user-fullname={{user `vagrant_username`}} <wait>",
+        "passwd/username={{user `vagrant_username`}} <wait>",
+        "passwd/user-password={{user `vagrant_password`}} <wait>",
+        "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
         "<enter> <wait>"
@@ -150,6 +169,9 @@
         "../provisioners/base.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/cleanup.sh"
+      ],
+      "environment_vars": [
+        "VAGRANT_USERNAME={{user `vagrant_username`}}"
       ]
     }
   ],

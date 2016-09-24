@@ -1,22 +1,23 @@
 {
   "variables": {
-    "vm_name": "Debian-7.10.0-amd64-xfce",
+    "vm_name": "Debian-7.11-amd64-docker",
     "mem_size": "512",
-    "disk_size": "102400",
-    "iso_name": "debian-7.10.0-amd64-netinst.iso",
-    "iso_path": "cdimage/archive/7.10.0/amd64/iso-cd",
-    "iso_checksum": "7b6e0ec52a8290b2746fe8707c20815c",
+    "disk_size": "51200",
+    "iso_name": "mini.iso",
+    "iso_path": "debian/dists/Debian7.11/main/installer-amd64/20130613+deb7u3+b2/images/netboot",
+    "iso_checksum": "a4b8363bdcbe04d3e82b9531a095af96",
     "iso_checksum_type": "md5",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "2",
+    "box_version": "1",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
-    "remote_datastore": "{{env `REMOTE_DATASTORE`}}"
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "vb_version": "4.3.28"
   },
   "builders": [
     {
@@ -28,6 +29,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
+        "http://ftp.jp.debian.org/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://cdimage.debian.org/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
@@ -67,7 +69,8 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
-        "./{{user `iso_name`}}",
+        "./iso/{{user `iso_name`}}",
+        "http://ftp.jp.debian.org/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://cdimage.debian.org/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
@@ -113,7 +116,8 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
-        "./{{user `iso_name`}}",
+        "./iso/{{user `iso_name`}}",
+        "http://ftp.jp.debian.org/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://cdimage.debian.org/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
@@ -126,6 +130,7 @@
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
+      "tools_upload_flavor": "linux",
       "output_directory": "{{user `vm_name`}}",
       "vm_name": "{{user `vm_name`}}",
       "vmx_data": {
@@ -158,6 +163,39 @@
   "provisioners": [
     {
       "type": "shell",
+      "scripts": [
+        "../provisioners/base.sh",
+        "../provisioners/kernel-3.16.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "start_retry_timeout": "5m",
+      "scripts": [
+        "../provisioners/docker-io.sh",
+        "../provisioners/vagrant.sh"
+      ],
+      "environment_vars": [
+        "VAGRANT_USERNAME={{user `vagrant_username`}}"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso"],
+      "scripts": [
+        "../provisioners/virtualbox.sh"
+      ],
+      "override": {
+        "virtualbox-iso": {
+          "execute_command": "{{ .Vars }} sudo -E sh {{ .Path }}"
+        }
+      },
+      "environment_vars": [
+        "VBOX_VER={{user `vb_version`}}"
+      ]
+    },
+    {
+      "type": "shell",
       "only": ["vmware-iso", "esxi-iso"],
       "scripts": [
         "../provisioners/vmtools.sh"
@@ -165,14 +203,15 @@
     },
     {
       "type": "shell",
+      "only": ["virtualbox-iso", "vmware-iso"],
       "scripts": [
-        "../provisioners/base.sh",
-        "../provisioners/vagrant.sh",
-        "../provisioners/xfce4.sh",
+        "../provisioners/disk_cleanup.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "scripts": [
         "../provisioners/cleanup.sh"
-      ],
-      "environment_vars": [
-        "VAGRANT_USERNAME={{user `vagrant_username`}}"
       ]
     }
   ],
@@ -180,6 +219,7 @@
     {
       "type": "vagrant",
       "only": ["virtualbox-iso", "vmware-iso"],
+      "compression_level": 9,
       "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box"
     }
   ]
