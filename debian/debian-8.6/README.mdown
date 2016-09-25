@@ -1,6 +1,6 @@
-# Packer templates for Debian 7.11
+# Packer templates for Debian 8.6
 
-Templates to create Vagrant boxes for Debian 7.11 (amd64).
+Templates to create Vagrant boxes for Debian 8.6 (amd64).
 
 ## Prerequisites
 
@@ -36,20 +36,20 @@ Templates to create Vagrant boxes for Debian 7.11 (amd64).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-	packer build -only=virtualbox-iso debian-7.11.0-amd64-minimal.json
+    packer build -only=virtualbox-iso debian-8.6-amd64-minimal.json
 
 or:
 
-	packer build -only=vmware-iso debian-7.11.0-amd64-minimal.json
+    packer build -only=vmware-iso debian-8.6-amd64-minimal.json
 
 for [VMware] provider.
-You will find a vagrant box file named `Debian-7.11-amd64-minimal-v1-virtualbox.box`
-or `Debian-7.11-amd64-minimal-v1-vmware.box` in the same directory after the command has succeeded.
+You will find a vagrant box file named `Debian-8-amd64-minimal-v8.6.0-virtualbox.box`
+or `Debian-8-amd64-minimal-v8.6.0-vmware.box` in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-7.11-amd64-minimal-v1-virtualbox` to your box list
+Then you can add the box named `Debian-8-amd64-minimal-v8.6.0-virtualbox` to your box list
 by the following command:
 
-	vagrant add Debian-7.11-amd64-minimal-v1-virtualbox.box --name Debian-7.11-amd64-minimal-v1-minimal
+    vagrant add Debian-8-amd64-minimal-v8.6.0-virtualbox.box --name Debian-8-amd64-minimal-v8.6.0-virtualbox
 
 ## Building a VM image on ESXi
 
@@ -64,32 +64,37 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi (Created VM will be unregistered from your Inventory):
 
-    packer build -only=esxi-iso debian-7.11-amd64-minimal.json
+    packer build -only=esxi-iso debian-8.6-amd64-minimal.json
 
 ## Variants
 
-* `debian-7.11-amd64-minimal.json` - Debian 7.11 minimal installation
-* `debian-7.11-amd64-ansible.json` - provided with [Ansible] + [Testinfra] in addition to Debian 7.11 minimal installation.
-* `debian-7.11-amd64-docker.json` - provided with [Docker] + [Docker Compose] in addition to Debian 7.11 minimal installation.
-* `debian-7.11-amd64-xfce.json` - provided with [Xfce] and [xrdp] in addition to Debian 7.11 minimal installation.
+* `debian-8.6-amd64-minimal.json` - Debian 8.6 minimal installation
+* `debian-8.6-amd64-ansible.json` - Debian 8.6 with [Ansible] + [Testinfra].
+* `debian-8.6-amd64-docker.json` - Debian 8.6 with [Docker] + [Docker Compose].
+* `debian-8.6-amd64-xfce.json` - Debian 8.6 with [Xfce] + [xrdp].
+* `debian-8.6-amd64-xorg.json` - Debian 8.6 with [X.org], [SLiM], [suckless] tools, [ARandR], and [xrdp].
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
+[ARandR]: https://christian.amsuess.com/tools/arandr/ "ARandR: Another XRandR GUI"
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 [Docker Compose]: https://docs.docker.com/compose/ "Docker Compose"
+[SLiM]: https://sourceforge.net/projects/slim.berlios/ "SLiM download | SourceForge.net"
+[suckless]: http://suckless.org/ "suckless.org software that sucks less"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
+[X.org]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
 
 ## Installer CD images
 
 Optional var files are provided to instruct to use alternative installer CD images, i.e.,
-`vars-debian-7.11-amd64-full.json` instructs to use `debian-7.11.0-amd64-CD-1.iso` while
-`vars-debian-7.11-amd64-netinst.json` does `debian-7.11.0-amd64-netinst.iso` respectively.
-Without using these var files, `debian-7.11.0-amd64-*.json` templates use `mini.iso`.
+`vars-debian-8.6-amd64-full.json` instructs to use `debian-8.6.0-amd64-CD-1.iso` while
+`vars-debian-8.6-amd64-netinst.json` does `debian-8.6.0-amd64-netinst.iso` respectively.
+Without using these var files, `debian-8.6.0-amd64-*.json` templates use `mini.iso`.
 
 Depending on situation you can specify either of var files on the command line:
 
-    packer build -var-file=vars-debian-7.11-amd64-full.json debian-7.11.0-amd64-minimal.json
+    packer build -var-file=vars-debian-8.6-amd64-full.json debian-8.6-amd64-minimal.json
 
 ## Build parameters
 
