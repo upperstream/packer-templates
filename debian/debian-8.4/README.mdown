@@ -83,7 +83,7 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 
 * `vm_name` - VM name.  This also affects box file name and output directory name.
 * `mem_size` - RAM size of the created VM.
-* `disk_size` = Disk size of the created VM.
+* `disk_size` - Disk size of the created VM.
 
 - - -
 

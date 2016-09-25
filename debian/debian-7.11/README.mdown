@@ -89,7 +89,7 @@ Without using these var files, `debian-7.11.0-amd64-*.json` templates use `mini.
 
 Depending on situation you can specify either of var files on the command line:
 
-    packer build -var-file=vars-debian-7.10-amd64-full.json debian-7.10.0-amd64-minimal.json
+    packer build -var-file=vars-debian-7.11-amd64-full.json debian-7.11.0-amd64-minimal.json
 
 ## Build parameters
 
