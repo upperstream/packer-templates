@@ -24,6 +24,12 @@
 	* Debian 8.4 minimal
 	* Debian 8.4 + Docker
 	* Debian 8.4 + Xfce
+* [debian-8.6](debian-8.6/README.mdown) - templates for Debian 8.6
+	* Debian 8.6 minimal
+	* Debian 8.6 + Ansible + Testinfra
+	* Debian 8.6 + Docker + Docker Compose
+	* Debian 8.6 + X.org + suckless tools
+	* Debian 8.6 + Xfce
 
 - - -
 

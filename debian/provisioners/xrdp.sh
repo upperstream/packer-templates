@@ -1,1 +1,3 @@
-apt-get install -y xrdp
+#!/bin/sh -ex
+test -z "$XRDP" && XRDP=xrdp
+apt-get install -y $XRDP
