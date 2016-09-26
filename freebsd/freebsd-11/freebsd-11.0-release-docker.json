@@ -4,8 +4,8 @@
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.0",
     "iso_checksum_type": "",
     "iso_checksum": "",
-    "os_version": "11.0-RC3",
-    "box_version": "3.0",
+    "os_version": "11.0-RELEASE",
+    "box_version": "11.0.0",
     "mem_size": "1024",
     "disk_size": "51200",
     "remote_host": "{{env `REMOTE_HOST`}}",
@@ -18,7 +18,7 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "x11"
+    "variant": "docker"
   },
   "builders": [
     {
@@ -29,9 +29,10 @@
         "s",
         "<wait5>",
         "dhclient em0<enter><wait5>",
-        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
+        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `virtualbox_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `virtualbox_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -39,14 +40,14 @@
         "VAGRANT_USER={{user `vagrant_username`}} ",
         "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
         "VAGRANT_GROUP={{user `vagrant_group`}} ",
-        "bsdinstall script /tmp/install_with_x11.sh<enter>",
+        "bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ],
       "boot_wait": "10s",
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
       "http_directory": ".",
-      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum": "{{user `iso_checksum` }}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
@@ -66,8 +67,7 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
-        [ "modifyvm", "{{.Name}}", "--vram", "12" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ]
     },
     {
@@ -80,7 +80,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -96,7 +97,7 @@
       "disk_type_id": "0",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "http_directory": ".",
-      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum": "{{user `iso_checksum` }}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
@@ -122,8 +123,7 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE",
-        "svga.vramSize": "12582912"
+        "vhv.enable": "TRUE"
       }
     },
     {
@@ -137,7 +137,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -153,7 +154,7 @@
       "disk_type_id": "thin",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "http_directory": ".",
-      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum": "{{user `iso_checksum` }}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
@@ -185,8 +186,7 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE",
-        "svga.vramSize": "12582912"
+        "vhv.enable": "TRUE"
       }
     }
   ],
@@ -195,10 +195,8 @@
       "type": "shell",
       "only": ["virtualbox-iso"],
       "scripts": [
-        "../provisioners/xorg.sh",
-        "../provisioners/virtualbox_ose_additions-11.sh",
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/disk_cleanup.sh",
+        "../provisioners/docker-11.0.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
@@ -216,10 +214,9 @@
       "type": "shell",
       "only": ["vmware-iso"],
       "scripts": [
-        "../provisioners/xorg.sh",
-        "../provisioners/vmware-guest-x11.sh",
+        "../provisioners/vmware-guest.sh",
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/disk_cleanup.sh",
+        "../provisioners/docker-11.0.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
@@ -237,9 +234,9 @@
       "type": "shell",
       "only": ["esxi-iso"],
       "scripts": [
-        "../provisioners/xorg.sh",
-        "../provisioners/vmware-guest-x11.sh",
+        "../provisioners/vmware-guest.sh",
         "../provisioners/vagrant-11.0.sh",
+        "../provisioners/docker-11.0.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {

@@ -4,8 +4,8 @@
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.0",
     "iso_checksum_type": "",
     "iso_checksum": "",
-    "os_version": "11.0-RC3",
-    "box_version": "3.0",
+    "os_version": "11.0-RELEASE",
+    "box_version": "11.0.0",
     "mem_size": "1024",
     "disk_size": "51200",
     "remote_host": "{{env `REMOTE_HOST`}}",
@@ -18,7 +18,7 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "docker"
+    "variant": "minimal"
   },
   "builders": [
     {
@@ -31,8 +31,7 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "export ZFSBOOT_DISKS={{user `virtualbox_partition`}}<enter>",
-        "export nonInteractive=\"YES\"<enter>",
+        "PARTITIONS={{user `virtualbox_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -80,8 +79,7 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
-        "export nonInteractive=\"YES\"<enter>",
+        "PARTITIONS={{user `vmware_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -137,8 +135,7 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
-        "export nonInteractive=\"YES\"<enter>",
+        "PARTITIONS={{user `vmware_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -196,7 +193,7 @@
       "only": ["virtualbox-iso"],
       "scripts": [
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/docker-11.0.sh",
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
@@ -216,7 +213,7 @@
       "scripts": [
         "../provisioners/vmware-guest.sh",
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/docker-11.0.sh",
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {
@@ -236,7 +233,6 @@
       "scripts": [
         "../provisioners/vmware-guest.sh",
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/docker-11.0.sh",
         "../provisioners/cleanup.sh"
       ],
       "override": {

@@ -8,13 +8,15 @@
 	* FreeBSD 10.1-RELEASE
 * [freebsd-10.3](freebsd-10.3/README.mdown) - templates for FreeBSD 10.3-RELEASE (amd64 and i386)
 	* FreeBSD 10.3-RELEASE
-* [freebsd-11](freebsd-11/README.mdown) - templates for FreeBSD 11.0-RC3 (amd64 and i386)
-	* FreeBSD 11.0-RC3
-	* FreeBSD 11.0-RC3 + Ansible + Testinfra
-	* FreeBSD 11.0-RC3 + Docker + Docker Compose (amd64 only)
-	* FreeBSD 11.0-RC3 + X11
-	* FreeBSD 11.0-RC3 + X11 + dwm + dmenu + st + SLiM
-	* FreeBSD 11.0-RC3 + Xfce
+	* FreeBSD 10.3-RELEASE + Ansible + Testinfra
+	* FreeBSD 10.3-RELEASE + Docker (amd64 only)
+* [freebsd-11](freebsd-11/README.mdown) - templates for FreeBSD 11.0-RELEASE (amd64 and i386)
+	* FreeBSD 11.0-RELEASE
+	* FreeBSD 11.0-RELEASE + Ansible + Testinfra
+	* FreeBSD 11.0-RELEASE + Docker + Docker Compose (amd64 only)
+	* FreeBSD 11.0-RELEASE + X11
+	* FreeBSD 11.0-RELEASE + X11 + dwm + dmenu + st + SLiM
+	* FreeBSD 11.0-RELEASE + Xfce
 
 - - -
 
