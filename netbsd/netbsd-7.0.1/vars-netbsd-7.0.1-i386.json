@@ -1,0 +1,10 @@
+{
+  "iso_file_name": "NetBSD-7.0.1-i386.iso",
+  "iso_path": "NetBSD/NetBSD-7.0.1/iso",
+  "iso_checksum": "17fb6d56b30a16d7794f957db0300cd49767ca8452d243c47697df0b05ea857723f2cadd6a05eb913ffd62a52fcf53e140f23018b050e9cf0a4c36b857ea5a68",
+  "iso_checksum_type": "sha512",
+  "cpu": "i386",
+  "virtualbox_geust_os_type": "NetBSD",
+  "vmware_guest_os_type": "other",
+  "vm_name": "NetBSD-7.0-i386"
+}

@@ -2,9 +2,9 @@
   "variables": {
     "ssh_username": "root",
     "ssh_password": "vagrant",
-    "os_ver": "7.0",
-    "variant": "minimal",
-    "box_ver": "2.1",
+    "os_ver": "7.0.1",
+    "variant": "ansible",
+    "box_ver": "2.1.1",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -64,6 +64,7 @@
         "a<enter><wait>",
         "x<enter><wait>",
         "d<enter><wait>",
+        "e<enter><wait>",
         "g<enter><wait>",
         "j<enter><wait>",
         "x<enter><wait>",
@@ -269,60 +270,33 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH=http://ftp.NetBSD.org/pub/pkgsrc/packages/NetBSD/amd64/7.0_2015Q4/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH=http://ftp.NetBSD.org/pub/pkgsrc/packages/NetBSD/`uname -m`/7.0_2016Q1/All\" > /etc/pkg_install.conf"
       ]
     },
     {
       "type": "shell",
-      "only": ["virtualbox-iso"],
       "scripts": [
         "../provisioners/vagrant-7.0.sh",
-        "../provisioners/disk_cleanup.sh",
-        "../provisioners/cleanup-7.0.sh"
+        "../provisioners/ansible-7.0.sh"
       ],
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}" 
-        }
-      },
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
-        "VAGRANT_USER={{user `user_name`}}"
+        "VAGRANT_USER={{user `user_name`}}",
+        "SUDO=sudo-1.8.15nb1",
+        "RSYNC=rsync-3.1.2",
+        "PYTHON=python27-2.7.11nb2",
+        "ANSIBLE_VERSION=2.1.1.0",
+        "TESTINFRA_VERSION=1.4.2"
       ]
     },
     {
       "type": "shell",
-      "only": ["vmware-iso"],
-      "scripts": [
-        "../provisioners/vmware-7.0.sh",
-        "../provisioners/vagrant-7.0.sh",
-        "../provisioners/disk_cleanup.sh",
-        "../provisioners/cleanup-7.0.sh"
-      ],
-      "override": {
-        "vmware-iso": {
-          "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}" 
-        }
-      },
-      "environment_vars": [
-        "VAGRANT_USER={{user `user_name`}}"
-      ]
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "script": "../provisioners/disk_cleanup.sh"
     },
     {
       "type": "shell",
-      "only": ["esxi-iso"],
-      "scripts": [
-        "../provisioners/vmware-7.0.sh",
-        "../provisioners/vagrant-7.0.sh",
-        "../provisioners/cleanup-7.0.sh"
-      ],
-      "override": {
-        "esxi-iso": {
-          "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}" 
-        }
-      },
-      "environment_vars": [
-        "VAGRANT_USER={{user `user_name`}}"
-      ]
+      "script": "../provisioners/cleanup-7.0.sh"
     }
   ],
   "post-processors": [

@@ -17,6 +17,11 @@
 	* NetBSD 7.0 + Ansible (amd64)
 	* NetBSD 7.0 (i386)
 	* NetBSD 7.0 + Ansible (i386)
+* [netbsd-7.0.1](netbsd-7.0.1/README.mdown) - templates for NetBSD 7.0.1
+	* NetBSD 7.0.1 (amd64)
+	* NetBSD 7.0.1 + Ansible (amd64)
+	* NetBSD 7.0.1 (i386)
+	* NetBSD 7.0.1 + Ansible (i386)
 
 VirtualBox and VMware providers are supported.
 
