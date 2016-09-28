@@ -1,6 +1,5 @@
 
 #!/bin/sh -x
-echo "WITH_PKGNG=yes" >> /etc/make.conf
 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
 cat >> /etc/rc.conf <<EOF
 ifconfig_em0="DHCP"
@@ -35,6 +34,11 @@ pw groupmod wheel -m $VAGRANT_USER
 echo "$VAGRANT_USER ALL=(ALL) NOPASSWD:ALL" >> /usr/local/etc/sudoers.d/$VAGRANT_USER
 
 # SSH config
-echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+cp /etc/ssh/sshd_config /tmp/sshd_config
+sed \
+  -e 's/^#PermitRootLogin .*/PermitRootLogin yes/' \
+  -e 's/^#PasswordAuthentication no/PasswordAuthentication yes/' \
+  -e 's/^#UseDNS yes/UseDNS no/' /tmp/sshd_config > /etc/ssh/sshd_config
+rm /tmp/sshd_config
 
 reboot

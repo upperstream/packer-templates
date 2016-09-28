@@ -57,8 +57,8 @@
         "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
-      "ssh_username": "{{user `vagrant_username`}}",
-      "ssh_password": "{{user `vagrant_password`}}",
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
       "guest_additions_mode": "disable",
@@ -106,8 +106,8 @@
         "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
-      "ssh_username": "{{user `vagrant_username`}}",
-      "ssh_password": "{{user `vagrant_password`}}",
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
@@ -162,8 +162,8 @@
         "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
-      "ssh_username": "{{user `vagrant_username`}}",
-      "ssh_password": "{{user `vagrant_password`}}",
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
       "remote_type": "esx5",
@@ -190,17 +190,8 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": ["virtualbox-iso"],
-      "scripts": [
-        "../provisioners/vagrant-11.0.sh",
-        "../provisioners/disk_cleanup.sh",
-        "../provisioners/cleanup.sh"
-      ],
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
-        }
-      },
+      "script": "../provisioners/vagrant-11.0.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
@@ -209,42 +200,23 @@
     },
     {
       "type": "shell",
-      "only": ["vmware-iso"],
-      "scripts": [
-        "../provisioners/vmware-guest.sh",
-        "../provisioners/vagrant-11.0.sh",
-        "../provisioners/disk_cleanup.sh",
-        "../provisioners/cleanup.sh"
-      ],
-      "override": {
-        "vmware-iso": {
-          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
-        }
-      },
+      "only": ["vmware-iso", "esxi-iso"],
+      "script": "../provisioners/vmware-guest.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "ROOT_PASSWORD={{user `root_password`}}",
-        "VAGRANT_USER={{user `vagrant_username`}}",
-        "VAGRANT_PASSWORD={{user `vagrant_password`}}"
+        "OPEN_VM_TOOLS=open-vm-tools-nox11-1280544_12,1"
       ]
     },
     {
       "type": "shell",
-      "only": ["esxi-iso"],
-      "scripts": [
-        "../provisioners/vmware-guest.sh",
-        "../provisioners/vagrant-11.0.sh",
-        "../provisioners/cleanup.sh"
-      ],
-      "override": {
-        "esxi-iso": {
-          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
-        }
-      },
-      "environment_vars": [
-        "ROOT_PASSWORD={{user `root_password`}}",
-        "VAGRANT_USER={{user `vagrant_username`}}",
-        "VAGRANT_PASSWORD={{user `vagrant_password`}}"
-      ]
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "script": "../provisioners/disk_cleanup.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
+    },
+    {
+      "type": "shell",
+      "script": "../provisioners/cleanup.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     }
   ],
   "post-processors": [
