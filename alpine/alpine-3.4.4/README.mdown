@@ -99,6 +99,11 @@ The following command will build a VM image on your ESXi:
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
 [X.org]: https://www.x.org/wiki/ "X.Org"
 
+## Optimised kernel for virtual machines
+
+Instead of `vars-alpine-3.4.4-x86*.json` files you can use `vars-alpine-virt-3.4.4-x86*.json`.
+These files instruct to use ISO images with kernels optimised for virtual machines. 
+
 ## Build parameters
 
 The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
