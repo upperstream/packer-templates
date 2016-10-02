@@ -9,6 +9,7 @@
     * alpine-3.4.1 - Alpine Linux 3.4.1 templates
     * alpine-3.4.2 - Alpine Linux 3.4.2 templates
     * alpine-3.4.3 - Alpine Linux 3.4.3 templates
+    * alpine-3.4.4 - Alpine Linux 3.4.4 templates
 * [centos](centos/README.mdown) - CentOS templates
 	* centos-5.11 - CentOS 5.11 templates (x86_64 and i386)
 	* centos-6.5 - CentOS 6.5 templates (x86_64)
