@@ -200,7 +200,7 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "PY27_PIP=py27-pip-8.0.2",
-        "ANSIBLE=ansible==2.1.1.0",
+        "ANSIBLE=ansible==2.1.2.0",
         "TESTINFRA=testinfra==1.4.2"
       ]
     },
