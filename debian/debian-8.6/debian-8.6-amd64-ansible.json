@@ -12,7 +12,7 @@
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "8.6.0",
+    "box_version": "8.6.1",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -177,10 +177,10 @@
         "LIBFFI_DEV=libffi-dev=3.1-2+b2",
         "LIBYAML_DEV=libyaml-dev=0.1.6-3",
         "LIBGMP_DEV=libgmp-dev=2:6.0.0+dfsg-6",
-        "LIBGMP_DEV=libssl-dev=1.0.1t-1+deb8u3",
-        "PYTHON_PIP=python-pip=1.5.6-5",
-        "ANSIBLE_VERSION=2.1.1.0",
-        "TESTINFRA_VERSION=1.4.2"
+        "LIBSSL_DEV=libssl-dev=1.0.1t-1+deb8u5",
+        "PIP=pip==8.1.2",
+        "ANSIBLE=ansible==2.1.2.0",
+        "TESTINFRA=testinfra==1.4.2"
       ]
     },
     {

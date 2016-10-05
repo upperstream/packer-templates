@@ -12,7 +12,7 @@
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "1",
+    "box_version": "2",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -42,8 +42,7 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
-        [ "modifyvm", "{{.Name}}", "--vram", "32" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
       "http_directory": "../http",
       "boot_command": [
@@ -175,8 +174,8 @@
       ],
       "environment_vars": [
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
-        "ANSIBLE_VERSION=2.1.1.0",
-        "TESTINFRA_VERSION=1.4.2"
+        "ANSIBLE=ansible==2.1.2.0",
+        "TESTINFRA=testinfra==1.4.2"
       ]
     },
     {
