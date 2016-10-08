@@ -1,7 +1,7 @@
 {
   "iso_image": "FreeBSD-11.0-RELEASE-i386-disc1.iso",
   "iso_checksum_type": "sha256",
-  "iso_checksum": "d42dddd8fca57d362f5a4cfb1a84ef5db7960148b8f3b44856bd9c237c856534",
+  "iso_checksum": "6638ed4cce829cf0f8c120962140e4c24587f0a0ebe0567661f95cbfb2ebee78",
   "os_version": "11.0-RCLEASE",
   "virtualbox_guest_os_type": "FreeBSD",
   "vmware_guest_os_type": "freebsd",
