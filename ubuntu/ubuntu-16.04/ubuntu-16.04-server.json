@@ -19,7 +19,7 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
-        "{{user `iso_name`}}",
+        "./iso/{{user `iso_name`}}",
         "http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/20101020ubuntu450/images/netboot/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
@@ -59,7 +59,7 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
-        "{{user `iso_name`}}",
+        "./iso/{{user `iso_name`}}",
         "http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/20101020ubuntu450/images/netboot/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
