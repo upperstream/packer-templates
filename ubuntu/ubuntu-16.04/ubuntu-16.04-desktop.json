@@ -136,6 +136,12 @@
       "script": "../provisioners/vmware-desktop.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
     },
+     {
+      "type": "shell",
+      "only": [ "virtualbox-iso", "vmware-iso" ],
+      "script": "../provisioners/disk_cleanup.sh",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
+    },
     {
       "type": "shell",
       "script": "../provisioners/cleanup.sh",
@@ -145,9 +151,8 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "only": [
-      	"virtualbox-iso"
-      ],
+      "only": [ "virtualbox-iso", "vmware-iso" ],
+      "compression_level": 9,
       "output": "./{{user `flavour`}}-{{user `os_ver`}}-{{user `variant`}}-amd64-minimal.box"
     }
   ]
