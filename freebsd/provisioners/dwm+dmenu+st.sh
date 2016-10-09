@@ -25,7 +25,7 @@ EOF
 
 pkg install -y $ARNADR $DWM $STERM $DMENU
 
-for t in st st-256color st-meta st-meta-256color; do infocmp -C $t >> /usr/share/misc/termcap; done
+for t in st st-256color; do infocmp -C $t >> /usr/share/misc/termcap; done
 cap_mkdb /usr/share/misc/termcap
 
 cat >> /etc/X11/xorg.conf << EOF
