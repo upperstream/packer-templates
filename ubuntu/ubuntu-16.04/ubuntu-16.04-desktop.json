@@ -29,6 +29,7 @@
       "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{user `flavour`}}-{{user `os_ver`}}-{{user `variant`}}-amd64-minimal",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
@@ -106,21 +107,23 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": [
-      	"virtualbox-iso"
-      ],
       "scripts": [
         "../provisioners/base.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/virtualbox.sh",
-        "../provisioners/xrdp.sh",
-        "../provisioners/cleanup.sh"
+        "../provisioners/xrdp.sh"
       ],
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
-        }
-      },
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh '{{.Path}}'",
+      "environment_vars": [
+        "VIRTUALBOX_VERSION={{user `virtualbox_version`}}"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": [
+        "virtualbox-iso"
+      ],
+      "script": "../provisioners/virtualbox.sh",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh '{{.Path}}'",
       "environment_vars": [
         "VIRTUALBOX_VERSION={{user `virtualbox_version`}}"
       ]
@@ -130,18 +133,13 @@
       "only": [
         "vmware-iso"
       ],
-      "scripts": [
-        "../provisioners/base.sh",
-        "../provisioners/vagrant.sh",
-        "../provisioners/vmware-desktop.sh",
-        "../provisioners/xrdp.sh",
-        "../provisioners/cleanup.sh"
-      ],
-      "override": {
-        "vmware-iso": {
-          "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
-        }
-      }
+      "script": "../provisioners/vmware-desktop.sh",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
+    },
+    {
+      "type": "shell",
+      "script": "../provisioners/cleanup.sh",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
     }
   ],
   "post-processors": [
