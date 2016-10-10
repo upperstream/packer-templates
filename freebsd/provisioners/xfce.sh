@@ -1,6 +1,5 @@
 #!/bin/sh -ex
-pkg install -y xfce-4.12_1 slim-1.3.6_12 slim-themes-1.0.1 arandr-0.1.7.1_2
-echo 'slim_enable="YES"' >> /etc/rc.conf
+pkg install -y xfce-4.12_1 arandr-0.1.7.1_2
 
 cat >> /usr/local/etc/polkit-1/rules.d/10-restart.rules << EOF
 polkit.addRule(function (action, subject) {
@@ -39,5 +38,3 @@ cat > /home/$VAGRANT_USER/.xsession << EOF
 #!/bin/sh
 exec /usr/local/bin/startxfce4 --with-ck-launch
 EOF
-
-sed -i .orig '/current_theme/s/default/fbsd/' /usr/local/etc/slim.conf

@@ -4,8 +4,8 @@
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.0",
     "iso_checksum_type": "",
     "iso_checksum": "",
-    "os_version": "11.0-RC3",
-    "box_version": "3.0",
+    "os_version": "11.0-RELEASE",
+    "box_version": "11.0.0",
     "mem_size": "1024",
     "disk_size": "51200",
     "remote_host": "{{env `REMOTE_HOST`}}",
@@ -18,7 +18,7 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "minimal"
+    "variant": "docker"
   },
   "builders": [
     {
@@ -31,7 +31,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `virtualbox_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `virtualbox_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -57,8 +58,8 @@
         "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
-      "ssh_username": "{{user `vagrant_username`}}",
-      "ssh_password": "{{user `vagrant_password`}}",
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
       "guest_additions_mode": "disable",
@@ -79,7 +80,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -106,8 +108,8 @@
         "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
-      "ssh_username": "{{user `vagrant_username`}}",
-      "ssh_password": "{{user `vagrant_password`}}",
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
@@ -135,7 +137,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -162,8 +165,8 @@
         "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
-      "ssh_username": "{{user `vagrant_username`}}",
-      "ssh_password": "{{user `vagrant_password`}}",
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
       "remote_type": "esx5",
@@ -190,17 +193,11 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": ["virtualbox-iso"],
       "scripts": [
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/disk_cleanup.sh",
-        "../provisioners/cleanup.sh"
+        "../provisioners/docker-11.0.sh"
       ],
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
-        }
-      },
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
@@ -209,42 +206,17 @@
     },
     {
       "type": "shell",
-      "only": ["vmware-iso"],
-      "scripts": [
-        "../provisioners/vmware-guest.sh",
-        "../provisioners/vagrant-11.0.sh",
-        "../provisioners/disk_cleanup.sh",
-        "../provisioners/cleanup.sh"
-      ],
-      "override": {
-        "vmware-iso": {
-          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
-        }
-      },
+      "only": ["vmware-iso", "esxi-iso"],
+      "script": "../provisioners/vmware-guest.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "ROOT_PASSWORD={{user `root_password`}}",
-        "VAGRANT_USER={{user `vagrant_username`}}",
-        "VAGRANT_PASSWORD={{user `vagrant_password`}}"
+        "OPEN_VM_TOOLS=open-vm-tools-nox11-1280544_12,1"
       ]
     },
     {
       "type": "shell",
-      "only": ["esxi-iso"],
-      "scripts": [
-        "../provisioners/vmware-guest.sh",
-        "../provisioners/vagrant-11.0.sh",
-        "../provisioners/cleanup.sh"
-      ],
-      "override": {
-        "esxi-iso": {
-          "execute_command": "env {{.Vars}} sudo -E sh '{{.Path}}'"
-        }
-      },
-      "environment_vars": [
-        "ROOT_PASSWORD={{user `root_password`}}",
-        "VAGRANT_USER={{user `vagrant_username`}}",
-        "VAGRANT_PASSWORD={{user `vagrant_password`}}"
-      ]
+      "script": "../provisioners/cleanup.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     }
   ],
   "post-processors": [
