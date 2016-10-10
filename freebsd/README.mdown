@@ -14,8 +14,8 @@
 	* FreeBSD 11.0-RELEASE
 	* FreeBSD 11.0-RELEASE + Ansible + Testinfra
 	* FreeBSD 11.0-RELEASE + Docker + Docker Compose (amd64 only)
-	* FreeBSD 11.0-RELEASE + X11
-	* FreeBSD 11.0-RELEASE + X11 + dwm + dmenu + st + SLiM
+	* FreeBSD 11.0-RELEASE + X.Org
+	* FreeBSD 11.0-RELEASE + X.Org + dwm + dmenu + st + SLiM
 	* FreeBSD 11.0-RELEASE + Xfce
 
 - - -
