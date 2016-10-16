@@ -22,6 +22,11 @@
 	* Ubuntu Desktop 16.04 LTS
 	* Ubuntu Server 16.04 LTS
 	* Xubuntu 16.04 LTS
+* [ubuntu-16.10](ubuntu-16.10/README.mdown) - templates for Ubuntu 16.10
+	* Ubuntu Desktop 16.10
+	* Ubuntu Server 16.10
+	* Lubuntu 16.10
+	* Xubuntu 16.10
 
 - - -
 
