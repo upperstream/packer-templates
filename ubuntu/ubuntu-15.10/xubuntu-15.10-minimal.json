@@ -6,7 +6,7 @@
     "flavour": "Xubuntu",
     "variant": "desktop",
     "os_ver": "15.10",
-    "preseed": "xubuntu-preseed",
+    "preseed": "xubuntu-preseed.cfg",
     "virtualbox_version": "5.0.14"
   },
   "builders": [
@@ -42,7 +42,7 @@
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
         "/linux ",
-        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `preseed`}}.cfg ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `preseed`}} ",
         "debian-installer=en_US auto=true locale=en_US kbd-chooser/method=us ",
         "console-setup/ask_detect=false keyboard-configuration/layoutcode=us ",
         "hostname=vagrant ",
