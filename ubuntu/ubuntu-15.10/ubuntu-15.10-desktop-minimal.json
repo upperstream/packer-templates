@@ -6,7 +6,7 @@
     "flavour": "Ubuntu",
     "variant": "desktop",
     "os_ver": "15.10",
-    "preseed": "ubuntu-desktop-preseed.cfg",
+    "preseed": "ubuntu-desktop.seed",
     "virtualbox_version": "5.0.14"
   },
   "builders": [
