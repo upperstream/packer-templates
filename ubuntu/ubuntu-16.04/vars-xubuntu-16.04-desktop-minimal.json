@@ -2,7 +2,7 @@
   "flavour": "Xubuntu",
   "variant": "desktop",
   "os_ver": "16.04",
-  "preseed": "xubuntu-preseed.cfg",
+  "preseed": "xubuntu-desktop.seed",
   "virtualbox_version": "5.0.16",
   "mem_size": "2048",
   "disk_size": "512000"

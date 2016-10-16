@@ -6,7 +6,7 @@
     "flavour": "Xubuntu",
     "variant": "desktop",
     "os_ver": "15.10",
-    "preseed": "xubuntu-preseed.cfg",
+    "preseed": "xubuntu-desktop.seed",
     "virtualbox_version": "5.0.14"
   },
   "builders": [
