@@ -331,6 +331,7 @@ d-i user-setup/encrypt-home boolean false
 #tasksel tasksel/first multiselect lamp-server, print-server
 #tasksel tasksel/first multiselect kubuntu-desktop
 #tasksel tasksel/first multiselect xubuntu-desktop
+#tasksel tasksel/first multiselect lubuntu-desktop
 tasksel tasksel/first multiselect Basic Ubuntu server
 
 # Individual additional packages to install
