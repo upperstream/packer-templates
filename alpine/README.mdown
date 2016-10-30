@@ -16,6 +16,8 @@
     * Alpine Linux 3.4.3 (x86_64 and x86)
 * [alpine-3.4.4](alpine-3.4.4/README.mdown) - templates for Alpine Linux 3.4.4
     * Alpine Linux 3.4.4 (x86_64 and x86)
+* [alpine-3.4.5](alpine-3.4.5/README.mdown) - templates for Alpine Linux 3.4.5
+    * Alpine Linux 3.4.5 (x86_64 and x86)
 
 - - -
 
