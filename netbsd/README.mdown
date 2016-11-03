@@ -22,6 +22,15 @@
 	* NetBSD 7.0.1 + Ansible + Testinfra (amd64)
 	* NetBSD 7.0.1 (i386)
 	* NetBSD 7.0.1 + Ansible + Testinfra (i386)
+* [netbsd-7.0.2](netbsd-7.0.2/README.mdown) - templates for NetBSD 7.0.2
+	* NetBSD 7.0.2 (amd64)
+	* NetBSD 7.0.2 + Ansible + Testinfra (amd64)
+	* NetBSD 7.0.2 + X.Org (amd64)
+	* NetBSD 7.0.2 + X.Org + dwm + dmenu (amd64)
+	* NetBSD 7.0.2 (i386)
+	* NetBSD 7.0.2 + Ansible + Testinfra (i386)
+	* NetBSD 7.0.2 + X.Org (i386)
+	* NetBSD 7.0.2 + X.Org + dwm + dmenu (i386)
 
 VirtualBox and VMware providers are supported.
 
