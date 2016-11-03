@@ -32,22 +32,35 @@ Templates to create Vagrant box for NetBSD 7.0.2 (amd64 and i386).
 
 ## How to create a box
 
+### VirtualBox
+
 From the terminal, invoke the following command for VirtualBox provider:
 
 	packer build -only=virtualbox-iso -var-file=vars-netbsd-7.0.2-amd64.json netbsd-7.0.2-minimal.json
 
-or:
+You will find a vagrant box file named `NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox` to your box list
+by the following command:
+
+	vagrant add NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox.box --name NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox
+
+### VMware
+
+From the terminal, invoke the following command for VMware provider:
 
 	packer build -only=vmware-iso -var-file=vars-netbsd-7.0.2-amd64.json netbsd-7.0.2-minimal.json
 
-for VMware provider.
-You will find a vagrant box file named `NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox.box` or
-`NetBSD-7.0-amd64-minimal-v2.2.0-vmware.box` in the same directory after the command has succeeded.
+You will find a vagrant box file named `NetBSD-7.0-amd64-minimal-v2.2.0-vmware.box`
+in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox` to your box list
-by the following command (for example of VirtualBox provider):
+Then you can add the box named `NetBSD-7.0-amd64-minimal-v2.2.0-vmware` to your box list
+by the following command:
 
-	vagrant add NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox.box --name NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox
+	vagrant add NetBSD-7.0-amd64-minimal-v2.2.0-vmware.box --name NetBSD-7.0-amd64-minimal-v2.2.0-vmware
+
+In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
 ## Default settings
 

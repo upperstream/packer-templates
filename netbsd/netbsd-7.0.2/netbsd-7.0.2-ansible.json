@@ -40,6 +40,7 @@
       "shutdown_command": "echo 'shutdown -p now'|su -",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
+      "output_directory": "output/output-virtualbox-iso",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
@@ -116,6 +117,7 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'shutdown -p now'|su -",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
@@ -305,10 +307,18 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "only": ["virtualbox-iso", "vmware-iso"],
+      "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
       "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD-7.0.2"
+    },
+    {
+      "type": "vagrant",
+      "only": ["vmware-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD-7.0.2",
+      "keep_input_artifact": true
     }
   ]
 }
