@@ -30,22 +30,34 @@ Templates to create Vagrant boxes for Alpine Linux 3.4.6. (x86_64 and i686)
 
 ## How to create a box
 
+### VirtualBox
+
 From the terminal, invoke the following command for VirtualBox provider:
 
 	packer build -only=virtualbox-iso -var-file=vars-alpine-3.4.6-x86_64.json alpine-3.4.6-minimal.json
 
-or:
+You will find a vagrant box file named `Alpine-Linux-3.4-x86_64-minimal-v4.6.0-virtualbox.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `Alpine-Linux-3.4-x86_64-minimal-v4.6.0-virtualbox` to your box list
+by the following command:
+
+	vagrant add Alpine-Linux-3.4-x86_64-minimal-v4.6.0-virtualbox.box --name Alpine-Linux-3.4-x86_64-minimal-v4.6.0-virtualbox
+### VMware
+
+From the terminal, invoke the following command for VMware provider:
 
 	packer build -only=vmware-iso -var-file=vars-alpine-3.4.6-x86_64.json alpine-3.4.6-minimal.json
 
-for VMware provider.
-You will find a vagrant box file named `Alpine-Linux-3.4-x86_64-minimal-v4.4.0-virtualbox.box` or
-`Alpine-Linux-3.4-x86_64-minimal-v4.4.0-vmware.box` respectively in the same directory after the command has succeeded.
+You will find a vagrant box file named `Alpine-Linux-3.4-x86_64-minimal-v4.6.0-vmware.box`
+in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-Linux-3.4-x86_64-minimal-v4.4.0-virtualbox` to your box list
+Then you can add the box named `Alpine-Linux-3.4-x86_64-minimal-v4.6.0-vmware` to your box list
 by the following command:
 
-	vagrant add Alpine-Linux-3.4-x86_64-minimal-v4.4.0-virtualbox.box --name Alpine-Linux-3.4-x86_64-minimal-v4.4.0-virtualbox
+	vagrant add Alpine-Linux-3.4-x86_64-minimal-v4.6.0-vmware.box --name Alpine-Linux-3.4-x86_64-minimal-v4.6.0-vmware
+
+In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
 ## Default settings
 

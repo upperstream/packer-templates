@@ -39,13 +39,13 @@ or:
 	packer build -only=vmware-iso -var-file=vars-alpine-3.4.5-x86_64.json alpine-3.4.5-minimal.json
 
 for VMware provider.
-You will find a vagrant box file named `Alpine-Linux-3.4-x86_64-minimal-v4.4.0-virtualbox.box` or
-`Alpine-Linux-3.4-x86_64-minimal-v4.4.0-vmware.box` respectively in the same directory after the command has succeeded.
+You will find a vagrant box file named `Alpine-Linux-3.4-x86_64-minimal-v4.5.0-virtualbox.box` or
+`Alpine-Linux-3.4-x86_64-minimal-v4.5.0-vmware.box` respectively in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-Linux-3.4-x86_64-minimal-v4.4.0-virtualbox` to your box list
+Then you can add the box named `Alpine-Linux-3.4-x86_64-minimal-v4.5.0-virtualbox` to your box list
 by the following command:
 
-	vagrant add Alpine-Linux-3.4-x86_64-minimal-v4.4.0-virtualbox.box --name Alpine-Linux-3.4-x86_64-minimal-v4.4.0-virtualbox
+	vagrant add Alpine-Linux-3.4-x86_64-minimal-v4.5.0-virtualbox.box --name Alpine-Linux-3.4-x86_64-minimal-v4.5.0-virtualbox
 
 ## Default settings
 
