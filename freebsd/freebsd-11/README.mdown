@@ -33,22 +33,35 @@ Templates to create Vagrant box for FreeBSD 11.0-RELEASE (amd64 and i386).
 
 ## How to create a box
 
+### VirtualBox
+
 From the terminal, invoke the following command for VirtualBox provider:
 
 	packer build -only=virtualbox-iso -var-file=vars-freebsd-11-amd64.json freebsd-11.0-release-minimal.json
 
-or:
+You will find a vagrant box file named `FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.0-virtualbox.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.0-virtualbox` to your box list
+by the following command:
+
+	vagrant add FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.0-virtualbox.box --name FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.0-virtualbox
+
+### VMware
+
+From the terminal, invoke the following command for VMware provider:
 
 	packer build -only=vmware-iso -var-file=vars-freebsd-11-amd64.json freebsd-11.0-release-minimal.json
 
-for VMware provider.
-You will find a vagrant box file named `FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.0-virtualbox.box` or
-`FreeBSD-11.0-RELEASE-amd64-v11.0.0-vmware.box` in the same directory after the command has succeeded.
+You will find a vagrant box file named `FreeBSD-11.0-RELEASE-amd64-v11.0.0-vmware.box`
+in the same directory after the command has succeeded.
 
 Then you can add the box named `FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.0-virtualbox` to your box list
-by the following command (for example of VirtualBox provider):
+by the following command:
 
 	vagrant add FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.0-virtualbox.box --name FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.0-virtualbox
+
+In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
 ## Default settings
 
