@@ -1,7 +1,8 @@
 # Virtualbox
 # Depends: kernel-stuff, epel
-
-yum -y install perl gcc
+test -z "$GCC" && GCC=gcc
+test -z "$PERL" && PERL=perl
+yum -y install $PERL $GCC
 
 VBOX_VERSION=$(cat /root/.vbox_version)
 
