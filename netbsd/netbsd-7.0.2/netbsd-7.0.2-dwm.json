@@ -327,14 +327,14 @@
       "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD-7.0.2"
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD-sh"
     },
     {
       "type": "vagrant",
       "only": ["vmware-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD-7.0.2",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD-sh",
       "keep_input_artifact": true
     }
   ]

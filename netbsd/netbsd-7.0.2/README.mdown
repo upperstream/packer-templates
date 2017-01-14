@@ -64,7 +64,7 @@ In the `output` directory you will also find a VM image that can be directly imp
 
 ## Default settings
 
-These default settings are done by the file `Vagrantfile.NetBSD-7.0.2` which will be included in the box.
+These default settings are done by the file `Vagrantfile.NetBSD-sh` which will be included in the box.
 Users can override this setting by users' own `Vagrantfile`s.
 
 ### Synced Folder
@@ -89,7 +89,7 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-minimal.json
+    packer build -only=esxi-iso -var-file=vars-netbsd-7.0.2-amd64.json netbsd-7.0.2-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
 
@@ -125,4 +125,4 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 
 - - -
 
-Copyright &copy; 2016 Upper Stream Software.
+Copyright &copy; 2016, 2017 Upper Stream Software.
