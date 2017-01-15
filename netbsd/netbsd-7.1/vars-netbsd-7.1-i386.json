@@ -1,0 +1,10 @@
+{
+  "iso_file_name": "NetBSD-7.1_RC1-i386.iso",
+  "iso_path": "NetBSD/iso/7.1_RC1",
+  "iso_checksum": "21fb5ba6a3ebdbfac75822ce85b64a45",
+  "iso_checksum_type": "md5",
+  "cpu": "i386",
+  "virtualbox_geust_os_type": "NetBSD",
+  "vmware_guest_os_type": "other",
+  "vm_name": "NetBSD-7.1-RC-i386"
+}
