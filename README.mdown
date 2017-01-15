@@ -40,6 +40,7 @@
     * netbsd-7.0 - NetBSD 7.0 templates (amd64 and i386)
     * netbsd-7.0.1 - NetBSD 7.0.1 templates (amd64 and i386)
     * netbsd-7.0.2 - NetBSD 7.0.2 templates (amd64 and i386)
+    * netbsd-7.1 - NetBSD 7.1_RC1 templates (amd64)
 * [openbsd](openbsd/README.mdown) - OpenBSD templates
     * openbsd-5.6 - OpenBSD 5.6 templates (amd64 and i386)
     * openbsd-5.7 - OpenBSD 5.7 templates (amd64 and i386)
@@ -72,4 +73,4 @@ permissions and limitations under the License.
 
 - - -
 
-Copyright &copy; 2014-2016 Upper Stream Software.
+Copyright &copy; 2014-2017 Upper Stream Software.
