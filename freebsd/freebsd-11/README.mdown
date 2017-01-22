@@ -108,11 +108,13 @@ The following command will build a VM image on your ESXi:
 * `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11.0-release-x11.json` - FreeBSD 11.0-RELEASE + [X.Org] (amd64)
 * `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11.0-release-dwm.json` - FreeBSD 11.0-RELEASE + X.Org + [dwm] + [dmenu] + [st] + [SLiM] (amd64)
 * `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11.0-release-xfce.json` - FreeBSD 11.0-RELEASE + [Xfce] (amd64)
+* `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11.0-release-zfs.json` - FreeBSD 11.0-RELEASE on ZFS root file system (amd64)
 * `packer build -var-file=vars-freebsd-11-i386.json freebsd-11.0-release-minimal.json` - FreeBSD 11.0-RELEASE (i386)
 * `packer build -var-file=vars-freebsd-11-i386.json freebsd-11.0-release-ansible.json` - FreeBSD 11.0-RELEASE + Ansible + Testinfra (i386)
 * `packer build -var-file=vars-freebsd-11-i386.json freebsd-11.0-release-x11.json` - FreeBSD 11.0-RELEASE + X.Org (i386)
 * `packer build -var-file=vars-freebsd-11-amd64.json freebsd-11.0-release-dwm.json` - FreeBSD 11.0-RELEASE + X.Org + dwm + dmenu + st + SLiM (i386)
 * `packer build -var-file=vars-freebsd-11-i386.json freebsd-11.0-release-xfce.json` - FreeBSD 11.0-RELEASE + Xfce (i386)
+* `packer build -var-file=vars-freebsd-11-i386.json freebsd-11.0-release-zfs.json` - FreeBSD 11.0-RELEASE on ZFS root file system (i386)
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [dmenu]: http://tools.suckless.org/dmenu/ "dmenu | suckless.org tools"
@@ -141,4 +143,4 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 
 - - -
 
-Copyright &copy; 2016 Upper Stream Software.
+Copyright &copy; 2016, 2017 Upper Stream Software.
