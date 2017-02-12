@@ -4,4 +4,6 @@ test -z "$XSERVER_XORG_VIDEO_VMWARE" && XSERVER_XORG_VIDEO_VMWARE=xserver-xorg-v
 test -z "$XSERVER_XORG_INPUT_VMMOUSE" && XSERVER_XORG_INPUT_VMMOUSE=xserver-xorg-input-vmmouse
 
 apt-get -y install open-vm-tools
-test $VMWARE_WITH_XORG -eq 1 && apt-get -y install $XSERVER_XORG_VIDEO_VMWARE $XSERVER_XORG_INPUT_VMMOUSE 
+if [ "$VMWARE_WITH_XORG" = "1" ]; then
+  apt-get -y install $XSERVER_XORG_VIDEO_VMWARE $XSERVER_XORG_INPUT_VMMOUSE
+fi
