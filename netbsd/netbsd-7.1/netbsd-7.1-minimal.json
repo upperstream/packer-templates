@@ -2,9 +2,9 @@
   "variables": {
     "ssh_username": "root",
     "ssh_password": "vagrant",
-    "os_ver": "7.1_RC1",
+    "os_ver": "7.1_RC2",
     "variant": "minimal",
-    "box_ver": "1.0.0",
+    "box_ver": "2.0.0",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
