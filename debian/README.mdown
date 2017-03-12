@@ -30,7 +30,13 @@
 	* Debian 8.6 + Docker + Docker Compose
 	* Debian 8.6 + X.org + suckless tools
 	* Debian 8.6 + Xfce
+* [debian-8.7](debian-8.7/README.mdown) - templates for Debian 8.7
+	* Debian 8.7 minimal
+	* Debian 8.7 + Ansible + Testinfra
+	* Debian 8.7 + Docker + Docker Compose
+	* Debian 8.7 + X.org + suckless tools
+	* Debian 8.7 + Xfce
 
 - - -
 
-Copyright &copy; 2015, 2016 Upper Stream Software.
+Copyright &copy; 2015-2017 Upper Stream Software.

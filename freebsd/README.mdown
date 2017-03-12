@@ -17,7 +17,8 @@
 	* FreeBSD 11.0-RELEASE + X.Org
 	* FreeBSD 11.0-RELEASE + X.Org + dwm + dmenu + st + SLiM
 	* FreeBSD 11.0-RELEASE + Xfce
+	* FreeBSD 11.0-RELEASE on ZFS root file system
 
 - - -
 
-Copyright &copy; 2015, 2016 Upper Stream Software.
+Copyright &copy; 2015-2017 Upper Stream Software.

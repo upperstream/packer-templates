@@ -13,6 +13,8 @@
     * alpine-3.4.5 - Alpine Linux 3.4.5 templates
     * alpine-3.4.6 - Alpine Linux 3.4.6 templates
     * alpine-3.5.0 - Alpine Linux 3.5.0 templates
+    * alpine-3.5.1 - Alpine Linux 3.5.1 templates
+    * alpine-3.5.2 - Alpine Linux 3.5.2 templates
 * [centos](centos/README.mdown) - CentOS templates
     * centos-5.11 - CentOS 5.11 templates (x86_64 and i386)
     * centos-6.5 - CentOS 6.5 templates (x86_64)
@@ -29,6 +31,7 @@
     * debian-8.0 - Debian 8.0 templates
     * debian-8.4 - Debian 8.4 templates
     * debian-8.6 - Debian 8.6 templates
+    * debian-8.7 - Debian 8.7 templates
 * [freebsd](freebsd/README.mdown) - FreeBSD templates
     * freebsd-9.3 - FreeBSD 9.3 templates (amd64 and i386)
     * freebsd-10.1 - FreeBSD 10.1 templates (amd64 and i386)
@@ -40,7 +43,7 @@
     * netbsd-7.0 - NetBSD 7.0 templates (amd64 and i386)
     * netbsd-7.0.1 - NetBSD 7.0.1 templates (amd64 and i386)
     * netbsd-7.0.2 - NetBSD 7.0.2 templates (amd64 and i386)
-    * netbsd-7.1 - NetBSD 7.1_RC1 templates (amd64)
+    * netbsd-7.1 - NetBSD 7.1_RC2 templates (amd64 and i386)
 * [openbsd](openbsd/README.mdown) - OpenBSD templates
     * openbsd-5.6 - OpenBSD 5.6 templates (amd64 and i386)
     * openbsd-5.7 - OpenBSD 5.7 templates (amd64 and i386)
