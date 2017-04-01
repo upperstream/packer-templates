@@ -1,6 +1,6 @@
-# Packer templates for NetBSD 7.1_RC2
+# Packer templates for NetBSD 7.1
 
-Templates to create Vagrant box for NetBSD 7.1_RC2 (amd64 and i386).
+Templates to create Vagrant box for NetBSD 7.1 (amd64 and i386).
 
 ## Prerequisites
 
@@ -38,13 +38,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
 	packer build -only=virtualbox-iso -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-minimal.json
 
-You will find a vagrant box file named `NetBSD-7.1-RC-amd64-minimal-v2.0.0-virtualbox.box`
+You will find a vagrant box file named `NetBSD-7.1-amd64-minimal-v0.1.0-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-7.1-RC-amd64-minimal-v2.0.0-virtualbox` to your box list
+Then you can add the box named `NetBSD-7.1-amd64-minimal-v0.1.0-virtualbox` to your box list
 by the following command:
 
-	vagrant add NetBSD-7.1-RC-amd64-minimal-v2.0.0-virtualbox.box --name NetBSD-7.1-RC-amd64-minimal-v2.0.0-virtualbox
+	vagrant add NetBSD-7.1-amd64-minimal-v0.1.0-virtualbox.box --name NetBSD-7.1-amd64-minimal-v0.1.0-virtualbox
 
 ### VMware
 
@@ -52,13 +52,13 @@ From the terminal, invoke the following command for VMware provider:
 
 	packer build -only=vmware-iso -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-minimal.json
 
-You will find a vagrant box file named `NetBSD-7.1-RC-amd64-minimal-v2.0.0-vmware.box`
+You will find a vagrant box file named `NetBSD-7.1-amd64-minimal-v0.1.0-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-7.1-RC-amd64-minimal-v2.0.0-vmware` to your box list
+Then you can add the box named `NetBSD-7.1-amd64-minimal-v0.1.0-vmware` to your box list
 by the following command:
 
-	vagrant add NetBSD-7.1-RC-amd64-minimal-v2.0.0-vmware.box --name NetBSD-7.1-RC-amd64-minimal-v2.0.0-vmware
+	vagrant add NetBSD-7.1-amd64-minimal-v0.1.0-vmware.box --name NetBSD-7.1-amd64-minimal-v0.1.0-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
@@ -95,14 +95,14 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `packer build -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-minmal.json` - NetBSD 7.1_RC2 (amd64)
-* `packer build -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-ansible.json` - NetBSD 7.1_RC2 + [Ansible] + [Testinfra] (amd64)
-* `packer build -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-xorg.json` - NetBSD 7.1_RC2 + [X.Org] (amd64)
-* `packer build -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-dwm.json` - NetBSD 7.1_RC2 + X.Org + [dwm] + [dmenu] (amd64)
-* `packer build -var-file=vars-netbsd-7.1-i386.json netbsd-7.1-minmal.json` - NetBSD 7.1_RC2 (i386)
-* `packer build -var-file=vars-netbsd-7.1-i386.json netbsd-7.1-ansible.json` - NetBSD 7.1_RC2 + [Ansible] + [Testinfra] (i386)
-* `packer build -var-file=vars-netbsd-7.1-i386.json netbsd-7.1-xorg.json` - NetBSD 7.1_RC2 + [X.Org] (i386)
-* `packer build -var-file=vars-netbsd-7.1-i386.json netbsd-7.1-dwm.json` - NetBSD 7.1_RC2 + X.Org + [dwm] + [dmenu] (i386)
+* `packer build -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-minmal.json` - NetBSD 7.1 (amd64)
+* `packer build -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-ansible.json` - NetBSD 7.1 + [Ansible] + [Testinfra] (amd64)
+* `packer build -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-xorg.json` - NetBSD 7.1 + [X.Org] (amd64)
+* `packer build -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-dwm.json` - NetBSD 7.1 + X.Org + [dwm] + [dmenu] (amd64)
+* `packer build -var-file=vars-netbsd-7.1-i386.json netbsd-7.1-minmal.json` - NetBSD 7.1 (i386)
+* `packer build -var-file=vars-netbsd-7.1-i386.json netbsd-7.1-ansible.json` - NetBSD 7.1 + [Ansible] + [Testinfra] (i386)
+* `packer build -var-file=vars-netbsd-7.1-i386.json netbsd-7.1-xorg.json` - NetBSD 7.1 + [X.Org] (i386)
+* `packer build -var-file=vars-netbsd-7.1-i386.json netbsd-7.1-dwm.json` - NetBSD 7.1 + X.Org + [dwm] + [dmenu] (i386)
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
