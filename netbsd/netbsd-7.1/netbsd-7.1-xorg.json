@@ -2,9 +2,9 @@
   "variables": {
     "ssh_username": "root",
     "ssh_password": "vagrant",
-    "os_ver": "7.1_RC2",
+    "os_ver": "7.1",
     "variant": "xorg",
-    "box_ver": "2.0.0",
+    "box_ver": "0.1.0",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -23,6 +23,7 @@
       "guest_os_type": "{{user `virtualbox_geust_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
+        "http://iso.jp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
         "http://ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
         "http://mirror.planetunix.net/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
         "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
