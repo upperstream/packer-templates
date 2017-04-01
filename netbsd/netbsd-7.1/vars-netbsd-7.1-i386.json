@@ -1,10 +1,10 @@
 {
-  "iso_file_name": "NetBSD-7.1_RC2-i386.iso",
-  "iso_path": "NetBSD/iso/7.1_RC2",
-  "iso_checksum": "12fe6c8eb719071d929cbaf55a5233111cfb4e19785973ac3267efc37ba0a78179de046cf28867b8ccc9d1ca4bab590dbfb7a3fcbdacade45d358a3c458e6250",
+  "iso_file_name": "NetBSD-7.1-i386.iso",
+  "iso_path": "NetBSD/iso/7.1",
+  "iso_checksum": "2401f1f58b846c706356d08a3476e7c2229477b1fe1dbacf56cd18557ec6fa97816d1efb1daeb39c69cfdbe486ae7f7b1781daaaf50cab1a4ab903b934d75bca",
   "iso_checksum_type": "sha512",
   "cpu": "i386",
   "virtualbox_geust_os_type": "NetBSD",
   "vmware_guest_os_type": "other",
-  "vm_name": "NetBSD-7.1-RC-i386"
+  "vm_name": "NetBSD-7.1-i386"
 }
