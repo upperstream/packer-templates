@@ -2,7 +2,7 @@
   "variables": {
     "variant": "xfce",
     "cpu": "",
-    "box_version": "5.9.2",
+    "box_version": "5.9.3",
     "iso_image": "",
     "source": "",
     "proxy": "",
