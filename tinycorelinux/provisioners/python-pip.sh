@@ -1,3 +1,5 @@
+set -e
+set -x
 cd /tmp
 test -d package && rm -rf package
 mkdir /tmp/package

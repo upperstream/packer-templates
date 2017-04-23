@@ -1,3 +1,5 @@
+set -e
+set -x
 sudo sed -i \
     -e '/^#PermitRootLogin /s/^#//' \
     -e '/^PermitRootLogin /s/ yes$/ no/' \
