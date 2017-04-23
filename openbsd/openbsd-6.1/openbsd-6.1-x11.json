@@ -2,7 +2,7 @@
   "variables": {
     "variant": "x11",
     "cpu": "",
-    "box_version": "6.1.0",
+    "box_version": "6.1.1",
     "iso_image": "",
     "os_ver": "6.1",
     "mem_size": "1024",
@@ -47,7 +47,7 @@
       "boot_command": [
         "a<enter><wait>",
         "<wait10>",
-        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.conf<enter><wait>",
         "<wait5>",
         "i<enter><wait>"
       ]
@@ -89,7 +89,7 @@
       "boot_command": [
         "a<enter><wait>",
         "<wait10>",
-        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.conf<enter><wait>",
         "<wait5>",
         "i<enter><wait>"
       ]
@@ -138,7 +138,7 @@
       "boot_command": [
         "a<enter><wait>",
         "<wait10>",
-        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.conf<enter><wait>",
         "<wait5>",
         "i<enter><wait>"
       ]
