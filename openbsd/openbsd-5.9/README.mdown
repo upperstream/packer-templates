@@ -94,12 +94,12 @@ The following command will build a VM image on your ESXi:
 * `packer build -var-file=vars-openbsd-5.9-amd64-mini.json openbsd-5.9-sudo.json` - OpenBSD 5.9 (amd64) with `sudo`
 * `packer build -var-file=vars-openbsd-5.9-amd64-mini.json openbsd-5.9-ansible.json` - OpenBSD 5.9 (amd64) with `sudo`+[Ansible]+[Testinfra]
 * `packer build -var-file=vars-openbsd-5.9-amd64-mini.json openbsd-5.9-x11.json` - OpenBSD 5.9 (amd64) with [X11]
-* `packer build -var-file=vars-openbsd-5.9-amd64-mini.json openbsd-5.9-x11.json` - OpenBSD 5.9 (amd64) with [Xfce]
+* `packer build -var-file=vars-openbsd-5.9-amd64-mini.json openbsd-5.9-xfce.json` - OpenBSD 5.9 (amd64) with [Xfce]
 * `packer build -var-file=vars-openbsd-5.9-i386-mini.json openbsd-5.9-doas.json` - OpenBSD 5.9 (i386)
 * `packer build -var-file=vars-openbsd-5.9-i386-mini.json openbsd-5.9-sudo.json` - OpenBSD 5.9 (i386) with `sudo`
 * `packer build -var-file=vars-openbsd-5.9-i386-mini.json openbsd-5.9-ansible.json` - OpenBSD 5.9 (i386) with `sudo`+Ansible+Testinfra
 * `packer build -var-file=vars-openbsd-5.9-i386-mini.json openbsd-5.9-x11.json` - OpenBSD 5.9 (i386) with X11
-* `packer build -var-file=vars-openbsd-5.9-i386-mini.json openbsd-5.9-x11.json` - OpenBSD 5.9 (i386) with Xfce
+* `packer build -var-file=vars-openbsd-5.9-i386-mini.json openbsd-5.9-xfce.json` - OpenBSD 5.9 (i386) with Xfce
 
 `vars-openbsd-5.9-{amd64|i386}-mini.json` uses `cd59.iso` while `vars-openbsd-5.9-{amd64|i386}-full.json` uses `install59.iso`.
 
@@ -122,4 +122,4 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 
 - - -
 
-Copyright &copy; 2016 Upper Stream Software.
+Copyright &copy; 2016, 2017 Upper Stream Software.
