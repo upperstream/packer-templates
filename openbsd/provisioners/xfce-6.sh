@@ -17,5 +17,6 @@ cat > /home/$VAGRANT_USER/.xsession << EOF
 #!/bin/sh
 exec /usr/local/bin/startxfce4 --with-ck-launch
 EOF
+chown $VAGRANT_USER /home/$VAGRANT_USER/.xinitrc /home/$VAGRANT_USER/.xsession
 
 sed -i.orig '/current_theme/s/default/openbsd-simple/' /etc/slim.conf
