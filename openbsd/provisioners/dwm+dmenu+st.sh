@@ -21,5 +21,6 @@ cat > /home/$VAGRANT_USER/.xsession << EOF
 st &
 exec dwm
 EOF
+chown $VAGRANT_USER /home/$VAGRANT_USER/.xinitrc /home/$VAGRANT_USER/.xsession
 
 sed -i.orig '/current_theme/s/default/openbsd-simple/' /etc/slim.conf
