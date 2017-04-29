@@ -65,7 +65,6 @@ Since `tc` is the default user of Tiny Core Linux, this box is configured that `
 * x64
     * `packer build -var-file=vars-core-8.json tc-8.json-minimal.json` - Core v8.0 (x86)
     * `packer build -var-file=vars-core-8.json tc-8.json-compiletc.json` - Core v8.0 (x86) with build tools
-    * `packer build -var-file=vars-core-8.json tc-8.json-ansible.json` - Core v8.0 (x86) with Ansible and Testinfra
     * `packer build -var-file=vars-tinycore-8.json tc-8.json-x11.json` - TinyCore v8.0 (x86)
     * `packer build -var-file=vars-tinycore-8.json tc-8.json-compiletc+x11.json` - TinyCore v8.0 (x86) with build tools
 
