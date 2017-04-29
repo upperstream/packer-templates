@@ -61,6 +61,7 @@
     * ubuntu-15.10 - Ubuntu 15.10 templates
     * ubuntu-16.04 - Ubuntu 16.04 templates
     * ubuntu-16.10 - Ubuntu 16.10 templates
+    * ubuntu-17.04 - Ubuntu 17.04 templates
 
 
 ## Licensing

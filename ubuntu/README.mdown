@@ -27,7 +27,12 @@
 	* Ubuntu Server 16.10
 	* Lubuntu 16.10
 	* Xubuntu 16.10
+* [ubuntu-17.04](ubuntu-17.04/README.mdown) - templates for Ubuntu 17.04
+	* Ubuntu Desktop 17.04
+	* Ubuntu Server 17.04
+	* Lubuntu 17.04
+	* Xubuntu 17.04
 
 - - -
 
-Copyright &copy; 2014-2016 Upper Stream Software.
+Copyright &copy; 2014-2017 Upper Stream Software.
