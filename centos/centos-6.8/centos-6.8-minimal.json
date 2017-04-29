@@ -21,8 +21,7 @@
       "iso_checksum_type": "md5",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}"
+        "http://archive.kernel.org/centos-vault/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -53,8 +52,7 @@
       "iso_checksum_type": "md5",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}"
+        "http://archive.kernel.org/centos-vault/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -90,8 +88,7 @@
       "iso_checksum_type": "md5",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}"
+        "http://archive.kernel.org/centos-vault/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",

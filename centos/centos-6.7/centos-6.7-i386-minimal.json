@@ -13,7 +13,7 @@
       "guest_os_type": "RedHat",
       "iso_checksum": "fd2446e4555fb7e8e7e98e21395eae32",
       "iso_checksum_type": "md5",
-      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/6.7/isos/{{user `hardware`}}/CentOS-6.7-{{user `hardware`}}-minimal.iso",
+      "iso_url": "http://archive.kernel.org/centos-vault/6.7/isos/{{user `hardware`}}/CentOS-6.7-{{user `hardware`}}-minimal.iso",
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
