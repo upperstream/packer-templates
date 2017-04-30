@@ -1,6 +1,6 @@
 {
   "variables": {
-    "box_version": "1.0",
+    "box_version": "2017.05.03",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "mem_size": "512",
@@ -126,7 +126,10 @@
       "scripts": [
         "../provisioners/kernel3.sh",
         "../provisioners/nothing.sh",
-        "../provisioners/epel-6.8.sh"
+        "../provisioners/epel-6.x.sh"
+      ],
+      "environment_vars": [
+        "YUM_PLUGIN_PRIORITIES=1.1.30-40.el6"
       ]
     },
     {
@@ -143,6 +146,9 @@
       "only": ["vmware-iso", "esxi-iso"],
       "scripts": [
         "../provisioners/vmtools.sh"
+      ],
+      "environment_vars": [
+        "OPEN_VM_TOOLS=10.1.5-6.el6"
       ]
     },
     {

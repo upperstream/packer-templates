@@ -1,10 +1,9 @@
 {
   "variables": {
     "hardware": "x86_64",
-    "processor": "x86_64",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
-    "box_ver": "2"
+    "box_ver": "2017.05.03"
   },
   "builders": [
     {
@@ -54,11 +53,14 @@
       "scripts": [
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/kernel_stuff-6.6.sh",
-        "../provisioners/epel-6.x-{{user `hardware`}}.sh",
+        "../provisioners/kernel_stuff-6.x.sh",
+        "../provisioners/epel-6.x.sh",
         "../provisioners/virtualbox_dependencies-6.x.sh",
         "../provisioners/virtualbox.sh",
         "../provisioners/cleanup.sh"
+      ],
+      "environment_vars": [
+        "YUM_PLUGIN_PRIORITIES=1.1.30-40.el6"
       ]
     }
   ],
