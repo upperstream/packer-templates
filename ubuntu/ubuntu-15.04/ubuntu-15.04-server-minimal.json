@@ -31,7 +31,7 @@
       "http_directory": "../http",
       "boot_command": [
         "<esc> linux ",
-        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu-server.seed ",
         "debian-installer=en_US auto=true locale=en_US kbd-chooser/method=us ",
         "console-setup/ask_detect=false keyboard-configuration/layoutcode=us ",
         "hostname=vagrant ",

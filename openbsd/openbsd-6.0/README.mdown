@@ -87,11 +87,11 @@ The following command will build a VM image on your ESXi:
 * `packer build -var-file=vars-openbsd-6.0-amd64-mini.json openbsd-6.0-minimal.json` - OpenBSD 6.0 (amd64)
 * `packer build -var-file=vars-openbsd-6.0-amd64-mini.json openbsd-6.0-ansible.json` - OpenBSD 6.0 (amd64) with [Ansible]+[Testinfra]
 * `packer build -var-file=vars-openbsd-6.0-amd64-mini.json openbsd-6.0-x11.json` - OpenBSD 6.0 (amd64) with [X11]
-* `packer build -var-file=vars-openbsd-6.0-amd64-mini.json openbsd-6.0-x11.json` - OpenBSD 6.0 (amd64) with [Xfce]
+* `packer build -var-file=vars-openbsd-6.0-amd64-mini.json openbsd-6.0-xfce.json` - OpenBSD 6.0 (amd64) with [Xfce]
 * `packer build -var-file=vars-openbsd-6.0-i386-mini.json openbsd-6.0-minimal.json` - OpenBSD 6.0 (i386)
 * `packer build -var-file=vars-openbsd-6.0-i386-mini.json openbsd-6.0-ansible.json` - OpenBSD 6.0 (i386) with Ansible+Testinfra
 * `packer build -var-file=vars-openbsd-6.0-i386-mini.json openbsd-6.0-x11.json` - OpenBSD 6.0 (i386) with X11
-* `packer build -var-file=vars-openbsd-6.0-i386-mini.json openbsd-6.0-x11.json` - OpenBSD 6.0 (i386) with Xfce
+* `packer build -var-file=vars-openbsd-6.0-i386-mini.json openbsd-6.0-xfce.json` - OpenBSD 6.0 (i386) with Xfce
 
 `vars-openbsd-6.0-{amd64|i386}-mini.json` uses `cd60.iso` installer CD while `vars-openbsd-6.0-{amd64|i386}-full.json` uses `install60.iso`.
 

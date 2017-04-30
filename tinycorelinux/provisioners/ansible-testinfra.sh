@@ -1,6 +1,8 @@
+set -e
+set -x
 tce-load -wi python
 tce-load -wi python-dev gmp-dev libffi-dev
-tce-load -wi gcc glibc_base-dev linux-4.2.1_api_headers
+tce-load -wi gcc glibc_base-dev linux-${LINUX_API:=4.2.1}_api_headers
 tce-load -wi squashfs-tools
 tce-load -wi python-setuptools
 
@@ -52,10 +54,10 @@ echo "python-MarkupSafe-0.23.tcz" > /mnt/sda1/tce/optional/python-jinja2-2.8.tcz
 
 /tmp/python2tcz.sh pycrypto=2.6.1
 
-for p in PyYAML=3.11 ansible=2.1.1.0; do
+for p in PyYAML=3.11 ansible=${ANSIBLE:=2.1.1.0}; do
   /tmp/python2tcz.sh $p
 done
-cat << EOF > /mnt/sda1/tce/optional/python-ansible-2.1.1.0.tcz.dep
+cat << EOF > /mnt/sda1/tce/optional/python-ansible-${ANSIBLE}.tcz.dep
 python-paramiko-1.16.0.tcz
 python-jinja2-2.8.tcz
 python-PyYAML-3.11.tcz
@@ -63,23 +65,23 @@ python-setuptools.tcz
 python-pycrypto-2.6.1.tcz
 EOF
 
-tce-load -i python-ansible-2.1.1.0
-echo "python-ansible-2.1.1.0" >> /mnt/sda1/tce/onboot.lst
+tce-load -i python-ansible-${ANSIBLE}
+echo "python-ansible-${ANSIBLE}" >> /mnt/sda1/tce/onboot.lst
 
-for p in py=1.4.31 pytest=3.0.1 testinfra=1.4.2; do
+for p in py=1.4.31 pytest=3.0.1 testinfra=${TESTINFRA:=1.4.2}; do
   /tmp/python2tcz.sh $p
 done
-cat << EOF > /mnt/sda1/tce/optional/python-testinfra-1.4.2.tcz.dep
+cat << EOF > /mnt/sda1/tce/optional/python-testinfra-${TESTINFRA}.tcz.dep
 python-py-1.4.31.tcz
 python-pytest-3.0.1.tcz
 python-six-1.10.0.tcz
 EOF
 
-tce-load -i python-testinfra-1.4.2
-echo "python-testinfra-1.4.2" >> /mnt/sda1/tce/onboot.lst
+tce-load -i python-testinfra-${TESTINFRA}
+echo "python-testinfra-${TESTINFRA}" >> /mnt/sda1/tce/onboot.lst
 
 tce-audit builddb
-for c in squashfs-tools python-dev gmp-dev libffi-dev gcc glibc_base-dev linux-4.2.1_api_headers; do
+for c in squashfs-tools python-dev gmp-dev libffi-dev gcc glibc_base-dev linux-${LINUX_API}_api_headers; do
   tce-audit delete $c
 done
 

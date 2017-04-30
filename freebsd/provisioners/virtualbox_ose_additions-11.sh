@@ -7,7 +7,6 @@ vboxguest_enable="YES"
 vboxservice_enable="YES"
 EOF
 
-pw groupmod wheel -m $VAGRANT_USER
 cat >> /etc/X11/xorg.conf << EOF
 Section "Device"
 	Identifier "Card0"

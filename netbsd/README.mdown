@@ -3,28 +3,46 @@
 ## Contents
 
 * [netbsd-5.2.3](netbsd-5.2.3/README.mdown) - templates for NetBSD 5.2.3
-	* NetBSD 5.2.3 (amd64)
-	* NetBSD 5.2.3 + Ansible (amd64)
-	* NetBSD 5.2.3 (i386)
-	* NetBSD 5.2.3 + Ansible (i386)
+    * NetBSD 5.2.3 (amd64)
+    * NetBSD 5.2.3 + Ansible + Testinfra (amd64)
+    * NetBSD 5.2.3 (i386)
+    * NetBSD 5.2.3 + Ansible + Testinfra (i386)
 * [netbsd-6.1.5](netbsd-6.1.5/README.mdown) - templates for NetBSD 6.1.5
-	* NetBSD 6.1.5 (amd64)
-	* NetBSD 6.1.5 + Ansible (amd64)
-	* NetBSD 6.1.5 (i386)
-	* NetBSD 6.1.5 + Ansible (i386)
+    * NetBSD 6.1.5 (amd64)
+    * NetBSD 6.1.5 + Ansible + Testinfra (amd64)
+    * NetBSD 6.1.5 (i386)
+    * NetBSD 6.1.5 + Ansible + Testinfra (i386)
 * [netbsd-7.0](netbsd-7.0/README.mdown) - templates for NetBSD 7.0
-	* NetBSD 7.0 (amd64)
-	* NetBSD 7.0 + Ansible (amd64)
-	* NetBSD 7.0 (i386)
-	* NetBSD 7.0 + Ansible (i386)
+    * NetBSD 7.0 (amd64)
+    * NetBSD 7.0 + Ansible + Testinfra (amd64)
+    * NetBSD 7.0 (i386)
+    * NetBSD 7.0 + Ansible + Testinfra (i386)
 * [netbsd-7.0.1](netbsd-7.0.1/README.mdown) - templates for NetBSD 7.0.1
-	* NetBSD 7.0.1 (amd64)
-	* NetBSD 7.0.1 + Ansible (amd64)
-	* NetBSD 7.0.1 (i386)
-	* NetBSD 7.0.1 + Ansible (i386)
+    * NetBSD 7.0.1 (amd64)
+    * NetBSD 7.0.1 + Ansible + Testinfra (amd64)
+    * NetBSD 7.0.1 (i386)
+    * NetBSD 7.0.1 + Ansible + Testinfra (i386)
+* [netbsd-7.0.2](netbsd-7.0.2/README.mdown) - templates for NetBSD 7.0.2
+    * NetBSD 7.0.2 (amd64)
+    * NetBSD 7.0.2 + Ansible + Testinfra (amd64)
+    * NetBSD 7.0.2 + X.Org (amd64)
+    * NetBSD 7.0.2 + X.Org + dwm + dmenu (amd64)
+    * NetBSD 7.0.2 (i386)
+    * NetBSD 7.0.2 + Ansible + Testinfra (i386)
+    * NetBSD 7.0.2 + X.Org (i386)
+    * NetBSD 7.0.2 + X.Org + dwm + dmenu (i386)
+* [netbsd-7.1](netbsd-7.1/README.mdown) - templates for NetBSD 7.1
+    * NetBSD 7.1 (amd64)
+    * NetBSD 7.1 + Ansible + Testinfra (amd64)
+    * NetBSD 7.1 + X.Org (amd64)
+    * NetBSD 7.1 + X.Org + dwm + dmenu (amd64)
+    * NetBSD 7.1 (i386)
+    * NetBSD 7.1 + Ansible + Testinfra (i386)
+    * NetBSD 7.1 + X.Org (i386)
+    * NetBSD 7.1 + X.Org + dwm + dmenu (i386)
 
 VirtualBox and VMware providers are supported.
 
 - - -
 
-Copyright &copy; 2015, 2016 Upper Stream Software.
+Copyright &copy; 2015-2017 Upper Stream Software.

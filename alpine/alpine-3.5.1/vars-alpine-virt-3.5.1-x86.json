@@ -1,0 +1,10 @@
+{
+  "vm_name": "Alpine-virt-3.5-x86",
+  "iso_image": "alpine-virt-3.5.1-x86.iso",
+  "iso_checksum": "1efcc8dd4d213b829cdc13555e7f1b6e3abda44f89eed6abbbefc251d188cc38",
+  "iso_checksum_type": "sha256",
+  "cpu": "x86",
+  "virtualbox_guest_os_type": "Linux26",
+  "vmware_guest_os_type": "other3xlinux",
+  "esxi_guest_os_type": "linux"
+}

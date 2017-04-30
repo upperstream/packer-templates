@@ -2,7 +2,7 @@
   "flavour": "Ubuntu",
   "variant": "server",
   "os_ver": "16.04",
-  "preseed": "preseed",
+  "preseed": "ubuntu-server.seed",
   "virtualbox_version": "5.0.16",
   "mem_size": "512",
   "disk_size": "102400"

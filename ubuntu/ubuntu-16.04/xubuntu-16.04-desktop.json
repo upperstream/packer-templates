@@ -12,7 +12,7 @@
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "vm_name": "Xubuntu-16.04-amd64",
     "box_version": "1604.1.20170429",
-    "preseed": "xubuntu-preseed.cfg",
+    "preseed": "xubuntu-desktop.seed",
     "virtualbox_version": "5.1.6",
     "mem_size": "2048",
     "disk_size": "40960",

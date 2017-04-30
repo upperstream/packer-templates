@@ -1,0 +1,8 @@
+{
+  "vm_name": "OpenBSD-6.1-i386",
+  "cpu": "i386",
+  "virtualbox_guest_os_type": "OpenBSD",
+  "vmware_guest_os_type": "other",
+  "iso_image": "install61.iso",
+  "iso_checksum": "ff056193aa7556f5ad6542f2a72aef90698563459ace03e8453eb330a5a3e0d5"
+}

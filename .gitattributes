@@ -2,6 +2,7 @@
 *.conf eol=lf
 *.json	eol=lf
 *.mdown	eol=lf
+*.seed	eol=lf
 *.sh	eol=lf
 *.txt	eol=lf
 *.bat	eol=crlf

@@ -1,0 +1,12 @@
+{
+  "vm_name": "TinyCore-8",
+  "os_name": "TinyCore",
+  "os_ver": "8.0",
+  "cpu": "x86",
+  "mem_size": "512",
+  "disk_size": "40960",
+  "iso_name": "Core-8.0.iso",
+  "iso_checksum": "428bf8145ec06ced00d1d05b18f9a396",
+  "iso_checksum_type": "md5",
+  "guest_os_type": "Linux26"
+}

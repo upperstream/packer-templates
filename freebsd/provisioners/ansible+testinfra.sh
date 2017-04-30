@@ -1,3 +1,6 @@
 #!/bin/sh -x
-pkg install -y py27-pip-8.0.2
-pip install ansible==2.1.1.0 testinfra==1.4.2
+test -z "$PY27_PIP" && PY27_PIP=py27-pip
+test -z "$ANSIBLE" && ANSIBLE=ansible
+test -z "$TESTINFRA" && TESTINFRA=testinfra
+pkg install -y $PY27_PIP
+pip install $ANSIBLE $TESTINFRA

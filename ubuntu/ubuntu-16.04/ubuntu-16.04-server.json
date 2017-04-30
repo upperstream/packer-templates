@@ -12,7 +12,7 @@
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "vm_name": "Ubuntu-16.04-server-amd64",
     "box_version": "1604.1.20170429",
-    "preseed": "preseed.cfg",
+    "preseed": "ubuntu-server.seed",
     "virtualbox_version": "5.1.6",
     "mem_size": "512",
     "disk_size": "40960",
