@@ -18,11 +18,11 @@
 	* Ubuntu Desktop 15.10
 	* Ubuntu Server 15.10
 	* Xubuntu 15.10
-* [ubuntu-16.04](ubuntu-16.04/README.mdown) - templates for Ubuntu 16.04
-	* Ubuntu Desktop 16.04 LTS
-	* Ubuntu Server 16.04 LTS
-	* Xubuntu 16.04 LTS
+* [ubuntu-16.04](ubuntu-16.04/README.mdown) - templates for Ubuntu 16.04.1
+	* Ubuntu Desktop 16.04.1 LTS
+	* Ubuntu Server 16.04.1 LTS
+	* Xubuntu 16.04.1 LTS
 
 - - -
 
-Copyright &copy; 2014-2016 Upper Stream Software.
+Copyright &copy; 2014-2017 Upper Stream Software.
