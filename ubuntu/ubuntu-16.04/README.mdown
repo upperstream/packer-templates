@@ -33,15 +33,15 @@ or:
 	packer build -only=vmware-iso ubuntu-16.04-server.json
 
 for VMware provider.
-You will find a vagrant box file named `Ubuntu-16.04-server-minimal-amd64-v1604.1.20170429-virtualbox.box`
-or `Ubuntu-16.04-server-minimal-amd64-v1604.1.20170429-virtualbox.box`
+You will find a vagrant box file named `Ubuntu-16.04-server-amd64-v1604.1.20170429-virtualbox.box`
+or `Ubuntu-16.04-server-amd64-v1604.1.20170429-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-16.04-server-minimal-amd64-v1604.1.20170429-virtualbox` to your box list
+Then you can add the box named `Ubuntu-16.04-server-amd64-v1604.1.20170429-virtualbox` to your box list
 by the following command (for example of VirtualBox provider):
 
 
-	vagrant add Ubuntu-16.04-server-minimal-amd64-v1604.1.20170429-virtualbox.box --name Ubuntu-16.04-server-minimal-amd64-v1604.1.20170429-virtualbox
+	vagrant add Ubuntu-16.04-server-amd64-v1604.1.20170429-virtualbox.box --name Ubuntu-16.04-server-amd64-v1604.1.20170429-virtualbox
 
 
 ## Building a VM image on ESXi
@@ -57,7 +57,7 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso ubuntu-16.04-server-minimal.json
+    packer build -only=esxi-iso ubuntu-16.04-server.json
 
 (Note that created VM will be unregistered from your Inventory.)
 
