@@ -14,7 +14,8 @@
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "package_server": "http://www.ftp.ne.jp/OpenBSD/"
+    "package_server": "http://www.ftp.ne.jp/OpenBSD/",
+    "headless": "false"
   },
   "builders": [
     {
@@ -38,6 +39,7 @@
       "guest_additions_mode": "disable",
       "http_directory": ".",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "headless": "{{user `headless`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
@@ -73,6 +75,7 @@
       "shutdown_command": "shutdown -h -p now",
       "http_directory": ".",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "headless": "{{user `headless`}}",
       "vmx_data": {
         "numvcpus": "2",
         "memsize": "{{user `mem_size`}}",
@@ -122,6 +125,7 @@
       "http_directory": ".",
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{user `headless`}}",
       "vmx_data": {
         "numvcpus": "2",
         "memsize": "{{user `mem_size`}}",
