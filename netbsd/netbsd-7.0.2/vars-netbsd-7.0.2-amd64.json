@@ -1,0 +1,10 @@
+{
+  "iso_file_name": "NetBSD-7.0.2-amd64.iso",
+  "iso_path": "NetBSD/NetBSD-7.0.2/iso",
+  "iso_checksum": "6ec5b96400b2a9596766b155fda6fb4e",
+  "iso_checksum_type": "md5",
+  "cpu": "amd64",
+  "virtualbox_geust_os_type": "NetBSD_64",
+  "vmware_guest_os_type": "other-64",
+  "vm_name": "NetBSD-7.0-amd64"
+}

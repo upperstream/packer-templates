@@ -327,10 +327,12 @@ d-i user-setup/encrypt-home boolean false
 #d-i debian-installer/allow_unauthenticated boolean true
 
 ### Package selection
-tasksel tasksel/first multiselect ubuntu-desktop
+#tasksel tasksel/first multiselect ubuntu-desktop
 #tasksel tasksel/first multiselect lamp-server, print-server
 #tasksel tasksel/first multiselect kubuntu-desktop
 #tasksel tasksel/first multiselect xubuntu-desktop
+tasksel tasksel/first multiselect lubuntu-desktop
+#tasksel tasksel/first multiselect Basic Ubuntu server
 
 # Individual additional packages to install
 d-i pkgsel/include string openssh-server build-essential
