@@ -65,6 +65,7 @@ The following command will build a VM image on your ESXi:
 
 * `packer build ubuntu-16.04-desktop.json` - Ubuntu Desktop 16.04.2 LTS
 * `packer build ubuntu-16.04-server.json` - Ubuntu Server 16.04.2 LTS
+* `packer build lubuntu-16.04-desktop.json` - Lubuntu 16.04.2 LTS
 * `packer build xubuntu-16.04-desktop.json` - Xubuntu 16.04.2 LTS
 
 
