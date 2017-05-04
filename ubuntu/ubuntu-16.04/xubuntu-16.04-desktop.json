@@ -1,8 +1,8 @@
 {
   "variables": {
-    "iso_name": "ubuntu-16.04.1-server-amd64.iso",
+    "iso_name": "ubuntu-16.04.2-server-amd64.iso",
     "iso_path": "16.04",
-    "iso_checksum": "29a8b9009509b39d542ecb229787cdf48f05e739a932289de9e9858d7c487c80",
+    "iso_checksum": "737ae7041212c628de5751d15c3016058b0e833fdc32e7420209b76ca3d0a535",
     "iso_checksum_type": "sha256",
     "ssh_name": "vagrant",
     "ssh_pass": "vagrant",
@@ -11,7 +11,7 @@
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "vm_name": "Xubuntu-16.04-amd64",
-    "box_version": "1604.1.20170429",
+    "box_version": "1604.2.20170504",
     "preseed": "xubuntu-desktop.seed",
     "virtualbox_version": "5.1.6",
     "mem_size": "2048",

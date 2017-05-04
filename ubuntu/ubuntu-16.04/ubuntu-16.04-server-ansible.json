@@ -10,11 +10,11 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "vm_name": "Ubuntu-16.04-desktop-amd64",
+    "vm_name": "Ubuntu-16.04-server-ansible-amd64",
     "box_version": "1604.2.20170504",
-    "preseed": "ubuntu-desktop.seed",
+    "preseed": "ubuntu-server.seed",
     "virtualbox_version": "5.1.6",
-    "mem_size": "2048",
+    "mem_size": "512",
     "disk_size": "40960",
     "linux": "/install/linux",
     "initrd": "/install/initrd.gz"
@@ -45,8 +45,7 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
-        [ "modifyvm", "{{.Name}}", "--vram", "16" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
       "http_directory": "../http",
       "boot_command": [
@@ -99,8 +98,7 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE",
-        "svga.vramSize": "16777216"
+        "vhv.enable": "TRUE"
       },
       "http_directory": "../http",
       "boot_command": [
@@ -160,8 +158,7 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE",
-        "svga.vramSize": "16777216"
+        "vhv.enable": "TRUE"
       },
       "http_directory": "../http",
       "boot_command": [
@@ -187,18 +184,16 @@
   "provisioners": [
     {
       "type": "shell",
-      "inline": "apt-get install -y ubuntu-desktop",
-      "execute_command": "echo 'vagrant' | sudo -S sh -ex '{{.Path}}'"
-    },
-    {
-      "type": "shell",
       "scripts": [
         "../provisioners/base.sh",
-        "../provisioners/vagrant.sh"
+        "../provisioners/vagrant.sh",
+        "../provisioners/ansible+testinfra.sh"
       ],
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh -ex '{{.Path}}'",
       "environment_vars": [
-        "VIRTUALBOX_VERSION={{user `virtualbox_version`}}"
+        "VIRTUALBOX_VERSION={{user `virtualbox_version`}}",
+        "ANSIBLE=ansible==2.1.2.0",
+        "TESTINFRA=testinfra==1.4.2"
       ]
     },
     {
@@ -209,8 +204,7 @@
       "script": "../provisioners/virtualbox.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh -ex '{{.Path}}'",
       "environment_vars": [
-        "VIRTUALBOX_VERSION={{user `virtualbox_version`}}",
-        "VIRTUALBOX_WITH_XORG=1"
+        "VIRTUALBOX_VERSION={{user `virtualbox_version`}}"
       ]
     },
     {
@@ -219,7 +213,7 @@
         "vmware-iso",
         "esxi-iso"
       ],
-      "script": "../provisioners/vmware-desktop.sh",
+      "script": "../provisioners/vmware-server.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh -ex '{{.Path}}'"
     },
     {
