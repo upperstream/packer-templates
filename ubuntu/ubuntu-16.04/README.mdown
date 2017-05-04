@@ -26,22 +26,22 @@ Templates to create Vagrant boxes for Ubuntu 16.04.2 (x86_64).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-	packer build -only=virtualbox-iso ubuntu-16.04-server.json
+	packer build -only=virtualbox-iso ubuntu-16.04-server-minimal.json
 
 or:
 
-	packer build -only=vmware-iso ubuntu-16.04-server.json
+	packer build -only=vmware-iso ubuntu-16.04-server-minimal.json
 
 for VMware provider.
-You will find a vagrant box file named `Ubuntu-16.04-server-amd64-v1604.2.20170504-virtualbox.box`
-or `Ubuntu-16.04-server-amd64-v1604.2.20170504-virtualbox.box`
+You will find a vagrant box file named `Ubuntu-16.04-server-minimal-amd64-v1604.2.20170504-virtualbox.box`
+or `Ubuntu-16.04-server-minimal-amd64-v1604.2.20170504-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-16.04-server-amd64-v1604.2.20170504-virtualbox` to your box list
+Then you can add the box named `Ubuntu-16.04-server-minimal-amd64-v1604.2.20170504-virtualbox` to your box list
 by the following command (for example of VirtualBox provider):
 
 
-	vagrant add Ubuntu-16.04-server-amd64-v1604.2.20170504-virtualbox.box --name Ubuntu-16.04-server-amd64-v1604.2.20170504-virtualbox
+	vagrant add Ubuntu-16.04-server-minimal-amd64-v1604.2.20170504-virtualbox.box --name Ubuntu-16.04-server-minimal-amd64-v1604.2.20170504-virtualbox
 
 
 ## Building a VM image on ESXi
@@ -57,17 +57,20 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso ubuntu-16.04-server.json
+    packer build -only=esxi-iso ubuntu-16.04-server-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
 
 ## Variants
 
 * `packer build ubuntu-16.04-desktop.json` - Ubuntu Desktop 16.04.2 LTS
-* `packer build ubuntu-16.04-server.json` - Ubuntu Server 16.04.2 LTS
+* `packer build ubuntu-16.04-server-minimal.json` - Ubuntu Server 16.04.2 LTS
+* `packer build ubuntu-16.04-server-ansible.json` - Ubuntu Server 16.04.2 LTS + [Ansible] + [Testinfra]
 * `packer build lubuntu-16.04-desktop.json` - Lubuntu 16.04.2 LTS
 * `packer build xubuntu-16.04-desktop.json` - Xubuntu 16.04.2 LTS
 
+[Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
+[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
 
 ## Build parameters
 
