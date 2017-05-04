@@ -1,5 +1,5 @@
 #!/bin/sh -ex
-pkg_add xfce-4.12p3 slim-1.3.6p11 slim-themes-1.2.3p5
+pkg_add xfce-${XFCE:-4.12p3} slim-${SLIM:-1.3.6p11} slim-themes-${SLIM_THEMES:-1.2.3p5}
 echo '/usr/local/bin/slim -d' >> /etc/rc.local
 
 cat >> /etc/rc.conf.local << EOF
@@ -17,5 +17,6 @@ cat > /home/$VAGRANT_USER/.xsession << EOF
 #!/bin/sh
 exec /usr/local/bin/startxfce4 --with-ck-launch
 EOF
+chown $VAGRANT_USER /home/$VAGRANT_USER/.xinitrc /home/$VAGRANT_USER/.xsession
 
 sed -i.orig '/current_theme/s/default/openbsd-simple/' /etc/slim.conf

@@ -80,7 +80,7 @@ The following command will build a VM image on your ESXi (Created VM will be unr
 [Docker Compose]: https://docs.docker.com/compose/ "Docker Compose"
 [SLiM]: https://sourceforge.net/projects/slim.berlios/ "SLiM download | SourceForge.net"
 [suckless]: http://suckless.org/ "suckless.org software that sucks less"
-[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
+[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.5.3 documentation"
 [X.org]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"

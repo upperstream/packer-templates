@@ -1,16 +1,11 @@
 {
   "variables": {
-    "variant": "xfce",
+    "variant": "minimal",
     "cpu": "",
-    "box_version": "6.0.1",
+    "box_version": "6.1.0",
     "iso_image": "",
-    "source": "",
-    "proxy": "",
-    "http_server": "",
-    "path": "",
-    "install_without_signature": "",
-    "os_ver": "6.0",
-    "mem_size": "1024",
+    "os_ver": "6.1",
+    "mem_size": "512",
     "disk_size": "40960",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
@@ -19,7 +14,7 @@
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "script_postfix": ""
+    "package_server": "http://www.ftp.ne.jp/OpenBSD/"
   },
   "builders": [
     {
@@ -32,8 +27,9 @@
       "iso_urls": [
         "iso/{{user `cpu`}}/{{user `iso_image`}}",
         "iso/{{user `iso_image`}}",
-        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
-        "http://ftp.jaist.ac.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://ftp.jaist.ac.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
+        "http://ftp.kddilabs.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
+        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -45,13 +41,12 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
-        [ "modifyvm", "{{.Name}}", "--vram", "12" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
       "boot_command": [
         "a<enter><wait>",
         "<wait10>",
-        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11{{user `script_postfix`}}.conf<enter><wait>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
         "<wait5>",
         "i<enter><wait>"
       ]
@@ -67,8 +62,9 @@
       "iso_urls": [
         "iso/{{user `cpu`}}/{{user `iso_image`}}",
         "iso/{{user `iso_image`}}",
-        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
-        "http://ftp.jaist.ac.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://ftp.jaist.ac.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
+        "http://ftp.kddilabs.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
+        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -86,13 +82,12 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE",
-        "svga.vramSize": "12582912"
+        "vhv.enable": "TRUE"
       },
       "boot_command": [
         "a<enter><wait>",
         "<wait10>",
-        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11{{user `script_postfix`}}.conf<enter><wait>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
         "<wait5>",
         "i<enter><wait>"
       ]
@@ -109,8 +104,9 @@
       "iso_urls": [
         "iso/{{user `cpu`}}/{{user `iso_image`}}",
         "iso/{{user `iso_image`}}",
-        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
-        "http://ftp.jaist.ac.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://ftp.jaist.ac.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
+        "http://ftp.kddilabs.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
+        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -134,13 +130,12 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE",
-        "svga.vramSize": "12582912"
+        "vhv.enable": "TRUE"
       },
       "boot_command": [
         "a<enter><wait>",
         "<wait10>",
-        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11{{user `script_postfix`}}.conf<enter><wait>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
         "<wait5>",
         "i<enter><wait>"
       ]
@@ -153,16 +148,15 @@
       "scripts": [
         "../provisioners/vagrant-6.sh",
         "../provisioners/sudo-6.sh",
-        "../provisioners/x11.sh",
-        "../provisioners/xfce-6.sh",
         "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
       "environment_vars": [
-        "PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/{{user `cpu`}}",
+        "PKG_PATH={{user `package_server`}}/{{user `os_ver`}}/packages/{{user `cpu`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_username`}}",
-        "VAGRANT_PASSWORD={{user `vagrant_password`}}"
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}",
+        "SUDO=1.8.19.2"
       ]
     },
     {
@@ -171,15 +165,14 @@
       "scripts": [
         "../provisioners/vagrant-6.sh",
         "../provisioners/sudo-6.sh",
-        "../provisioners/x11.sh",
-        "../provisioners/xfce-6.sh",
         "../provisioners/cleanup.sh"
       ],
       "environment_vars": [
-        "PKG_PATH=http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/packages/{{user `cpu`}}",
+        "PKG_PATH={{user `package_server`}}/{{user `os_ver`}}/packages/{{user `cpu`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_username`}}",
-        "VAGRANT_PASSWORD={{user `vagrant_password`}}"
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}",
+        "SUDO=1.8.19.2"
       ]
     }
   ],

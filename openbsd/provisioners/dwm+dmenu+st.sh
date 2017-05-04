@@ -1,5 +1,5 @@
 #!/bin/sh -ex
-pkg_add xfce-4.12p3 slim-1.3.6p10 slim-themes-1.2.3p5 toad-1.4
+pkg_add slim-${SLIM:-1.3.6p11} slim-themes-${SLIM_THEMES:-1.2.3p5} dwm-${DWM:-6.1p0} dmenu-${DMENU:-4.6} st-${ST:-0.7}
 echo '/usr/local/bin/slim -d' >> /etc/rc.local
 
 cat >> /etc/rc.conf.local << EOF
@@ -12,10 +12,14 @@ apmd_flags="-A"      ## enables suspend and power mgmt
 pkg_scripts="${pkg_scripts} messagebus toadd slim"
 EOF
 
-echo "exec /usr/local/bin/startxfce4 --with-ck-launch" > /home/$VAGRANT_USER/.xinitrc
+cat << EOF > /home/$VAGRANT_USER/.xinitrc
+st &
+exec dwm
+EOF
 cat > /home/$VAGRANT_USER/.xsession << EOF
 #!/bin/sh
-exec /usr/local/bin/startxfce4 --with-ck-launch
+st &
+exec dwm
 EOF
 chown $VAGRANT_USER /home/$VAGRANT_USER/.xinitrc /home/$VAGRANT_USER/.xsession
 
