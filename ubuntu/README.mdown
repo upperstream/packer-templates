@@ -3,31 +3,37 @@
 ## Contents
 
 * [ubuntu-14.04](ubuntu-14.04/README.mdown) - templates for Ubuntu 14.04
-	* Ubuntu Desktop 14.04 LTS
-	* Ubuntu Server 14.04 LTS
-	* Xubuntu 14.04 LTS
+    * Ubuntu Desktop 14.04 LTS
+    * Ubuntu Server 14.04 LTS
+    * Xubuntu 14.04 LTS
 * [ubuntu-14.10](ubuntu-14.10/README.mdown) - templates for Ubuntu 14.10
-	* Ubuntu Desktop 14.10
-	* Ubuntu Server 14.10
-	* Xubuntu 14.10
+    * Ubuntu Desktop 14.10
+    * Ubuntu Server 14.10
+    * Xubuntu 14.10
 * [ubuntu-15.04](ubuntu-15.04/README.mdown) - templates for Ubuntu 15.04
-	* Ubuntu Desktop 15.04
-	* Ubuntu Server 15.04
-	* Xubuntu 15.04
+    * Ubuntu Desktop 15.04
+    * Ubuntu Server 15.04
+    * Xubuntu 15.04
 * [ubuntu-15.10](ubuntu-15.10/README.mdown) - templates for Ubuntu 15.10
-	* Ubuntu Desktop 15.10
-	* Ubuntu Server 15.10
-	* Xubuntu 15.10
-* [ubuntu-16.04](ubuntu-16.04/README.mdown) - templates for Ubuntu 16.04
-	* Ubuntu Desktop 16.04 LTS
-	* Ubuntu Server 16.04 LTS
-	* Xubuntu 16.04 LTS
+    * Ubuntu Desktop 15.10
+    * Ubuntu Server 15.10
+    * Xubuntu 15.10
+* [ubuntu-16.04](ubuntu-16.04/README.mdown) - templates for Ubuntu 16.04.2
+    * Ubuntu Desktop 16.04.2 LTS
+    * Ubuntu Server 16.04.2 LTS
+    * Lubuntu 16.04.2 LTS
+    * Xubuntu 16.04.2 LTS
 * [ubuntu-16.10](ubuntu-16.10/README.mdown) - templates for Ubuntu 16.10
-	* Ubuntu Desktop 16.10
-	* Ubuntu Server 16.10
-	* Lubuntu 16.10
-	* Xubuntu 16.10
+    * Ubuntu Desktop 16.10
+    * Ubuntu Server 16.10
+    * Lubuntu 16.10
+    * Xubuntu 16.10
+* [ubuntu-17.04](ubuntu-17.04/README.mdown) - templates for Ubuntu 17.04
+    * Ubuntu Desktop 17.04
+    * Ubuntu Server 17.04
+    * Lubuntu 17.04
+    * Xubuntu 17.04
 
 - - -
 
-Copyright &copy; 2014-2016 Upper Stream Software.
+Copyright &copy; 2014-2017 Upper Stream Software.
