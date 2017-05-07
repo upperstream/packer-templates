@@ -1,6 +1,6 @@
 {
   "variables": {
-    "box_version": "2017.05.03",
+    "box_version": "2017.05.06",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "mem_size": "512",
@@ -9,7 +9,8 @@
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
-    "remote_datastore": "{{env `REMOTE_DATASTORE`}}"
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "headless": "false"
   },
   "builders": [
     {
@@ -18,10 +19,10 @@
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "md5",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://archive.kernel.org/centos-vault/6.8/isos/{{user `hardware`}}/CentOS-6.8-{{user `hardware`}}-minimal.iso"
+        "http://ftp.iij.ad.jp/pub/linux/centos/6.9/isos/{{user `hardware`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -31,6 +32,7 @@
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{ user `headless`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
@@ -49,10 +51,10 @@
       "disk_type_id": "0",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "md5",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://archive.kernel.org/centos-vault/6.8/isos/{{user `hardware`}}/CentOS-6.8-{{user `hardware`}}-minimal.iso"
+        "http://ftp.iij.ad.jp/pub/linux/centos/6.9/isos/{{user `hardware`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -60,6 +62,7 @@
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "shutdown -h now",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{ user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -85,10 +88,10 @@
       "disk_type_id": "thin",
       "guest_os_type": "{{user `esxi_guest_os_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "md5",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://archive.kernel.org/centos-vault/6.8/isos/{{user `hardware`}}/CentOS-6.8-{{user `hardware`}}-minimal.iso"
+        "http://ftp.iij.ad.jp/pub/linux/centos/6.9/isos/{{user `hardware`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -102,6 +105,7 @@
       "remote_datastore": "{{user `remote_datastore`}}",
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{ user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -157,6 +161,7 @@
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/docker-io-centos6.8+.sh",
+        "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ]
     }

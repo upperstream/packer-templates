@@ -1,4 +1,4 @@
-yum -y install yum-plugin-priorities-1.1.30-37.el6
+yum -y install yum-plugin-priorities-1.1.30-40.el6
 rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm
 yum install -y --enablerepo elrepo-kernel kernel-lt
 yum install -y docker-io-1.7.1-2.el6
