@@ -12,7 +12,8 @@
     "os_ver": "",
     "guest_os_type": "",
     "variant": "compiletc+x11",
-    "box_version": "8.0.0"
+    "box_version": "8.0.0",
+    "headless": "false"
   },
   "builders": [
     {
@@ -34,6 +35,7 @@
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "headless": "{{user `headless`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
