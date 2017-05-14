@@ -13,7 +13,8 @@
     "user_password": "vagrant",
     "mem_size": "1024",
     "disk_size": "40960",
-    "hostname": "vagrant"
+    "hostname": "vagrant",
+    "headless": "false"
   },
   "builders": [
     {
@@ -43,6 +44,7 @@
       "virtualbox_version_file": ".vbox_version",
       "output_directory": "output/output-virtualbox-iso",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "headless": "{{user `headless`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
@@ -123,6 +125,7 @@
       "shutdown_command": "echo 'shutdown -p now'|su -",
       "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "headless": "{{user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -215,6 +218,7 @@
       "remote_datastore": "{{user `remote_datastore`}}",
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "headless": "{{user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",

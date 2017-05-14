@@ -10,7 +10,8 @@
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "user_name": "vagrant",
-    "user_password": "vagrant"
+    "user_password": "vagrant",
+    "headless": "false"
   },
   "builders": [
     {
@@ -38,6 +39,7 @@
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "headless": "{{user `headless`}}",
       "vboxmanage": [
         [
           "modifyvm",
@@ -122,6 +124,7 @@
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'shutdown -p now'|su -",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "headless": "{{user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
@@ -208,6 +211,7 @@
       "remote_datastore": "{{user `remote_datastore`}}",
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "headless": "{{user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "2",
