@@ -36,7 +36,7 @@ Templates to create Vagrant box for NetBSD 7.1 (amd64 and i386).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-	packer build -only=virtualbox-iso -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-minimal.json
+    packer build -only=virtualbox-iso -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-minimal.json
 
 You will find a vagrant box file named `NetBSD-7.1-amd64-minimal-v0.1.0-virtualbox.box`
 in the same directory after the command has succeeded.
@@ -44,13 +44,13 @@ in the same directory after the command has succeeded.
 Then you can add the box named `NetBSD-7.1-amd64-minimal-v0.1.0-virtualbox` to your box list
 by the following command:
 
-	vagrant add NetBSD-7.1-amd64-minimal-v0.1.0-virtualbox.box --name NetBSD-7.1-amd64-minimal-v0.1.0-virtualbox
+    vagrant add NetBSD-7.1-amd64-minimal-v0.1.0-virtualbox.box --name NetBSD-7.1-amd64-minimal-v0.1.0-virtualbox
 
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
 
-	packer build -only=vmware-iso -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-minimal.json
+    packer build -only=vmware-iso -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-minimal.json
 
 You will find a vagrant box file named `NetBSD-7.1-amd64-minimal-v0.1.0-vmware.box`
 in the same directory after the command has succeeded.
@@ -58,7 +58,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `NetBSD-7.1-amd64-minimal-v0.1.0-vmware` to your box list
 by the following command:
 
-	vagrant add NetBSD-7.1-amd64-minimal-v0.1.0-vmware.box --name NetBSD-7.1-amd64-minimal-v0.1.0-vmware
+    vagrant add NetBSD-7.1-amd64-minimal-v0.1.0-vmware.box --name NetBSD-7.1-amd64-minimal-v0.1.0-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
@@ -122,6 +122,7 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 * `ssh_password` - SSH password for `ssh_user` during build time.  Default value is `vagrant`.
 * `user_name` - User name during run time.  Vagrant box is set for this user.  Default value is `vagrant`.
 * `user_password` - Password for `user_name`.  Default value is `vagrant`.
+* `headless` - Launch the virtual machine in headless mode if set to `true`.  Default value is `false`.
 
 - - -
 
