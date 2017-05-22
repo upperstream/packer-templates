@@ -1,0 +1,218 @@
+{
+  "variables": {
+    "variant": "docker",
+    "box_version": "20170501.0",
+    "iso_image": "archlinux-2017.05.01-x86_64.iso",
+    "path_to_iso": "iso/2017.05.01",
+    "iso_checksum": "91a195bf1395694151fc3f7f766e9d1233e2aed9",
+    "iso_checksum_type": "sha1",
+    "mem_size": "512",
+    "disk_size": "40960",
+    "virtualbox_guest_os_type": "ArchLinux_64",
+    "vm_name": "ArchLinux-x86_64",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "root_password": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_group": "vagrant",
+    "vagrant_password": "vagrant",
+    "hostname": "",
+    "headless": "false",
+    "mirror": "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/$repo/os/$arch"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "ArchLinux_64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "iso/{{user `iso_image`}}",
+        "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/{{user `path_to_iso`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "{{user `vagrant_username`}}",
+      "ssh_password": "{{user `vagrant_password`}}",
+      "ssh_wait_timeout": "10000s",
+      "guest_additions_mode": "disable",
+      "shutdown_command": "sudo poweroff",
+      "http_directory": ".",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "headless": "{{user `headless`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+      ],
+      "boot_command": [
+        "<enter><wait>",
+        "<wait10><wait10><wait10>",
+        "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "wget -O /tmp/install-chrooted.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install-chrooted.sh<enter><wait>",
+        "cat > /tmp/environment_vars.txt << \"EOF\"<enter>",
+        "VAGRANT_HOSTNAME={{user `hostname`}}<enter>",
+        "ROOT_PASSWORD={{user `root_password`}}<enter>",
+        "VAGRANT_USERNAME={{user `vagrant_username`}}<enter>",
+        "VAGRANT_GROUP={{user `vagrant_group`}}<enter>",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}<enter>",
+        "MIRROR='{{user `mirror`}}'<enter>",
+        "SWAP_SIZE=500M<enter>",
+        "EOF<enter>",
+        "sh -ex /tmp/install.sh /tmp/environment_vars.txt<enter>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "0",
+      "guest_os_type": "other3xlinux-64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "iso/{{user `iso_image`}}",
+        "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2017.05.01/{{user `iso_image`}}"
+      ],
+      "ssh_username": "{{user `vagrant_username`}}",
+      "ssh_password": "{{user `vagrant_password`}}",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "sudo poweroff",
+      "http_directory": ".",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "headless": "{{user `headless`}}",
+      "vmx_data": {
+        "numvcpus": "2",
+        "memsize": "{{user `mem_size`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "boot_command": [
+        "<enter><wait>",
+        "<wait10><wait10><wait10>",
+        "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "wget -O /tmp/install-chrooted.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install-chrooted.sh<enter><wait>",
+        "cat > /tmp/environment_vars.txt << \"EOF\"<enter>",
+        "VAGRANT_HOSTNAME={{user `hostname`}}<enter>",
+        "ROOT_PASSWORD={{user `root_password`}}<enter>",
+        "VAGRANT_USERNAME={{user `vagrant_username`}}<enter>",
+        "VAGRANT_GROUP={{user `vagrant_group`}}<enter>",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}<enter>",
+        "MIRROR='{{user `mirror`}}'<enter>",
+        "SWAP_SIZE=500M<enter>",
+        "EOF<enter>",
+        "sh -ex /tmp/install.sh /tmp/environment_vars.txt<enter>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "name": "esxi-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "thin",
+      "guest_os_type": "otherlinux-64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "iso/{{user `iso_image`}}",
+        "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2017.05.01/{{user `iso_image`}}"
+      ],
+      "ssh_username": "{{user `vagrant_username`}}",
+      "ssh_password": "{{user `vagrant_password`}}",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "sudo poweroff",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "http_directory": ".",
+      "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{user `headless`}}",
+      "vmx_data": {
+        "numvcpus": "2",
+        "memsize": "{{user `mem_size`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "bridged",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "boot_command": [
+        "<enter><wait>",
+        "<wait10><wait10><wait10>",
+        "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "wget -O /tmp/install-chrooted.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install-chrooted.sh<enter><wait>",
+        "cat > /tmp/environment_vars.txt << \"EOF\"<enter>",
+        "VAGRANT_HOSTNAME={{user `hostname`}}<enter>",
+        "ROOT_PASSWORD={{user `root_password`}}<enter>",
+        "VAGRANT_USERNAME={{user `vagrant_username`}}<enter>",
+        "VAGRANT_GROUP={{user `vagrant_group`}}<enter>",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}<enter>",
+        "MIRROR='{{user `mirror`}}'<enter>",
+        "SWAP_SIZE=500M<enter>",
+        "EOF<enter>",
+        "sh -ex /tmp/install.sh /tmp/environment_vars.txt<enter>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso"],
+      "inline": "echo y | sudo pacman -S virtualbox-guest-utils-nox virtualbox-guest-modules-arch",
+      "execute_command": "chmod +x {{ .Path }}; sh -ex {{ .Path }}"
+    },
+    {
+      "type": "shell",
+      "only": ["vmware-iso", "esxi-iso"],
+      "script": "provisioners/vmware.sh",
+      "execute_command": "chmod +x {{ .Path }}; sh -ex {{ .Path }}"
+    },
+    { 
+      "type": "shell",
+      "script": "provisioners/docker.sh",
+      "execute_command": "chmod +x {{ .Path }}; {{.Vars}} sh -ex {{ .Path }}",
+      "environment_vars": [
+        "VAGRANT_USERNAME={{user `vagrant_username`}}"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "scripts": [
+        "provisioners/disk_cleanup.sh",
+        "provisioners/cleanup.sh"
+      ],
+      "execute_command": "chmod +x {{ .Path }}; sh -ex {{ .Path }}"
+    },
+    {
+      "type": "shell",
+      "only": ["esxi-iso"],
+      "scripts": [
+        "provisioners/cleanup.sh"
+      ],
+      "execute_command": "chmod +x {{ .Path }}; sh -ex {{ .Path }}"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box"
+    }
+  ]
+}
