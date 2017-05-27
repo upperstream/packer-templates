@@ -38,6 +38,7 @@
       "shutdown_command": "shutdown -h -p now",
       "guest_additions_mode": "disable",
       "http_directory": ".",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-virtualbox",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "headless": "{{user `headless`}}",
       "vboxmanage": [
@@ -74,6 +75,7 @@
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "shutdown -h -p now",
       "http_directory": ".",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "headless": "{{user `headless`}}",
       "vmx_data": {
