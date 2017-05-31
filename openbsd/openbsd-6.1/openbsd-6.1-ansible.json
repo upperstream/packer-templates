@@ -38,6 +38,7 @@
       "shutdown_command": "shutdown -h -p now",
       "guest_additions_mode": "disable",
       "http_directory": ".",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-virtualbox",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "headless": "{{user `headless`}}",
       "vboxmanage": [
@@ -73,6 +74,7 @@
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "shutdown -h -p now",
       "http_directory": ".",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "headless": "{{user `headless`}}",
       "vmx_data": {
@@ -193,14 +195,18 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "only": ["virtualbox-iso", "vmware-iso"],
+      "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "override": {
-        "virtualbox": {
-          "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD"
-        }
-      }
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD"
+    },
+    {
+      "type": "vagrant",
+      "only": ["vmware-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD",
+      "keep_input_artifact": true
     }
   ]
 }
