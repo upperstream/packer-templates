@@ -153,14 +153,11 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": ["virtualbox-iso", "vmware-iso"],
       "scripts": [
         "../provisioners/vagrant-6.sh",
         "../provisioners/sudo-6.sh",
         "../provisioners/x11.sh",
-        "../provisioners/dwm+dmenu+st.sh",
-        "../provisioners/disk_cleanup.sh",
-        "../provisioners/cleanup.sh"
+        "../provisioners/dwm+dmenu+st.sh"
       ],
       "environment_vars": [
         "PKG_PATH={{user `package_server`}}/{{user `os_ver`}}/packages/{{user `cpu`}}",
@@ -177,26 +174,12 @@
     },
     {
       "type": "shell",
-      "only": ["esxi-iso"],
-      "scripts": [
-        "../provisioners/vagrant-6.sh",
-        "../provisioners/sudo-6.sh",
-        "../provisioners/x11.sh",
-        "../provisioners/dwm+dmenu+st.sh",
-        "../provisioners/cleanup.sh"
-      ],
-      "environment_vars": [
-        "PKG_PATH={{user `package_server`}}/{{user `os_ver`}}/packages/{{user `cpu`}}",
-        "VAGRANT_USER={{user `vagrant_username`}}",
-        "VAGRANT_GROUP={{user `vagrant_username`}}",
-        "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "SUDO=1.8.19.2",
-        "SLIM=1.3.6p13",
-        "SLIM_THEMES=1.2.3p6",
-	"DWM=6.1p0",
-	"DMENU=4.6",
-	"ST=0.7"
-      ]
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "script": "../provisioners/disk_cleanup.sh"
+    },
+    {
+      "type": "shell",
+      "script": "../provisioners/cleanup.sh"
     }
   ],
   "post-processors": [
