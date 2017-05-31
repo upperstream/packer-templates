@@ -12,7 +12,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "5.0.0",
+    "box_version": "6.0.20170528",
     "vm_name": ""
   },
   "builders": [
@@ -23,7 +23,7 @@
       "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
-        "http://dl-cdn.alpinelinux.org/alpine/v3.5/releases/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://dl-cdn.alpinelinux.org/alpine/v3.6/releases/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -34,7 +34,7 @@
       "shutdown_command": "poweroff",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
-      "output_directory": "output/output-virtualbox-iso",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-virtualbox",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
@@ -75,7 +75,7 @@
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
-        "http://dl-cdn.alpinelinux.org/alpine/v3.5/releases/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://dl-cdn.alpinelinux.org/alpine/v3.6/releases/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -85,7 +85,7 @@
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "poweroff",
       "tools_upload_flavor": "linux",
-      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
@@ -134,7 +134,7 @@
       "guest_os_type": "{{user `esxi_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
-        "http://dl-cdn.alpinelinux.org/alpine/v3.5/releases/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://dl-cdn.alpinelinux.org/alpine/v3.6/releases/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -208,9 +208,9 @@
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "ANSIBLE=ansible=2.2.0.0-r0",
-        "PY2_PIP=py2-pip=9.0.0-r0",
-        "TESTINFRA_VERSION=1.4.5"
+        "ANSIBLE=ansible=2.3.0.0-r1",
+        "PY2_PIP=py2-pip=9.0.1-r1",
+        "TESTINFRA_VERSION=1.5.3"
       ]
     },
     {
@@ -231,9 +231,9 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "only": ["virtualbox-iso", "vmware-iso"],
-      "compression_level": "9",
-      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "only": ["virtualbox-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{.Provider}}.box",
       "vagrantfile_template": "../vagrantfiles/Vagrantfile.Alpine"
     },
     {
