@@ -150,13 +150,10 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": ["virtualbox-iso", "vmware-iso"],
       "scripts": [
         "../provisioners/ansible-6.sh",
         "../provisioners/vagrant-6.sh",
-        "../provisioners/sudo-6.sh",
-        "../provisioners/disk_cleanup.sh",
-        "../provisioners/cleanup.sh"
+        "../provisioners/sudo-6.sh"
       ],
       "environment_vars": [
         "PKG_PATH={{user `package_server`}}/{{user `os_ver`}}/packages/{{user `cpu`}}",
@@ -172,24 +169,12 @@
     },
     {
       "type": "shell",
-      "only": ["esxi-iso"],
-      "scripts": [
-        "../provisioners/ansible-6.sh",
-        "../provisioners/vagrant-6.sh",
-        "../provisioners/sudo-6.sh",
-        "../provisioners/cleanup.sh"
-      ],
-      "environment_vars": [
-        "PKG_PATH={{user `package_server`}}/{{user `os_ver`}}/packages/{{user `cpu`}}",
-        "VAGRANT_USER={{user `vagrant_username`}}",
-        "VAGRANT_GROUP={{user `vagrant_username`}}",
-        "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "SUDO=1.8.19.2",
-        "PYTHON=2.7.13p0",
-        "ANSIBLE=2.2.1.0",
-        "PY_PIP=9.0.1p0",
-        "TESTINFRA=1.4.2"
-      ]
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "script": "../provisioners/disk_cleanup.sh"
+    },
+    {
+      "type": "shell",
+      "script": "../provisioners/cleanup.sh"
     }
   ],
   "post-processors": [
