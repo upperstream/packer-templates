@@ -1,10 +1,10 @@
 {
   "variables": {
     "variant": "docker",
-    "box_version": "20170501.0",
-    "iso_image": "archlinux-2017.05.01-x86_64.iso",
-    "path_to_iso": "iso/2017.05.01",
-    "iso_checksum": "91a195bf1395694151fc3f7f766e9d1233e2aed9",
+    "box_version": "20170601.0",
+    "iso_image": "archlinux-2017.06.01-x86_64.iso",
+    "path_to_iso": "iso/2017.06.01",
+    "iso_checksum": "77508eaf2be9f15e22b1cc920db12d4e90c2cf77",
     "iso_checksum_type": "sha1",
     "mem_size": "512",
     "disk_size": "40960",
@@ -74,7 +74,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2017.05.01/{{user `iso_image`}}"
+        "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "{{user `vagrant_username`}}",
       "ssh_password": "{{user `vagrant_password`}}",
@@ -123,7 +123,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2017.05.01/{{user `iso_image`}}"
+        "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "{{user `vagrant_username`}}",
       "ssh_password": "{{user `vagrant_password`}}",
