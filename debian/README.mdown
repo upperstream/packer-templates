@@ -42,6 +42,8 @@
     * Debian 8.8 + Docker + Docker Compose
     * Debian 8.8 + X.org + suckless tools
     * Debian 8.8 + Xfce
+* [debian-9](debian-9/README.mdown) - templates for Debain 9
+    * Debain 9 minimal
 
 - - -
 
