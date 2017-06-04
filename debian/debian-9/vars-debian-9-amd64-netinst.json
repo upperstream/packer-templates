@@ -1,0 +1,6 @@
+{
+  "iso_name": "debian-stretch-DI-rc4-amd64-netinst.iso",
+  "iso_path": "stretch_di_rc4/amd64/iso-cd",
+  "iso_checksum": "647cd96c08af635029d1a0a369a50086f8c244f967ff144c31d17b004fb8f3f9",
+  "iso_checksum_type": "sha256"
+}
