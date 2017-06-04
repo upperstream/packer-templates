@@ -16,7 +16,7 @@
     * alpine-3.5.1 - Alpine Linux 3.5.1 templates
     * alpine-3.5.2 - Alpine Linux 3.5.2 templates
     * alpine-3.6.0 - Alpine Linux 3.6.0 templates
-    * alpine-3.6.1 - Alpine Linux 3.6.0 templates
+    * alpine-3.6.1 - Alpine Linux 3.6.1 templates
 * [archlinux](archlinux/README.mdown) - Arch Linux templates
 * [centos](centos/README.mdown) - CentOS templates
     * centos-5.11 - CentOS 5.11 templates (x86_64 and i386)
