@@ -81,6 +81,7 @@
         "http://ftp.jp.debian.org/debian/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://ftp.jaist.ac.jp/debian-cd/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://cdimage.debian.org/debian-cd/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://cdimage.debian.org/cdimage/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://cdimage.debian.org/cdimage/archive/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
@@ -132,6 +133,7 @@
         "http://ftp.jp.debian.org/debian/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://ftp.jaist.ac.jp/debian-cd/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://cdimage.debian.org/debian-cd/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://cdimage.debian.org/cdimage/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://cdimage.debian.org/cdimage/archive/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
