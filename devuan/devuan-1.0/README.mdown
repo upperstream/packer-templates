@@ -86,6 +86,19 @@ The following command will build a VM image on your ESXi:
 (Note that created VM will be unregistered from your Inventory.)
 
 
+## Variants
+
+* `devuan-1.0-amd64-minimal.json` - Devuan 1.0 minimal installation
+* `devuan-1.0-amd64-xfce.json` - Devuan 1.0 with [Xfce][] + [xrdp][]
+* `devuan-1.0-amd64-xorg.json` - Devuan 1.0 with [X.org][], [suckless][] tools, [ARandR][], and [xrdp][]
+
+[ARandR]: https://christian.amsuess.com/tools/arandr/ "ARandR: Another XRandR GUI"
+[suckless]: http://suckless.org/ "suckless.org software that sucks less"
+[X.org]: https://www.x.org/wiki/ "X.Org"
+[Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
+[xrdp]: http://www.xrdp.org/ "xrdp"
+
+
 ## Installer CD images
 
 Optional var file is provided to instruct to use an alternative installer CD image, i.e.,
