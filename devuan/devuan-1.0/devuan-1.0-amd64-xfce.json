@@ -1,0 +1,233 @@
+{
+  "variables": {
+    "vm_name": "Devuan-1.0-amd64-xfce",
+    "mem_size": "1024",
+    "disk_size": "51200",
+    "iso_name": "devuan_jessie_1.0.0_amd64_NETINST.iso",
+    "iso_path": "devuan/devuan_jessie/installer-iso",
+    "iso_checksum": "70c6abe544ec59b0d0882c666ca0377be1b6c218655dac1f61b2c7e88c9b3d9f",
+    "iso_checksum_type": "sha256",
+    "ssh_name": "root",
+    "ssh_pass": "vagrant",
+    "root_password": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_group": "vagrant",
+    "vagrant_password": "vagrant",
+    "box_version": "1.0.20170604",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "headless": "false"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "Debian_64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "https://mirror.leaseweb.com/{{user `iso_path`}}/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": ".vbox_version",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-virtualbox",
+      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "32" ]
+      ],
+      "http_directory": "../http",
+      "headless": "{{user `headless`}}",
+      "boot_command": [
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "passwd/root-password={{user `root_password`}} <wait>",
+        "passwd/root-password-again={{user `root_password`}} <wait>",
+        "passwd/user-fullname={{user `vagrant_username`}} <wait>",
+        "passwd/username={{user `vagrant_username`}} <wait>",
+        "passwd/user-password={{user `vagrant_password`}} <wait>",
+        "passwd/user-password-again={{user `vagrant_password`}} <wait>",
+        "keymap=us <wait>",
+        "tasks=standard,xfce-desktop <wait>",
+        "<enter> <wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "0",
+      "guest_os_type": "other3xlinux-64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "https://mirror.leaseweb.com/{{user `iso_path`}}/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-vmware",
+      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vmx_data": {
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "2",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "33554432"
+      },
+      "http_directory": "../http",
+      "headless": "{{user `headless`}}",
+      "boot_command": [
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "passwd/root-password={{user `root_password`}} <wait>",
+        "passwd/root-password-again={{user `root_password`}} <wait>",
+        "passwd/user-fullname={{user `vagrant_username`}} <wait>",
+        "passwd/username={{user `vagrant_username`}} <wait>",
+        "passwd/user-password={{user `vagrant_password`}} <wait>",
+        "passwd/user-password-again={{user `vagrant_password`}} <wait>",
+        "keymap=us <wait>",
+        "tasks=standard,xfce-desktop <wait>",
+        "<enter> <wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "name": "esxi-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "thin",
+      "guest_os_type": "otherlinux-64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "https://mirror.leaseweb.com/{{user `iso_path`}}/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vmx_data": {
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "2",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "bridged",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "33554432"
+      },
+      "http_directory": "../http",
+      "headless": "{{user `headless`}}",
+      "boot_command": [
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "passwd/root-password={{user `root_password`}} <wait>",
+        "passwd/root-password-again={{user `root_password`}} <wait>",
+        "passwd/user-fullname={{user `vagrant_username`}} <wait>",
+        "passwd/username={{user `vagrant_username`}} <wait>",
+        "passwd/user-password={{user `vagrant_password`}} <wait>",
+        "passwd/user-password-again={{user `vagrant_password`}} <wait>",
+        "keymap=us <wait>",
+        "tasks=standard,xfce-desktop <wait>",
+        "<enter> <wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/base.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/xrdp.sh"
+      ],
+      "environment_vars": [
+        "VAGRANT_USERNAME={{user `vagrant_username`}}",
+        "VAGRANT_GROUP={{user `vagrant_group`}}",
+        "XRDP=xrdp=0.6.1-2"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso"],
+      "scripts": [
+        "../provisioners/linux-headers.sh",
+        "../provisioners/virtualbox.sh"
+      ],
+      "environment_vars": [
+        "VBOX_VER={{user `vb_version`}}",
+        "VIRTUALBOX_WITH_XORG=1"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["vmware-iso", "esxi-iso"],
+      "scripts": [
+        "../provisioners/vmtools.sh"
+      ],
+      "environment_vars": [
+        "XSERVER_XORG_VIDEO_VMWARE=xserver-xorg-video-vmware=1:13.0.2-3.1",
+        "XSERVER_XORG_INPUT_VMMOUSE=xserver-xorg-input-vmmouse=1:13.0.0-1+b3",
+        "VMWARE_WITH_XORG=1"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "scripts": [
+        "../provisioners/disk_cleanup.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/finalise.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box"
+    },
+    {
+      "type": "vagrant",
+      "only": ["vmware-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "keep_input_artifact": true
+    }
+  ]
+}
