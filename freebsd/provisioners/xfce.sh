@@ -20,7 +20,7 @@ return polkit.Result.YES;
 });
 EOF
 
-pw groupmod wheel -m $VAGRANT_USER
+pw groupmod wheel -m ${VAGRANT_USER:=vagrant}
 
 cat >> /etc/X11/xorg.conf << EOF
 
@@ -34,7 +34,11 @@ EndSection
 EOF
 
 echo "exec /usr/local/bin/startxfce4 --with-ck-launch" > /home/$VAGRANT_USER/.xinitrc
+chown $VAGRANT_USER:${VAGRANT_GROUP:=vagrant} /home/$VAGRANT_USER/.xinitrc
+
 cat > /home/$VAGRANT_USER/.xsession << EOF
 #!/bin/sh
 exec /usr/local/bin/startxfce4 --with-ck-launch
 EOF
+chown $VAGRANT_USER:$VAGRANT_GROUP /home/$VAGRANT_USER/.xsession
+chmod +x /home/$VAGRANT_USER/.xsession
