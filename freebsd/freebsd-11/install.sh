@@ -29,7 +29,7 @@ ln -sf /usr/local/share/certs/ca-root-nss.crt /etc/ssl/cert.pem
 
 echo -n "$ROOT_PASSWORD" | pw usermod root -h 0
 pw groupadd -n "$VAGRANT_GROUP" -g 1000
-echo -n "$VAGRANT_PASSWORD" | pw useradd -n $VAGRANT_USER -u 1000 -s /bin/sh -m -d /home/$VAGRANT_USER -G $VAGRANT_GROUP -h 0
+echo -n "$VAGRANT_PASSWORD" | pw useradd -n $VAGRANT_USER -u 1000 -s /bin/sh -m -d /home/$VAGRANT_USER -g $VAGRANT_GROUP -h 0
 pw groupmod wheel -m $VAGRANT_USER
 
 echo "$VAGRANT_USER ALL=(ALL) NOPASSWD:ALL" >> /usr/local/etc/sudoers.d/$VAGRANT_USER
