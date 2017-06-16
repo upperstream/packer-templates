@@ -1,5 +1,5 @@
 #!/bin/sh -ex
-pkg install -y xfce-4.12_1 arandr-0.1.7.1_2
+pkg install -y ${XFCE:-"xfce-4.12_1"} ${ARANDR:-"arandr-0.1.7.1_2"}
 
 cat >> /usr/local/etc/polkit-1/rules.d/10-restart.rules << EOF
 polkit.addRule(function (action, subject) {

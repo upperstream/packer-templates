@@ -1,5 +1,5 @@
 #!/bin/sh -ex
-pkg install -y xorg-minimal-7.5.2_1 xterm-325 xclock-1.0.7_1 twm-1.0.9 xrandr-1.4.3
+pkg install -y ${XORG_MINIMAL:="xorg-minimal-7.5.2_1"} ${XTERM:-"xterm-325"} ${XCLOCK:-"xclock-1.0.7_1"} ${TWM:-"twm-1.0.9"} ${XRANDR:-"xrandr-1.4.3"}
 pw groupmod video -m ${VAGRANT_USER:=vagrant} || pw groupmod wheel -m $VAGRANT_USER
 echo "kern.vty=vt" >> /boot/loader.conf
 cat >> /usr/local/etc/X11/xorg.conf.d/screen-resolutions.conf << EOF
