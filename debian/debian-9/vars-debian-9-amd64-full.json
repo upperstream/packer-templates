@@ -1,6 +1,6 @@
 {
-  "iso_name": "debian-stretch-DI-rc4-amd64-xfce-CD-1.iso",
-  "iso_path": "stretch_di_rc4/amd64/iso-cd",
-  "iso_checksum": "af4084dac3e4817bc65f8b6c60f8156aeddbc5561c6a8d81f1417b7fd1b5e862",
+  "iso_name": "debian-stretch-DI-rc5-amd64-xfce-CD-1.iso",
+  "iso_path": "stretch_di_rc5/amd64/iso-cd",
+  "iso_checksum": "a0d11858903fafe532f2619ceb9c842f071b54dab8452302c814a147c2a79858",
   "iso_checksum_type": "sha256"
 }

@@ -1,6 +1,6 @@
-# Packer templates for Debian 9
+# Packer templates for Debian 9 rc5
 
-Templates to create Vagrant boxes for Debian 9 (amd64).
+Templates to create Vagrant boxes for Debian 9 rc5 (amd64).
 
 
 ## Prerequisites
@@ -39,13 +39,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso debian-9-amd64-minimal.json
 
-You will find a vagrant box file named `Debian-9-rc-amd64-minimal-v0.4.20170604-virtualbox.box`
+You will find a vagrant box file named `Debian-9-rc-amd64-minimal-v0.5.20170617-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-9-rc-amd64-minimal-v0.4.20170604-virtualbox` to your box list
+Then you can add the box named `Debian-9-rc-amd64-minimal-v0.5.20170617-virtualbox` to your box list
 by the following command:
 
-    vagrant add Debian-9-rc-amd64-minimal-v0.4.20170604-virtualbox.box --name Debian-9-rc-amd64-minimal-v0.4.20170604-virtualbox
+    vagrant add Debian-9-rc-amd64-minimal-v0.5.20170617-virtualbox.box --name Debian-9-rc-amd64-minimal-v0.5.20170617-virtualbox
 
 ### VMware
 
@@ -53,13 +53,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso debian-9-amd64-minimal.json
 
-You will find a vagrant box file named `Debian-9-rc-amd64-minimal-v0.4.20170604-vmware.box`
+You will find a vagrant box file named `Debian-9-rc-amd64-minimal-v0.5.20170617-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-9-rc-amd64-minimal-v0.4.20170604-vmware` to your box list
+Then you can add the box named `Debian-9-rc-amd64-minimal-v0.5.20170617-vmware` to your box list
 by the following command:
 
-    vagrant add Debian-9-rc-amd64-minimal-v0.4.20170604-vmware.box --name Debian-9-rc-amd64-minimal-v0.4.20170604-vmware
+    vagrant add Debian-9-rc-amd64-minimal-v0.5.20170617-vmware.box --name Debian-9-rc-amd64-minimal-v0.5.20170617-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
