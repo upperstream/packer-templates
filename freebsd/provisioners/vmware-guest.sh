@@ -2,11 +2,7 @@
 
 if [ "$VMWARE_WITH_XORG" = "1" ]; then
 
-test -z "$OPEN_VM_TOOLS" && OPEN_VM_TOOLS=open-vm-tools
-test -z "$XF86_VIDEO_VMWARE" && XF86_VIDEO_VMWARE=xf86-video-vmware
-test -z "$XF86_INPUT_VMMOUSE" && XF86_INPUT_VMMOUSE=xf86-input-vmmouse
-
-pkg install -y $OPEN_VM_TOOLS $XF86_VIDEO_VMWARE $XF86_INPUT_VMMOUSE
+pkg install -y ${OPEN_VM_TOOLS:-"open-vm-tools"} ${XF86_VIDEO_VMWARE:-"xf86-video-vmware"} ${XF86_INPUT_VMMOUSE:-"xf86-input-vmmouse"}
 
 cat >> /etc/rc.conf << EOF
 hald_enable="YES"
@@ -48,8 +44,7 @@ EOF
 
 else
 
-test -z "$OPEN_VM_TOOLS" && OPEN_VM_TOOLS=open-vm-tools-nox11
-pkg install -y $OPEN_VM_TOOLS
+pkg install -y ${OPEN_VM_TOOLS:-"open-vm-tools-nox11"}
 
 fi
 
