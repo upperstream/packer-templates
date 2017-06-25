@@ -1,7 +1,7 @@
 {
   "variables": {
-    "vm_name": "Debian-9-amd64-minimal",
-    "mem_size": "512",
+    "vm_name": "Debian-9-amd64-xfce",
+    "mem_size": "1024",
     "disk_size": "51200",
     "iso_name": "mini.iso",
     "iso_path": "dists/Debian9.0/main/installer-amd64/20170615/images/netboot",
@@ -50,7 +50,8 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "32" ]
       ],
       "http_directory": "../http",
       "headless": "{{user `headless`}}",
@@ -63,7 +64,7 @@
         "passwd/user-password={{user `vagrant_password`}} <wait>",
         "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
-        "tasks=standard <wait>",
+        "tasks=standard,xfce-desktop <wait>",
         "<enter> <wait>"
       ]
     },
@@ -102,7 +103,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "33554432"
       },
       "http_directory": "../http",
       "headless": "{{user `headless`}}",
@@ -115,7 +117,7 @@
         "passwd/user-password={{user `vagrant_password`}} <wait>",
         "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
-        "tasks=standard <wait>",
+        "tasks=standard,xfce-desktop <wait>",
         "<enter> <wait>"
       ]
     },
@@ -160,7 +162,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "33554432"
       },
       "http_directory": "../http",
       "headless": "{{user `headless`}}",
@@ -173,7 +176,7 @@
         "passwd/user-password={{user `vagrant_password`}} <wait>",
         "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
-        "tasks=standard <wait>",
+        "tasks=standard,xfce-desktop <wait>",
         "<enter> <wait>"
       ]
     }
@@ -183,10 +186,12 @@
       "type": "shell",
       "scripts": [
         "../provisioners/base.sh",
-        "../provisioners/vagrant.sh"
+        "../provisioners/vagrant.sh",
+        "../provisioners/xrdp.sh"
       ],
       "environment_vars": [
-        "VAGRANT_USERNAME={{user `vagrant_username`}}"
+        "VAGRANT_USERNAME={{user `vagrant_username`}}",
+        "XRDP=xrdp=0.9.1-9"
       ]
     },
     {
@@ -197,7 +202,8 @@
         "../provisioners/virtualbox.sh"
       ],
       "environment_vars": [
-        "VBOX_VER={{user `virtualbox_version`}}"
+        "VBOX_VER={{user `virtualbox_version`}}",
+        "VIRTUALBOX_WITH_XORG=1"
       ]
     },
     {
@@ -205,6 +211,11 @@
       "only": ["vmware-iso", "esxi-iso"],
       "scripts": [
         "../provisioners/vmtools.sh"
+      ],
+      "environment_vars": [
+        "XSERVER_XORG_VIDEO_VMWARE=xserver-xorg-video-vmware=1:13.2.1-1+b1",
+        "XSERVER_XORG_INPUT_VMMOUSE=xserver-xorg-input-evdev=1:2.10.5-1",
+        "VMWARE_WITH_XORG=1"
       ]
     },
     {

@@ -1,6 +1,6 @@
 {
   "variables": {
-    "vm_name": "Debian-9-amd64-minimal",
+    "vm_name": "Debian-9-amd64-docker",
     "mem_size": "512",
     "disk_size": "51200",
     "iso_name": "mini.iso",
@@ -183,10 +183,13 @@
       "type": "shell",
       "scripts": [
         "../provisioners/base.sh",
-        "../provisioners/vagrant.sh"
+        "../provisioners/vagrant.sh",
+        "../provisioners/docker-ce.sh"
       ],
       "environment_vars": [
-        "VAGRANT_USERNAME={{user `vagrant_username`}}"
+        "VAGRANT_USERNAME={{user `vagrant_username`}}",
+        "DOCKER_CE=docker-ce=17.03.1~ce-0~debian-stretch",
+        "DOCKER_COMPOSE_VERSION=1.12.0"
       ]
     },
     {
