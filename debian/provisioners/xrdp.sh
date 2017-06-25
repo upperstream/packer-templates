@@ -1,3 +1,2 @@
 #!/bin/sh -ex
-test -z "$XRDP" && XRDP=xrdp
-apt-get install -y $XRDP
+apt-get install -y ${XRDP:-xrdp}

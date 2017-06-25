@@ -1,6 +1,6 @@
 {
   "variables": {
-    "vm_name": "Debian-9-amd64-minimal",
+    "vm_name": "Debian-9-amd64-ansible",
     "mem_size": "512",
     "disk_size": "51200",
     "iso_name": "mini.iso",
@@ -183,10 +183,19 @@
       "type": "shell",
       "scripts": [
         "../provisioners/base.sh",
-        "../provisioners/vagrant.sh"
+        "../provisioners/vagrant.sh",
+        "../provisioners/ansible+testinfra.sh"
       ],
       "environment_vars": [
-        "VAGRANT_USERNAME={{user `vagrant_username`}}"
+        "VAGRANT_USERNAME={{user `vagrant_username`}}",
+        "PYTHON_DEV=python-dev=2.7.13-2",
+        "LIBFFI_DEV=libffi-dev=3.2.1-6",
+        "LIBYAML_DEV=libyaml-dev=0.1.7-2",
+        "LIBGMP_DEV=libgmp-dev=2:6.1.2+dfsg-1",
+        "LIBSSL_DEV=libssl-dev=1.1.0f-3",
+        "PIP=pip==9.0.1",
+        "ANSIBLE=ansible==2.2.3.0",
+        "TESTINFRA=testinfra==1.5.5"
       ]
     },
     {
