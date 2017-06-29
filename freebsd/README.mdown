@@ -18,7 +18,7 @@
 	* FreeBSD 11.0-RELEASE + X.Org + dwm + dmenu + st + SLiM
 	* FreeBSD 11.0-RELEASE + Xfce
 	* FreeBSD 11.0-RELEASE on ZFS root file system
-* [freebsd-11.1](freebsd-11.1/README.mdown) - templates for FreeBSD 11.1-BETA2 (amd64 and i386)
+* [freebsd-11.1](freebsd-11.1/README.mdown) - templates for FreeBSD 11.1-BETA3 (amd64 and i386)
 	* FreeBSD 11.1-BETA2
 	* FreeBSD 11.0-BETA2 + Ansible + Testinfra
 	* FreeBSD 11.1-BETA2 + X.Org + dwm + dmenu + st
