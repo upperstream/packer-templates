@@ -197,7 +197,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant-11.0.sh",
-        "../provisioners/docker-11.0.sh"
+        "../provisioners/docker-11.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
