@@ -9,7 +9,7 @@
     "ssh_pass": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "7.3.0",
+    "box_version": "7.3.20170701",
     "vm_name": "CentOS-7-x86_64-minimal"
   },
   "builders": [
