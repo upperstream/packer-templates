@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-11.1-BETA3-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.1-RC1-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.1",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "067c65510e7fcfc9e07fa80ce06a6e4f9d9132d691db51fe7426f36ff3629ccf",
-    "box_version": "3.20170625",
+    "iso_checksum": "ba049786abd34b664fd2aca62f5984333e852cad17d212da5084a55e2d4d98f1",
+    "box_version": "1.20170701",
     "mem_size": "1024",
     "disk_size": "51200",
     "remote_host": "{{env `REMOTE_HOST`}}",
@@ -17,12 +17,12 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "zfs",
+    "variant": "docker",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:11:amd64",
-    "vm_name": "FreeBSD-11.1-BETA-amd64"
+    "vm_name": "FreeBSD-11.1-RC-amd64"
   },
   "builders": [
     {
@@ -139,7 +139,7 @@
     {
       "type": "vmware-iso",
       "name": "esxi-iso",
-      "boot_wait": "10s",
+      "boot_wait": "20s",
       "disk_size": "{{user `disk_size`}}",
       "disk_type_id": "thin",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
@@ -205,13 +205,19 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "../provisioners/vagrant-11.1.sh",
+      "scripts": [
+        "../provisioners/vagrant-11.1.sh",
+        "../provisioners/docker-11.sh"
+      ],
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "VAGRANT_GROUP={{user `vagrant_group`}}"
+        "VAGRANT_GROUP={{user `vagrant_group`}}",
+        "DOCKER_FREEBSD=docker-freebsd-20150625",
+        "PY27_PIP=py27-pip-9.0.1",
+        "DOCKER_COMPOSE=docker-compose==1.3.3"
       ]
     },
     {
