@@ -43,6 +43,7 @@
     * tinycorelinux-7 - Tiny Core Linux v7.2 templates (x86_64 and x86)
     * tinycorelinux-8 - Tiny Core Linux v8.0 templates (x86_64 and x86)
 * [ubuntu](ubuntu/README.mdown) - Ubuntu templates
+    * ubuntu-12.04 - Ubuntu 12.04.5 templates
     * ubuntu-14.04 - Ubuntu 14.04.5 templates
     * ubuntu-16.04 - Ubuntu 16.04.2 templates
     * ubuntu-16.10 - Ubuntu 16.10 templates
