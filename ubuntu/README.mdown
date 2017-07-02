@@ -2,6 +2,8 @@
 
 ## Contents
 
+* [ubuntu-12.04](ubuntu-12.04/README.mdown) - template for Ubuntu 12.04.5
+    * Ubuntu Server 12.04.5 LTS
 * [ubuntu-14.04](ubuntu-14.04/README.mdown) - templates for Ubuntu 14.04.5
     * Ubuntu Desktop 14.04.5 LTS
     * Ubuntu Server 14.04.5 LTS
