@@ -9,7 +9,7 @@
     "ssh_pass": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "7.3.0",
+    "box_version": "7.3.20170701",
     "vm_name": "CentOS-7-x86_64-minimal"
   },
   "builders": [
@@ -18,15 +18,14 @@
       "boot_wait": "10s",
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "RedHat_64",
-      "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
         "http://ftp.iij.ad.jp/pub/linux/centos/7.3.1611/isos/x86_64/{{user `iso_name`}}"
       ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
-      "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "shutdown -h now",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
