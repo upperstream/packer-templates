@@ -40,6 +40,7 @@
       "guest_additions_mode": "disable",
       "shutdown_command": "sudo poweroff",
       "http_directory": ".",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-virtualbox",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "headless": "{{user `headless`}}",
       "vboxmanage": [
@@ -81,6 +82,7 @@
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "sudo poweroff",
       "http_directory": ".",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "headless": "{{user `headless`}}",
       "vmx_data": {
@@ -210,8 +212,15 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "only": ["virtualbox-iso", "vmware-iso"],
+      "only": ["virtualbox-iso"],
       "compression_level": 9,
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box"
+    },
+    {
+      "type": "vagrant",
+      "only": ["vmware-iso"],
+      "compression_level": 9,
+      "keep_input_artifact": true,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box"
     }
   ]

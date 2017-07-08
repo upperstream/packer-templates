@@ -48,6 +48,8 @@ by the following command:
 
     vagrant add ArchLinux-x86_64-minimal-v20170701.0-vmware.box --name ArchLinux-x86_64-minimal-v20170701.0-vmware
 
+In the `output` directory you will also find a VM image that can be directly imported from VMware.
+
 ## Building a VM image on ESXi
 
 In order to build a VM image on ESXi, you need to provide the following environment variables:
