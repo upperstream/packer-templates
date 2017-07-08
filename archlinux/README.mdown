@@ -4,11 +4,11 @@ Templates to create Vagrant boxes for Arch Linux.
 
 ## Prerequisites
 
-* [Packer] v0.8.6+
-* [Vagrant] v1.7.3+
-* [VirtualBox] Version 5.0.36+, on which Linux 4.11 can run
-* [VMware] Workstation v11.1.0+ / VMware Fusion v8.0+
-* [ESXi] (vSphere Hypervisor) v5.5+
+* [Packer][] v0.8.6+
+* [Vagrant][] v1.7.3+
+* [VirtualBox][] Version 5.0.36+, on which Linux 4.11 can run
+* [VMware][] Workstation v11.1.0+ / VMware Fusion v8.0+
+* [ESXi][] (vSphere Hypervisor) v5.5+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
         "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
@@ -25,13 +25,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso archlinux-minimal.json
 
-You will find a vagrant box file named `ArchLinux-x86_64-minimal-v20170601.0-virtualbox.box`
+You will find a vagrant box file named `ArchLinux-x86_64-minimal-v20170701.0-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `ArchLinux-x86_64-minimal-v20170601.0-virtualbox` to your box list
+Then you can add the box named `ArchLinux-x86_64-minimal-v20170701.0-virtualbox` to your box list
 by the following command:
 
-    vagrant add ArchLinux-x86_64-minimal-v20170601.0-virtualbox.box --name ArchLinux-x86_64-minimal-v20170601.0-virtualbox
+    vagrant add ArchLinux-x86_64-minimal-v20170701.0-virtualbox.box --name ArchLinux-x86_64-minimal-v20170701.0-virtualbox
 
 ### VMware
 
@@ -40,13 +40,15 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso archlinux-minimal.json
 
 for VMware provider.
-You will find a vagrant box file named `ArchLinux-x86_64-minimal-v20170601.0-vmware.box`
+You will find a vagrant box file named `ArchLinux-x86_64-minimal-v20170701.0-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `ArchLinux-x86_64-minimal-v20170601.0-vmware` to your box list
+Then you can add the box named `ArchLinux-x86_64-minimal-v20170701.0-vmware` to your box list
 by the following command:
 
-    vagrant add ArchLinux-x86_64-minimal-v20170601.0-vmware.box --name ArchLinux-x86_64-minimal-v20170601.0-vmware
+    vagrant add ArchLinux-x86_64-minimal-v20170701.0-vmware.box --name ArchLinux-x86_64-minimal-v20170701.0-vmware
+
+In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
 ## Building a VM image on ESXi
 
@@ -70,7 +72,7 @@ The following command will build a VM image on your ESXi:
 `sudo` is enabled with all variants.
 
 * `packer build archlinux-minimal.json` - Arch Linux
-* `packer build archlinux-docker.json` - Arch Linux with [Docker]
+* `packer build archlinux-docker.json` - Arch Linux with [Docker][]
 
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 
