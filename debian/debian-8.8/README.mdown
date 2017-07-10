@@ -45,13 +45,13 @@ or:
     packer build -only=vmware-iso debian-8.8-amd64-minimal.json
 
 for [VMware] provider.
-You will find a vagrant box file named `Debian-8-amd64-minimal-v8.8.20170507-virtualbox.box`
-or `Debian-8-amd64-minimal-v8.8.20170507-vmware.box` in the same directory after the command has succeeded.
+You will find a vagrant box file named `Debian-8-amd64-minimal-v8.8.20170508-virtualbox.box`
+or `Debian-8-amd64-minimal-v8.8.20170508-vmware.box` in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-8-amd64-minimal-v8.8.20170507-virtualbox` to your box list
+Then you can add the box named `Debian-8-amd64-minimal-v8.8.20170508-virtualbox` to your box list
 by the following command:
 
-    vagrant add Debian-8-amd64-minimal-v8.8.20170507-virtualbox.box --name Debian-8-amd64-minimal-v8.8.20170507-virtualbox
+    vagrant add Debian-8-amd64-minimal-v8.8.20170508-virtualbox.box --name Debian-8-amd64-minimal-v8.8.20170508-virtualbox
 
 
 ## Building a VM image on ESXi
