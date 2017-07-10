@@ -1,11 +1,10 @@
 {
   "variables": {
     "hardware": "x86_64",
-    "processor": "x86_64",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "path_to_iso": "6.5/isos/x86_64/CentOS-6.5-x86_64-minimal.iso",
-    "box_ver": "2"
+    "box_ver": "2017.05.03"
   },
   "builders": [
     {
@@ -60,14 +59,19 @@
       "scripts": [
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/kernel_stuff-6.5.sh",
-        "../provisioners/epel-6.x-{{user `hardware`}}.sh",
+        "../provisioners/kernel_stuff-6.x.sh",
+        "../provisioners/epel-6.x.sh",
         "../provisioners/virtualbox_dependencies-6.x.sh",
         "../provisioners/virtualbox.sh",
-        "../provisioners/docker-io-centos6.5.sh",
+        "../provisioners/docker-io-centos6.x.sh",
         "../provisioners/fig.sh",
         "../provisioners/nsenter.sh",
         "../provisioners/cleanup.sh"
+      ],
+      "environment_vars": [
+        "YUM_PLUGIN_PRIORITIES=1.1.30-40.el6",
+        "DEVICE_MAPPER=1.02.117-12.el6",
+        "DOCKER_IO=1.7.1-2.el6"
       ]
     }
   ],

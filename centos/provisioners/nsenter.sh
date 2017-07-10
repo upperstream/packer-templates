@@ -7,7 +7,6 @@ command -v docker || (
 command -v nsenter || (
   test -d /usr/local/bin || mkdir -p /usr/local/bin
   service docker start
-  while ! service docker status; do sleep 10; done
   docker run --rm jpetazzo/nsenter cat /nsenter > /usr/local/bin/nsenter && chmod +x /usr/local/bin/nsenter && strip /usr/local/bin/nsenter
   service docker stop
 )

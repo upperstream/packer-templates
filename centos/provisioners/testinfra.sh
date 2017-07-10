@@ -1,2 +1,1 @@
-pip install testinfra==1.2.0
-
+pip install testinfra==${TESTINFRA:-1.2.0}

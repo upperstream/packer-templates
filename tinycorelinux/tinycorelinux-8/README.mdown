@@ -65,7 +65,6 @@ Since `tc` is the default user of Tiny Core Linux, this box is configured that `
 * x64
     * `packer build -var-file=vars-core-8.json tc-8.json-minimal.json` - Core v8.0 (x86)
     * `packer build -var-file=vars-core-8.json tc-8.json-compiletc.json` - Core v8.0 (x86) with build tools
-    * `packer build -var-file=vars-core-8.json tc-8.json-ansible.json` - Core v8.0 (x86) with Ansible and Testinfra
     * `packer build -var-file=vars-tinycore-8.json tc-8.json-x11.json` - TinyCore v8.0 (x86)
     * `packer build -var-file=vars-tinycore-8.json tc-8.json-compiletc+x11.json` - TinyCore v8.0 (x86) with build tools
 
@@ -78,6 +77,7 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 * `vm_name` - VM name.  This also affects box file name and output directory name.
 * `mem_size` - RAM size of the created VM.  Default value is `512` which means 512MB.
 * `disk_size` - Disk size of the created VM.  Default value is `40960` which means 40GB.
+* `headless` - Launch the virtual machine in headless mode if set to `true`.  Default value is `false`.
 
 - - -
 

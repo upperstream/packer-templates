@@ -1,10 +1,9 @@
 {
   "variables": {
     "hardware": "x86_64",
-    "processor": "x86_64",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
-    "box_ver": "2"
+    "box_ver": "2017.05.03"
   },
   "builders": [
     {
@@ -14,7 +13,7 @@
       "guest_os_type": "RedHat_64",
       "iso_checksum": "eb3c8be6ab668e6d83a118323a789e6c",
       "iso_checksum_type": "md5",
-      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/6.6/isos/{{user `hardware`}}/CentOS-6.6-{{user `hardware`}}-minimal.iso",
+      "iso_url": "http://archive.kernel.org/centos-vault/6.6/isos/{{user `hardware`}}/CentOS-6.6-{{user `hardware`}}-minimal.iso",
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
@@ -54,14 +53,19 @@
       "scripts": [
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/kernel_stuff-6.6.sh",
-        "../provisioners/epel-6.x-{{user `hardware`}}.sh",
+        "../provisioners/kernel_stuff-6.x.sh",
+        "../provisioners/epel-6.x.sh",
         "../provisioners/virtualbox_dependencies-6.x.sh",
         "../provisioners/virtualbox.sh",
-        "../provisioners/docker-io-centos6.6.sh",
+        "../provisioners/docker-io-centos6.x.sh",
         "../provisioners/fig.sh",
         "../provisioners/nsenter.sh",
         "../provisioners/cleanup.sh"
+      ],
+      "environment_vars": [
+        "YUM_PLUGIN_PRIORITIES=1.1.30-40.el6",
+        "DEVICE_MAPPER=1.02.95-3.el6_7.3",
+        "DOCKER_IO=1.7.1-2.el6"
       ]
     }
   ],

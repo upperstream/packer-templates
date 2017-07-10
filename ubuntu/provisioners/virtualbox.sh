@@ -1,14 +1,15 @@
 #!/bin/sh -ex
-test -z "$VIRTUALBOX_VERSION" && VIRTUALBOX_VERSION=`cat /root/.vbox_version`
+test -z "$VIRTUALBOX_VERSION" && VIRTUALBOX_VERSION=$(cat $HOME/.vbox_version)
 test "$VIRTUALBOX_WITH_XORG" = "1" || VIRTUALBOX_WITHOUT_XORG=--nox11
-wget http://download.virtualbox.org/virtualbox/$VIRTUALBOX_VERSION/VBoxGuestAdditions_$VIRTUALBOX_VERSION.iso
+VBOX_GUEST_ADDITIONS_ISO=VBoxGuestAdditions_$VIRTUALBOX_VERSION.iso
+test -f $VBOX_GUEST_ADDITIONS_ISO || wget http://download.virtualbox.org/virtualbox/$VIRTUALBOX_VERSION/$VBOX_GUEST_ADDITIONS_ISO
 
 apt-get install -y build-essential
 apt-get install -y linux-headers-`uname -r`
 apt-get install -y dkms
 
 cd /tmp
-mount -o loop /home/vagrant/VBoxGuestAdditions_$VIRTUALBOX_VERSION.iso /mnt
-sh /mnt/VBoxLinuxAdditions.run $VIRTUALBOX_WITHOUT_XORG
+mount -o loop /home/vagrant/$VBOX_GUEST_ADDITIONS_ISO /mnt
+sh /mnt/VBoxLinuxAdditions.run $VIRTUALBOX_WITHOUT_XORG || true
 umount /mnt
-rm -rf /home/vagrant/VBoxGuestAdditions_*.iso
+rm -rf /home/vagrant/$VBOX_GUEST_ADDITIONS_ISO

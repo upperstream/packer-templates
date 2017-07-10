@@ -1,13 +1,6 @@
 #!/bin/sh -ex
-test -z "$XORG_MINIMAL" && XORG_MINIMAL=xorg-minimal
-test -z "$XRANDR" && XRANDR=xrandr
-test -z "$ARANDR" && ARANDR=arandr
-test -z "$DWM" && DWM=dwm
-test -z "$STERM" && STERM=sterm
-test -z "$DMENU" && DMENU=dmenu
-
-pkg install -y $XORG_MINIMAL $XRANDR
-pw groupmod video -m $VAGRANT_USER || pw groupmod wheel -m $VAGRANT_USER
+pkg install -y ${XORG_MINIMAL:-"xorg-minimal"} ${XRANDR:-xrandr}
+pw groupmod video -m ${VAGRANT_USER:=vagrant} || pw groupmod wheel -m $VAGRANT_USER
 echo "kern.vty=vt" >> /boot/loader.conf
 cat >> /usr/local/etc/X11/xorg.conf.d/screen-resolutions.conf << EOF
 Section "Screen"
@@ -23,7 +16,7 @@ Section "Screen"
 EndSection
 EOF
 
-pkg install -y $ARNADR $DWM $STERM $DMENU
+pkg install -y ${ARNADR:-arandr} ${DWM:-dwm} ${STERM:-sterm} ${DMENU:-dmenu} ${NCURSES:-ncurses}
 
 for t in st st-256color; do infocmp -C $t >> /usr/share/misc/termcap; done
 cap_mkdb /usr/share/misc/termcap
@@ -43,3 +36,4 @@ cat > /home/$VAGRANT_USER/.xinitrc << EOF
 st &
 exec dwm
 EOF
+chown $VAGRANT_USER:${VAGRANT_GROUP:-vagrant} /home/$VAGRANT_USER/.xinitrc

@@ -28,26 +28,38 @@ Templates to create Vagrant boxes for OpenBSD 6.1 (amd64 and i386).
 * sharity-light
 * sudo
 * `vagrant` user and its insecure public key
-* ... and their dependencies
 
 ## How to create a box
 
+### VirtualBox
+
 From the terminal, invoke the following command for VirtualBox provider:
 
-	packer build -only=virtualbox-iso -var-file=vars-openbsd-6.1-amd64.json openbsd-6.1-minimal.json
+    packer build -only=virtualbox-iso -var-file=vars-openbsd-6.1-amd64.json openbsd-6.1-minimal.json
 
-or:
-
-	packer build -only=vmware-iso -var-file=vars-openbsd-6.1-amd64.json openbsd-6.1-minimal.json
-
-for VMware provider.
-You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.0-virtualbox.box`
+You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.0-virtualbox`
 in the same directory after the command has succeeded.
 
 Then you can add the box named `OpenBSD-6.1-amd64-minimal-v6.1.0-virtualbox` to your box list
 by the following command:
 
-	vagrant add OpenBSD-6.1-amd64-minimal-v6.1.0-virtualbox.box --name OpenBSD-6.1-amd64-minimal-v6.1.0-virtualbox
+    vagrant add OpenBSD-6.1-amd64-minimal-v6.1.0-virtualbox.box --name OpenBSD-6.1-amd64-minimal-v6.1.0-virtualbox
+
+### VMware
+
+From the terminal, invoke the following command for VMware provider:
+
+    packer build -only=vmware-iso -var-file=vars-openbsd-6.1-amd64.json openbsd-6.1-minimal.json
+
+You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.0-vmware.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `OpenBSD-6.1-amd64-minimal-v6.1.0-vmawre` to your box list
+by the following command:
+
+    vagrant add OpenBSD-6.1-amd64-minimal-v6.1.0-vmware.box --name OpenBSD-6.1-amd64-minimal-v6.1.0-vmware
+
+In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
 ## Default settings
 
@@ -115,6 +127,7 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 * `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
 * `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
 * `vagrant_group` - Group name that `vagrant_username` belongs to.  Default value is `vagrant`.
+* `headless` - Launch the virtual machine in headless mode if set to `true`.  Default value is `false`.
 
 - - -
 

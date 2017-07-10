@@ -1,6 +1,6 @@
 {
   "variables": {
-    "box_version": "1.0",
+    "box_version": "2017.05.03",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "mem_size": "512",
@@ -21,8 +21,7 @@
       "iso_checksum_type": "md5",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}"
+        "http://archive.kernel.org/centos-vault/6.8/isos/{{user `hardware`}}/CentOS-6.8-{{user `hardware`}}-minimal.iso"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -53,8 +52,7 @@
       "iso_checksum_type": "md5",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}"
+        "http://archive.kernel.org/centos-vault/6.8/isos/{{user `hardware`}}/CentOS-6.8-{{user `hardware`}}-minimal.iso"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -90,8 +88,7 @@
       "iso_checksum_type": "md5",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/6.8/isos/{{user `hardware`}}/{{user `iso_image`}}"
+        "http://archive.kernel.org/centos-vault/6.8/isos/{{user `hardware`}}/CentOS-6.8-{{user `hardware`}}-minimal.iso"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -129,7 +126,10 @@
       "scripts": [
         "../provisioners/kernel3.sh",
         "../provisioners/nothing.sh",
-        "../provisioners/epel-6.8.sh"
+        "../provisioners/epel-6.x.sh"
+      ],
+      "environment_vars": [
+        "YUM_PLUGIN_PRIORITIES=1.1.30-40.el6"
       ]
     },
     {
@@ -137,7 +137,7 @@
       "only": ["virtualbox-iso"],
       "scripts": [
         "../provisioners/kernel3_stuff.sh",
-        "../provisioners/virtualbox_dependencies-6.8.sh",
+        "../provisioners/virtualbox_dependencies-6.x.sh",
         "../provisioners/virtualbox.sh"
       ]
     },
@@ -146,6 +146,9 @@
       "only": ["vmware-iso", "esxi-iso"],
       "scripts": [
         "../provisioners/vmtools.sh"
+      ],
+      "environment_vars": [
+        "OPEN_VM_TOOLS=10.1.5-6.el6"
       ]
     },
     {
@@ -153,7 +156,7 @@
       "scripts": [
         "../provisioners/sudo.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/docker-io-centos6.8.sh",
+        "../provisioners/docker-io-centos6.8+.sh",
         "../provisioners/cleanup.sh"
       ]
     }

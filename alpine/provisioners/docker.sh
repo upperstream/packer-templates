@@ -1,3 +1,4 @@
+#!/bin/sh -ex
 sed -i '/edge\/community/s/^#//' /etc/apk/repositories
 sed -i '/edge\/main/s/^#//' /etc/apk/repositories
 HOST=$(grep '/main$' /etc/apk/repositories | head -1)
@@ -13,4 +14,4 @@ sysctl -w kernel.grsecurity.chroot_deny_mknod=0
 apk add py-pip
 pip install docker-compose
 rc-update add docker boot
-adduser vagrant docker
+adduser ${VAGRANT_USERNAME:-vagrant} docker

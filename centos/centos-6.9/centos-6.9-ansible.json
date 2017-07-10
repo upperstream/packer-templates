@@ -1,0 +1,184 @@
+{
+  "variables": {
+    "box_version": "2017.05.06",
+    "ssh_name": "root",
+    "ssh_pass": "vagrant",
+    "mem_size": "512",
+    "disk_size": "40960",
+    "variant": "ansible",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "headless": "false"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "iso/{{user `iso_image`}}",
+        "http://ftp.iij.ad.jp/pub/linux/centos/6.9/isos/{{user `hardware`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h now",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{ user `headless`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--nictype1", "virtio" ]
+      ],
+      "http_directory": "../http",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "0",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "iso/{{user `iso_image`}}",
+        "http://ftp.iij.ad.jp/pub/linux/centos/6.9/isos/{{user `hardware`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h now",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{ user `headless`}}",
+      "vmx_data": {
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "2",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "http_directory": "../http",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "name": "esxi-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "thin",
+      "guest_os_type": "{{user `esxi_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "iso/{{user `iso_image`}}",
+        "http://ftp.iij.ad.jp/pub/linux/centos/6.9/isos/{{user `hardware`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h now",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{ user `headless`}}",
+      "vmx_data": {
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "2",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "bridged",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "http_directory": "../http",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso"],
+      "scripts": [
+        "../provisioners/kernel_stuff-6.9.sh",
+        "../provisioners/epel-6.x.sh",
+        "../provisioners/virtualbox_dependencies-6.x.sh",
+        "../provisioners/virtualbox.sh"
+      ],
+      "environment_vars": [
+        "YUM_PLUGIN_PRIORITIES=1.1.30-40.el6"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["vmware-iso", "esxi-iso"],
+      "scripts": [
+        "../provisioners/epel-6.x.sh",
+        "../provisioners/vmtools.sh"
+      ],
+      "environment_vars": [
+        "YUM_PLUGIN_PRIORITIES=1.1.30-40.el6",
+        "OPEN_VM_TOOLS=10.1.5-6.el6"
+      ]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/sudo.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/python-devel-6.9.sh",
+        "../provisioners/ansible-6.8.sh",
+        "../provisioners/testinfra.sh",
+        "../provisioners/disk_cleanup.sh",
+        "../provisioners/cleanup.sh"
+      ],
+      "environment_vars": [
+        "PYTHON_LIBS=2.6.6-66.el6_8",
+        "PYTHON=2.6.6-66.el6_8",
+        "PYTHON_DEVEL=2.6.6-66.el6_8",
+        "GCC=4.4.7-18.el6",
+        "GPM_DEVEL=1.20.6-12.el6",
+        "OPENSSL_DEVEL=1.0.1e-57.el6",
+        "ANSIBLE=2.2.1.0",
+        "TESTINFRA=1.5.5"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "compression_level": 9,
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box"
+    }
+  ]
+}

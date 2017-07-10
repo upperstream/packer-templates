@@ -1,5 +1,5 @@
 #!/bin/sh -ex
-pkg install -y virtualbox-ose-additions-4.3.38
+pkg install -y ${VIRTUALBOX_OSE_ADDITIONS:-"virtualbox-ose-additions-4.3.38"}
 cat >> /etc/rc.conf << EOF
 hald_enable="YES"
 dbus_enable="YES"

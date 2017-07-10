@@ -35,20 +35,20 @@ Templates to create Vagrant boxes for CentOS 6.8 (x86_64 and i386).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-	packer build -only=virtualbox-iso -var-file=vars-centos-6.8-x86_64.json centos-6.8-minimal.json
+    packer build -only=virtualbox-iso -var-file=vars-centos-6.8-x86_64.json centos-6.8-minimal.json
 
 or:
 
-	packer build -only=vmware-iso -var-file=vars-centos-6.8-x86_64.json centos-6.8-minimal.json
+    packer build -only=vmware-iso -var-file=vars-centos-6.8-x86_64.json centos-6.8-minimal.json
 
 for VMware provider.
-You will find a vagrant box file named `CentOS-6.8-x86_64-minimal-v1.0-virtualbox.box`
+You will find a vagrant box file named `CentOS-6.8-x86_64-minimal-v2017.05.03-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `CentOS-6.8-x86_64-minimal-v1.0-virtualbox` to your box list
+Then you can add the box named `CentOS-6.8-x86_64-minimal-v2017.05.03-virtualbox` to your box list
 by the following command:
 
-	vagrant add CentOS-6.8-x86_64-minimal-v1.0-virtualbox.box --name CentOS-6.8-x86_64-minimal-v1.0-virtualbox
+    vagrant add CentOS-6.8-x86_64-minimal-v2017.05.03-virtualbox.box --name CentOS-6.8-x86_64-minimal-v2017.05.03-virtualbox
 
 
 ## Building a VM image on ESXi
@@ -91,4 +91,4 @@ The following command will build a VM image on your ESXi:
 
 - - -
 
-Copyright &copy; 2016 Upper Stream Software.
+Copyright &copy; 2016, 2017 Upper Stream Software.

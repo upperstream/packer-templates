@@ -3,39 +3,51 @@
 ## Contents
 
 * [debian-7.8](debian-7.8/README.mdown) - templates for Debian 7.8
-	* Debian 7.8 minimal
-	* Debian 7.8 + Docker
+    * Debian 7.8 minimal
+    * Debian 7.8 + Docker
 * [debian-7.9](debian-7.9/README.mdown) - templates for Debian 7.9
-	* Debian 7.9 minimal
-	* Debian 7.9 + Docker
-	* Debian 7.9 + Xfce
+    * Debian 7.9 minimal
+    * Debian 7.9 + Docker
+    * Debian 7.9 + Xfce
 * [debian-7.10](debian-7.10/README.mdown) - templates for Debian 7.10
-	* Debian 7.10 minimal
-	* Debian 7.10 + Xfce
+    * Debian 7.10 minimal
+    * Debian 7.10 + Xfce
 * [debian-7.11](debian-7.11/README.mdown) - templates for Debian 7.11
-	* Debian 7.11 minimal
-	* Debian 7.11 + Ansible + Testinfra
-	* Debian 7.11 + Docker + Docker Compose
-	* Debian 7.11 + Xfce
+    * Debian 7.11 minimal
+    * Debian 7.11 + Ansible + Testinfra
+    * Debian 7.11 + Docker + Docker Compose
+    * Debian 7.11 + Xfce
 * [debian-8.0](debian-8.0/README.mdown) - templates for Debian 8.0
-	* Debian 8.0 minimal
-	* Debian 8.0 + Docker
+    * Debian 8.0 minimal
+    * Debian 8.0 + Docker
 * [debian-8.4](debian-8.4/README.mdown) - templates for Debian 8.4
-	* Debian 8.4 minimal
-	* Debian 8.4 + Docker
-	* Debian 8.4 + Xfce
+    * Debian 8.4 minimal
+    * Debian 8.4 + Docker
+    * Debian 8.4 + Xfce
 * [debian-8.6](debian-8.6/README.mdown) - templates for Debian 8.6
-	* Debian 8.6 minimal
-	* Debian 8.6 + Ansible + Testinfra
-	* Debian 8.6 + Docker + Docker Compose
-	* Debian 8.6 + X.org + suckless tools
-	* Debian 8.6 + Xfce
+    * Debian 8.6 minimal
+    * Debian 8.6 + Ansible + Testinfra
+    * Debian 8.6 + Docker + Docker Compose
+    * Debian 8.6 + X.org + suckless tools
+    * Debian 8.6 + Xfce
 * [debian-8.7](debian-8.7/README.mdown) - templates for Debian 8.7
-	* Debian 8.7 minimal
-	* Debian 8.7 + Ansible + Testinfra
-	* Debian 8.7 + Docker + Docker Compose
-	* Debian 8.7 + X.org + suckless tools
-	* Debian 8.7 + Xfce
+    * Debian 8.7 minimal
+    * Debian 8.7 + Ansible + Testinfra
+    * Debian 8.7 + Docker + Docker Compose
+    * Debian 8.7 + X.org + suckless tools
+    * Debian 8.7 + Xfce
+* [debian-8.8](debian-8.8/README.mdown) - templates for Debian 8.8
+    * Debian 8.8 minimal
+    * Debian 8.8 + Ansible + Testinfra
+    * Debian 8.8 + Docker + Docker Compose
+    * Debian 8.8 + X.org + suckless tools
+    * Debian 8.8 + Xfce
+* [debian-9](debian-9/README.mdown) - templates for Debain 9
+    * Debain 9 minimal
+    * Debian 9 + Ansible + Testinfra
+    * Debian 9 + Docker + Docker Compose
+    * Debian 9 + X.org + suckless tools
+    * Debian 9 + Xfce
 
 - - -
 

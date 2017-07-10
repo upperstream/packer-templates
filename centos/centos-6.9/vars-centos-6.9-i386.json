@@ -1,0 +1,11 @@
+{
+  "vm_name": "CentOS-6.9-i386",
+  "hardware": "i386",
+  "processor": "i386",
+  "iso_image": "CentOS-6.9-i386-minimal.iso",
+  "iso_checksum": "e104b3bc2261e40c020e4047d31a4454a00435787c54fb0a376261f9348382b7",
+  "iso_checksum_type": "sha256",
+  "virtualbox_guest_os_type": "RedHat",
+  "vmware_guest_os_type": "centos",
+  "esxi_guest_os_type": "centos"
+}

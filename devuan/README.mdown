@@ -1,0 +1,12 @@
+# Packer templates for Devuan
+
+## Contents
+
+* [devuan-devuan-1.0](devuan-1.0/README.mdown) - templates for Devuan 1.0.0
+    * Devuan 1.0.0 minimal
+    * Devuan 1.0.0 minimal + X.org + suckless tools
+    * Devuan 1.0.0 minimal + Xfce
+
+- - -
+
+Copyright &copy; 2017 Upper Stream Software.
