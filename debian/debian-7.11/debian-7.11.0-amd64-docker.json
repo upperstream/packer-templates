@@ -17,7 +17,8 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "vb_version": "4.3.28"
+    "vb_version": "4.3.28",
+    "headless": "false"
   },
   "builders": [
     {
@@ -47,6 +48,7 @@
         [ "modifyvm", "{{.Name}}", "--vram", "32" ]
       ],
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
         "passwd/root-password={{user `root_password`}} <wait>",
@@ -93,6 +95,7 @@
         "vhv.enable": "TRUE"
       },
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
         "passwd/root-password={{user `root_password`}} <wait>",
@@ -146,6 +149,7 @@
         "vhv.enable": "TRUE"
       },
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
         "passwd/root-password={{user `root_password`}} <wait>",
