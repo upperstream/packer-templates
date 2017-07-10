@@ -42,6 +42,7 @@
       "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-virtualbox",
       "vm_name": "{{user `vm_name`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
@@ -84,7 +85,7 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
-      "output_directory": "{{user `vm_name`}}",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
@@ -140,7 +141,7 @@
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
-      "output_directory": "{{user `vm_name`}}",
+      "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
       "vm_name": "{{user `vm_name`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
@@ -219,9 +220,16 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "only": ["virtualbox-iso", "vmware-iso"],
+      "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box"
+    },
+    {
+      "type": "vagrant",
+      "only": ["vmware-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "keep_input_artifact": true
     }
   ]
 }

@@ -34,24 +34,38 @@ Templates to create Vagrant boxes for Debian 8.8 (amd64).
 
 [open-vm-tools]: https://github.com/vmware/open-vm-tools "Official repository of VMware open-vm-tools project"
 
+
 ## How to create a box
+
+### VirtualBox
 
 From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso debian-8.8-amd64-minimal.json
 
-or:
+You will find a vagrant box file named `Debian-8-amd64-minimal-v8.8.20170508-virtualbox.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `Debian-8-amd64-minimal-v8.8.20170508-virtualbox` to your box list
+by the following command:
+
+    vagrant add Debian-8-amd64-minimal-v8.8.20170508-virtualbox.box --name Debian-8-amd64-minimal-v8.8.20170508-virtualbox
+
+### VMware
+
+From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso debian-8.8-amd64-minimal.json
 
-for [VMware] provider.
-You will find a vagrant box file named `Debian-8-amd64-minimal-v8.8.20170507-virtualbox.box`
-or `Debian-8-amd64-minimal-v8.8.20170507-vmware.box` in the same directory after the command has succeeded.
+You will find a vagrant box file named `Debian-8-amd64-minimal-v8.8.20170508-vmware.box`
+in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-8-amd64-minimal-v8.8.20170507-virtualbox` to your box list
+Then you can add the box named `Debian-8-amd64-minimal-v8.8.20170508-vmware` to your box list
 by the following command:
 
-    vagrant add Debian-8-amd64-minimal-v8.8.20170507-virtualbox.box --name Debian-8-amd64-minimal-v8.8.20170507-virtualbox
+    vagrant add Debian-8-amd64-minimal-v8.8.20170508-vmware.box --name Debian-8-amd64-minimal-v8.8.20170508-vmware
+
+In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
 
 ## Building a VM image on ESXi
@@ -65,9 +79,11 @@ In order to build a VM image on ESXi, you need to provide the following environm
 
 You also have to enable SSH and VNC on ESXi host.
 
-The following command will build a VM image on your ESXi (Created VM will be unregistered from your Inventory):
+The following command will build a VM image on your ESXi:
 
     packer build -only=esxi-iso debian-8.8-amd64-minimal.json
+
+Created VM will be unregistered from your Inventory.
 
 
 ## Variants
@@ -116,6 +132,7 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 * `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
 * `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
 * `headless` - Launch the virtual machine in headless mode if set to `true`.  Default value is `false`.
+
 
 - - -
 
