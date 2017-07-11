@@ -24,7 +24,7 @@ EOF
 
 env ASSUME_ALWAYS_YES="YES" pkg bootstrap -y
 pkg update
-pkg install -y sudo-1.8.20p1
+pkg install -y sudo-1.8.20p2_2
 pkg install -y ca_root_nss-3.31
 ln -sf /usr/local/share/certs/ca-root-nss.crt /etc/ssl/cert.pem
 

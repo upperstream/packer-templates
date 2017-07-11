@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-11.1-RC1-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.1-RC2-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.1",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "ba049786abd34b664fd2aca62f5984333e852cad17d212da5084a55e2d4d98f1",
-    "box_version": "1.20170701",
+    "iso_checksum": "a90ad95fcba10095d890bcb4746c57f68128dbad636ed896dd6282860cd91ea6",
+    "box_version": "2.20170708",
     "mem_size": "1024",
     "disk_size": "51200",
     "remote_host": "{{env `REMOTE_HOST`}}",
@@ -219,7 +219,7 @@
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
         "XORG_MINIMAL=xorg-minimal-7.5.2_1",
-        "XTERM=xterm-327",
+        "XTERM=xterm-330",
         "XCLOCK=xclock-1.0.7_2",
         "XRANDR=xrandr-1.5.0",
         "SLIM=slim-1.3.6_14",
@@ -234,7 +234,7 @@
       "script": "../provisioners/virtualbox_ose_additions-11.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.1.18"
+        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.1.22_1"
       ]
     },
     {
@@ -244,7 +244,7 @@
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "VMWARE_WITH_XORG=1",
-        "OPEN_VM_TOOLS=open-vm-tools-10.1.0_2,2",
+        "OPEN_VM_TOOLS=open-vm-tools-10.1.5,2",
         "XF86_VIDEO_VMWARE=xf86-video-vmware-13.2.1_1",
         "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0_1"
       ]

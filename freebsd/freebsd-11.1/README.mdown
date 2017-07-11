@@ -1,6 +1,7 @@
-# Packer templates for FreeBSD 11.1-RC1
+# Packer templates for FreeBSD 11.1-RC2
 
-Templates to create Vagrant box for FreeBSD 11.1-RC1 (amd64 and i386).
+Templates to create Vagrant box for FreeBSD 11.1-RC2 (amd64 and i386).
+
 
 ## Prerequisites
 
@@ -21,12 +22,14 @@ Templates to create Vagrant box for FreeBSD 11.1-RC1 (amd64 and i386).
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
 [VMware]: http://www.vmware.com/ "VMware Virtualization for Desktop &amp; Server, Application, Public &amp; Hybrid Clouds"
 
+
 ## Provisioned software tools
 
 * sshd
 * sudo
 * `vagrant` user and its insecure public key
 * ntpd enabled
+
 
 ## How to create a box
 
@@ -36,13 +39,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso freebsd-11.1-rc-minimal.json
 
-You will find a vagrant box file named `FreeBSD-11.1-RC-amd64-minimal-v1.20170701-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-11.1-RC-amd64-minimal-v2.20170708-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.1-RC-amd64-minimal-v1.20170701-virtualbox` to your box list
+Then you can add the box named `FreeBSD-11.1-RC-amd64-minimal-v2.20170708-virtualbox` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-11.1-RC-amd64-minimal-v1.20170701-virtualbox.box --name FreeBSD-11.1-RC-amd64-minimal-v1.20170701-virtualbox
+    vagrant box add FreeBSD-11.1-RC-amd64-minimal-v2.20170708-virtualbox.box --name FreeBSD-11.1-RC-amd64-minimal-v2.20170708-virtualbox
 
 ### VMware
 
@@ -50,15 +53,16 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso freebsd-11.1-rc-minimal.json
 
-You will find a vagrant box file named `FreeBSD-11.1-RC-amd64-v1.20170701-vmware.box`
+You will find a vagrant box file named `FreeBSD-11.1-RC-amd64-v2.20170708-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.1-RC-amd64-minimal-v1.20170701-virtualbox` to your box list
+Then you can add the box named `FreeBSD-11.1-RC-amd64-minimal-v2.20170708-virtualbox` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-11.1-RC-amd64-minimal-v1.20170701-virtualbox.box --name FreeBSD-11.1-RC-amd64-minimal-v1.20170701-virtualbox
+    vagrant box add FreeBSD-11.1-RC-amd64-minimal-v2.20170708-virtualbox.box --name FreeBSD-11.1-RC-amd64-minimal-v2.20170708-virtualbox
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
+
 
 ## Default settings
 
@@ -80,6 +84,7 @@ SMB synced folder is not supported for FreeBSD guest.
 Because Bash is not the standard shell for FreeBSD, default shell for SSH connection of this box
 is set to `/bin/sh`.
 
+
 ## Building a VM image on ESXi
 
 In order to build a VM image on ESXi, you need to provide the following environment variables:
@@ -97,14 +102,15 @@ The following command will build a VM image on your ESXi:
 
 (Note that created VM will be unregistered from your Inventory.)
 
+
 ## Variants
 
-* `freebsd-11.1-rc-minimal.json` - FreeBSD 11.1-RC1
-* `freebsd-11.1-rc-ansible.json` - FreeBSD 11.1-RC1 + [Ansible][] + [Testinfra][]
-* `freebsd-11.1-rc-dwm.json` - FreeBSD 11.1-RC1 + [X.Org][] + [dwm][] + [dmenu][] + [st][]
-* `freebsd-11.1-rc-xfce.json` - FreeBSD 11.1-RC1 + [Xfce][]
-* `freebsd-11.1-rc-zfs.json` - FreeBSD 11.1-RC1 on ZFS root file system
-* `freebsd-11.1-rc-docker.json` - FreeBSD 11.1-RC1 on ZFS root file system + [Docker][] + [Docker Compose][] (amd64 only)
+* `freebsd-11.1-rc-minimal.json` - FreeBSD 11.1-RC2
+* `freebsd-11.1-rc-ansible.json` - FreeBSD 11.1-RC2 + [Ansible][] + [Testinfra][]
+* `freebsd-11.1-rc-dwm.json` - FreeBSD 11.1-RC2 + [X.Org][] + [dwm][] + [dmenu][] + [st][]
+* `freebsd-11.1-rc-xfce.json` - FreeBSD 11.1-RC2 + [Xfce][]
+* `freebsd-11.1-rc-zfs.json` - FreeBSD 11.1-RC2 on ZFS root file system
+* `freebsd-11.1-rc-docker.json` - FreeBSD 11.1-RC2 on ZFS root file system + [Docker][] + [Docker Compose][] (amd64 only)
 
 While `freebsd-11.1-rc-*.json` templates generate amd64 boxes by default, using `vars-freebsd-11.1-i386.json`
 generates i386 boxes:
@@ -118,6 +124,7 @@ generates i386 boxes:
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.5.5 documentation"
 [X.Org]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
+
 
 ## Build parameters
 
@@ -133,6 +140,7 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
   This is also used for SSH password during build time.
 * `vagrant_group` - Group name that `vagrant_username` belongs to.  Default value is `vagrant`.
 * `headless` - Launch the virtual machine in headless mode if set to `true`.  Default value is `false`.
+
 
 - - -
 

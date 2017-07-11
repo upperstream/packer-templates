@@ -1,4 +1,7 @@
-#!/bin/sh -x
+#!/bin/sh
+
+set -e
+set -x
 
 if [ "$VMWARE_WITH_XORG" = "1" ]; then
 
