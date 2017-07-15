@@ -18,13 +18,13 @@
     * FreeBSD 11.0-RELEASE + Xfce
     * FreeBSD 11.0-RELEASE on ZFS root file system
     * FreeBSD 11.0-RELEASE + Docker + Docker Compose on ZFS root file system (amd64 only)
-* [freebsd-11.1](freebsd-11.1/README.mdown) - templates for FreeBSD 11.1-RC2 (amd64 and i386)
-    * FreeBSD 11.1-RC2
-    * FreeBSD 11.1-RC2 + Ansible + Testinfra
-    * FreeBSD 11.1-RC2 + X.Org + dwm + dmenu + st
-    * FreeBSD 11.1-RC2 + Xfce
-    * FreeBSD 11.1-RC2 on ZFS root file system
-    * FreeBSD 11.1-RC2 + Docker + Docker Compose on ZFS root file system (amd64 only)
+* [freebsd-11.1](freebsd-11.1/README.mdown) - templates for FreeBSD 11.1-RC3 (amd64 and i386)
+    * FreeBSD 11.1-RC3
+    * FreeBSD 11.1-RC3 + Ansible + Testinfra
+    * FreeBSD 11.1-RC3 + X.Org + dwm + dmenu + st
+    * FreeBSD 11.1-RC3 + Xfce
+    * FreeBSD 11.1-RC3 on ZFS root file system
+    * FreeBSD 11.1-RC3 + Docker + Docker Compose on ZFS root file system (amd64 only)
 
 - - -
 
