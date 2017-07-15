@@ -237,15 +237,6 @@
     },
     {
       "type": "shell",
-      "only": ["virtualbox-iso"],
-      "inline": [
-        "sed s/^vbox/#vbox/ /etc/rc.conf > /tmp/rc.conf",
-        "mv /tmp/rc.conf /etc/rc.conf"
-      ],
-      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
-    },
-    {
-      "type": "shell",
       "only": ["vmware-iso", "esxi-iso"],
       "script": "../provisioners/vmware-guest.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
