@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-11.1-RC2-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.1-RC3-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.1",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "a90ad95fcba10095d890bcb4746c57f68128dbad636ed896dd6282860cd91ea6",
-    "box_version": "2.20170708",
+    "iso_checksum": "9e2fd85ad0d0b7c7e2951336496aed22131a7bdf8f35a782c50b59f3730cc801",
+    "box_version": "3.20170715",
     "mem_size": "1024",
     "disk_size": "51200",
     "remote_host": "{{env `REMOTE_HOST`}}",
@@ -236,15 +236,6 @@
       "environment_vars": [
         "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.1.22_1"
       ]
-    },
-    {
-      "type": "shell",
-      "only": ["virtualbox-iso"],
-      "inline": [
-        "sed s/^vbox/#vbox/ /etc/rc.conf > /tmp/rc.conf",
-        "mv /tmp/rc.conf /etc/rc.conf"
-      ],
-      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     },
     {
       "type": "shell",
