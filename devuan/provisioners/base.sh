@@ -1,3 +1,3 @@
 #!/bin/sh -ex
-apt-get install -y curl rsync
+apt-get -y install rsync
 sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers

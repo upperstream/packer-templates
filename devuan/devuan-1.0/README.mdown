@@ -26,7 +26,6 @@ Templates to create Vagrant boxes for Devuan 1.0.0 (amd64).
 ## Provisioned software tools
 
 * VirtualBox Guest Additions or [open-vm-tools][]
-* curl
 * sshd
 * sudo
 * rsync
