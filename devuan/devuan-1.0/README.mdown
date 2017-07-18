@@ -98,15 +98,16 @@ The following command will build a VM image on your ESXi:
 [xrdp]: http://www.xrdp.org/ "xrdp"
 
 
-## Installer CD images
+## Installer ISO images
 
-Optional var file is provided to instruct to use an alternative installer CD image, i.e.,
-`vars-devuan-1.0-amd64-full.json` instructs to use `devuan_jessie_1.0.0_amd64_CD.iso`.
-Without using this var file, `devuan-1.0-amd64-*.json` templates use `devuan_jessie_1.0.0_amd64_NETINST.iso`.
+Optional var files are provided to instruct to use an alternative installer CD image or DVD image, i.e.,
+`vars-devuan-1.0-amd64-CD.json` instructs to use `devuan_jessie_1.0.0_amd64_CD.iso` while
+`vars-devuan-1.0-amd64-DVD.json` does `devuan_jessie_1.0.0_amd64_DVD.iso`.
+Without using these var files, `devuan-1.0-amd64-*.json` templates use `devuan_jessie_1.0.0_amd64_NETINST.iso`.
 
 Depending on situation you can specify the var file on the command line:
 
-    packer build -var-file=vars-devuan-1.0-amd64-full.json devuan-1.0-amd64-minimal.json
+    packer build -var-file=vars-devuan-1.0-amd64-CD.json devuan-1.0-amd64-minimal.json
 
 It is recommended to use "jigdo" to download large iso image file and put it in `iso` directory.  Templates
 instruct `packer` to use the image file rather than downloading an image from a mirror site.

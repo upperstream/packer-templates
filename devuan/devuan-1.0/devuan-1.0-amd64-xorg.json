@@ -4,7 +4,7 @@
     "mem_size": "1024",
     "disk_size": "51200",
     "iso_name": "devuan_jessie_1.0.0_amd64_NETINST.iso",
-    "iso_path": "devuan/devuan_jessie/installer-iso",
+    "iso_path": "devuan_jessie/installer-iso",
     "iso_checksum": "70c6abe544ec59b0d0882c666ca0377be1b6c218655dac1f61b2c7e88c9b3d9f",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
@@ -13,12 +13,13 @@
     "vagrant_username": "vagrant",
     "vagrant_group": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "1.0.20170604",
+    "box_version": "1.0.20170719",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "headless": "false"
+    "headless": "false",
+    "install_from_dvd": "false"
   },
   "builders": [
     {
@@ -30,7 +31,10 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
-        "https://mirror.leaseweb.com/{{user `iso_path`}}/{{user `iso_name`}}"
+        "https://mirror.netzspielplatz.de/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://devuan.unetresgrossebite.com/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.math.princeton.edu/pub/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -72,7 +76,10 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
-        "https://mirror.leaseweb.com/{{user `iso_path`}}/{{user `iso_name`}}"
+        "https://mirror.netzspielplatz.de/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://devuan.unetresgrossebite.com/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.math.princeton.edu/pub/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -120,7 +127,10 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
-        "https://mirror.leaseweb.com/{{user `iso_path`}}/{{user `iso_name`}}"
+        "https://mirror.netzspielplatz.de/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://devuan.unetresgrossebite.com/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.math.princeton.edu/pub/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -180,7 +190,8 @@
         "STTERM=stterm=0.5+20140606+gitc2fd275-1",
         "SUCKLESS_TOOLS=suckless-tools=40-1+deb8u2",
         "ARANDR=arandr=0.1.7.1-1",
-        "XRDP=xrdp=0.6.1-2"
+        "XRDP=xrdp=0.6.1-2",
+        "INSTALL_FROM_DVD={{user `install_from_dvd`}}"
       ]
     },
     {
