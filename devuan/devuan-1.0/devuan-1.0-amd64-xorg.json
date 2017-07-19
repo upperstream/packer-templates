@@ -186,10 +186,7 @@
     {
       "type": "shell",
       "only": ["virtualbox-iso"],
-      "scripts": [
-        "../provisioners/linux-headers.sh",
-        "../provisioners/virtualbox.sh"
-      ],
+      "script": "../provisioners/virtualbox.sh",
       "environment_vars": [
         "VBOX_VER={{user `vb_version`}}",
         "VIRTUALBOX_WITH_XORG=1"
