@@ -4,7 +4,7 @@
     "mem_size": "1024",
     "disk_size": "51200",
     "iso_name": "devuan_jessie_1.0.0_amd64_NETINST.iso",
-    "iso_path": "devuan/devuan_jessie/installer-iso",
+    "iso_path": "devuan_jessie/installer-iso",
     "iso_checksum": "70c6abe544ec59b0d0882c666ca0377be1b6c218655dac1f61b2c7e88c9b3d9f",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
@@ -13,12 +13,13 @@
     "vagrant_username": "vagrant",
     "vagrant_group": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "1.0.20170604",
+    "box_version": "1.0.20170719",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "headless": "false"
+    "headless": "false",
+    "install_from_dvd": "false"
   },
   "builders": [
     {
@@ -30,13 +31,16 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
-        "https://mirror.leaseweb.com/{{user `iso_path`}}/{{user `iso_name`}}"
+        "https://mirror.netzspielplatz.de/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://devuan.unetresgrossebite.com/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.math.princeton.edu/pub/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
+      "shutdown_command": "/sbin/shutdown -h now",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
       "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-virtualbox",
@@ -72,13 +76,16 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
-        "https://mirror.leaseweb.com/{{user `iso_path`}}/{{user `iso_name`}}"
+        "https://mirror.netzspielplatz.de/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://devuan.unetresgrossebite.com/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.math.princeton.edu/pub/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
+      "shutdown_command": "/sbin/shutdown -h now",
       "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
       "vmx_data": {
@@ -120,13 +127,16 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
-        "https://mirror.leaseweb.com/{{user `iso_path`}}/{{user `iso_name`}}"
+        "https://mirror.netzspielplatz.de/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://devuan.unetresgrossebite.com/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.math.princeton.edu/pub/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'; rm -f shutdown.sh",
+      "shutdown_command": "/sbin/shutdown -h now",
       "remote_type": "esx5",
       "remote_host": "{{user `remote_host`}}",
       "remote_username": "{{user `remote_username`}}",
@@ -174,16 +184,14 @@
       "environment_vars": [
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "XRDP=xrdp=0.6.1-2"
+        "XRDP=xrdp=0.6.1-2",
+        "INSTALL_FROM_DVD={{user `install_from_dvd`}}"
       ]
     },
     {
       "type": "shell",
       "only": ["virtualbox-iso"],
-      "scripts": [
-        "../provisioners/linux-headers.sh",
-        "../provisioners/virtualbox.sh"
-      ],
+      "script": "../provisioners/virtualbox.sh",
       "environment_vars": [
         "VBOX_VER={{user `vb_version`}}",
         "VIRTUALBOX_WITH_XORG=1"

@@ -1,6 +1,6 @@
 {
   "iso_name": "devuan_jessie_1.0.0_amd64_CD.iso",
-  "iso_path": "devuan/devuan_jessie/installer-iso",
+  "iso_path": "devuan_jessie/installer-iso",
   "iso_checksum": "c191a809ae6a6bbc17a6f2a390d167b3806fedbbf86ee02df6ce21fac93168e4",
   "iso_checksum_type": "sha256"
 }
