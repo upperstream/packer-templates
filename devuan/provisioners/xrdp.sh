@@ -1,2 +1,2 @@
-vagrant #!/bin/sh -ex
+#!/bin/sh -ex
 apt-get install -y ${XRDP:-xrdp}
