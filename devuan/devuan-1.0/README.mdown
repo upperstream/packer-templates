@@ -42,13 +42,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso devuan-1.0-amd64-minimal.json
 
-You will find a vagrant box file named `Devuan-1.0-amd64-minimal-v1.0.20170604-virtualbox.box`
+You will find a vagrant box file named `Devuan-1.0-amd64-minimal-v1.0.20170719-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Devuan-1.0-amd64-minimal-v1.0.20170604-virtualbox` to your box list
+Then you can add the box named `Devuan-1.0-amd64-minimal-v1.0.20170719-virtualbox` to your box list
 by the following command:
 
-    vagrant add Devuan-1.0-amd64-minimal-v1.0.20170604-virtualbox.box --name Devuan-1.0-amd64-minimal-v1.0.20170604-virtualbox
+    vagrant add Devuan-1.0-amd64-minimal-v1.0.20170719-virtualbox.box --name Devuan-1.0-amd64-minimal-v1.0.20170719-virtualbox
 
 ### VMware
 
@@ -56,13 +56,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso devuan-1.0-amd64-minimal.json
 
-You will find a vagrant box file named `Devuan-1.0-amd64-minimal-v1.0.20170604-vmware.box`
+You will find a vagrant box file named `Devuan-1.0-amd64-minimal-v1.0.20170719-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Devuan-1.0-amd64-minimal-v1.0.20170604-vmware` to your box list
+Then you can add the box named `Devuan-1.0-amd64-minimal-v1.0.20170719-vmware` to your box list
 by the following command:
 
-    vagrant add Devuan-1.0-amd64-minimal-v1.0.20170604-vmware.box --name Devuan-1.0-amd64-minimal-v1.0.20170604-vmware
+    vagrant add Devuan-1.0-amd64-minimal-v1.0.20170719-vmware.box --name Devuan-1.0-amd64-minimal-v1.0.20170719-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
@@ -88,10 +88,13 @@ The following command will build a VM image on your ESXi:
 ## Variants
 
 * `devuan-1.0-amd64-minimal.json` - Devuan 1.0 minimal installation
+* `devuan-1.0-amd64-docker.json` - Devuan 1.0 + [Docker][] + [Docker Compose][]
 * `devuan-1.0-amd64-xfce.json` - Devuan 1.0 with [Xfce][] + [xrdp][]
 * `devuan-1.0-amd64-xorg.json` - Devuan 1.0 with [X.org][], [suckless][] tools, [ARandR][], and [xrdp][]
 
 [ARandR]: https://christian.amsuess.com/tools/arandr/ "ARandR: Another XRandR GUI"
+[Docker]: https://www.docker.com/ "Docker - Build, Ship, and Run Any App, Anywhere"
+[Docker Compose]: https://docs.docker.com/compose/ "Docker Compose"
 [suckless]: http://suckless.org/ "suckless.org software that sucks less"
 [X.org]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
@@ -108,6 +111,10 @@ Without using these var files, `devuan-1.0-amd64-*.json` templates use `devuan_j
 Depending on situation you can specify the var file on the command line:
 
     packer build -var-file=vars-devuan-1.0-amd64-CD.json devuan-1.0-amd64-minimal.json
+
+or
+
+    packer build -var-file=vars-devuan-1.0-amd64-DVD.json devuan-1.0-amd64-minimal.json
 
 It is recommended to use "jigdo" to download large iso image file and put it in `iso` directory.  Templates
 instruct `packer` to use the image file rather than downloading an image from a mirror site.
