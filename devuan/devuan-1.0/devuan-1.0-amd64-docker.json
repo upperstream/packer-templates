@@ -13,7 +13,7 @@
     "vagrant_username": "vagrant",
     "vagrant_group": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "1.0.20170719",
+    "box_version": "1.0.20170722",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",

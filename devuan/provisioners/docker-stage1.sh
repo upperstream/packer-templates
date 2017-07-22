@@ -6,7 +6,7 @@ set -x
 apt-get -y install aufs-tools
 groupadd docker
 usermod -a -G docker ${VAGRANT_USERNAME:-vagrant}
-sed 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LUNIX="cgroup_enable=memory swapaccount=1"/' /etc/default/grub > /tmp/grub
+sed 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"/' /etc/default/grub > /tmp/grub
 mv /tmp/grub /etc/default/grub
 update-grub
 reboot

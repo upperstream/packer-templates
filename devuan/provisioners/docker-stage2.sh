@@ -2,13 +2,7 @@
 set -e
 set -x
 
-#apt-get -y install cgroupfs-mount chkconfig
 apt-get -y install cgroupfs-mount
-#wget -O - https://raw.githubusercontent.com/tianon/cgroupfs-mount/master/cgroupfs-mount | sh -s -x
-#wget -O - https://gist.githubusercontent.com/onjin/5982766/raw/6d67cf7b8bb062ea67f47333eff86b090eef3793/docker | \
-#sed \
-#  -e 's/DOCKER_OPTS="-d=true"/DOCKER_OPTS=""/' \
-#  -e s:DAEMON=/usr/bin/docker:DAEMON=/usr/bin/dockerd: > /etc/init.d/docker
 cat > /etc/init.d/docker << 'EOF'
 #!/bin/sh
 
@@ -35,7 +29,7 @@ logfile=/var/log/$prog
 
 start() {
     log_daemon_msg "Starting $prog daemon" "$prog"
-    start-stop-daemon --start --quiet --oknodo --pidfile $pidfile --exec $executable
+    start-stop-daemon --start --quiet --oknodo --pidfile $pidfile --exec $executable --background
     log_end_msg $?
 }
 
@@ -59,16 +53,7 @@ force_reload() {
 }
 
 case "$1" in
-    start)
-        $1
-        ;;
-    stop)
-        $1
-        ;;
-    reload|force-reload)
-        $1
-        ;;
-    restart)
+    start|stop|reload|force-reload|restart)
         $1
         ;;
     status)
@@ -80,11 +65,10 @@ case "$1" in
         exit 1
 esac
 
-exit $0
+exit 0
 EOF
 
 chmod +x /etc/init.d/docker
-#chkconfig --add docker
 /usr/sbin/update-rc.d docker defaults
 
 apt-get -y install ${PYTHON_PIP:-python-pip}
