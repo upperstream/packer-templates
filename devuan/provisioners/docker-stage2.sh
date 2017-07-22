@@ -80,7 +80,7 @@ case "$1" in
         exit 1
 esac
 
-exit $0
+exit 0
 EOF
 
 chmod +x /etc/init.d/docker
