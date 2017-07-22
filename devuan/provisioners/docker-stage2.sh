@@ -29,7 +29,7 @@ logfile=/var/log/$prog
 
 start() {
     log_daemon_msg "Starting $prog daemon" "$prog"
-    start-stop-daemon --start --quiet --oknodo --pidfile $pidfile --exec $executable
+    start-stop-daemon --start --quiet --oknodo --pidfile $pidfile --exec $executable --background
     log_end_msg $?
 }
 
