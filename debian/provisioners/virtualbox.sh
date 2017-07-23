@@ -1,4 +1,8 @@
-#!/bin/sh -x
+#!/bin/sh
+set -e
+set -x
+
+test "${INSTALL_DKMS:-false}" = "true" && apt-get -y install dkms
 test -z "$VBOX_VER" && VBOX_VER=`cat /root/.vbox_version`
 test "$VIRTUALBOX_WITH_XORG" = "1" || VIRTUALBOX_WITHOUT_XORG=--nox11
 wget http://download.virtualbox.org/virtualbox/$VBOX_VER/VBoxGuestAdditions_$VBOX_VER.iso
