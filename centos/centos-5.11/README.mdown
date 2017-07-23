@@ -38,7 +38,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `CentOS-5.11-x86_64-minimal` to your box list
 by the following command:
 
-	vagrant add CentOS-5.11-x86_64-minimal.box --name CentOS-5.11-x86_64-minimal
+	vagrant box add CentOS-5.11-x86_64-minimal.box --name CentOS-5.11-x86_64-minimal
 
 ## Variants
 

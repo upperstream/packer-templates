@@ -38,7 +38,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `CentOS-6.5-x86_64-minimal-v2017.05.03` to your box list
 by the following command:
 
-	vagrant add CentOS-6.5-x86_64-minimal-v2017.05.03.box --name CentOS-6.5-x86_64-minimal-v2017.05.03
+	vagrant box add CentOS-6.5-x86_64-minimal-v2017.05.03.box --name CentOS-6.5-x86_64-minimal-v2017.05.03
 
 ## Variants
 

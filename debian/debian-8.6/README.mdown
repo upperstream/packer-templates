@@ -49,7 +49,7 @@ or `Debian-8-amd64-minimal-v8.6.0-vmware.box` in the same directory after the co
 Then you can add the box named `Debian-8-amd64-minimal-v8.6.0-virtualbox` to your box list
 by the following command:
 
-    vagrant add Debian-8-amd64-minimal-v8.6.0-virtualbox.box --name Debian-8-amd64-minimal-v8.6.0-virtualbox
+    vagrant box add Debian-8-amd64-minimal-v8.6.0-virtualbox.box --name Debian-8-amd64-minimal-v8.6.0-virtualbox
 
 ## Building a VM image on ESXi
 

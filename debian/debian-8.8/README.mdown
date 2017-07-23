@@ -49,7 +49,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Debian-8-amd64-minimal-v8.8.20170508-virtualbox` to your box list
 by the following command:
 
-    vagrant add Debian-8-amd64-minimal-v8.8.20170508-virtualbox.box --name Debian-8-amd64-minimal-v8.8.20170508-virtualbox
+    vagrant box add Debian-8-amd64-minimal-v8.8.20170508-virtualbox.box --name Debian-8-amd64-minimal-v8.8.20170508-virtualbox
 
 ### VMware
 
@@ -63,7 +63,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Debian-8-amd64-minimal-v8.8.20170508-vmware` to your box list
 by the following command:
 
-    vagrant add Debian-8-amd64-minimal-v8.8.20170508-vmware.box --name Debian-8-amd64-minimal-v8.8.20170508-vmware
+    vagrant box add Debian-8-amd64-minimal-v8.8.20170508-vmware.box --name Debian-8-amd64-minimal-v8.8.20170508-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 

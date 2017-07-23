@@ -38,7 +38,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Alpine-Linux-3.3.3-x86_64-minimal-virtualbox.box` to your box list
 by the following command:
 
-	vagrant add Alpine-Linux-3.3.3-x86_64-minimal-virtualbox.box --name Alpine-Linux-3.3.3-x86_64-minimal-virtualbox
+	vagrant box add Alpine-Linux-3.3.3-x86_64-minimal-virtualbox.box --name Alpine-Linux-3.3.3-x86_64-minimal-virtualbox
 
 ## Default settings
 

@@ -30,7 +30,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Ubuntu-14.04-server-amd64-minimal-v1404.5.20170520` to your box list
 by the following command:
 
-    vagrant add Ubuntu-14.04-server-amd64-minimal-v1404.5.20170520.box --name Ubuntu-14.04-server-amd64-minimal-v1404.5.20170520
+    vagrant box add Ubuntu-14.04-server-amd64-minimal-v1404.5.20170520.box --name Ubuntu-14.04-server-amd64-minimal-v1404.5.20170520
 
 ## Variants
 

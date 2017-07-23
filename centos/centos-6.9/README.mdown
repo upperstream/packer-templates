@@ -48,7 +48,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `CentOS-6.9-x86_64-minimal-v2017.05.06-virtualbox` to your box list
 by the following command:
 
-    vagrant add CentOS-6.9-x86_64-minimal-v2017.05.06-virtualbox.box --name CentOS-6.9-x86_64-minimal-v2017.05.06-virtualbox
+    vagrant box add CentOS-6.9-x86_64-minimal-v2017.05.06-virtualbox.box --name CentOS-6.9-x86_64-minimal-v2017.05.06-virtualbox
 
 
 ## Building a VM image on ESXi

@@ -35,7 +35,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `CorePure64-7-minimal-v7.2.0` to your box list
 by the following command:
 
-	vagrant add CorePure64-7-minimal-v7.2.0.box --name CorePure64-7-minimal-v7.2.0
+	vagrant box add CorePure64-7-minimal-v7.2.0.box --name CorePure64-7-minimal-v7.2.0
 
 ## Default settings
 

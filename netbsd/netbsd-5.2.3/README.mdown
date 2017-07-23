@@ -48,7 +48,7 @@ You will find a vagrant box file named `NetBSD-5.2.3-amd64-minimal-v3.2.0-virtua
 Then you can add the box named `NetBSD-5.2.3-amd64-minimal-3.2.0` to your box list
 by the following command (for example of VirtualBox provider):
 
-    vagrant add NetBSD-5.2.3-amd64-minimal-v3.2.0-virtualbox.box --name NetBSD-5.2.3-amd64-minimal-v3.2.0-virtualbox
+    vagrant box add NetBSD-5.2.3-amd64-minimal-v3.2.0-virtualbox.box --name NetBSD-5.2.3-amd64-minimal-v3.2.0-virtualbox
 
 ## Default settings
 

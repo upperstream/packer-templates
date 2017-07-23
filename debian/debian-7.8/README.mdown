@@ -37,7 +37,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Debian-7.8.0-amd64-minimal-v3` to your box list
 by the following command:
 
-	vagrant add Debian-7.8.0-amd64-minimal-v3.box --name Debian-7.8.0-amd64-minimal-v3
+	vagrant box add Debian-7.8.0-amd64-minimal-v3.box --name Debian-7.8.0-amd64-minimal-v3
 
 ## Variants
 

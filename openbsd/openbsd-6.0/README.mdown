@@ -47,7 +47,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `OpenBSD-6.0-amd64-minimal-v6.0.0-virtualbox` to your box list
 by the following command:
 
-	vagrant add OpenBSD-6.0-amd64-minimal-v6.0.0-virtualbox.box --name OpenBSD-6.0-amd64-minimal-v6.0.0-virtualbox
+	vagrant box add OpenBSD-6.0-amd64-minimal-v6.0.0-virtualbox.box --name OpenBSD-6.0-amd64-minimal-v6.0.0-virtualbox
 
 ## Default settings
 

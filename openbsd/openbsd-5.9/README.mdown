@@ -46,7 +46,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `OpenBSD-5.9-amd64-doas-v5.9.2-virtualbox` to your box list
 by the following command:
 
-	vagrant add OpenBSD-5.9-amd64-doas-v5.9.2-virtualbox.box --name OpenBSD-5.9-amd64-doas-v5.9.2-virtualbox
+	vagrant box add OpenBSD-5.9-amd64-doas-v5.9.2-virtualbox.box --name OpenBSD-5.9-amd64-doas-v5.9.2-virtualbox
 
 ## Default settings
 

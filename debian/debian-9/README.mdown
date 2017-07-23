@@ -45,7 +45,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Debian-9-amd64-minimal-v9.0.20170618-virtualbox` to your box list
 by the following command:
 
-    vagrant add Debian-9-amd64-minimal-v9.0.20170618-virtualbox.box --name Debian-9-amd64-minimal-v9.0.20170618-virtualbox
+    vagrant box add Debian-9-amd64-minimal-v9.0.20170618-virtualbox.box --name Debian-9-amd64-minimal-v9.0.20170618-virtualbox
 
 ### VMware
 
@@ -59,7 +59,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Debian-9-amd64-minimal-v9.0.20170618-vmware` to your box list
 by the following command:
 
-    vagrant add Debian-9-amd64-minimal-v9.0.20170618-vmware.box --name Debian-9-amd64-minimal-v9.0.20170618-vmware
+    vagrant box add Debian-9-amd64-minimal-v9.0.20170618-vmware.box --name Debian-9-amd64-minimal-v9.0.20170618-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 

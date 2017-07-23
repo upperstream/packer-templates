@@ -34,7 +34,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Xubuntu-14.10-amd64-minimal` to your box list
 by the following command:
 
-	vagrant add Xubuntu-14.10-amd64-minimal.box --name Xubuntu-14.10-amd64-minimal
+	vagrant box add Xubuntu-14.10-amd64-minimal.box --name Xubuntu-14.10-amd64-minimal
 
 ## Variants
 

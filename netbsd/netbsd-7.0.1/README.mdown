@@ -47,7 +47,7 @@ You will find a vagrant box file named `NetBSD-7.0-amd64-minimal-v2.1-virtualbox
 Then you can add the box named `NetBSD-7.0-amd64-minimal-v2.1` to your box list
 by the following command (for example of VirtualBox provider):
 
-    vagrant add NetBSD-7.0-amd64-minimal-v2.1-virtualbox.box --name NetBSD-7.0-amd64-minimal-v2.1-virtualbox
+    vagrant box add NetBSD-7.0-amd64-minimal-v2.1-virtualbox.box --name NetBSD-7.0-amd64-minimal-v2.1-virtualbox
 
 ## Default settings
 

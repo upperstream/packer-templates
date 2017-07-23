@@ -39,7 +39,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Ubuntu-12.04-server-amd64-minimal-v1204.5.20170702-virtualbox` to your box list
 by the following command:
 
-    vagrant add Ubuntu-12.04-server-amd64-minimal-v1204.5.20170702-virtualbox.box --name Ubuntu-12.04-server-amd64-minimal-v1204.5.20170702-virtualbox
+    vagrant box add Ubuntu-12.04-server-amd64-minimal-v1204.5.20170702-virtualbox.box --name Ubuntu-12.04-server-amd64-minimal-v1204.5.20170702-virtualbox
 
 ### VMware
 
@@ -53,7 +53,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Ubuntu-12.04-server-amd64-minimal-v1204.5.20170702-vmware` to your box list
 by the following command:
 
-    vagrant add Ubuntu-12.04-server-amd64-minimal-v1204.5.20170702-vmware.box --name Ubuntu-12.04-server-amd64-minimal-v1204.5.20170702-vmware
+    vagrant box add Ubuntu-12.04-server-amd64-minimal-v1204.5.20170702-vmware.box --name Ubuntu-12.04-server-amd64-minimal-v1204.5.20170702-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 

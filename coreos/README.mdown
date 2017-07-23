@@ -35,7 +35,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `CoreOS-stable` to your box list
 by the following command:
 
-	vagrant add CoreOS-stable.box --name CoreOS-stable
+	vagrant box add CoreOS-stable.box --name CoreOS-stable
 
 If you want to try Alpha channel or Beta channel rather than Stable channel, you can use `coreos-alpha.json`
 or `coreos-beta.json`, respectively, instead of `coreos-stable.json` to create boxes.

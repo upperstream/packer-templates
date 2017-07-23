@@ -39,7 +39,7 @@ Then you can add the box named `Ubuntu-16.10-server-amd64-minimal-v1610.0.0-virt
 by the following command (for example of VirtualBox provider):
 
 
-	vagrant add Ubuntu-16.10-server-amd64-minimal-v1610.0.0-virtualbox.box --name Ubuntu-16.10-server-amd64-minimal-v1610.0.0-virtualbox
+	vagrant box add Ubuntu-16.10-server-amd64-minimal-v1610.0.0-virtualbox.box --name Ubuntu-16.10-server-amd64-minimal-v1610.0.0-virtualbox
 
 
 ## Building a VM image on ESXi

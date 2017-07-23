@@ -36,7 +36,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `OpenBSD-5.6-amd64-v1.1` to your box list
 by the following command:
 
-	vagrant add OpenBSD-5.6-amd64-v1.1.box --name OpenBSD-5.6-amd64-v1.1
+	vagrant box add OpenBSD-5.6-amd64-v1.1.box --name OpenBSD-5.6-amd64-v1.1
 
 ## Default settings
 

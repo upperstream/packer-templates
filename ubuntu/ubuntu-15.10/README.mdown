@@ -34,7 +34,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Ubuntu-15.10-server-amd64-minimal` to your box list
 by the following command:
 
-	vagrant add Ubuntu-15.10-server-amd64-minimal.box --name Ubuntu-15.10-server-amd64-minimal
+	vagrant box add Ubuntu-15.10-server-amd64-minimal.box --name Ubuntu-15.10-server-amd64-minimal
 
 ## Variants
 

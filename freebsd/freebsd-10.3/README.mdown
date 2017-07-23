@@ -40,7 +40,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `FreeBSD-10.3-RELEASE-amd64-minimal-v10.3.1` to your box list
 by the following command:
 
-	vagrant add FreeBSD-10.3-RELEASE-amd64-minimal-v10.3.1.box --name FreeBSD-10.3-RELEASE-amd64-minimal-v10.3.1
+	vagrant box add FreeBSD-10.3-RELEASE-amd64-minimal-v10.3.1.box --name FreeBSD-10.3-RELEASE-amd64-minimal-v10.3.1
 
 ## Default settings
 

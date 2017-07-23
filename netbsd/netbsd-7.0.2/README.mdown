@@ -44,7 +44,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox` to your box list
 by the following command:
 
-    vagrant add NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox.box --name NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox
+    vagrant box add NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox.box --name NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox
 
 ### VMware
 
@@ -58,7 +58,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `NetBSD-7.0-amd64-minimal-v2.2.0-vmware` to your box list
 by the following command:
 
-    vagrant add NetBSD-7.0-amd64-minimal-v2.2.0-vmware.box --name NetBSD-7.0-amd64-minimal-v2.2.0-vmware
+    vagrant box add NetBSD-7.0-amd64-minimal-v2.2.0-vmware.box --name NetBSD-7.0-amd64-minimal-v2.2.0-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 

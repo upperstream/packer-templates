@@ -45,7 +45,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.20170610-virtualbox` to your box list
 by the following command:
 
-	vagrant add FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.20170610-virtualbox.box --name FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.20170610-virtualbox
+	vagrant box add FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.20170610-virtualbox.box --name FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.20170610-virtualbox
 
 ### VMware
 
@@ -59,7 +59,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.20170610-virtualbox` to your box list
 by the following command:
 
-	vagrant add FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.20170610-virtualbox.box --name FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.20170610-virtualbox
+	vagrant box add FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.20170610-virtualbox.box --name FreeBSD-11.0-RELEASE-amd64-minimal-v11.0.20170610-virtualbox
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 

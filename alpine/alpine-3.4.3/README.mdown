@@ -47,7 +47,7 @@ You will find a vagrant box file named `Alpine-Linux-3.4-x86_64-minimal-v4.3.0-v
 Then you can add the box named `Alpine-Linux-3.4-x86_64-minimal-v4.3.0-virtualbox` to your box list
 by the following command:
 
-	vagrant add Alpine-Linux-3.4-x86_64-minimal-v4.3.0-virtualbox.box --name Alpine-Linux-3.4-x86_64-minimal-v4.3.0-virtualbox
+	vagrant box add Alpine-Linux-3.4-x86_64-minimal-v4.3.0-virtualbox.box --name Alpine-Linux-3.4-x86_64-minimal-v4.3.0-virtualbox
 
 ## Default settings
 

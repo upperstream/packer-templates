@@ -39,7 +39,7 @@ Then you can add the box named `Ubuntu-17.04-server-amd64-minimal-v1704.0.201704
 by the following command (for example of VirtualBox provider):
 
 
-	vagrant add Ubuntu-17.04-server-amd64-minimal-v1704.0.20170429-virtualbox.box --name Ubuntu-17.04-server-amd64-minimal-v1704.0.20170429-virtualbox
+	vagrant box add Ubuntu-17.04-server-amd64-minimal-v1704.0.20170429-virtualbox.box --name Ubuntu-17.04-server-amd64-minimal-v1704.0.20170429-virtualbox
 
 
 ## Building a VM image on ESXi

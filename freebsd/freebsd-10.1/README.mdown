@@ -45,7 +45,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `FreeBSD-10.1-RELEASE-amd64-v10.1.3` to your box list
 by the following command:
 
-	vagrant add FreeBSD-10.1-RELEASE-amd64-v10.1.3.box --name FreeBSD-10.1-RELEASE-amd64-v10.1.3
+	vagrant box add FreeBSD-10.1-RELEASE-amd64-v10.1.3.box --name FreeBSD-10.1-RELEASE-amd64-v10.1.3
 
 ## Default settings
 

@@ -42,7 +42,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Debian-7.9.0-amd64-minimal-v2-virtualbox` to your box list
 by the following command:
 
-	vagrant add Debian-7.9.0-amd64-minimal-v2-virtualbox.box --name Debian-7.9.0-amd64-minimal-v2-virtualbox
+	vagrant box add Debian-7.9.0-amd64-minimal-v2-virtualbox.box --name Debian-7.9.0-amd64-minimal-v2-virtualbox
 
 ## Building a VM image on ESXi
 

@@ -48,7 +48,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Devuan-1.0-amd64-minimal-v1.0.20170719-virtualbox` to your box list
 by the following command:
 
-    vagrant add Devuan-1.0-amd64-minimal-v1.0.20170719-virtualbox.box --name Devuan-1.0-amd64-minimal-v1.0.20170719-virtualbox
+    vagrant box add Devuan-1.0-amd64-minimal-v1.0.20170719-virtualbox.box --name Devuan-1.0-amd64-minimal-v1.0.20170719-virtualbox
 
 ### VMware
 
@@ -62,7 +62,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Devuan-1.0-amd64-minimal-v1.0.20170719-vmware` to your box list
 by the following command:
 
-    vagrant add Devuan-1.0-amd64-minimal-v1.0.20170719-vmware.box --name Devuan-1.0-amd64-minimal-v1.0.20170719-vmware
+    vagrant box add Devuan-1.0-amd64-minimal-v1.0.20170719-vmware.box --name Devuan-1.0-amd64-minimal-v1.0.20170719-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 

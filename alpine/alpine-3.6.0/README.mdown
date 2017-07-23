@@ -40,7 +40,8 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Alpine-standard-3.6-x86_64-minimal-v6.0.20170528-virtualbox` to your box list
 by the following command:
 
-	vagrant add Alpine-standard-3.6-x86_64-minimal-v6.0.20170528-virtualbox.box --name Alpine-standard-3.6-x86_64-minimal-v6.0.20170528-virtualbox
+	vagrant box add Alpine-standard-3.6-x86_64-minimal-v6.0.20170528-virtualbox.box --name Alpine-standard-3.6-x86_64-minimal-v6.0.20170528-virtualbox
+
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
@@ -53,7 +54,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `Alpine-standard-3.6-x86_64-minimal-v6.0.20170528-vmware` to your box list
 by the following command:
 
-	vagrant add Alpine-standard-3.6-x86_64-minimal-v6.0.20170528-vmware.box --name Alpine-standard-3.6-x86_64-minimal-v6.0.20170528-vmware
+	vagrant box add Alpine-standard-3.6-x86_64-minimal-v6.0.20170528-vmware.box --name Alpine-standard-3.6-x86_64-minimal-v6.0.20170528-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
