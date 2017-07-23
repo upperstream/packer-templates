@@ -1,0 +1,6 @@
+{
+  "iso_name": "debian-9.1.0-amd64-xfce-CD-1.iso",
+  "iso_path": "9.1.0/amd64/iso-cd",
+  "iso_checksum": "9558262f6c15b024d8c3ca140d1c70c310f11384e227329d08dab38c915a4306",
+  "iso_checksum_type": "sha256"
+}
