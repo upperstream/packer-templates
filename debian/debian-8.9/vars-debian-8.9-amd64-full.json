@@ -1,0 +1,6 @@
+{
+  "iso_name": "debian-8.9.0-amd64-CD-1.iso",
+  "iso_path": "8.9.0/amd64/iso-cd",
+  "iso_checksum": "0d55d42629676f2516ae6edfc8af5134194dd5d89ae791329d24fceba2cc3fd8",
+  "iso_checksum_type": "sha256"
+}
