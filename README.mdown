@@ -18,7 +18,7 @@
 * [coreos](coreos/README.mdown) - CoreOS templates
 * [debian](debian/README.mdown) - Debian templates
     * debian-7.11 - Debian 7.11 templates
-    * debian-8.8 - Debian 8.8 templates
+    * debian-8.9 - Debian 8.9 templates
     * debian-9.1 - Debian 9.1 templates
     * [more](debian/README.mdown)
 * [devuan](devuan) - Devuan templates

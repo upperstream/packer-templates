@@ -217,7 +217,7 @@
       "environment_vars": [
         "XSERVER_XORG_VIDEO_VMWARE=xserver-xorg-video-vmware=1:13.2.1-1+b1",
         "XSERVER_XORG_INPUT_VMMOUSE=xserver-xorg-input-evdev=1:2.10.5-1",
-	"OPEN_VM_TOOLS=open-vm-tools=2:10.1.5-5055683-4",
+        "OPEN_VM_TOOLS=open-vm-tools=2:10.1.5-5055683-4",
         "VMWARE_WITH_XORG=1"
       ]
     },
