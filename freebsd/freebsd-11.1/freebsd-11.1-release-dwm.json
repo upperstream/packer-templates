@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-11.1-RC3-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.1-RELEASE-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.1",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "9e2fd85ad0d0b7c7e2951336496aed22131a7bdf8f35a782c50b59f3730cc801",
-    "box_version": "3.20170715",
+    "iso_checksum": "ff4c749ea0aaaceedb2432ba3e0fd0c1b64f5a72141b1ec06b9ced52b5de0dbf",
+    "box_version": "11.1.20170726",
     "mem_size": "1024",
     "disk_size": "51200",
     "remote_host": "{{env `REMOTE_HOST`}}",
@@ -22,7 +22,7 @@
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:11:amd64",
-    "vm_name": "FreeBSD-11.1-RC-amd64"
+    "vm_name": "FreeBSD-11.1-RELEASE-amd64"
   },
   "builders": [
     {
