@@ -39,6 +39,8 @@
     * openbsd-5.9 - OpenBSD 5.9 templates (amd64 and i386)
     * openbsd-6.1 - OpenBSD 6.1 templates (amd64 and i386)
     * [more](openbsd/README.mdown)
+* [opensuse](opensuse/README.mdown) - openSUSE templates
+    * leap-42.3 - openSUSE Leap 42.3 templates
 * [tinycorelinux](tinycorelinux/README.mdown) - Tiny Core Linux templates
     * tinycorelinux-7 - Tiny Core Linux v7.2 templates (x86_64 and x86)
     * tinycorelinux-8 - Tiny Core Linux v8.0 templates (x86_64 and x86)
