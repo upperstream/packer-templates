@@ -1,6 +1,6 @@
 # Packer templates for NetBSD 7.1
 
-Templates to create Vagrant box for NetBSD 7.1 (amd64 and i386).
+Templates to create Vagrant boxes for NetBSD 7.1 (amd64 and i386).
 
 
 ## Prerequisites
@@ -122,10 +122,11 @@ The following command will build a VM image on your ESXi:
 The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
 
 * `vm_name` - VM name.  This also affects box file name and output directory name.
+* `num_cpus` - Number of virtual CPUs.  Default value is 2.
 * `mem_size` - RAM size of the created VM.  Default value is `512` which means 512MB.
 * `disk_size` - Disk size of the created VM.  Default value is `40960` which means 40GB.
 * `hostname` - Host name of the created VM.  Default value is `vagrant`.
-* `ssh_user` - User name to login via SSH during build time.  Default value is `root`.
+* `ssh_username` - User name to login via SSH during build time.  Default value is `root`.
 * `ssh_password` - SSH password for `ssh_user` during build time.  Default value is `vagrant`.
 * `user_name` - User name during run time.  Vagrant box is set for this user.  Default value is `vagrant`.
 * `user_password` - Password for `user_name`.  Default value is `vagrant`.

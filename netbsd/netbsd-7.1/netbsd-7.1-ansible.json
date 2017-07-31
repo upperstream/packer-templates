@@ -11,6 +11,7 @@
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "user_name": "vagrant",
     "user_password": "vagrant",
+    "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "40960",
     "hostname": "vagrant",
@@ -47,7 +48,7 @@
       "headless": "{{user `headless`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
         [ "modifyvm", "{{.Name}}", "--natdnsproxy1", "on" ]
       ],
@@ -126,7 +127,7 @@
       "headless": "{{user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
         "ethernet0.virtualDev": "e1000",
@@ -217,7 +218,7 @@
       "headless": "{{user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "bridged",
         "ethernet0.virtualDev": "e1000",
