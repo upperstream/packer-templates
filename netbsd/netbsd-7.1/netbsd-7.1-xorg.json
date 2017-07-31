@@ -43,7 +43,7 @@
       "shutdown_command": "echo 'shutdown -p now'|su -",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
-      "output_directory": "output/output-virtualbox-iso",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}-virtualbox",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "headless": "{{user `headless`}}",
       "vboxmanage": [
@@ -124,7 +124,7 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo 'shutdown -p now'|su -",
-      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}-vmware",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "headless": "{{user `headless`}}",
       "vmx_data": {
