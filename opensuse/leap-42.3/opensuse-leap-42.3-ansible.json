@@ -1,0 +1,227 @@
+{
+  "variables": {
+    "vm_name": "openSUSE-Leap-amd64-ansible",
+    "box_version": "42.3.20170730",
+    "iso_name": "openSUSE-Leap-42.3-DVD-x86_64.iso",
+    "iso_path": "distribution/leap/42.3/iso",
+    "iso_checksum_type": "sha256",
+    "iso_checksum": "195baca6c5f3b7f3ad4d7984a7f7bd5c4a37be2eb67e58b65d07ac3a2b599e83",
+    "num_cpus": "2",
+    "mem_size": "1024",
+    "disk_size": "40000",
+    "ssh_username": "root",
+    "ssh_password": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_group": "vagrant",
+    "vagrant_password": "vagrant",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "headless": "false"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "OpenSUSE_64",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_urls": [
+        "iso/{{user `iso_name`}}",
+        "http://ftp.jaist.ac.jp/pub/Linux/openSUSE/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.clarkson.edu/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.tspu.ru/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.infotronik.hu/mirrors/pub/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.internode.on.net/pub/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://ftp.acc.umu.se/mirror/opensuse.org/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://ftp.gwdg.de/pub/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.cedia.org.ec/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://download.opensuse.org/{{user `iso_path`}}/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "/sbin/shutdown -h now",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": ".vbox_version",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-virtualbox",
+      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+      ],
+      "http_directory": ".",
+      "headless": "{{user `headless`}}",
+      "boot_command": [
+        "<down><wait>",
+        "autoyast2=http://{{ .HTTPIP }}:{{ .HTTPPort }}/autoinst.xml textmode=1<enter>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "opensuse-64",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_urls": [
+        "iso/{{user `iso_name`}}",
+        "http://ftp.jaist.ac.jp/pub/Linux/openSUSE/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.clarkson.edu/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.tspu.ru/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.infotronik.hu/mirrors/pub/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.internode.on.net/pub/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://ftp.acc.umu.se/mirror/opensuse.org/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://ftp.gwdg.de/pub/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.cedia.org.ec/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://download.opensuse.org/{{user `iso_path`}}/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "/sbin/shutdown -h now",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-vmware",
+      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vmx_data": {
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "{user `num_cpus`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "http_directory": ".",
+      "headless": "{{user `headless`}}",
+      "boot_command": [
+        "<down><wait>",
+        "autoyast2=http://{{ .HTTPIP }}:{{ .HTTPPort }}/autoinst.xml textmode=1<enter>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "name": "esxi-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "otherlinux-64",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_urls": [
+        "iso/{{user `iso_name`}}",
+        "http://ftp.jaist.ac.jp/pub/Linux/openSUSE/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.clarkson.edu/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.tspu.ru/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.infotronik.hu/mirrors/pub/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.internode.on.net/pub/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://ftp.acc.umu.se/mirror/opensuse.org/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://ftp.gwdg.de/pub/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://mirror.cedia.org.ec/opensuse/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://download.opensuse.org/{{user `iso_path`}}/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "/sbin/shutdown -h now",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vmx_data": {
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "{{user `num_cpus`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "bridged",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "http_directory": ".",
+      "headless": "{{user `headless`}}",
+      "boot_command": [
+        "<down><wait>",
+        "autoyast2=http://{{ .HTTPIP }}:{{ .HTTPPort }}/autoinst.xml textmode=1<enter>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/base.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/ansible.sh"
+      ],
+      "environment_vars": [
+        "VAGRANT_USERNAME={{user `vagrant_username`}}",
+        "VAGRANT_GROUP={{user `vagrant_group`}}",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}",
+        "SUDO=sudo=1.8.20p2-1.3",
+        "ANSIBLE=ansible=2.1.1.0-3.2",
+        "PYTHON_PIP=python-pip=7.1.2-4.4",
+        "TESTINFRA=testinfra==1.6.4"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": [ "virtualbox-iso" ],
+      "script": "../provisioners/virtualbox.sh",
+      "environment_vars": [
+        "VIRTUALBOX_GUEST_TOOLS=virtualbox-guest-tools=5.1.22-20.2",
+        "VIRTUALBOX_GUEST_KMP_DEFAULT=virtualbox-guest-kmp-default=5.1.22_k4.4.76_1-20.2"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": [
+        "vmware-iso",
+        "esxi-iso"
+      ],
+      "script": "../provisioners/vmware.sh",
+      "environment_vars": [
+        "OPEN_VM_TOOLS=open-vm-tools=10.1.5-2.1"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": [
+        "virtualbox-iso",
+        "vmware-iso"
+      ],
+      "script": "../provisioners/disk_cleanup.sh"
+    },
+    {
+      "type": "shell",
+      "script": "../provisioners/finalise.sh"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box"
+    },
+    {
+      "type": "vagrant",
+      "only": ["vmware-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "keep_input_artifact": true
+    }
+  ]
+}

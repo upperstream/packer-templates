@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile
+  xmlns="http://www.suse.com/1.0/yast2ns"
+  xmlns:config="http://www.suse.com/1.0/configns">
+  <general>
+    <mode>
+      <confirm config:type="boolean">false</confirm>
+      <confirm_base_product_license config:type="boolean">false</confirm_base_product_license>
+      <self_update config:type="boolean">false</self_update>
+    </mode>
+  </general>
+  <bootloader>
+    <loader_type>grub2</loader_type>
+    <global>
+      <activate config:type="boolean">true</activate>
+      <timeout config:type="integer">5</timeout>
+    </global>
+  </bootloader>
+  <partitioning config:type="list">
+    <drive>
+      <device>/dev/sda</device>
+      <initialize config:type="boolean">true</initialize>
+      <use config:type="symbol">all</use>
+    </drive>
+  </partitioning>
+  <timezone>
+    <hwclock>UTC</hwclock>
+    <timezone>UTC</timezone>
+  </timezone>
+  <software>
+    <patterns config:type="list">
+      <pattern>x11</pattern>
+    </patterns>
+  </software>
+  <services-manager>
+    <default_target>multi-user</default_target>
+  </services-manager>
+  <networking>
+    <interfaces config:type="list">
+      <interface>
+        <bootproto>dhcp</bootproto>
+        <device>eth0</device>
+        <startmode>auto</startmode>
+      </interface>
+    </interfaces>
+  </networking>
+  <users config:type="list">
+    <user>
+      <username>root</username>
+      <user_password>vagrant</user_password>
+      <uid>1001</uid>
+      <giu>100</giu>
+    </user>
+  </users>
+  <scripts>
+    <pre-scripts>
+      <script>
+        <interpreter>shell</interpreter>
+        <filename>start.sh</filename>
+        <source>
+        <![CDATA[
+#!/bin/sh
+echo "Starting installation"
+exit 0
+
+]]>
+
+        </source>
+      </script>
+    </pre-scripts>
+    <post-scripts config:type="list">
+      <script>
+        <interpreter>shell</interpreter>
+        <filename>post-install.sh</filename>
+        <chrooted config:type="boolean">true</chrooted>
+        <source>
+        <![CDATA[
+#!/bin/sh
+set -e
+set -x
+systemctl enable sshd.service
+]]>
+        </source>
+      </script>
+    </post-scripts>
+  </scripts>
+</profile>
