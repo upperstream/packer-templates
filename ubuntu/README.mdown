@@ -20,11 +20,11 @@
     * Ubuntu Desktop 15.10
     * Ubuntu Server 15.10
     * Xubuntu 15.10
-* [ubuntu-16.04](ubuntu-16.04/README.mdown) - templates for Ubuntu 16.04.2
-    * Ubuntu Desktop 16.04.2 LTS
-    * Ubuntu Server 16.04.2 LTS
-    * Lubuntu 16.04.2 LTS
-    * Xubuntu 16.04.2 LTS
+* [ubuntu-16.04](ubuntu-16.04/README.mdown) - templates for Ubuntu 16.04.3
+    * Ubuntu Desktop 16.04.3 LTS
+    * Ubuntu Server 16.04.3 LTS
+    * Lubuntu 16.04.3 LTS
+    * Xubuntu 16.04.3 LTS
 * [ubuntu-16.10](ubuntu-16.10/README.mdown) - templates for Ubuntu 16.10
     * Ubuntu Desktop 16.10
     * Ubuntu Server 16.10

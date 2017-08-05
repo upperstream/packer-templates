@@ -1,6 +1,7 @@
-# Packer templates for Ubuntu 16.04.2
+# Packer templates for Ubuntu 16.04.3
 
-Templates to create Vagrant boxes for Ubuntu 16.04.2 (x86_64).
+Templates to create Vagrant boxes for Ubuntu 16.04.3 (x86_64).
+
 
 ## Prerequisites
 
@@ -17,31 +18,32 @@ Templates to create Vagrant boxes for Ubuntu 16.04.2 (x86_64).
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
 [VMware]: http://www.vmware.com/ "VMware Virtualization for Desktop &amp; Server, Application, Public &amp; Hybrid Clouds"
 
+
 ## Provisioned software tools
 
 * VirtualBox Guest Additions
 * `vagrant` user and its insecure public key
 
+
 ## How to create a box
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-	packer build -only=virtualbox-iso ubuntu-16.04-server-minimal.json
+    packer build -only=virtualbox-iso ubuntu-16.04-server-minimal.json
 
 or:
 
-	packer build -only=vmware-iso ubuntu-16.04-server-minimal.json
+    packer build -only=vmware-iso ubuntu-16.04-server-minimal.json
 
 for VMware provider.
-You will find a vagrant box file named `Ubuntu-16.04-server-minimal-amd64-v1604.2.20170504-virtualbox.box`
-or `Ubuntu-16.04-server-minimal-amd64-v1604.2.20170504-virtualbox.box`
+You will find a vagrant box file named `Ubuntu-16.04-server-minimal-amd64-v1604.3.20170804-virtualbox.box`
+or `Ubuntu-16.04-server-minimal-amd64-v1604.3.20170804-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-16.04-server-minimal-amd64-v1604.2.20170504-virtualbox` to your box list
+Then you can add the box named `Ubuntu-16.04-server-minimal-amd64-v1604.3.20170804-virtualbox` to your box list
 by the following command (for example of VirtualBox provider):
 
-
-	vagrant box add Ubuntu-16.04-server-minimal-amd64-v1604.2.20170504-virtualbox.box --name Ubuntu-16.04-server-minimal-amd64-v1604.2.20170504-virtualbox
+    vagrant box add Ubuntu-16.04-server-minimal-amd64-v1604.3.20170804-virtualbox.box --name Ubuntu-16.04-server-minimal-amd64-v1604.3.20170804-virtualbox
 
 
 ## Building a VM image on ESXi
@@ -61,16 +63,18 @@ The following command will build a VM image on your ESXi:
 
 (Note that created VM will be unregistered from your Inventory.)
 
+
 ## Variants
 
-* `packer build ubuntu-16.04-desktop.json` - Ubuntu Desktop 16.04.2 LTS
-* `packer build ubuntu-16.04-server-minimal.json` - Ubuntu Server 16.04.2 LTS
-* `packer build ubuntu-16.04-server-ansible.json` - Ubuntu Server 16.04.2 LTS + [Ansible] + [Testinfra]
-* `packer build lubuntu-16.04-desktop.json` - Lubuntu 16.04.2 LTS
-* `packer build xubuntu-16.04-desktop.json` - Xubuntu 16.04.2 LTS
+* `packer build ubuntu-16.04-desktop.json` - Ubuntu Desktop 16.04.3 LTS
+* `packer build ubuntu-16.04-server-minimal.json` - Ubuntu Server 16.04.3 LTS
+* `packer build ubuntu-16.04-server-ansible.json` - Ubuntu Server 16.04.3 LTS + [Ansible] + [Testinfra]
+* `packer build lubuntu-16.04-desktop.json` - Lubuntu 16.04.3 LTS
+* `packer build xubuntu-16.04-desktop.json` - Xubuntu 16.04.3 LTS
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
-[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
+[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.6.4 documentation"
+
 
 ## Build parameters
 
