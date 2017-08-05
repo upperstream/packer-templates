@@ -45,6 +45,8 @@ by the following command (for example of VirtualBox provider):
 
     vagrant box add Ubuntu-16.04-server-minimal-amd64-v1604.3.20170804-virtualbox.box --name Ubuntu-16.04-server-minimal-amd64-v1604.3.20170804-virtualbox
 
+In the `output` directory you will also find a VM image that can be directly imported from VMware.
+
 
 ## Building a VM image on ESXi
 
