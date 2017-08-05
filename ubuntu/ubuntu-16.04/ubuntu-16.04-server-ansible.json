@@ -17,7 +17,8 @@
     "mem_size": "512",
     "disk_size": "40960",
     "linux": "/install/linux",
-    "initrd": "/install/initrd.gz"
+    "initrd": "/install/initrd.gz",
+    "headless": "false"
   },
   "builders": [
     {
@@ -48,6 +49,7 @@
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><f6><esc>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -101,6 +103,7 @@
         "vhv.enable": "TRUE"
       },
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><f6><esc>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -161,6 +164,7 @@
         "vhv.enable": "TRUE"
       },
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><f6><esc>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",

@@ -17,7 +17,8 @@
     "mem_size": "1024",
     "disk_size": "40960",
     "linux": "/install/linux",
-    "initrd": "/install/initrd.gz"
+    "initrd": "/install/initrd.gz",
+    "headless": "false"
   },
   "builders": [
     {
@@ -49,6 +50,7 @@
         [ "modifyvm", "{{.Name}}", "--vram", "16" ]
       ],
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><f6><esc>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -103,6 +105,7 @@
         "svga.vramSize": "16777216"
       },
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><f6><esc>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -164,6 +167,7 @@
         "svga.vramSize": "16777216"
       },
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><f6><esc>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
