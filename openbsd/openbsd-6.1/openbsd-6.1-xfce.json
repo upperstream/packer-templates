@@ -2,7 +2,7 @@
   "variables": {
     "variant": "xfce",
     "cpu": "",
-    "box_version": "6.1.1",
+    "box_version": "6.1.20170806",
     "iso_image": "",
     "os_ver": "6.1",
     "num_cpus": "2",
@@ -187,14 +187,14 @@
       "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD"
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD-sh"
     },
     {
       "type": "vagrant",
       "only": ["vmware-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD-sh",
       "keep_input_artifact": true
     }
   ]

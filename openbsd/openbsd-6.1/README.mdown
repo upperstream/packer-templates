@@ -40,13 +40,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso -var-file=vars-openbsd-6.1-amd64.json openbsd-6.1-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.0-virtualbox`
+You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.20170806-virtualbox`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.1-amd64-minimal-v6.1.0-virtualbox` to your box list
-by the following command:
+Then you can add the box named `OpenBSD-6.1-amd64-minimal-v6.1.20170806-virtualbox`
+to your box list by the following command:
 
-    vagrant box add OpenBSD-6.1-amd64-minimal-v6.1.0-virtualbox.box --name OpenBSD-6.1-amd64-minimal-v6.1.0-virtualbox
+    vagrant box add OpenBSD-6.1-amd64-minimal-v6.1.20170806-virtualbox.box --name OpenBSD-6.1-amd64-minimal-v6.1.20170806-virtualbox
 
 ### VMware
 
@@ -54,35 +54,39 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso -var-file=vars-openbsd-6.1-amd64.json openbsd-6.1-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.0-vmware.box`
+You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.20170806-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.1-amd64-minimal-v6.1.0-vmawre` to your box list
-by the following command:
+Then you can add the box named `OpenBSD-6.1-amd64-minimal-v6.1.20170806-vmawre`
+to your box list by the following command:
 
-    vagrant box add OpenBSD-6.1-amd64-minimal-v6.1.0-vmware.box --name OpenBSD-6.1-amd64-minimal-v6.1.0-vmware
+    vagrant box add OpenBSD-6.1-amd64-minimal-v6.1.20170806-vmware.box --name OpenBSD-6.1-amd64-minimal-v6.1.20170806-vmware
 
-In the `output` directory you will also find a VM image that can be directly imported from VMware.
+In the `output` directory you will also find a VM image that can be directly
+imported to VMware.
 
 
 ## Default settings
 
-These default settings below are done by the file `Vagrantfile.OpenBSD` which will be included in the box.
-Users can override this setting by users' own `Vagrantfile`s.
+These default settings below are done by the file `Vagrantfile.OpenBSD-sh`
+which will be included in the box.  Users can override this setting by users'
+own `Vagrantfile`s.
 
 ### Synced Folder
 
-Due to Vagrant limitation of OpenBSD support, Synced Folder of this box is disabled by default.
+Due to Vagrant limitation of OpenBSD support, Synced Folder of this box is
+disabled by default.
 
 ### SSH Shell
 
-Because Bash is not the standard shell for OpenBSD, default shell for SSH connection of this box
-is set to "`/bin/ksh`".
+Because Bash is not the standard shell for OpenBSD, default shell for non-
+interactive SSH connection of this box is set to `/bin/sh`.
 
 
 ## Building a VM image on ESXi
 
-In order to build a VM image on ESXi, you need to provide the following environment variables:
+In order to build a VM image on ESXi, you need to provide the following
+environment variables:
 
 * `REMOTE_HOST` - ESXi host name or IP address
 * `REMOTE_USERNAME` - ESXi login user name
@@ -125,7 +129,8 @@ The following command will build a VM image on your ESXi:
 
 ## Build parameters
 
-The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
+The following parameters can be set at build time by supplying `-var` or
+`-var-file` command line options to `packer`:
 
 * `vm_name` - VM name.  This also affects box file name and output directory name.
 * `num_cpus` - Number of virtual CPUs.  Default value is 2.
