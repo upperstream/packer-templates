@@ -2,9 +2,10 @@
   "variables": {
     "variant": "xfce",
     "cpu": "",
-    "box_version": "6.1.1",
+    "box_version": "6.1.20170806",
     "iso_image": "",
     "os_ver": "6.1",
+    "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "40960",
     "remote_host": "{{env `REMOTE_HOST`}}",
@@ -43,7 +44,7 @@
       "headless": "{{user `headless`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
         [ "modifyvm", "{{.Name}}", "--vram", "12" ]
       ],
@@ -79,7 +80,7 @@
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "headless": "{{user `headless`}}",
       "vmx_data": {
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "memsize": "{{user `mem_size`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
@@ -129,7 +130,7 @@
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
       "vmx_data": {
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "memsize": "{{user `mem_size`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "bridged",
@@ -186,14 +187,14 @@
       "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD"
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD-sh"
     },
     {
       "type": "vagrant",
       "only": ["vmware-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD-sh",
       "keep_input_artifact": true
     }
   ]
