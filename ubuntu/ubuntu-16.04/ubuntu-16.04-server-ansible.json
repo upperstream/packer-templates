@@ -14,6 +14,7 @@
     "box_version": "1604.3.20170804",
     "preseed": "ubuntu-server.seed",
     "virtualbox_version": "5.1.6",
+    "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "40960",
     "linux": "/install/linux",
@@ -46,7 +47,7 @@
       "vm_name": "{{user `vm_name`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
       "http_directory": "../http",
@@ -94,7 +95,7 @@
       "vm_name": "{{user `vm_name`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
         "ethernet0.virtualDev": "e1000",
@@ -155,7 +156,7 @@
       "vm_name": "{{user `vm_name`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "bridged",
         "ethernet0.virtualDev": "e1000",
