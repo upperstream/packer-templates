@@ -1,4 +1,7 @@
-#!/bin/sh -x
+#!/bin/sh
+set -e
+set -x
+
 pkg_add ${DWM:-dwm} ${DMENU:-dmenu} ${ST_TERM:-"st-term"} ${FREETYPE2:-freetype2} ${FONTCONFIG:-fontconfig} ${XFT2:-Xft2}
 #echo "xdm=YES" >> /etc/rc.conf
 cp /etc/X11/xdm/Xresources /tmp/Xresources
@@ -16,5 +19,5 @@ cat > /home/$VAGRANT_USER/.xsession << EOF
 #!/bin/sh
 . /home/$VAGRANT_USER/.xinitrc
 EOF
-chown $VAGRANT_USER /home/$VAGRANT_USER/.xinitrc /home/$VAGRANT_USER/.xsession
+chown $VAGRANT_USER:${VAGRANT_GROUP:-vagrant} /home/$VAGRANT_USER/.xinitrc /home/$VAGRANT_USER/.xsession
 chmod +x /home/$VAGRANT_USER/.xsession
