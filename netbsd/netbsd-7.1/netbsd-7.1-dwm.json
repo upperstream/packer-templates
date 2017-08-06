@@ -96,7 +96,7 @@
         "x<enter><wait>",
         "<enter><wait10>",
         "x<enter><wait>",
-        "dhclient<enter><wait10>",
+        "dhcpcd<enter><wait10>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
         "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} HDD=wd0a HOSTNAME={{user `hostname`}} sh /tmp/install.sh<enter><wait>"
       ]
@@ -183,7 +183,7 @@
         "x<enter><wait>",
         "<enter><wait10><wait10>",
         "x<enter><wait>",
-        "dhclient<enter><wait10>",
+        "dhcpcd<enter><wait10>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
         "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} HDD=sd0a HOSTNAME={{user `hostname`}} sh /tmp/install.sh<enter><wait>"
       ]
@@ -276,7 +276,7 @@
         "x<enter><wait>",
         "<enter><wait10><wait10>",
         "x<enter><wait>",
-        "dhclient<enter><wait10>",
+        "dhcpcd<enter><wait10>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
         "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} HDD=sd0a HOSTNAME={{user `hostname`}} sh /tmp/install.sh<enter><wait>"
       ]

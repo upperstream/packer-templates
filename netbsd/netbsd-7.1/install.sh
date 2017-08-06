@@ -5,7 +5,7 @@ sed -I \
   -e 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /mnt/etc/ssh/sshd_config
 cat << EOF >> /mnt/etc/rc.conf
 #critical_filesystems_local=/var
-dhclient=YES
+dhcpcd=YES
 rpcbind=YES
 nfs_client=YES
 no_swap=YES
