@@ -2,6 +2,7 @@
 
 Templates to create Vagrant boxes for OpenBSD 6.1 (amd64 and i386).
 
+
 ## Prerequisites
 
 * [Packer] v0.8.6+
@@ -21,6 +22,7 @@ Templates to create Vagrant boxes for OpenBSD 6.1 (amd64 and i386).
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
 [VMware]: http://www.vmware.com/ "VMware Virtualization for Desktop &amp; Server, Application, Public &amp; Hybrid Clouds"
 
+
 ## Provisioned software tools
 
 * sshd
@@ -28,6 +30,7 @@ Templates to create Vagrant boxes for OpenBSD 6.1 (amd64 and i386).
 * sharity-light
 * sudo
 * `vagrant` user and its insecure public key
+
 
 ## How to create a box
 
@@ -61,6 +64,7 @@ by the following command:
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
+
 ## Default settings
 
 These default settings below are done by the file `Vagrantfile.OpenBSD` which will be included in the box.
@@ -74,6 +78,7 @@ Due to Vagrant limitation of OpenBSD support, Synced Folder of this box is disab
 
 Because Bash is not the standard shell for OpenBSD, default shell for SSH connection of this box
 is set to "`/bin/ksh`".
+
 
 ## Building a VM image on ESXi
 
@@ -91,6 +96,7 @@ The following command will build a VM image on your ESXi:
     packer build -only=esxi-iso -var-file=vars-openbsd-6.1-amd64.json openbsd-6.1-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
+
 
 ## Variants
 
@@ -116,11 +122,13 @@ The following command will build a VM image on your ESXi:
 [X11]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 
+
 ## Build parameters
 
 The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
 
 * `vm_name` - VM name.  This also affects box file name and output directory name.
+* `num_cpus` - Number of virtual CPUs.  Default value is 2.
 * `mem_size` - RAM size of the created VM.  Default value is `512` which means 512MB.
 * `disk_size` - Disk size of the created VM.  Default value is `40960` which means 40GB.
 * `package_server`: - URL to download packages from.  Default value is `http://www.ftp.ne.jp/OpenBSD/`.
