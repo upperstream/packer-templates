@@ -1,8 +1,8 @@
 {
   "variables": {
-    "iso_name": "ubuntu-16.04.2-server-amd64.iso",
+    "iso_name": "ubuntu-16.04.3-server-amd64.iso",
     "iso_path": "16.04",
-    "iso_checksum": "737ae7041212c628de5751d15c3016058b0e833fdc32e7420209b76ca3d0a535",
+    "iso_checksum": "a06cd926f5855d4f21fb4bc9978a35312f815fbda0d0ef7fdc846861f4fc4600",
     "iso_checksum_type": "sha256",
     "ssh_name": "vagrant",
     "ssh_pass": "vagrant",
@@ -11,13 +11,15 @@
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "vm_name": "Xubuntu-16.04-amd64",
-    "box_version": "1604.2.20170504",
+    "box_version": "1604.3.20170804",
     "preseed": "xubuntu-desktop.seed",
     "virtualbox_version": "5.1.6",
+    "num_cpus": "2",
     "mem_size": "2048",
     "disk_size": "40960",
     "linux": "/install/linux",
-    "initrd": "/install/initrd.gz"
+    "initrd": "/install/initrd.gz",
+    "headless": "false"
   },
   "builders": [
     {
@@ -38,17 +40,19 @@
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'",
+      "shutdown_command": "sudo /sbin/shutdown -h now",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-virtualbox",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm_name`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
         [ "modifyvm", "{{.Name}}", "--vram", "16" ]
       ],
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><f6><esc>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -87,11 +91,12 @@
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'",
+      "shutdown_command": "sudo /sbin/shutdown -h now",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
         "ethernet0.virtualDev": "e1000",
@@ -103,6 +108,7 @@
         "svga.vramSize": "16777216"
       },
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><f6><esc>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -142,7 +148,7 @@
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'",
+      "shutdown_command": "sudo /sbin/shutdown -h now",
       "remote_type": "esx5",
       "remote_host": "{{user `remote_host`}}",
       "remote_username": "{{user `remote_username`}}",
@@ -152,7 +158,7 @@
       "vm_name": "{{user `vm_name`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "bridged",
         "ethernet0.virtualDev": "e1000",
@@ -164,6 +170,7 @@
         "svga.vramSize": "16777216"
       },
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<esc><f6><esc>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -240,12 +247,16 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "only": [
-        "virtualbox-iso",
-        "vmware-iso"
-      ],
+      "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box"
+    },
+    {
+      "type": "vagrant",
+      "only": ["vmware-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "keep_input_artifact": true
     }
   ]
 }
