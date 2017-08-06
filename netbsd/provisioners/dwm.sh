@@ -19,4 +19,4 @@ cat > /home/$VAGRANT_USER/.xsession << EOF
 . /home/$VAGRANT_USER/.xinitrc
 EOF
 chown $VAGRANT_USER /home/$VAGRANT_USER/.xinitrc /home/$VAGRANT_USER/.xsession
-chmod +x /home/$VAGRANT_USER/.xinitrc /home/$VAGRANT_USER/.xsession
+chmod +x /home/$VAGRANT_USER/.xsession
