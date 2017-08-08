@@ -12,16 +12,6 @@
     * NetBSD 6.1.5 + Ansible + Testinfra (amd64)
     * NetBSD 6.1.5 (i386)
     * NetBSD 6.1.5 + Ansible + Testinfra (i386)
-* [netbsd-7.0](netbsd-7.0/README.mdown) - templates for NetBSD 7.0
-    * NetBSD 7.0 (amd64)
-    * NetBSD 7.0 + Ansible + Testinfra (amd64)
-    * NetBSD 7.0 (i386)
-    * NetBSD 7.0 + Ansible + Testinfra (i386)
-* [netbsd-7.0.1](netbsd-7.0.1/README.mdown) - templates for NetBSD 7.0.1
-    * NetBSD 7.0.1 (amd64)
-    * NetBSD 7.0.1 + Ansible + Testinfra (amd64)
-    * NetBSD 7.0.1 (i386)
-    * NetBSD 7.0.1 + Ansible + Testinfra (i386)
 * [netbsd-7.0.2](netbsd-7.0.2/README.mdown) - templates for NetBSD 7.0.2
     * NetBSD 7.0.2 (amd64)
     * NetBSD 7.0.2 + Ansible + Testinfra (amd64)
