@@ -39,7 +39,7 @@ Templates to create Vagrant box for NetBSD 7.0.2 (amd64 and i386).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso -var-file=vars-netbsd-7.0.2-amd64.json netbsd-7.0.2-minimal.json
+    packer build -only=virtualbox-iso -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-minimal.json
 
 You will find a vagrant box file named `NetBSD-7.0-amd64-minimal-v2.2.0-virtualbox.box`
 in the same directory after the command has succeeded.
@@ -53,7 +53,7 @@ by the following command:
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso -var-file=vars-netbsd-7.0.2-amd64.json netbsd-7.0.2-minimal.json
+    packer build -only=vmware-iso -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-minimal.json
 
 You will find a vagrant box file named `NetBSD-7.0-amd64-minimal-v2.2.0-vmware.box`
 in the same directory after the command has succeeded.
@@ -94,21 +94,21 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso -var-file=vars-netbsd-7.0.2-amd64.json netbsd-7.0.2-minimal.json
+    packer build -only=esxi-iso -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
 
 
 ## Variants
 
-* `packer build -var-file=vars-netbsd-7.0.2-amd64.json netbsd-7.0.2-minmal.json` - NetBSD 7.0.2 (amd64)
-* `packer build -var-file=vars-netbsd-7.0.2-amd64.json netbsd-7.0.2-ansible.json` - NetBSD 7.0.2 + [Ansible] + [Testinfra] (amd64)
-* `packer build -var-file=vars-netbsd-7.0.2-amd64.json netbsd-7.0.2-xorg.json` - NetBSD 7.0.2 + [X.Org] (amd64)
-* `packer build -var-file=vars-netbsd-7.0.2-amd64.json netbsd-7.0.2-dwm.json` - NetBSD 7.0.2 + X.Org + [dwm] + [dmenu] (amd64)
-* `packer build -var-file=vars-netbsd-7.0.2-i386.json netbsd-7.0.2-minmal.json` - NetBSD 7.0.2 (i386)
-* `packer build -var-file=vars-netbsd-7.0.2-i386.json netbsd-7.0.2-ansible.json` - NetBSD 7.0.2 + Ansible + Testinfra (i386)
-* `packer build -var-file=vars-netbsd-7.0.2-i386.json netbsd-7.0.2-xorg.json` - NetBSD 7.0.2 + X.Org (i386)
-* `packer build -var-file=vars-netbsd-7.0.2-i386.json netbsd-7.0.2-dwm.json` - NetBSD 7.0.2 + X.Org + dwm + dmenu (i386)
+* `packer build -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-minmal.json` - NetBSD 7.0.2 (amd64)
+* `packer build -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-ansible.json` - NetBSD 7.0.2 + [Ansible] + [Testinfra] (amd64)
+* `packer build -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-xorg.json` - NetBSD 7.0.2 + [X.Org] (amd64)
+* `packer build -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-dwm.json` - NetBSD 7.0.2 + X.Org + [dwm] + [dmenu] (amd64)
+* `packer build -var-file=vars-netbsd-7.0-i386.json netbsd-7.0-minmal.json` - NetBSD 7.0.2 (i386)
+* `packer build -var-file=vars-netbsd-7.0-i386.json netbsd-7.0-ansible.json` - NetBSD 7.0.2 + Ansible + Testinfra (i386)
+* `packer build -var-file=vars-netbsd-7.0-i386.json netbsd-7.0-xorg.json` - NetBSD 7.0.2 + X.Org (i386)
+* `packer build -var-file=vars-netbsd-7.0-i386.json netbsd-7.0-dwm.json` - NetBSD 7.0.2 + X.Org + dwm + dmenu (i386)
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
@@ -143,4 +143,4 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 
 - - -
 
-Copyright &copy; 2016, 2017 Upper Stream Software.
+Copyright &copy; 2015-2017 Upper Stream Software.
