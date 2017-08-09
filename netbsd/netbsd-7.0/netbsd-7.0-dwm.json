@@ -283,7 +283,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant-7.0.sh",
-        "../provisioners/dwm.sh"
+        "../provisioners/dwm+st+dmenu.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
@@ -294,6 +294,7 @@
         "RSYNC=rsync-3.1.2",
         "DWM=dwm-6.1",
         "DMENU=dmenu-4.6",
+        "ST_TERM=st-term-0.7",
         "XRANDR=xrandr-1.5.0",
         "X11VNC=x11vnc-0.9.13nb27"
       ]

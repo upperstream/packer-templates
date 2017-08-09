@@ -104,7 +104,7 @@ The following command will build a VM image on your ESXi:
 * `packer build -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-minmal.json` - NetBSD 7.0.2 (amd64)
 * `packer build -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-ansible.json` - NetBSD 7.0.2 + [Ansible] + [Testinfra] (amd64)
 * `packer build -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-xorg.json` - NetBSD 7.0.2 + [X.Org] (amd64)
-* `packer build -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-dwm.json` - NetBSD 7.0.2 + X.Org + [dwm] + [dmenu] (amd64)
+* `packer build -var-file=vars-netbsd-7.0-amd64.json netbsd-7.0-dwm.json` - NetBSD 7.0.2 + X.Org + [dwm] + [st] + [dmenu] (amd64)
 * `packer build -var-file=vars-netbsd-7.0-i386.json netbsd-7.0-minmal.json` - NetBSD 7.0.2 (i386)
 * `packer build -var-file=vars-netbsd-7.0-i386.json netbsd-7.0-ansible.json` - NetBSD 7.0.2 + Ansible + Testinfra (i386)
 * `packer build -var-file=vars-netbsd-7.0-i386.json netbsd-7.0-xorg.json` - NetBSD 7.0.2 + X.Org (i386)
@@ -114,6 +114,7 @@ The following command will build a VM image on your ESXi:
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
 [dmenu]: http://tools.suckless.org/dmenu/ "dmenu | suckless.org tools"
 [dwm]: http://dwm.suckless.org/ "suckless.org dwm - dynamic window manager"
+[st]: http://st.suckless.org/ "suckless.org st - simple terminal"
 [X.Org]: https://www.x.org/wiki/ "X.Org"
 
 
