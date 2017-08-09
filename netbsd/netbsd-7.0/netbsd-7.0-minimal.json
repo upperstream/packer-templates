@@ -4,7 +4,7 @@
     "ssh_password": "vagrant",
     "os_ver": "7.0.2",
     "variant": "minimal",
-    "box_ver": "2.2.0",
+    "box_ver": "7.0.20170810",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
