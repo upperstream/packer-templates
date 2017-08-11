@@ -1,0 +1,25 @@
+This patch works around an issue with Ruby Net::SSH package that `vagrant up` NetBSD 7.x boxes fails
+when you use Vagrant version prior to 1.9.6 or Net::SSH version prior to 4.2.0.rc1.  See
+https://github.com/mitchellh/vagrant/issues/6640, https://github.com/mitchellh/vagrant/pull/8661, and
+https://github.com/net-ssh/net-ssh/pull/525 for further information.
+
+--- net-ssh-3.0.2/lib/net/ssh/transport/algorithms.rb.orig	2017-07-23 17:20:38 +0900
++++ net-ssh-3.0.2/lib/net/ssh/transport/algorithms.rb	2017-07-23 17:20:38 +0900
+@@ -31,7 +31,7 @@
+                          diffie-hellman-group-exchange-sha256),
+       :encryption  => %w(aes128-cbc 3des-cbc blowfish-cbc cast128-cbc
+                          aes192-cbc aes256-cbc rijndael-cbc@lysator.liu.se
+-                         idea-cbc none arcfour128 arcfour256 arcfour
++                         idea-cbc arcfour128 arcfour256 arcfour
+                          aes128-ctr aes192-ctr aes256-ctr
+                          camellia128-cbc camellia192-cbc camellia256-cbc
+                          camellia128-cbc@openssh.org
+@@ -41,7 +41,7 @@
+                          camellia128-ctr@openssh.org
+                          camellia192-ctr@openssh.org
+                          camellia256-ctr@openssh.org
+-                         cast128-ctr blowfish-ctr 3des-ctr
++                         cast128-ctr blowfish-ctr 3des-ctr none
+                         ),
+ 
+       :hmac        => %w(hmac-sha1 hmac-md5 hmac-sha1-96 hmac-md5-96

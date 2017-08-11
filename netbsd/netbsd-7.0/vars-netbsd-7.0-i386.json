@@ -1,12 +1,10 @@
 {
-  "iso_file_name": "NetBSD-7.0-i386.iso",
-  "iso_path": "NetBSD/NetBSD-7.0/iso",
-  "iso_checksum": "807c27de7eeea9c6758cdd7df49b307c12c2ba246b56bd4fa75f5c8aa8de62699e0b51248e881864210cb1bb8d5c8c6551112a0008b9b932fc6e64136767604c",
+  "iso_file_name": "NetBSD-7.0.2-i386.iso",
+  "iso_path": "NetBSD/NetBSD-7.0.2/iso",
+  "iso_checksum": "4209c7f1a270e48b142746a19207930f2575d2ba2f89073ec15943e819f1aaefb5c45318042424999923b1fb5f706baad6ebd5ec7997986d305988524e75d841",
   "iso_checksum_type": "sha512",
   "cpu": "i386",
   "virtualbox_geust_os_type": "NetBSD",
   "vmware_guest_os_type": "other",
-  "mem_size": "512",
-  "disk_size": "40960",
   "vm_name": "NetBSD-7.0-i386"
 }
