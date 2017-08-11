@@ -266,7 +266,7 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH=http://ftp.NetBSD.org/pub/pkgsrc/packages/NetBSD/`uname -m`/7.0_2016Q4/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH=http://ftp.NetBSD.org/pub/pkgsrc/packages/NetBSD/`uname -m`/7.0_2017Q1/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
@@ -276,9 +276,9 @@
       "script": "../provisioners/vmware-xorg.sh",
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools-2008.08.08.109361nb45",
+        "OPEN_VM_TOOLS=open-vm-tools-10.1.0nb3",
         "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0nb1",
-        "XF86_VIDEO_VMWARE=xf86-video-vmware-13.1.0nb4"
+        "XF86_VIDEO_VMWARE=xf86-video-vmware-13.2.1"
       ]
     },
     {
@@ -292,13 +292,13 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "SUDO=sudo-1.8.17p1",
+        "SUDO=sudo-1.8.20p2",
         "RSYNC=rsync-3.1.2",
         "DWM=dwm-6.1",
         "DMENU=dmenu-4.6",
-        "ST_TERM=st-term-0.7",
+        "ST_TERM=st-term-0.7nb1",
         "XRANDR=xrandr-1.5.0",
-        "X11VNC=x11vnc-0.9.13nb27"
+        "X11VNC=x11vnc-0.9.13nb30"
       ]
     },
     {
