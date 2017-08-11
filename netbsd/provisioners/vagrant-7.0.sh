@@ -3,7 +3,7 @@ set -e
 set -x
 
 groupadd ${VAGRANT_GROUP:=vagrant}
-useradd -g $VAGRANT_GROUP -m -p $(printf "${VAGRANT_PASSWORD:-vagrant}" | pwhash) -s /bin/ksh ${VAGRANT_USER:=vagrant}
+useradd -g $VAGRANT_GROUP -m -p $(printf "${VAGRANT_PASSWORD:-vagrant}" | pwhash) -s /bin/sh ${VAGRANT_USER:=vagrant}
 mkdir -p /home/$VAGRANT_USER/.ssh
 ftp -o - "https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub" >> /home/$VAGRANT_USER/.ssh/authorized_keys
 chown -R $VAGRANT_USER:$VAGRANT_GROUP /home/$VAGRANT_USER
