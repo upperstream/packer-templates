@@ -1,4 +1,6 @@
 #!/bin/sh
+set -x
+set -e
 
 mkdir -p /home/vagrant/.ssh
 fetch -o /home/vagrant/.ssh/authorized_keys 'https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub'

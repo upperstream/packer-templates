@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 10.4-BETA1
+# Packer templates for FreeBSD 10.4-BETA2
 
-Templates to create Vagrant boxes for FreeBSD 10.4-BETA1 (amd64 and i386).
+Templates to create Vagrant boxes for FreeBSD 10.4-BETA2 (amd64 and i386).
 
 
 ## Prerequisites
@@ -34,13 +34,13 @@ From the terminal, invoke the following command:
 
 	packer build freebsd-10.4-beta-amd64-minimal.json
 
-and you will find a vagrant box file named `FreeBSD-10.4-BETA-amd64-minimal-v1.20170820.box`
+and you will find a vagrant box file named `FreeBSD-10.4-BETA-amd64-minimal-v2.20170827.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-10.4-BETA-amd64-minimal-v1.20170820` to your box list
+Then you can add the box named `FreeBSD-10.4-BETA-amd64-minimal-v2.20170827` to your box list
 by the following command:
 
-	vagrant box add FreeBSD-10.4-BETA-amd64-minimal-v1.20170820.box --name FreeBSD-10.4-BETA-amd64-minimal-v1.20170820
+	vagrant box add FreeBSD-10.4-BETA-amd64-minimal-v2.20170827.box --name FreeBSD-10.4-BETA-amd64-minimal-v2.20170827
 
 
 ## Default settings
@@ -66,9 +66,9 @@ is set to `/bin/sh`.
 
 ## Variants
 
-* `freebsd-10.4-beta-minimal.json` - FreeBSD 10.4-BETA1
-* `freebsd-10.4-beta-ansible.json` - FreeBSD 10.4-BETA1 + [Ansible][] + [Testinfra][]
-* `freebsd-10.4-beta-docker.json` - FreeBSD 10.4-BETA1 +  + [Docker][] + [Docker Compose][] (amd64 only)
+* `freebsd-10.4-beta-minimal.json` - FreeBSD 10.4-BETA2
+* `freebsd-10.4-beta-ansible.json` - FreeBSD 10.4-BETA2 + [Ansible][] + [Testinfra][]
+* `freebsd-10.4-beta-docker.json` - FreeBSD 10.4-BETA2 + [Docker][] + [Docker Compose][] on ZFS root file system (amd64 only)
 
 While `freebsd-10.4-beta-*.json` templates generate amd64 boxes by default, using `vars-freebsd-10.4-i386.json`
 generates i386 boxes:

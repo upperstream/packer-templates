@@ -1,11 +1,11 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-10.4-BETA1-amd64-disc1.iso",
+    "iso_image": "FreeBSD-10.4-BETA2-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/10.4",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "5a3858ccb08a245f7db310dc120ce426f84dbdd97cae3cce8a74bda57ac345bf",
+    "iso_checksum": "3440373e5cb9787080ee424b3d040068edafd6f3c711640524311a79b1c846bf",
     "os_ver": "10.4",
-    "box_ver": "1.20170820",
+    "box_ver": "2.20170827",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "num_cpus": "2",
