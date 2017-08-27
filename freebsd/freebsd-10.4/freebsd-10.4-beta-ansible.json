@@ -4,10 +4,7 @@
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/10.4",
     "iso_checksum_type": "sha256",
     "iso_checksum": "3440373e5cb9787080ee424b3d040068edafd6f3c711640524311a79b1c846bf",
-    "os_ver": "10.4",
-    "box_ver": "2.20170827",
-    "virtualbox_guest_os_type": "FreeBSD_64",
-    "vmware_guest_os_type": "freebsd-64",
+    "box_version": "2.20170827",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -15,17 +12,47 @@
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
     "vagrant_group": "vagrant",
-    "vm_name": "FreeBSD-10.4-BETA-amd64",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
+    "variant": "ansible",
+    "virtualbox_guest_os_type": "FreeBSD_64",
+    "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:10:amd64",
     "headless": "false",
-    "variant": "ansible"
+    "vm_name": "FreeBSD-10.4-BETA-amd64"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
+      "guest_additions_mode": "disable",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{user `headless`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+      ],
+      "http_directory": ".",
       "boot_command": [
         "<enter>",
         "<wait10><wait10><wait5>",
@@ -44,34 +71,6 @@
         "VAGRANT_GROUP={{user `vagrant_group`}} ",
         "bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10>"
-      ],
-      "boot_wait": "10s",
-      "disk_size": "{{user `disk_size`}}",
-      "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
-      "http_directory": ".",
-      "iso_checksum": "{{user `iso_checksum` }}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
-      "iso_urls": [
-        "./iso/{{user `iso_image`}}",
-        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
-      ],
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
-      "guest_additions_mode": "disable",
-      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
-      "headless": "{{user `headless`}}",
-      "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ]
     }
   ],
@@ -98,7 +97,7 @@
   ],
   "post-processors": [
     {
-      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}.box",
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}.box",
       "type": "vagrant",
       "compression_level": 9,
       "override": {
