@@ -1,4 +1,7 @@
-#!/bin/sh -ex
+#!/bin/sh
+set -x
+set -e
+
 pkg install -y ${XFCE:-"xfce-4.12_1"} ${ARANDR:-"arandr-0.1.7.1_2"}
 
 cat >> /usr/local/etc/polkit-1/rules.d/10-restart.rules << EOF
