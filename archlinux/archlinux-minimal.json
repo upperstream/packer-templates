@@ -1,11 +1,10 @@
 {
   "variables": {
     "variant": "minimal",
-    "box_version": "20170801.0",
-    "iso_image": "archlinux-2017.08.01-x86_64.iso",
-    "path_to_iso": "iso/2017.08.01",
-    "iso_checksum": "bb609f8dfb7ece06ba3cdc355b627aab763639d3",
-    "box_version": "20170801.0",
+    "iso_image": "archlinux-2017.09.01-x86_64.iso",
+    "path_to_iso": "iso/2017.09.01",
+    "iso_checksum": "b0490c8471e3059bf1e3759ade38a63570b301ae",
+    "box_version": "20170901.0",
     "iso_checksum_type": "sha1",
     "mem_size": "512",
     "disk_size": "40960",
