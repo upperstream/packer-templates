@@ -23,6 +23,7 @@
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:11:amd64",
+    "headless": "false",
     "vm_name": "FreeBSD-11.1-RELEASE-amd64"
   },
   "builders": [
