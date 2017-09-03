@@ -1,7 +1,7 @@
 {
-  "iso_image": "FreeBSD-10.4-BETA2-i386-disc1.iso",
+  "iso_image": "FreeBSD-10.4-BETA3-i386-disc1.iso",
   "iso_checksum_type": "sha256",
-  "iso_checksum": "891cccfd1e8abc6e0d801bdb3e5ebf6498ba64c79005b2d7e8b43543beab69bc",
+  "iso_checksum": "301f679942bd999aeff6550c203337658c97deec5b631fc2cb7aebd7ad15f474",
   "os_version": "10.4-BETA",
   "virtualbox_guest_os_type": "FreeBSD",
   "vmware_guest_os_type": "freebsd",

@@ -1,5 +1,6 @@
 
 #!/bin/sh
+
 set -e
 set -x
 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf

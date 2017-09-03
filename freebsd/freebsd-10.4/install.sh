@@ -1,5 +1,8 @@
 
-#!/bin/sh -ex
+#!/bin/sh
+set -e
+set -x
+
 echo 'WITHOUT_X11="YES"' >> /etc/make.conf
 echo "WITH_PKGNG=yes" >> /etc/make.conf
 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
@@ -8,7 +11,7 @@ ifconfig_em0="DHCP"
 sshd_enable="YES"
 dumpdev="AUTO"
 rpcbind_enable="YES"
-nfs_client_enable="YES"
+#nfs_client_enable="YES"
 mountd_flags="-r"
 ntpd_enable="YES"
 EOF
@@ -36,6 +39,11 @@ pw groupmod wheel -m $VAGRANT_USER
 echo "$VAGRANT_USER ALL=(ALL) NOPASSWD:ALL" >> /usr/local/etc/sudoers.d/$VAGRANT_USER
 
 # SSH config
-echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+cp /etc/ssh/sshd_config /tmp/sshd_config
+sed \
+  -e 's/^#PermitRootLogin .*/PermitRootLogin yes/' \
+  -e 's/^#PasswordAuthentication no/PasswordAuthentication yes/' \
+  -e 's/^#UseDNS yes/UseDNS no/' /tmp/sshd_config > /etc/ssh/sshd_config
+rm /tmp/sshd_config
 
 reboot

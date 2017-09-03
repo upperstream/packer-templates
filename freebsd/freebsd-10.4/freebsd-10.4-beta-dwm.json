@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-10.4-BETA2-amd64-disc1.iso",
+    "iso_image": "FreeBSD-10.4-BETA3-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/10.4",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "3440373e5cb9787080ee424b3d040068edafd6f3c711640524311a79b1c846bf",
-    "box_version": "2.20170827",
+    "iso_checksum": "48f5b2bcfa5811ca098bad96d1218c513d3a382c51b923049381ecde0fc53537",
+    "box_version": "3.20170903",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
