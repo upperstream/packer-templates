@@ -29,7 +29,6 @@ Templates to create Vagrant boxes for FreeBSD 10.4-BETA3 (amd64 and i386).
 * sudo
 * `vagrant` user and its insecure public key
 * ntpd enabled
-* ... and their dependencies
 
 
 ## How to create a box
@@ -109,7 +108,7 @@ The following command will build a VM image on your ESXi:
 * `freebsd-10.4-beta-minimal.json` - FreeBSD 10.4-BETA3
 * `freebsd-10.4-beta-ansible.json` - FreeBSD 10.4-BETA3 + [Ansible][] + [Testinfra][]
 * `freebsd-10.4-beta-dwm.json` - FreeBSD 10.4-BETA3 + [X.Org][] + [dwm][] + [dmenu][] + [st][]
-* `freebsd-10.4-beta-xfce.json` - FreeBSD 10.4-BETA3 + [Xfce][]
+* `freebsd-10.4-beta-xfce.json` - FreeBSD 10.4-BETA3 + [Xfce][] + [SLiM][]
 * `freebsd-10.4-beta-zfs.json` - FreeBSD 10.4-BETA3 on ZFS root file system (amd64 only)
 * `freebsd-10.4-beta-docker.json` - FreeBSD 10.4-BETA3 + [Docker][] + [Docker Compose][] on ZFS root file system (amd64 only)
 
@@ -123,6 +122,7 @@ generates i386 boxes:
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 [Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
 [dwm]: http://dwm.suckless.org/ "suckless.org dwm - dynamic window manager"
+[SLiM]: https://sourceforge.net/projects/slim.berlios/ "SLiM download | SourceForge.net"
 [st]: http://st.suckless.org/ "suckless.org st - simple terminal"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.6.5 documentation"
 [X.Org]: https://www.x.org/wiki/ "X.Org"
