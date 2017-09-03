@@ -18,7 +18,7 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "minimal",
+    "variant": "zfs",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
@@ -66,7 +66,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `virtualbox_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `virtualbox_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -124,7 +125,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -188,7 +190,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -205,7 +208,7 @@
     {
       "type": "shell",
       "script": "../provisioners/vagrant-10.4.sh",
-      "execute_command": "echo 'vagrant' | env {{ .Vars }} sudo -E sh '{{.Path}}'",
+      "execute_command": "echo '{{user `vagrant_password`}}' | env {{ .Vars }} sudo -E sh '{{.Path}}'",
       "environment_vars": [
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}"
@@ -219,12 +222,6 @@
       "environment_vars": [
         "OPEN_VM_TOOLS=open-vm-tools-nox11-1280544_12,1"
       ]
-    },
-    {
-      "type": "shell",
-      "only": ["virtualbox-iso", "vmware-iso"],
-      "script": "../provisioners/disk_cleanup.sh",
-      "execute_command": "echo '{{user `vagrant_password`}}' | env {{ .Vars }} sudo sh -E '{{.Path}}'"
     },
     {
       "type": "shell",
