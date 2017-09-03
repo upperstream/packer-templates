@@ -106,7 +106,7 @@
       "headless": "{{user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
         "ethernet0.virtualDev": "e1000",
@@ -171,7 +171,7 @@
       "headless": "{{user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "bridged",
         "ethernet0.virtualDev": "e1000",
