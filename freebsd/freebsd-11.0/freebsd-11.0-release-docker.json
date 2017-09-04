@@ -30,6 +30,7 @@
       "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
@@ -82,6 +83,7 @@
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
@@ -141,6 +143,7 @@
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
