@@ -39,13 +39,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso freebsd-11.1-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170726-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170906-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170726-virtualbox` to your box list
+Then you can add the box named `FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170906-virtualbox` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170726-virtualbox.box --name FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170726-virtualbox
+    vagrant box add FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170906-virtualbox.box --name FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170906-virtualbox
 
 ### VMware
 
@@ -53,13 +53,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso freebsd-11.1-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-11.1-RELEASE-amd64-v11.1.20170726-vmware.box`
+You will find a vagrant box file named `FreeBSD-11.1-RELEASE-amd64-v11.1.20170906-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170726-virtualbox` to your box list
+Then you can add the box named `FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170906-vmware` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170726-virtualbox.box --name FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170726-virtualbox
+    vagrant box add FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170906-vmware.box --name FreeBSD-11.1-RELEASE-amd64-minimal-v11.1.20170906-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 

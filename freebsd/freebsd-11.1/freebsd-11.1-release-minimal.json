@@ -4,7 +4,7 @@
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.1",
     "iso_checksum_type": "sha256",
     "iso_checksum": "ff4c749ea0aaaceedb2432ba3e0fd0c1b64f5a72141b1ec06b9ced52b5de0dbf",
-    "box_version": "11.1.20170726",
+    "box_version": "11.1.20170906",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
