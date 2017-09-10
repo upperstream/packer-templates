@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 10.4-BETA3
+# Packer templates for FreeBSD 10.4-BETA4
 
-Templates to create Vagrant boxes for FreeBSD 10.4-BETA3 (amd64 and i386).
+Templates to create Vagrant boxes for FreeBSD 10.4-BETA4 (amd64 and i386).
 
 
 ## Prerequisites
@@ -29,7 +29,6 @@ Templates to create Vagrant boxes for FreeBSD 10.4-BETA3 (amd64 and i386).
 * sudo
 * `vagrant` user and its insecure public key
 * ntpd enabled
-* ... and their dependencies
 
 
 ## How to create a box
@@ -40,13 +39,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso freebsd-10.4-beta-amd64-minimal.json
 
-You will find a vagrant box file named `FreeBSD-10.4-BETA-amd64-minimal-v3.20170903-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-10.4-BETA-amd64-minimal-v4.20170910-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-10.4-BETA-amd64-minimal-v3.20170903-virtualbox` to your box list
+Then you can add the box named `FreeBSD-10.4-BETA-amd64-minimal-v4.20170910-virtualbox` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-10.4-BETA-amd64-minimal-v3.20170903-virtualbox.box --name FreeBSD-10.4-BETA-amd64-minimal-v3.20170903-virtualbox
+    vagrant box add FreeBSD-10.4-BETA-amd64-minimal-v4.20170910-virtualbox.box --name FreeBSD-10.4-BETA-amd64-minimal-v4.20170910-virtualbox
 
 ### VMware
 
@@ -54,13 +53,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso freebsd-10.4-beta-minimal.json
 
-You will find a vagrant box file named `FreeBSD-10.4-BETA-amd64-v3.20170903-vmware.box`
+You will find a vagrant box file named `FreeBSD-10.4-BETA-amd64-v4.20170910-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-10.4-BETA-amd64-minimal-v3.20170903-vmware` to your box list
+Then you can add the box named `FreeBSD-10.4-BETA-amd64-minimal-v4.20170910-vmware` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-10.4-BETA-amd64-minimal-v3.20170903-vmware.box --name FreeBSD-10.4-BETA-amd64-minimal-v3.20170903-vmware
+    vagrant box add FreeBSD-10.4-BETA-amd64-minimal-v4.20170910-vmware.box --name FreeBSD-10.4-BETA-amd64-minimal-v4.20170910-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
@@ -106,12 +105,12 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `freebsd-10.4-beta-minimal.json` - FreeBSD 10.4-BETA3
-* `freebsd-10.4-beta-ansible.json` - FreeBSD 10.4-BETA3 + [Ansible][] + [Testinfra][]
-* `freebsd-10.4-beta-dwm.json` - FreeBSD 10.4-BETA3 + [X.Org][] + [dwm][] + [dmenu][] + [st][]
-* `freebsd-10.4-beta-xfce.json` - FreeBSD 10.4-BETA3 + [Xfce][]
-* `freebsd-10.4-beta-zfs.json` - FreeBSD 10.4-BETA3 on ZFS root file system (amd64 only)
-* `freebsd-10.4-beta-docker.json` - FreeBSD 10.4-BETA3 + [Docker][] + [Docker Compose][] on ZFS root file system (amd64 only)
+* `freebsd-10.4-beta-minimal.json` - FreeBSD 10.4-BETA4
+* `freebsd-10.4-beta-ansible.json` - FreeBSD 10.4-BETA4 + [Ansible][] + [Testinfra][]
+* `freebsd-10.4-beta-dwm.json` - FreeBSD 10.4-BETA4 + [X.Org][] + [dwm][] + [dmenu][] + [st][]
+* `freebsd-10.4-beta-xfce.json` - FreeBSD 10.4-BETA4 + [Xfce][]
+* `freebsd-10.4-beta-zfs.json` - FreeBSD 10.4-BETA4 on ZFS root file system (amd64 only)
+* `freebsd-10.4-beta-docker.json` - FreeBSD 10.4-BETA4 + [Docker][] + [Docker Compose][] on ZFS root file system (amd64 only)
 
 While `freebsd-10.4-beta-*.json` templates generate amd64 boxes by default, using `vars-freebsd-10.4-i386.json`
 generates i386 boxes:
@@ -123,6 +122,7 @@ generates i386 boxes:
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 [Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
 [dwm]: http://dwm.suckless.org/ "suckless.org dwm - dynamic window manager"
+[SLiM]: https://sourceforge.net/projects/slim.berlios/ "SLiM download | SourceForge.net"
 [st]: http://st.suckless.org/ "suckless.org st - simple terminal"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.6.5 documentation"
 [X.Org]: https://www.x.org/wiki/ "X.Org"

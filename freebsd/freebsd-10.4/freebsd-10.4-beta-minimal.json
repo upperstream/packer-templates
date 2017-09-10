@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-10.4-BETA3-amd64-disc1.iso",
+    "iso_image": "FreeBSD-10.4-BETA4-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/10.4",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "48f5b2bcfa5811ca098bad96d1218c513d3a382c51b923049381ecde0fc53537",
-    "box_version": "3.20170903",
+    "iso_checksum": "9104bff980a0b940df3d0b87d54050411135f929b5fc03cbe36a0d90cfb8573e",
+    "box_version": "4.20170910",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -105,7 +105,7 @@
       "headless": "{{user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
         "ethernet0.virtualDev": "e1000",
@@ -169,7 +169,7 @@
       "headless": "{{user `headless`}}",
       "vmx_data": {
         "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "bridged",
         "ethernet0.virtualDev": "e1000",
