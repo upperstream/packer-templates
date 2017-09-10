@@ -1,0 +1,16 @@
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Windows-style newlines for Windows batch files
+[**.bat]
+end_of_line = crlf
+
+# Indentation override for all JSON files
+[**.json]
+indent_style = space
+indent_size = 2
