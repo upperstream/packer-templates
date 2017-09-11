@@ -40,13 +40,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso -var-file=vars-openbsd-6.1-amd64.json openbsd-6.1-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.20170806-virtualbox`
+You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.20170910-virtualbox`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.1-amd64-minimal-v6.1.20170806-virtualbox`
+Then you can add the box named `OpenBSD-6.1-amd64-minimal-v6.1.20170910-virtualbox`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.1-amd64-minimal-v6.1.20170806-virtualbox.box --name OpenBSD-6.1-amd64-minimal-v6.1.20170806-virtualbox
+    vagrant box add OpenBSD-6.1-amd64-minimal-v6.1.20170910-virtualbox.box --name OpenBSD-6.1-amd64-minimal-v6.1.20170910-virtualbox
 
 ### VMware
 
@@ -54,13 +54,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso -var-file=vars-openbsd-6.1-amd64.json openbsd-6.1-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.20170806-vmware.box`
+You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.20170910-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.1-amd64-minimal-v6.1.20170806-vmawre`
+Then you can add the box named `OpenBSD-6.1-amd64-minimal-v6.1.20170910-vmawre`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.1-amd64-minimal-v6.1.20170806-vmware.box --name OpenBSD-6.1-amd64-minimal-v6.1.20170806-vmware
+    vagrant box add OpenBSD-6.1-amd64-minimal-v6.1.20170910-vmware.box --name OpenBSD-6.1-amd64-minimal-v6.1.20170910-vmware
 
 In the `output` directory you will also find a VM image that can be directly
 imported to VMware.
@@ -81,6 +81,10 @@ disabled by default.
 
 Because Bash is not the standard shell for OpenBSD, default shell for non-
 interactive SSH connection of this box is set to `/bin/sh`.
+
+### sudo Command
+
+Instead of `sudo`, boxes are configured to use `doas` command.
 
 
 ## Building a VM image on ESXi
@@ -144,4 +148,4 @@ The following parameters can be set at build time by supplying `-var` or
 
 - - -
 
-Copyright &copy; 2017 Upper Stream Software.
+Copyright &copy; 2017 Upperstream Software.

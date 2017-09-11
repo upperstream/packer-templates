@@ -40,11 +40,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Set the default shell for SSH session to sh
   config.ssh.shell = "/bin/sh"
 
+  # Use doas command instead of sudo.  Supported by Vagrant 17.3 or later.
+  # Comment out this line if you need to stay with older versions of Vagrant.
+  config.ssh.sudo_command = "doas %c"
+
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder ".", "/vagrant", disabled: true, rsync__rsync_path: "doas rsync"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
