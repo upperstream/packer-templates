@@ -2,7 +2,7 @@
   "variables": {
     "variant": "ansible",
     "cpu": "",
-    "box_version": "6.1.20170806",
+    "box_version": "6.1.20170910",
     "iso_image": "",
     "os_ver": "6.1",
     "num_cpus": "2",
