@@ -1,0 +1,9 @@
+{
+  "vm_name": "OpenBSD-6.2-snapshot-i386",
+  "cpu": "i386",
+  "virtualbox_guest_os_type": "OpenBSD",
+  "vmware_guest_os_type": "other",
+  "os_ver": "snapshots",
+  "iso_image": "install62.iso",
+  "iso_checksum": "fd94eb1e2acd9c978fdef697350e0141f4354cd8db08cea23951d4ab88e93a4c"
+}
