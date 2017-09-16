@@ -1,17 +1,17 @@
-# Virtualbox
-# Depends: kernel-stuff, epel
-test -z "$GCC" && GCC=gcc
-test -z "$PERL" && PERL=perl
-yum -y install $PERL $GCC
+#!/bin/sh
+set -e
+set -x
 
-VBOX_VERSION=$(cat /root/.vbox_version)
+yum -y install ${PERL:-perl} ${GCC:-gcc}
 
 yum -y --enablerepo epel install dkms
+
+curl -O http://download.virtualbox.org/virtualbox/${VBOX_VERSION:=`cat /root/.vbox_version`}/VBoxGuestAdditions_$VBOX_VERSION.iso
 
 cd /tmp
 mount -o loop /root/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
 sh /mnt/VBoxLinuxAdditions.run
 umount /mnt
-rm -rf /root/VBoxGuestAdditions_*.iso
+rm -f /root/VBoxGuestAdditions_*.iso
 
 yum -y erase perl gcc
