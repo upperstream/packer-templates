@@ -1,15 +1,15 @@
 {
   "variables": {
-    "iso_name": "CentOS-7-x86_64-Minimal-1611.iso",
-    "iso_checksum": "71a7aa147877b413497cdff5b1e0aa5bc0c9484f",
-    "iso_checksum_type": "sha1",
+    "iso_name": "CentOS-7-x86_64-Minimal-1708.iso",
+    "iso_checksum": "bba314624956961a2ea31dd460cd860a77911c1e0a56e4820a12b9c5dad363f5",
+    "iso_checksum_type": "sha256",
     "mem_size": "512",
     "disk_size": "40960",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "7.3.20170701",
+    "box_version": "7.4.20170915",
     "vm_name": "CentOS-7-x86_64-docker"
   },
   "builders": [
@@ -20,7 +20,7 @@
       "guest_os_type": "RedHat_64",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
-        "http://ftp.iij.ad.jp/pub/linux/centos/7.3.1611/isos/x86_64/{{user `iso_name`}}"
+        "http://ftp.jaist.ac.jp/pub/Linux/CentOS/7.4.1708/isos/x86_64/{{user `iso_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -28,7 +28,7 @@
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "shutdown -h now",
-      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
       "vboxmanage": [
@@ -60,10 +60,9 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_username`}}",
-        "SUDO=sudo-1.8.6p7-20.el7",
+        "SUDO=sudo-1.8.19p2-11.el7_4",
         "BZIP2=bzip2-1.0.6-13.el7",
-        "PERL=perl-5.16.3-291.el7",
-        "GCC=gcc-4.8.5-11.el7",
+	"EPEL_RELEASE=epel-release-7-10.noarch",
         "DOCKER_ENGINE=docker-engine-1.12.4-1.el7.centos"
       ]
     }
