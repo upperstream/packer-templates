@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-10.4-BETA4-amd64-disc1.iso",
+    "iso_image": "FreeBSD-10.4-RC1-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/10.4",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "9104bff980a0b940df3d0b87d54050411135f929b5fc03cbe36a0d90cfb8573e",
-    "box_version": "4.20170910",
+    "iso_checksum": "b37b94a51bad2c2542f07727f607e4816609eeebc6976c9631b600a96f72d1d4",
+    "box_version": "1.20170917",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -24,7 +24,7 @@
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:10:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-10.4-BETA-amd64"
+    "vm_name": "FreeBSD-10.4-RC-amd64"
   },
   "builders": [
     {
@@ -217,7 +217,7 @@
       "script": "../provisioners/vmware-guest.sh",
       "execute_command": "echo '{{user `vagrant_password`}}' | env {{ .Vars }} sudo -E sh '{{.Path}}'",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools-nox11-1280544_12,1"
+        "OPEN_VM_TOOLS=open-vm-tools-nox11-10.1.5_1,2"
       ]
     },
     {
