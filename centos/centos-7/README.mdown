@@ -1,6 +1,6 @@
-# Packer templates for CentOS 7.3 1611
+# Packer templates for CentOS 7.4 1708
 
-Templates to create Vagrant boxes for CentOS 7.3.1611 (x86_64).
+Templates to create Vagrant boxes for CentOS 7.4 1708 (x86_64).
 
 
 ## Prerequisites
@@ -26,7 +26,6 @@ Templates to create Vagrant boxes for CentOS 7.3.1611 (x86_64).
 * sudo
 * rsync
 * `vagrant` user and its insecure public key
-* ... and their dependencies
 
 
 ## How to create a box
@@ -35,27 +34,27 @@ From the terminal, invoke the following command:
 
     packer build centos-7-x86_64-minimal.json
 
-and you will find a vagrant box file named `CentOS-7-x86_64-minimal-v7.3.20170701.box`
+and you will find a vagrant box file named `CentOS-7-x86_64-minimal-v7.4.20170915.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `CentOS-7-x86_64-minimal-v7.3.20170701` to your box list
+Then you can add the box named `CentOS-7-x86_64-minimal-v7.4.20170915` to your box list
 by the following command:
 
-    vagrant box add CentOS-7-x86_64-minimal-v7.3.20170701.box --name CentOS-7-x86_64-minimal-v7.3.20170701
+    vagrant box add CentOS-7-x86_64-minimal-v7.4.20170915.box --name CentOS-7-x86_64-minimal-v7.4.20170915
 
 
 ## Variants
 
-* `centos-7-x86_64-minimal.json` - CentOS 7.3.1611 (x86_64) minimal installation
+* `centos-7-x86_64-minimal.json` - CentOS 7.4 1708 (x86_64) minimal installation
 * `centos-7-x86_64-ansible.json` - provided with [Ansible][] and [Testinfra][]
   in addition to CentOS 6.9 (x86_64) minimal installation
 * `centos-7-x86_64-docker.json` - provided with [Docker][] and [Docker Compose][];
-  in addition to CentOS 7.3.1611 (x86_64) minimal installation.
+  in addition to CentOS 7.4 1708 (x86_64) minimal installation.
 
 [Ansible]: http://www.ansible.com/home "Ansible is Simple IT Automation"
 [Docker]: https://www.docker.com/ "Docker - Build, Ship and Run Any App, Anywhere"
 [Docker Compose]: https://docs.docker.com/compose/ "Docker Compose - Docker Documentation"
-[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.5.5 documentation"
+[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.6.5 documentation"
 
 
 ## Build parameters
@@ -69,4 +68,4 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 
 - - -
 
-Copyright &copy; 2014-2017 Upper Stream Software.
+Copyright &copy; 2014-2017 Upperstream Software.

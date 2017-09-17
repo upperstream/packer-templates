@@ -13,7 +13,7 @@
 * [centos](centos/README.mdown) - CentOS templates
     * centos-5.11 - CentOS 5.11 templates (x86_64 and i386)
     * centos-6.9 - CentOS 6.9 templates (x86_64 and i386)
-    * centos-7 - CentOS 7.3.1611 templates (x86_64)
+    * centos-7 - CentOS 7.4 1708 templates (x86_64)
     * [more](centos/README.mdown)
 * [coreos](coreos/README.mdown) - CoreOS templates
 * [debian](debian/README.mdown) - Debian templates

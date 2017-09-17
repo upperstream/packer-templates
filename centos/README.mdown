@@ -24,11 +24,11 @@
 	* CentOS 6.9 minimal
 	* CentOS 6.9 minimal + Ansible + Testinfra
 	* CentOS 6.9 minimal + Docker (x86_64 only)
-* [centos-7](centos-7/README.mdown) - templates for CentOS 7.3.1611 (x86_64)
-	* CentOS 7.3.1611 minimal
-	* CentOS 7.3.1611 minimal + Ansible + Testinfra
-	* CentOS 7.3.1611 minimal + Docker and Docker Compose
+* [centos-7](centos-7/README.mdown) - templates for CentOS 7.4 1708 (x86_64)
+	* CentOS 7.4 1708 minimal
+	* CentOS 7.4 1708 minimal + Ansible + Testinfra
+	* CentOS 7.4 1708 minimal + Docker and Docker Compose
 
 - - -
 
-Copyright &copy; 2014-2017 Upper Stream Software.
+Copyright &copy; 2014-2017 Upperstream Software.
