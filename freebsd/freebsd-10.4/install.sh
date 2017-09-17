@@ -19,15 +19,15 @@ EOF
 mkdir -p /usr/local/etc/pkg/repos/
 cat > /usr/local/etc/pkg/repos/FreeBSD.conf << EOF
 FreeBSD: {
-    url: pkg+http://pkg.freebsd.org/${ABI}/release_3,
+    url: pkg+http://pkg.freebsd.org/${ABI}/release_4,
     enabled: true
 }
 EOF
 
 env ASSUME_ALWAYS_YES="YES" pkg bootstrap -y
 pkg update
-pkg install -y sudo-1.8.15
-pkg install -y ca_root_nss-3.22.2
+pkg install -y sudo-1.8.20p2_3
+pkg install -y ca_root_nss-3.32
 
 ln -sf /usr/local/share/certs/ca-root-nss.crt /etc/ssl/cert.pem
 
