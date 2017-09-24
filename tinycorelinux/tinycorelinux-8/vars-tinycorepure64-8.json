@@ -5,8 +5,8 @@
   "cpu": "x86_64",
   "mem_size": "512",
   "disk_size": "40960",
-  "iso_name": "CorePure64-8.1.1.iso",
-  "iso_checksum": "2c82e9b9a1d09da8514aff6ac7854f34",
+  "iso_name": "CorePure64-8.2.iso",
+  "iso_checksum": "f688eb41d3621dd7f6d70d2db591f718",
   "iso_checksum_type": "md5",
   "guest_os_type": "Linux26_64"
 }

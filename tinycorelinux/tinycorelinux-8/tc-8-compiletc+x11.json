@@ -13,7 +13,7 @@
     "os_ver": "",
     "guest_os_type": "",
     "variant": "compiletc+x11",
-    "box_version": "8.1.20170907",
+    "box_version": "8.2.20170923",
     "headless": "false"
   },
   "builders": [
