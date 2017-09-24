@@ -1,7 +1,7 @@
 {
-  "iso_image": "FreeBSD-10.4-RC1-i386-disc1.iso",
+  "iso_image": "FreeBSD-10.4-RC2-i386-disc1.iso",
   "iso_checksum_type": "sha256",
-  "iso_checksum": "5bc2171aa68d73a72be2a233c328ec9e708b91cf09d6d81e40af035b523f0cff",
+  "iso_checksum": "6ae84725db357fcca318ce6b21fac066dfad3881f9d0259cfb22270155aeb334",
   "virtualbox_guest_os_type": "FreeBSD",
   "vmware_guest_os_type": "freebsd",
   "DISTRIBUTIONS": "'base.txz kernel.txz'",

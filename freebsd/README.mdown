@@ -10,13 +10,13 @@
     * FreeBSD 10.3-RELEASE
     * FreeBSD 10.3-RELEASE + Ansible + Testinfra
     * FreeBSD 10.3-RELEASE + Docker + Docker Compose on ZFS root file system (amd64 only)
-* [freebsd-10.4](freebsd-10.4/README.mdown) - templates for FreeBSD 10.4-RC1 (amd64 and i386)
-    * FreeBSD 10.4-RC1
-    * FreeBSD 10.4-RC1 + Ansible + Testinfra
-    * FreeBSD 10.4-RC1 + X.Org + dwm + dmenu + st
-    * FreeBSD 10.4-RC1 + Xfce
-    * FreeBSD 10.4-RC1 on ZFS root file system (amd64 only)
-    * FreeBSD 10.4-RC1 + Docker + Docker Compose on ZFS root file system (amd64 only)
+* [freebsd-10.4](freebsd-10.4/README.mdown) - templates for FreeBSD 10.4-RC2 (amd64 and i386)
+    * FreeBSD 10.4-RC2
+    * FreeBSD 10.4-RC2 + Ansible + Testinfra
+    * FreeBSD 10.4-RC2 + X.Org + dwm + dmenu + st
+    * FreeBSD 10.4-RC2 + Xfce
+    * FreeBSD 10.4-RC2 on ZFS root file system (amd64 only)
+    * FreeBSD 10.4-RC2 + Docker + Docker Compose on ZFS root file system (amd64 only)
 * [freebsd-11.0](freebsd-11.0/README.mdown) - templates for FreeBSD 11.0-RELEASE (amd64 and i386)
     * FreeBSD 11.0-RELEASE
     * FreeBSD 11.0-RELEASE + Ansible + Testinfra
