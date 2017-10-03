@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-10.4-RC2-amd64-disc1.iso",
+    "iso_image": "FreeBSD-10.4-RELEASE-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/10.4",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "3a8867fa1c04d5986fd1f0f166f558daf68d4a1e36d5258bd2b3c89e9deffea5",
-    "box_version": "2.20170924",
+    "iso_checksum": "7ac73b2a899024e1d9e71e55b5c9b9ac13938468206c72c5a1cf23c7e0a715b4",
+    "box_version": "10.4.20171003",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -18,13 +18,13 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "minimal",
+    "variant": "dwm",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:10:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-10.4-RC-amd64"
+    "vm_name": "FreeBSD-10.4-RELEASE-amd64"
   },
   "builders": [
     {
@@ -55,7 +55,8 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "16" ]
       ],
       "http_directory": ".",
       "boot_command": [
@@ -64,7 +65,7 @@
         "s",
         "<wait5>",
         "dhclient em0<enter><wait5>",
-        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `virtualbox_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -74,7 +75,7 @@
         "VAGRANT_USER={{user `vagrant_username`}} ",
         "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
         "VAGRANT_GROUP={{user `vagrant_group`}} ",
-        "bsdinstall script /tmp/install.sh<enter>",
+        "bsdinstall script /tmp/install_with_x11.sh<enter>",
         "<wait10><wait10><wait10>"
       ]
     },
@@ -113,7 +114,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "16777216"
       },
       "http_directory": ".",
       "boot_command": [
@@ -177,7 +179,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "16777216"
       },
       "http_directory": ".",
       "boot_command": [
@@ -204,11 +207,32 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "../provisioners/vagrant-10.4.sh",
+      "scripts": [
+        "../provisioners/vagrant-10.4.sh",
+        "../provisioners/dwm+dmenu+st.sh",
+        "../provisioners/xrdp.sh"
+      ],
       "execute_command": "echo 'vagrant' | env {{ .Vars }} sudo -E sh '{{.Path}}'",
       "environment_vars": [
         "VAGRANT_USER={{user `vagrant_username`}}",
-        "VAGRANT_GROUP={{user `vagrant_group`}}"
+        "VAGRANT_GROUP={{user `vagrant_group`}}",
+        "XORG_MINIMAL=xorg-minimal-7.5.2_1",
+        "XRANDR=xrandr-1.5.0",
+        "ARANDR=arandr-0.1.9",
+        "DWM=dwm-6.1_1",
+        "STERM=sterm-0.7",
+        "DMENU=dmenu-4.7",
+        "XRDP=xrdp-0.6.2,1",
+        "NCURSES=ncurses-6.0_3"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso"],
+      "script": "../provisioners/virtualbox_ose_additions-11.sh",
+      "execute_command": "echo '{{user `vagrant_password`}}' | env {{ .Vars }} sudo -E sh '{{.Path}}'",
+      "environment_vars": [
+        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.1.22_1"
       ]
     },
     {
@@ -217,7 +241,10 @@
       "script": "../provisioners/vmware-guest.sh",
       "execute_command": "echo '{{user `vagrant_password`}}' | env {{ .Vars }} sudo -E sh '{{.Path}}'",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools-nox11-10.1.5_1,2"
+        "VMWARE_WITH_XORG=1",
+        "OPEN_VM_TOOLS=open-vm-tools-10.1.5_1,2",
+        "XF86_VIDEO_VMWARE=xf86-video-vmware-13.2.1_1",
+        "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0_1"
       ]
     },
     {

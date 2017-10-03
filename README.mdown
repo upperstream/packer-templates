@@ -25,7 +25,6 @@
     * devuan-1.0 - Devuan 1.0.0 templates
 * [freebsd](freebsd/README.mdown) - FreeBSD templates
     * freebsd-9.3 - FreeBSD 9.3 templates (amd64 and i386)
-    * freebsd-10.3 - FreeBSD 10.3 templates (amd64 and i386)
     * freebsd-10.4 - FreeBSD 10.4 templates (amd64 and i386)
     * freebsd-11.1 - FreeBSD 11.1 templates (amd64 and i386)
     * [more](freebsd/README.mdown)
