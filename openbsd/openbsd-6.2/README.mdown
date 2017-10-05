@@ -38,13 +38,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso openbsd-6.2-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20170912-virtualbox`
+You will find a vagrant box file named `OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20171002-virtualbox`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20170912-virtualbox`
+Then you can add the box named `OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20171002-virtualbox`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20170912-virtualbox.box --name OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20170912-virtualbox
+    vagrant box add OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20171002-virtualbox.box --name OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20171002-virtualbox
 
 ### VMware
 
@@ -52,13 +52,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso openbsd-6.2-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20170912-vmware.box`
+You will find a vagrant box file named `OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20171002-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20170912-vmawre`
+Then you can add the box named `OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20171002-vmawre`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20170912-vmware.box --name OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20170912-vmware
+    vagrant box add OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20171002-vmware.box --name OpenBSD-6.2-snapshot-amd64-minimal-v6.2.20171002-vmware
 
 In the `output` directory you will also find a VM image that can be directly
 imported to VMware.
@@ -128,7 +128,7 @@ generates i386 boxes:
 [dwm]: http://dwm.suckless.org/ "suckless.org dwm - dynamic window manager"
 [SLiM]: https://sourceforge.net/projects/slim.berlios/ "SLiM download | SourceForge.net"
 [st]: http://st.suckless.org/ "suckless.org st - simple terminal"
-[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.6.4 documentation"
+[Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.7.1 documentation"
 [X11]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 
