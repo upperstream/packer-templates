@@ -48,13 +48,7 @@
     * Debian 8.9 + Docker + Docker Compose
     * Debian 8.9 + X.org + suckless tools
     * Debian 8.9 + Xfce
-* [debian-9](debian-9/README.mdown) - templates for Debain 9
-    * Debain 9 minimal
-    * Debian 9 + Ansible + Testinfra
-    * Debian 9 + Docker + Docker Compose
-    * Debian 9 + X.org + suckless tools
-    * Debian 9 + Xfce
-* [debian-9.1](debian-9.1/README.mdown) - templates for Debain 9.1
+* [debian-9](debian-9/README.mdown) - templates for Debain 9.1
     * Debain 9.1 minimal
     * Debian 9.1 + Ansible + Testinfra
     * Debian 9.1 + Docker + Docker Compose
@@ -63,4 +57,4 @@
 
 - - -
 
-Copyright &copy; 2015-2017 Upper Stream Software.
+Copyright &copy; 2015-2017 Upperstream Software.

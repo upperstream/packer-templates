@@ -4,15 +4,15 @@
     "mem_size": "1024",
     "disk_size": "51200",
     "iso_name": "mini.iso",
-    "iso_path": "dists/Debian9.0/main/installer-amd64/20170615/images/netboot",
-    "iso_checksum": "4c86484357bb8e78a2982e8415dcebc1c7cebf4702a30a924d9d22b877b68a15",
+    "iso_path": "dists/Debian9.1/main/installer-amd64/20170615+deb9u1/images/netboot",
+    "iso_checksum": "7fd16ec981a97f5cd31cffee317e3ff149c7d2cbbc8d93010eee542fd86b27f7",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "9.0.20170618",
+    "box_version": "9.1.20170722",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -191,6 +191,7 @@
       ],
       "environment_vars": [
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
+        "WGET=wget -O -",
         "XRDP=xrdp=0.9.1-9"
       ]
     },
@@ -203,6 +204,7 @@
       ],
       "environment_vars": [
         "VBOX_VER={{user `virtualbox_version`}}",
+        "INSTALL_DKMS=true",
         "VIRTUALBOX_WITH_XORG=1"
       ]
     },
@@ -215,6 +217,7 @@
       "environment_vars": [
         "XSERVER_XORG_VIDEO_VMWARE=xserver-xorg-video-vmware=1:13.2.1-1+b1",
         "XSERVER_XORG_INPUT_VMMOUSE=xserver-xorg-input-evdev=1:2.10.5-1",
+        "OPEN_VM_TOOLS=open-vm-tools=2:10.1.5-5055683-4",
         "VMWARE_WITH_XORG=1"
       ]
     },
