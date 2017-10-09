@@ -4,15 +4,15 @@
     "mem_size": "512",
     "disk_size": "51200",
     "iso_name": "mini.iso",
-    "iso_path": "dists/Debian9.0/main/installer-amd64/20170615/images/netboot",
-    "iso_checksum": "4c86484357bb8e78a2982e8415dcebc1c7cebf4702a30a924d9d22b877b68a15",
+    "iso_path": "dists/Debian9.2/main/installer-amd64/20170615+deb9u2/images/netboot",
+    "iso_checksum": "83fea524a48e66c0f0ba144ff96bca7d57022c664cb474b83fdc8b61f751d688",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "9.0.20170618",
+    "box_version": "9.2.20171008",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -186,7 +186,8 @@
         "../provisioners/vagrant.sh"
       ],
       "environment_vars": [
-        "VAGRANT_USERNAME={{user `vagrant_username`}}"
+        "VAGRANT_USERNAME={{user `vagrant_username`}}",
+        "WGET=wget -O -"
       ]
     },
     {
@@ -197,7 +198,8 @@
         "../provisioners/virtualbox.sh"
       ],
       "environment_vars": [
-        "VBOX_VER={{user `virtualbox_version`}}"
+        "VBOX_VER={{user `virtualbox_version`}}",
+        "INSTALL_DKMS=true"
       ]
     },
     {
