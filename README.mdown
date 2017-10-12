@@ -50,6 +50,7 @@
     * ubuntu-16.04 - Ubuntu 16.04.3 templates
     * ubuntu-16.10 - Ubuntu 16.10 templates
     * ubuntu-17.04 - Ubuntu 17.04 templates
+    * ubuntu-17.10 - Ubuntu 17.10 templates
     * [more](ubuntu/README.mdown)
 
 
