@@ -40,7 +40,7 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso -var-file=vars-openbsd-6.1-amd64.json openbsd-6.1-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.20170910-virtualbox`
+You will find a vagrant box file named `OpenBSD-6.1-amd64-minimal-v6.1.20170910-virtualbox.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named `OpenBSD-6.1-amd64-minimal-v6.1.20170910-virtualbox`
