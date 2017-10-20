@@ -10,12 +10,12 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "vm_name": "Ubuntu-17.10-amd64-minimal",
+    "vm_name": "Ubuntu-17.10-amd64-xfce",
     "box_version": "1710.0.20171020",
     "preseed": "ubuntu-server.seed",
     "virtualbox_version": "5.1.6",
     "num_cpus": "2",
-    "mem_size": "512",
+    "mem_size": "1024",
     "disk_size": "40960",
     "linux": "/install/linux",
     "initrd": "/install/initrd.gz",
@@ -48,7 +48,8 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "16" ]
       ],
       "http_directory": "../http",
       "headless": "{{user `headless`}}",
@@ -103,7 +104,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "16777216"
       },
       "http_directory": "../http",
       "headless": "{{user `headless`}}",
@@ -164,7 +166,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "16777216"
       },
       "http_directory": "../http",
       "headless": "{{user `headless`}}",
@@ -193,7 +196,8 @@
       "type": "shell",
       "scripts": [
         "../provisioners/base.sh",
-        "../provisioners/vagrant.sh"
+        "../provisioners/vagrant.sh",
+        "../provisioners/xfce.sh"
       ],
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh -ex '{{.Path}}'",
       "environment_vars": [
@@ -208,7 +212,8 @@
       "script": "../provisioners/virtualbox.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh -ex '{{.Path}}'",
       "environment_vars": [
-        "VIRTUALBOX_VERSION={{user `virtualbox_version`}}"
+        "VIRTUALBOX_VERSION={{user `virtualbox_version`}}",
+        "VIRTUALBOX_WITH_XORG=1"
       ]
     },
     {
@@ -217,7 +222,7 @@
         "vmware-iso",
         "esxi-iso"
       ],
-      "script": "../provisioners/vmware-server.sh",
+      "script": "../provisioners/vmware-desktop.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh -ex '{{.Path}}'"
     },
     {
