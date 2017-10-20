@@ -1,8 +1,8 @@
 {
   "variables": {
-    "iso_name": "ubuntu-17.10-beta2-server-amd64.iso",
+    "iso_name": "ubuntu-17.10-server-amd64.iso",
     "iso_path": "17.10",
-    "iso_checksum": "6176ee2b00e95276c42c237896c134989792fc6ad7eccbcd7405f9728c0e5066",
+    "iso_checksum": "af913c00296eb0cfece99b8a02ae6db035ae173ed240241e780c8d7db96914b1",
     "iso_checksum_type": "sha256",
     "ssh_name": "vagrant",
     "ssh_pass": "vagrant",
@@ -10,8 +10,8 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "vm_name": "Ubuntu-17.10-beta-amd64-ansible",
-    "box_version": "2.20171010",
+    "vm_name": "Ubuntu-17.10-amd64-ansible",
+    "box_version": "1710.0.20171020",
     "preseed": "ubuntu-server.seed",
     "virtualbox_version": "5.1.6",
     "num_cpus": "2",

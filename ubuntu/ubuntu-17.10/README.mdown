@@ -1,6 +1,6 @@
-# Packer templates for Ubuntu 17.10 Beta 2
+# Packer templates for Ubuntu 17.10
 
-Templates to create Vagrant boxes for Ubuntu 17.10 Beta 2 (x86_64).
+Templates to create Vagrant boxes for Ubuntu 17.10 (x86_64).
 
 
 ## Prerequisites
@@ -33,13 +33,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso ubuntu-17.10-minimal.json
 
-You will find a vagrant box file named `Ubuntu-17.10-beta-amd64-minimal-v2.20171010-virtualbox.box`
+You will find a vagrant box file named `Ubuntu-17.10-amd64-minimal-v1710.0.20171020-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-17.10-beta-amd64-minimal-v2.20171010-virtualbox` to your box list
+Then you can add the box named `Ubuntu-17.10-amd64-minimal-v1710.0.20171020-virtualbox` to your box list
 by the following command:
 
-    vagrant box add Ubuntu-17.10-beta-amd64-minimal-v2.20171010-virtualbox.box --name Ubuntu-17.10-beta-amd64-minimal-v2.20171010-virtualbox
+    vagrant box add Ubuntu-17.10-amd64-minimal-v1710.0.20171020-virtualbox.box --name Ubuntu-17.10-amd64-minimal-v1710.0.20171020-virtualbox
 
 ### VMware
 
@@ -47,13 +47,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso ubuntu-17.10-minimal.json
 
-You will find a vagrant box file named `Ubuntu-17.10-beta-amd64-minimal-v2.20171010-vmware.box`
+You will find a vagrant box file named `Ubuntu-17.10-amd64-minimal-v1710.0.20171020-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-17.10-beta-amd64-minimal-v2.20171010-vmware` to your box list
+Then you can add the box named `Ubuntu-17.10-amd64-minimal-v1710.0.20171020-vmware` to your box list
 by the following command:
 
-    vagrant box add Ubuntu-17.10-beta-amd64-minimal-v2.20171010-vmware.box --name Ubuntu-17.10-beta-amd64-minimal-v2.20171010-vmware
+    vagrant box add Ubuntu-17.10-amd64-minimal-v1710.0.20171020-vmware.box --name Ubuntu-17.10-amd64-minimal-v1710.0.20171020-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
@@ -78,11 +78,15 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `packer build ubuntu-17.10-minimal.json` - Ubuntu Server 17.10 Beta 2
-* `packer build ubuntu-17.10-ansible.json` - Ubuntu Server 17.10 Beta 2 + [Ansible][] + [Testinfra][]
+* `ubuntu-17.10-minimal.json` - Ubuntu Server 17.10
+* `ubuntu-17.10-ansible.json` - Ubuntu Server 17.10 + [Ansible][] + [Testinfra][]
+* `ubuntu-17.10-lxde.json` - Ubuntu 17.10 + [LXDE][]
+* `ubuntu-17.10-xfce.json` - Ubuntu 17.10 + [Xfce][]
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
+[LXDE]: http://lxde.org/ "LXDE"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/ "Testinfra test your infrastructure &mdash; testinfra 1.7.1 documentation"
+[Xfce]: https://xfce.org/ "Xfce Desktop Environment"
 
 
 ## Build parameters

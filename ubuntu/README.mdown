@@ -35,9 +35,11 @@
     * Ubuntu Server 17.04
     * Lubuntu 17.04
     * Xubuntu 17.04
-* [ubuntu-17.10](ubuntu-17.10/README.mdown) - templates for Ubuntu 17.10 Beta 2
-    * Ubuntu Server 17.10 Beta 2
-    * Ubuntu Server 17.10 Beta 2 + Ansible + Testinfra
+* [ubuntu-17.10](ubuntu-17.10/README.mdown) - templates for Ubuntu 17.10
+    * Ubuntu Server 17.10
+    * Ubuntu Server 17.10 + Ansible + Testinfra
+    * Ubuntu 17.10 + LXDE
+    * Ubuntu 17.10 + Xfce
 
 - - -
 
