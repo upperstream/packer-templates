@@ -28,7 +28,7 @@
     * freebsd-10.4 - FreeBSD 10.4 templates (amd64 and i386)
     * freebsd-11.1 - FreeBSD 11.1 templates (amd64 and i386)
     * [more](freebsd/README.mdown)
-* [netbsd](netbsd/README.mdown) - NetBSD template
+* [netbsd](netbsd/README.mdown) - NetBSD templates
     * netbsd-5.2.3 - NetBSD 5.2.3 templates (amd64 and i386)
     * netbsd-6.1.5 - NetBSD 6.1.5 templates (amd64 and i386)
     * netbsd-7.0 - NetBSD 7.0.2 templates (amd64 and i386)
