@@ -30,9 +30,10 @@
     * NetBSD 7.1 + Ansible + Testinfra (i386)
     * NetBSD 7.1 + X.Org (i386)
     * NetBSD 7.1 + X.Org + dwm + dmenu (i386)
+* [netbsd-8.0](netbsd-8.0/README.mdown) - templates for NetBSD 8.0 BETA
 
 VirtualBox and VMware providers are supported.
 
 - - -
 
-Copyright &copy; 2015-2017 Upper Stream Software.
+Copyright &copy; 2015-2017 Upperstream Software.
