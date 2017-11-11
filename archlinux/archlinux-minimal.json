@@ -1,11 +1,12 @@
 {
   "variables": {
     "variant": "minimal",
-    "iso_image": "archlinux-2017.10.01-x86_64.iso",
-    "path_to_iso": "iso/2017.10.01",
-    "iso_checksum": "99357d28070706be18f02472f062e02347ab0e68",
-    "box_version": "20171001.0",
+    "iso_image": "archlinux-2017.11.01-x86_64.iso",
+    "path_to_iso": "iso/2017.11.01",
+    "iso_checksum": "ce7bbccc246b6c4c6ff13eadbcdf18e44bb85d82",
+    "box_version": "20171101.0",
     "iso_checksum_type": "sha1",
+    "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "40960",
     "virtualbox_guest_os_type": "ArchLinux_64",
@@ -45,7 +46,7 @@
       "headless": "{{user `headless`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
       "boot_command": [
@@ -86,7 +87,7 @@
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "headless": "{{user `headless`}}",
       "vmx_data": {
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "memsize": "{{user `mem_size`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
@@ -141,7 +142,7 @@
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
       "vmx_data": {
-        "numvcpus": "2",
+        "numvcpus": "{{user `num_cpus`}}",
         "memsize": "{{user `mem_size`}}",
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "bridged",
