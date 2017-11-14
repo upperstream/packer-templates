@@ -43,7 +43,7 @@
     * leap-42.3 - openSUSE Leap 42.3 templates
 * [tinycorelinux](tinycorelinux/README.mdown) - Tiny Core Linux templates
     * tinycorelinux-7 - Tiny Core Linux v7.2 templates (x86_64 and x86)
-    * tinycorelinux-8 - Tiny Core Linux v8.2 templates (x86_64 and x86)
+    * tinycorelinux-8 - Tiny Core Linux v8.2.1 templates (x86_64 and x86)
 * [ubuntu](ubuntu/README.mdown) - Ubuntu templates
     * ubuntu-12.04 - Ubuntu 12.04.5 templates
     * ubuntu-14.04 - Ubuntu 14.04.5 templates
