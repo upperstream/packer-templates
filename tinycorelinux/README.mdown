@@ -4,8 +4,8 @@
 
 * [tinycorelinux-7](tinycorelinux-7/README.mdown) - templates for Tiny Core Linux v7.2
     * Tiny Core Linux v7.2 (x86_64 and x86)
-* [tinycorelinux-8](tinycorelinux-8/README.mdown) - templates for Tiny Core Linux v8.2
-    * Tiny Core Linux v8.1 (x86_64 and x86)
+* [tinycorelinux-8](tinycorelinux-8/README.mdown) - templates for Tiny Core Linux v8.2.1
+    * Tiny Core Linux v8.2.1 (x86_64 and x86)
 
 - - -
 

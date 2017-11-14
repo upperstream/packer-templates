@@ -13,7 +13,7 @@
     "os_ver": "",
     "guest_os_type": "",
     "variant": "minimal",
-    "box_version": "8.2.20170923",
+    "box_version": "8.2.20171113",
     "headless": "false"
   },
   "builders": [

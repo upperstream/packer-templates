@@ -1,6 +1,6 @@
-# Packer templates for Tiny Core Linux v8.2
+# Packer templates for Tiny Core Linux v8.2.1
 
-Templates to create Vagrant boxes for Tiny Core Linux v8.2. (x86_64 and x86)
+Templates to create Vagrant boxes for Tiny Core Linux v8.2.1. (x86_64 and x86)
 
 
 ## Prerequisites
@@ -32,13 +32,13 @@ From the terminal, invoke the following command:
 
     packer build -var-file=vars-corepure64-8.json tc-8-minimal.json
 
-and you will find a vagrant box file named `CorePure64-8-minimal-v8.2.20170923.box`
+and you will find a vagrant box file named `CorePure64-8-minimal-v8.2.20171113.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `CorePure64-8-minimal-v8.2.20170923` to your box list
+Then you can add the box named `CorePure64-8-minimal-v8.2.20171113` to your box list
 by the following command:
 
-    vagrant box add CorePure64-8-minimal-v8.2.20170923.box --name CorePure64-8-minimal-v8.2.20170923
+    vagrant box add CorePure64-8-minimal-v8.2.20171113.box --name CorePure64-8-minimal-v8.2.20171113
 
 
 ## Default settings
@@ -63,15 +63,15 @@ Since `tc` is the default user of Tiny Core Linux, this box is configured that `
 ## Variants
 
 * x86_64
-    * `packer build -var-file=vars-corepure64-8.json tc-8-minimal.json` - CorePure 64 v8.2 (x86_64)
-    * `packer build -var-file=vars-corepure64-8.json tc-8-compiletc.json` - CorePure 64 v8.2 (x86_64) with build tools
-    * `packer build -var-file=vars-tinycorepure64-8.json tc-8-x11.json` - TinyCorePure 64 v8.2 (x86_64)
-    * `packer build -var-file=vars-tinycorepure64-8.json tc-8-compiletc+x11.json` - TinyCorePure 64 v8.2 (x86_64) with build tools
+    * `packer build -var-file=vars-corepure64-8.json tc-8-minimal.json` - CorePure 64 v8.2.1 (x86_64)
+    * `packer build -var-file=vars-corepure64-8.json tc-8-compiletc.json` - CorePure 64 v8.2.1 (x86_64) with build tools
+    * `packer build -var-file=vars-tinycorepure64-8.json tc-8-x11.json` - TinyCorePure 64 v8.2.1 (x86_64)
+    * `packer build -var-file=vars-tinycorepure64-8.json tc-8-compiletc+x11.json` - TinyCorePure 64 v8.2.1 (x86_64) with build tools
 * x64
-    * `packer build -var-file=vars-core-8.json tc-8.json-minimal.json` - Core v8.2 (x86)
-    * `packer build -var-file=vars-core-8.json tc-8.json-compiletc.json` - Core v8.2 (x86) with build tools
-    * `packer build -var-file=vars-tinycore-8.json tc-8.json-x11.json` - TinyCore v8.2 (x86)
-    * `packer build -var-file=vars-tinycore-8.json tc-8.json-compiletc+x11.json` - TinyCore v8.2 (x86) with build tools
+    * `packer build -var-file=vars-core-8.json tc-8.json-minimal.json` - Core v8.2.1 (x86)
+    * `packer build -var-file=vars-core-8.json tc-8.json-compiletc.json` - Core v8.2.1 (x86) with build tools
+    * `packer build -var-file=vars-tinycore-8.json tc-8.json-x11.json` - TinyCore v8.2.1 (x86)
+    * `packer build -var-file=vars-tinycore-8.json tc-8.json-compiletc+x11.json` - TinyCore v8.2.1 (x86) with build tools
 
 Executing `build_all.sh` (or `build_all.bat`) generates all boxes above.
 
