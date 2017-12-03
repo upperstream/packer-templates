@@ -1,10 +1,10 @@
 {
   "variables": {
     "variant": "minimal",
-    "iso_image": "archlinux-2017.11.01-x86_64.iso",
-    "path_to_iso": "iso/2017.11.01",
-    "iso_checksum": "ce7bbccc246b6c4c6ff13eadbcdf18e44bb85d82",
-    "box_version": "20171101.0",
+    "iso_image": "archlinux-2017.12.01-x86_64.iso",
+    "path_to_iso": "iso/2017.12.01",
+    "iso_checksum": "ec5e7c58520d7e1be72bc27c669d3c5fc94d6947",
+    "box_version": "20171201.0",
     "iso_checksum_type": "sha1",
     "num_cpus": "2",
     "mem_size": "512",
