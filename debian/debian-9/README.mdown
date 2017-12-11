@@ -1,13 +1,13 @@
-# Packer templates for Debian 9.2
+# Packer templates for Debian 9.3
 
-Templates to create Vagrant boxes for Debian 9.2 (amd64).
+Templates to create Vagrant boxes for Debian 9.3 (amd64).
 
 
 ## Prerequisites
 
-* [Packer][] v0.8.6+
-* [Vagrant][] v1.7.3+
-* [VirtualBox][] Version 5.0.36+
+* [Packer][] v1.0.3+
+* [Vagrant][] v1.8.6+
+* [VirtualBox][] Version 5.1.22+
 * [VMware][] Workstation v11.1.0+ / VMware Fusion v8.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
 
@@ -37,13 +37,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso debian-9-amd64-minimal.json
 
-You will find a vagrant box file named `Debian-9-amd64-minimal-v9.2.20171008-virtualbox.box`
+You will find a vagrant box file named `Debian-9-amd64-minimal-v9.3.20171210-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-9-amd64-minimal-v9.2.20171008-virtualbox` to your box list
+Then you can add the box named `Debian-9-amd64-minimal-v9.3.20171210-virtualbox` to your box list
 by the following command:
 
-    vagrant box add Debian-9-amd64-minimal-v9.2.20171008-virtualbox.box --name Debian-9-amd64-minimal-v9.2.20171008-virtualbox
+    vagrant box add Debian-9-amd64-minimal-v9.3.20171210-virtualbox.box --name Debian-9-amd64-minimal-v9.3.20171210-virtualbox
 
 ### VMware
 
@@ -51,13 +51,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso debian-9-amd64-minimal.json
 
-You will find a vagrant box file named `Debian-9-amd64-minimal-v9.2.20171008-vmware.box`
+You will find a vagrant box file named `Debian-9-amd64-minimal-v9.3.20171210-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-9-amd64-minimal-v9.2.20171008-vmware` to your box list
+Then you can add the box named `Debian-9-amd64-minimal-v9.3.20171210-vmware` to your box list
 by the following command:
 
-    vagrant box add Debian-9-amd64-minimal-v9.2.20171008-vmware.box --name Debian-9-amd64-minimal-v9.2.20171008-vmware
+    vagrant box add Debian-9-amd64-minimal-v9.3.20171210-vmware.box --name Debian-9-amd64-minimal-v9.3.20171210-vmware
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
@@ -80,11 +80,11 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `debian-9-amd64-minimal.json` - Debian 9.2 minimal installation
-* `debian-9-amd64-ansible.json` - Debian 9.2 with [Ansible][] + [Testinfra][].
-* `debian-9-amd64-docker.json` - Debian 9.2 with [Docker][] + [Docker Compose][]
-* `debian-9-amd64-dwm.json` - Debian 9.2 with [X.org][], [suckless][] tools, [ARandR][], and [xrdp][].
-* `debian-9-amd64-xfce.json` - Debian 9.2 with [Xfce][] + [xrdp][].
+* `debian-9-amd64-minimal.json` - Debian 9.3 minimal installation
+* `debian-9-amd64-ansible.json` - Debian 9.3 with [Ansible][] + [Testinfra][].
+* `debian-9-amd64-docker.json` - Debian 9.3 with [Docker][] + [Docker Compose][]
+* `debian-9-amd64-dwm.json` - Debian 9.3 with [X.org][], [suckless][] tools, [ARandR][], and [xrdp][].
+* `debian-9-amd64-xfce.json` - Debian 9.3 with [Xfce][] + [xrdp][].
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [ARandR]: https://christian.amsuess.com/tools/arandr/ "ARandR: Another XRandR GUI"
@@ -101,8 +101,8 @@ The following command will build a VM image on your ESXi:
 ## Installer CD images
 
 Optional var files are provided to instruct to use alternative installer CD images, i.e.,
-`vars-debian-9-amd64-full.json` instructs to use `debian-9.2.0-amd64-xfce-CD-1.iso` while
-`vars-debian-9-amd64-netinst.json` does `debian-9.2.0-amd64-netinst.iso` respectively.
+`vars-debian-9-amd64-full.json` instructs to use `debian-9.3.0-amd64-xfce-CD-1.iso` while
+`vars-debian-9-amd64-netinst.json` does `debian-9.3.0-amd64-netinst.iso` respectively.
 Without using these var files, `debian-9-amd64-*.json` templates use `mini.iso`.
 
 Depending on situation you can specify either of var files on the command line:
@@ -124,7 +124,7 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 * `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
 * `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
 * `headless` - Launch the virtual machine in headless mode if set to `true`.  Default value is `false`.
-* `virtualbox_version` - VirtualBox Guest Additions version number.  Default value is "5.0.36".
+* `virtualbox_version` - VirtualBox Guest Additions version number.  Default value is "5.1.22".
 
 
 - - -
