@@ -4,21 +4,21 @@
     "mem_size": "512",
     "disk_size": "51200",
     "iso_name": "mini.iso",
-    "iso_path": "dists/Debian9.2/main/installer-amd64/20170615+deb9u2/images/netboot",
-    "iso_checksum": "83fea524a48e66c0f0ba144ff96bca7d57022c664cb474b83fdc8b61f751d688",
+    "iso_path": "dists/Debian9.3/main/installer-amd64/20170615+deb9u2+b1/images/netboot",
+    "iso_checksum": "dbc682eddefae1bf902948c12798085acf093f083d0e3b386e658d917dfcd52a",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "9.2.20171008",
+    "box_version": "9.3.20171210",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "headless": "false",
-    "virtualbox_version": "5.0.36"
+    "virtualbox_version": "5.1.22"
   },
   "builders": [
     {
@@ -193,7 +193,7 @@
         "LIBFFI_DEV=libffi-dev=3.2.1-6",
         "LIBYAML_DEV=libyaml-dev=0.1.7-2",
         "LIBGMP_DEV=libgmp-dev=2:6.1.2+dfsg-1",
-        "LIBSSL_DEV=libssl-dev=1.1.0f-3",
+        "LIBSSL_DEV=libssl-dev=1.1.0f-3+deb9u1",
         "PIP=pip==9.0.1",
         "ANSIBLE=ansible==2.3.2.0",
         "TESTINFRA=testinfra==1.7.1"

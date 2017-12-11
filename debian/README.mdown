@@ -48,12 +48,12 @@
     * Debian 8.9 + Docker + Docker Compose
     * Debian 8.9 + X.org + suckless tools
     * Debian 8.9 + Xfce
-* [debian-9](debian-9/README.mdown) - templates for Debain 9.2
-    * Debain 9.2 minimal
-    * Debian 9.2 + Ansible + Testinfra
-    * Debian 9.2 + Docker + Docker Compose
-    * Debian 9.2 + X.org + suckless tools
-    * Debian 9.2 + Xfce
+* [debian-9](debian-9/README.mdown) - templates for Debain 9.3
+    * Debain 9.3 minimal
+    * Debian 9.3 + Ansible + Testinfra
+    * Debian 9.3 + Docker + Docker Compose
+    * Debian 9.3 + X.org + suckless tools
+    * Debian 9.3 + Xfce
 
 - - -
 
