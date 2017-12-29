@@ -69,4 +69,4 @@ permissions and limitations under the License.
 
 - - -
 
-Copyright &copy; 2014-2017 Upperstream Software.
+Copyright &copy; 2014-2018 Upperstream Software.

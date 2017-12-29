@@ -39,7 +39,7 @@ EOF
 
 tce-load -wil curl.tcz make.tcz
 
-tce-setdrive
+tce-setdrive -s /mnt/sda1
 
 tce-load -wi openssh.tcz
 sudo sh -c 'echo "usr/local/etc/ssh" >> /opt/.filetool.lst'
