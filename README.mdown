@@ -2,46 +2,48 @@
 
 ## Contents
 
-* [alpine](alpine/README.mdown) - Alpine Linux templates (x86_64 and x86)
+* [alpine](alpine/README.mdown) - Alpine Linux templates (x86_64 and
+  x86)
     * alpine-3.5.2 - Alpine Linux 3.5.2 templates
     * alpine-3.6.2 - Alpine Linux 3.6.2 templates
     * alpine-3.7 - Alpine Linux 3.7.0 templates
     * [more](alpine/README.mdown)
-* [archlinux](archlinux/README.mdown) - Arch Linux templates
-* [centos](centos/README.mdown) - CentOS templates
-    * centos-5.11 - CentOS 5.11 templates (x86_64 and i386)
-    * centos-6.9 - CentOS 6.9 templates (x86_64 and i386)
-    * centos-7 - CentOS 7.4 1708 templates (x86_64)
+* [archlinux](archlinux/README.mdown) - Arch Linux templates (x86_64)
+* [centos](centos/README.mdown) - CentOS templates (x86_64 and i386)
+    * centos-5.11 - CentOS 5.11 templates
+    * centos-6.9 - CentOS 6.9 templates
+    * centos-7 - CentOS 7.4 1708 templates (x86_64 only)
     * [more](centos/README.mdown)
-* [debian](debian/README.mdown) - Debian templates
+* [debian](debian/README.mdown) - Debian templates (amd64)
     * debian-7.11 - Debian 7.11 templates
     * debian-8.10 - Debian 8.10 templates
     * debian-9 - Debian 9.3 templates
     * [more](debian/README.mdown)
-* [devuan](devuan) - Devuan templates
+* [devuan](devuan) - Devuan templates (amd64)
     * devuan-1.0 - Devuan 1.0.0 templates
-* [freebsd](freebsd/README.mdown) - FreeBSD templates
-    * freebsd-9.3 - FreeBSD 9.3 templates (amd64 and i386)
-    * freebsd-10.4 - FreeBSD 10.4 templates (amd64 and i386)
-    * freebsd-11.1 - FreeBSD 11.1 templates (amd64 and i386)
+* [freebsd](freebsd/README.mdown) - FreeBSD templates (amd64 and i386)
+    * freebsd-9.3 - FreeBSD 9.3 templates
+    * freebsd-10.4 - FreeBSD 10.4 templates
+    * freebsd-11.1 - FreeBSD 11.1 templates
     * [more](freebsd/README.mdown)
-* [netbsd](netbsd/README.mdown) - NetBSD templates
-    * netbsd-5.2.3 - NetBSD 5.2.3 templates (amd64 and i386)
-    * netbsd-6.1.5 - NetBSD 6.1.5 templates (amd64 and i386)
-    * netbsd-7.0 - NetBSD 7.0.2 templates (amd64 and i386)
-    * netbsd-7.1 - NetBSD 7.1 templates (amd64 and i386)
+* [netbsd](netbsd/README.mdown) - NetBSD templates (amd64 and i386)
+    * netbsd-5.2.3 - NetBSD 5.2.3 templates
+    * netbsd-6.1.5 - NetBSD 6.1.5 templates
+    * netbsd-7.0 - NetBSD 7.0.2 templates
+    * netbsd-7.1 - NetBSD 7.1.1 templates
     * [more](netbsd/README.mdown)
-* [openbsd](openbsd/README.mdown) - OpenBSD templates
-    * openbsd-5.9 - OpenBSD 5.9 templates (amd64 and i386)
-    * openbsd-6.1 - OpenBSD 6.1 templates (amd64 and i386)
-    * openbsd-6.2 - OpenBSD 6.2 templates (amd64 and i386)
+* [openbsd](openbsd/README.mdown) - OpenBSD templates (amd64 and i386)
+    * openbsd-5.9 - OpenBSD 5.9 templates
+    * openbsd-6.1 - OpenBSD 6.1 templates
+    * openbsd-6.2 - OpenBSD 6.2 templates
     * [more](openbsd/README.mdown)
-* [opensuse](opensuse/README.mdown) - openSUSE templates
+* [opensuse](opensuse/README.mdown) - openSUSE templates (amd64)
     * leap-42.3 - openSUSE Leap 42.3 templates
-* [tinycorelinux](tinycorelinux/README.mdown) - Tiny Core Linux templates
-    * tinycorelinux-7 - Tiny Core Linux v7.2 templates (x86_64 and x86)
-    * tinycorelinux-8 - Tiny Core Linux v8.2.1 templates (x86_64 and x86)
-* [ubuntu](ubuntu/README.mdown) - Ubuntu templates
+* [tinycorelinux](tinycorelinux/README.mdown) - Tiny Core Linux
+  templates (x86_64 and x86)
+    * tinycorelinux-7 - Tiny Core Linux v7.2 templates
+    * tinycorelinux-8 - Tiny Core Linux v8.2.1 templates
+* [ubuntu](ubuntu/README.mdown) - Ubuntu templates (x86_64)
     * ubuntu-12.04 - Ubuntu 12.04.5 templates
     * ubuntu-14.04 - Ubuntu 14.04.5 templates
     * ubuntu-16.04 - Ubuntu 16.04.3 templates
@@ -52,15 +54,17 @@
 
 ## Licensing
 
-All the files in this directory and descendants are provided under the Apache License,
-Version 2.0 (the "License"); unless otherwise explicitly stated.  You may not use these
-files except in compliance with the License.  You may obtain a copy of the License at
+All the files in this directory and descendants are provided under the
+Apache License, Version 2.0 (the "License"); unless otherwise
+explicitly stated.  You may not use these files except in compliance
+with the License.  You may obtain a copy of the License at
 
    <http://www.apache.org/licenses/LICENSE-2.0>
 
-Unless required by applicable law or agreed to in writing, software distributed under
-the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, either express or implied.  See the License for the specific language governing
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied.  See the License for the specific language governing
 permissions and limitations under the License.
 
 - - -

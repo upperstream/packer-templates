@@ -1,7 +1,7 @@
 {
-  "iso_file_name": "NetBSD-7.1-i386.iso",
-  "iso_path": "NetBSD/iso/7.1",
-  "iso_checksum": "2401f1f58b846c706356d08a3476e7c2229477b1fe1dbacf56cd18557ec6fa97816d1efb1daeb39c69cfdbe486ae7f7b1781daaaf50cab1a4ab903b934d75bca",
+  "iso_file_name": "NetBSD-7.1.1-i386.iso",
+  "iso_path": "NetBSD/iso/7.1.1",
+  "iso_checksum": "2849de4184426f35e721e50b62b0e595180021c0b6ed6fe42e98c69ddceb6fffd2f8d8fcf53639d0f40b1f6c09a4eb01e4747727d5f6422bdff37e06a575eebe",
   "iso_checksum_type": "sha512",
   "cpu": "i386",
   "virtualbox_geust_os_type": "NetBSD",

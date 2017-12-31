@@ -1,7 +1,7 @@
 {
-  "iso_file_name": "NetBSD-7.1-amd64.iso",
-  "iso_path": "NetBSD/iso/7.1",
-  "iso_checksum": "4d00951c2e5f51591a3b08a5d572a42e8a4f48b60901e58cfee5f0b7f107f3b923786860acda3caaf30b9ea3a7e39a2b4f3def951c4e30b08fb2232f20d5a0bc",
+  "iso_file_name": "NetBSD-7.1.1-amd64.iso",
+  "iso_path": "NetBSD/iso/7.1.1",
+  "iso_checksum": "92f2d8b825f529f8719754fe29fa152046c04ab567bb4bd611533377417250ddc4099e7b212a0ac5bb92d6d32f5fb96a4537df93ed6c36ee317a59a27c58407c",
   "iso_checksum_type": "sha512",
   "cpu": "amd64",
   "virtualbox_geust_os_type": "NetBSD_64",
