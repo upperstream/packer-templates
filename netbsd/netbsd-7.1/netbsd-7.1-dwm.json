@@ -2,9 +2,8 @@
   "variables": {
     "ssh_username": "root",
     "ssh_password": "vagrant",
-    "os_ver": "7.1",
     "variant": "dwm",
-    "box_ver": "7.1.20170810",
+    "box_ver": "7.1.20171229",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -16,7 +15,8 @@
     "mem_size": "1024",
     "disk_size": "40960",
     "hostname": "vagrant",
-    "headless": "false"
+    "headless": "false",
+    "package_server": "http://ftp.NetBSD.org/pub/pkgsrc"
   },
   "builders": [
     {
@@ -127,7 +127,6 @@
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
         "ethernet0.virtualDev": "e1000",
-        "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
@@ -247,14 +246,14 @@
         "a<enter><wait10><wait10><wait10><wait10><wait10>",
         "<enter><wait>",
         "d<enter><wait>",
-        "a<enter><wait10>",
+        "a<enter><wait10><wait10>",
         "{{user `ssh_password`}}<enter><wait>",
         "{{user `ssh_password`}}<enter><wait>",
         "{{user `ssh_password`}}<enter><wait5>",
         "g<enter><wait>",
         "h<enter><wait>",
         "x<enter><wait>",
-        "<enter><wait10><wait10>",
+        "<enter><wait10><wait10><wait10><wait10>",
         "x<enter><wait>",
         "dhcpcd<enter><wait10>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
@@ -266,7 +265,7 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH=http://ftp.NetBSD.org/pub/pkgsrc/packages/NetBSD/`uname -m`/7.0_2017Q1/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH={{user `package_server`}}/packages/NetBSD/`uname -m`/7.0_2017Q3/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
@@ -276,7 +275,7 @@
       "script": "../provisioners/vmware-xorg.sh",
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools-10.1.0nb3",
+        "OPEN_VM_TOOLS=open-vm-tools-10.1.10nb1",
         "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0nb1",
         "XF86_VIDEO_VMWARE=xf86-video-vmware-13.2.1"
       ]
@@ -292,10 +291,10 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "SUDO=sudo-1.8.20p2",
-        "RSYNC=rsync-3.1.2",
+        "SUDO=sudo-1.8.21p2",
+        "RSYNC=rsync-3.1.2nb1",
         "DWM=dwm-6.1",
-        "DMENU=dmenu-4.6",
+        "DMENU=dmenu-4.7",
         "ST_TERM=st-term-0.7nb1",
         "XRANDR=xrandr-1.5.0",
         "X11VNC=x11vnc-0.9.13nb30"
