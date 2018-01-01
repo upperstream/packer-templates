@@ -8,5 +8,6 @@
   "iso_name": "CorePure64-8.2.1.iso",
   "iso_checksum": "b103992b01f728dc8fe41602314b7854",
   "iso_checksum_type": "md5",
-  "guest_os_type": "Linux26_64"
+  "virtualbox_guest_os_type": "Linux26_64",
+  "vmware_guest_os_type": "other26xlinux-64"
 }

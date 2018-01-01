@@ -2,11 +2,11 @@
 
 ## Contents
 
-* [tinycorelinux-7](tinycorelinux-7/README.mdown) - templates for Tiny Core Linux v7.2
+* [tinycorelinux-7](tinycorelinux-7/README.mdown)
     * Tiny Core Linux v7.2 (x86_64 and x86)
-* [tinycorelinux-8](tinycorelinux-8/README.mdown) - templates for Tiny Core Linux v8.2.1
+* [tinycorelinux-8](tinycorelinux-8/README.mdown)
     * Tiny Core Linux v8.2.1 (x86_64 and x86)
 
 - - -
 
-Copyright &copy; 2016, 2017 Upperstream Software.
+Copyright &copy; 2016-2018 Upperstream Software.

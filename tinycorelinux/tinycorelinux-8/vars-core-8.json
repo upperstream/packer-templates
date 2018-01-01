@@ -8,5 +8,6 @@
   "iso_name": "Core-8.2.1.iso",
   "iso_checksum": "8235a6011cf2611b757a8338286924f6",
   "iso_checksum_type": "md5",
-  "guest_os_type": "Linux26"
+  "virtualbox_guest_os_type": "Linux26",
+  "vmware_guest_os_type": "other26xlinux"
 }

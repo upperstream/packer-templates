@@ -39,7 +39,7 @@ sudo sh -c 'echo "usr/local/etc/grub.d" >> /opt/.filetool.lst'
 
 tce-load -wil curl.tcz make.tcz
 
-tce-setdrive
+tce-setdrive -s /mnt/sda1
 
 tce-load -wi openssh.tcz
 
