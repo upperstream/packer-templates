@@ -1,10 +1,10 @@
 {
   "variables": {
     "variant": "docker",
-    "iso_image": "archlinux-2017.12.01-x86_64.iso",
-    "path_to_iso": "iso/2017.12.01",
-    "iso_checksum": "ec5e7c58520d7e1be72bc27c669d3c5fc94d6947",
-    "box_version": "20171201.0",
+    "iso_image": "archlinux-2018.01.01-x86_64.iso",
+    "path_to_iso": "iso/2018.01.01",
+    "iso_checksum": "6c98c1932731eff98e430958c3589c4124bafbe9",
+    "box_version": "20180101.0",
     "iso_checksum_type": "sha1",
     "num_cpus": "2",
     "mem_size": "512",
