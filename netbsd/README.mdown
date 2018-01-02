@@ -22,9 +22,10 @@
     * NetBSD 7.1.1 + Ansible + Testinfra
     * NetBSD 7.1.1 + X.Org
     * NetBSD 7.1.1 + X.Org + dwm + dmenu
+    * NetBSD 7.1.1 + Xfce + XDM (amd64 only)
 
 VirtualBox and VMware providers are supported.
 
 - - -
 
-Copyright &copy; 2015-2017 Upperstream Software.
+Copyright &copy; 2015-2018 Upperstream Software.
