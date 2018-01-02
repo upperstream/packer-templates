@@ -103,11 +103,12 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `netbsd-7.1-minmal.json` - NetBSD 7.1 minimal installation
-* `netbsd-7.1-ansible.json` - NetBSD 7.1 + [Ansible][] + [Testinfra][]
-* `netbsd-7.1-xorg.json` - NetBSD 7.1 + [X.Org][]
-* `netbsd-7.1-dwm.json` - NetBSD 7.1 + X.Org + [dwm][] + [st][] +
+* `netbsd-7.1-minmal.json` - NetBSD 7.1.1 minimal installation
+* `netbsd-7.1-ansible.json` - NetBSD 7.1.1 + [Ansible][] + [Testinfra][]
+* `netbsd-7.1-xorg.json` - NetBSD 7.1.1 + [X.Org][]
+* `netbsd-7.1-dwm.json` - NetBSD 7.1.1 + X.Org + [dwm][] + [st][] +
   [dmenu][]
+* `netbsd-7.1-xfce.json` - NetBSD 7.1.1 + [Xfce][] + [XDM][] (amd64 only)
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/
@@ -117,6 +118,8 @@ The following command will build a VM image on your ESXi:
     "suckless.org dwm - dynamic window manager"
 [st]: http://st.suckless.org/ "suckless.org st - simple terminal"
 [X.Org]: https://www.x.org/wiki/ "X.Org"
+[XDM]: https://www.x.org/releases/X11R7.6/doc/man/man1/xdm.1.xhtml "XDM"
+[Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 
 As a parameter to `-var-file` option, you can choose either
 `vars-netbsd-7.1-amd64.json` for amd64 or `vars-netbsd-7.1-i386.json`
@@ -166,4 +169,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2017 Upperstream Software.
+Copyright &copy; 2017, 2018 Upperstream Software.
