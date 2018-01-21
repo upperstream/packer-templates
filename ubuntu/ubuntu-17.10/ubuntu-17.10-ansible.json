@@ -1,8 +1,8 @@
 {
   "variables": {
-    "iso_name": "ubuntu-17.10-server-amd64.iso",
-    "iso_path": "17.10",
-    "iso_checksum": "af913c00296eb0cfece99b8a02ae6db035ae173ed240241e780c8d7db96914b1",
+    "iso_name": "ubuntu-17.10.1-server-amd64.iso",
+    "iso_path": "17.10.1",
+    "iso_checksum": "8ff73f1b622276758475c3bd5190b382774626de5a82c50930519381f6c3a3f8",
     "iso_checksum_type": "sha256",
     "ssh_name": "vagrant",
     "ssh_pass": "vagrant",
@@ -11,15 +11,16 @@
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "vm_name": "Ubuntu-17.10-amd64-ansible",
-    "box_version": "1710.0.20171020",
+    "box_version": "1710.1.20180120",
     "preseed": "ubuntu-server.seed",
-    "virtualbox_version": "5.1.6",
+    "virtualbox_version": "5.1.30",
     "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "40960",
     "linux": "/install/linux",
     "initrd": "/install/initrd.gz",
-    "headless": "false"
+    "headless": "false",
+    "archive_mirror": "http://archive.ubuntu.com/ubuntu"
   },
   "builders": [
     {
@@ -192,6 +193,7 @@
     {
       "type": "shell",
       "scripts": [
+        "../provisioners/update_mirror.sh",
         "../provisioners/base.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/ansible+testinfra.sh"
@@ -199,8 +201,9 @@
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh -ex '{{.Path}}'",
       "environment_vars": [
         "VIRTUALBOX_VERSION={{user `virtualbox_version`}}",
-        "ANSIBLE=ansible==2.3.2.0",
-        "TESTINFRA=testinfra==1.7.1"
+        "ARCHIVE_MIRROR={{user `archive_mirror`}}",
+        "ANSIBLE=ansible==2.4.2.0",
+        "TESTINFRA=testinfra==1.10.1"
       ]
     },
     {
