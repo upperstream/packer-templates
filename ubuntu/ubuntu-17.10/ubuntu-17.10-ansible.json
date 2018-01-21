@@ -19,7 +19,8 @@
     "disk_size": "40960",
     "linux": "/install/linux",
     "initrd": "/install/initrd.gz",
-    "headless": "false"
+    "headless": "false",
+    "archive_mirror": "http://archive.ubuntu.com/ubuntu"
   },
   "builders": [
     {
@@ -192,6 +193,7 @@
     {
       "type": "shell",
       "scripts": [
+        "../provisioners/update_mirror.sh",
         "../provisioners/base.sh",
         "../provisioners/vagrant.sh",
         "../provisioners/ansible+testinfra.sh"
@@ -199,6 +201,7 @@
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh -ex '{{.Path}}'",
       "environment_vars": [
         "VIRTUALBOX_VERSION={{user `virtualbox_version`}}",
+        "ARCHIVE_MIRROR={{user `archive_mirror`}}",
         "ANSIBLE=ansible==2.3.2.0",
         "TESTINFRA=testinfra==1.7.1"
       ]

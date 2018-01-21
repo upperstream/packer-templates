@@ -93,6 +93,7 @@ The following command will build a VM image on your ESXi:
 
 The following parameters can be set at build time by supplying `-var` or `-var-file` command line options to `packer`:
 
+* `archive_mirror`: - URL to download packages from.  Default value is `http://archive.ubuntu.com/ubuntu`.
 * `vm_name` - VM name.  This also affects box file name and output directory name.
 * `num_cpus` - Number of virtual CPUs.  Default value is 2.
 * `mem_size` - RAM size of the created VM.  Default value is `512` which means 512MB.
@@ -102,4 +103,4 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 
 - - -
 
-Copyright &copy; 2017 Upperstream Software.
+Copyright &copy; 2017, 2018 Upperstream Software.
