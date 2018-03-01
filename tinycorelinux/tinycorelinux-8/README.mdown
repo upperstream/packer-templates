@@ -116,7 +116,7 @@ The following command will build a VM image on your ESXi:
       TinyCorePure 64 v8.2.1 (x86_64)
     * `packer build -var-file=vars-tinycorepure64-8.json tc-8-compiletc+x11.json`:
       TinyCorePure 64 v8.2.1 (x86_64) with build tools
-* x64
+* x86
     * `packer build -var-file=vars-core-8.json tc-8.json-minimal.json`:
       Core v8.2.1 (x86)
     * `packer build -var-file=vars-core-8.json tc-8.json-compiletc.json`:
