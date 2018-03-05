@@ -1,0 +1,13 @@
+{
+  "vm_name": "Core-9",
+  "os_name": "Core",
+  "os_ver": "9.0",
+  "cpu": "x86",
+  "mem_size": "512",
+  "disk_size": "40960",
+  "iso_name": "Core-9.0.iso",
+  "iso_checksum": "8ba2e30b569e54aa859ebd756bd36e22",
+  "iso_checksum_type": "md5",
+  "virtualbox_guest_os_type": "Linux26",
+  "vmware_guest_os_type": "other26xlinux"
+}
