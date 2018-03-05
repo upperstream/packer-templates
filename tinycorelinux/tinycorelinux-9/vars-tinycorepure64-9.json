@@ -1,0 +1,13 @@
+{
+  "vm_name": "TinyCorePure64-9",
+  "os_name": "TinyCorePure64",
+  "os_ver": "9.0",
+  "cpu": "x86_64",
+  "mem_size": "512",
+  "disk_size": "40960",
+  "iso_name": "CorePure64-9.0.iso",
+  "iso_checksum": "d204919c814464d2fa4f1d732348262e",
+  "iso_checksum_type": "md5",
+  "virtualbox_guest_os_type": "Linux26_64",
+  "vmware_guest_os_type": "other26xlinux-64"
+}
