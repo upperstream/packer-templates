@@ -46,7 +46,7 @@
     * tinycorelinux-9 - Tiny Core Linux v9.0 templates
 * [ubuntu](ubuntu/README.mdown) - Ubuntu templates (x86_64)
     * ubuntu-14.04 - Ubuntu 14.04.5 templates
-    * ubuntu-16.04 - Ubuntu 16.04.3 templates
+    * ubuntu-16.04 - Ubuntu 16.04.4 templates
     * ubuntu-17.10 - Ubuntu 17.10.1 templates
     * [more](ubuntu/README.mdown)
 
