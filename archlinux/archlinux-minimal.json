@@ -1,10 +1,10 @@
 {
   "variables": {
     "variant": "minimal",
-    "iso_image": "archlinux-2018.02.01-x86_64.iso",
-    "path_to_iso": "iso/2018.02.01",
-    "iso_checksum": "003678c0216c7eacb3d7711a74206edb52fdb887",
-    "box_version": "20180201.0",
+    "iso_image": "archlinux-2018.03.01-x86_64.iso",
+    "path_to_iso": "iso/2018.03.01",
+    "iso_checksum": "bfe1c58cd4396ffd5826ae5a2d71f45f873428be",
+    "box_version": "20180301.0",
     "iso_checksum_type": "sha1",
     "num_cpus": "2",
     "mem_size": "512",
@@ -21,7 +21,7 @@
     "vagrant_password": "vagrant",
     "hostname": "",
     "headless": "false",
-    "mirror": "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/$repo/os/$arch"
+    "mirror": "http://mirrors.evowise.com/archlinux/$repo/os/$arch"
   },
   "builders": [
     {
@@ -33,7 +33,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/{{user `path_to_iso`}}/{{user `iso_image`}}"
+        "http://mirrors.evowise.com/archlinux/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "{{user `vagrant_username`}}",
       "ssh_password": "{{user `vagrant_password`}}",
@@ -76,7 +76,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/{{user `path_to_iso`}}/{{user `iso_image`}}"
+        "http://mirrors.evowise.com/archlinux/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "{{user `vagrant_username`}}",
       "ssh_password": "{{user `vagrant_password`}}",
@@ -126,7 +126,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "iso/{{user `iso_image`}}",
-        "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/{{user `path_to_iso`}}/{{user `iso_image`}}"
+        "http://mirrors.evowise.com/archlinux/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "{{user `vagrant_username`}}",
       "ssh_password": "{{user `vagrant_password`}}",
