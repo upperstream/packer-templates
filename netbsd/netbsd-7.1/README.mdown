@@ -1,6 +1,6 @@
-# Packer templates for NetBSD 7.1.1
+# Packer templates for NetBSD 7.1.2
 
-Templates to create Vagrant boxes for NetBSD 7.1.1 (amd64 and i386).
+Templates to create Vagrant boxes for NetBSD 7.1.2 (amd64 and i386).
 
 
 ## Prerequisites
@@ -38,13 +38,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-minimal.json
 
-You will find a vagrant box file named `NetBSD-7.1-amd64-minimal-v7.1.20171229-virtualbox.box`
+You will find a vagrant box file named `NetBSD-7.1-amd64-minimal-v7.1.20180319-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-7.1-amd64-minimal-v7.1.20171229-virtualbox`
+Then you can add the box named `NetBSD-7.1-amd64-minimal-v7.1.20180319-virtualbox`
 to your box list by the following command:
 
-    vagrant box add NetBSD-7.1-amd64-minimal-v7.1.20171229-virtualbox.box --name NetBSD-7.1-amd64-minimal-v7.1.20171229-virtualbox
+    vagrant box add NetBSD-7.1-amd64-minimal-v7.1.20180319-virtualbox.box --name NetBSD-7.1-amd64-minimal-v7.1.20180319-virtualbox
 
 ### VMware
 
@@ -52,13 +52,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso -var-file=vars-netbsd-7.1-amd64.json netbsd-7.1-minimal.json
 
-You will find a vagrant box file named `NetBSD-7.1-amd64-minimal-v7.1.20171229-vmware.box`
+You will find a vagrant box file named `NetBSD-7.1-amd64-minimal-v7.1.20180319-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-7.1-amd64-minimal-v7.1.20171229-vmware`
+Then you can add the box named `NetBSD-7.1-amd64-minimal-v7.1.20180319-vmware`
 to your box list by the following command:
 
-    vagrant box add NetBSD-7.1-amd64-minimal-v7.1.20171229-vmware.box --name NetBSD-7.1-amd64-minimal-v7.1.20171229-vmware
+    vagrant box add NetBSD-7.1-amd64-minimal-v7.1.20180319-vmware.box --name NetBSD-7.1-amd64-minimal-v7.1.20180319-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -103,16 +103,16 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `netbsd-7.1-minmal.json` - NetBSD 7.1.1 minimal installation
-* `netbsd-7.1-ansible.json` - NetBSD 7.1.1 + [Ansible][] + [Testinfra][]
-* `netbsd-7.1-xorg.json` - NetBSD 7.1.1 + [X.Org][]
-* `netbsd-7.1-dwm.json` - NetBSD 7.1.1 + X.Org + [dwm][] + [st][] +
+* `netbsd-7.1-minmal.json` - NetBSD 7.1.2 minimal installation
+* `netbsd-7.1-ansible.json` - NetBSD 7.1.2 + [Ansible][] + [Testinfra][]
+* `netbsd-7.1-xorg.json` - NetBSD 7.1.2 + [X.Org][]
+* `netbsd-7.1-dwm.json` - NetBSD 7.1.2 + X.Org + [dwm][] + [st][] +
   [dmenu][]
-* `netbsd-7.1-xfce.json` - NetBSD 7.1.1 + [Xfce][] + [XDM][] (amd64 only)
+* `netbsd-7.1-xfce.json` - NetBSD 7.1.2 + [Xfce][] + [XDM][] (amd64 only)
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/
-    "Testinfra test your infrastructure &mdash; testinfra 1.10.0 documentation"
+    "Testinfra test your infrastructure &#8212; testinfra 1.10.2.dev3 documentation"
 [dmenu]: http://tools.suckless.org/dmenu/ "dmenu | suckless.org tools"
 [dwm]: http://dwm.suckless.org/
     "suckless.org dwm - dynamic window manager"
@@ -139,8 +139,11 @@ or `-var-file` command line options to `packer`:
 * `disk_size` - Disk size of the created VM.  Default value is `40960`
   which means 40GB.
 * `hostname` - Host name of the created VM.  Default value is `vagrant`.
-* `package_server`: - URL to download binary packages from.  Default
+* `package_server` - URL to download binary packages from.  Default
   value is `http://ftp.NetBSD.org/pub/pkgsrc`.
+* `pkgsrc_tag` - combination of OS version and tag name on pkgsrc to
+  specify a directory to download binary packages from.  Default value
+  is `7.0_2017Q4` for amd64 and `7.0_2017Q3` for i386.
 * `ssh_username` - User name to login via SSH during build time.
   Default value is `root`.
 * `ssh_password` - SSH password for `ssh_user` during build time.

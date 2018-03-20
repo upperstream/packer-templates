@@ -3,7 +3,7 @@
     "ssh_username": "root",
     "ssh_password": "vagrant",
     "variant": "minimal",
-    "box_ver": "7.1.20171229",
+    "box_ver": "7.1.20180319",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -16,7 +16,8 @@
     "disk_size": "40960",
     "hostname": "vagrant",
     "headless": "false",
-    "package_server": "http://ftp.NetBSD.org/pub/pkgsrc"
+    "package_server": "http://ftp.netbsd.org/pub/pkgsrc",
+    "pkgsrc_tag": ""
   },
   "builders": [
     {
@@ -26,14 +27,7 @@
       "guest_os_type": "{{user `virtualbox_geust_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
-        "http://iso.jp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://mirror.planetunix.net/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp.fr.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp.availo.se/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp.fi.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -100,13 +94,7 @@
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
-        "http://ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://mirror.planetunix.net/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp.fr.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp.availo.se/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp.fi.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -177,13 +165,7 @@
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
-        "http://ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://mirror.planetunix.net/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp7.de.NetBSD.org/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "https://ftp.ipv6.uni-leipzig.de/pub/ftp.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp.fr.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp.availo.se/pub/{{user `iso_path`}}/{{user `iso_file_name`}}",
-        "http://ftp.fi.NetBSD.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -256,7 +238,7 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH={{user `package_server`}}/packages/NetBSD/`uname -m`/7.0_2017Q3/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH={{user `package_server`}}/packages/NetBSD/`uname -m`/{{user `pkgsrc_tag`}}/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
@@ -268,8 +250,8 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "SUDO=sudo-1.8.21p2",
-        "RSYNC=rsync-3.1.2nb1"
+        "SUDO=sudo",
+        "RSYNC=rsync"
       ]
     },
     {

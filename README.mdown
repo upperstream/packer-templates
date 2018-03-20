@@ -30,7 +30,7 @@
     * netbsd-5.2.3 - NetBSD 5.2.3 templates
     * netbsd-6.1.5 - NetBSD 6.1.5 templates
     * netbsd-7.0 - NetBSD 7.0.2 templates
-    * netbsd-7.1 - NetBSD 7.1.1 templates
+    * netbsd-7.1 - NetBSD 7.1.2 templates
     * [more](netbsd/README.mdown)
 * [openbsd](openbsd/README.mdown) - OpenBSD templates (amd64 and i386)
     * openbsd-5.9 - OpenBSD 5.9 templates

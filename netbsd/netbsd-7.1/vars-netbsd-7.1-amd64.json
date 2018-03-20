@@ -1,10 +1,11 @@
 {
-  "iso_file_name": "NetBSD-7.1.1-amd64.iso",
-  "iso_path": "NetBSD/iso/7.1.1",
-  "iso_checksum": "92f2d8b825f529f8719754fe29fa152046c04ab567bb4bd611533377417250ddc4099e7b212a0ac5bb92d6d32f5fb96a4537df93ed6c36ee317a59a27c58407c",
+  "iso_file_name": "NetBSD-7.1.2-amd64.iso",
+  "iso_path": "NetBSD/iso/7.1.2",
+  "iso_checksum": "aaccacbfa3ee5a497170025aed9426de1ef91f8f7ebdaf862bd178c4922a5db1b82171832c916acd7a4e2038dd9ec39ef1061c41d98c5b5af56e3165cc945539",
   "iso_checksum_type": "sha512",
   "cpu": "amd64",
   "virtualbox_geust_os_type": "NetBSD_64",
   "vmware_guest_os_type": "other-64",
-  "vm_name": "NetBSD-7.1-amd64"
+  "vm_name": "NetBSD-7.1-amd64",
+  "pkgsrc_tag": "7.0_2017Q4"
 }
