@@ -7,7 +7,7 @@ Templates to create Vagrant boxes for Arch Linux.
 
 * [Packer][] v1.1.0+
 * [Vagrant][] v1.9.8+
-* [VirtualBox][] Version 5.0.36+, on which Linux 4.11 can run
+* [VirtualBox][] Version 5.2.8+, on which Linux 4.15 can run
 * [VMware][] Workstation v11.1.0+ / VMware Fusion v8.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
 
@@ -28,13 +28,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso archlinux-minimal.json
 
-You will find a vagrant box file named `ArchLinux-x86_64-minimal-v20180301.0-virtualbox.box`
+You will find a vagrant box file named `ArchLinux-x86_64-minimal-v20180401.0-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `ArchLinux-x86_64-minimal-v20180301.0-virtualbox`
+Then you can add the box named `ArchLinux-x86_64-minimal-v20180401.0-virtualbox`
  to your box list by the following command:
 
-    vagrant box add ArchLinux-x86_64-minimal-v20180301.0-virtualbox.box --name ArchLinux-x86_64-minimal-v20180301.0-virtualbox
+    vagrant box add ArchLinux-x86_64-minimal-v20180401.0-virtualbox.box --name ArchLinux-x86_64-minimal-v20180401.0-virtualbox
 
 ### VMware
 
@@ -42,13 +42,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso archlinux-minimal.json
 
-You will find a vagrant box file named `ArchLinux-x86_64-minimal-v20180301.0-vmware.box`
+You will find a vagrant box file named `ArchLinux-x86_64-minimal-v20180401.0-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `ArchLinux-x86_64-minimal-v20180301.0-vmware`
+Then you can add the box named `ArchLinux-x86_64-minimal-v20180401.0-vmware`
 to your box list by the following command:
 
-    vagrant box add ArchLinux-x86_64-minimal-v20180301.0-vmware.box --name ArchLinux-x86_64-minimal-v20180301.0-vmware
+    vagrant box add ArchLinux-x86_64-minimal-v20180401.0-vmware.box --name ArchLinux-x86_64-minimal-v20180401.0-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
