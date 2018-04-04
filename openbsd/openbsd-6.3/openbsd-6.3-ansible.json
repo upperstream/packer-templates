@@ -2,12 +2,12 @@
   "variables": {
     "variant": "ansible",
     "cpu": "amd64",
-    "vm_name": "OpenBSD-6.2-amd64",
-    "iso_image": "install62.iso",
-    "iso_checksum": "b7994d29c7db3087db65158901d700fb7d10500b9b7496c1d86b285cabce0a2b",
+    "vm_name": "OpenBSD-6.3-amd64",
+    "iso_image": "install63.iso",
+    "iso_checksum": "ee775405dd7926975befbc3fef23de8c4b5a726c3b5075e4848fcd3a2a712ea8",
     "iso_checksum_type": "sha256",
-    "os_ver": "6.2",
-    "box_version": "6.2.20171010",
+    "os_ver": "6.3",
+    "box_version": "6.3.20180403",
     "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "40960",
@@ -18,7 +18,7 @@
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "package_server": "http://ftp.jaist.ac.jp/pub/OpenBSD/",
+    "package_server": "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/",
     "virtualbox_guest_os_type": "OpenBSD_64",
     "vmware_guest_os_type": "other-64",
     "headless": "false"
@@ -34,9 +34,7 @@
       "iso_urls": [
         "iso/{{user `cpu`}}/{{user `iso_image`}}",
         "iso/{{user `iso_image`}}",
-        "http://ftp.jaist.ac.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
-        "http://ftp.kddilabs.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
-        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -71,9 +69,7 @@
       "iso_urls": [
         "iso/{{user `cpu`}}/{{user `iso_image`}}",
         "iso/{{user `iso_image`}}",
-        "http://ftp.jaist.ac.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
-        "http://ftp.kddilabs.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
-        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -115,9 +111,7 @@
       "iso_urls": [
         "iso/{{user `cpu`}}/{{user `iso_image`}}",
         "iso/{{user `iso_image`}}",
-        "http://ftp.jaist.ac.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
-        "http://ftp.kddilabs.jp/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}",
-        "http://www.ftp.ne.jp/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -165,10 +159,11 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "PYTHON=2.7.14",
-        "ANSIBLE=2.3.2.0",
+        "PYTHON=2.7.14p1",
+        "ANSIBLE=2.4.3.0",
         "PY_PIP=9.0.1p0",
-        "TESTINFRA=1.7.1"
+        "TESTINFRA=1.10.1",
+        "RSYNC=3.1.3"
       ]
     },
     {
