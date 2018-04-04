@@ -2,7 +2,7 @@
 set -x
 set -e
 
-pkg_add rsync-3.1.2p0
+pkg_add rsync-${RSYNC:-3.1.2p0}
 groupadd $VAGRANT_GROUP
 useradd -g $VAGRANT_GROUP -p $(encrypt $VAGRANT_PASSWORD) -m $VAGRANT_USER
 ftp -o - https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub >> /home/$VAGRANT_USER/.ssh/authorized_keys

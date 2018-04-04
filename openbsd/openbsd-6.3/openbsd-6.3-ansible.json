@@ -1,0 +1,196 @@
+{
+  "variables": {
+    "variant": "ansible",
+    "cpu": "amd64",
+    "vm_name": "OpenBSD-6.3-amd64",
+    "iso_image": "install63.iso",
+    "iso_checksum": "ee775405dd7926975befbc3fef23de8c4b5a726c3b5075e4848fcd3a2a712ea8",
+    "iso_checksum_type": "sha256",
+    "os_ver": "6.3",
+    "box_version": "6.3.20180403",
+    "num_cpus": "2",
+    "mem_size": "512",
+    "disk_size": "40960",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "root_password": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_password": "vagrant",
+    "package_server": "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/",
+    "virtualbox_guest_os_type": "OpenBSD_64",
+    "vmware_guest_os_type": "other-64",
+    "headless": "false"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "30s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "iso/{{user `cpu`}}/{{user `iso_image`}}",
+        "iso/{{user `iso_image`}}",
+        "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h -p now",
+      "guest_additions_mode": "disable",
+      "http_directory": ".",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-virtualbox",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "headless": "{{user `headless`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+      ],
+      "boot_command": [
+        "a<enter><wait>",
+        "<wait10>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "<wait5>",
+        "i<enter><wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "50s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "0",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "iso/{{user `cpu`}}/{{user `iso_image`}}",
+        "iso/{{user `iso_image`}}",
+        "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h -p now",
+      "http_directory": ".",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-vmware",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "headless": "{{user `headless`}}",
+      "vmx_data": {
+        "numvcpus": "{{user `num_cpus`}}",
+        "memsize": "{{user `mem_size`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "boot_command": [
+        "a<enter><wait>",
+        "<wait10>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "<wait5>",
+        "i<enter><wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "name": "esxi-iso",
+      "boot_wait": "50s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "thin",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "iso/{{user `cpu`}}/{{user `iso_image`}}",
+        "iso/{{user `iso_image`}}",
+        "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h -p now",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "http_directory": ".",
+      "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{user `headless`}}",
+      "vmx_data": {
+        "numvcpus": "{{user `num_cpus`}}",
+        "memsize": "{{user `mem_size`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "bridged",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "boot_command": [
+        "a<enter><wait>",
+        "<wait10>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "<wait5>",
+        "i<enter><wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/ansible-6.sh",
+        "../provisioners/vagrant-6.2+.sh"
+      ],
+      "environment_vars": [
+        "PKG_PATH={{user `package_server`}}/{{user `os_ver`}}/packages/{{user `cpu`}}",
+        "VAGRANT_USER={{user `vagrant_username`}}",
+        "VAGRANT_GROUP={{user `vagrant_username`}}",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}",
+        "PYTHON=2.7.14p1",
+        "ANSIBLE=2.4.3.0",
+        "PY_PIP=9.0.1p0",
+        "TESTINFRA=1.10.1",
+        "RSYNC=3.1.3"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "script": "../provisioners/disk_cleanup.sh"
+    },
+    {
+      "type": "shell",
+      "script": "../provisioners/cleanup.sh"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD-sh"
+    },
+    {
+      "type": "vagrant",
+      "only": ["vmware-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD-sh",
+      "keep_input_artifact": true
+    }
+  ]
+}
