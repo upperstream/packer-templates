@@ -1,1 +1,1 @@
-rm -f /home/vagrant/*
+rm -f /home/${VAGRANT_USERNAME:-vagrant}/*
