@@ -5,8 +5,8 @@ Templates to create Vagrant boxes for NetBSD 8.0 BETA (amd64 and i386).
 
 ## Prerequisites
 
-* [Packer][] v0.8.6+
-* [Vagrant][] v1.7.2+
+* [Packer][] v1.1.0+
+* [Vagrant][] v1.9.8+
 * [VirtualBox][]
 	* Version 4.3.28+ for Windows
 	* Version 4.3.28+ for Mac OS X (You may want to stay with
@@ -42,13 +42,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso netbsd-8.0-minimal.json
 
-You will find a vagrant box file named `NetBSD-8.0_BETA-amd64-minimal-v20171022-virtualbox.box`
+You will find a vagrant box file named `NetBSD-8.0_BETA-amd64-minimal-v20180318-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-8.0_BETA-amd64-minimal-v20171022-virtualbox`
+Then you can add the box named `NetBSD-8.0_BETA-amd64-minimal-v20180318-virtualbox`
 to your box list by the following command:
 
-    vagrant box add NetBSD-8.0_BETA-amd64-minimal-v20171022-virtualbox.box --name NetBSD-8.0_BETA-amd64-minimal-v20171022-virtualbox
+    vagrant box add NetBSD-8.0_BETA-amd64-minimal-v20180318-virtualbox.box --name NetBSD-8.0_BETA-amd64-minimal-v20180318-virtualbox
 
 ### VMware
 
@@ -56,13 +56,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso netbsd-8.0-minimal.json
 
-You will find a vagrant box file named `NetBSD-8.0_BETA-amd64-minimal-v20171022-vmware.box`
+You will find a vagrant box file named `NetBSD-8.0_BETA-amd64-minimal-v20180318-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-8.0_BETA-amd64-minimal-v20171022-vmware`
+Then you can add the box named `NetBSD-8.0_BETA-amd64-minimal-v20180318-vmware`
 to your box list by the following command:
 
-    vagrant box add NetBSD-8.0_BETA-amd64-minimal-v20171022-vmware.box --name NetBSD-8.0_BETA-amd64-minimal-v20171022-vmware
+    vagrant box add NetBSD-8.0_BETA-amd64-minimal-v20180318-vmware.box --name NetBSD-8.0_BETA-amd64-minimal-v20180318-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -123,7 +123,7 @@ using `vars-netbsd-8.0-i386.json` generates i386 boxes:
     "suckless.org dwm - dynamic window manager"
 [st]: http://st.suckless.org/ "suckless.org st - simple terminal"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/
-    "Testinfra test your infrastructure &mdash; testinfra 1.4.2 documentation"
+    "Testinfra test your infrastructure &mdash; testinfra 1.10.2.dev3 documentation"
 [X.Org]: https://www.x.org/wiki/ "X.Org"
 
 
@@ -168,4 +168,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2017 Upperstream Software.
+Copyright &copy; 2017, 2018 Upperstream Software.

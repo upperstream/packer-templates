@@ -1,7 +1,7 @@
 {
   "iso_file_name": "NetBSD-8.0_BETA-i386.iso",
-  "iso_path": "NetBSD-daily/netbsd-8/201710221410Z/images",
-  "iso_checksum": "6519242913e67cc1e2229fc4847ee06759c7a1a84594ba32405219384213b429c241813b84e96fff3581eb3becce74b6c805b6ec7d1577be6fb2f5ee9a91509f",
+  "iso_path": "NetBSD-daily/netbsd-8/201803180440Z/images",
+  "iso_checksum": "ba8d852ca00428de8ee7c9390daf16d4bfd4c8a5a3559c58d0f9125e651ed9fa3a908de15e287a3f0790e1c66c4c475de4ced90e59928276f909a0206a752ede",
   "iso_checksum_type": "sha512",
   "virtualbox_geust_os_type": "NetBSD",
   "vmware_guest_os_type": "other",
