@@ -1,6 +1,6 @@
-# Packer templates for NetBSD 8.0 BETA
+# Packer templates for NetBSD 8.0 RC1
 
-Templates to create Vagrant boxes for NetBSD 8.0 BETA (amd64 and i386).
+Templates to create Vagrant boxes for NetBSD 8.0 RC1 (amd64 and i386).
 
 
 ## Prerequisites
@@ -42,13 +42,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso netbsd-8.0-minimal.json
 
-You will find a vagrant box file named `NetBSD-8.0_BETA-amd64-minimal-v20180318-virtualbox.box`
+You will find a vagrant box file named `NetBSD-8.0_RC-amd64-minimal-v1.20180425-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-8.0_BETA-amd64-minimal-v20180318-virtualbox`
+Then you can add the box named `NetBSD-8.0_RC-amd64-minimal-v1.20180425-virtualbox`
 to your box list by the following command:
 
-    vagrant box add NetBSD-8.0_BETA-amd64-minimal-v20180318-virtualbox.box --name NetBSD-8.0_BETA-amd64-minimal-v20180318-virtualbox
+    vagrant box add NetBSD-8.0_RC-amd64-minimal-v1.20180425-virtualbox.box --name NetBSD-8.0_RC-amd64-minimal-v1.20180425-virtualbox
 
 ### VMware
 
@@ -56,13 +56,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso netbsd-8.0-minimal.json
 
-You will find a vagrant box file named `NetBSD-8.0_BETA-amd64-minimal-v20180318-vmware.box`
+You will find a vagrant box file named `NetBSD-8.0_RC-amd64-minimal-v1.20180425-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-8.0_BETA-amd64-minimal-v20180318-vmware`
+Then you can add the box named `NetBSD-8.0_RC-amd64-minimal-v1.20180425-vmware`
 to your box list by the following command:
 
-    vagrant box add NetBSD-8.0_BETA-amd64-minimal-v20180318-vmware.box --name NetBSD-8.0_BETA-amd64-minimal-v20180318-vmware
+    vagrant box add NetBSD-8.0_RC-amd64-minimal-v1.20180425-vmware.box --name NetBSD-8.0_RC-amd64-minimal-v1.20180425-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -107,10 +107,12 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `netbsd-8.0-minmal.json` - NetBSD 8.0 BETA
-* `netbsd-8.0-ansible.json` - NetBSD 8.0 BETA + [Ansible][] + [Testinfra][]
-* `netbsd-8.0-xorg.json` - NetBSD 8.0 BETA + [X.Org][]
-* `netbsd-8.0-dwm.json` - NetBSD 8.0 BETA + X.Org + [dwm][] + [st][] + [dmenu][], with XDM enabled
+* `netbsd-8.0-minmal.json` - NetBSD 8.0 RC1
+* `netbsd-8.0-ansible.json` - NetBSD 8.0 RC1 + [Ansible][] +
+  [Testinfra][]
+* `netbsd-8.0-xorg.json` - NetBSD 8.0 RC1 + [X.Org][]
+* `netbsd-8.0-dwm.json` - NetBSD 8.0 RC1 + X.Org + [dwm][] + [st][] +
+  [dmenu][], with [XDM] enabled
 
 While `netbsd-8.0-*.json` templates generate amd64 boxes by default,
 using `vars-netbsd-8.0-i386.json` generates i386 boxes:
@@ -125,6 +127,7 @@ using `vars-netbsd-8.0-i386.json` generates i386 boxes:
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/
     "Testinfra test your infrastructure &mdash; testinfra 1.10.2.dev3 documentation"
 [X.Org]: https://www.x.org/wiki/ "X.Org"
+[XDM]: https://www.x.org/releases/X11R7.6/doc/man/man1/xdm.1.xhtml "XDM"
 
 
 ## Build parameters
@@ -153,7 +156,7 @@ or `-var-file` command line options to `packer`:
 * `headless` - Launch the virtual machine in headless mode if set to
   `true`.  Default value is `false`.
 * `package_server` - Host name to download pakages from.  Default value
-  is `http://ftp.jaist.ac.jp`.
+  is `http://cdn.netbsd.org`.
 
 
 ## Notes

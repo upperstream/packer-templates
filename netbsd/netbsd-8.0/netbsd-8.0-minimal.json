@@ -4,7 +4,7 @@
     "ssh_password": "vagrant",
     "os_ver": "8.0",
     "variant": "minimal",
-    "box_ver": "20180318",
+    "box_ver": "1.20180425",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -18,13 +18,13 @@
     "hostname": "vagrant",
     "headless": "false",
     "package_server": "http://cdn.netbsd.org",
-    "iso_file_name": "NetBSD-8.0_BETA-amd64.iso",
-    "iso_path": "NetBSD-daily/netbsd-8/201803180440Z/images",
-    "iso_checksum": "1d6fe3f61275407cd2b0a49a327bd590cfaa5afcadfbcd9c95eb5db1c3eae2402bf7f2438f9ded3d503bf949f6450d39d0ef0ef2d318a8a691d9b3d90730dbd6",
+    "iso_file_name": "NetBSD-8.0_RC1-amd64.iso",
+    "iso_path": "NetBSD/NetBSD-8.0_RC1/images",
+    "iso_checksum": "3374101d74ae5d1d532e8f5cadc4eb4f66f0f29cf1b25a4d90806924f9ee92ba9830bcbcb3fe2d202b1377bcf464c413a20f788a3fb72d7577aa403b69586e3b",
     "iso_checksum_type": "sha512",
     "virtualbox_geust_os_type": "NetBSD_64",
     "vmware_guest_os_type": "other-64",
-    "vm_name": "NetBSD-8.0_BETA-amd64"
+    "vm_name": "NetBSD-8.0_RC-amd64"
   },
   "builders": [
     {
@@ -34,7 +34,7 @@
       "guest_os_type": "{{user `virtualbox_geust_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
-        "http://nycdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -101,7 +101,7 @@
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
-        "http://nycdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -173,7 +173,7 @@
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
-        "http://nycdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -246,20 +246,20 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.0/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.0_2017Q4/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
     {
       "type": "shell",
-      "script": "../provisioners/vagrant-8.sh",
+      "script": "../provisioners/vagrant_netbsd8.sh",
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "SUDO=sudo",
-        "RSYNC=rsync"
+        "SUDO=sudo-1.8.21p2nb1",
+        "RSYNC=rsync-3.1.3"
       ]
     },
     {

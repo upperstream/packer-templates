@@ -1,4 +1,7 @@
-#!/bin/sh -ex
+#!/bin/sh
+set -e
+set -x
+
 pkg_add ${SUDO:-sudo} ${RSYNC:-rsync}
 groupadd ${VAGRANT_GROUP:=vagrant}
 useradd -g $VAGRANT_USER -m -p $(echo ${VAGRANT_PASSWORD:-vagrant} | pwhash) ${VAGRANT_USER:=vagrant}
@@ -7,7 +10,6 @@ ftp -o - "https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub" >> /
 echo "PATH=/usr/bin:/bin:/usr/pkg/bin:/usr/local/bin:/usr/sbin" >> /home/$VAGRANT_USER/.ssh/environment
 chown -R $VAGRANT_USER:$VAGRANT_GROUP /home/$VAGRANT_USER
 chmod -R og-rwx /home/$VAGRANT_USER/.ssh
-echo 'PATH=$PATH:/usr/sbin' >> /home/$VAGRANT_USER/.kshrc
 sed \
   -e 's/^#PubkeyAuthentication yes/PubkeyAuthentication yes/' \
   -e 's/^UsePam yes/UsePam no/' \

@@ -19,11 +19,11 @@
     * NetBSD 7.1.2 + X.Org
     * NetBSD 7.1.2 + X.Org + dwm + dmenu
     * NetBSD 7.1.2 + Xfce + XDM (amd64 only)
-* [netbsd-8.0](netbsd-8.0/README.mdown) - templates for NetBSD 8.0 BETA
-    * NetBSD 8.0 BETA
-    * NetBSD 8.0 BETA + Ansible + Testinfra
-    * NetBSD 8.0 BETA + X.Org
-    * NetBSD 8.0 BETA + X.Org + dwm + dmenu
+* [netbsd-8.0](netbsd-8.0/README.mdown) - templates for NetBSD 8.0 RC1
+    * NetBSD 8.0 RC1
+    * NetBSD 8.0 RC1 + Ansible + Testinfra
+    * NetBSD 8.0 RC1 + X.Org
+    * NetBSD 8.0 RC1 + X.Org + XDM + dwm + dmenu + st
 
 VirtualBox and VMware providers are supported.
 
