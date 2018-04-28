@@ -1,0 +1,186 @@
+{
+  "variables": {
+    "iso_name": "",
+    "iso_checksum": "",
+    "iso_checksum_type": "",
+    "ssh_name": "tc",
+    "ssh_pass": "",
+    "num_cpus": "2",
+    "mem_size": "",
+    "disk_size": "",
+    "os_name": "",
+    "cpu": "",
+    "os_ver": "",
+    "virtualbox_guest_os_type": "",
+    "vmware_guest_os_type": "",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "variant": "x11",
+    "box_version": "9.0.20180301",
+    "headless": "false"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "http://tinycorelinux.net/9.x/{{user `cpu`}}/release/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "sudo filetool.sh -b; sudo poweroff",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-virtualbox",
+      "headless": "{{user `headless`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "32" ],
+        [ "modifyvm", "{{.Name}}", "--nictype1", "virtio" ]
+      ],
+      "http_directory": "../http",
+      "boot_command": [
+        "<enter><wait10>",
+        "wget -O /tmp/install_{{user `cpu`}}.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_{{user `cpu`}}.sh<enter><wait>",
+        "GRUB_ENTRY_NAME='{{user `os_name`}} {{user `os_ver`}}' sh -x /tmp/install_{{user `cpu`}}.sh<enter><wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "http://tinycorelinux.net/9.x/{{user `cpu`}}/release/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "sudo filetool.sh -b; sudo poweroff",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-vmware",
+      "headless": "{{user `headless`}}",
+      "vmdk_name": "disk",
+      "vmx_data": {
+        "numvcpus": "{{user `num_cpus`}}",
+        "memsize": "{{user `mem_size`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE",
+        "ide0:0.present": "TRUE",
+        "ide0:0.fileName": "disk.vmdk",
+        "ide0:0.redo": "",
+        "scsi0.present": "FALSE"
+      },
+      "http_directory": "../http",
+      "boot_command": [
+        "<enter><wait10>",
+        "wget -O /tmp/install_{{user `cpu`}}.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_{{user `cpu`}}.sh<enter><wait>",
+        "GRUB_ENTRY_NAME='{{user `os_name`}} {{user `os_ver`}}' sh -x /tmp/install_{{user `cpu`}}.sh<enter><wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "name": "esxi-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "thin",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "http://tinycorelinux.net/9.x/{{user `cpu`}}/release/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "sudo filetool.sh -b; sudo poweroff",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{user `headless`}}",
+      "vmdk_name": "disk",
+      "vmx_data": {
+        "numvcpus": "{{user `num_cpus`}}",
+        "memsize": "{{user `mem_size`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "bridged",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE",
+        "ide0:0.present": "TRUE",
+        "ide0:0.fileName": "disk.vmdk",
+        "ide0:0.redo": "",
+        "scsi0.present": "FALSE"
+      },
+      "http_directory": "../http",
+      "boot_command": [
+        "<enter><wait10>",
+        "wget -O /tmp/install_{{user `cpu`}}.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_{{user `cpu`}}.sh<enter><wait>",
+        "GRUB_ENTRY_NAME='{{user `os_name`}} {{user `os_ver`}}' sh -x /tmp/install_{{user `cpu`}}.sh<enter><wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "only": ["vmware-iso", "esxi-iso"],
+      "inline": "tce-load -wi open-vm-tools-desktop"
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/x11.sh",
+        "../provisioners/vagrant.sh",
+        "../provisioners/cleanup.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox-iso"],
+      "compression_level": "9",
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.tc"
+    },
+    {
+      "type": "vagrant",
+      "only": ["vmware-iso"],
+      "compression_level": "9",
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.tc",
+      "keep_input_artifact": true
+    }
+  ]
+}

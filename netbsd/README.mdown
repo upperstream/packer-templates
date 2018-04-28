@@ -13,11 +13,12 @@
     * NetBSD 7.0.2 + Ansible + Testinfra
     * NetBSD 7.0.2 + X.Org
     * NetBSD 7.0.2 + X.Org + dwm + dmenu
-* [netbsd-7.1](netbsd-7.1/README.mdown) - templates for NetBSD 7.1
-    * NetBSD 7.1
-    * NetBSD 7.1 + Ansible + Testinfra
-    * NetBSD 7.1 + X.Org
-    * NetBSD 7.1 + X.Org + dwm + dmenu
+* [netbsd-7.1](netbsd-7.1/README.mdown) - templates for NetBSD 7.1.2
+    * NetBSD 7.1.2
+    * NetBSD 7.1.2 + Ansible + Testinfra
+    * NetBSD 7.1.2 + X.Org
+    * NetBSD 7.1.2 + X.Org + dwm + dmenu
+    * NetBSD 7.1.2 + Xfce + XDM (amd64 only)
 * [netbsd-8.0](netbsd-8.0/README.mdown) - templates for NetBSD 8.0 BETA
     * NetBSD 8.0 BETA
     * NetBSD 8.0 BETA + Ansible + Testinfra

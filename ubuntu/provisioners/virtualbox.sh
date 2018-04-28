@@ -1,4 +1,7 @@
-#!/bin/sh -ex
+#!/bin/sh
+set -e
+set -x
+
 test -z "$VIRTUALBOX_VERSION" && VIRTUALBOX_VERSION=$(cat $HOME/.vbox_version)
 test "$VIRTUALBOX_WITH_XORG" = "1" || VIRTUALBOX_WITHOUT_XORG=--nox11
 VBOX_GUEST_ADDITIONS_ISO=VBoxGuestAdditions_$VIRTUALBOX_VERSION.iso
@@ -9,7 +12,7 @@ apt-get install -y linux-headers-`uname -r`
 apt-get install -y dkms
 
 cd /tmp
-mount -o loop /home/vagrant/$VBOX_GUEST_ADDITIONS_ISO /mnt
+mount -o loop /home/${VAGRANT_USERNAME:=vagrant}/$VBOX_GUEST_ADDITIONS_ISO /mnt
 sh /mnt/VBoxLinuxAdditions.run $VIRTUALBOX_WITHOUT_XORG || true
 umount /mnt
-rm -rf /home/vagrant/$VBOX_GUEST_ADDITIONS_ISO
+rm -rf /home/$VAGRANT_USERNAME/$VBOX_GUEST_ADDITIONS_ISO

@@ -20,11 +20,11 @@
     * Ubuntu Desktop 15.10
     * Ubuntu Server 15.10
     * Xubuntu 15.10
-* [ubuntu-16.04](ubuntu-16.04/README.mdown) - templates for Ubuntu 16.04.3
-    * Ubuntu Desktop 16.04.3 LTS
-    * Ubuntu Server 16.04.3 LTS
-    * Lubuntu 16.04.3 LTS
-    * Xubuntu 16.04.3 LTS
+* [ubuntu-16.04](ubuntu-16.04/README.mdown) - templates for Ubuntu 16.04.4
+    * Ubuntu Desktop 16.04.4 LTS
+    * Ubuntu Server 16.04.4 LTS
+    * Lubuntu 16.04.4 LTS
+    * Xubuntu 16.04.4 LTS
 * [ubuntu-16.10](ubuntu-16.10/README.mdown) - templates for Ubuntu 16.10
     * Ubuntu Desktop 16.10
     * Ubuntu Server 16.10
@@ -35,12 +35,18 @@
     * Ubuntu Server 17.04
     * Lubuntu 17.04
     * Xubuntu 17.04
-* [ubuntu-17.10](ubuntu-17.10/README.mdown) - templates for Ubuntu 17.10
-    * Ubuntu Server 17.10
-    * Ubuntu Server 17.10 + Ansible + Testinfra
-    * Ubuntu 17.10 + LXDE
-    * Ubuntu 17.10 + Xfce
+* [ubuntu-17.10](ubuntu-17.10/README.mdown) - templates for Ubuntu 17.10.1
+    * Ubuntu Server 17.10.1
+    * Ubuntu Server 17.10.1 + Ansible + Testinfra
+    * Ubuntu 17.10.1 + LXDE
+    * Ubuntu 17.10.1 + Xfce
+* [ubuntu-18.04](ubuntu-18.04/README.mdown) - templates for Ubuntu 18.04 Beta 2
+    * Ubuntu Server 18.04 LTS Beta 2
+    * Ubuntu Server 18.04 LTS Beta 2 + Ansible + Testinfra
+    * Ubuntu 18.04 LTS Beta 2 + X.org + suckless tools
+    * Ubuntu 18.04 LTS Beta 2 + LXDE
+    * Ubuntu 18.04 LTS Beta 2 + Xfce
 
 - - -
 
-Copyright &copy; 2014-2017 Upperstream Software.
+Copyright &copy; 2014-2018 Upperstream Software.

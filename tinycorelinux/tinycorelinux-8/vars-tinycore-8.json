@@ -1,12 +1,13 @@
 {
   "vm_name": "TinyCore-8",
   "os_name": "TinyCore",
-  "os_ver": "8.2",
+  "os_ver": "8.2.1",
   "cpu": "x86",
   "mem_size": "512",
   "disk_size": "40960",
-  "iso_name": "Core-8.2.iso",
-  "iso_checksum": "de809849f6c56039fa3e1729d1b220f6",
+  "iso_name": "Core-8.2.1.iso",
+  "iso_checksum": "8235a6011cf2611b757a8338286924f6",
   "iso_checksum_type": "md5",
-  "guest_os_type": "Linux26"
+  "virtualbox_guest_os_type": "Linux26",
+  "vmware_guest_os_type": "other26xlinux"
 }
