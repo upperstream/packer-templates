@@ -113,6 +113,7 @@ The following command will build a VM image on your ESXi:
 * `netbsd-8.0-xorg.json` - NetBSD 8.0 RC1 + [X.Org][]
 * `netbsd-8.0-dwm.json` - NetBSD 8.0 RC1 + X.Org + [dwm][] + [st][] +
   [dmenu][], with [XDM] enabled
+* `netbsd-8.0-xfce.json` - NetBSD 8.0 RC1 + [Xfce][], with XDM enabled
 
 While `netbsd-8.0-*.json` templates generate amd64 boxes by default,
 using `vars-netbsd-8.0-i386.json` generates i386 boxes:
@@ -128,6 +129,7 @@ using `vars-netbsd-8.0-i386.json` generates i386 boxes:
     "Testinfra test your infrastructure &mdash; testinfra 1.10.2.dev3 documentation"
 [X.Org]: https://www.x.org/wiki/ "X.Org"
 [XDM]: https://www.x.org/releases/X11R7.6/doc/man/man1/xdm.1.xhtml "XDM"
+[Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 
 
 ## Build parameters

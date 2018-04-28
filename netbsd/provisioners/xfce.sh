@@ -2,7 +2,7 @@
 set -e
 set -x
 
-pkg_add ${XFCE4:-xfce4} ${FAM:-fam}
+pkg_add ${XFCE4:-xfce4} ${FAM:-fam} ${XRANDR:-xrandr} ${X11VNC:-x11vnc}
 
 sed 's/^XConsole\(.*\)/!XConsole\1/' /etc/X11/xdm/Xresources > /tmp/Xresources
 mv /tmp/Xresources /etc/X11/xdm/Xresources

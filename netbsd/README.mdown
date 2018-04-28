@@ -24,6 +24,7 @@
     * NetBSD 8.0 RC1 + Ansible + Testinfra
     * NetBSD 8.0 RC1 + X.Org
     * NetBSD 8.0 RC1 + X.Org + XDM + dwm + dmenu + st
+    * NetBSD 8.0 RC1 + Xfce + XDM
 
 VirtualBox and VMware providers are supported.
 
