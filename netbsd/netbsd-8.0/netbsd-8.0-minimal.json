@@ -2,8 +2,9 @@
   "variables": {
     "ssh_username": "root",
     "ssh_password": "vagrant",
-    "variant": "xfce",
-    "box_ver": "7.1.20180425",
+    "os_ver": "8.0",
+    "variant": "minimal",
+    "box_ver": "1.20180425",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -12,12 +13,18 @@
     "vagrant_password": "vagrant",
     "vagrant_group": "vagrant",
     "num_cpus": "2",
-    "mem_size": "2048",
+    "mem_size": "512",
     "disk_size": "40960",
     "hostname": "vagrant",
     "headless": "false",
-    "package_server": "http://ftp.netbsd.org/pub/pkgsrc",
-    "pkgsrc_tag": ""
+    "package_server": "http://cdn.netbsd.org",
+    "iso_file_name": "NetBSD-8.0_RC1-amd64.iso",
+    "iso_path": "NetBSD/NetBSD-8.0_RC1/images",
+    "iso_checksum": "3374101d74ae5d1d532e8f5cadc4eb4f66f0f29cf1b25a4d90806924f9ee92ba9830bcbcb3fe2d202b1377bcf464c413a20f788a3fb72d7577aa403b69586e3b",
+    "iso_checksum_type": "sha512",
+    "virtualbox_geust_os_type": "NetBSD_64",
+    "vmware_guest_os_type": "other-64",
+    "vm_name": "NetBSD-8.0_RC-amd64"
   },
   "builders": [
     {
@@ -66,12 +73,8 @@
         "a<enter><wait>",
         "x<enter><wait>",
         "d<enter><wait>",
-        "e<enter><wait>",
         "g<enter><wait>",
         "j<enter><wait>",
-        "k<enter><wait>",
-        "f<enter><wait>",
-        "x<enter><wait>",
         "x<enter><wait>",
         "a<enter><wait10><wait10><wait10><wait10><wait10>",
         "<enter><wait>",
@@ -82,7 +85,6 @@
         "{{user `ssh_password`}}<enter><wait>",
         "g<enter><wait>",
         "h<enter><wait>",
-        "k<enter><wait>",
         "x<enter><wait>",
         "<enter><wait10>",
         "x<enter><wait>",
@@ -117,6 +119,7 @@
         "ethernet0.present": "TRUE",
         "ethernet0.connectionType": "nat",
         "ethernet0.virtualDev": "e1000",
+        "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
@@ -141,12 +144,8 @@
         "a<enter><wait>",
         "x<enter><wait>",
         "d<enter><wait>",
-        "e<enter><wait>",
         "g<enter><wait>",
         "j<enter><wait>",
-        "k<enter><wait>",
-        "f<enter><wait>",
-        "x<enter><wait>",
         "x<enter><wait>",
         "a<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
         "<enter><wait>",
@@ -157,11 +156,9 @@
         "{{user `ssh_password`}}<enter><wait5>",
         "g<enter><wait>",
         "h<enter><wait>",
-        "k<enter><wait>",
-        "x<enter><wait5>",
-        "<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
-        "<wait10>",
-        "x<enter><wait5>",
+        "x<enter><wait>",
+        "<enter><wait10><wait10>",
+        "x<enter><wait>",
         "dhcpcd<enter><wait10>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
         "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} HDD=sd0a HOSTNAME={{user `hostname`}} sh /tmp/install.sh<enter><wait>"
@@ -224,27 +221,21 @@
         "a<enter><wait>",
         "x<enter><wait>",
         "d<enter><wait>",
-        "e<enter><wait>",
         "g<enter><wait>",
         "j<enter><wait>",
-        "k<enter><wait>",
-        "f<enter><wait>",
-        "x<enter><wait>",
         "x<enter><wait>",
         "a<enter><wait10><wait10><wait10><wait10><wait10>",
         "<enter><wait>",
         "d<enter><wait>",
-        "a<enter><wait10><wait10>",
+        "a<enter><wait10>",
         "{{user `ssh_password`}}<enter><wait>",
         "{{user `ssh_password`}}<enter><wait>",
         "{{user `ssh_password`}}<enter><wait5>",
         "g<enter><wait>",
         "h<enter><wait>",
-        "k<enter><wait>",
-        "x<enter><wait5>",
-        "<enter><wait10><wait10><wait10><wait10><wait10><wait10>",
-        "<wait10>",
-        "x<enter><wait5>",
+        "x<enter><wait>",
+        "<enter><wait10><wait10>",
+        "x<enter><wait>",
         "dhcpcd<enter><wait10>",
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
         "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} HDD=sd0a HOSTNAME={{user `hostname`}} sh /tmp/install.sh<enter><wait>"
@@ -255,36 +246,20 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH={{user `package_server`}}/packages/NetBSD/`uname -m`/{{user `pkgsrc_tag`}}/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.0_2017Q4/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
     {
       "type": "shell",
-      "only": ["vmware-iso", "esxi-iso"],
-      "script": "../provisioners/vmware-xorg.sh",
-      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
-      "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools-10.1.15nb1",
-        "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0nb1",
-        "XF86_VIDEO_VMWARE=xf86-video-vmware-13.2.1"
-      ]
-    },
-    {
-      "type": "shell",
-      "scripts": [
-        "../provisioners/vagrant-7.0.sh",
-        "../provisioners/xfce.sh"
-      ],
+      "script": "../provisioners/vagrant_netbsd8.sh",
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "SUDO=sudo",
-        "RSYNC=rsync",
-        "XFCE4=xfce4-4.12.0nb8",
-        "FAM=fam-2.7.0nb9"
+        "SUDO=sudo-1.8.21p2nb1",
+        "RSYNC=rsync-3.1.3"
       ]
     },
     {
@@ -294,7 +269,7 @@
     },
     {
       "type": "shell",
-      "script": "../provisioners/cleanup-7.0.sh"
+      "script": "../provisioners/finalise.sh"
     }
   ],
   "post-processors": [

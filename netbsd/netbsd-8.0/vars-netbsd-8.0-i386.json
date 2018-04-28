@@ -1,0 +1,9 @@
+{
+  "iso_file_name": "NetBSD-8.0_RC1-i386.iso",
+  "iso_path": "NetBSD/NetBSD-8.0_RC1/images",
+  "iso_checksum": "a3fd31c5247ed6fcae9edea0cb9d64244344d3f40c608a530addebb574f17a878b78e3dfa51338535cdcdf56a188084445484e92bd6aa21fb19503552a2c6251",
+  "iso_checksum_type": "sha512",
+  "virtualbox_geust_os_type": "NetBSD",
+  "vmware_guest_os_type": "other",
+  "vm_name": "NetBSD-8.0_RC-i386"
+}
