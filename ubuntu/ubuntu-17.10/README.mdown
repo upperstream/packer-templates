@@ -6,7 +6,7 @@ Templates to create Vagrant boxes for Ubuntu 17.10.1 (x86_64).
 ## Prerequisites
 
 * [Packer][] v1.1.0+
-* [Vagrant][] v1.8.6+
+* [Vagrant][] v1.9.8+
 * [VirtualBox][] Version 5.1.30+
 * [VMware][] Workstation v11.1.0+ / VMware Fusion v8.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+

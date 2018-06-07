@@ -1,1 +1,1 @@
-apt-get -y install open-vm-tools-desktop
+apt-get -y install ${OPEN_VM_TOOLS_DESKTOP:-open-vm-tools-desktop}
