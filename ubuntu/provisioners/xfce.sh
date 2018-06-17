@@ -2,7 +2,7 @@
 set -x
 set -e
 apt-get update
-apt-get -y install xfce4 lightdm lightdm-gtk-greeter
+apt-get -y install xfce4 xfce4-goodies lightdm lightdm-gtk-greeter
 
 cat > /usr/share/X11/xorg.conf.d/20-server.conf <<EOF
 Section "Device"

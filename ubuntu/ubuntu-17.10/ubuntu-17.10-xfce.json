@@ -11,7 +11,7 @@
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "vm_name": "Ubuntu-17.10-amd64-xfce",
-    "box_version": "1710.1.20180120",
+    "box_version": "1710.1.20180427",
     "preseed": "ubuntu-server.seed",
     "virtualbox_version": "5.1.30",
     "num_cpus": "2",
@@ -226,7 +226,10 @@
         "esxi-iso"
       ],
       "script": "../provisioners/vmware-desktop.sh",
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh -ex '{{.Path}}'"
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh -ex '{{.Path}}'",
+      "environment_vars": [
+        "OPEN_VM_TOOLS_DESKTOP=open-vm-tools-desktop=2:10.1.10-3"
+      ]
     },
     {
       "type": "shell",
