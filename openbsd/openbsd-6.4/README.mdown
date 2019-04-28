@@ -142,7 +142,7 @@ The following parameters can be set at build time by supplying `-var` or
 * `num_cpus` - Number of virtual CPUs.  Default value is 2.
 * `mem_size` - RAM size of the created VM.  Default value is `512` which means 512MB.
 * `disk_size` - Disk size of the created VM.  Default value is `40960` which means 40GB.
-* `package_server`: - URL to download packages from.  Default value is `http://www.ftp.ne.jp/OpenBSD/`.
+* `package_server`: - URL to download packages from.  Default value is `http://cloudflare.cdn.openbsd.org/pub/OpenBSD/`.
 * `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
 * `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
 * `vagrant_group` - Group name that `vagrant_username` belongs to.  Default value is `vagrant`.
