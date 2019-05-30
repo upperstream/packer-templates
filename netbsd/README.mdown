@@ -19,15 +19,15 @@
     * NetBSD 7.1.2 + X.Org
     * NetBSD 7.1.2 + X.Org + dwm + dmenu
     * NetBSD 7.1.2 + Xfce + XDM (amd64 only)
-* [netbsd-8.0](netbsd-8.0/README.mdown) - templates for NetBSD 8.0 RC1
-    * NetBSD 8.0 RC1
-    * NetBSD 8.0 RC1 + Ansible + Testinfra
-    * NetBSD 8.0 RC1 + X.Org
-    * NetBSD 8.0 RC1 + X.Org + XDM + dwm + dmenu + st
-    * NetBSD 8.0 RC1 + Xfce + XDM
+* [netbsd-8.0](netbsd-8.0/README.mdown) - templates for NetBSD 8.0
+    * NetBSD 8.0
+    * NetBSD 8.0 + Ansible + Ansible Lint + Testinfra
+    * NetBSD 8.0 + X.Org
+    * NetBSD 8.0 + X.Org + XDM + dwm + dmenu + st
+    * NetBSD 8.0 + Xfce + XDM
 
 VirtualBox and VMware providers are supported.
 
 - - -
 
-Copyright &copy; 2015-2018 Upperstream Software.
+Copyright &copy; 2015-2019 Upperstream Software.
