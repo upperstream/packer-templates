@@ -3,6 +3,9 @@ set -e
 set -x
 
 pkg_add ${XFCE4:-xfce4} ${FAM:-fam} ${XRANDR:-xrandr} ${X11VNC:-x11vnc}
+if [ "$HAL" ]; then
+	pkg_add "$HAL"
+fi
 
 sed 's/^XConsole\(.*\)/!XConsole\1/' /etc/X11/xdm/Xresources > /tmp/Xresources
 mv /tmp/Xresources /etc/X11/xdm/Xresources
