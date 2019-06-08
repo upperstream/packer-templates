@@ -4,7 +4,7 @@
     "ssh_password": "vagrant",
     "os_ver": "8.1",
     "variant": "xorg",
-    "box_ver": "1.20190520",
+    "box_ver": "8.1.20190604",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -18,13 +18,13 @@
     "hostname": "vagrant",
     "headless": "false",
     "package_server": "http://cdn.netbsd.org",
-    "iso_file_name": "NetBSD-8.1_RC1-amd64.iso",
-    "iso_path": "NetBSD/NetBSD-8.1_RC1/images",
-    "iso_checksum": "0da4e9c3319cb07c7a1eeccd103d60868d0b63d9c4092a3895f723cbe859194e7e671f67b144399d21eb3e2923ef9f003486af94738bdf8d89d266b1a6422a63",
+    "iso_file_name": "NetBSD-8.1-amd64.iso",
+    "iso_path": "NetBSD/NetBSD-8.1/images",
+    "iso_checksum": "718f275b7e0879599bdac95630c5e3f2184700032fdb6cdebf3bdd63687898c48ff3f08f57b89f4437a86cdd8ea07c01a39d432dbb37e1e4b008f4985f98da3f",
     "iso_checksum_type": "sha512",
     "virtualbox_geust_os_type": "NetBSD_64",
     "vmware_guest_os_type": "other-64",
-    "vm_name": "NetBSD-8.1_RC-amd64"
+    "vm_name": "NetBSD-8.1-amd64"
   },
   "builders": [
     {
@@ -255,7 +255,7 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.0_2019Q1/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.1/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
