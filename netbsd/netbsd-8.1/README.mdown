@@ -1,6 +1,6 @@
-# Packer templates for NetBSD 8.1 RC1
+# Packer templates for NetBSD 8.1
 
-Templates to create Vagrant boxes for NetBSD 8.1 RC1 (amd64 and i386).
+Templates to create Vagrant boxes for NetBSD 8.1 (amd64 and i386).
 
 
 ## Prerequisites
@@ -12,12 +12,12 @@ Templates to create Vagrant boxes for NetBSD 8.1 RC1 (amd64 and i386).
 * [ESXi][] (vSphere Hypervisor) v5.5+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
-    "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
+  "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
 [VMware]: http://www.vmware.com/
-    "VMware Virtualization for Desktop &amp; Server, Application, Public &amp; Hybrid Clouds"
+  "VMware Virtualization for Desktop &amp; Server, Application, Public &amp; Hybrid Clouds"
 
 
 ## Provisioned software tools
@@ -37,13 +37,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso netbsd-8.1-minimal.json
 
-You will find a vagrant box file named `NetBSD-8.1_RC-amd64-minimal-v1.20190520-virtualbox.box`
+You will find a vagrant box file named `NetBSD-8.1-amd64-minimal-v8.1.20190604-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-8.1_RC-amd64-minimal-v1.20190520-virtualbox`
+Then you can add the box named `NetBSD-8.1-amd64-minimal-v8.1.20190604-virtualbox`
 to your box list by the following command:
 
-    vagrant box add NetBSD-8.1_RC-amd64-minimal-v1.20190520-virtualbox.box --name NetBSD-8.1_RC-amd64-minimal-v1.20190520-virtualbox
+    vagrant box add NetBSD-8.1-amd64-minimal-v8.1.20190604-virtualbox.box --name NetBSD-8.1-amd64-minimal-v8.1.20190604-virtualbox
 
 ### VMware
 
@@ -51,13 +51,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso netbsd-8.1-minimal.json
 
-You will find a vagrant box file named `NetBSD-8.1_RC-amd64-minimal-v1.20190520-vmware.box`
+You will find a vagrant box file named `NetBSD-8.1-amd64-minimal-v8.1.20190604-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-8.1_RC-amd64-minimal-v1.20190520-vmware`
+Then you can add the box named `NetBSD-8.1-amd64-minimal-v8.1.20190604-vmware`
 to your box list by the following command:
 
-    vagrant box add NetBSD-8.1_RC-amd64-minimal-v1.20190520-vmware.box --name NetBSD-8.1_RC-amd64-minimal-v1.20190520-vmware
+    vagrant box add NetBSD-8.1-amd64-minimal-v8.1.20190604-vmware.box --name NetBSD-8.1-amd64-minimal-v8.1.20190604-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -102,13 +102,13 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `netbsd-8.1-minmal.json` - NetBSD 8.1 RC1
-* `netbsd-8.1-ansible.json` - NetBSD 8.1 RC1 + [Ansible][] +
+* `netbsd-8.1-minmal.json` - NetBSD 8.1
+* `netbsd-8.1-ansible.json` - NetBSD 8.1 + [Ansible][] +
   [Ansible Lint][] + [Testinfra][]
-* `netbsd-8.1-xorg.json` - NetBSD 8.1 RC1 + [X.Org][]
-* `netbsd-8.1-dwm.json` - NetBSD 8.1 RC1 + X.Org + [dwm][] + [st][] +
-  [dmenu][], with [XDM] enabled
-* `netbsd-8.1-xfce.json` - NetBSD 8.1 RC1 + [Xfce][], with XDM enabled
+* `netbsd-8.1-xorg.json` - NetBSD 8.1 + [X.Org][]
+* `netbsd-8.1-dwm.json` - NetBSD 8.1 + X.Org + [dwm][] + [st][]
+  + [dmenu][], with [XDM] enabled
+* `netbsd-8.1-xfce.json` - NetBSD 8.1 + [Xfce][], with XDM enabled
 
 While `netbsd-8.1-*.json` templates generate amd64 boxes by default,
 using `vars-netbsd-8.1-i386.json` generates i386 boxes:
@@ -123,7 +123,7 @@ using `vars-netbsd-8.1-i386.json` generates i386 boxes:
   "suckless.org dwm - dynamic window manager"
 [st]: http://st.suckless.org/ "suckless.org st - simple terminal"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/
-  "Testinfra test your infrastructure &mdash; testinfra 1.10.2.dev3 documentation"
+  "Testinfra test your infrastructure &#8212; testinfra 3.0.6.dev0+g1fee986.d20190529 documentation"
 [X.Org]: https://www.x.org/wiki/ "X.Org"
 [XDM]: https://www.x.org/releases/X11R7.6/doc/man/man1/xdm.1.xhtml "XDM"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
