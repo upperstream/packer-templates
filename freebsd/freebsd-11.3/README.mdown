@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 11.3-BETA2
+# Packer templates for FreeBSD 11.3-BETA3
 
-Templates to create Vagrant boxes for FreeBSD 11.3-BETA2 (amd64 and i386).
+Templates to create Vagrant boxes for FreeBSD 11.3-BETA3 (amd64 and i386).
 
 
 ## Prerequisites
@@ -37,13 +37,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso freebsd-11.3-beta-minimal.json
 
-You will find a vagrant box file named `FreeBSD-11.3-BETA-amd64-minimal-v2.20190531-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.3-BETA-amd64-minimal-v2.20190531-virtualbox`
+Then you can add the box named `FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-virtualbox`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-11.3-BETA-amd64-minimal-v2.20190531-virtualbox.box --name FreeBSD-11.3-BETA-amd64-minimal-v2.20190531-virtualbox
+    vagrant box add FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-virtualbox.box --name FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-virtualbox
 
 ### VMware
 
@@ -51,13 +51,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso freebsd-11.3-beta-minimal.json
 
-You will find a vagrant box file named `FreeBSD-11.3-BETA-amd64-v2.20190531-vmware.box`
+You will find a vagrant box file named `FreeBSD-11.3-BETA-amd64-v3.20190607-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.3-BETA-amd64-minimal-v2.20190531-vmware`
+Then you can add the box named `FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-vmware`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-11.3-BETA-amd64-minimal-v2.20190531-vmware.box --name FreeBSD-11.3-BETA-amd64-minimal-v2.20190531-vmware
+    vagrant box add FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-vmware.box --name FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
