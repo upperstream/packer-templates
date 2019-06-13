@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-11.3-BETA1-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.3-BETA2-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.3",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "b63430ef33259c6998dbdab9130643855d110937f2d21692e80effe83ef88749",
-    "box_version": "1.20190524",
+    "iso_checksum": "a29b2d01a4051e50b692ac69390e90e75ee7f77b23a8fe5499c111f115e5a53f",
+    "box_version": "2.20190531",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -217,9 +217,10 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "PY27_PIP=py27-pip-9.0.3_1",
-        "ANSIBLE=py27-ansible-2.7.10",
-        "ANSIBLE_LINT=py27-ansible-lint-4.1.0_1",
+        "PIP=py36-pip-9.0.3_1",
+        "ANSIBLE=py36-ansible-2.7.10",
+        "ANSIBLE_LINT=py36-ansible-lint-4.1.0_1",
+        "RUAMEL_YAML=py36-ruamel.yaml-0.15.87",
         "TESTINFRA=testinfra==1.17.0"
       ]
     },
