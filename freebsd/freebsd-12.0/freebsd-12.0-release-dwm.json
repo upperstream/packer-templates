@@ -1,0 +1,284 @@
+{
+  "variables": {
+    "iso_image": "FreeBSD-12.0-RELEASE-amd64-disc1.iso",
+    "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.0",
+    "iso_checksum_type": "sha256",
+    "iso_checksum": "63abec8aeb915f1a021dd2df6c7767251f9b6e87f403b7ddf9a423446d0a5453",
+    "box_version": "12.0.20181211",
+    "num_cpus": "2",
+    "mem_size": "1024",
+    "disk_size": "51200",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
+    "root_password": "vagrant",
+    "vagrant_username": "vagrant",
+    "vagrant_password": "vagrant",
+    "vagrant_group": "vagrant",
+    "virtualbox_partition": "ada0",
+    "vmware_partition": "da0",
+    "variant": "dwm",
+    "virtualbox_guest_os_type": "FreeBSD_64",
+    "vmware_guest_os_type": "freebsd-64",
+    "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
+    "ABI": "FreeBSD:12:amd64",
+    "headless": "false",
+    "vm_name": "FreeBSD-12.0-RELEASE-amd64"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
+      "guest_additions_mode": "disable",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-virtualbox",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{user `headless`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "16" ]
+      ],
+      "http_directory": ".",
+      "boot_command": [
+        "<enter>",
+        "<wait10><wait10><wait5>",
+        "s",
+        "<wait5>",
+        "dhclient em0<enter><wait5>",
+        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
+        "<wait>",
+        "PARTITIONS={{user `virtualbox_partition`}} ",
+        "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
+        "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
+        "ABI={{user `ABI`}} ",
+        "ROOT_PASSWORD={{user `root_password`}} ",
+        "VAGRANT_USER={{user `vagrant_username`}} ",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
+        "VAGRANT_GROUP={{user `vagrant_group`}} ",
+        "bsdinstall script /tmp/install_with_x11.sh<enter>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "0",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-vmware",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{user `headless`}}",
+      "vmx_data": {
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "{{user `num_cpus`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.present": "TRUE",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "16777216"
+      },
+      "http_directory": ".",
+      "boot_command": [
+        "<enter>",
+        "<wait10><wait10><wait5>",
+        "s",
+        "<wait5>",
+        "dhclient em0<enter><wait5>",
+        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "<wait>",
+        "PARTITIONS={{user `vmware_partition`}} ",
+        "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
+        "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
+        "ABI={{user `ABI`}} ",
+        "ROOT_PASSWORD={{user `root_password`}} ",
+        "VAGRANT_USER={{user `vagrant_username`}} ",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
+        "VAGRANT_GROUP={{user `vagrant_group`}} ",
+        "bsdinstall script /tmp/install.sh<enter>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "name": "esxi-iso",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "thin",
+      "guest_os_type": "{{user `vmware_guest_os_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{user `headless`}}",
+      "skip_export": "true",
+      "vmx_data": {
+        "memsize": "{{user `mem_size`}}",
+        "numvcpus": "{{user `num_cpus`}}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.virtualDev": "e1000",
+        "ethernet0.present": "TRUE",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "16777216"
+      },
+      "http_directory": ".",
+      "boot_command": [
+        "<enter>",
+        "<wait10><wait10><wait5>",
+        "s",
+        "<wait5>",
+        "dhclient em0<enter><wait5>",
+        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "<wait>",
+        "PARTITIONS={{user `vmware_partition`}} ",
+        "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
+        "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
+        "ABI={{user `ABI`}} ",
+        "ROOT_PASSWORD={{user `root_password`}} ",
+        "VAGRANT_USER={{user `vagrant_username`}} ",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
+        "VAGRANT_GROUP={{user `vagrant_group`}} ",
+        "bsdinstall script /tmp/install.sh<enter>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../provisioners/vagrant-11.1+.sh",
+        "../provisioners/dwm+dmenu+st.sh",
+        "../provisioners/xrdp.sh"
+      ],
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
+      "environment_vars": [
+        "ROOT_PASSWORD={{user `root_password`}}",
+        "VAGRANT_USER={{user `vagrant_username`}}",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}",
+        "VAGRANT_GROUP={{user `vagrant_group`}}",
+        "XORG_MINIMAL=xorg-minimal-7.5.2_2",
+        "XRANDR=xrandr-1.5.0",
+        "ARANDR=arandr-0.1.9",
+        "DWM=dwm-6.1_3",
+        "STERM=sterm-0.8.1",
+        "DMENU=dmenu-4.8",
+        "XRDP=xrdp-0.9.8,1",
+        "NCURSES=ncurses-6.1.20180728"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso"],
+      "script": "../provisioners/virtualbox_ose_additions-11.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
+      "environment_vars": [
+        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.2.18_1"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["vmware-iso", "esxi-iso"],
+      "script": "../provisioners/vmware-guest.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
+      "environment_vars": [
+        "VMWARE_WITH_XORG=1",
+        "OPEN_VM_TOOLS=open-vm-tools-10.3.0,2",
+        "XF86_VIDEO_VMWARE=xf86-video-vmware-13.3.0_3",
+        "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0_3"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso", "vmware-iso"],
+      "script": "../provisioners/disk_cleanup.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
+    },
+    {
+      "type": "shell",
+      "script": "../provisioners/cleanup.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11+"
+    },
+    {
+      "type": "vagrant",
+      "only": ["vmware-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11+",
+      "keep_input_artifact": true
+    }
+  ]
+}
