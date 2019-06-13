@@ -235,14 +235,14 @@
       "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11"
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11+"
     },
     {
       "type": "vagrant",
       "only": ["vmware-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11+",
       "keep_input_artifact": true
     }
   ]
