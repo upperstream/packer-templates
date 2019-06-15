@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-11.3-BETA3-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.3-RC1-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.3",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "5734dc63be22e1b5d3a99e00d64efbd64654f8aaa48ca0a89b0031f181e1b21c",
-    "box_version": "3.20190607",
+    "iso_checksum": "e598419c5a89d2d98480363d89a04aae68a00c9afab39f22cb31e6c89121a066",
+    "box_version": "1.20190614",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -18,13 +18,13 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "xfce",
+    "variant": "ansible",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:11:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-11.3-BETA-amd64"
+    "vm_name": "FreeBSD-11.3-RC-amd64"
   },
   "builders": [
     {
@@ -55,8 +55,7 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
-        [ "modifyvm", "{{.Name}}", "--vram", "16" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
       "http_directory": ".",
       "boot_command": [
@@ -65,7 +64,7 @@
         "s",
         "<wait5>",
         "dhclient em0<enter><wait5>",
-        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
+        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `virtualbox_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -75,7 +74,7 @@
         "VAGRANT_USER={{user `vagrant_username`}} ",
         "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
         "VAGRANT_GROUP={{user `vagrant_group`}} ",
-        "bsdinstall script /tmp/install_with_x11.sh<enter>",
+        "bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
     },
@@ -115,8 +114,7 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE",
-        "svga.vramSize": "16777216"
+        "vhv.enable": "TRUE"
       },
       "http_directory": ".",
       "boot_command": [
@@ -182,8 +180,7 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE",
-        "svga.vramSize": "16777216"
+        "vhv.enable": "TRUE"
       },
       "http_directory": ".",
       "boot_command": [
@@ -212,10 +209,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant-11.1+.sh",
-        "../provisioners/xorg.sh",
-        "../provisioners/xfce.sh",
-        "../provisioners/slim.sh",
-        "../provisioners/xrdp.sh"
+        "../provisioners/ansible+testinfra-11.3+.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
@@ -223,24 +217,11 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "XORG_MINIMAL=xorg-minimal-7.5.2_2",
-        "XTERM=xterm-346",
-        "TWM=twm-1.0.10",
-        "XCLOCK=xclock-1.0.8",
-        "XRANDR=xrandr-1.5.0",
-        "SLIM=slim-1.3.6_16",
-        "SLIM_THEMES=slim-themes-1.0.1_1",
-        "ARANDR=arandr-0.1.9",
-        "XRDP=xrdp-0.9.10_1,1"
-      ]
-    },
-    {
-      "type": "shell",
-      "only": ["virtualbox-iso"],
-      "script": "../provisioners/virtualbox_ose_additions-11.sh",
-      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
-      "environment_vars": [
-        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.2.30"
+        "PIP=py36-pip-9.0.3_1",
+        "ANSIBLE=py36-ansible-2.7.10_1",
+        "ANSIBLE_LINT=py36-ansible-lint-4.1.0_2",
+        "RUAMEL_YAML=py36-ruamel.yaml-0.15.87",
+        "TESTINFRA=testinfra==1.17.0"
       ]
     },
     {
@@ -249,10 +230,7 @@
       "script": "../provisioners/vmware-guest.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "VMWARE_WITH_XORG=1",
-        "OPEN_VM_TOOLS=open-vm-tools-10.3.0_1,2",
-        "XF86_VIDEO_VMWARE=xf86-video-vmware-13.3.0_4",
-        "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0_3"
+        "OPEN_VM_TOOLS=open-vm-tools-nox11-10.3.0_1,2"
        ]
     },
     {
@@ -273,14 +251,14 @@
       "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11"
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11+"
     },
     {
       "type": "vagrant",
       "only": ["vmware-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11+",
       "keep_input_artifact": true
     }
   ]

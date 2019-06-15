@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 11.3-BETA3
+# Packer templates for FreeBSD 11.3-RC1
 
-Templates to create Vagrant boxes for FreeBSD 11.3-BETA3 (amd64 and i386).
+Templates to create Vagrant boxes for FreeBSD 11.3-RC1 (amd64 and i386).
 
 
 ## Prerequisites
@@ -35,29 +35,29 @@ Templates to create Vagrant boxes for FreeBSD 11.3-BETA3 (amd64 and i386).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso freebsd-11.3-beta-minimal.json
+    packer build -only=virtualbox-iso freebsd-11.3-rc-minimal.json
 
-You will find a vagrant box file named `FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-11.3-RC-amd64-minimal-v1.20190614-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-virtualbox`
+Then you can add the box named `FreeBSD-11.3-RC-amd64-minimal-v1.20190614-virtualbox`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-virtualbox.box --name FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-virtualbox
+    vagrant box add FreeBSD-11.3-RC-amd64-minimal-v1.20190614-virtualbox.box --name FreeBSD-11.3-RC-amd64-minimal-v1.20190614-virtualbox
 
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso freebsd-11.3-beta-minimal.json
+    packer build -only=vmware-iso freebsd-11.3-rc-minimal.json
 
-You will find a vagrant box file named `FreeBSD-11.3-BETA-amd64-v3.20190607-vmware.box`
+You will find a vagrant box file named `FreeBSD-11.3-RC-amd64-v1.20190614-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-vmware`
+Then you can add the box named `FreeBSD-11.3-RC-amd64-minimal-v1.20190614-vmware`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-vmware.box --name FreeBSD-11.3-BETA-amd64-minimal-v3.20190607-vmware
+    vagrant box add FreeBSD-11.3-RC-amd64-minimal-v1.20190614-vmware.box --name FreeBSD-11.3-RC-amd64-minimal-v1.20190614-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -65,7 +65,7 @@ directly imported from VMware.
 
 ## Default settings
 
-These default settings are done by the file `Vagrantfile.FreeBSD-11`
+These default settings are done by the file `Vagrantfile.FreeBSD-11+`
 which will be included in the box.  Users can override this setting by
 users' own `Vagrantfile`s.
 
@@ -101,22 +101,22 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso freebsd-11.3-beta-minimal.json
+    packer build -only=esxi-iso freebsd-11.3-rc-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
 
 
 ## Variants
 
-* `freebsd-11.3-beta-minimal.json` - FreeBSD 11.3-BETA1
-* `freebsd-11.3-beta-ansible.json` - FreeBSD 11.3-BETA1 + [Ansible][] [Ansible Lint] + [Testinfra][]
-* `freebsd-11.3-beta-dwm.json` - FreeBSD 11.3-BETA1 + [X.Org][] + [dwm][] + [dmenu][] + [st][]
-* `freebsd-11.3-beta-xfce.json` - FreeBSD 11.3-BETA1 + [Xfce][] + [SLiM][]
-* `freebsd-11.3-beta-zfs.json` - FreeBSD 11.3-BETA1 on ZFS root file system
+* `freebsd-11.3-rc-minimal.json` - FreeBSD 11.3-BETA1
+* `freebsd-11.3-rc-ansible.json` - FreeBSD 11.3-BETA1 + [Ansible][] [Ansible Lint] + [Testinfra][]
+* `freebsd-11.3-rc-dwm.json` - FreeBSD 11.3-BETA1 + [X.Org][] + [dwm][] + [dmenu][] + [st][]
+* `freebsd-11.3-rc-xfce.json` - FreeBSD 11.3-BETA1 + [Xfce][] + [SLiM][]
+* `freebsd-11.3-rc-zfs.json` - FreeBSD 11.3-BETA1 on ZFS root file system
 
-While `freebsd-11.3-beta-*.json` templates generate amd64 boxes by default, using `vars-freebsd-11.3-i386.json` generates i386 boxes:
+While `freebsd-11.3-rc-*.json` templates generate amd64 boxes by default, using `vars-freebsd-11.3-i386.json` generates i386 boxes:
 
-    packer build -var-file=vars-freebsd-11.3-i386.json freebsd-11.3-beta-minimal.json
+    packer build -var-file=vars-freebsd-11.3-i386.json freebsd-11.3-rc-minimal.json
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/

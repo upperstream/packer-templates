@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-11.3-BETA3-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.3-RC1-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.3",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "5734dc63be22e1b5d3a99e00d64efbd64654f8aaa48ca0a89b0031f181e1b21c",
-    "box_version": "3.20190607",
+    "iso_checksum": "e598419c5a89d2d98480363d89a04aae68a00c9afab39f22cb31e6c89121a066",
+    "box_version": "1.20190614",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -18,13 +18,13 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "ansible",
+    "variant": "zfs",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:11:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-11.3-BETA-amd64"
+    "vm_name": "FreeBSD-11.3-RC-amd64"
   },
   "builders": [
     {
@@ -66,7 +66,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `virtualbox_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `virtualbox_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -107,7 +108,7 @@
         "memsize": "{{user `mem_size`}}",
         "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "nat",
+        "ethernet0.connectionType": "bridged",
         "ethernet0.virtualDev": "e1000",
         "ethernet0.present": "TRUE",
         "ethernet0.networkName": "VM Network",
@@ -125,7 +126,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -191,7 +193,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -207,21 +210,13 @@
   "provisioners": [
     {
       "type": "shell",
-      "scripts": [
-        "../provisioners/vagrant-11.1+.sh",
-        "../provisioners/ansible+testinfra-11.3+.sh"
-      ],
+      "script": "../provisioners/vagrant-11.1+.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "PIP=py36-pip-9.0.3_1",
-        "ANSIBLE=py36-ansible-2.7.10_1",
-        "ANSIBLE_LINT=py36-ansible-lint-4.1.0_1",
-        "RUAMEL_YAML=py36-ruamel.yaml-0.15.87",
-        "TESTINFRA=testinfra==1.17.0"
+        "VAGRANT_GROUP={{user `vagrant_group`}}"
       ]
     },
     {
@@ -235,12 +230,6 @@
     },
     {
       "type": "shell",
-      "only": ["virtualbox-iso", "vmware-iso"],
-      "script": "../provisioners/disk_cleanup.sh",
-      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
-    },
-    {
-      "type": "shell",
       "script": "../provisioners/cleanup.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     }
@@ -251,14 +240,14 @@
       "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11"
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11+"
     },
     {
       "type": "vagrant",
       "only": ["vmware-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11+",
       "keep_input_artifact": true
     }
   ]
