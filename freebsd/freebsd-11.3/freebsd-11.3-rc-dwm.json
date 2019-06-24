@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-11.3-RC1-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.3-RC2-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.3",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "e598419c5a89d2d98480363d89a04aae68a00c9afab39f22cb31e6c89121a066",
-    "box_version": "1.20190614",
+    "iso_checksum": "60c3742cd2bede13d70b3d55e9e2484af350bc08fc4c363eed4de31b140e82cd",
+    "box_version": "2.20190621",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -224,11 +224,11 @@
         "XORG_MINIMAL=xorg-minimal-7.5.2_2",
         "XRANDR=xrandr-1.5.0",
         "ARANDR=arandr-0.1.9",
-        "DWM=dwm-6.2_1",
+        "DWM=dwm-6.2",
         "STERM=sterm-0.8.2",
         "DMENU=dmenu-4.9_1",
-        "XRDP=xrdp-0.9.10_1,1",
-        "NCURSES=ncurses-6.1.20190525"
+        "XRDP=xrdp-0.9.9_1,1",
+        "NCURSES=ncurses-6.1.20190112"
       ]
     },
     {
@@ -237,7 +237,7 @@
       "script": "../provisioners/virtualbox_ose_additions-11.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.2.30"
+        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.2.26_4"
       ]
     },
     {
