@@ -1,7 +1,7 @@
 {
-  "iso_image": "FreeBSD-11.3-RC1-i386-disc1.iso",
+  "iso_image": "FreeBSD-11.3-RC2-i386-disc1.iso",
   "iso_checksum_type": "sha256",
-  "iso_checksum": "03d5d015c4648260b38279bcbdfd3beabd76eb97468447f5f3c07c846ad5dd31",
+  "iso_checksum": "db3f6e22c15b9ffdd171356d26eb7688cd778a6272e467b7794c7381c1a07f5e",
   "virtualbox_guest_os_type": "FreeBSD",
   "vmware_guest_os_type": "freebsd",
   "DISTRIBUTIONS": "'base.txz kernel.txz'",
