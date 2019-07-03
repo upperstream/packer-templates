@@ -21,7 +21,7 @@
     * [more](debian/README.mdown)
 * [devuan](devuan) - Devuan templates (amd64)
     * devuan-1.0 - Devuan Jessie 1.0.0 templates
-    * devuan-2.0 - Devuan 2.0 ASCII templates
+    * devuan-2.0 - Devuan 2.0.0 ASCII templates
 * [freebsd](freebsd/README.mdown) - FreeBSD templates (amd64 and i386)
     * freebsd-9.3 - FreeBSD 9.3 templates
     * freebsd-10.4 - FreeBSD 10.4 templates

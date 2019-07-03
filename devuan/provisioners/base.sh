@@ -4,11 +4,12 @@ set -x
 
 sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
 
-if [ ${INSTALL_FROM_DVD:-false} = "true" ]; then
-  sed -e '/^#deb cdrom:.*$/a\
+DEVUAN_VERSION=${DEVUAN_VERSION:-jessie}
+if [ "${INSTALL_FROM_DVD:-false}" = "true" ]; then
+  sed -e "/^#deb cdrom:.*$/a\
 \
-deb http://auto.mirror.devuan.org/merged jessie main\
-deb-src http://auto.mirror.devuan.org/merged jessie main' \
+deb http://auto.mirror.devuan.org/merged $DEVUAN_VERSION main\
+deb-src http://auto.mirror.devuan.org/merged $DEVUAN_VERSION main" \
       -e 's/^# deb http:/deb http:/' \
       -e 's/^# deb-src http:/deb-src http:/' /etc/apt/sources.list > /tmp/sources.list
   mv /tmp/sources.list /etc/apt/sources.list

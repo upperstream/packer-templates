@@ -1,11 +1,11 @@
 {
   "variables": {
-    "vm_name": "Devuan-2.0_beta-amd64-xfce",
-    "mem_size": "1024",
+    "vm_name": "Devuan-2.0-amd64-xfce",
+    "mem_size": "512",
     "disk_size": "51200",
-    "iso_name": "devuan_ascii_2.0.0-beta_amd64_NETINST.iso",
-    "iso_path": "devuan_ascii_beta/installer-iso",
-    "iso_checksum": "5b644dac66f3b5ad8986e74d84abe59bf29d94071d68805e235121f100540972",
+    "iso_name": "devuan_ascii_2.0.0_amd64_netinst.iso",
+    "iso_path": "devuan_ascii/installer-iso",
+    "iso_checksum": "c16bebdeecdf452188ae4bb823cd5f1c0d2ed3a7a568332508943ce16f7e5c71",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
@@ -13,7 +13,7 @@
     "vagrant_username": "vagrant",
     "vagrant_group": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "1.20180214",
+    "box_version": "2.0.20180608",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -186,9 +186,10 @@
         "../provisioners/xrdp.sh"
       ],
       "environment_vars": [
+        "DEVUAN_VERSION=ascii",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "XRDP=xrdp=0.6.1-2",
+        "XRDP=xrdp=0.9.1-9+deb9u3",
         "INSTALL_FROM_DVD={{user `install_from_dvd`}}"
       ]
     },
@@ -208,8 +209,8 @@
         "../provisioners/vmtools.sh"
       ],
       "environment_vars": [
-        "XSERVER_XORG_VIDEO_VMWARE=xserver-xorg-video-vmware",
-        "XSERVER_XORG_INPUT_VMMOUSE=xserver-xorg-input-vmmouse",
+        "OPEN_VM_TOOLS_DESKTOP=open-vm-tools-desktop=2:10.1.5-5055683-4+deb9u1",
+        "XSERVER_XORG_VIDEO_VMWARE=xserver-xorg-video-vmware=1:13.2.1-1+b1",
         "VMWARE_WITH_XORG=1"
       ]
     },

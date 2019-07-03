@@ -7,10 +7,12 @@
     * Devuan Jessie 1.0.0 + Docker + Docker Compose
     * Devuan Jessie 1.0.0 + X.org + suckless tools
     * Devuan Jessie 1.0.0 + Xfce
-* [devuan-devuan-2.0](devuan-2.0/README.mdown) - templates for Devuan 2.0 ASCII Beta
-    * Devuan 2.0 ASCII Beta minimal
-    * Devuan 2.0 ASCII Beta + Xfce
+* [devuan-devuan-2.0](devuan-2.0/README.mdown) - templates for Devuan 2.0.0 ASCII
+    * Devuan 2.0.0 ASCII minimal
+    * Devuan 2.0.0 ASCII + Docker + Docker Compose
+    * Devuan 2.0.0 ASCII + X.org + suckless tools
+    * Devuan 2.0.0 ASCII + Xfce
 
 - - -
 
-Copyright &copy; 2017, 2018 Upper Stream Software.
+Copyright &copy; 2017-2019 Upper Stream Software.

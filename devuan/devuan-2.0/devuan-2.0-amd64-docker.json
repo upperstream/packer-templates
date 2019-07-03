@@ -1,6 +1,6 @@
 {
   "variables": {
-    "vm_name": "Devuan-2.0-amd64-minimal",
+    "vm_name": "Devuan-2.0-amd64-docker",
     "mem_size": "512",
     "disk_size": "51200",
     "iso_name": "devuan_ascii_2.0.0_amd64_netinst.iso",
@@ -19,8 +19,7 @@
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "headless": "false",
-    "install_from_dvd": "false",
-    "vb_version": "5.1.36"
+    "install_from_dvd": "false"
   },
   "builders": [
     {
@@ -35,8 +34,7 @@
         "https://mirror.netzspielplatz.de/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://devuan.unetresgrossebite.com/{{user `iso_path`}}/{{user `iso_name`}}",
         "https://mirror.math.princeton.edu/pub/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
-        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
-        "https://files.devuan.org/{{user `iso_path`}}/{{user `iso_name`}}"
+        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -80,8 +78,7 @@
         "https://mirror.netzspielplatz.de/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://devuan.unetresgrossebite.com/{{user `iso_path`}}/{{user `iso_name`}}",
         "https://mirror.math.princeton.edu/pub/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
-        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
-        "https://files.devuan.org/{{user `iso_path`}}/{{user `iso_name`}}"
+        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -131,8 +128,7 @@
         "https://mirror.netzspielplatz.de/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://devuan.unetresgrossebite.com/{{user `iso_path`}}/{{user `iso_name`}}",
         "https://mirror.math.princeton.edu/pub/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
-        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
-        "https://files.devuan.org/{{user `iso_path`}}/{{user `iso_name`}}"
+        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}"
       ],
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
@@ -179,13 +175,18 @@
       "type": "shell",
       "scripts": [
         "../provisioners/base.sh",
-        "../provisioners/vagrant.sh"
+        "../provisioners/vagrant.sh",
+        "../provisioners/docker_devuan2.sh"
       ],
       "environment_vars": [
         "DEVUAN_VERSION=ascii",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "INSTALL_FROM_DVD={{user `install_from_dvd`}}"
+        "INSTALL_FROM_DVD={{user `install_from_dvd`}}",
+        "CURL=curl=7.52.1-5+deb9u9",
+        "DOCKER=docker-18.06.0-ce",
+        "PYTHON_PIP=python-pip=9.0.1-2+deb9u1",
+        "DOCKER_COMPOSE=docker-compose==1.21.2"
       ]
     },
     {
@@ -199,7 +200,7 @@
     {
       "type": "shell",
       "only": ["vmware-iso", "esxi-iso"],
-      "scripts": "../provisioners/vmtools.sh",
+      "script": "../provisioners/vmtools.sh",
       "environment_vars": [
         "OPEN_VM_TOOLS=open-vm-tools=2:10.1.5-5055683-4+deb9u1"
       ]
