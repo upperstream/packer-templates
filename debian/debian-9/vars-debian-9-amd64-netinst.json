@@ -1,6 +1,6 @@
 {
-  "iso_name": "debian-9.5.0-amd64-netinst.iso",
-  "iso_path": "9.5.0/amd64/iso-cd",
-  "iso_checksum": "1f97a4b8dee7c3def5cd8215ff01b9edef27c901b28fa8b1ef4f022eff7c36c2",
+  "iso_name": "debian-9.9.0-amd64-netinst.iso",
+  "iso_path": "9.9.0/amd64/iso-cd",
+  "iso_checksum": "d4a22c81c76a66558fb92e690ef70a5d67c685a08216701b15746586520f6e8e",
   "iso_checksum_type": "sha256"
 }
