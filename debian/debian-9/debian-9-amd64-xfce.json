@@ -4,21 +4,21 @@
     "mem_size": "1024",
     "disk_size": "51200",
     "iso_name": "mini.iso",
-    "iso_path": "",
-    "iso_checksum": "",
+    "iso_path": "stretch/main/installer-amd64/20170615+deb9u6/images/netboot",
+    "iso_checksum": "53583c1bd3808aab8629faf16d57aad32ae791e77ec52b7c283f0f4efda69b24",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "9.5.20181111",
+    "box_version": "9.9.20190427",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "headless": "false",
-    "virtualbox_version": "5.1.22"
+    "virtualbox_version": "5.1.38"
   },
   "builders": [
     {
@@ -30,6 +30,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
+        "http://ftp.debian.org/debian/dists/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://debian-cd.debian.net/debian-cd/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://ftp.riken.jp/Linux/debian/debian/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://ftp.jp.debian.org/debian/{{user `iso_path`}}/{{user `iso_name`}}",
@@ -78,6 +79,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
+        "http://ftp.debian.org/debian/dists/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://debian-cd.debian.net/debian-cd/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://ftp.riken.jp/Linux/debian/debian/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://ftp.jp.debian.org/debian/{{user `iso_path`}}/{{user `iso_name`}}",
@@ -132,6 +134,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
+        "http://ftp.debian.org/debian/dists/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://debian-cd.debian.net/debian-cd/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://ftp.riken.jp/Linux/debian/debian/{{user `iso_path`}}/{{user `iso_name`}}",
         "http://ftp.jp.debian.org/debian/{{user `iso_path`}}/{{user `iso_name`}}",
@@ -218,7 +221,7 @@
       "environment_vars": [
         "XSERVER_XORG_VIDEO_VMWARE=xserver-xorg-video-vmware=1:13.2.1-1+b1",
         "XSERVER_XORG_INPUT_VMMOUSE=xserver-xorg-input-evdev=1:2.10.5-1",
-        "OPEN_VM_TOOLS=open-vm-tools=2:10.1.5-5055683-4",
+        "OPEN_VM_TOOLS=open-vm-tools-desktop=2:10.1.5-5055683-4+deb9u1",
         "VMWARE_WITH_XORG=1"
       ]
     },

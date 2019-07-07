@@ -1,6 +1,6 @@
-# Packer templates for Debian 9.5
+# Packer templates for Debian 9.9
 
-Templates to create Vagrant boxes for Debian 9.5 (amd64).
+Templates to create Vagrant boxes for Debian 9.9 (amd64).
 
 
 ## Prerequisites
@@ -37,29 +37,29 @@ Templates to create Vagrant boxes for Debian 9.5 (amd64).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso -var-file=debian-9.5.0-amd64-netinst.iso debian-9-amd64-minimal.json
+    packer build -only=virtualbox-iso debian-9-amd64-minimal.json
 
-You will find a vagrant box file named `Debian-9-amd64-minimal-v9.5.20181111-virtualbox.box`
+You will find a vagrant box file named `Debian-9-amd64-minimal-v9.9.20190427-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-9-amd64-minimal-v9.5.20181111-virtualbox` to your box list
+Then you can add the box named `Debian-9-amd64-minimal-v9.9.20190427-virtualbox` to your box list
 by the following command:
 
-    vagrant box add Debian-9-amd64-minimal-v9.5.20181111-virtualbox.box --name Debian-9-amd64-minimal-v9.5.20181111-virtualbox
+    vagrant box add Debian-9-amd64-minimal-v9.9.20190427-virtualbox.box --name Debian-9-amd64-minimal-v9.9.20190427-virtualbox
 
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso -var-file=debian-9.5.0-amd64-netinst.iso debian-9-amd64-minimal.json
+    packer build -only=vmware-iso debian-9-amd64-minimal.json
 
-You will find a vagrant box file named `Debian-9-amd64-minimal-v9.5.20181111-vmware.box`
+You will find a vagrant box file named `Debian-9-amd64-minimal-v9.9.20190427-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-9-amd64-minimal-v9.5.20181111-vmware` to your box list
+Then you can add the box named `Debian-9-amd64-minimal-v9.9.20190427-vmware` to your box list
 by the following command:
 
-    vagrant box add Debian-9-amd64-minimal-v9.5.20181111-vmware.box --name Debian-9-amd64-minimal-v9.5.20181111-vmware
+    vagrant box add Debian-9-amd64-minimal-v9.9.20190427-vmware.box --name Debian-9-amd64-minimal-v9.9.20190427-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -80,21 +80,23 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso -var-file=debian-9.5.0-amd64-netinst.iso debian-9-amd64-minimal.json
+    packer build -only=esxi-iso debian-9-amd64-minimal.json
 
 
 ## Variants
 
-* `debian-9-amd64-minimal.json` - Debian 9.5 minimal installation
-* `debian-9-amd64-ansible.json` - Debian 9.5 with [Ansible][] +
-  [Testinfra][].
-* `debian-9-amd64-docker.json` - Debian 9.5 with [Docker][] +
+* `debian-9-amd64-minimal.json` - Debian 9.9 minimal installation
+* `debian-9-amd64-ansible.json` - Debian 9.9 with [Ansible][] +
+  [Ansible Lint][] + [Testinfra][]
+* `debian-9-amd64-docker.json` - Debian 9.9 with [Docker][] +
   [Docker Compose][]
-* `debian-9-amd64-dwm.json` - Debian 9.5 with [X.org][], [suckless][]
+* `debian-9-amd64-dwm.json` - Debian 9.9 with [X.org][], [suckless][]
   tools, [ARandR][], and [xrdp][].
-* `debian-9-amd64-xfce.json` - Debian 9.5 with [Xfce][] + [xrdp][].
+* `debian-9-amd64-xfce.json` - Debian 9.9 with [Xfce][] + [xrdp][].
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
+[Ansible Lint]: https://docs.ansible.com/ansible-lint/
+  "Ansible Lint Documentation &mdash; Ansible Documentation"
 [ARandR]: https://christian.amsuess.com/tools/arandr/
     "ARandR: Another XRandR GUI"
 [Docker]: https://www.docker.com/
@@ -114,8 +116,8 @@ The following command will build a VM image on your ESXi:
 
 Optional var files are provided to instruct to use alternative
 installer CD images, i.e., `vars-debian-9-amd64-full.json` instructs to
-use `debian-9.5.0-amd64-xfce-CD-1.iso` while `vars-debian-9-amd64-netinst.json`
-does `debian-9.5.0-amd64-netinst.iso` respectively.
+use `debian-9.9.0-amd64-xfce-CD-1.iso` while `vars-debian-9-amd64-netinst.json`
+does `debian-9.9.0-amd64-netinst.iso` respectively.
 Without using these var files, `debian-9-amd64-*.json` templates use
 `mini.iso`.
 
@@ -154,4 +156,4 @@ Default value is "5.1.22".
 
 - - -
 
-Copyright &copy; 2017, 2018 Upperstream Software.
+Copyright &copy; 2017-2019 Upperstream Software.

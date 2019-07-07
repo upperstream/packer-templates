@@ -1,6 +1,6 @@
 {
-  "iso_name": "debian-9.5.0-amd64-xfce-CD-1.iso",
-  "iso_path": "9.5.0/amd64/iso-cd",
-  "iso_checksum": "e3934b8dd67f31622f8d2bdb72e91d458c05b05d59b069695274c5cb617e821c",
+  "iso_name": "debian-9.9.0-amd64-xfce-CD-1.iso",
+  "iso_path": "9.9.0/amd64/iso-cd",
+  "iso_checksum": "6fa24e8e305bdfd762605f092c2dcddb2e76f8522cb9a5035df88532d28c9a50",
   "iso_checksum_type": "sha256"
 }
