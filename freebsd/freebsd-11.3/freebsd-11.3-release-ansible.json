@@ -1,11 +1,11 @@
 
 {
   "variables": {
-    "iso_image": "FreeBSD-11.3-RC3-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.3-RELEASE-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.3",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "671db8e9187ff32fe099d8f4f32f1da321030016c36057f1c9c45965f411acf7",
-    "box_version": "3.20190628",
+    "iso_checksum": "d268db365e26305ec3d51b29211caad903749c33a4a8f2cf661d671f8e0ba0b0",
+    "box_version": "11.3.20190709",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -25,7 +25,7 @@
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:11:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-11.3-RC-amd64"
+    "vm_name": "FreeBSD-11.3-RELEASE-amd64"
   },
   "builders": [
     {
