@@ -1,0 +1,6 @@
+{
+  "iso_name": "debian-8.11.1-amd64-netinst.iso",
+  "iso_path": "8.11.1/amd64/iso-cd",
+  "iso_checksum": "ea444d6f8ac95fd51d2aedb8015c57410d1ad19b494cedec6914c17fda02733c",
+  "iso_checksum_type": "sha256"
+}
