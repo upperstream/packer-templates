@@ -1,0 +1,6 @@
+{
+  "iso_name": "debian-8.11.1-amd64-CD-1.iso",
+  "iso_path": "8.11.1/amd64/iso-cd",
+  "iso_checksum": "8bfd6b0c1ee0eaa0639bae5b07656fb70bf46a07fb9d14b9d06641a8119b2877",
+  "iso_checksum_type": "sha256"
+}
