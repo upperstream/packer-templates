@@ -37,13 +37,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso netbsd-8.1-minimal.json
 
-You will find a vagrant box file named `NetBSD-8.1-amd64-minimal-v8.1.20190604-virtualbox.box`
+You will find a vagrant box file named `NetBSD-8.1-amd64-minimal-v8.1.20190912-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-8.1-amd64-minimal-v8.1.20190604-virtualbox`
+Then you can add the box named `NetBSD-8.1-amd64-minimal-v8.1.20190912-virtualbox`
 to your box list by the following command:
 
-    vagrant box add NetBSD-8.1-amd64-minimal-v8.1.20190604-virtualbox.box --name NetBSD-8.1-amd64-minimal-v8.1.20190604-virtualbox
+    vagrant box add NetBSD-8.1-amd64-minimal-v8.1.20190912-virtualbox.box --name NetBSD-8.1-amd64-minimal-v8.1.20190912-virtualbox
 
 ### VMware
 
@@ -51,13 +51,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso netbsd-8.1-minimal.json
 
-You will find a vagrant box file named `NetBSD-8.1-amd64-minimal-v8.1.20190604-vmware.box`
+You will find a vagrant box file named `NetBSD-8.1-amd64-minimal-v8.1.20190912-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-8.1-amd64-minimal-v8.1.20190604-vmware`
+Then you can add the box named `NetBSD-8.1-amd64-minimal-v8.1.20190912-vmware`
 to your box list by the following command:
 
-    vagrant box add NetBSD-8.1-amd64-minimal-v8.1.20190604-vmware.box --name NetBSD-8.1-amd64-minimal-v8.1.20190604-vmware
+    vagrant box add NetBSD-8.1-amd64-minimal-v8.1.20190912-vmware.box --name NetBSD-8.1-amd64-minimal-v8.1.20190912-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.

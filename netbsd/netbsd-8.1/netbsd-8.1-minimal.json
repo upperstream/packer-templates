@@ -4,7 +4,7 @@
     "ssh_password": "vagrant",
     "os_ver": "8.1",
     "variant": "minimal",
-    "box_ver": "8.1.20190604",
+    "box_ver": "8.1.20190912",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -244,7 +244,7 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.1/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.0_2019Q1/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
