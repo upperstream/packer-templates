@@ -5,10 +5,10 @@ Templates to create Vagrant boxes for NetBSD 8.1 (amd64 and i386).
 
 ## Prerequisites
 
-* [Packer][] v1.1.3+
-* [Vagrant][] v1.9.8+
-* [VirtualBox][] v5.1.30+
-* [VMware][] Workstation v11.1.0+ / VMware Fusion v8.1+
+* [Packer][] v1.3.3+
+* [Vagrant][] v2.0.2+
+* [VirtualBox][] v5.2.32+
+* [VMware][] Workstation v15.0+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
