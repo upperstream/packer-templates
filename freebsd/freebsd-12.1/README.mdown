@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 12.1-BETA1
+# Packer templates for FreeBSD 12.1-BETA2
 
-Templates to create Vagrant boxes for FreeBSD 12.1-BETA1 (amd64 and
+Templates to create Vagrant boxes for FreeBSD 12.1-BETA2 (amd64 and
 i386).
 
 
@@ -38,13 +38,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso freebsd-12.1-beta-minimal.json
 
-You will find a vagrant box file named `FreeBSD-12.1-BETA1-amd64-minimal-v1.20190922-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-12.1-BETA-amd64-minimal-v2.20190928-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-12.1-BETA1-amd64-minimal-v1.20190922-virtualbox`
+Then you can add the box named `FreeBSD-12.1-BETA-amd64-minimal-v2.20190928-virtualbox`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.1-BETA1-amd64-minimal-v1.20190922-virtualbox.box --name FreeBSD-12.1-BETA1-amd64-minimal-v1.20190922-virtualbox
+    vagrant box add FreeBSD-12.1-BETA-amd64-minimal-v2.20190928-virtualbox.box --name FreeBSD-12.1-BETA-amd64-minimal-v2.20190928-virtualbox
 
 ### VMware
 
@@ -52,13 +52,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso freebsd-12.1-beta-minimal.json
 
-You will find a vagrant box file named `FreeBSD-12.1-BETA1-amd64-v1.20190922-vmware.box`
+You will find a vagrant box file named `FreeBSD-12.1-BETA-amd64-v2.20190928-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-12.1-BETA1-amd64-minimal-v1.20190922-vmware`
+Then you can add the box named `FreeBSD-12.1-BETA-amd64-minimal-v2.20190928-vmware`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.1-BETA1-amd64-minimal-v1.20190922-vmware.box --name FreeBSD-12.1-BETA1-amd64-minimal-v1.20190922-vmware
+    vagrant box add FreeBSD-12.1-BETA-amd64-minimal-v2.20190928-vmware.box --name FreeBSD-12.1-BETA-amd64-minimal-v2.20190928-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -109,14 +109,14 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `freebsd-12.1-beta-minimal.json` - FreeBSD 12.1-BETA1
-* `freebsd-12.1-beta-ansible.json` - FreeBSD 12.1-BETA1 +
+* `freebsd-12.1-beta-minimal.json` - FreeBSD 12.1-BETA2
+* `freebsd-12.1-beta-ansible.json` - FreeBSD 12.1-BETA2 +
   [Ansible][] + [Ansible Lint] + [Testinfra][]
-* `freebsd-12.1-beta-dwm.json` - FreeBSD 12.1-BETA1 + [X.Org][] +
+* `freebsd-12.1-beta-dwm.json` - FreeBSD 12.1-BETA2 + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-12.1-beta-xfce.json` - FreeBSD 12.1-BETA1 + [Xfce][] +
+* `freebsd-12.1-beta-xfce.json` - FreeBSD 12.1-BETA2 + [Xfce][] +
   [SLiM][]
-* `freebsd-12.1-beta-zfs.json` - FreeBSD 12.1-BETA1 on ZFS root
+* `freebsd-12.1-beta-zfs.json` - FreeBSD 12.1-BETA2 on ZFS root
   file system
 
 While `freebsd-12.1-beta-*.json` templates generate amd64 boxes by

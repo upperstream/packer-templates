@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-12.1-BETA1-amd64-disc1.iso",
+    "iso_image": "FreeBSD-12.1-BETA2-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.1",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "fb4dea1341e0044685b092f28dd8939451067a1271373769cd2e6722e9c92742",
-    "box_version": "1.20190922",
+    "iso_checksum": "e28c2cb5d4aebcda1168ffa6a866864f8894b13314b849f5fad4a6b970f64a1f",
+    "box_version": "2.20190928",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
