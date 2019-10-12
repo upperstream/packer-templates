@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-12.1-BETA2-amd64-disc1.iso",
+    "iso_image": "FreeBSD-12.1-BETA3-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.1",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "e28c2cb5d4aebcda1168ffa6a866864f8894b13314b849f5fad4a6b970f64a1f",
-    "box_version": "2.20190928",
+    "iso_checksum": "3e50474412efc961664d3cced6a24a1adb9f9fac9dca7c43c1034b5dbf62c9e6",
+    "box_version": "3.20191004",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -220,15 +220,16 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
+        "XFCE=xfce-4.14",
         "XORG_MINIMAL=xorg-minimal-7.5.2_2",
-        "XTERM=xterm-346",
-        "XCLOCK=xclock-1.0.8",
+        "XTERM=xterm-349",
+        "XCLOCK=xclock-1.0.9",
         "TWM=twm-1.0.10",
-        "XRANDR=xrandr-1.5.0",
-        "SLIM=slim-1.3.6_16",
+        "XRANDR=xrandr-1.5.1",
+        "SLIM=slim-1.3.6_17",
         "SLIM_THEMES=slim-themes-1.0.1_1",
         "ARANDR=arandr-0.1.9",
-        "XRDP=xrdp-0.9.10_2,1"
+        "XRDP=xrdp-0.9.11,1"
       ]
     },
     {
@@ -237,7 +238,7 @@
       "script": "../provisioners/virtualbox_ose_additions-11.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.2.30"
+        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.2.32_1"
       ]
     },
     {
@@ -248,7 +249,7 @@
       "environment_vars": [
         "VMWARE_WITH_XORG=1",
         "OPEN_VM_TOOLS=open-vm-tools-10.3.0_1,2",
-        "XF86_VIDEO_VMWARE=xf86-video-vmware-13.3.0_4",
+        "XF86_VIDEO_VMWARE=xf86-video-vmware-13.3.0_5",
         "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0_3"
       ]
     },
