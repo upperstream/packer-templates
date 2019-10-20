@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-12.1-BETA3-amd64-disc1.iso",
+    "iso_image": "FreeBSD-12.1-RC1-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.1",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "3e50474412efc961664d3cced6a24a1adb9f9fac9dca7c43c1034b5dbf62c9e6",
-    "box_version": "3.20191004",
+    "iso_checksum": "880defda032429a4c9e5960a17ffac08a17937165bebe1cb195f86751ada0641",
+    "box_version": "1.20191011",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -18,13 +18,13 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "dwm",
+    "variant": "xfce",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:12:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-12.1-BETA-amd64"
+    "vm_name": "FreeBSD-12.1-RC-amd64"
   },
   "builders": [
     {
@@ -209,7 +209,9 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant-11.1+.sh",
-        "../provisioners/dwm+dmenu+st.sh",
+        "../provisioners/xorg.sh",
+        "../provisioners/xfce.sh",
+        "../provisioners/slim.sh",
         "../provisioners/xrdp.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
@@ -218,14 +220,16 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
+        "XFCE=xfce-4.14",
         "XORG_MINIMAL=xorg-minimal-7.5.2_2",
+        "XTERM=xterm-349",
+        "XCLOCK=xclock-1.0.9",
+        "TWM=twm-1.0.10",
         "XRANDR=xrandr-1.5.1",
+        "SLIM=slim-1.3.6_17",
+        "SLIM_THEMES=slim-themes-1.0.1_1",
         "ARANDR=arandr-0.1.9",
-        "DWM=dwm-6.2_1",
-        "STERM=sterm-0.8.2",
-        "DMENU=dmenu-4.9_1",
-        "XRDP=xrdp-0.9.11,1",
-        "NCURSES=ncurses-6.1.20190525"
+        "XRDP=xrdp-0.9.11,1"
       ]
     },
     {

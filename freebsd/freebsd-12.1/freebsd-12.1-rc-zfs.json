@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-12.1-BETA3-amd64-disc1.iso",
+    "iso_image": "FreeBSD-12.1-RC1-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.1",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "3e50474412efc961664d3cced6a24a1adb9f9fac9dca7c43c1034b5dbf62c9e6",
-    "box_version": "3.20191004",
+    "iso_checksum": "880defda032429a4c9e5960a17ffac08a17937165bebe1cb195f86751ada0641",
+    "box_version": "1.20191011",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -18,13 +18,13 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "ansible",
+    "variant": "zfs",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:12:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-12.1-BETA-amd64"
+    "vm_name": "FreeBSD-12.1-RC-amd64"
   },
   "builders": [
     {
@@ -66,7 +66,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `virtualbox_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `virtualbox_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -123,7 +124,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -188,7 +190,8 @@
         "dhclient em0<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -204,20 +207,13 @@
   "provisioners": [
     {
       "type": "shell",
-      "scripts": [
-        "../provisioners/vagrant-11.1+.sh",
-        "../provisioners/ansible+testinfra-11.1+.sh"
-      ],
+      "script": "../provisioners/vagrant-11.1+.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "PY27_PIP=py36-pip-19.1.1",
-        "ANSIBLE=py36-ansible-2.8.5",
-        "ANSIBLE_LINT=py36-ansible-lint-4.1.0_2",
-        "TESTINFRA=testinfra==3.2.0"
+        "VAGRANT_GROUP={{user `vagrant_group`}}"
       ]
     },
     {
@@ -228,12 +224,6 @@
       "environment_vars": [
         "OPEN_VM_TOOLS=open-vm-tools-nox11-10.3.0_1,2"
       ]
-    },
-    {
-      "type": "shell",
-      "only": ["virtualbox-iso", "vmware-iso"],
-      "script": "../provisioners/disk_cleanup.sh",
-      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     },
     {
       "type": "shell",
