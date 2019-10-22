@@ -151,7 +151,7 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/ansible-6.5.sh",
+        "../provisioners/ansible-6.5+.sh",
         "../provisioners/vagrant-6.2+.sh"
       ],
       "environment_vars": [
