@@ -49,6 +49,12 @@
 	* OpenBSD 6.5 + X11 (amd64 and i386)
 	* OpenBSD 6.5 + X11 + dwm + dmenu + st + SLiM (amd64 and i386)
 	* OpenBSD 6.5 + Xfce + SLiM (amd64 and i386)
+* [openbsd-6.6](openbsd-6.6/README.mdown) - templates for OpenBSD 6.6
+	* OpenBSD 6.6 (amd64 and i386)
+	* OpenBSD 6.6 + Ansible + Ansible Lint + Testinfra (amd64 and i386)
+	* OpenBSD 6.6 + X11 (amd64 and i386)
+	* OpenBSD 6.6 + X11 + dwm + dmenu + st + SLiM (amd64 and i386)
+	* OpenBSD 6.6 + Xfce + SLiM (amd64 and i386)
 
 - - -
 
