@@ -1,13 +1,13 @@
 {
   "variables": {
-    "variant": "ansible",
+    "variant": "minimal",
     "cpu": "amd64",
-    "vm_name": "OpenBSD-6.5-amd64",
-    "iso_image": "install65.iso",
-    "iso_checksum": "38d1f8cadd502f1c27bf05c5abde6cc505dd28f3f34f8a941048ff9a54f9f608",
+    "vm_name": "OpenBSD-6.6-amd64",
+    "iso_image": "install66.iso",
+    "iso_checksum": "b22e63df56e6266de6bbeed8e9be0fbe9ee2291551c5bc03f3cc2e4ab9436ee3",
     "iso_checksum_type": "sha256",
-    "os_ver": "6.5",
-    "box_version": "6.5.20190425",
+    "os_ver": "6.6",
+    "box_version": "6.6.20191017",
     "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "40960",
@@ -18,7 +18,7 @@
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "package_server": "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/",
+    "package_server": "http://cdn.openbsd.org/pub/OpenBSD/",
     "virtualbox_guest_os_type": "OpenBSD_64",
     "vmware_guest_os_type": "other-64",
     "headless": "false"
@@ -34,7 +34,7 @@
       "iso_urls": [
         "iso/{{user `cpu`}}/{{user `iso_image`}}",
         "iso/{{user `iso_image`}}",
-        "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -69,7 +69,7 @@
       "iso_urls": [
         "iso/{{user `cpu`}}/{{user `iso_image`}}",
         "iso/{{user `iso_image`}}",
-        "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -79,13 +79,11 @@
       "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "headless": "{{user `headless`}}",
+      "network": "nat",
+      "network_adapter_type": "e1000",
       "vmx_data": {
-        "numvcpus": "{{user `num_cpus`}}",
-        "memsize": "{{user `mem_size`}}",
         "ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "nat",
-        "ethernet0.virtualDev": "e1000",
-        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
@@ -111,7 +109,7 @@
       "iso_urls": [
         "iso/{{user `cpu`}}/{{user `iso_image`}}",
         "iso/{{user `iso_image`}}",
-        "http://cloudflare.cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+        "http://cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -126,12 +124,10 @@
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
+      "network": "bridged",
+      "network_adapter_type": "e1000",
       "vmx_data": {
-        "numvcpus": "{{user `num_cpus`}}",
-        "memsize": "{{user `mem_size`}}",
         "ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "bridged",
-        "ethernet0.virtualDev": "e1000",
         "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
@@ -151,7 +147,6 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/ansible-6.5+.sh",
         "../provisioners/vagrant-6.2+.sh"
       ],
       "environment_vars": [
@@ -159,10 +154,6 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "ANSIBLE=2.7.9",
-        "ANSIBLE_LINT=4.1.0",
-        "PY3_PIP=9.0.3",
-        "TESTINFRA=2.0.0",
         "RSYNC=3.1.3"
       ]
     },
