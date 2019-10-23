@@ -24,8 +24,8 @@ EOF
 
 env ASSUME_ALWAYS_YES="YES" pkg bootstrap -y
 pkg update
-pkg install -y sudo-1.8.27_1
-pkg install -y ca_root_nss-3.46.1
+pkg install -y sudo-1.8.28
+pkg install -y ca_root_nss-3.47
 ln -sf /usr/local/share/certs/ca-root-nss.crt /etc/ssl/cert.pem
 
 echo -n "$ROOT_PASSWORD" | pw usermod root -h 0
