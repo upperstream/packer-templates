@@ -1,8 +1,7 @@
-# Packer templates for FreeBSD 12.1-RC1
+# Packer templates for FreeBSD 12.1-RC2
 
-Templates to create Vagrant boxes for FreeBSD 12.1-RC1 (amd64 and
+Templates to create Vagrant boxes for FreeBSD 12.1-RC2 (amd64 and
 i386).
-
 
 ## Prerequisites
 
@@ -21,14 +20,12 @@ i386).
     "VMware Virtualization for Desktop &amp; Server, Application,
     Public &amp; Hybrid Clouds"
 
-
 ## Provisioned software tools
 
 * sshd
 * sudo
 * `vagrant` user and its insecure public key
 * ntpd enabled
-
 
 ## How to create a box
 
@@ -38,13 +35,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso freebsd-12.1-rc-minimal.json
 
-You will find a vagrant box file named `FreeBSD-12.1-RC-amd64-minimal-v1.20191011-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-12.1-RC-amd64-minimal-v2.20191018-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-12.1-RC-amd64-minimal-v1.20191011-virtualbox`
+Then you can add the box named `FreeBSD-12.1-RC-amd64-minimal-v2.20191018-virtualbox`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.1-RC-amd64-minimal-v1.20191011-virtualbox.box --name FreeBSD-12.1-RC-amd64-minimal-v1.20191011-virtualbox
+    vagrant box add FreeBSD-12.1-RC-amd64-minimal-v2.20191018-virtualbox.box --name FreeBSD-12.1-RC-amd64-minimal-v2.20191018-virtualbox
 
 ### VMware
 
@@ -52,21 +49,20 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso freebsd-12.1-rc-minimal.json
 
-You will find a vagrant box file named `FreeBSD-12.1-RC-amd64-v1.20191011-vmware.box`
+You will find a vagrant box file named `FreeBSD-12.1-RC-amd64-v2.20191018-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-12.1-RC-amd64-minimal-v1.20191011-vmware`
+Then you can add the box named `FreeBSD-12.1-RC-amd64-minimal-v2.20191018-vmware`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.1-RC-amd64-minimal-v1.20191011-vmware.box --name FreeBSD-12.1-RC-amd64-minimal-v1.20191011-vmware
+    vagrant box add FreeBSD-12.1-RC-amd64-minimal-v2.20191018-vmware.box --name FreeBSD-12.1-RC-amd64-minimal-v2.20191018-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
 
-
 ## Default settings
 
-These default settings are done by the file `Vagrantfile.FreeBSD-11`
+These default settings are done by the file `Vagrantfile.FreeBSD-11+`
 which will be included in the box.  Users can override this setting by
 users' own `Vagrantfile`s.
 
@@ -85,7 +81,6 @@ SMB synced folder is not supported for FreeBSD guest.
 
 Because Bash is not the standard shell for FreeBSD, default shell for
 SSH connection of this box is set to `/bin/sh`.
-
 
 ## Building a VM image on ESXi
 
@@ -106,17 +101,16 @@ The following command will build a VM image on your ESXi:
 
 (Note that created VM will be unregistered from your Inventory.)
 
-
 ## Variants
 
-* `freebsd-12.1-rc-minimal.json` - FreeBSD 12.1-RC1
-* `freebsd-12.1-rc-ansible.json` - FreeBSD 12.1-RC1 +
+* `freebsd-12.1-rc-minimal.json` - FreeBSD 12.1-RC2
+* `freebsd-12.1-rc-ansible.json` - FreeBSD 12.1-RC2 +
   [Ansible][] + [Ansible Lint] + [Testinfra][]
-* `freebsd-12.1-rc-dwm.json` - FreeBSD 12.1-RC1 + [X.Org][] +
+* `freebsd-12.1-rc-dwm.json` - FreeBSD 12.1-RC2 + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-12.1-rc-xfce.json` - FreeBSD 12.1-RC1 + [Xfce][] +
+* `freebsd-12.1-rc-xfce.json` - FreeBSD 12.1-RC2 + [Xfce][] +
   [SLiM][]
-* `freebsd-12.1-rc-zfs.json` - FreeBSD 12.1-RC1 on ZFS root
+* `freebsd-12.1-rc-zfs.json` - FreeBSD 12.1-RC2 on ZFS root
   file system
 
 While `freebsd-12.1-rc-*.json` templates generate amd64 boxes by
@@ -137,7 +131,6 @@ default, using `vars-freebsd-12.1-i386.json` generates i386 boxes:
   "Testinfra test your infrastructure &#8212; testinfra 3.2.1.dev2+g672a064.d20191006 documentation"
 [X.Org]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
-
 
 ## Build parameters
 
