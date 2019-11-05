@@ -229,7 +229,7 @@
     {
       "type": "shell",
       "only": ["virtualbox-iso"],
-      "script": "../provisioners/virtualbox_ose_additions-11.sh",
+      "script": "../provisioners/virtualbox_ose_additions-10.4+.sh",
       "execute_command": "echo '{{user `vagrant_password`}}' | env {{ .Vars }} sudo -E sh '{{.Path}}'",
       "environment_vars": [
         "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.1.22_1"
