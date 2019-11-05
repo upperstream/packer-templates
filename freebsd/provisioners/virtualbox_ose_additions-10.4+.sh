@@ -1,4 +1,7 @@
-#!/bin/sh -ex
+#!/bin/sh
+set -e
+set -x
+
 pkg install -y ${VIRTUALBOX_OSE_ADDITIONS:-"virtualbox-ose-additions-4.3.38"}
 cat >> /etc/rc.conf << EOF
 hald_enable="YES"
@@ -6,6 +9,8 @@ dbus_enable="YES"
 vboxguest_enable="YES"
 vboxservice_enable="YES"
 EOF
+
+test "${VIRTUALBOX_WITH_XORG:-true}" = "true" || exit 0
 
 cat >> /etc/X11/xorg.conf << EOF
 Section "Device"

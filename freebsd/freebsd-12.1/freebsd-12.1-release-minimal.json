@@ -215,6 +215,16 @@
     },
     {
       "type": "shell",
+      "only": ["virtualbox-iso"],
+      "script": "../provisioners/virtualbox_ose_additions-10.4+.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
+      "environment_vars": [
+        "VIRTUALBOX_WITH_XORG=false",
+        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-nox11-5.2.32_1"
+      ]
+    },
+    {
+      "type": "shell",
       "only": ["vmware-iso", "esxi-iso"],
       "script": "../provisioners/vmware-guest.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",

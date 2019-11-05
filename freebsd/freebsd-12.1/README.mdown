@@ -68,14 +68,16 @@ users' own `Vagrantfile`s.
 
 ### Synced Folder
 
-Due to Vagrant limitation for FreeBSD guest, VirtualBox Synced Folder
-is disabled by default.  You can still use other types of synced
-folders:
+Because VirtualBox share folder on FreeBSD guest was not supported
+until Vagrant 2.2.5, VirtualBox Synced Folder is disabled by default.
+You can enable it in your Vagrantfile with Vagrant 2.2.5 or later, or
+use other types of synced folders:
 
 * NFS on non-Windows hosts
 * RSync on any hosts.
 
-SMB synced folder is not supported for FreeBSD guest.
+with Vagrant older versions.  SMB synced folder is not supported for
+FreeBSD guest.
 
 ### SSH Shell
 
