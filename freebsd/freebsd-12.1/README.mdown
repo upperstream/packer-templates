@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 12.1-RC2
+# Packer templates for FreeBSD 12.1-RELEASE
 
-Templates to create Vagrant boxes for FreeBSD 12.1-RC2 (amd64 and
+Templates to create Vagrant boxes for FreeBSD 12.1-RELEASE (amd64 and
 i386).
 
 ## Prerequisites
@@ -33,29 +33,29 @@ i386).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso freebsd-12.1-rc-minimal.json
+    packer build -only=virtualbox-iso freebsd-12.1-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-12.1-RC-amd64-minimal-v2.20191018-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-12.1-RELEASE-amd64-minimal-v12.1.20191104-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-12.1-RC-amd64-minimal-v2.20191018-virtualbox`
+Then you can add the box named `FreeBSD-12.1-RELEASE-amd64-minimal-v12.1.20191104-virtualbox`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.1-RC-amd64-minimal-v2.20191018-virtualbox.box --name FreeBSD-12.1-RC-amd64-minimal-v2.20191018-virtualbox
+    vagrant box add FreeBSD-12.1-RELEASE-amd64-minimal-v12.1.20191104-virtualbox.box --name FreeBSD-12.1-RELEASE-amd64-minimal-v12.1.20191104-virtualbox
 
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso freebsd-12.1-rc-minimal.json
+    packer build -only=vmware-iso freebsd-12.1-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-12.1-RC-amd64-v2.20191018-vmware.box`
+You will find a vagrant box file named `FreeBSD-12.1-RELEASE-amd64-v12.1.20191104-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-12.1-RC-amd64-minimal-v2.20191018-vmware`
+Then you can add the box named `FreeBSD-12.1-RELEASE-amd64-minimal-v12.1.20191104-vmware`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.1-RC-amd64-minimal-v2.20191018-vmware.box --name FreeBSD-12.1-RC-amd64-minimal-v2.20191018-vmware
+    vagrant box add FreeBSD-12.1-RELEASE-amd64-minimal-v12.1.20191104-vmware.box --name FreeBSD-12.1-RELEASE-amd64-minimal-v12.1.20191104-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -97,26 +97,26 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso freebsd-12.1-rc-minimal.json
+    packer build -only=esxi-iso freebsd-12.1-release-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
 
 ## Variants
 
-* `freebsd-12.1-rc-minimal.json` - FreeBSD 12.1-RC2
-* `freebsd-12.1-rc-ansible.json` - FreeBSD 12.1-RC2 +
+* `freebsd-12.1-release-minimal.json` - FreeBSD 12.1-RELEASE
+* `freebsd-12.1-release-ansible.json` - FreeBSD 12.1-RELEASE +
   [Ansible][] + [Ansible Lint] + [Testinfra][]
-* `freebsd-12.1-rc-dwm.json` - FreeBSD 12.1-RC2 + [X.Org][] +
+* `freebsd-12.1-release-dwm.json` - FreeBSD 12.1-RELEASE + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-12.1-rc-xfce.json` - FreeBSD 12.1-RC2 + [Xfce][] +
+* `freebsd-12.1-release-xfce.json` - FreeBSD 12.1-RELEASE + [Xfce][] +
   [SLiM][]
-* `freebsd-12.1-rc-zfs.json` - FreeBSD 12.1-RC2 on ZFS root
+* `freebsd-12.1-release-zfs.json` - FreeBSD 12.1-RELEASE on ZFS root
   file system
 
-While `freebsd-12.1-rc-*.json` templates generate amd64 boxes by
+While `freebsd-12.1-release-*.json` templates generate amd64 boxes by
 default, using `vars-freebsd-12.1-i386.json` generates i386 boxes:
 
-    packer build -var-file=vars-freebsd-12.1-i386.json freebsd-12.1-rc-minimal.json
+    packer build -var-file=vars-freebsd-12.1-i386.json freebsd-12.1-release-minimal.json
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/

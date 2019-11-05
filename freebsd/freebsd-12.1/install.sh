@@ -17,7 +17,7 @@ EOF
 mkdir -p /usr/local/etc/pkg/repos/
 cat > /usr/local/etc/pkg/repos/FreeBSD.conf << EOF
 FreeBSD: {
-    url: pkg+http://pkg.freebsd.org/${ABI}/quarterly,
+    url: pkg+http://pkg.freebsd.org/${ABI}/release_1,
     enabled: true
 }
 EOF
@@ -25,7 +25,7 @@ EOF
 env ASSUME_ALWAYS_YES="YES" pkg bootstrap -y
 pkg update
 pkg install -y sudo-1.8.28
-pkg install -y ca_root_nss-3.47
+pkg install -y ca_root_nss-3.46.1
 ln -sf /usr/local/share/certs/ca-root-nss.crt /etc/ssl/cert.pem
 
 echo -n "$ROOT_PASSWORD" | pw usermod root -h 0
