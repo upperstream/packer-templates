@@ -256,7 +256,7 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/vagrant_netbsd8.sh",
+        "../provisioners/vagrant_netbsd8+.sh",
         "../provisioners/ansible_netbsd8.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
