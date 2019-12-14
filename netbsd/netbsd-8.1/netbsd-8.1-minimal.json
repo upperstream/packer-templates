@@ -250,7 +250,7 @@
     },
     {
       "type": "shell",
-      "script": "../provisioners/vagrant_netbsd8.sh",
+      "script": "../provisioners/vagrant_netbsd8+.sh",
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
         "VAGRANT_USER={{user `vagrant_username`}}",
