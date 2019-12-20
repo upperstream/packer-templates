@@ -1,7 +1,0 @@
-{
-  "iso_name": "devuan_ascii_2.0.0_amd64_dvd-1.iso",
-  "iso_path": "devuan_ascii/installer-iso",
-  "iso_checksum": "bf6629d949f51d0d874a47e4d9107a0f437c1f915bf816cae8f0ceef0ca0a1d5",
-  "iso_checksum_type": "sha256",
-  "install_from_dvd": "true"
-}

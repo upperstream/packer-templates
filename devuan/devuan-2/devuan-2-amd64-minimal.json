@@ -1,11 +1,12 @@
 {
   "variables": {
-    "vm_name": "Devuan-2.0-amd64-minimal",
+    "vm_name": "Devuan-2-amd64-minimal",
+    "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "51200",
-    "iso_name": "devuan_ascii_2.0.0_amd64_netinst.iso",
+    "iso_name": "devuan_ascii_2.1_amd64_netinst.iso",
     "iso_path": "devuan_ascii/installer-iso",
-    "iso_checksum": "c16bebdeecdf452188ae4bb823cd5f1c0d2ed3a7a568332508943ce16f7e5c71",
+    "iso_checksum": "321292be7928f7f09918affe1529283d571930ec4a93a2cce8e0ce0d494058e8",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
@@ -13,7 +14,7 @@
     "vagrant_username": "vagrant",
     "vagrant_group": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "2.0.20180608",
+    "box_version": "2.1.20191121",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -64,7 +65,8 @@
         "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
-        "<enter> <wait>"
+        "choose-init/select_init=sysvinit<wait>",
+        "<enter><wait>"
       ]
     },
     {
@@ -90,13 +92,12 @@
       "shutdown_command": "/sbin/shutdown -h now",
       "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "memory": "{{user `mem_size`}}",
+      "cpus": "{{user `num_cpus`}}",
+      "network": "nat",
+      "network_adapter_type": "e1000",
       "vmx_data": {
-        "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
         "ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "nat",
-        "ethernet0.virtualDev": "e1000",
-        "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
@@ -114,7 +115,8 @@
         "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
-        "<enter> <wait>"
+        "choose-init/select_init=sysvinit<wait>",
+        "<enter><wait>"
       ]
     },
     {
@@ -145,13 +147,14 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
       "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "skip_export": true,
       "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "memory": "{{user `mem_size`}}",
+      "cpus": "{{user `num_cpus`}}",
+      "network": "bridged",
+      "network_adapter_type": "e1000",
       "vmx_data": {
-        "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
         "ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "bridged",
-        "ethernet0.virtualDev": "e1000",
         "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
@@ -170,7 +173,8 @@
         "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
-        "<enter> <wait>"
+        "choose-init/select_init=sysvinit<wait>",
+        "<enter><wait>"
       ]
     }
   ],
@@ -199,23 +203,19 @@
     {
       "type": "shell",
       "only": ["vmware-iso", "esxi-iso"],
-      "scripts": "../provisioners/vmtools.sh",
+      "script": "../provisioners/vmtools.sh",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools=2:10.1.5-5055683-4+deb9u1"
+        "OPEN_VM_TOOLS=open-vm-tools=2:10.1.5-5055683-4+deb9u2"
       ]
     },
     {
       "type": "shell",
       "only": ["virtualbox-iso", "vmware-iso"],
-      "scripts": [
-        "../provisioners/disk_cleanup.sh"
-      ]
+      "script": "../provisioners/disk_cleanup.sh"
     },
     {
       "type": "shell",
-      "scripts": [
-        "../provisioners/finalise.sh"
-      ]
+      "script": "../provisioners/finalise.sh"
     }
   ],
   "post-processors": [
