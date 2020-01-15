@@ -34,7 +34,9 @@
     * Alpine Linux 3.6.2 (x86_64 and x86)
 * [alpine-3.7](alpine-3.7/README.mdown) - templates for Alpine Linux 3.7.0
     * Alpine Linux 3.7.0 (x86_64 and x86)
+* [alpine-3.11](alpine-3.11/README.mdown) - templates for Alpine Linux 3.11.2
+    * Alpine Linux 3.11.2 (x86_64 and x86)
 
 - - -
 
-Copyright &copy; 2015-2017 Upper Stream Software.
+Copyright &copy; 2015-2017, 2020 Upperstream Software.
