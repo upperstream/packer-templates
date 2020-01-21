@@ -13,7 +13,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "11.2.20200113",
+    "box_version": "11.3.20200121",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.11"
@@ -197,7 +197,7 @@
       "script": "../provisioners/virtualbox_3.8+.sh",
       "environment_vars": [
         "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.0.14-r0",
-        "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.8-r0",
+        "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.12-r1",
         "OS_VER={{user `os_ver`}}"
       ]
     },
@@ -216,7 +216,7 @@
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "ANSIBLE=ansible=2.9.1-r0",
+        "ANSIBLE=ansible=2.9.3-r0",
         "ANSIBLE_LINT=ansible-lint=4.1.1a1-r0",
         "TESTINFRA=testinfra==3.2.1"
       ]

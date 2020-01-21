@@ -1,7 +1,7 @@
 {
   "vm_name": "Alpine-standard-3.11-x86",
-  "iso_image": "alpine-standard-3.11.2-x86.iso",
-  "iso_checksum": "102c379f41cbd62d1bf7f80fadb660575cc615d83930cb47269afcd93ec90984",
+  "iso_image": "alpine-standard-3.11.3-x86.iso",
+  "iso_checksum": "740e92d84d018758b3ceabf5eb0536647bd420efcce4189ec7f3c06e5bdfeb8c",
   "iso_checksum_type": "sha256",
   "cpu": "x86",
   "virtualbox_guest_os_type": "Linux26",
