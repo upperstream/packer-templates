@@ -31,12 +31,12 @@
     * NetBSD 8.1 + X.Org
     * NetBSD 8.1 + X.Org + XDM + dwm + dmenu + st
     * NetBSD 8.1 + Xfce + XDM
-* [netbsd-9.0](netbsd-9.0/README.mdown) - templates for NetBSD 9.0_RC1
-    * NetBSD 9.0_RC1
-    * NetBSD 9.0_RC1 + X.Org
+* [netbsd-9.0](netbsd-9.0/README.mdown) - templates for NetBSD 9.0_RC2
+    * NetBSD 9.0_RC2
+    * NetBSD 9.0_RC2 + X.Org
 
 VirtualBox and VMware providers are supported.
 
 - - -
 
-Copyright &copy; 2015-2019 Upperstream Software.
+Copyright &copy; 2015-2020 Upperstream Software.
