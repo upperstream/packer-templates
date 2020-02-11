@@ -1,6 +1,6 @@
 # Packer templates for NetBSD 9.0_RC2
 
-Templates to create Vagrant boxes for NetBSD 9.0_RC2 (amd64).
+Templates to create Vagrant boxes for NetBSD 9.0_RC2 (amd64 and i386).
 
 
 ## Prerequisites
@@ -35,7 +35,7 @@ Templates to create Vagrant boxes for NetBSD 9.0_RC2 (amd64).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso netbsd-9.0-minimal.json
+    packer build -only=virtualbox-iso netbsd-9.0-amd64-minimal.json
 
 You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v2.20200202-virtualbox.box`
 in the same directory after the command has succeeded.
@@ -49,7 +49,7 @@ to your box list by the following command:
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso netbsd-9.0-minimal.json
+    packer build -only=vmware-iso netbsd-9.0-and64-minimal.json
 
 You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v2.20200202-vmware.box`
 in the same directory after the command has succeeded.
@@ -95,7 +95,7 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso netbsd-9.0-minimal.json
+    packer build -only=esxi-iso netbsd-9.0-amd64-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
 
@@ -105,10 +105,10 @@ The following command will build a VM image on your ESXi:
 * `netbsd-9.0-minmal.json` - NetBSD 9.0_RC2
 * `netbsd-9.0-xorg.json` - NetBSD 9.0_RC2 + [X.Org][]
 
-While `netbsd-9.0-*.json` templates generate amd64 boxes by default,
-using `vars-netbsd-9.0-i386.json` generates i386 boxes:
+While `netbsd-9.0-amd64-*.json` templates generate amd64 boxes,
+`netbsd-9.0-i386-*.json` templates generate i386 boxes:
 
-    packer build -var-file=vars-netbsd-9.0-i386.json netbsd-9.0-minimal.json
+    packer build netbsd-9.0-i386-minimal.json
 
 [X.Org]: https://www.x.org/wiki/ "X.Org"
 
