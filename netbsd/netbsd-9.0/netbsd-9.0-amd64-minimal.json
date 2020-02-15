@@ -4,7 +4,7 @@
     "ssh_password": "vagrant",
     "os_ver": "9.0",
     "variant": "minimal",
-    "box_ver": "2.20200202",
+    "box_ver": "9.0.20200215",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_port": "{{env `REMOTE_PORT`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
@@ -19,13 +19,13 @@
     "hostname": "vagrant",
     "headless": "false",
     "package_server": "http://cdn.netbsd.org",
-    "iso_file_name": "NetBSD-9.0_RC2-amd64.iso",
-    "iso_path": "NetBSD/NetBSD-9.0_RC2/images",
-    "iso_checksum": "587df4e38b3a884dcbcf38e5e57821383355d37b83530c95ac774d17b12b422589a0e1dcd5b0e6f47af73b8c917408e8867bc02ee01ffaf79ecb352c746d0ed2",
+    "iso_file_name": "NetBSD-9.0-amd64.iso",
+    "iso_path": "NetBSD/NetBSD-9.0/images",
+    "iso_checksum": "34da4882ee61bdbf69f241195a8933dc800949d30b43fc6988da853d57fc2b8cac50cf97a0d2adaf93250b4e329d189c1a8b83c33bd515226f37745d50c33369",
     "iso_checksum_type": "sha512",
     "virtualbox_geust_os_type": "NetBSD_64",
     "vmware_guest_os_type": "other-64",
-    "vm_name": "NetBSD-9.0_RC-amd64"
+    "vm_name": "NetBSD-9.0-amd64"
   },
   "builders": [
     {
@@ -235,7 +235,7 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.0_2019Q3/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.0_2019Q4/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
@@ -247,7 +247,7 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "SUDO=sudo-1.8.28",
+        "SUDO=sudo-1.8.29nb2",
         "RSYNC=rsync-3.1.3nb2"
       ]
     },

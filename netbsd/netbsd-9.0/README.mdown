@@ -1,6 +1,6 @@
-# Packer templates for NetBSD 9.0_RC2
+# Packer templates for NetBSD 9.0
 
-Templates to create Vagrant boxes for NetBSD 9.0_RC2 (amd64 and i386).
+Templates to create Vagrant boxes for NetBSD 9.0 (amd64 and i386).
 
 
 ## Prerequisites
@@ -37,13 +37,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso netbsd-9.0-amd64-minimal.json
 
-You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v2.20200202-virtualbox.box`
+You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v9.0.20200215-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.0-amd64-minimal-v2.20200202-virtualbox`
+Then you can add the box named `NetBSD-9.0-amd64-minimal-v9.0.20200215-virtualbox`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.0-amd64-minimal-v2.20200202-virtualbox.box --name NetBSD-9.0-amd64-minimal-v2.20200202-virtualbox
+    vagrant box add NetBSD-9.0-amd64-minimal-v9.0.20200215-virtualbox.box --name NetBSD-9.0-amd64-minimal-v9.0.20200215-virtualbox
 
 ### VMware
 
@@ -51,13 +51,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso netbsd-9.0-and64-minimal.json
 
-You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v2.20200202-vmware.box`
+You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v9.0.20200215-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.0-amd64-minimal-v2.20200202-vmware`
+Then you can add the box named `NetBSD-9.0-amd64-minimal-v9.0.20200215-vmware`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.0-amd64-minimal-v2.20200202-vmware.box --name NetBSD-9.0-amd64-minimal-v2.20200202-vmware
+    vagrant box add NetBSD-9.0-amd64-minimal-v9.0.20200215-vmware.box --name NetBSD-9.0-amd64-minimal-v9.0.20200215-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -102,8 +102,8 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `netbsd-9.0-minmal.json` - NetBSD 9.0_RC2
-* `netbsd-9.0-xorg.json` - NetBSD 9.0_RC2 + [X.Org][]
+* `netbsd-9.0-minmal.json` - NetBSD 9.0
+* `netbsd-9.0-xorg.json` - NetBSD 9.0 + [X.Org][]
 
 While `netbsd-9.0-amd64-*.json` templates generate amd64 boxes,
 `netbsd-9.0-i386-*.json` templates generate i386 boxes:

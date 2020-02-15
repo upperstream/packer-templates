@@ -4,7 +4,7 @@
     "ssh_password": "vagrant",
     "os_ver": "9.0",
     "variant": "xorg",
-    "box_ver": "2.20200202",
+    "box_ver": "9.0.20200215",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_port": "{{env `REMOTE_PORT`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
@@ -19,13 +19,13 @@
     "hostname": "vagrant",
     "headless": "false",
     "package_server": "http://cdn.netbsd.org",
-    "iso_file_name": "NetBSD-9.0_RC2-i386.iso",
-    "iso_path": "NetBSD/NetBSD-9.0_RC2/images",
-    "iso_checksum": "c5a0673bbbae3eee2f0f24bd4fa992f337dbc2041fc36604f6d6ff3298bf3a276779f0d495d994c8614b5abfb8a97f6b3106af10d045fac9540be0b22cb96f20",
+    "iso_file_name": "NetBSD-9.0-i386.iso",
+    "iso_path": "NetBSD/NetBSD-9.0/images",
+    "iso_checksum": "36d7e820ade17a0d684de46ffcfa8ee36cf861c438399fc8456a5a1bc07aef84a420acc6144c6d54b682b3cdcdce2789e59a03b7f070b002b6f8bd50407eedf1",
     "iso_checksum_type": "sha512",
     "virtualbox_geust_os_type": "NetBSD",
     "vmware_guest_os_type": "other",
-    "vm_name": "NetBSD-9.0_RC-i386"
+    "vm_name": "NetBSD-9.0-i386"
   },
   "builders": [
     {
@@ -247,7 +247,7 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.0_2019Q3/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.0_2019Q4/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
@@ -271,7 +271,7 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "SUDO=sudo-1.8.28",
+        "SUDO=sudo-1.8.29nb2",
         "RSYNC=rsync-3.1.3nb2"
       ]
     },
