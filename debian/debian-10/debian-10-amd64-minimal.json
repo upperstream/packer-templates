@@ -1,24 +1,25 @@
 {
   "variables": {
     "vm_name": "Debian-10-amd64-minimal",
+    "num_cpus": "2",
     "mem_size": "640",
     "disk_size": "51200",
     "iso_name": "mini.iso",
-    "iso_path": "buster/main/installer-amd64/20190702/images/netboot",
-    "iso_checksum": "20247e068b1edf5b3bfefff6f0cb7073ca48e56c4adba241429cf4f49dddd489",
+    "iso_path": "buster/main/installer-amd64/20190702+deb10u3/images/netboot",
+    "iso_checksum": "26b6f6f6bcb24c4e59b965d4a2a6c44af5d79381b9230d69a7d4db415ddcb4cd",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "10.0.20190706",
+    "box_version": "10.3.20200208",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "headless": "false",
-    "virtualbox_version": "5.2.30"
+    "virtualbox_version": "5.2.36"
   },
   "builders": [
     {
@@ -50,7 +51,7 @@
       "vm_name": "{{user `vm_name`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
       "http_directory": "../http",
@@ -94,13 +95,12 @@
       "shutdown_command": "sudo /sbin/shutdown -h now",
       "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}",
+      "memory": "{{user `mem_size`}}",
+      "cpus": "{{user `num_cpus`}}",
+      "network": "nat",
+      "network_adapter_type": "e1000",
       "vmx_data": {
-        "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
         "ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "nat",
-        "ethernet0.virtualDev": "e1000",
-        "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
@@ -153,12 +153,13 @@
       "remote_datastore": "{{user `remote_datastore`}}",
       "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
       "vm_name": "{{user `vm_name`}}",
+      "skip_export": "true",
+      "memory": "{{user `mem_size`}}",
+      "cpus": "{{user `num_cpus`}}",
+      "network": "bridged",
+      "network_adapter_type": "e1000",
       "vmx_data": {
-        "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
         "ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "bridged",
-        "ethernet0.virtualDev": "e1000",
         "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
@@ -211,7 +212,7 @@
       "only": ["vmware-iso", "esxi-iso"],
       "script": "../provisioners/vmtools.sh",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools=2:10.3.10-1"
+        "OPEN_VM_TOOLS=open-vm-tools=2:10.3.10-1+deb10u2"
       ]
     },
     {
