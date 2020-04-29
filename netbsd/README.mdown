@@ -33,7 +33,10 @@
     * NetBSD 8.1 + Xfce + XDM
 * [netbsd-9.0](netbsd-9.0/README.mdown) - templates for NetBSD 9.0
     * NetBSD 9.0
+    * NetBSD 9.0 + Ansible + Ansible Lint + Testinfra
     * NetBSD 9.0 + X.Org
+    * NetBSD 9.0 + X.Org + XDM + dwm + dmenu + st
+    * NetBSD 9.0 + Xfce + XDM
 
 VirtualBox and VMware providers are supported.
 

@@ -3,7 +3,7 @@
     "ssh_username": "root",
     "ssh_password": "vagrant",
     "os_ver": "9.0",
-    "variant": "xorg",
+    "variant": "ansible",
     "box_ver": "9.0.20200428",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_port": "{{env `REMOTE_PORT`}}",
@@ -14,7 +14,7 @@
     "vagrant_password": "vagrant",
     "vagrant_group": "vagrant",
     "num_cpus": "2",
-    "mem_size": "1024",
+    "mem_size": "512",
     "disk_size": "40960",
     "hostname": "vagrant",
     "headless": "false",
@@ -72,12 +72,8 @@
         "d<enter><wait>",
         "h<enter><wait>",
         "l<enter><wait>",
-        "m<enter><wait>",
-        "f<enter><wait>",
-        "b<enter><wait>",
         "x<enter><wait>",
-        "x<enter><wait>",
-        "a<enter><wait10><wait10><wait10><wait10><wait10><wait10><wait10>",
+        "a<enter><wait10><wait10><wait10><wait10><wait10>",
         "<enter><wait>",
         "d<enter><wait>",
         "a<enter><wait>",
@@ -142,12 +138,8 @@
         "d<enter><wait>",
         "h<enter><wait>",
         "l<enter><wait>",
-        "m<enter><wait>",
-        "f<enter><wait>",
-        "b<enter><wait>",
         "x<enter><wait>",
-        "x<enter><wait>",
-        "a<enter><wait10><wait10><wait10><wait10><wait10><wait10><wait10>",
+        "a<enter><wait10><wait10><wait10><wait10><wait10>",
         "<enter><wait>",
         "d<enter><wait>",
         "a<enter><wait>",
@@ -220,12 +212,8 @@
         "d<enter><wait>",
         "h<enter><wait>",
         "l<enter><wait>",
-        "m<enter><wait>",
-        "f<enter><wait>",
-        "b<enter><wait>",
         "x<enter><wait>",
-        "x<enter><wait>",
-        "a<enter><wait10><wait10><wait10><wait10><wait10><wait10><wait10>",
+        "a<enter><wait10><wait10><wait10><wait10><wait10>",
         "<enter><wait>",
         "d<enter><wait>",
         "a<enter><wait>",
@@ -253,18 +241,9 @@
     },
     {
       "type": "shell",
-      "only": ["vmware-iso", "esxi-iso"],
-      "script": "../provisioners/vmware-xorg_netbsd8+.sh",
-      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
-      "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools-10.3.0nb5"
-      ]
-    },
-    {
-      "type": "shell",
       "scripts": [
         "../provisioners/vagrant_netbsd8+.sh",
-        "../provisioners/xorg.sh"
+        "../provisioners/ansible_netbsd9.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
@@ -272,7 +251,13 @@
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
         "SUDO=sudo-1.8.31",
-        "RSYNC=rsync-3.1.3nb2"
+        "RSYNC=rsync-3.1.3nb2",
+        "PYTHON=python37-3.7.5",
+        "PYTHON_PIP=py37-pip-19.3.1",
+        "ANSIBLE=ansible-2.9.2",
+        "ANSIBLE_LINT=ansible-lint==4.2.0",
+        "TESTINFRA=testinfra==3.4.0",
+        "PIP=python3.7 -m pip"
       ]
     },
     {
