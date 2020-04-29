@@ -254,7 +254,7 @@
     {
       "type": "shell",
       "only": ["vmware-iso", "esxi-iso"],
-      "script": "../provisioners/vmware-xorg_netbsd8.sh",
+      "script": "../provisioners/vmware-xorg_netbsd8+.sh",
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
         "OPEN_VM_TOOLS=open-vm-tools-10.3.0nb5"
