@@ -4,7 +4,7 @@
     "ssh_password": "vagrant",
     "os_ver": "9.0",
     "variant": "minimal",
-    "box_ver": "9.0.20200215",
+    "box_ver": "9.0.20200428",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_port": "{{env `REMOTE_PORT`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
@@ -235,7 +235,7 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.0_2019Q4/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/9.0_2019Q4/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
@@ -247,7 +247,7 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "SUDO=sudo-1.8.29nb2",
+        "SUDO=sudo-1.8.31",
         "RSYNC=rsync-3.1.3nb2"
       ]
     },

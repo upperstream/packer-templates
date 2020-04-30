@@ -37,13 +37,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso netbsd-9.0-amd64-minimal.json
 
-You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v9.0.20200215-virtualbox.box`
+You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v9.0.20200428-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.0-amd64-minimal-v9.0.20200215-virtualbox`
+Then you can add the box named `NetBSD-9.0-amd64-minimal-v9.0.20200428-virtualbox`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.0-amd64-minimal-v9.0.20200215-virtualbox.box --name NetBSD-9.0-amd64-minimal-v9.0.20200215-virtualbox
+    vagrant box add NetBSD-9.0-amd64-minimal-v9.0.20200428-virtualbox.box --name NetBSD-9.0-amd64-minimal-v9.0.20200428-virtualbox
 
 ### VMware
 
@@ -51,13 +51,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso netbsd-9.0-and64-minimal.json
 
-You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v9.0.20200215-vmware.box`
+You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v9.0.20200428-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.0-amd64-minimal-v9.0.20200215-vmware`
+Then you can add the box named `NetBSD-9.0-amd64-minimal-v9.0.20200428-vmware`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.0-amd64-minimal-v9.0.20200215-vmware.box --name NetBSD-9.0-amd64-minimal-v9.0.20200215-vmware
+    vagrant box add NetBSD-9.0-amd64-minimal-v9.0.20200428-vmware.box --name NetBSD-9.0-amd64-minimal-v9.0.20200428-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -103,14 +103,31 @@ The following command will build a VM image on your ESXi:
 ## Variants
 
 * `netbsd-9.0-minmal.json` - NetBSD 9.0
+* `netbsd-9.0-ansible.json` - NetBSD 9.0 + [Ansible][] +
+  [Ansible Lint][] + [Testinfra][]
 * `netbsd-9.0-xorg.json` - NetBSD 9.0 + [X.Org][]
+* `netbsd-9.0-dwm.json` - NetBSD 9.0 + X.Org + [dwm][] + [st][]
+  + [dmenu][], with [XDM] enabled
+* `netbsd-9.0-xfce.json` - NetBSD 9.0 + [Xfce][], with XDM enabled
+  (amd64 only)
 
 While `netbsd-9.0-amd64-*.json` templates generate amd64 boxes,
 `netbsd-9.0-i386-*.json` templates generate i386 boxes:
 
     packer build netbsd-9.0-i386-minimal.json
 
+[Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
+[Ansible Lint]: https://docs.ansible.com/ansible-lint/
+  "Ansible Lint Documentation &mdash; Ansible Documentation"
+[dmenu]: http://tools.suckless.org/dmenu/ "dmenu | suckless.org tools"
+[dwm]: http://dwm.suckless.org/
+  "suckless.org dwm - dynamic window manager"
+[st]: http://st.suckless.org/ "suckless.org st - simple terminal"
+[Testinfra]: https://testinfra.readthedocs.io/en/latest/
+  "Testinfra test your infrastructure &#8212; testinfra 5.0.1.dev2+gd9d87d8.d20200427 documentation"
 [X.Org]: https://www.x.org/wiki/ "X.Org"
+[XDM]: https://www.x.org/releases/X11R7.6/doc/man/man1/xdm.1.xhtml "XDM"
+[Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 
 
 ## Build parameters
