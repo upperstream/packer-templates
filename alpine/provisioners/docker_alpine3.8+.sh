@@ -3,7 +3,16 @@ set -e
 set -x
 
 sed -i "/${OS_VER:-edge}\/community/s/^#//" /etc/apk/repositories
-apk --update --no-cache add ${DOCKER:-docker} ${DOCKER_COMPOSE:-docker-compose}
+apk --update --no-cache add ${DOCKER:-docker}
+if [ "$DOCKER_COMPOSE" ]; then
+	apk --no-cache add ${DOCKER_COMPOSE:-docker-compose}
+else
+	apk --no-cache add ${PYTHON:-python3} python3-dev libffi-dev openssl-dev
+	apk --no-cache add build-base
+	python3 -m pip install docker-compose==${DOCKER_COMPOSE_VERSION:=1.25.0}
+	apk del build-base libffi-dev openssl-dev python3-dev
+fi
+
 rc-update add docker boot
 
 adduser -SDHs /sbin/nologin dockremap
