@@ -206,7 +206,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant.sh",
-        "../provisioners/ansible+testinfra_3.5+.sh"
+        "../provisioners/ansible+testinfra_alpine3.5+.sh"
       ],
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",

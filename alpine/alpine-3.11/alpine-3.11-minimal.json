@@ -194,7 +194,7 @@
     {
       "type": "shell",
       "only": ["virtualbox-iso"],
-      "script": "../provisioners/virtualbox_3.8+.sh",
+      "script": "../provisioners/virtualbox_alpine3.8+.sh",
       "environment_vars": [
         "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.0.14-r0",
         "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.12-r1",
@@ -204,7 +204,7 @@
     {
       "type": "shell",
       "only": ["vmware-iso", "esxi-iso"],
-      "script": "../provisioners/vmware_3.9+.sh"
+      "script": "../provisioners/vmware_alpine3.9+.sh"
     },
     {
       "type": "shell",
