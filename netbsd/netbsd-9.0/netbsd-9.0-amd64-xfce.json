@@ -273,7 +273,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant_netbsd8+.sh",
-        "../provisioners/xfce_netbsd9.sh"
+        "../provisioners/xfce_netbsd8.2+.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
