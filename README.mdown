@@ -4,55 +4,54 @@
 
 * [alpine](alpine/README.mdown) - Alpine Linux templates (x86_64 and
   x86)
-    * alpine-3.5.2 - Alpine Linux 3.5.2 templates
-    * alpine-3.6.2 - Alpine Linux 3.6.2 templates
-    * alpine-3.7 - Alpine Linux 3.7.0 templates
-    * alpine-3.11 - Alpine Linux 3.11.3 templates
-    * [more](alpine/README.mdown)
+  * alpine-3.5.2 - Alpine Linux 3.5.2 templates
+  * alpine-3.6.2 - Alpine Linux 3.6.2 templates
+  * alpine-3.7 - Alpine Linux 3.7.0 templates
+  * alpine-3.11 - Alpine Linux 3.11.3 templates
+  * [more](alpine/README.mdown)
 * [archlinux](archlinux/README.mdown) - Arch Linux templates (x86_64)
 * [centos](centos/README.mdown) - CentOS templates (x86_64 and i386)
-    * centos-5.11 - CentOS 5.11 templates
-    * centos-6.9 - CentOS 6.9 templates
-    * centos-7 - CentOS 7.4 1708 templates (x86_64 only)
-    * [more](centos/README.mdown)
+  * centos-5.11 - CentOS 5.11 templates
+  * centos-6.9 - CentOS 6.9 templates
+  * centos-7 - CentOS 7.4 1708 templates (x86_64 only)
+  * [more](centos/README.mdown)
 * [debian](debian/README.mdown) - Debian templates (amd64)
-    * debian-8.11 - Debian 8.11.1 templates
-    * debian-9 - Debian 9.12 templates
-    * debian-10 - Debian 10.3 templates
-    * [more](debian/README.mdown)
+  * debian-8.11 - Debian 8.11.1 templates
+  * debian-9 - Debian 9.12 templates
+  * debian-10 - Debian 10.3 templates
+  * [more](debian/README.mdown)
 * [devuan](devuan) - Devuan templates (amd64)
-    * devuan-1.0 - Devuan Jessie 1.0.0 templates
-    * devuan-2.0 - Devuan 2.0.0 ASCII templates
+  * devuan-1.0 - Devuan Jessie 1.0.0 templates
+  * devuan-2.0 - Devuan 2.0.0 ASCII templates
 * [freebsd](freebsd/README.mdown) - FreeBSD templates (amd64 and i386)
-    * freebsd-11.3 - FreeBSD 11.3 templates
-    * freebsd-12.0 - FreeBSD 12.0 templates
-    * freebsd-12.1 - FreeBSD 12.1 templates
-    * [more](freebsd/README.mdown)
+  * freebsd-11.3 - FreeBSD 11.3 templates
+  * freebsd-12.0 - FreeBSD 12.0 templates
+  * freebsd-12.1 - FreeBSD 12.1 templates
+  * [more](freebsd/README.mdown)
 * [netbsd](netbsd/README.mdown) - NetBSD templates (amd64 and i386)
-    * netbsd-5.2.3 - NetBSD 5.2.3 templates
-    * netbsd-6.1.5 - NetBSD 6.1.5 templates
-    * netbsd-7.1 - NetBSD 7.1.2 templates
-    * netbsd-8.1 - NetBSD 8.1 templates
-    * netbsd-9.0 - NetBSD 9.0 templates
-    * [more](netbsd/README.mdown)
+  * netbsd-5.2.3 - NetBSD 5.2.3 templates
+  * netbsd-6.1.5 - NetBSD 6.1.5 templates
+  * netbsd-7.1 - NetBSD 7.1.2 templates
+  * netbsd-8.2 - NetBSD 8.2 templates
+  * netbsd-9.0 - NetBSD 9.0 templates
+  * [more](netbsd/README.mdown)
 * [openbsd](openbsd/README.mdown) - OpenBSD templates (amd64 and i386)
-    * openbsd-6.5 - OpenBSD 6.5 templates
-    * openbsd-6.6 - OpenBSD 6.6 templates
-    * [more](openbsd/README.mdown)
+  * openbsd-6.5 - OpenBSD 6.5 templates
+  * openbsd-6.6 - OpenBSD 6.6 templates
+  * [more](openbsd/README.mdown)
 * [opensuse](opensuse/README.mdown) - openSUSE templates (amd64)
-    * leap-42.3 - openSUSE Leap 42.3 templates
+  * leap-42.3 - openSUSE Leap 42.3 templates
 * [tinycorelinux](tinycorelinux/README.mdown) - Tiny Core Linux
   templates (x86_64 and x86)
-    * tinycorelinux-7 - Tiny Core Linux v7.2 templates
-    * tinycorelinux-8 - Tiny Core Linux v8.2.1 templates
-    * tinycorelinux-9 - Tiny Core Linux v9.0 templates
+  * tinycorelinux-7 - Tiny Core Linux v7.2 templates
+  * tinycorelinux-8 - Tiny Core Linux v8.2.1 templates
+  * tinycorelinux-9 - Tiny Core Linux v9.0 templates
 * [ubuntu](ubuntu/README.mdown) - Ubuntu templates (x86_64)
-    * ubuntu-14.04 - Ubuntu 14.04.5 templates
-    * ubuntu-16.04 - Ubuntu 16.04.4 templates
-    * ubuntu-17.10 - Ubuntu 17.10.1 templates
-    * ubuntu-18.04 - Ubuntu 18.04 templates
-    * [more](ubuntu/README.mdown)
-
+  * ubuntu-14.04 - Ubuntu 14.04.5 templates
+  * ubuntu-16.04 - Ubuntu 16.04.4 templates
+  * ubuntu-17.10 - Ubuntu 17.10.1 templates
+  * ubuntu-18.04 - Ubuntu 18.04 templates
+  * [more](ubuntu/README.mdown)
 
 ## Licensing
 

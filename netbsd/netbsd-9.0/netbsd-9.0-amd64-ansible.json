@@ -243,7 +243,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant_netbsd8+.sh",
-        "../provisioners/ansible_netbsd9.sh"
+        "../provisioners/ansible_netbsd8.2+.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
@@ -255,8 +255,8 @@
         "PYTHON=python37-3.7.5",
         "PYTHON_PIP=py37-pip-19.3.1",
         "ANSIBLE=ansible-2.9.2",
-        "ANSIBLE_LINT=ansible-lint==4.2.0",
-        "TESTINFRA=testinfra==3.4.0",
+        "ANSIBLE_LINT_VERSION=4.2.0",
+        "TESTINFRA_VERSION=3.4.0",
         "PIP=python3.7 -m pip"
       ]
     },
