@@ -210,7 +210,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant-11.1+.sh",
-        "../provisioners/ansible+testinfra-11.3+.sh"
+        "../provisioners/ansible+testinfra_freebsd11.3+.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
