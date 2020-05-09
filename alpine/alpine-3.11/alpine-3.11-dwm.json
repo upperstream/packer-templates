@@ -13,7 +13,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "11.3.20200121",
+    "box_version": "11.6.20200423",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.11"
@@ -205,7 +205,7 @@
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "DWM=dwm=6.2-r0",
-        "ST=st=0.8.2-r0",
+        "ST=st=0.8.2-r1",
         "DMENU=dmenu=4.9-r0",
         "XRANDR=xrandr=1.5.1-r0",
         "XRDP=xrdp=0.9.11-r0"
@@ -217,7 +217,7 @@
       "script": "../provisioners/virtualbox_alpine3.8+.sh",
       "environment_vars": [
         "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.0.14-r0",
-        "VIRTUALBOX_GUEST_MODULES_LTS=virtualbox-guest-modules-lts=5.4.12-r1",
+        "VIRTUALBOX_GUEST_MODULES_LTS=virtualbox-guest-modules-lts=5.4.34-r0",
         "VIRTUALBOX_GUEST_ADDITIONS_X11=virtualbox-guest-additions-x11=6.0.14-r0",
         "VIRTUALBOX_WITH_X11=true",
         "OS_VER={{user `os_ver`}}"
@@ -229,6 +229,9 @@
       "scripts": [
         "../provisioners/vmware_alpine3.9+.sh",
         "../provisioners/xorg-vmware.sh"
+      ],
+      "environment_vars": [
+        "OS_VER={{user `os_ver`}}"
       ]
     },
     {

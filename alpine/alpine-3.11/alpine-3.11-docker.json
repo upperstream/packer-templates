@@ -13,7 +13,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "11.3.20200121",
+    "box_version": "11.6.20200423",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.11"
@@ -197,14 +197,18 @@
       "script": "../provisioners/virtualbox_alpine3.8+.sh",
       "environment_vars": [
         "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.0.14-r0",
-        "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.12-r1",
+        "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.34-r0",
         "OS_VER={{user `os_ver`}}"
       ]
     },
     {
       "type": "shell",
       "only": ["vmware-iso", "esxi-iso"],
-      "script": "../provisioners/vmware_alpine3.9+.sh"
+      "script": "../provisioners/vmware_alpine3.9+.sh",
+      "environment_vars": [
+        "OPEN_VM_TOOLS=open-vm-tools=10.3.10-r2",
+        "OS_VER={{user `os_ver`}}"
+      ]
     },
     {
       "type": "shell",
