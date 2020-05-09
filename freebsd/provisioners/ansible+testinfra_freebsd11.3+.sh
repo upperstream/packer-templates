@@ -6,4 +6,4 @@ if [ "$RUAMEL_ORDEREDDICT" ]; then
 	pkg install -y "$RUAMEL_ORDEREDDICT"
 fi
 
-pip install ${TESTINFRA:-testinfra}
+pip install testinfra==${TESTINFRA_VERSION:-1.17.0}

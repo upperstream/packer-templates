@@ -223,7 +223,7 @@
         "ANSIBLE_LINT=py27-ansible-lint-4.1.0",
         "RUAMEL_YAML=py27-ruamel.yaml-0.15.87",
         "RUAMEL_ORDEREDDICT=py27-ruamel.ordereddict-0.4.13",
-        "TESTINFRA=testinfra==1.17.0"
+        "TESTINFRA_VERSION=1.17.0"
       ]
     },
     {
