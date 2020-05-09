@@ -1,6 +1,6 @@
 {
   "variables": {
-    "variant": "ansible",
+    "variant": "minimal",
     "num_cpus": "2",
     "disk_size": "40960",
     "mem_size": "512",
@@ -13,10 +13,10 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "9.6.20200423",
+    "box_version": "10.5.20200423",
     "headless": "false",
     "vm_name": "",
-    "os_ver": "v3.9"
+    "os_ver": "v3.10"
   },
   "builders": [
     {
@@ -196,23 +196,19 @@
       "only": ["vmware-iso", "esxi-iso"],
       "script": "../provisioners/vmware_alpine3.9+.sh",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools=10.3.5-r1",
+        "OPEN_VM_TOOLS=open-vm-tools=10.3.10-r2",
         "OS_VER={{user `os_ver`}}"
       ]
     },
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/vagrant.sh",
-        "../provisioners/ansible+testinfra_alpine3.9+.sh"
+        "../provisioners/vagrant.sh"
       ],
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
-        "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "ANSIBLE=ansible=2.7.17-r0",
-        "ANSIBLE_LINT_VERSION=4.2.0",
-        "TESTINFRA_VERSION=4.1.0"
+        "VAGRANT_PASSWORD={{user `vagrant_password`}}"
       ]
     },
     {

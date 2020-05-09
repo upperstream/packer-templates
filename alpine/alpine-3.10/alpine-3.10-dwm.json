@@ -1,6 +1,6 @@
 {
   "variables": {
-    "variant": "ansible",
+    "variant": "dwm",
     "num_cpus": "2",
     "disk_size": "40960",
     "mem_size": "512",
@@ -13,10 +13,10 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "9.6.20200423",
+    "box_version": "10.5.20200423",
     "headless": "false",
     "vm_name": "",
-    "os_ver": "v3.9"
+    "os_ver": "v3.10"
   },
   "builders": [
     {
@@ -43,7 +43,8 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "{{user `num_cpus`}}" ],
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "12" ]
       ],
       "http_directory": ".",
       "boot_command": [
@@ -99,7 +100,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "12582912"
       },
       "http_directory": ".",
       "boot_command": [
@@ -163,7 +165,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "12582912"
       },
       "http_directory": ".",
       "boot_command": [
@@ -193,26 +196,31 @@
   "provisioners": [
     {
       "type": "shell",
-      "only": ["vmware-iso", "esxi-iso"],
-      "script": "../provisioners/vmware_alpine3.9+.sh",
-      "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools=10.3.5-r1",
-        "OS_VER={{user `os_ver`}}"
-      ]
-    },
-    {
-      "type": "shell",
       "scripts": [
         "../provisioners/vagrant.sh",
-        "../provisioners/ansible+testinfra_alpine3.9+.sh"
+        "../provisioners/dwm.sh"
       ],
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "ANSIBLE=ansible=2.7.17-r0",
-        "ANSIBLE_LINT_VERSION=4.2.0",
-        "TESTINFRA_VERSION=4.1.0"
+        "DWM=dwm=6.2-r0",
+        "ST=st=0.8.2-r0",
+        "DMENU=dmenu=4.9-r0",
+        "XRANDR=xrandr=1.5.0-r1",
+        "XRDP=xrdp=0.9.9-r0"
+     ]
+    },
+    {
+      "type": "shell",
+      "only": ["vmware-iso", "esxi-iso"],
+      "scripts": [
+        "../provisioners/vmware_alpine3.9+.sh",
+        "../provisioners/xorg-vmware.sh"
+      ],
+      "environment_vars": [
+        "OPEN_VM_TOOLS=open-vm-tools=10.3.10-r2",
+        "OS_VER={{user `os_ver`}}"
       ]
     },
     {
