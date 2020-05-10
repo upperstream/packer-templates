@@ -1,11 +1,10 @@
-
 {
   "variables": {
-    "iso_image": "FreeBSD-11.3-RELEASE-amd64-disc1.iso",
-    "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.3",
+    "iso_image": "FreeBSD-11.4-BETA1-amd64-disc1.iso",
+    "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.4",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "d268db365e26305ec3d51b29211caad903749c33a4a8f2cf661d671f8e0ba0b0",
-    "box_version": "11.3.20190709",
+    "iso_checksum": "e19f3f2a3c6363f75b6377b2f2ef63ccf96a8369307ddb02deff96b98c12d405",
+    "box_version": "1.20200508",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -19,13 +18,13 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "ansible",
+    "variant": "minimal",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:11:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-11.3-RELEASE-amd64"
+    "vm_name": "FreeBSD-11.4-BETA-amd64"
   },
   "builders": [
     {
@@ -104,14 +103,12 @@
       "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
+      "memory": "{{user `mem_size`}}",
+      "cpus": "{{user `num_cpus`}}",
+      "network": "nat",
+      "network_adapter_type": "e1000",
       "vmx_data": {
-        "memsize": "{{user `mem_size`}}",
-        "numvcpus": "{{user `num_cpus`}}",
         "ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "nat",
-        "ethernet0.virtualDev": "e1000",
-        "ethernet0.present": "TRUE",
-        "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
@@ -169,13 +166,12 @@
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
-      "skip_export": "true",
+      "skip_export": true,
+      "memory": "{{user `mem_size`}}",
+      "cpus": "{{user `num_cpus`}}",
+      "network": "bridged",
+      "network_adapter_type": "e1000",
       "vmx_data": {
-        "memsize": "{{user `mem_size`}}",
-        "numvcpus": "{{user `num_cpus`}}",
-        "ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "bridged",
-        "ethernet0.virtualDev": "e1000",
         "ethernet0.present": "TRUE",
         "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
@@ -208,22 +204,13 @@
   "provisioners": [
     {
       "type": "shell",
-      "scripts": [
-        "../provisioners/vagrant-11.1+.sh",
-        "../provisioners/ansible+testinfra_freebsd11.3+.sh"
-      ],
+      "script": "../provisioners/vagrant-11.1+.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "PIP=py27-pip-9.0.3",
-        "ANSIBLE=py27-ansible-2.7.9",
-        "ANSIBLE_LINT=py27-ansible-lint-4.1.0",
-        "RUAMEL_YAML=py27-ruamel.yaml-0.15.87",
-        "RUAMEL_ORDEREDDICT=py27-ruamel.ordereddict-0.4.13",
-        "TESTINFRA_VERSION=1.17.0"
+        "VAGRANT_GROUP={{user `vagrant_group`}}"
       ]
     },
     {
@@ -232,8 +219,8 @@
       "script": "../provisioners/vmware-guest.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools-nox11-10.3.0_1,2"
-       ]
+        "OPEN_VM_TOOLS=open-vm-tools-nox11-11.0.1_3,2"
+      ]
     },
     {
       "type": "shell",
