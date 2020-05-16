@@ -5,15 +5,15 @@
     "mem_size": "640",
     "disk_size": "51200",
     "iso_name": "mini.iso",
-    "iso_path": "buster/main/installer-amd64/20190702+deb10u3/images/netboot",
-    "iso_checksum": "26b6f6f6bcb24c4e59b965d4a2a6c44af5d79381b9230d69a7d4db415ddcb4cd",
+    "iso_path": "buster/main/installer-amd64/20190702+deb10u4/images/netboot",
+    "iso_checksum": "a749cb499cf4f335d1d4fbffb041353f6e41f5d0681b1d856cb167ed2c27e756",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "root_password": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "10.3.20200208",
+    "box_version": "10.4.20200509",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
@@ -57,7 +57,7 @@
       "http_directory": "../http",
       "headless": "{{user `headless`}}",
       "boot_command": [
-        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed-stretch.cfg <wait>",
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed-buster.cfg <wait>",
         "passwd/root-password={{user `root_password`}} <wait>",
         "passwd/root-password-again={{user `root_password`}} <wait>",
         "passwd/user-fullname={{user `vagrant_username`}} <wait>",
@@ -109,7 +109,7 @@
       "http_directory": "../http",
       "headless": "{{user `headless`}}",
       "boot_command": [
-        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed-stretch.cfg <wait>",
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed-buster.cfg <wait>",
         "passwd/root-password={{user `root_password`}} <wait>",
         "passwd/root-password-again={{user `root_password`}} <wait>",
         "passwd/user-fullname={{user `vagrant_username`}} <wait>",
@@ -169,7 +169,7 @@
       "http_directory": "../http",
       "headless": "{{user `headless`}}",
       "boot_command": [
-        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed-stretch.cfg <wait>",
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed-buster.cfg <wait>",
         "passwd/root-password={{user `root_password`}} <wait>",
         "passwd/root-password-again={{user `root_password`}} <wait>",
         "passwd/user-fullname={{user `vagrant_username`}} <wait>",
@@ -188,21 +188,17 @@
       "scripts": [
         "../provisioners/base.sh",
         "../provisioners/vagrant.sh",
-        "../provisioners/ansible+testinfra.sh"
+        "../provisioners/ansible+testinfra_debian10.4.sh"
       ],
       "environment_vars": [
         "OPTIMISE_REPOS=1",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "WGET=wget -O -",
-        "PYTHON_DEV=python-dev=2.7.16-1",
-        "LIBFFI_DEV=libffi-dev=3.2.1-9",
-        "LIBYAML_DEV=libyaml-dev=0.2.1-1",
-        "LIBGMP_DEV=libgmp-dev=2:6.1.2+dfsg-4",
-        "LIBSSL_DEV=libssl-dev=1.1.1d-0+deb10u2",
-        "PIP=pip==19.1.1",
-        "ANSIBLE=ansible==2.7.12",
-        "ANSIBLE_LINT=ansible-lint==4.1.0",
-        "TESTINFRA=testinfra==3.0.5"
+        "PYTHON_PIP=python3-pip=18.1-5",
+        "ANSIBLE=ansible=2.7.7+dfsg-1",
+        "ANSIBLE_LINT=ansible-lint=4.1.0+dfsg.1-1",
+        "TESTINFRA_VERSION=testinfra==4.1.0",
+        "PIP_COMMAND=pip3"
       ]
     },
     {
