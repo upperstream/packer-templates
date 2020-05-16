@@ -1,13 +1,13 @@
-# Packer templates for Debian 10.3
+# Packer templates for Debian 10.4
 
-Templates to create Vagrant boxes for Debian 10.3 (amd64).
+Templates to create Vagrant boxes for Debian 10.4 (amd64).
 
 
 ## Prerequisites
 
 * [Packer][] v1.4.1+
 * [Vagrant][] v2.2.6+
-* [VirtualBox][] v5.2.32+
+* [VirtualBox][] v5.2.36+
 * [VMware][] Workstation v15.0+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
 
@@ -40,14 +40,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso debian-10-amd64-minimal.json
 
 You will find a vagrant box file named
-`Debian-10-amd64-minimal-v10.3.20200208-virtualbox.box` in the same
+`Debian-10-amd64-minimal-v10.4.20200509-virtualbox.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`Debian-10-amd64-minimal-v10.3.20200208-virtualbox` to your box list by
+`Debian-10-amd64-minimal-v10.4.20200509-virtualbox` to your box list by
 the following command:
 
-    vagrant box add Debian-10-amd64-minimal-v10.3.20200208-virtualbox.box --name Debian-10-amd64-minimal-v10.3.20200208-virtualbox
+    vagrant box add Debian-10-amd64-minimal-v10.4.20200509-virtualbox.box --name Debian-10-amd64-minimal-v10.4.20200509-virtualbox
 
 ### VMware
 
@@ -56,14 +56,14 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso debian-10-amd64-minimal.json
 
 You will find a vagrant box file named
-`Debian-10-amd64-minimal-v10.3.20200208-vmware.box` in the same
+`Debian-10-amd64-minimal-v10.4.20200509-vmware.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`Debian-10-amd64-minimal-v10.3.20200208-vmware` to your box list by the
+`Debian-10-amd64-minimal-v10.4.20200509-vmware` to your box list by the
 following command:
 
-    vagrant box add Debian-10-amd64-minimal-v10.3.20200208-vmware.box --name Debian-10-amd64-minimal-v10.3.20200208-vmware
+    vagrant box add Debian-10-amd64-minimal-v10.4.20200509-vmware.box --name Debian-10-amd64-minimal-v10.4.20200509-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -89,14 +89,14 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `debian-10-amd64-minimal.json` - Debian 10.3 minimal installation
-* `debian-10-amd64-ansible.json` - Debian 10.3 with [Ansible][] +
+* `debian-10-amd64-minimal.json` - Debian 10.4 minimal installation
+* `debian-10-amd64-ansible.json` - Debian 10.4 with [Ansible][] +
   [Ansible Lint][] + [Testinfra][]
-* `debian-10-amd64-docker.json` - Debian 10.3 with [Docker][] +
+* `debian-10-amd64-docker.json` - Debian 10.4 with [Docker][] +
   [Docker Compose][]
-* `debian-10-amd64-dwm.json` - Debian 10.3 with [X.org][], [suckless][]
+* `debian-10-amd64-dwm.json` - Debian 10.4 with [X.org][], [suckless][]
   tools, [ARandR][], and [xrdp][].
-* `debian-10-amd64-xfce.json` - Debian 10.3 with [Xfce][] + [xrdp][].
+* `debian-10-amd64-xfce.json` - Debian 10.4 with [Xfce][] + [xrdp][].
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/
@@ -110,7 +110,7 @@ The following command will build a VM image on your ESXi:
     "SLiM download | SourceForge.net"
 [suckless]: http://suckless.org/ "suckless.org software that sucks less"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/
-    "Testinfra test your infrastructure &#8212; testinfra 1.10.2.dev3 documentation"
+    "Testinfra test your infrastructure &#8212; testinfra 5.0.1.dev13+g37c7488.d20200507 documentation"
 [X.org]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
@@ -120,9 +120,9 @@ The following command will build a VM image on your ESXi:
 
 Optional var files are provided to instruct to use alternative
 installer CD images, i.e., `vars-debian-10-amd64-full.json` instructs to
-use `debian-10.3.0-amd64-xfce-CD-1.iso` while
+use `debian-10.4.0-amd64-xfce-CD-1.iso` while
 `vars-debian-10-amd64-netinst.json` does
-`debian-10.3.0-amd64-netinst.iso` respectively.  Without using these
+`debian-10.4.0-amd64-netinst.iso` respectively.  Without using these
 var files, `debian-10-amd64-*.json` templates use `mini.iso`.
 
 Depending on situation you can specify either of var files on the
@@ -156,7 +156,7 @@ or `-var-file` command line options to `packer`:
 * `headless` - Launch the virtual machine in headless mode if set to
   `true`.  Default value is `false`.
 * `virtualbox_version` - VirtualBox Guest Additions version number.
-Default value is "5.1.22".
+Default value is "5.2.36".
 
 
 - - -

@@ -1,6 +1,6 @@
 {
-  "iso_name": "debian-10.3.0-amd64-xfce-CD-1.iso",
-  "iso_path": "10.3.0/amd64/iso-cd",
-  "iso_checksum": "47671cf75c68b8f0a2169857a7e2fe371553de3c956b87688604cc920bceb52e",
+  "iso_name": "debian-10.4.0-amd64-xfce-CD-1.iso",
+  "iso_path": "10.4.0/amd64/iso-cd",
+  "iso_checksum": "b325326614f26760fc8d4fad48df3bf48fb8a3a437298bbe3d01c5a759c889d4",
   "iso_checksum_type": "sha256"
 }
