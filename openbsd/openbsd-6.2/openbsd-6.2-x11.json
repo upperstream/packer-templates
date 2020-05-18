@@ -160,7 +160,7 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/vagrant-6.2+.sh",
+        "../provisioners/vagrant_openbsd6.2+.sh",
         "../provisioners/x11.sh"
       ],
       "environment_vars": [

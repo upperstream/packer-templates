@@ -151,10 +151,10 @@
       "type": "shell",
       "only": ["virtualbox-iso", "vmware-iso"],
       "scripts": [
-        "../provisioners/vagrant-6.sh",
-        "../provisioners/sudo-6.sh",
+        "../provisioners/vagrant_openbsd6.sh",
+        "../provisioners/sudo_openbsd6.sh",
         "../provisioners/x11.sh",
-        "../provisioners/xfce-6.sh",
+        "../provisioners/xfce_openbsd6.sh",
         "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
@@ -169,10 +169,10 @@
       "type": "shell",
       "only": ["esxi-iso"],
       "scripts": [
-        "../provisioners/vagrant-6.sh",
-        "../provisioners/sudo-6.sh",
+        "../provisioners/vagrant_openbsd6.sh",
+        "../provisioners/sudo_openbsd6.sh",
         "../provisioners/x11.sh",
-        "../provisioners/xfce-6.sh",
+        "../provisioners/xfce_openbsd6.sh",
         "../provisioners/cleanup.sh"
       ],
       "environment_vars": [

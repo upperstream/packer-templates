@@ -246,7 +246,7 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/rsync-5.9.sh",
+        "../provisioners/rsync_openbsd5.9.sh",
         "../provisioners/sharity-light.sh",
         "../provisioners/vagrant-doas.sh",
         "../provisioners/disk_cleanup.sh",

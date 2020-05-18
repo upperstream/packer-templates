@@ -155,8 +155,8 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/vagrant-6.sh",
-        "../provisioners/sudo-6.sh",
+        "../provisioners/vagrant_openbsd6.sh",
+        "../provisioners/sudo_openbsd6.sh",
         "../provisioners/x11.sh"
       ],
       "environment_vars": [

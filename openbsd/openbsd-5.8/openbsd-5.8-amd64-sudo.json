@@ -94,7 +94,7 @@
         "../provisioners/rsync.sh",
         "../provisioners/sharity-light.sh",
         "../provisioners/vagrant-doas.sh",
-        "../provisioners/sudo-5.8.sh",
+        "../provisioners/sudo_openbsd5.8.sh",
         "../provisioners/cleanup.sh"
       ],
       "environment_vars": [

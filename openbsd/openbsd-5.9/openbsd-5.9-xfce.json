@@ -250,7 +250,7 @@
       "type": "shell",
       "only": ["virtualbox-iso", "vmware-iso"],
       "scripts": [
-        "../provisioners/rsync-5.9.sh",
+        "../provisioners/rsync_openbsd5.9.sh",
         "../provisioners/sharity-light.sh",
         "../provisioners/vagrant-doas.sh",
         "../provisioners/x11.sh",
@@ -268,7 +268,7 @@
       "type": "shell",
       "only": ["esxi-iso"],
       "scripts": [
-        "../provisioners/rsync-5.9.sh",
+        "../provisioners/rsync_openbsd5.9.sh",
         "../provisioners/sharity-light.sh",
         "../provisioners/vagrant-doas.sh",
         "../provisioners/x11.sh",

@@ -152,9 +152,9 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/ansible-6.sh",
-        "../provisioners/vagrant-6.sh",
-        "../provisioners/sudo-6.sh"
+        "../provisioners/ansible_openbsd6+.sh",
+        "../provisioners/vagrant_openbsd6.sh",
+        "../provisioners/sudo_openbsd6.sh"
       ],
       "environment_vars": [
         "PKG_PATH={{user `package_server`}}/{{user `os_ver`}}/packages/{{user `cpu`}}",
