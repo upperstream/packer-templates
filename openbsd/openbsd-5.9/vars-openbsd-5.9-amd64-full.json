@@ -5,6 +5,7 @@
   "vmware_guest_os_type": "other-64",
   "iso_image": "install59.iso",
   "iso_checksum": "685262fc665425c61a2952b2820389a2d331ac5558217080e6d564d2ce88eecb",
+  "iso_checksum_type": "sha256",
   "source": "cd0",
   "proxy": "",
   "http_server": "",
