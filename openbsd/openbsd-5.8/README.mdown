@@ -75,4 +75,4 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 
 - - -
 
-Copyright &copy; 2015, 2016 Upper Stream Software.
+Copyright &copy; 2015, 2016, 2020 Upperstream Software.

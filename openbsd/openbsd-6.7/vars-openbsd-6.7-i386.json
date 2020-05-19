@@ -1,0 +1,10 @@
+{
+  "vm_name": "OpenBSD-6.7-i386",
+  "cpu": "i386",
+  "virtualbox_guest_os_type": "OpenBSD",
+  "vmware_guest_os_type": "other",
+  "os_ver": "6.7",
+  "iso_image": "install67.iso",
+  "iso_checksum": "437862c10c727a6af165625193a91578039fbee05734dccb780b097abf849c17",
+  "iso_checksum_type": "sha256"
+}

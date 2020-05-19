@@ -1,13 +1,13 @@
 {
   "variables": {
-    "variant": "ansible",
+    "variant": "minimal",
     "cpu": "amd64",
-    "vm_name": "OpenBSD-6.6-amd64",
-    "iso_image": "install66.iso",
-    "iso_checksum": "b22e63df56e6266de6bbeed8e9be0fbe9ee2291551c5bc03f3cc2e4ab9436ee3",
+    "vm_name": "OpenBSD-6.7-amd64",
+    "iso_image": "install67.iso",
+    "iso_checksum": "097e0fd122fb792a070ad2836e762100d020c5c82da72fe25f3c7a1c844974f5",
     "iso_checksum_type": "sha256",
-    "os_ver": "6.6",
-    "box_version": "6.6.20191017",
+    "os_ver": "6.7",
+    "box_version": "6.7.20200519",
     "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "40960",
@@ -79,12 +79,11 @@
       "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "headless": "{{user `headless`}}",
-      "cpus": "{{user `num_cpus`}}",
-      "memory": "{{user `mem_size`}}",
       "network": "nat",
       "network_adapter_type": "e1000",
       "vmx_data": {
         "ethernet0.present": "TRUE",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
@@ -123,10 +122,9 @@
       "remote_datastore": "{{user `remote_datastore`}}",
       "http_directory": ".",
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "skip_export": true,
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
-      "cpus": "{{user `num_cpus`}}",
-      "memory": "{{user `mem_size`}}",
       "network": "bridged",
       "network_adapter_type": "e1000",
       "vmx_data": {
@@ -150,7 +148,6 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/ansible+testinfra_openbsd6.5+.sh",
         "../provisioners/vagrant_openbsd6.2+.sh"
       ],
       "environment_vars": [
@@ -158,11 +155,7 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "ANSIBLE=2.8.5",
-        "ANSIBLE_LINT=4.1.0p0",
-        "PY3_PIP=19.1.1",
-        "TESTINFRA=3.2.0",
-        "RSYNC=3.1.3"
+        "RSYNC=3.1.3p0"
       ]
     },
     {

@@ -2,6 +2,7 @@
   "variables": {
     "iso_image": "cd58.iso",
     "iso_checksum": "19afc0e6ba4e22e03906364dbaf92a63bc273e5236a9be6c2cf27fc2cfe132cc",
+    "iso_checksum_type": "sha256",
     "os_ver": "5.8",
     "box_version": "1.1",
     "root_password": "vagrant",
@@ -93,7 +94,7 @@
         "../provisioners/rsync.sh",
         "../provisioners/sharity-light.sh",
         "../provisioners/vagrant-doas.sh",
-        "../provisioners/sudo-5.8.sh",
+        "../provisioners/sudo_openbsd5.8.sh",
         "../provisioners/cleanup.sh"
       ],
       "environment_vars": [

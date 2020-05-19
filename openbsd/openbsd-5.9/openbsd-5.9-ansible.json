@@ -247,10 +247,10 @@
       "type": "shell",
       "scripts": [
         "../provisioners/ansible.sh",
-        "../provisioners/rsync-5.9.sh",
+        "../provisioners/rsync_openbsd5.9.sh",
         "../provisioners/sharity-light.sh",
         "../provisioners/vagrant-doas.sh",
-        "../provisioners/sudo-5.9.sh",
+        "../provisioners/sudo_openbsd5.9.sh",
         "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
