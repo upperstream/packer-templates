@@ -35,7 +35,7 @@ SSHDOPTS="-c none"
 NTPOPTS="-c openntpd"
 
 # Use /dev/sda as a data disk
-DISKOPTS="-m sys /dev/sda"
+DISKOPTS="-m sys /dev/${DISK:-sda}"
 
 # Setup in /media/sdb1
 LBUOPTS="/media/sdb1"
