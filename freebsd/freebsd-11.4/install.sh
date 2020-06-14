@@ -5,7 +5,7 @@ set -x
 echo 'WITHOUT_X11="YES"' >> /etc/make.conf
 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
 cat >> /etc/rc.conf <<EOF
-ifconfig_em0="DHCP"
+ifconfig_${NETIF:-em0}="DHCP"
 sshd_enable="YES"
 dumpdev="AUTO"
 rpcbind_enable="YES"
