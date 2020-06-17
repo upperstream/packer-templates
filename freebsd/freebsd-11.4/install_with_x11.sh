@@ -4,7 +4,7 @@ set -e
 set -x
 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
 cat >> /etc/rc.conf <<EOF
-ifconfig_em0="DHCP"
+ifconfig_${NETIF:-em0}="DHCP"
 sshd_enable="YES"
 dumpdev="AUTO"
 rpcbind_enable="YES"
@@ -16,7 +16,7 @@ EOF
 mkdir -p /usr/local/etc/pkg/repos/
 cat > /usr/local/etc/pkg/repos/FreeBSD.conf << EOF
 FreeBSD: {
-    url: pkg+http://pkg.freebsd.org/${ABI}/quarterly,
+    url: pkg+http://pkg.freebsd.org/${ABI}/release_4,
     enabled: true
 }
 EOF

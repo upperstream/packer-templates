@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-11.4-RC2-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.4-RELEASE-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.4",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "16361277b33d05214bb763429be6a20b5d8efb533a2e650ca1a8e49ad4109c66",
-    "box_version": "2.20200529",
+    "iso_checksum": "d76c1ded99b2c1005b1ff94cc0c811fbcd8a2d04196432009ab5f203c2146914",
+    "box_version": "11.4.20200616",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -18,13 +18,17 @@
     "vagrant_group": "vagrant",
     "virtualbox_partition": "ada0",
     "vmware_partition": "da0",
-    "variant": "ansible",
+    "qemu_partition": "vtbd0",
+    "virtualbox_netif": "em0",
+    "vmware_netif": "em0",
+    "qemu_netif": "vtnet0",
+    "variant": "zfs",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:11:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-11.4-RC-amd64"
+    "vm_name": "FreeBSD-11.4-RELEASE-amd64"
   },
   "builders": [
     {
@@ -63,10 +67,11 @@
         "<wait10><wait10><wait5>",
         "s",
         "<wait5>",
-        "dhclient em0<enter><wait5>",
+        "dhclient {{user `virtualbox_netif`}}<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `virtualbox_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `virtualbox_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -120,10 +125,11 @@
         "<wait10><wait10><wait5>",
         "s",
         "<wait5>",
-        "dhclient em0<enter><wait5>",
+        "dhclient {{user `vmware_netif`}}<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -185,10 +191,11 @@
         "<wait10><wait10><wait5>",
         "s",
         "<wait5>",
-        "dhclient em0<enter><wait5>",
+        "dhclient {{user `vmware_netif`}}<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -199,26 +206,73 @@
         "bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
+    },
+    {
+      "type": "qemu",
+      "iso_urls": [
+        "./iso/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
+      "format": "qcow2",
+      "accelerator": "kvm",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-qemu",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "headless": "{{user `headless`}}",
+      "memory": "{{user `mem_size`}}",
+      "cpus": "{{user `num_cpus`}}",
+      "qemuargs": [
+        ["-display", "gtk"]
+      ],
+      "headless": "{{user `headless`}}",
+      "http_directory": ".",
+      "boot_command": [
+        "<enter>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10>",
+        "s",
+        "<wait5>",
+        "dhclient {{user `qemu_netif`}} <enter><wait5>",
+        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "<wait>",
+        "export ZFSBOOT_DISKS={{user `qemu_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
+        "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
+        "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
+        "ABI={{user `ABI`}} ",
+        "ROOT_PASSWORD={{user `root_password`}} ",
+        "VAGRANT_USER={{user `vagrant_username`}} ",
+        "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
+        "VAGRANT_GROUP={{user `vagrant_group`}} ",
+        "NETIF={{user `qemu_netif`}} ",
+        "bsdinstall script /tmp/install.sh<enter>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>"
+      ]
     }
   ],
   "provisioners": [
     {
       "type": "shell",
-      "scripts": [
-        "../provisioners/vagrant-11.1+.sh",
-        "../provisioners/ansible+testinfra_freebsd11.3+.sh"
-      ],
+      "script": "../provisioners/vagrant-11.1+.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "PIP=py37-pip-19.1.1",
-        "ANSIBLE=py37-ansible-2.8.11",
-        "ANSIBLE_LINT=py37-ansible-lint-4.2.0",
-        "RUAMEL_YAML=py37-ruamel.yaml-0.15.87",
-        "TESTINFRA_VERSION=4.1.0"
+        "VAGRANT_GROUP={{user `vagrant_group`}}"
       ]
     },
     {
@@ -229,12 +283,6 @@
       "environment_vars": [
         "OPEN_VM_TOOLS=open-vm-tools-nox11-11.0.1_3,2"
       ]
-    },
-    {
-      "type": "shell",
-      "only": ["virtualbox-iso", "vmware-iso"],
-      "script": "../provisioners/disk_cleanup.sh",
-      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     },
     {
       "type": "shell",
@@ -252,7 +300,7 @@
     },
     {
       "type": "vagrant",
-      "only": ["vmware-iso"],
+      "only": ["vmware-iso", "qemu"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
       "vagrantfile_template": "../vagrantfiles/Vagrantfile.FreeBSD-11+",
