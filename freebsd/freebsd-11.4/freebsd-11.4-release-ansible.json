@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-11.4-RC2-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.4-RELEASE-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.4",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "16361277b33d05214bb763429be6a20b5d8efb533a2e650ca1a8e49ad4109c66",
-    "box_version": "2.20200529",
+    "iso_checksum": "d76c1ded99b2c1005b1ff94cc0c811fbcd8a2d04196432009ab5f203c2146914",
+    "box_version": "11.4.20200616",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -22,13 +22,13 @@
     "virtualbox_netif": "em0",
     "vmware_netif": "em0",
     "qemu_netif": "vtnet0",
-    "variant": "zfs",
+    "variant": "ansible",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:11:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-11.4-RC-amd64"
+    "vm_name": "FreeBSD-11.4-RELEASE-amd64"
   },
   "builders": [
     {
@@ -70,8 +70,7 @@
         "dhclient {{user `virtualbox_netif`}}<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "export ZFSBOOT_DISKS={{user `virtualbox_partition`}}<enter>",
-        "export nonInteractive=\"YES\"<enter>",
+        "PARTITIONS={{user `virtualbox_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -128,8 +127,7 @@
         "dhclient {{user `vmware_netif`}}<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
-        "export nonInteractive=\"YES\"<enter>",
+        "PARTITIONS={{user `vmware_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -194,8 +192,7 @@
         "dhclient {{user `vmware_netif`}}<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
-        "export nonInteractive=\"YES\"<enter>",
+        "PARTITIONS={{user `vmware_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -248,8 +245,7 @@
         "dhclient {{user `qemu_netif`}} <enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "export ZFSBOOT_DISKS={{user `qemu_partition`}}<enter>",
-        "export nonInteractive=\"YES\"<enter>",
+        "PARTITIONS={{user `qemu_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -266,13 +262,21 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "../provisioners/vagrant-11.1+.sh",
+      "scripts": [
+        "../provisioners/vagrant-11.1+.sh",
+        "../provisioners/ansible+testinfra_freebsd11.3+.sh"
+      ],
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "VAGRANT_GROUP={{user `vagrant_group`}}"
+        "VAGRANT_GROUP={{user `vagrant_group`}}",
+        "PIP=py37-pip-19.1.1",
+        "ANSIBLE=py37-ansible-2.8.11",
+        "ANSIBLE_LINT=py37-ansible-lint-4.2.0",
+        "RUAMEL_YAML=py37-ruamel.yaml-0.15.87",
+        "TESTINFRA_VERSION=4.1.0"
       ]
     },
     {
@@ -283,6 +287,12 @@
       "environment_vars": [
         "OPEN_VM_TOOLS=open-vm-tools-nox11-11.0.1_3,2"
       ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso", "vmware-iso", "qemu"],
+      "script": "../provisioners/disk_cleanup.sh",
+      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     },
     {
       "type": "shell",

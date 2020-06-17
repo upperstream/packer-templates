@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 11.4-RC2
+# Packer templates for FreeBSD 11.4-RELEASE
 
-Templates to create Vagrant boxes for FreeBSD 11.4-RC2 (amd64 and i386).
+Templates to create Vagrant boxes for FreeBSD 11.4-RELEASE (amd64 and i386).
 
 ## Prerequisites
 
@@ -36,33 +36,33 @@ Templates to create Vagrant boxes for FreeBSD 11.4-RC2 (amd64 and i386).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso freebsd-11.4-rc-minimal.json
+    packer build -only=virtualbox-iso freebsd-11.4-release-minimal.json
 
 You will find a vagrant box file named
-`FreeBSD-11.4-RC-amd64-minimal-v2.20200529-virtualbox.box`
+`FreeBSD-11.4-RELEASE-amd64-minimal-v11.4.20200616-virtualbox.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-11.4-rc-amd64-minimal-v2.20200529-virtualbox`
+`FreeBSD-11.4-release-amd64-minimal-v11.4.20200616-virtualbox`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-11.4-rc-amd64-minimal-v2.20200529-virtualbox.box --name FreeBSD-11.4-RC-amd64-minimal-v2.20200529-virtualbox
+    vagrant box add FreeBSD-11.4-RELEASE-amd64-minimal-v11.4.20200616-virtualbox.box --name FreeBSD-11.4-RELEASE-amd64-minimal-v11.4.20200616-virtualbox
 
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso freebsd-11.4-rc-minimal.json
+    packer build -only=vmware-iso freebsd-11.4-release-minimal.json
 
 You will find a vagrant box file named
-`FreeBSD-11.4-RC-amd64-v2.20200529-vmware.box`
+`FreeBSD-11.4-RELEASE-amd64-v11.4.20200616-vmware.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-11.4-RC-amd64-minimal-v2.20200529-vmware`
+`FreeBSD-11.4-RELEASE-amd64-minimal-v11.4.20200616-vmware`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-11.4-RC-amd64-minimal-v2.20200529-vmware.box --name FreeBSD-11.4-RC-amd64-minimal-v2.20200529-vmware
+    vagrant box add FreeBSD-11.4-RELEASE-amd64-minimal-v11.4.20200616-vmware.box --name FreeBSD-11.4-RELEASE-amd64-minimal-v11.4.20200616-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -71,15 +71,15 @@ directly imported from VMware.
 
 From the terminal, invoke the following command for Libvirt provider:
 
-    packer build -only=qemu freebsd-11.4-rc-minimal.json
+    packer build -only=qemu freebsd-11.4-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-11.4-RC-amd64-v2.20200529-libvirt.box`
+You will find a vagrant box file named `FreeBSD-11.4-RELEASE-amd64-v11.4.20200616-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-11.4-RC-amd64-minimal-v2.20200529-libvirt` to your box
+Then you can add the box named `FreeBSD-11.4-RELEASE-amd64-minimal-v11.4.20200616-libvirt` to your box
 list by the following command:
 
-    vagrant box add FreeBSD-11.4-RC-amd64-minimal-v2.20200529-libvirt.box --name FreeBSD-11.4-RC-amd64-minimal-v2.20200529-libvirt
+    vagrant box add FreeBSD-11.4-RELEASE-amd64-minimal-v11.4.20200616-libvirt.box --name FreeBSD-11.4-RELEASE-amd64-minimal-v11.4.20200616-libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -123,26 +123,26 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso freebsd-11.4-rc-minimal.json
+    packer build -only=esxi-iso freebsd-11.4-release-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
 
 ## Variants
 
-* `freebsd-11.4-rc-minimal.json` - FreeBSD 11.4-RC2
-* `freebsd-11.4-rc-ansible.json` - FreeBSD 11.4-RC2 +
+* `freebsd-11.4-release-minimal.json` - FreeBSD 11.4-RELEASE
+* `freebsd-11.4-release-ansible.json` - FreeBSD 11.4-RELEASE +
   [Ansible][] [Ansible Lint] + [Testinfra][]
-* `freebsd-11.4-rc-dwm.json` - FreeBSD 11.4-RC2 + [X.Org][] +
+* `freebsd-11.4-release-dwm.json` - FreeBSD 11.4-RELEASE + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-11.4-rc-xfce.json` - FreeBSD 11.4-RC2 + [Xfce][] +
+* `freebsd-11.4-release-xfce.json` - FreeBSD 11.4-RELEASE + [Xfce][] +
   [SLiM][]
-* `freebsd-11.4-rc-zfs.json` - FreeBSD 11.4-RC2 on ZFS root
+* `freebsd-11.4-release-zfs.json` - FreeBSD 11.4-RELEASE on ZFS root
   file system
 
-While `freebsd-11.4-rc-*.json` templates generate amd64 boxes by
+While `freebsd-11.4-release-*.json` templates generate amd64 boxes by
  default, using `vars-freebsd-11.4-i386.json` generates i386 boxes:
 
-    packer build -var-file=vars-freebsd-11.4-i386.json freebsd-11.4-rc-minimal.json
+    packer build -var-file=vars-freebsd-11.4-i386.json freebsd-11.4-release-minimal.json
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/

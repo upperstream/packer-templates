@@ -1,10 +1,10 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-11.4-RC2-amd64-disc1.iso",
+    "iso_image": "FreeBSD-11.4-RELEASE-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/11.4",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "16361277b33d05214bb763429be6a20b5d8efb533a2e650ca1a8e49ad4109c66",
-    "box_version": "2.20200529",
+    "iso_checksum": "d76c1ded99b2c1005b1ff94cc0c811fbcd8a2d04196432009ab5f203c2146914",
+    "box_version": "11.4.20200616",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -28,7 +28,7 @@
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:11:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-11.4-RC-amd64"
+    "vm_name": "FreeBSD-11.4-RELEASE-amd64"
   },
   "builders": [
     {
