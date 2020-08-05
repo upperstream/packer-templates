@@ -1,11 +1,12 @@
 {
   "variables": {
-    "vm_name": "Devuan-2.0-amd64-minimal",
+    "vm_name": "Devuan-2-amd64-docker",
+    "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "51200",
-    "iso_name": "devuan_ascii_2.0.0_amd64_netinst.iso",
+    "iso_name": "devuan_ascii_2.1_amd64_netinst.iso",
     "iso_path": "devuan_ascii/installer-iso",
-    "iso_checksum": "c16bebdeecdf452188ae4bb823cd5f1c0d2ed3a7a568332508943ce16f7e5c71",
+    "iso_checksum": "321292be7928f7f09918affe1529283d571930ec4a93a2cce8e0ce0d494058e8",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
@@ -13,14 +14,13 @@
     "vagrant_username": "vagrant",
     "vagrant_group": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "2.0.20180608",
+    "box_version": "2.1.20191121",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "headless": "false",
-    "install_from_dvd": "false",
-    "vb_version": "5.1.36"
+    "install_from_dvd": "false"
   },
   "builders": [
     {
@@ -41,7 +41,7 @@
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
-      "ssh_wait_timeout": "10000s",
+      "ssh_timeout": "10000s",
       "shutdown_command": "/sbin/shutdown -h now",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
@@ -64,7 +64,8 @@
         "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
-        "<enter> <wait>"
+        "choose-init/select_init=sysvinit<wait>",
+        "<enter><wait>"
       ]
     },
     {
@@ -86,17 +87,16 @@
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
-      "ssh_wait_timeout": "10000s",
+      "ssh_timeout": "10000s",
       "shutdown_command": "/sbin/shutdown -h now",
       "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "memory": "{{user `mem_size`}}",
+      "cpus": "{{user `num_cpus`}}",
+      "network": "nat",
+      "network_adapter_type": "e1000",
       "vmx_data": {
-        "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
         "ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "nat",
-        "ethernet0.virtualDev": "e1000",
-        "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
@@ -114,7 +114,8 @@
         "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
-        "<enter> <wait>"
+        "choose-init/select_init=sysvinit<wait>",
+        "<enter><wait>"
       ]
     },
     {
@@ -137,7 +138,7 @@
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
       "ssh_port": 22,
-      "ssh_wait_timeout": "10000s",
+      "ssh_timeout": "10000s",
       "shutdown_command": "/sbin/shutdown -h now",
       "remote_type": "esx5",
       "remote_host": "{{user `remote_host`}}",
@@ -145,13 +146,14 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
       "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "skip_export": true,
       "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "memory": "{{user `mem_size`}}",
+      "cpus": "{{user `num_cpus`}}",
+      "network": "bridged",
+      "network_adapter_type": "e1000",
       "vmx_data": {
-        "memsize": "{{user `mem_size`}}",
-        "numvcpus": "2",
         "ethernet0.present": "TRUE",
-        "ethernet0.connectionType": "bridged",
-        "ethernet0.virtualDev": "e1000",
         "ethernet0.networkName": "VM Network",
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
@@ -170,7 +172,51 @@
         "passwd/user-password-again={{user `vagrant_password`}} <wait>",
         "keymap=us <wait>",
         "tasks=standard <wait>",
-        "<enter> <wait>"
+        "choose-init/select_init=sysvinit<wait>",
+        "<enter><wait>"
+      ]
+    },
+    {
+      "type": "qemu",
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "https://mirror.netzspielplatz.de/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "http://devuan.unetresgrossebite.com/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.math.princeton.edu/pub/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://mirror.leaseweb.com/devuan/{{user `iso_path`}}/{{user `iso_name`}}",
+        "https://files.devuan.org/{{user `iso_path`}}/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_timeout": "10000s",
+      "shutdown_command": "/sbin/shutdown -h now",
+      "format": "qcow2",
+      "accelerator": "kvm",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-qemu",
+      "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "memory": "{{user `mem_size`}}",
+      "cpus": "{{user `num_cpus`}}",
+      "headless": "{{user `headless`}}",
+      "http_directory": "../http",
+      "boot_command": [
+        "<esc><wait>auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed-qemu.cfg <wait>",
+        "passwd/root-password={{user `root_password`}} <wait>",
+        "passwd/root-password-again={{user `root_password`}} <wait>",
+        "passwd/user-fullname={{user `vagrant_username`}} <wait>",
+        "passwd/username={{user `vagrant_username`}} <wait>",
+        "passwd/user-password={{user `vagrant_password`}} <wait>",
+        "passwd/user-password-again={{user `vagrant_password`}} <wait>",
+        "keymap=us <wait>",
+        "tasks=standard <wait>",
+        "choose-init/select_init=sysvinit<wait>",
+        "<enter><wait>"
       ]
     }
   ],
@@ -179,13 +225,18 @@
       "type": "shell",
       "scripts": [
         "../provisioners/base.sh",
-        "../provisioners/vagrant.sh"
+        "../provisioners/vagrant.sh",
+        "../provisioners/docker_devuan2.sh"
       ],
       "environment_vars": [
         "DEVUAN_VERSION=ascii",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "INSTALL_FROM_DVD={{user `install_from_dvd`}}"
+        "INSTALL_FROM_DVD={{user `install_from_dvd`}}",
+        "CURL=curl=7.52.1-5+deb9u10",
+        "DOCKER=docker-18.06.0-ce",
+        "PYTHON_PIP=python-pip=9.0.1-2+deb9u1",
+        "DOCKER_COMPOSE=docker-compose==1.21.2"
       ]
     },
     {
@@ -199,23 +250,19 @@
     {
       "type": "shell",
       "only": ["vmware-iso", "esxi-iso"],
-      "scripts": "../provisioners/vmtools.sh",
+      "script": "../provisioners/vmtools.sh",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools=2:10.1.5-5055683-4+deb9u1"
+        "OPEN_VM_TOOLS=open-vm-tools=2:10.1.5-5055683-4+deb9u2"
       ]
     },
     {
       "type": "shell",
-      "only": ["virtualbox-iso", "vmware-iso"],
-      "scripts": [
-        "../provisioners/disk_cleanup.sh"
-      ]
+      "only": ["virtualbox-iso", "vmware-iso", "qemu"],
+      "script": "../provisioners/disk_cleanup.sh"
     },
     {
       "type": "shell",
-      "scripts": [
-        "../provisioners/finalise.sh"
-      ]
+      "script": "../provisioners/finalise.sh"
     }
   ],
   "post-processors": [
@@ -227,7 +274,7 @@
     },
     {
       "type": "vagrant",
-      "only": ["vmware-iso"],
+      "only": ["vmware-iso", "qemu"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box",
       "keep_input_artifact": true
