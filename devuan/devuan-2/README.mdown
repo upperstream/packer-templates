@@ -5,8 +5,8 @@ Templates to create Vagrant boxes for Devuan 2.1 ASCII (amd64).
 ## Prerequisites
 
 * [Packer][] v1.5.2+
-* [Vagrant][] v2.0.2+
-* [VirtualBox][] Version 5.1.36+
+* [Vagrant][] v2.2.6+
+* [VirtualBox][] Version 6.1.10+
 * [VMware][] Workstation v15.5+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
@@ -39,13 +39,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso devuan-2-amd64-minimal.json
 
-You will find a vagrant box file named `Devuan-2-amd64-minimal-v2.1.20191121-virtualbox.box`
+You will find a vagrant box file named `Devuan-2-amd64-minimal-v2.1.20191221-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Devuan-2-amd64-minimal-v2.1.20191121-virtualbox`
+Then you can add the box named `Devuan-2-amd64-minimal-v2.1.20191221-virtualbox`
 to your box list by the following command:
 
-    vagrant box add Devuan-2-amd64-minimal-v2.1.20191121-virtualbox.box --name Devuan-2-amd64-minimal-v2.1.20191121-virtualbox
+    vagrant box add Devuan-2-amd64-minimal-v2.1.20191221-virtualbox.box --name Devuan-2-amd64-minimal-v2.1.20191221-virtualbox
 
 ### VMware
 
@@ -53,13 +53,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso devuan-2-amd64-minimal.json
 
-You will find a vagrant box file named `Devuan-2-amd64-minimal-v2.1.20191121-vmware.box`
+You will find a vagrant box file named `Devuan-2-amd64-minimal-v2.1.20191221-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Devuan-2-amd64-minimal-v2.1.20191121-vmware`
+Then you can add the box named `Devuan-2-amd64-minimal-v2.1.20191221-vmware`
 to your box list by the following command:
 
-    vagrant box add Devuan-2-amd64-minimal-v2.1.20191121-vmware.box --name Devuan-2-amd64-minimal-v2.1.20191121-vmware
+    vagrant box add Devuan-2-amd64-minimal-v2.1.20191221-vmware.box --name Devuan-2-amd64-minimal-v2.1.20191221-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -87,27 +87,27 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu devuan-2-amd64-minimal.json
 
-You will find a vagrant box file named `Devuan-2-amd64-minimal-v2.1.20191121-libvirt.box`
+You will find a vagrant box file named `Devuan-2-amd64-minimal-v2.1.20191221-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Devuan-2-amd64-minimal-v2.1.20191121-libvirt` to your box
+Then you can add the box named `Devuan-2-amd64-minimal-v2.1.20191221-libvirt` to your box
 list by the following command:
 
-    vagrant box add Devuan-2-amd64-minimal-v2.1.20191121-libvirt.box --name Devuan-2-amd64-minimal-v2.1.20191121-libvirt
+    vagrant box add Devuan-2-amd64-minimal-v2.1.20191221-libvirt.box --name Devuan-2-amd64-minimal-v2.1.20191221-libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
 
 ## Variants
 
-* `devuan-2-amd64-minimal.json` - Devuan 2.0 ASCII minimal
+* `devuan-2-amd64-minimal.json` - Devuan 2.1 ASCII minimal
   installation
-* `devuan-2-amd64-docker.json` - Devuan 2.0 ASCII with [Docker][] +
+* `devuan-2-amd64-docker.json` - Devuan 2.1 ASCII with [Docker][] +
   [Docker Compose][]
-* `devuan-2-amd64-dwm.json` - Devuan 2.0 ASCII with [X.org][],
+* `devuan-2-amd64-dwm.json` - Devuan 2.1 ASCII with [X.org][],
   [suckless][]
   tools, [ARandR][], and [xrdp][]
-* `devuan-2-amd64-xfce.json` - Devuan 2.0 ASCII with [Xfce][] +
+* `devuan-2-amd64-xfce.json` - Devuan 2.1 ASCII with [Xfce][] +
   [xrdp][]
 
 [ARandR]: https://christian.amsuess.com/tools/arandr/

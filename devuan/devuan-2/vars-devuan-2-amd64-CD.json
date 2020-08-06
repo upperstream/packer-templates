@@ -1,6 +1,6 @@
 {
   "iso_name": "devuan_ascii_2.1_amd64_cd-1.iso",
   "iso_path": "devuan_ascii/installer-iso",
-  "iso_checksum": "b6744edbc6068f8f2e76d7fdf86b725ee16292fc8dabb63589df33bbd7d983ce",
+  "iso_checksum": "4dc1704eca989ceea95febbf20e032b1397f5d1065916be8a87d84671f4c20fc",
   "iso_checksum_type": "sha256"
 }

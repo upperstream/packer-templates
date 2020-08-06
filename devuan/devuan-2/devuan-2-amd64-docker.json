@@ -6,7 +6,7 @@
     "disk_size": "51200",
     "iso_name": "devuan_ascii_2.1_amd64_netinst.iso",
     "iso_path": "devuan_ascii/installer-iso",
-    "iso_checksum": "321292be7928f7f09918affe1529283d571930ec4a93a2cce8e0ce0d494058e8",
+    "iso_checksum": "9aa6de460fb944ddfec8c79306974a522be166e4d296e9673f083f9e1cc6c56c",
     "iso_checksum_type": "sha256",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
@@ -14,13 +14,14 @@
     "vagrant_username": "vagrant",
     "vagrant_group": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "2.1.20191121",
+    "box_version": "2.1.20191221",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "headless": "false",
-    "install_from_dvd": "false"
+    "install_from_dvd": "false",
+    "virtualbox_version": "6.1.10"
   },
   "builders": [
     {
@@ -233,7 +234,7 @@
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
         "INSTALL_FROM_DVD={{user `install_from_dvd`}}",
-        "CURL=curl=7.52.1-5+deb9u10",
+        "CURL=curl=7.52.1-5+deb9u11",
         "DOCKER=docker-18.06.0-ce",
         "PYTHON_PIP=python-pip=9.0.1-2+deb9u1",
         "DOCKER_COMPOSE=docker-compose==1.21.2"
@@ -244,7 +245,7 @@
       "only": ["virtualbox-iso"],
       "script": "../provisioners/virtualbox.sh",
       "environment_vars": [
-        "VBOX_VER={{user `vb_version`}}"
+        "VBOX_VER={{user `virtualbox_version`}}"
       ]
     },
     {
