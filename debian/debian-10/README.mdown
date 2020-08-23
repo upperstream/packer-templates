@@ -1,13 +1,13 @@
-# Packer templates for Debian 10.4
+# Packer templates for Debian 10.5
 
-Templates to create Vagrant boxes for Debian 10.4 (amd64).
+Templates to create Vagrant boxes for Debian 10.5 (amd64).
 
 
 ## Prerequisites
 
-* [Packer][] v1.4.1+
+* [Packer][] v1.6.0+
 * [Vagrant][] v2.2.6+
-* [VirtualBox][] v5.2.36+
+* [VirtualBox][] v6.1.10+
 * [VMware][] Workstation v15.0+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
 
@@ -40,14 +40,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso debian-10-amd64-minimal.json
 
 You will find a vagrant box file named
-`Debian-10-amd64-minimal-v10.4.20200509-virtualbox.box` in the same
+`Debian-10-amd64-minimal-v10.5.20200801-virtualbox.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`Debian-10-amd64-minimal-v10.4.20200509-virtualbox` to your box list by
+`Debian-10-amd64-minimal-v10.5.20200801-virtualbox` to your box list by
 the following command:
 
-    vagrant box add Debian-10-amd64-minimal-v10.4.20200509-virtualbox.box --name Debian-10-amd64-minimal-v10.4.20200509-virtualbox
+    vagrant box add Debian-10-amd64-minimal-v10.5.20200801-virtualbox.box --name Debian-10-amd64-minimal-v10.5.20200801-virtualbox
 
 ### VMware
 
@@ -56,14 +56,14 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso debian-10-amd64-minimal.json
 
 You will find a vagrant box file named
-`Debian-10-amd64-minimal-v10.4.20200509-vmware.box` in the same
+`Debian-10-amd64-minimal-v10.5.20200801-vmware.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`Debian-10-amd64-minimal-v10.4.20200509-vmware` to your box list by the
+`Debian-10-amd64-minimal-v10.5.20200801-vmware` to your box list by the
 following command:
 
-    vagrant box add Debian-10-amd64-minimal-v10.4.20200509-vmware.box --name Debian-10-amd64-minimal-v10.4.20200509-vmware
+    vagrant box add Debian-10-amd64-minimal-v10.5.20200801-vmware.box --name Debian-10-amd64-minimal-v10.5.20200801-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -89,14 +89,14 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `debian-10-amd64-minimal.json` - Debian 10.4 minimal installation
-* `debian-10-amd64-ansible.json` - Debian 10.4 with [Ansible][] +
+* `debian-10-amd64-minimal.json` - Debian 10.5 minimal installation
+* `debian-10-amd64-ansible.json` - Debian 10.5 with [Ansible][] +
   [Ansible Lint][] + [Testinfra][]
-* `debian-10-amd64-docker.json` - Debian 10.4 with [Docker][] +
+* `debian-10-amd64-docker.json` - Debian 10.5 with [Docker][] +
   [Docker Compose][]
-* `debian-10-amd64-dwm.json` - Debian 10.4 with [X.org][], [suckless][]
+* `debian-10-amd64-dwm.json` - Debian 10.5 with [X.org][], [suckless][]
   tools, [ARandR][], and [xrdp][].
-* `debian-10-amd64-xfce.json` - Debian 10.4 with [Xfce][] + [xrdp][].
+* `debian-10-amd64-xfce.json` - Debian 10.5 with [Xfce][] + [xrdp][].
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/
