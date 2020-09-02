@@ -1,42 +1,44 @@
 {
   "variables": {
-    "iso_name": "CentOS-7-x86_64-Minimal-1708.iso",
-    "iso_checksum": "bba314624956961a2ea31dd460cd860a77911c1e0a56e4820a12b9c5dad363f5",
-    "iso_checksum_type": "sha256",
+    "iso_name": "CentOS-7-x86_64-Minimal-2003.iso",
+    "iso_checksum": "sha256:659691c28a0e672558b003d223f83938f254b39875ee7559d1a4a14c79173193",
+    "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "40960",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "7.4.20170915",
-    "vm_name": "CentOS-7-x86_64-ansible"
+    "box_version": "7.8.20200427",
+    "vm_name": "CentOS-7-x86_64-ansible",
+    "os_version": "7.8.2003",
+    "headless": "false"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_wait": "10s",
+      "cpus": "{{user `num_cpus`}}",
+      "memory": "{{user `mem_size`}}",
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "RedHat_64",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
-        "http://ftp.jaist.ac.jp/pub/Linux/CentOS/7.4.1708/isos/x86_64/{{user `iso_name`}}"
+        "http://ftp.jaist.ac.jp/pub/Linux/CentOS/{{user `os_version`}}/isos/x86_64/{{user `iso_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
-      "ssh_wait_timeout": "10000s",
+      "ssh_timeout": "10000s",
       "shutdown_command": "shutdown -h now",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
       "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
       "http_directory": "../http",
+      "headless": "{{user `headless`}}",
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
       ]
@@ -48,11 +50,11 @@
       "scripts": [
         "../provisioners/base-7.sh",
         "../provisioners/vagrant-parameterised.sh",
+        "../provisioners/epel-7-x86_64_centos7.8.sh",
+        "../provisioners/ansible+testinfra_centos7.8.sh",
         "../provisioners/kernel_stuff-7-x86_64.sh",
-        "../provisioners/epel-7-x86_64.sh",
         "../provisioners/virtualbox_dependencies-7.sh",
         "../provisioners/virtualbox.sh",
-        "../provisioners/ansible+testinfra.sh",
         "../provisioners/disk_cleanup.sh",
         "../provisioners/cleanup.sh"
       ],
@@ -60,12 +62,14 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_username`}}",
-        "SUDO=sudo-1.8.19p2-11.el7_4",
+        "SUDO=sudo-1.8.23-9.el7",
         "BZIP2=bzip2-1.0.6-13.el7",
-	"EPEL_RELEASE=epel-release-7-10.noarch",
-        "ANSIBLE=ansible-2.3.1.0-3.el7",
-        "PYTHON2_PIP=python2-pip-8.1.2-5.el7",
-        "TESTINFRA=testinfra==1.6.5"
+        "EPEL_RELEASE=epel-release-7-11.noarch",
+        "ANSIBLE=ansible-python3-2.9.10-1.el7.noarch",
+        "ANSIBLE_LINT=ansible-lint==4.2.0",
+        "PYTHON_PIP=python3-pip-9.0.3-5.el7",
+        "TESTINFRA=testinfra==5.0.0",
+        "PIP=pip3"
       ]
     }
   ],
