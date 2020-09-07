@@ -1,41 +1,152 @@
 {
   "variables": {
-    "iso_name": "CentOS-7-x86_64-Minimal-1708.iso",
-    "iso_checksum": "bba314624956961a2ea31dd460cd860a77911c1e0a56e4820a12b9c5dad363f5",
-    "iso_checksum_type": "sha256",
+    "iso_name": "CentOS-7-x86_64-Minimal-2003.iso",
+    "iso_checksum": "sha256:659691c28a0e672558b003d223f83938f254b39875ee7559d1a4a14c79173193",
+    "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "40960",
+    "remote_host": "{{env `REMOTE_HOST`}}",
+    "remote_username": "{{env `REMOTE_USERNAME`}}",
+    "remote_password": "{{env `REMOTE_PASSWORD`}}",
+    "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "ssh_name": "root",
     "ssh_pass": "vagrant",
     "vagrant_username": "vagrant",
     "vagrant_password": "vagrant",
-    "box_version": "7.4.20170915",
-    "vm_name": "CentOS-7-x86_64-docker"
+    "box_version": "7.8.20200427",
+    "vm_name": "CentOS-7-x86_64-docker",
+    "os_version": "7.8.2003",
+    "headless": "false"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_wait": "10s",
+      "cpus": "{{user `num_cpus`}}",
+      "memory": "{{user `mem_size`}}",
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "RedHat_64",
       "iso_urls": [
         "./iso/{{user `iso_name`}}",
-        "http://ftp.jaist.ac.jp/pub/Linux/CentOS/7.4.1708/isos/x86_64/{{user `iso_name`}}"
+        "http://ftp.jaist.ac.jp/pub/Linux/CentOS/{{user `os_version`}}/isos/x86_64/{{user `iso_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
-      "ssh_wait_timeout": "10000s",
+      "ssh_timeout": "10000s",
       "shutdown_command": "shutdown -h now",
       "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-virtualbox",
       "vm_name": "{{user `vm_name`}}-v{{user `box_version`}}",
       "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--memory", "{{user `mem_size`}}" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
+      "http_directory": "../http",
+      "headless": "{{user `headless`}}",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_wait": "10s",
+      "cpus": "{{user `num_cpus`}}",
+      "memory": "{{user `mem_size`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "0",
+      "guest_os_type": "centos7-64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "http://ftp.jaist.ac.jp/pub/Linux/CentOS/{{user `os_version`}}/isos/x86_64/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_timeout": "10000s",
+      "shutdown_command": "sudo /sbin/shutdown -h now",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-vmware",
+      "vm_name": "{{user `vm_name`}}",
+      "network": "nat",
+      "vmx_data": {
+        "ethernet0.present": "TRUE",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "http_directory": "../http",
+      "headless": "{{user `headless`}}",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "name": "esxi-iso",
+      "boot_wait": "10s",
+      "cpus": "{{user `num_cpus`}}",
+      "memory": "{{user `mem_size`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "thin",
+      "guest_os_type": "centos-64",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "http://ftp.jaist.ac.jp/pub/Linux/CentOS/{{user `os_version`}}/isos/x86_64/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_timeout": "10000s",
+      "shutdown_command": "sudo /sbin/shutdown -h now",
+      "remote_type": "esx5",
+      "remote_host": "{{user `remote_host`}}",
+      "remote_username": "{{user `remote_username`}}",
+      "remote_password": "{{user `remote_password`}}",
+      "remote_datastore": "{{user `remote_datastore`}}",
+      "output_directory": "{{user `vm_name`}}-v{{user `box_version`}}",
+      "vm_name": "{{user `vm_name`}}",
+      "skip_export": true,
+      "network": "bridged",
+      "vmx_data": {
+        "ethernet0.present": "TRUE",
+        "ethernet0.networkName": "VM Network",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "ethernet0.addressType": "generated",
+        "remotedisplay.vnc.enabled": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "http_directory": "../http",
+      "headless": "{{user `headless`}}",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ]
+    },
+    {
+      "type": "qemu",
+      "boot_wait": "10s",
+      "cpus": "{{user `num_cpus`}}",
+      "memory": "{{user `mem_size`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_name`}}",
+        "http://ftp.jaist.ac.jp/pub/Linux/CentOS/{{user `os_version`}}/isos/x86_64/{{user `iso_name`}}"
+      ],
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_port": 22,
+      "ssh_timeout": "10000s",
+      "shutdown_command": "/sbin/shutdown -h now",
+      "format": "qcow2",
+      "accelerator": "kvm",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "output_directory": "output/{{user `vm_name`}}-v{{user `box_version`}}-qemu",
+      "vm_name": "{{user `vm_name`}}",
+      "headless": "{{user `headless`}}",
       "http_directory": "../http",
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
@@ -47,31 +158,68 @@
       "type": "shell",
       "scripts": [
         "../provisioners/base-7.sh",
-        "../provisioners/vagrant-parameterised.sh",
-        "../provisioners/kernel_stuff-7-x86_64.sh",
-        "../provisioners/epel-7-x86_64.sh",
-        "../provisioners/virtualbox_dependencies-7.sh",
-        "../provisioners/virtualbox.sh",
-        "../provisioners/docker-7.sh",
-        "../provisioners/disk_cleanup.sh",
-        "../provisioners/cleanup.sh"
+        "../provisioners/vagrant-parameterised.sh"
       ],
       "environment_vars": [
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_username`}}",
-        "SUDO=sudo-1.8.19p2-11.el7_4",
-        "BZIP2=bzip2-1.0.6-13.el7",
-	"EPEL_RELEASE=epel-release-7-10.noarch",
-        "DOCKER_ENGINE=docker-engine-1.12.4-1.el7.centos"
+        "SUDO=sudo-1.8.23-9.el7",
+        "BZIP2=bzip2-1.0.6-13.el7"
       ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso"],
+      "scripts": [
+        "../provisioners/kernel_stuff-7-x86_64.sh",
+        "../provisioners/epel-7-x86_64_centos7.8.sh",
+        "../provisioners/virtualbox_dependencies-7.sh",
+        "../provisioners/virtualbox.sh"
+      ],
+      "environment_vars": [
+	"EPEL_RELEASE=epel-release-7-11.noarch"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["vmware-iso", "esxi-iso"],
+      "script": "../provisioners/vmtools_centos7.8.sh",
+      "environment_vars": [
+	"OPEN_VM_TOOLS=open-vm-tools-10.3.10-2.el7"
+      ]
+    },
+    {
+      "type": "shell",
+      "script": "../provisioners/docker_centos7.8.sh",
+      "environment_vars": [
+        "DOCKER_CE=docker-ce-19.03.8",
+        "DOCKER_COMPOSE_VERSION=1.25.5"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox-iso", "vmware-iso", "qemu"],
+      "script": "../provisioners/disk_cleanup.sh"
+    },
+    {
+      "type": "shell",
+      "script": "../provisioners/cleanup.sh"
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
+      "only": ["virtualbox-iso"],
       "compression_level": 9,
-      "output": "./{{user `vm_name`}}-v{{user `box_version`}}.box"
+      "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box"
+    },
+    {
+      "type": "vagrant",
+      "only": ["vmware-iso", "qemu"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "keep_input_artifact": true
     }
   ]
 }
