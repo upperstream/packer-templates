@@ -9,10 +9,12 @@ Templates to create Vagrant boxes for CentOS 7.8.2003 (x86_64).
 * [VirtualBox][] version 6.1.10+
 * [VMware][] Workstation v15.0+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
+* [QEMU][] version 4.2+ / [libvirt][] 6.0+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
     "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
+[QEMU]: https://www.qemu.org/ "QEMU"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
 [VMware]: http://www.vmware.com/
@@ -55,8 +57,8 @@ From the terminal, invoke the following command for VMware provider:
 You will find a vagrant box file named `CentOS-7-x86_64-minimal-v7.8.20200427-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `CentOS-7-x86_64-minimal-v7.8.20200427-vmware` to your box list
-by the following command:
+Then you can add the box named `CentOS-7-x86_64-minimal-v7.8.20200427-vmware`
+to your box list by the following command:
 
     vagrant box add CentOS-7-x86_64-minimal-v7.8.20200427-vmware.box --name CentOS-7-x86_64-minimal-v7.8.20200427-vmware
 
@@ -79,6 +81,23 @@ You also have to enable SSH and VNC on ESXi host.
 The following command will build a VM image on your ESXi:
 
     packer build -only=esxi-iso centos-7-x86_64-minimal.json
+
+### QEMU/libvirt
+
+From the terminal, invoke the following command for Libvirt provider:
+
+    packer build -only=qemu centos-7-x86_64-minimal.json
+
+You will find a vagrant box file named `CentOS-7-x86_64-minimal-v7.8.20200427-libvirt.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `CentOS-7-x86_64-minimal-v7.8.20200427-libvirt`
+to your box list by the following command:
+
+    vagrant box add CentOS-7-x86_64-minimal-v7.8.20200427-libvirt.box --name CentOS-7-x86_64-minimal-v7.8.20200427-libvirt
+
+In the `output` directory you will also find a VM image that can be
+directly imported to QEMU.
 
 ## Variants
 
