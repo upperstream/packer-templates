@@ -25,7 +25,9 @@
     "cpu": "amd64",
     "virtualbox_geust_os_type": "NetBSD_64",
     "vmware_guest_os_type": "other-64",
-    "vm_name": "NetBSD-7.2-amd64"
+    "vm_name": "NetBSD-7.2-amd64",
+    "qemu_accelerator": "kvm",
+    "qemu_binary": "qemu-system-x86_64"
   },
   "builders": [
     {
@@ -250,6 +252,74 @@
         "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
         "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} HDD=sd0a HOSTNAME={{user `hostname`}} sh /tmp/install.sh<enter><wait>"
       ]
+    },
+    {
+      "type": "qemu",
+      "boot_wait": "10s",
+      "iso_urls": [
+        "./iso/{{user `iso_file_name`}}",
+        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo 'shutdown -p now'|su -",
+      "format": "qcow2",
+      "accelerator": "{{user `qemu_accelerator`}}",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}-qemu",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
+      "headless": "{{user `headless`}}",
+      "qemuargs": [
+        ["-display", "gtk"],
+        ["-smp", "cpus={{user `num_cpus`}}"],
+        ["-m", "size={{user `mem_size`}}"]
+      ],
+      "http_directory": ".",
+      "boot_command": [
+        "1<wait10><wait10><wait5>",
+        "a<enter><wait>",
+        "a<enter><wait>",
+        "a<enter><wait>",
+        "b<enter><wait>",
+        "a<enter><wait>",
+        "a<enter><wait>",
+        "b<enter><wait>",
+        "a<enter><wait>",
+        "b<enter><wait>",
+        "x<enter><wait>",
+        "<enter><wait>",
+        "b<enter><wait>",
+        "<wait10><wait10><wait10><wait10>",
+        "a<enter><wait>",
+        "x<enter><wait>",
+        "d<enter><wait>",
+        "g<enter><wait>",
+        "j<enter><wait>",
+        "k<enter><wait>",
+        "f<enter><wait>",
+        "x<enter><wait>",
+        "x<enter><wait>",
+        "a<enter><wait10><wait10><wait10><wait10><wait10>",
+        "<enter><wait>",
+        "d<enter><wait>",
+        "a<enter><wait>",
+        "{{user `ssh_password`}}<enter><wait>",
+        "{{user `ssh_password`}}<enter><wait>",
+        "{{user `ssh_password`}}<enter><wait>",
+        "g<enter><wait>",
+        "h<enter><wait>",
+        "x<enter><wait>",
+        "<enter><wait10>",
+        "x<enter><wait>",
+        "dhcpcd<enter><wait10>",
+        "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} HDD=ld0a HOSTNAME={{user `hostname`}} sh /tmp/install.sh<enter><wait>"
+      ]
     }
   ],
   "provisioners": [
@@ -277,7 +347,7 @@
     },
     {
       "type": "shell",
-      "only": ["virtualbox-iso", "vmware-iso"],
+      "only": ["virtualbox-iso", "vmware-iso", "qemu"],
       "script": "../provisioners/disk_cleanup.sh"
     },
     {
@@ -295,7 +365,7 @@
     },
     {
       "type": "vagrant",
-      "only": ["vmware-iso"],
+      "only": ["vmware-iso", "qemu"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
       "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD-sh",
