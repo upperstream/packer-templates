@@ -3,7 +3,7 @@ set -e
 set -x
 
 # XORG_FONTS is optional
-pkg install -y ${XORG_MINIMAL:-"xorg-minimal"} ${XRANDR:-xrandr} ${XORG_FONTS:-""}
+pkg install -y ${XORG_MINIMAL:-"xorg-minimal"} ${XRANDR:-xrandr} ${XORG_FONTS-}
 pw groupmod video -m ${VAGRANT_USER:=vagrant} || pw groupmod wheel -m $VAGRANT_USER
 echo "kern.vty=vt" >> /boot/loader.conf
 cat >> /usr/local/etc/X11/xorg.conf.d/screen-resolutions.conf << EOF
