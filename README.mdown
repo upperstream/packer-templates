@@ -30,9 +30,7 @@
   * freebsd-12.1 - FreeBSD 12.1 templates
   * [more](freebsd/README.mdown)
 * [netbsd](netbsd/README.mdown) - NetBSD templates (amd64 and i386)
-  * netbsd-5.2.3 - NetBSD 5.2.3 templates
-  * netbsd-6.1.5 - NetBSD 6.1.5 templates
-  * netbsd-7.1 - NetBSD 7.1.2 templates
+  * netbsd-7.2 - NetBSD 7.2 templates
   * netbsd-8.2 - NetBSD 8.2 templates
   * netbsd-9.0 - NetBSD 9.0 templates
   * [more](netbsd/README.mdown)

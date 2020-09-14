@@ -2,7 +2,7 @@
 set -e
 set -x
 
-pkg_add ${DWM:-dwm} ${DMENU:-dmenu} ${ST_TERM:-"st-term"} ${FREETYPE2:-freetype2} ${FONTCONFIG:-fontconfig} ${XFT2:-Xft2}
+pkg_add ${DWM:-dwm} ${DMENU:-dmenu} ${ST_TERM:-"st-term"} ${FREETYPE2-freetype2} ${FONTCONFIG-fontconfig} ${XFT2-Xft2}
 #echo "xdm=YES" >> /etc/rc.conf
 cp /etc/X11/xdm/Xresources /tmp/Xresources
 sed 's/^XConsole\(.*\)/!XConsole\1/' /tmp/Xresources > /etc/X11/xdm/Xresources

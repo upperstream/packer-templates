@@ -1,0 +1,12 @@
+{
+  "iso_file_name": "NetBSD-7.2-i386.iso",
+  "iso_path": "NetBSD/iso/7.2",
+  "iso_checksum": "26be3b33764e0da28ce7b112ae95bc713f1b35bb1f1423de89aa3bad9fd6de4709db0d8e0561ce66f4f9753c45ff6ce5cfdea1129897f9cbfe239d4b6c7b7e36",
+  "iso_checksum_type": "sha512",
+  "cpu": "i386",
+  "virtualbox_geust_os_type": "NetBSD",
+  "vmware_guest_os_type": "other",
+  "vm_name": "NetBSD-7.2-i386",
+  "pkgsrc_branch": "7.1_2020Q1",
+  "qemu_binary": "qemu-system-i386"
+}
