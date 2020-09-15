@@ -1,15 +1,15 @@
 {
   "variables": {
-    "iso_image": "NetBSD-8.2-amd64.iso",
+    "num_cpus": "2",
+    "mem_size": "512",
+    "disk_size": "40960",
+    "iso_file_name": "NetBSD-8.2-amd64.iso",
     "iso_path": "NetBSD/NetBSD-8.2/images",
     "iso_checksum_type": "sha512",
     "iso_checksum": "52521c1c4de4341922edda97d399daae65022f3c9804cea4ce32edfd48088f55edef0c08c4c9fa7a109972195913e98cdc009202a3088a918c9d775d2ed0b38f",
     "variant": "minimal",
     "vm_name": "NetBSD-8.2-amd64",
-    "box_ver": "8.2.20200402",
-    "num_cpus": "2",
-    "mem_size": "512",
-    "disk_size": "40960",
+    "box_ver": "8.2.20200909",
     "os_ver": "8.2",
     "hostname": "vagrant",
     "remote_host": "{{env `REMOTE_HOST`}}",
@@ -33,8 +33,8 @@
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "{{user `virtualbox_geust_os_type`}}",
       "iso_urls": [
-        "./iso/{{user `iso_image`}}",
-        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_image`}}"
+        "./iso/{{user `iso_file_name`}}",
+        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -100,8 +100,8 @@
       "disk_type_id": "0",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
-        "./iso/{{user `iso_image`}}",
-        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_image`}}"
+        "./iso/{{user `iso_file_name`}}",
+        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -171,8 +171,8 @@
       "disk_type_id": "thin",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
-        "./iso/{{user `iso_image`}}",
-        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_image`}}"
+        "./iso/{{user `iso_file_name`}}",
+        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -189,7 +189,7 @@
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "headless": "{{user `headless`}}",
-      "skip_export": "true",
+      "skip_export": true,
       "memory": "{{user `mem_size`}}",
       "cpus": "{{user `num_cpus`}}",
       "network": "bridged",
@@ -246,7 +246,7 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.2/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/8.0_2020Q1/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
