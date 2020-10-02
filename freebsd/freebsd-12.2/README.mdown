@@ -10,10 +10,13 @@ i386).
 * [VirtualBox][] version 5.2.32+
 * [VMware][] Workstation version 15.0+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) version 5.5+
+* [QEMU][] version 4.2+ / [libvirt][] 6.0+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
     "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
+[libvirt]: https://libvirt.org/ "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
+[QEMU]: https://www.qemu.org/ "QEMU"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
 [VMware]: http://www.vmware.com/
@@ -59,6 +62,23 @@ to your box list by the following command:
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
+
+### QEMU/libvirt
+
+From the terminal, invoke the following command for Libvirt provider:
+
+    packer build -only=qemu freebsd-12.2-beta-minimal.json
+
+You will find a vagrant box file named `FreeBSD-12.2_BETA-amd64-v3.20200925-libvirt.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `FreeBSD-12.2_BETA-amd64-minimal-v3.20200925-libvirt` to your box
+list by the following command:
+
+    vagrant box add FreeBSD-12.2_BETA-amd64-minimal-v3.20200925-libvirt.box --name FreeBSD-12.2_BETA-amd64-minimal-v3.20200925-libvirt
+
+In the `output` directory you will also find a VM image that can be
+directly imported to QEMU.
 
 ## Default settings
 
