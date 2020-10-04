@@ -1,9 +1,9 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-12.2-BETA3-amd64-disc1.iso",
+    "iso_image": "FreeBSD-12.2-RC1-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.2",
-    "iso_checksum": "sha256:144973e2f61b86347fa31db24876b04765d639a0814918dc71f43b91131e6511",
-    "box_version": "3.20200925",
+    "iso_checksum": "sha256:59d21c4ea22ceb12b99bd062dff9cc9db98d3bda6416468e31a1a112f3db54f7",
+    "box_version": "1.20201003",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -27,7 +27,7 @@
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:12:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-12.2_BETA-amd64"
+    "vm_name": "FreeBSD-12.2_RC-amd64"
   },
   "builders": [
     {

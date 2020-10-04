@@ -1,9 +1,9 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-12.2-BETA3-amd64-disc1.iso",
+    "iso_image": "FreeBSD-12.2-RC1-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.2",
-    "iso_checksum": "sha256:144973e2f61b86347fa31db24876b04765d639a0814918dc71f43b91131e6511",
-    "box_version": "3.20200925",
+    "iso_checksum": "sha256:59d21c4ea22ceb12b99bd062dff9cc9db98d3bda6416468e31a1a112f3db54f7",
+    "box_version": "1.20201003",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -21,13 +21,13 @@
     "virtualbox_netif": "em0",
     "vmware_netif": "em0",
     "qemu_netif": "vtnet0",
-    "variant": "ansible",
+    "variant": "dwm",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:12:amd64",
     "headless": "false",
-    "vm_name": "FreeBSD-12.2_BETA-amd64"
+    "vm_name": "FreeBSD-12.2_RC-amd64"
   },
   "builders": [
     {
@@ -57,7 +57,8 @@
       "memory": "{{user `mem_size`}}",
       "cpus": "{{user `num_cpus`}}",
       "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "16" ]
       ],
       "http_directory": ".",
       "boot_command": [
@@ -66,7 +67,7 @@
         "s",
         "<wait5>",
         "dhclient {{user `virtualbox_netif`}}<enter><wait5>",
-        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `virtualbox_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -77,7 +78,7 @@
         "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
         "VAGRANT_GROUP={{user `vagrant_group`}} ",
         "NETIF={{user `virtualbox_netif`}} ",
-        "bsdinstall script /tmp/install.sh<enter>",
+        "bsdinstall script /tmp/install_with_x11.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
     },
@@ -114,7 +115,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "16777216"
       },
       "http_directory": ".",
       "boot_command": [
@@ -179,7 +181,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "16777216"
       },
       "http_directory": ".",
       "boot_command": [
@@ -246,7 +249,7 @@
         "s",
         "<wait5>",
         "dhclient {{user `qemu_netif`}}<enter><wait5>",
-        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `qemu_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -257,7 +260,7 @@
         "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
         "VAGRANT_GROUP={{user `vagrant_group`}} ",
         "NETIF={{user `qemu_netif`}} ",
-        "bsdinstall script /tmp/install.sh<enter>",
+        "bsdinstall script /tmp/install_with_x11.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
     }
@@ -267,7 +270,8 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant-11.1+.sh",
-        "../provisioners/ansible+testinfra-11.1+.sh"
+        "../provisioners/dwm+dmenu+st.sh",
+        "../provisioners/xrdp.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
@@ -275,10 +279,15 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "PY27_PIP=py37-pip-19.1.1",
-        "ANSIBLE=py37-ansible-2.9.7",
-        "ANSIBLE_LINT=py37-ansible-lint-4.2.0",
-        "TESTINFRA=testinfra==5.0.0"
+        "XORG_MINIMAL=xorg-minimal-7.5.2_3",
+        "XRANDR=xrandr-1.5.1",
+        "ARANDR=arandr-0.1.10",
+        "DWM=dwm-6.2_1",
+        "STERM=sterm-0.8.4",
+        "DMENU=dmenu-4.9.6",
+        "XRDP=xrdp-0.9.13.1_1,1",
+        "NCURSES=ncurses-6.1.20190525",
+        "XORG_FONTS=xorg-fonts-7.7_1"
       ]
     },
     {
@@ -287,8 +296,7 @@
       "script": "../provisioners/virtualbox_ose_additions-10.4+.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "VIRTUALBOX_WITH_XORG=false",
-        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-nox11-5.2.44"
+        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.2.44"
       ]
     },
     {
@@ -297,7 +305,10 @@
       "script": "../provisioners/vmware-guest.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools-nox11-11.1.0,2"
+        "VMWARE_WITH_XORG=1",
+        "OPEN_VM_TOOLS=open-vm-tools-11.1.0,2",
+        "XF86_VIDEO_VMWARE=xf86-video-vmware-13.3.0_6",
+        "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0_4"
       ]
     },
     {
