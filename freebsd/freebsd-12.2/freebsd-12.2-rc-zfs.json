@@ -1,9 +1,11 @@
 {
   "variables": {
-    "iso_image": "FreeBSD-12.2-RC1-amd64-disc1.iso",
+    "variant": "zfs",
+    "vm_name": "FreeBSD-12.2_RC-amd64",
+    "iso_image": "FreeBSD-12.2-RC2-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.2",
-    "iso_checksum": "sha256:59d21c4ea22ceb12b99bd062dff9cc9db98d3bda6416468e31a1a112f3db54f7",
-    "box_version": "1.20201003",
+    "iso_checksum": "sha256:7ead3fbfc7363e39b03f7a492ea38d5fef51e338bafb766c847566da84f58513",
+    "box_version": "2.20201010",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -21,20 +23,21 @@
     "virtualbox_netif": "em0",
     "vmware_netif": "em0",
     "qemu_netif": "vtnet0",
-    "variant": "zfs",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:12:amd64",
-    "headless": "false",
-    "vm_name": "FreeBSD-12.2_RC-amd64"
+    "headless": "false"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_wait": "10s",
+      "cpus": "{{user `num_cpus`}}",
+      "memory": "{{user `mem_size`}}",
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
         "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
@@ -45,21 +48,18 @@
         "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
-      "iso_checksum": "{{user `iso_checksum`}}",
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
       "ssh_timeout": "10000s",
-      "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
+      "shutdown_command": "echo '{{user `vagrant_password`}}' | sudo shutdown -p now",
       "guest_additions_mode": "disable",
+      "http_directory": ".",
       "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-virtualbox",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
-      "memory": "{{user `mem_size`}}",
-      "cpus": "{{user `num_cpus`}}",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
-      "http_directory": ".",
       "boot_command": [
         "<enter>",
         "<wait10><wait10><wait5>",
@@ -77,6 +77,8 @@
         "VAGRANT_USER={{user `vagrant_username`}} ",
         "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
         "VAGRANT_GROUP={{user `vagrant_group`}} ",
+        "SUDO=sudo-1.9.3p1 ",
+        "CA_ROOT_NSS=ca_root_nss-3.57 ",
         "NETIF={{user `virtualbox_netif`}} ",
         "bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
@@ -85,9 +87,12 @@
     {
       "type": "vmware-iso",
       "boot_wait": "10s",
+      "cpus": "{{user `num_cpus`}}",
+      "memory": "{{user `mem_size`}}",
       "disk_size": "{{user `disk_size`}}",
       "disk_type_id": "0",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
         "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
@@ -98,16 +103,14 @@
         "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
-      "iso_checksum": "{{user `iso_checksum`}}",
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
       "ssh_timeout": "10000s",
-      "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
+      "shutdown_command": "echo '{{user `vagrant_password`}}' | sudo shutdown -p now",
+      "http_directory": ".",
       "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-vmware",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
-      "memory": "{{user `mem_size`}}",
-      "cpus": "{{user `num_cpus`}}",
       "network": "nat",
       "network_adapter_type": "e1000",
       "vmx_data": {
@@ -117,7 +120,6 @@
         "remotedisplay.vnc.enabled": "TRUE",
         "vhv.enable": "TRUE"
       },
-      "http_directory": ".",
       "boot_command": [
         "<enter>",
         "<wait10><wait10><wait5>",
@@ -135,6 +137,8 @@
         "VAGRANT_USER={{user `vagrant_username`}} ",
         "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
         "VAGRANT_GROUP={{user `vagrant_group`}} ",
+        "SUDO=sudo-1.9.3p1 ",
+        "CA_ROOT_NSS=ca_root_nss-3.57 ",
         "NETIF={{user `vmware_netif`}} ",
         "bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
@@ -144,9 +148,12 @@
       "type": "vmware-iso",
       "name": "esxi-iso",
       "boot_wait": "10s",
+      "cpus": "{{user `num_cpus`}}",
+      "memory": "{{user `mem_size`}}",
       "disk_size": "{{user `disk_size`}}",
       "disk_type_id": "thin",
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
         "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
@@ -157,22 +164,20 @@
         "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
-      "iso_checksum": "{{user `iso_checksum`}}",
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
       "ssh_timeout": "10000s",
-      "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
+      "shutdown_command": "echo '{{user `vagrant_password`}}' | sudo shutdown -p now",
       "remote_type": "esx5",
       "remote_host": "{{user `remote_host`}}",
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
+      "http_directory": ".",
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
+      "skip_export": true,
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
-      "skip_export": "true",
-      "memory": "{{user `mem_size`}}",
-      "cpus": "{{user `num_cpus`}}",
       "network": "bridged",
       "network_adapter_type": "e1000",
       "vmx_data": {
@@ -183,7 +188,6 @@
         "remotedisplay.vnc.enabled": "TRUE",
         "vhv.enable": "TRUE"
       },
-      "http_directory": ".",
       "boot_command": [
         "<enter>",
         "<wait10><wait10><wait5>",
@@ -201,8 +205,8 @@
         "VAGRANT_USER={{user `vagrant_username`}} ",
         "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
         "VAGRANT_GROUP={{user `vagrant_group`}} ",
-        "SUDO=sudo-1.9.2 ",
-        "CA_ROOT_NSS=ca_root_nss-3.56 ",
+        "SUDO=sudo-1.9.3p1 ",
+        "CA_ROOT_NSS=ca_root_nss-3.57 ",
         "NETIF={{user `vmware_netif`}} ",
         "bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
@@ -211,7 +215,10 @@
     {
       "type": "qemu",
       "boot_wait": "10s",
+      "cpus": "{{user `num_cpus`}}",
+      "memory": "{{user `mem_size`}}",
       "disk_size": "{{user `disk_size`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
         "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
@@ -222,26 +229,22 @@
         "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
         "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
-      "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo 'vagrant' | sudo shutdown -p now",
+      "shutdown_command": "echo '{{user `vagrant_password`}}' | sudo shutdown -p now",
       "format": "qcow2",
       "accelerator": "kvm",
       "net_device": "virtio-net",
       "disk_interface": "virtio",
+      "http_directory": ".",
       "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-qemu",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
-      "memory": "{{user `mem_size`}}",
-      "cpus": "{{user `num_cpus`}}",
+      "disk_compression": true,
       "qemuargs": [
         ["-display", "gtk"]
       ],
-      "headless": "{{user `headless`}}",
-      "http_directory": ".",
       "boot_command": [
         "<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
@@ -260,6 +263,8 @@
         "VAGRANT_USER={{user `vagrant_username`}} ",
         "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
         "VAGRANT_GROUP={{user `vagrant_group`}} ",
+        "SUDO=sudo-1.9.3p1 ",
+        "CA_ROOT_NSS=ca_root_nss-3.57 ",
         "NETIF={{user `qemu_netif`}} ",
         "bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
@@ -285,7 +290,7 @@
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "VIRTUALBOX_WITH_XORG=false",
-        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-nox11-5.2.44"
+        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-nox11-5.2.44_2"
       ]
     },
     {
@@ -294,7 +299,7 @@
       "script": "../provisioners/vmware-guest.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools-nox11-11.1.0,2"
+        "OPEN_VM_TOOLS=open-vm-tools-nox11-11.1.5,2"
       ]
     },
     {
