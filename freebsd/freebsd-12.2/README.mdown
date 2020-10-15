@@ -6,14 +6,17 @@ i386).
 ## Prerequisites
 
 * [Packer][] version 1.6.2+
-* [Vagrant][] version 2.0.2+
-* [VirtualBox][] version 5.2.32+
-* [VMware][] Workstation version 15.0+ / VMware Fusion v10.0+
+* [Vagrant][] version 2.2.10+
+* [VirtualBox][] version 6.1.14+
+* [VMware][] Workstation version 15.5.6+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) version 5.5+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
+* [Hyper-V][] on Windows 10
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
     "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
+[Hyper-V]: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/
+    "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
 [libvirt]: https://libvirt.org/ "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
 [QEMU]: https://www.qemu.org/ "QEMU"
@@ -79,6 +82,20 @@ to your box list by the following command:
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
+
+### Hyper-V
+
+From the terminal, invoke the following command for Hyper-V provider:
+
+    packer build -only=hyperv-iso freebsd-12.2-rc-minimal.json
+
+You will find a vagrant box file named `FreeBSD-12.2_RC-amd64-v2.20201010-hyperv.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `FreeBSD-12.2_RC-amd64-minimal-v2.20201010-hyperv`
+to your box list by the following command:
+
+    vagrant box add FreeBSD-12.2_RC-amd64-minimal-v2.20201010-hyperv.box --name FreeBSD-12.2_RC-amd64-minimal-v2.20201010-hyperv
 
 ## Default settings
 
@@ -177,6 +194,8 @@ or `-var-file` command line options to `packer`:
   Default value is `vagrant`.
 * `headless` - Launch the virtual machine in headless mode if set to
   `true`.  Default value is `false`.
+* `hyperv_switch_name` - Network switch name on Packer Hyper-V builder.
+  Default value is `Default Switch`.
 
 - - -
 
