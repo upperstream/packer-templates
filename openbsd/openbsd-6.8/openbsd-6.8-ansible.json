@@ -20,6 +20,7 @@
     "package_server": "http://cdn.openbsd.org/pub/OpenBSD",
     "virtualbox_guest_os_type": "OpenBSD_64",
     "vmware_guest_os_type": "other-64",
+    "hyperv_switch_name": "Default Switch",
     "headless": "false",
     "rsync_version": "3.2.3"
   },
@@ -174,6 +175,35 @@
         "<wait5>",
         "i<enter><wait>"
       ]
+    },
+    {
+      "type": "hyperv-iso",
+      "boot_wait": "10s",
+      "cpus": "{{user `num_cpus`}}",
+      "memory": "{{user `mem_size`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_urls": [
+        "iso/{{user `cpu`}}/{{user `iso_image`}}",
+        "iso/{{user `iso_image`}}",
+        "http://cdn.openbsd.org/pub/OpenBSD/{{user `os_ver`}}/{{user `cpu`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "root",
+      "ssh_password": "{{user `root_password`}}",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -h -p now",
+      "http_directory": ".",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-hyperv",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "headless": "{{user `headless`}}",
+      "switch_name": "{{user `hyperv_switch_name`}}",
+      "boot_command": [
+        "a<enter><wait>",
+        "<wait10>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "<wait5>",
+        "i<enter><wait>"
+      ]
     }
   ],
   "provisioners": [
@@ -197,7 +227,7 @@
     },
     {
       "type": "shell",
-      "only": ["virtualbox-iso", "vmware-iso", "qemu"],
+      "only": ["virtualbox-iso", "vmware-iso", "qemu", "hyperv-iso"],
       "script": "../provisioners/disk_cleanup.sh"
     },
     {
@@ -208,7 +238,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "only": ["virtualbox-iso"],
+      "only": ["virtualbox-iso", "hyperv-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
       "vagrantfile_template": "../vagrantfiles/Vagrantfile.OpenBSD-sh"
