@@ -2,10 +2,10 @@
   "variables": {
     "variant": "xfce",
     "vm_name": "FreeBSD-12.2_RC-amd64",
-    "iso_image": "FreeBSD-12.2-RC2-amd64-disc1.iso",
+    "iso_image": "FreeBSD-12.2-RC3-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.2",
-    "iso_checksum": "sha256:7ead3fbfc7363e39b03f7a492ea38d5fef51e338bafb766c847566da84f58513",
-    "box_version": "2.20201010",
+    "iso_checksum": "sha256:ce69e0fa6d20a7312433e37c5ec06412ab4b70d74b8516d98e175b213f81a40a",
+    "box_version": "3.20201017",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -245,9 +245,7 @@
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
       "disk_compression": true,
-      "qemuargs": [
-        ["-display", "gtk"]
-      ],
+      "use_default_display": true,
       "boot_command": [
         "<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
