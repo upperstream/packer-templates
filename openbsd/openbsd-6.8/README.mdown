@@ -1,13 +1,13 @@
-# Packer templates for OpenBSD 6.8 snapshot
+# Packer templates for OpenBSD 6.8
 
-Templates to create Vagrant boxes for OpenBSD 6.8 snapshot (amd64 and i386).
+Templates to create Vagrant boxes for OpenBSD 6.8 (amd64 and i386).
 
 ## Prerequisites
 
-* [Packer][] v1.6.0+
+* [Packer][] v1.6.1+
 * [Vagrant][] v2.2.6+
-* [VirtualBox][] version 5.2.32+
-* [VMware][] Workstation version 15.0+ / VMware Fusion v10.0+
+* [VirtualBox][] version 6.1.0+
+* [VMware][] Workstation version 15.5+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) version 5.5+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
@@ -39,13 +39,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso openbsd-6.8-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-virtualbox.box`
+You will find a vagrant box file named `OpenBSD-6.8-amd64-minimal-v6.8.20201018-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-virtualbox`
+Then you can add the box named `OpenBSD-6.8-amd64-minimal-v6.8.20201018-virtualbox`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-virtualbox.box --name OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-virtualbox
+    vagrant box add OpenBSD-6.8-amd64-minimal-v6.8.20201018-virtualbox.box --name OpenBSD-6.8-amd64-minimal-v6.8.20201018-virtualbox
 
 ### VMware
 
@@ -53,13 +53,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso openbsd-6.8-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-vmware.box`
+You will find a vagrant box file named `OpenBSD-6.8-amd64-minimal-v6.8.20201018-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-vmawre`
+Then you can add the box named `OpenBSD-6.8-amd64-minimal-v6.8.20201018-vmawre`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-vmware.box --name OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-vmware
+    vagrant box add OpenBSD-6.8-amd64-minimal-v6.8.20201018-vmware.box --name OpenBSD-6.8-amd64-minimal-v6.8.20201018-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported to VMware.
@@ -70,13 +70,13 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu openbsd-6.8-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-libvirt.box`
+You will find a vagrant box file named `OpenBSD-6.8-amd64-minimal-v6.8.20201018-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-libvirt`
+Then you can add the box named `OpenBSD-6.8-amd64-minimal-v6.8.20201018-libvirt`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-libvirt.box --name OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-libvirt
+    vagrant box add OpenBSD-6.8-amd64-minimal-v6.8.20201018-libvirt.box --name OpenBSD-6.8-amd64-minimal-v6.8.20201018-libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -87,13 +87,13 @@ From the terminal, invoke the following command for Hyper-V provider:
 
     packer build -only=hyperv-iso openbsd-6.8-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-hyperv.box`
+You will find a vagrant box file named `OpenBSD-6.8-amd64-minimal-v6.8.20201018-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-hyperv`
+Then you can add the box named `OpenBSD-6.8-amd64-minimal-v6.8.20201018-hyperv`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-hyperv.box --name OpenBSD-6.8_BETA-amd64-minimal-v6.8.20201008-hyperv
+    vagrant box add OpenBSD-6.8-amd64-minimal-v6.8.20201018-hyperv.box --name OpenBSD-6.8-amd64-minimal-v6.8.20201018-hyperv
 
 ## Default settings
 
