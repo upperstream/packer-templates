@@ -34,8 +34,8 @@
   * netbsd-9.0 - NetBSD 9.0 templates
   * [more](netbsd/README.mdown)
 * [openbsd](openbsd/README.mdown) - OpenBSD templates (amd64 and i386)
-  * openbsd-6.6 - OpenBSD 6.6 templates
   * openbsd-6.7 - OpenBSD 6.7 templates
+  * openbsd-6.8 - OpenBSD 6.8 templates
   * [more](openbsd/README.mdown)
 * [opensuse](opensuse/README.mdown) - openSUSE templates (amd64)
   * leap-42.3 - openSUSE Leap 42.3 templates
