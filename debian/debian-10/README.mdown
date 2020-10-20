@@ -1,7 +1,6 @@
-# Packer templates for Debian 10.5
+# Packer templates for Debian 10.6
 
-Templates to create Vagrant boxes for Debian 10.5 (amd64).
-
+Templates to create Vagrant boxes for Debian 10.6 (amd64).
 
 ## Prerequisites
 
@@ -19,7 +18,6 @@ Templates to create Vagrant boxes for Debian 10.5 (amd64).
 [VMware]: http://www.vmware.com/
     "VMware Virtualization for Desktop &amp; Server, Application, Public &amp; Hybrid Clouds"
 
-
 ## Provisioned software tools
 
 * VirtualBox Guest Additions or [open-vm-tools][]
@@ -30,7 +28,6 @@ Templates to create Vagrant boxes for Debian 10.5 (amd64).
 [open-vm-tools]: https://github.com/vmware/open-vm-tools
     "Official repository of VMware open-vm-tools project"
 
-
 ## How to create a box
 
 ### VirtualBox
@@ -40,14 +37,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso debian-10-amd64-minimal.json
 
 You will find a vagrant box file named
-`Debian-10-amd64-minimal-v10.5.20200801-virtualbox.box` in the same
+`Debian-10-amd64-minimal-v10.6.20200926-virtualbox.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`Debian-10-amd64-minimal-v10.5.20200801-virtualbox` to your box list by
+`Debian-10-amd64-minimal-v10.6.20200926-virtualbox` to your box list by
 the following command:
 
-    vagrant box add Debian-10-amd64-minimal-v10.5.20200801-virtualbox.box --name Debian-10-amd64-minimal-v10.5.20200801-virtualbox
+    vagrant box add Debian-10-amd64-minimal-v10.6.20200926-virtualbox.box --name Debian-10-amd64-minimal-v10.6.20200926-virtualbox
 
 ### VMware
 
@@ -56,18 +53,17 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso debian-10-amd64-minimal.json
 
 You will find a vagrant box file named
-`Debian-10-amd64-minimal-v10.5.20200801-vmware.box` in the same
+`Debian-10-amd64-minimal-v10.6.20200926-vmware.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`Debian-10-amd64-minimal-v10.5.20200801-vmware` to your box list by the
+`Debian-10-amd64-minimal-v10.6.20200926-vmware` to your box list by the
 following command:
 
-    vagrant box add Debian-10-amd64-minimal-v10.5.20200801-vmware.box --name Debian-10-amd64-minimal-v10.5.20200801-vmware
+    vagrant box add Debian-10-amd64-minimal-v10.6.20200926-vmware.box --name Debian-10-amd64-minimal-v10.6.20200926-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
-
 
 ## Building a VM image on ESXi
 
@@ -86,17 +82,16 @@ The following command will build a VM image on your ESXi:
 
     packer build -only=esxi-iso debian-10-amd64-minimal.json
 
-
 ## Variants
 
-* `debian-10-amd64-minimal.json` - Debian 10.5 minimal installation
-* `debian-10-amd64-ansible.json` - Debian 10.5 with [Ansible][] +
+* `debian-10-amd64-minimal.json` - Debian 10.6 minimal installation
+* `debian-10-amd64-ansible.json` - Debian 10.6 with [Ansible][] +
   [Ansible Lint][] + [Testinfra][]
-* `debian-10-amd64-docker.json` - Debian 10.5 with [Docker][] +
+* `debian-10-amd64-docker.json` - Debian 10.6 with [Docker][] +
   [Docker Compose][]
-* `debian-10-amd64-dwm.json` - Debian 10.5 with [X.org][], [suckless][]
+* `debian-10-amd64-dwm.json` - Debian 10.6 with [X.org][], [suckless][]
   tools, [ARandR][], and [xrdp][].
-* `debian-10-amd64-xfce.json` - Debian 10.5 with [Xfce][] + [xrdp][].
+* `debian-10-amd64-xfce.json` - Debian 10.6 with [Xfce][] + [xrdp][].
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/
@@ -115,7 +110,6 @@ The following command will build a VM image on your ESXi:
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
 
-
 ## Installer CD images
 
 Optional var files are provided to instruct to use alternative
@@ -133,7 +127,6 @@ command line:
 It is recommended to use "jigdo" to download large iso image file and
 put it in `./iso` directory.  Templates instruct `packer` to use the
 image file rather than downloading an image from a mirror site.
-
 
 ## Build parameters
 
@@ -157,7 +150,6 @@ or `-var-file` command line options to `packer`:
   `true`.  Default value is `false`.
 * `virtualbox_version` - VirtualBox Guest Additions version number.
 Default value is "5.2.36".
-
 
 - - -
 
