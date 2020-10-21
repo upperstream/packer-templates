@@ -9,10 +9,13 @@ Templates to create Vagrant boxes for NetBSD 9.1 (amd64 and i386).
 * [VirtualBox][] v6.1.10+
 * [VMware][] Workstation v15.5+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
+* [QEMU][] version 4.2+ / [libvirt][] 6.0+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
   "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
+[libvirt]: https://libvirt.org/ "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
+[QEMU]: https://www.qemu.org/ "QEMU"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
 [VMware]: http://www.vmware.com/
@@ -58,6 +61,23 @@ to your box list by the following command:
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
+
+### QEMU/libvirt
+
+From the terminal, invoke the following command for Libvirt provider:
+
+    packer build -only=qemu netbsd-9.1-and64-minimal.json
+
+You will find a vagrant box file named `NetBSD-9.1-amd64-minimal-v9.1.20201018-libvirt.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018-libvirt`
+to your box list by the following command:
+
+    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-libvirt.box --name NetBSD-9.1-amd64-minimal-v9.1.20201018-libvirt
+
+In the `output` directory you will also find a VM image that can be
+directly imported to QEMU.
 
 ## Default settings
 
@@ -149,6 +169,15 @@ or `-var-file` command line options to `packer`:
   `true`.  Default value is `false`.
 * `package_server` - Host name to download pakages from.  Default value
   is `http://cdn.netbsd.org`.
+* `qemu_binary` - Name of QEMU binary to invoke. Default value is
+  `qemu-system-x86_64` for amd64 boxes and `qemu-system-i386` for i386
+  boxes.
+* `qemu_accelerator` - Accelerator type to run the VM with.  Default
+  value is `kvm`.
+* `qemu_use_default_display` - Do not pass `-display` option to QEMU if
+  `true`.  Default value is `false`.
+* `qemu_display` - Value for `-display` option for QEMU.  Default value
+  is an empty string.
 
 - - -
 
