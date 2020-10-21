@@ -48,8 +48,12 @@
   * NetBSD 9.0 + X.Org
   * NetBSD 9.0 + X.Org + XDM + dwm + dmenu + st
   * NetBSD 9.0 + Xfce + XDM
-
-VirtualBox and VMware providers are supported.
+* [netbsd-9.1](netbsd-9.1/README.mdown) - templates for NetBSD 9.1
+  * NetBSD 9.1
+  * NetBSD 9.1 + Ansible + Ansible Lint + Testinfra
+  * NetBSD 9.1 + X.Org
+  * NetBSD 9.1 + X.Org + XDM + dwm + dmenu + st
+  * NetBSD 9.1 + Xfce + XDM
 
 - - -
 
