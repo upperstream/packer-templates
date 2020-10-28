@@ -1,11 +1,11 @@
 {
   "variables": {
-    "variant": "xfce",
-    "vm_name": "FreeBSD-12.2_RC-amd64",
-    "iso_image": "FreeBSD-12.2-RC3-amd64-disc1.iso",
+    "variant": "minimal",
+    "vm_name": "FreeBSD-12.2-RELEASE-amd64",
+    "iso_image": "FreeBSD-12.2-RELEASE-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.2",
-    "iso_checksum": "sha256:ce69e0fa6d20a7312433e37c5ec06412ab4b70d74b8516d98e175b213f81a40a",
-    "box_version": "3.20201017",
+    "iso_checksum": "sha256:289522e2f4e1260859505adab6d7b54ab83d19aeb147388ff7e28019984da5dc",
+    "box_version": "12.2.20201027",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -28,6 +28,8 @@
     "hyperv_switch_name": "Default Switch",
     "virtualbox_guest_os_type": "FreeBSD_64",
     "vmware_guest_os_type": "freebsd-64",
+    "qemu_use_default_display": "true",
+    "qemu_disaply": "",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:12:amd64",
     "headless": "false"
@@ -61,8 +63,7 @@
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
       "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
-        [ "modifyvm", "{{.Name}}", "--vram", "16" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
       "boot_command": [
         "<enter>",
@@ -70,7 +71,7 @@
         "s",
         "<wait5>",
         "dhclient {{user `virtualbox_netif`}}<enter><wait5>",
-        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
+        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `virtualbox_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -83,7 +84,7 @@
         "SUDO=sudo-1.9.3p1 ",
         "CA_ROOT_NSS=ca_root_nss-3.57 ",
         "NETIF={{user `virtualbox_netif`}} ",
-        "bsdinstall script /tmp/install_with_x11.sh<enter>",
+        "bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
     },
@@ -121,8 +122,7 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE",
-        "svga.vramSize": "16777216"
+        "vhv.enable": "TRUE"
       },
       "boot_command": [
         "<enter>",
@@ -189,8 +189,7 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE",
-        "svga.vramSize": "16777216"
+        "vhv.enable": "TRUE"
       },
       "boot_command": [
         "<enter>",
@@ -245,7 +244,8 @@
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
       "disk_compression": true,
-      "use_default_display": true,
+      "use_default_display": "{{user `qemu_use_default_display`}}",
+      "display": "{{user `qemu_display`}}",
       "boot_command": [
         "<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
@@ -253,7 +253,7 @@
         "s",
         "<wait5>",
         "dhclient {{user `qemu_netif`}}<enter><wait5>",
-        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
+        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `qemu_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -266,7 +266,7 @@
         "SUDO=sudo-1.9.3p1 ",
         "CA_ROOT_NSS=ca_root_nss-3.57 ",
         "NETIF={{user `qemu_netif`}} ",
-        "bsdinstall script /tmp/install_with_x11.sh<enter>",
+        "bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
     },
@@ -302,7 +302,7 @@
         "s",
         "<wait5>",
         "dhclient {{user `hyperv_netif`}}<enter><wait5>",
-        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
+        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `hyperv_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -315,7 +315,7 @@
         "SUDO=sudo-1.9.3p1 ",
         "CA_ROOT_NSS=ca_root_nss-3.57 ",
         "NETIF={{user `hyperv_netif`}} ",
-        "bsdinstall script /tmp/install_with_x11.sh<enter>",
+        "bsdinstall script /tmp/install.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
     }
@@ -323,29 +323,13 @@
   "provisioners": [
     {
       "type": "shell",
-      "scripts": [
-        "../provisioners/vagrant-11.1+.sh",
-        "../provisioners/xorg.sh",
-        "../provisioners/xfce.sh",
-        "../provisioners/slim.sh",
-        "../provisioners/xrdp.sh"
-      ],
+      "script": "../provisioners/vagrant-11.1+.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "XFCE=xfce-4.14",
-        "XORG_MINIMAL=xorg-minimal-7.5.2_3",
-        "XTERM=xterm-360",
-        "XCLOCK=xclock-1.0.9",
-        "TWM=twm-1.0.11",
-        "XRANDR=xrandr-1.5.1",
-        "SLIM=slim-1.3.6_21",
-        "SLIM_THEMES=slim-themes-1.0.1_2",
-        "ARANDR=arandr-0.1.10_1",
-        "XRDP=xrdp-0.9.14,1"
+        "VAGRANT_GROUP={{user `vagrant_group`}}"
       ]
     },
     {
@@ -354,7 +338,8 @@
       "script": "../provisioners/virtualbox_ose_additions-10.4+.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.2.44_2"
+        "VIRTUALBOX_WITH_XORG=false",
+        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-nox11-5.2.44_2"
       ]
     },
     {
@@ -363,10 +348,7 @@
       "script": "../provisioners/vmware-guest.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "VMWARE_WITH_XORG=1",
-        "OPEN_VM_TOOLS=open-vm-tools-11.1.5,2",
-        "XF86_VIDEO_VMWARE=xf86-video-vmware-13.3.0_6",
-        "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0_4"
+        "OPEN_VM_TOOLS=open-vm-tools-nox11-11.1.5,2"
       ]
     },
     {
