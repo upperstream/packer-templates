@@ -62,12 +62,12 @@
   * FreeBSD 12.1-RELEASE + X.Org + dwm + dmenu + st
   * FreeBSD 12.1-RELEASE + Xfce
   * FreeBSD 12.1-RELEASE on ZFS root file system
-* [freebsd-12.2](freebsd-12.2/README.mdown) - templates for FreeBSD 12.2-RC3 (amd64 and i386)
-  * FreeBSD 12.2-RC3
-  * FreeBSD 12.2-RC3 + Ansible + Ansible Lint + Testinfra
-  * FreeBSD 12.2-RC3 + X.Org + dwm + dmenu + st
-  * FreeBSD 12.2-RC3 + Xfce
-  * FreeBSD 12.2-RC3 on ZFS root file system
+* [freebsd-12.2](freebsd-12.2/README.mdown) - templates for FreeBSD 12.2-RELEASE (amd64 and i386)
+  * FreeBSD 12.2-RELEASE
+  * FreeBSD 12.2-RELEASE + Ansible + Ansible Lint + Testinfra
+  * FreeBSD 12.2-RELEASE + X.Org + dwm + dmenu + st
+  * FreeBSD 12.2-RELEASE + Xfce
+  * FreeBSD 12.2-RELEASE on ZFS root file system
 
 - - -
 
