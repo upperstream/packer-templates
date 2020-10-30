@@ -259,6 +259,15 @@
     },
     {
       "type": "shell",
+      "only": ["qemu"],
+      "script": "../provisioners/nfs.sh",
+      "environment_vars": [
+        "NFS_UTILS=nfs-utils=2.4.3-r1",
+        "UTIL_LINUX=util-linux=2.35.2-r0"
+      ]
+    },
+    {
+      "type": "shell",
       "scripts": [
         "../provisioners/vagrant.sh",
         "../provisioners/ansible+testinfra_alpine3.12.sh"
