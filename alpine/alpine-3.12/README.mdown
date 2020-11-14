@@ -1,19 +1,22 @@
-# Packer templates for Alpine Linux 3.12.0
+# Packer templates for Alpine Linux 3.12.1
 
-Templates to create Vagrant boxes for Alpine Linux 3.12.0. (x86_64 and
+Templates to create Vagrant boxes for Alpine Linux 3.12.1. (x86_64 and
 i686)
 
 ## Prerequisites
 
-* [Packer][] version 1.4.1+
+* [Packer][] version 1.6.2+
 * [Vagrant][] version 2.2.8+
-* [VirtualBox][] version 6.1.0+
-* [VMware][] Workstation version 15.0+ / VMware Fusion v10.0+
+* [VirtualBox][] version 6.1.10+
+* [VMware][] Workstation version 15.5+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) version 5.5+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
+* [Hyper-V][] on Windows 10
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
   "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
+[Hyper-V]: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/
+    "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
 [libvirt]: https://libvirt.org/
   "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/
@@ -44,13 +47,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.0.20200529-virtualbox.box`
+You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.0.20200529-virtualbox` to your
-box list by the following command:
+Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-virtualbox`
+to your box list by the following command:
 
-    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.0.20200529-virtualbox.box --name Alpine-standard-3.12-x86_64-minimal-v12.0.20200529-virtualbox
+    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-virtualbox.box --name Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-virtualbox
 
 ### VMware
 
@@ -58,13 +61,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.0.20200529-vmware.box`
+You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.0.20200529-vmware` to your box
-list by the following command:
+Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-vmware`
+to your box list by the following command:
 
-    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.0.20200529-vmware.box --name Alpine-standard-3.12-x86_64-minimal-v12.0.20200529-vmware
+    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-vmware.box --name Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported to VMware.
@@ -75,16 +78,30 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.0.20200529-libvirt.box`
+You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.0.20200529-libvirt` to your box
-list by the following command:
+Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-libvirt`
+to your box list by the following command:
 
-    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.0.20200529-libvirt.box --name Alpine-standard-3.12-x86_64-minimal-v11.6.20200529-libvirt
+    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-libvirt.box --name Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
+
+### Hyper-V
+
+From the terminal, invoke the following command for Hyper-V provider:
+
+    packer build -only=hyperv-iso -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-minimal.json
+
+You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-hyperv.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-hyperv`
+to your box list by the following command:
+
+    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-hyperv --name Alpine-standard-3.12-x86_64-minimal-v12.1.20201021-hyperv
 
 ## Default settings
 
@@ -124,13 +141,13 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `packer build -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-minimal.json` - Alpine Linux 3.12.0 (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-ansible.json` - Alpine Linux 3.12.0 with [Ansible] and [Testinfra] (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-docker.json` - Alpine Linux 3.12.0 with [Docker] + [Docker Compose] (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-dwm.json` - Alpine Linux 3.12.0 with [X.Org], [dwm], [dmenu], [st] and more tools (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.12-x86.json alpine-3.12-minimal.json` - Alpine Linux 3.12.0 (x86)
-* `packer build -var-file=vars-alpine-standard-3.12-x86.json alpine-3.12-ansible.json` - Alpine Linux 3.12.0 with Ansible and Testinfra (x86)
-* `packer build -var-file=vars-alpine-standard-3.12-x86.json alpine-3.12-dwm.json` - Alpine Linux 3.12.0 with X.Org, dwm, dmenu, st and more tools (x86)
+* `packer build -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-minimal.json` - Alpine Linux 3.12.1 (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-ansible.json` - Alpine Linux 3.12.1 with [Ansible] and [Testinfra] (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-docker.json` - Alpine Linux 3.12.1 with [Docker] + [Docker Compose] (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-dwm.json` - Alpine Linux 3.12.1 with [X.Org], [dwm], [dmenu], [st] and more tools (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.12-x86.json alpine-3.12-minimal.json` - Alpine Linux 3.12.1 (x86)
+* `packer build -var-file=vars-alpine-standard-3.12-x86.json alpine-3.12-ansible.json` - Alpine Linux 3.12.1 with Ansible and Testinfra (x86)
+* `packer build -var-file=vars-alpine-standard-3.12-x86.json alpine-3.12-dwm.json` - Alpine Linux 3.12.1 with X.Org, dwm, dmenu, st and more tools (x86)
 
 [Ansible]: https://www.ansible.com/
   "Ansible is Simple IT Automation"
@@ -177,6 +194,12 @@ or `-var-file` command line options to `packer`:
   is `vagrant`.  This is also used for SSH password during build time.
 * `headless` - Launch the virtual machine in headless mode if set to
   `true`.  Default value is `false`.
+* `qemu_use_default_display` - Do not pass `-display` option to QEMU if
+  `true`.  Default value is `false`.
+* `qemu_display` - Value for `-display` option for QEMU.  Default value
+  is an empty string.
+* `hyperv_switch_name` - Network switch name on Packer Hyper-V builder.
+  Default value is `Default Switch`.
 
 - - -
 
