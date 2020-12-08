@@ -60,18 +60,18 @@
     * Debian 8.11.1 + Docker + Docker Compose
     * Debian 8.11.1 + X.org + suckless tools
     * Debian 8.11.1 + Xfce
-* [debian-9](debian-9/README.mdown) - templates for Debain 9.13
-    * Debain 9.13 minimal
+* [debian-9](debian-9/README.mdown) - templates for Debian 9.13
+    * Debian 9.13 minimal
     * Debian 9.13 + Ansible + Ansible Lint + Testinfra
     * Debian 9.13 + Docker + Docker Compose
     * Debian 9.13 + X.org + suckless tools
     * Debian 9.13 + Xfce
-* [debian-10](debian-10/README.mdown) - templates for Debain 10.5
-    * Debain 10.5 minimal
-    * Debian 10.5 + Ansible + Ansible Lint + Testinfra
-    * Debian 10.5 + Docker + Docker Compose
-    * Debian 10.5 + X.org + suckless tools
-    * Debian 10.5 + Xfce
+* [debian-10](debian-10/README.mdown) - templates for Debian 10.6
+    * Debian 10.6 minimal
+    * Debian 10.6 + Ansible + Ansible Lint + Testinfra
+    * Debian 10.6 + Docker + Docker Compose
+    * Debian 10.6 + X.org + suckless tools
+    * Debian 10.6 + Xfce
 
 - - -
 
