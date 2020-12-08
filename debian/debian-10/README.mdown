@@ -10,9 +10,12 @@ Templates to create Vagrant boxes for Debian 10.6 (amd64).
 * [VMware][] Workstation v15.5+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
+* [Hyper-V][] on Windows 10
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
     "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
+[Hyper-V]: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/
+    "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
 [libvirt]: https://libvirt.org/ "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
 [QEMU]: https://www.qemu.org/ "QEMU"
@@ -84,6 +87,20 @@ to your box list by the following command:
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
+
+### Hyper-V
+
+From the terminal, invoke the following command for Hyper-V provider:
+
+    packer build -only=hyperv-iso debian-10-amd64-minimal.json
+
+You will find a vagrant box file named `Debian-10-amd64-minimal-v10.6.20200926-hyperv.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `Debian-10-amd64-minimal-v10.6.20200926-hyperv`
+to your box list by the following command:
+
+    vagrant box add Debian-10-amd64-minimal-v10.6.20200926-hyperv.box --name Debian-10-amd64-minimal-v10.6.20200926-hyperv
 
 ## Building a VM image on ESXi
 
@@ -174,6 +191,8 @@ Default value is "5.2.36".
   to QEMU or not.  Default value is `false`.
 * `qemu_display` - What QEMU `-display` option to use.  Default value
   is an empty string.
+* `hyperv_switch_name` - Network switch name on Packer Hyper-V builder.
+  Default value is `Default Switch`.
 
 - - -
 
