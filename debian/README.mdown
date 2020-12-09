@@ -66,12 +66,12 @@
     * Debian 9.13 + Docker + Docker Compose
     * Debian 9.13 + X.org + suckless tools
     * Debian 9.13 + Xfce
-* [debian-10](debian-10/README.mdown) - templates for Debian 10.6
-    * Debian 10.6 minimal
-    * Debian 10.6 + Ansible + Ansible Lint + Testinfra
-    * Debian 10.6 + Docker + Docker Compose
-    * Debian 10.6 + X.org + suckless tools
-    * Debian 10.6 + Xfce
+* [debian-10](debian-10/README.mdown) - templates for Debian 10.7
+    * Debian 10.7 minimal
+    * Debian 10.7 + Ansible + Ansible Lint + Testinfra
+    * Debian 10.7 + Docker + Docker Compose
+    * Debian 10.7 + X.org + suckless tools
+    * Debian 10.7 + Xfce
 
 - - -
 
