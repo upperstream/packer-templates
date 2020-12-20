@@ -4,15 +4,18 @@ Templates to create Vagrant boxes for NetBSD 9.1 (amd64 and i386).
 
 ## Prerequisites
 
-* [Packer][] v1.6.1+
+* [Packer][] v1.6.2+
 * [Vagrant][] v2.2.6+
 * [VirtualBox][] v6.1.10+
 * [VMware][] Workstation v15.5+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
+* [Hyper-V][] on Windows 10
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
   "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
+[Hyper-V]: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/
+  "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
 [libvirt]: https://libvirt.org/ "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
 [QEMU]: https://www.qemu.org/ "QEMU"
@@ -40,10 +43,11 @@ From the terminal, invoke the following command for VirtualBox provider:
 You will find a vagrant box file named `NetBSD-9.1-amd64-minimal-v9.1.20201018-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018-virtualbox`
+Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-virtualbox.box --name NetBSD-9.1-amd64-minimal-v9.1.20201018-virtualbox
+    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-virtualbox.box \
+        --name NetBSD-9.1-amd64-minimal-v9.1.20201018 --provider virtualbox
 
 ### VMware
 
@@ -54,10 +58,11 @@ From the terminal, invoke the following command for VMware provider:
 You will find a vagrant box file named `NetBSD-9.1-amd64-minimal-v9.1.20201018-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018-vmware`
+Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-vmware.box --name NetBSD-9.1-amd64-minimal-v9.1.20201018-vmware
+    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-vmware.box \
+        --name NetBSD-9.1-amd64-minimal-v9.1.20201018 --provider vmware_desktop
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -71,13 +76,35 @@ From the terminal, invoke the following command for Libvirt provider:
 You will find a vagrant box file named `NetBSD-9.1-amd64-minimal-v9.1.20201018-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018-libvirt`
+Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-libvirt.box --name NetBSD-9.1-amd64-minimal-v9.1.20201018-libvirt
+    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-libvirt.box \
+        --name NetBSD-9.1-amd64-minimal-v9.1.20201018 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
+
+### Hyper-V
+
+From the terminal, invoke the following command for Hyper-V provider:
+
+    packer build -only=hyperv-iso -var hyperv_ssh_host=xxx.xxx.xxx.xxx \
+        -var hyperv_host_cidr=xxx.xxx.xxx.xxx/x \
+        -var hyperv_gateway=xxx.xxx.xxx.xxx netbsd-9.1-and64-minimal.json
+
+Because Packer Hyper-V builder cannot detect IP address of a NetBSD VM,
+you must provide static network settings so that the VM is configured to
+have a static IP address.
+
+You will find a vagrant box file named `NetBSD-9.1-amd64-minimal-v9.1.20201018-hyperv.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018`
+to your box list by the following command:
+
+    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-hyperv.box \
+        --name NetBSD-9.1-amd64-minimal-v9.1.20201018 --provider hyperv
 
 ## Default settings
 
@@ -120,8 +147,8 @@ The following command will build a VM image on your ESXi:
 * `netbsd-9.1-*-ansible.json` - NetBSD 9.1 + [Ansible][] +
   [Ansible Lint][] + [Testinfra][]
 * `netbsd-9.1-*-xorg.json` - NetBSD 9.1 + [X.Org][]
-* `netbsd-9.1-*-dwm.json` - NetBSD 9.1 + X.Org + [dwm][] + [st][]
-  + [dmenu][], with [XDM] enabled
+* `netbsd-9.1-*-dwm.json` - NetBSD 9.1 + X.Org + [dwm][] + [st][] +
+  [dmenu][], with [XDM] enabled
 * `netbsd-9.1-*-xfce.json` - NetBSD 9.1 + [Xfce][], with XDM enabled
 
 While `netbsd-9.1-amd64-*.json` templates generate amd64 boxes,
@@ -178,6 +205,17 @@ or `-var-file` command line options to `packer`:
   `true`.  Default value is `false`.
 * `qemu_display` - Value for `-display` option for QEMU.  Default value
   is an empty string.
+* `hyperv_switch_name` - Network switch name on Hyper-V builder.
+  Default value is `Default Switch`.
+* `hyperv_ssh_host` - IP address of the VM being built with Hyper-V
+  builder.  You must provide an appropriate value.
+* `hyperv_host_cidr` - CIDR notation of the VM IP address being built
+  with Hyper-V builder.  You must provide an appropriate value.
+* `hyperv_gateway` - IP address of the gateway and the name server for
+  the VM being built with Hyper-V builder.  You must provide an
+  appropriate value.
+* `hyperv_netif` - Network interface name of the VM being build with
+  Hyper-V builder.  Default value is `hvn0`.
 
 - - -
 
