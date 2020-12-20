@@ -13,7 +13,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "11.6.20200423",
+    "box_version": "11.7.20201216",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.11"
@@ -29,7 +29,6 @@
         "http://dl-cdn.alpinelinux.org/alpine/{{user `os_ver`}}/releases/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
       "ssh_port": 22,
@@ -80,7 +79,6 @@
         "http://dl-cdn.alpinelinux.org/alpine/{{user `os_ver`}}/releases/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
       "ssh_port": 22,
@@ -137,7 +135,6 @@
         "http://dl-cdn.alpinelinux.org/alpine/{{user `os_ver`}}/releases/{{user `cpu`}}/{{user `iso_image`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
       "ssh_port": 22,
@@ -197,7 +194,7 @@
       "script": "../provisioners/virtualbox_alpine3.8+.sh",
       "environment_vars": [
         "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.0.14-r0",
-        "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.34-r0",
+        "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.84-r0",
         "OS_VER={{user `os_ver`}}"
       ]
     },
@@ -220,7 +217,7 @@
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "ANSIBLE=ansible=2.9.7-r0",
+        "ANSIBLE=ansible=2.9.14-r0",
         "ANSIBLE_LINT=ansible-lint=4.1.1a1-r0",
         "TESTINFRA_VERSION=4.1.0",
         "OS_VER={{user `os_ver`}}"

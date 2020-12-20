@@ -1,14 +1,14 @@
-# Packer templates for Alpine Linux 3.11.6
+# Packer templates for Alpine Linux 3.11.7
 
-Templates to create Vagrant boxes for Alpine Linux 3.11.6. (x86_64 and
+Templates to create Vagrant boxes for Alpine Linux 3.11.7. (x86_64 and
 i686)
 
 ## Prerequisites
 
-* [Packer][] version 1.4.1+
-* [Vagrant][] version 2.0.2+
-* [VirtualBox][] version 5.2.36+
-* [VMware][] Workstation version 15.0+ / VMware Fusion v10.0+
+* [Packer][] version 1.6.1+
+* [Vagrant][] version 2.2.6+
+* [VirtualBox][] version 6.1.0+
+* [VMware][] Workstation version 15.5+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) version 5.5+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
@@ -39,13 +39,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso -var-file=vars-alpine-standard-3.11-x86_64.json alpine-3.11-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.11-x86_64-minimal-v11.6.20200423-virtualbox.box`
+You will find a vagrant box file named `Alpine-standard-3.11-x86_64-minimal-v11.7.20201216-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.11-x86_64-minimal-v11.6.20200423-virtualbox` to your
+Then you can add the box named `Alpine-standard-3.11-x86_64-minimal-v11.7.20201216-virtualbox` to your
 box list by the following command:
 
-    vagrant box add Alpine-standard-3.11-x86_64-minimal-v11.6.20200423-virtualbox.box --name Alpine-standard-3.11-x86_64-minimal-v11.6.20200423-virtualbox
+    vagrant box add Alpine-standard-3.11-x86_64-minimal-v11.7.20201216-virtualbox.box --name Alpine-standard-3.11-x86_64-minimal-v11.7.20201216-virtualbox
 
 ### VMware
 
@@ -53,13 +53,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso -var-file=vars-alpine-standard-3.11-x86_64.json alpine-3.11-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.11-x86_64-minimal-v11.6.20200423-vmware.box`
+You will find a vagrant box file named `Alpine-standard-3.11-x86_64-minimal-v11.7.20201216-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.11-x86_64-minimal-v11.6.20200423-vmware` to your box
+Then you can add the box named `Alpine-standard-3.11-x86_64-minimal-v11.7.20201216-vmware` to your box
 list by the following command:
 
-    vagrant box add Alpine-standard-3.11-x86_64-minimal-v11.6.20200423-vmware.box --name Alpine-standard-3.11-x86_64-minimal-v11.6.20200423-vmware
+    vagrant box add Alpine-standard-3.11-x86_64-minimal-v11.7.20201216-vmware.box --name Alpine-standard-3.11-x86_64-minimal-v11.7.20201216-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
