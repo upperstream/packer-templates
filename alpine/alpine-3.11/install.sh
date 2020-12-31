@@ -1,5 +1,7 @@
-#!/bin/sh -ex
-mount -t ext4 /dev/sda3 /mnt
+#!/bin/sh
+set -e
+set -x
+mount -t ext4 /dev/${DISK:-sda}3 /mnt
 apk add --root=/mnt openssl
 apk add --root=/mnt sudo
 apk add --root=/mnt openssh
