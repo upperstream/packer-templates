@@ -13,4 +13,8 @@ sed \
   -e 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' \
   -e 's/^#UseDNS no/UseDNS no/' /tmp/sshd_config > /mnt/etc/ssh/sshd_config
 rm /tmp/sshd_config
+apk add --root=/mnt hvtools
+chroot /mnt sh -c "rc-update add hv_fcopy_daemon default && \
+rc-update add hv_kvp_daemon default && \
+rc-update add hv_vss_daemon default"
 reboot
