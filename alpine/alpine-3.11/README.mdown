@@ -11,9 +11,12 @@ i686)
 * [VMware][] Workstation version 15.5+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) version 5.5+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
+* [Hyper-V][] on Windows 10
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
   "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
+[Hyper-V]: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/
+    "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
 [libvirt]: https://libvirt.org/
   "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/
@@ -85,6 +88,20 @@ to your box list by the following command:
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
+
+### Hyper-V
+
+From the terminal, invoke the following command for Hyper-V provider:
+
+    packer build -only=hyperv-iso -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-minimal.json
+
+You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.3.20201216-hyperv.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.3.20201216`
+to your box list by the following command:
+
+    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.3.20201216-hyperv --name Alpine-standard-3.12-x86_64-minimal-v12.3.20201216 --provider hyperv
 
 ## Default settings
 
@@ -181,6 +198,8 @@ or `-var-file` command line options to `packer`:
   `true`.  Default value is `false`.
 * `qemu_display` - Value for `-display` option for QEMU.  Default value
   is an empty string.
+* `hyperv_switch_name` - Network switch name on Packer Hyper-V builder.
+  Default value is `Default Switch`.
 
 - - -
 
