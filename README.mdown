@@ -26,6 +26,7 @@
   * freebsd-11.4 - FreeBSD 11.4 templates
   * freebsd-12.1 - FreeBSD 12.1 templates
   * freebsd-12.2 - FreeBSD 12.2 templates
+  * freebsd-13.0 - FreeBSD 13.0 templates
   * [more](freebsd/README.mdown)
 * [netbsd](netbsd/README.mdown) - NetBSD templates (amd64 and i386)
   * netbsd-7.2 - NetBSD 7.2 templates
@@ -68,4 +69,4 @@ permissions and limitations under the License.
 
 - - -
 
-Copyright &copy; 2014-2020 Upperstream Software.
+Copyright &copy; 2014-2021 Upperstream Software.
