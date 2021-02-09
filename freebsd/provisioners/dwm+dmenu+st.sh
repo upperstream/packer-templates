@@ -20,7 +20,7 @@ Section "Screen"
 EndSection
 EOF
 
-pkg install -y ${ARNADR:-arandr} ${DWM:-dwm} ${STERM:-sterm} ${DMENU:-dmenu} ${NCURSES:-ncurses}
+pkg install -y ${ARANDR:-arandr} ${DWM:-dwm} ${STERM:-sterm} ${DMENU:-dmenu} ${NCURSES:-ncurses}
 
 for t in st st-256color; do infocmp -C $t >> /usr/share/misc/termcap; done
 cap_mkdb /usr/share/misc/termcap
