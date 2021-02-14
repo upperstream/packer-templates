@@ -9,6 +9,9 @@ if [ "$DOCKER_COMPOSE" ]; then
 else
 	apk --no-cache add ${PYTHON:-python3} python3-dev libffi-dev openssl-dev
 	apk --no-cache add build-base
+	if [ "$PYTHON_PIP" ]; then
+		apk --no-cache add ${PYTHON_PIP:-py3-pip}
+	fi
 	python3 -m pip install docker-compose==${DOCKER_COMPOSE_VERSION:=1.25.0}
 	apk del build-base libffi-dev openssl-dev python3-dev
 fi
