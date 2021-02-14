@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 13.0-BETA1
+# Packer templates for FreeBSD 13.0-BETA2
 
-Templates to create Vagrant boxes for FreeBSD 13.0-BETA1
+Templates to create Vagrant boxes for FreeBSD 13.0-BETA2
 
 ## Prerequisites
 
@@ -40,13 +40,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso freebsd-13.0-beta-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-13.0-BETA-amd64-minimal-v2.20210212-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-virtualbox`
+Then you can add the box named `FreeBSD-13.0-BETA-amd64-minimal-v2.20210212`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-virtualbox.box --name FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-virtualbox
+    vagrant box add FreeBSD-13.0-BETA-amd64-minimal-v2.20210212-virtualbox.box --name FreeBSD-13.0-BETA-amd64-minimal-v2.20210212 --provider virtualbox
 
 ### VMware
 
@@ -54,13 +54,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso freebsd-13.0-beta-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.0-BETA-amd64-v1.20210205-vmware.box`
+You will find a vagrant box file named `FreeBSD-13.0-BETA-amd64-v2.20210212-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-vmware`
+Then you can add the box named `FreeBSD-13.0-BETA-amd64-minimal-v2.20210212`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-vmware.box --name FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-vmware
+    vagrant box add FreeBSD-13.0-BETA-amd64-minimal-v2.20210212-vmware.box --name FreeBSD-13.0-BETA-amd64-minimal-v2.20210212 --provider vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -71,13 +71,13 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu freebsd-13.0-beta-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.0-BETA-amd64-v1.20210205-libvirt.box`
+You will find a vagrant box file named `FreeBSD-13.0-BETA-amd64-v2.20210212-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-libvirt`
+Then you can add the box named `FreeBSD-13.0-BETA-amd64-minimal-v2.20210212`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-libvirt.box --name FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-libvirt
+    vagrant box add FreeBSD-13.0-BETA-amd64-minimal-v2.20210212-libvirt.box --name FreeBSD-13.0-BETA-amd64-minimal-v2.20210212 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -88,13 +88,13 @@ From the terminal, invoke the following command for Hyper-V provider:
 
     packer build -only=hyperv-iso freebsd-13.0-beta-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.0-BETA-amd64-v1.20210205-hyperv.box`
+You will find a vagrant box file named `FreeBSD-13.0-BETA-amd64-v2.20210212-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-hyperv`
+Then you can add the box named `FreeBSD-13.0-BETA-amd64-minimal-v2.20210212`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-hyperv.box --name FreeBSD-13.0-BETA-amd64-minimal-v1.20210205-hyperv
+    vagrant box add FreeBSD-13.0-BETA-amd64-minimal-v2.20210212-hyperv.box --name FreeBSD-13.0-BETA-amd64-minimal-v2.20210212 --provider hyperv
 
 ## Default settings
 
@@ -141,14 +141,14 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `freebsd-13.0-beta-minimal.json` - FreeBSD 13.0-BETA1
-* `freebsd-13.0-beta-ansible.json` - FreeBSD 13.0-BETA1 +
+* `freebsd-13.0-beta-minimal.json` - FreeBSD 13.0-BETA2
+* `freebsd-13.0-beta-ansible.json` - FreeBSD 13.0-BETA2 +
   [Ansible][] + [Ansible Lint] + [Testinfra][]
-* `freebsd-13.0-beta-dwm.json` - FreeBSD 13.0-BETA1 + [X.Org][] +
+* `freebsd-13.0-beta-dwm.json` - FreeBSD 13.0-BETA2 + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-13.0-beta-xfce.json` - FreeBSD 13.0-BETA1 + [Xfce][] +
+* `freebsd-13.0-beta-xfce.json` - FreeBSD 13.0-BETA2 + [Xfce][] +
   [SLiM][]
-* `freebsd-13.0-beta-zfs.json` - FreeBSD 13.0-BETA1 on ZFS root
+* `freebsd-13.0-beta-zfs.json` - FreeBSD 13.0-BETA2 on ZFS root
   file system
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
