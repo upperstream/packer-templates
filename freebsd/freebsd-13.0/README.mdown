@@ -151,6 +151,11 @@ The following command will build a VM image on your ESXi:
 * `freebsd-13.0-beta-zfs.json` - FreeBSD 13.0-BETA2 on ZFS root
   file system
 
+While `freebsd-13.0-beta-*.json` templates generate amd64 boxes by
+default, using `vars-freebsd-13.0-i386.json` generates i386 boxes:
+
+    packer build -var-file=vars-freebsd-13.0-i386.json freebsd-13.0-beta-minimal.json
+
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/
   "Ansible Lint Documentation &mdash; Ansible Documentation"

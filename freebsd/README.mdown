@@ -68,7 +68,7 @@
   * FreeBSD 12.2-RELEASE + X.Org + dwm + dmenu + st
   * FreeBSD 12.2-RELEASE + Xfce
   * FreeBSD 12.2-RELEASE on ZFS root file system
-* [freebsd-13.0](freebsd-13.0/README.mdown) - templates for FreeBSD 13.0-BETA2 (amd64)
+* [freebsd-13.0](freebsd-13.0/README.mdown) - templates for FreeBSD 13.0-BETA2 (amd64 and i386)
   * FreeBSD 13.0-BETA2
   * FreeBSD 13.0-BETA2 + Ansible + Ansible Lint + Testinfra
   * FreeBSD 13.0-BETA2 + X.Org + dwm + dmenu + st
