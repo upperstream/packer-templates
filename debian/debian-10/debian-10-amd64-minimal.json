@@ -2,9 +2,9 @@
   "variables": {
     "vm_name": "Debian-10-amd64-minimal",
     "iso_name": "mini.iso",
-    "iso_path": "buster/main/installer-amd64/20190702+deb10u7/images/netboot",
-    "iso_checksum": "sha256:577d490ccef8a9a16b97af07c2863e3b6b000ba869732df7fd92ae347038cb80",
-    "box_version": "10.7.20201205",
+    "iso_path": "buster/main/installer-amd64/20190702+deb10u8/images/netboot",
+    "iso_checksum": "sha256:1b86952fd8c9c60b41c66d4be7c3e8e28b7e939c002dc45951d4e90d5996456a",
+    "box_version": "10.8.20210206",
     "num_cpus": "2",
     "mem_size": "640",
     "disk_size": "51200",
