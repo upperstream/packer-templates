@@ -142,13 +142,13 @@ The following command will build a VM image on your ESXi:
 
 `sudo` is enabled with all variants.
 
-* `openbsd-6.8-minimal.json` - OpenBSD 6.7
-* `openbsd-6.8-ansible.json` - OpenBSD 6.7 with [Ansible][] +
+* `openbsd-6.8-minimal.json` - OpenBSD 6.8
+* `openbsd-6.8-ansible.json` - OpenBSD 6.8 with [Ansible][] +
   [Ansible Lint][] + [Testinfra][]
-* `openbsd-6.8-x11.json` - OpenBSD 6.7 with [X11][]
-* `openbsd-6.8-dwm.json` - OpenBSD 6.7 with X11 + [dwm][] + [dmenu][] +
+* `openbsd-6.8-x11.json` - OpenBSD 6.8 with [X11][]
+* `openbsd-6.8-dwm.json` - OpenBSD 6.8 with X11 + [dwm][] + [dmenu][] +
   [st][] + [SLiM][]
-* `openbsd-6.8-xfce.json` - OpenBSD 6.7 with [Xfce][] + SLiM
+* `openbsd-6.8-xfce.json` - OpenBSD 6.8 with [Xfce][] + SLiM
 
 While `openbsd-6.8-*.json` templates generate amd64 boxes by default,
 using `vars-openbsd-6.8-i386.json` generates i386 boxes:
