@@ -1,6 +1,6 @@
-# Packer templates for Alpine Linux 3.13.1
+# Packer templates for Alpine Linux 3.13.2
 
-Templates to create Vagrant boxes for Alpine Linux 3.13.1. (x86_64 and
+Templates to create Vagrant boxes for Alpine Linux 3.13.2. (x86_64 and
 i686)
 
 ## Prerequisites
@@ -41,13 +41,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso -var-file=vars-alpine-standard-3.13-x86_64.json alpine-3.13-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.13-x86_64-minimal-v13.1.20210128-vmware.box`
+You will find a vagrant box file named `Alpine-standard-3.13-x86_64-minimal-v13.2.20210217-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.13-x86_64-minimal-v13.1.20210128`
+Then you can add the box named `Alpine-standard-3.13-x86_64-minimal-v13.2.20210217`
 to your box list by the following command:
 
-    vagrant box add Alpine-standard-3.13-x86_64-minimal-v13.1.20210128-vmware.box --name Alpine-standard-3.13-x86_64-minimal-v13.1.20210128 --provider vmware
+    vagrant box add Alpine-standard-3.13-x86_64-minimal-v13.2.20210217-vmware.box --name Alpine-standard-3.13-x86_64-minimal-v13.2.20210217 --provider vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported to VMware.
@@ -58,13 +58,13 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu -var-file=vars-alpine-standard-3.13-x86_64.json alpine-3.13-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.13-x86_64-minimal-v13.1.20210128-libvirt.box`
+You will find a vagrant box file named `Alpine-standard-3.13-x86_64-minimal-v13.2.20210217-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.13-x86_64-minimal-v13.1.20210128`
+Then you can add the box named `Alpine-standard-3.13-x86_64-minimal-v13.2.20210217`
 to your box list by the following command:
 
-    vagrant box add Alpine-standard-3.13-x86_64-minimal-v13.1.20210128-libvirt.box --name Alpine-standard-3.13-x86_64-minimal-v13.1.20210128 --provider libvirt
+    vagrant box add Alpine-standard-3.13-x86_64-minimal-v13.2.20210217-libvirt.box --name Alpine-standard-3.13-x86_64-minimal-v13.2.20210217 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -107,13 +107,13 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `packer build -var-file=vars-alpine-standard-3.13-x86_64.json alpine-3.13-minimal.json` - Alpine Linux 3.13.1 (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.13-x86_64.json alpine-3.13-ansible.json` - Alpine Linux 3.13.1 with [Ansible] and [Testinfra] (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.13-x86_64.json alpine-3.13-docker.json` - Alpine Linux 3.13.1 with [Docker] + [Docker Compose] (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.13-x86_64.json alpine-3.13-dwm.json` - Alpine Linux 3.13.1 with [X.Org], [dwm], [dmenu], [st] and more tools (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.13-x86.json alpine-3.13-minimal.json` - Alpine Linux 3.13.1 (x86)
-* `packer build -var-file=vars-alpine-standard-3.13-x86.json alpine-3.13-ansible.json` - Alpine Linux 3.13.1 with Ansible and Testinfra (x86)
-* `packer build -var-file=vars-alpine-standard-3.13-x86.json alpine-3.13-dwm.json` - Alpine Linux 3.13.1 with X.Org, dwm, dmenu, st and more tools (x86)
+* `packer build -var-file=vars-alpine-standard-3.13-x86_64.json alpine-3.13-minimal.json` - Alpine Linux 3.13.2 (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.13-x86_64.json alpine-3.13-ansible.json` - Alpine Linux 3.13.2 with [Ansible] and [Testinfra] (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.13-x86_64.json alpine-3.13-docker.json` - Alpine Linux 3.13.2 with [Docker] + [Docker Compose] (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.13-x86_64.json alpine-3.13-dwm.json` - Alpine Linux 3.13.2 with [X.Org], [dwm], [dmenu], [st] and more tools (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.13-x86.json alpine-3.13-minimal.json` - Alpine Linux 3.13.2 (x86)
+* `packer build -var-file=vars-alpine-standard-3.13-x86.json alpine-3.13-ansible.json` - Alpine Linux 3.13.2 with Ansible and Testinfra (x86)
+* `packer build -var-file=vars-alpine-standard-3.13-x86.json alpine-3.13-dwm.json` - Alpine Linux 3.13.2 with X.Org, dwm, dmenu, st and more tools (x86)
 
 [Ansible]: https://www.ansible.com/
   "Ansible is Simple IT Automation"

@@ -1,7 +1,7 @@
 {
   "vm_name": "Alpine-virt-3.13-x86",
-  "iso_image": "alpine-virt-3.13.1-x86.iso",
-  "iso_checksum": "sha256:c1da3fcd4b59e99989a423f0947ff14a43f7bae0e35d69562c03499ed42295e0",
+  "iso_image": "alpine-virt-3.13.2-x86.iso",
+  "iso_checksum": "sha256:5445442fab0e1be20391ef84c99c175123b1ba7d5c8205528bf2086d39ab713a",
   "cpu": "x86",
   "virtualbox_guest_os_type": "Linux",
   "vmware_guest_os_type": "other3xlinux",
