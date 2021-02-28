@@ -13,7 +13,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "11.7.20201216",
+    "box_version": "11.8.20210223",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.11",
@@ -308,7 +308,7 @@
       "script": "../provisioners/virtualbox_alpine3.8+.sh",
       "environment_vars": [
         "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.0.14-r0",
-        "VIRTUALBOX_GUEST_MODULES_LTS=virtualbox-guest-modules-lts=5.4.84-r0",
+        "VIRTUALBOX_GUEST_MODULES_LTS=virtualbox-guest-modules-lts=5.4.99-r0",
         "VIRTUALBOX_GUEST_ADDITIONS_X11=virtualbox-guest-additions-x11=6.0.14-r0",
         "VIRTUALBOX_WITH_X11=true",
         "OS_VER={{user `os_ver`}}"
