@@ -13,7 +13,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "12.3.20201216",
+    "box_version": "12.4.20210223",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.12",
@@ -288,7 +288,7 @@
       "script": "../provisioners/virtualbox_alpine3.8+.sh",
       "environment_vars": [
         "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.0.14-r0",
-        "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.84-r0",
+        "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.99-r0",
         "OS_VER={{user `os_ver`}}"
       ]
     },
@@ -320,8 +320,8 @@
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "DOCKER=docker=19.03.12-r0",
-        "DOCKER_COMPOSE=docker-compose=1.25.4-r2",
+        "DOCKER=docker=20.10.3-r0",
+        "DOCKER_COMPOSE=docker-compose=1.25.4-r3",
         "OS_VER={{user `os_ver`}}"
       ]
     },
