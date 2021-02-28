@@ -47,13 +47,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.3.20201216-virtualbox.box`
+You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.4.20210223-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.3.20201216`
+Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.4.20210223`
 to your box list by the following command:
 
-    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.3.20201216-virtualbox.box --name Alpine-standard-3.12-x86_64-minimal-v12.3.20201216 --provider virtualbox
+    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.4.20210223-virtualbox.box --name Alpine-standard-3.12-x86_64-minimal-v12.4.20210223 --provider virtualbox
 
 ### VMware
 
@@ -61,13 +61,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.3.20201216-vmware.box`
+You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.4.20210223-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.3.20201216`
+Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.4.20210223`
 to your box list by the following command:
 
-    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.3.20201216-vmware.box --name Alpine-standard-3.12-x86_64-minimal-v12.3.20201216 --provider vmware
+    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.4.20210223-vmware.box --name Alpine-standard-3.12-x86_64-minimal-v12.4.20210223 --provider vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported to VMware.
@@ -78,13 +78,13 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.3.20201216-libvirt.box`
+You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.4.20210223-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.3.20201216`
+Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.4.20210223`
 to your box list by the following command:
 
-    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.3.20201216-libvirt.box --name Alpine-standard-3.12-x86_64-minimal-v12.3.20201216 --provider libvirt
+    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.4.20210223-libvirt.box --name Alpine-standard-3.12-x86_64-minimal-v12.4.20210223 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -95,13 +95,13 @@ From the terminal, invoke the following command for Hyper-V provider:
 
     packer build -only=hyperv-iso -var-file=vars-alpine-standard-3.12-x86_64.json alpine-3.12-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.3.20201216-hyperv.box`
+You will find a vagrant box file named `Alpine-standard-3.12-x86_64-minimal-v12.4.20210223-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.3.20201216`
+Then you can add the box named `Alpine-standard-3.12-x86_64-minimal-v12.4.20210223`
 to your box list by the following command:
 
-    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.3.20201216-hyperv --name Alpine-standard-3.12-x86_64-minimal-v12.3.20201216 --provider hyperv
+    vagrant box add Alpine-standard-3.12-x86_64-minimal-v12.4.20210223-hyperv --name Alpine-standard-3.12-x86_64-minimal-v12.4.20210223 --provider hyperv
 
 ## Default settings
 
