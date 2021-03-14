@@ -2,10 +2,10 @@
   "variables": {
     "variant": "xfce",
     "vm_name": "FreeBSD-13.0-RC-amd64",
-    "iso_image": "FreeBSD-13.0-RC1-amd64-disc1.iso",
+    "iso_image": "FreeBSD-13.0-RC2-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/13.0",
-    "iso_checksum": "sha256:2f078f655c46a3640af0a6b0f130ea872e4d284ef8cf3f347f0cc8393529a38e",
-    "box_version": "1.20210306",
+    "iso_checksum": "sha256:ab244a85e7acbadd5ea609934809f549302e911a68d6abfb784e4b83a6905cef",
+    "box_version": "2.20210312",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
