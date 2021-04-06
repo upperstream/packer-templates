@@ -13,7 +13,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "13.2.20210217",
+    "box_version": "13.4.20210331",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.13",
@@ -219,7 +219,7 @@
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "PYTHON_PIP=py3-pip=20.3.4-r0",
-        "DOCKER=docker=20.10.3-r0",
+        "DOCKER=docker=20.10.3-r1",
         "DOCKER_COMPOSE_VERSION=1.28.2",
         "CRYPTOGRAPHY_DONT_BUILD_RUST=1",
         "OS_VER={{user `os_ver`}}"

@@ -22,8 +22,8 @@
   * Alpine Linux 3.11.8 (x86_64 and x86)
 * [alpine-3.12](alpine-3.12/README.mdown) - templates for Alpine Linux 3.12.4
   * Alpine Linux 3.12.4 (x86_64 and x86)
-* [alpine-3.13](alpine-3.13/README.mdown) - templates for Alpine Linux 3.13.2
-  * Alpine Linux 3.13.2 (x86_64 and x86)
+* [alpine-3.13](alpine-3.13/README.mdown) - templates for Alpine Linux 3.13.4
+  * Alpine Linux 3.13.4 (x86_64 and x86)
 
 - - -
 
