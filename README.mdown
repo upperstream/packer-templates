@@ -4,7 +4,7 @@
 
 * [alpine](alpine/README.mdown) - Alpine Linux templates (x86_64 and
   x86)
-  * alpine-3.10 - Alpine Linux 3.10.6 templates
+  * alpine-3.10 - Alpine Linux 3.10.8 templates
   * alpine-3.11 - Alpine Linux 3.11.10 templates
   * alpine-3.12 - Alpine Linux 3.12.6 templates
   * alpine-3.13 - Alpine Linux 3.13.4 templates
