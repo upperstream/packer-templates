@@ -1,6 +1,6 @@
-# Packer templates for Alpine Linux 3.10.6
+# Packer templates for Alpine Linux 3.10.8
 
-Templates to create Vagrant boxes for Alpine Linux 3.10.6. (x86_64 and i686)
+Templates to create Vagrant boxes for Alpine Linux 3.10.8. (x86_64 and i686)
 
 ## Prerequisites
 
@@ -34,13 +34,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso -var-file=vars-alpine-standard-3.10-x86_64.json alpine-3.10-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.10-x86_64-minimal-v10.6.20210223-virtualbox.box`
+You will find a vagrant box file named `Alpine-standard-3.10-x86_64-minimal-v10.8.20210331-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.10-x86_64-minimal-v10.6.20210223` to your box list
+Then you can add the box named `Alpine-standard-3.10-x86_64-minimal-v10.8.20210331` to your box list
 by the following command:
 
-    vagrant box add Alpine-standard-3.10-x86_64-minimal-v10.6.20210223-virtualbox.box --name Alpine-standard-3.10-x86_64-minimal-v10.6.20210223 --provider virtualbox
+    vagrant box add Alpine-standard-3.10-x86_64-minimal-v10.8.20210331-virtualbox.box --name Alpine-standard-3.10-x86_64-minimal-v10.8.20210331 --provider virtualbox
 
 ### VMware
 
@@ -48,13 +48,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso -var-file=vars-alpine-standard-3.10-x86_64.json alpine-3.10-minimal.json
 
-You will find a vagrant box file named `Alpine-standard-3.10-x86_64-minimal-v10.6.20210223-vmware.box`
+You will find a vagrant box file named `Alpine-standard-3.10-x86_64-minimal-v10.8.20210331-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Alpine-standard-3.10-x86_64-minimal-v10.6.20210223` to your box list
+Then you can add the box named `Alpine-standard-3.10-x86_64-minimal-v10.8.20210331` to your box list
 by the following command:
 
-    vagrant box add Alpine-standard-3.10-x86_64-minimal-v10.6.20210223-vmware.box --name Alpine-standard-3.10-x86_64-minimal-v10.6.20210223 --provider vmware_desktop
+    vagrant box add Alpine-standard-3.10-x86_64-minimal-v10.8.20210331-vmware.box --name Alpine-standard-3.10-x86_64-minimal-v10.8.20210331 --provider vmware_desktop
 
 In the `output` directory you will also find a VM image that can be directly imported from VMware.
 
@@ -91,13 +91,13 @@ The following command will build a VM image on your ESXi:
 
 ## Variants
 
-* `packer build -var-file=vars-alpine-standard-3.10-x86_64.json alpine-3.10-minimal.json` - Alpine Linux 3.10.6 (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.10-x86_64.json alpine-3.10-ansible.json` - Alpine Linux 3.10.6 with [Ansible] and [Testinfra] (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.10-x86_64.json alpine-3.10-docker.json` - Alpine Linux 3.10.6 with [Docker] + [Docker Compose] (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.10-x86_64.json alpine-3.10-dwm.json` - Alpine Linux 3.10.6 with [X.Org], [dwm], [dmenu], [st] and more tools (x86_64)
-* `packer build -var-file=vars-alpine-standard-3.10-x86.json alpine-3.10-minimal.json` - Alpine Linux 3.10.6 (x86)
-* `packer build -var-file=vars-alpine-standard-3.10-x86.json alpine-3.10-ansible.json` - Alpine Linux 3.10.6 with Ansible and Testinfra (x86)
-* `packer build -var-file=vars-alpine-standard-3.10-x86.json alpine-3.10-dwm.json` - Alpine Linux 3.10.6 with X.Org, dwm, dmenu, st and more tools (x86)
+* `packer build -var-file=vars-alpine-standard-3.10-x86_64.json alpine-3.10-minimal.json` - Alpine Linux 3.10.8 (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.10-x86_64.json alpine-3.10-ansible.json` - Alpine Linux 3.10.8 with [Ansible] and [Testinfra] (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.10-x86_64.json alpine-3.10-docker.json` - Alpine Linux 3.10.8 with [Docker] + [Docker Compose] (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.10-x86_64.json alpine-3.10-dwm.json` - Alpine Linux 3.10.8 with [X.Org], [dwm], [dmenu], [st] and more tools (x86_64)
+* `packer build -var-file=vars-alpine-standard-3.10-x86.json alpine-3.10-minimal.json` - Alpine Linux 3.10.8 (x86)
+* `packer build -var-file=vars-alpine-standard-3.10-x86.json alpine-3.10-ansible.json` - Alpine Linux 3.10.8 with Ansible and Testinfra (x86)
+* `packer build -var-file=vars-alpine-standard-3.10-x86.json alpine-3.10-dwm.json` - Alpine Linux 3.10.8 with X.Org, dwm, dmenu, st and more tools (x86)
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [dmenu]: http://tools.suckless.org/dmenu/ "dmenu | suckless.org tools"
