@@ -5,5 +5,5 @@
   "vmware_guest_os_type": "other",
   "os_ver": "snapshots",
   "iso_image": "install69.iso",
-  "iso_checksum": "sha256:9bd0e2ea566a9a06e1d8e62eb3c9c7e312ea4d90910c6ed550ce26ea9057959d"
+  "iso_checksum": "sha256:70ba15dad25275b326e76b57f6fa2f9565c5b702809811c42c4bfebcd354f4e3"
 }
