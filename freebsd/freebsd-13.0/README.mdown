@@ -1,10 +1,10 @@
-# Packer templates for FreeBSD 13.0-RC5
+# Packer templates for FreeBSD 13.0-RELEASE
 
-Templates to create Vagrant boxes for FreeBSD 13.0-RC5
+Templates to create Vagrant boxes for FreeBSD 13.0-RELEASE
 
 ## Prerequisites
 
-* [Packer][] version 1.6.2+
+* [Packer][] version 1.6.3+
 * [Vagrant][] version 2.2.10+
 * [VirtualBox][] version 6.1.14+
 * [VMware][] Workstation version 15.5.6+ / VMware Fusion v10.0+
@@ -38,46 +38,71 @@ Templates to create Vagrant boxes for FreeBSD 13.0-RC5
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso freebsd-13.0-rc-minimal.json
+    packer build -only=virtualbox-iso freebsd-13.0-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.0-RC-amd64-minimal-v5.20210403-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.0-RC-amd64-minimal-v5.20210403`
+Then you can add the box named `FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.0-RC-amd64-minimal-v5.20210403-virtualbox.box --name FreeBSD-13.0-RC-amd64-minimal-v5.20210403 --provider virtualbox
+    vagrant box add FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413-virtualbox.box --name FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413 --provider virtualbox
 
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso freebsd-13.0-rc-minimal.json
+    packer build -only=vmware-iso freebsd-13.0-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.0-RC-amd64-v5.20210403-vmware.box`
+You will find a vagrant box file named `FreeBSD-13.0-RELEASE-amd64-v13.0.20210413-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.0-RC-amd64-minimal-v5.20210403`
+Then you can add the box named `FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.0-RC-amd64-minimal-v5.20210403-vmware.box --name FreeBSD-13.0-RC-amd64-minimal-v5.20210403 --provider vmware_desktop
+    vagrant box add FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413-vmware.box --name FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413 --provider vmware_desktop
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
+
+### ESXi
+
+In order to build a VM image on ESXi, you need to provide the following
+environment variables:
+
+* `REMOTE_HOST` - ESXi host name or IP address
+* `REMOTE_USERNAME` - ESXi login user name
+* `REMOTE_PASSWORD` - ESXi login password
+* `REMOTE_DATASTORE` - ESXi datastore name where a VM image will be
+   created
+
+You also have to enable SSH on ESXi host.
+
+The following command will build a VM image on your ESXi:
+
+    packer build -only=esxi-iso freebsd-13.0-release-minimal.json
+
+(Note that created VM will be unregistered from your Inventory.)
+
+When you create a box on ESXi host version prior to 6.7, you need to
+enable VNC on the host and need to disable Packer's VNC over WebSocket
+feature by adding `-var esxi_vnc_over_websocket=false` parameter:
+
+    packer build -only=esxi-iso --var esxi_vnc_over_websocket=false freebsd-13.0-release-minimal.json
 
 ### QEMU/libvirt
 
 From the terminal, invoke the following command for Libvirt provider:
 
-    packer build -only=qemu freebsd-13.0-rc-minimal.json
+    packer build -only=qemu freebsd-13.0-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.0-RC-amd64-v5.20210403-libvirt.box`
+You will find a vagrant box file named `FreeBSD-13.0-RELEASE-amd64-v13.0.20210413-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.0-RC-amd64-minimal-v5.20210403`
+Then you can add the box named `FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.0-RC-amd64-minimal-v5.20210403-libvirt.box --name FreeBSD-13.0-RC-amd64-minimal-v5.20210403 --provider libvirt
+    vagrant box add FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413-libvirt.box --name FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -86,15 +111,15 @@ directly imported to QEMU.
 
 From the terminal, invoke the following command for Hyper-V provider:
 
-    packer build -only=hyperv-iso freebsd-13.0-rc-minimal.json
+    packer build -only=hyperv-iso freebsd-13.0-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.0-RC-amd64-v5.20210403-hyperv.box`
+You will find a vagrant box file named `FreeBSD-13.0-RELEASE-amd64-v13.0.20210413-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.0-RC-amd64-minimal-v5.20210403`
+Then you can add the box named `FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.0-RC-amd64-minimal-v5.20210403-hyperv.box --name FreeBSD-13.0-RC-amd64-minimal-v5.20210403 --provider hyperv
+    vagrant box add FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413-hyperv.box --name FreeBSD-13.0-RELEASE-amd64-minimal-v13.0.20210413 --provider hyperv
 
 ## Default settings
 
@@ -120,41 +145,22 @@ FreeBSD guest.
 Because Bash is not the standard shell for FreeBSD, default shell for
 SSH connection of this box is set to `/bin/sh`.
 
-## Building a VM image on ESXi
-
-In order to build a VM image on ESXi, you need to provide the following
-environment variables:
-
-* `REMOTE_HOST` - ESXi host name or IP address
-* `REMOTE_USERNAME` - ESXi login user name
-* `REMOTE_PASSWORD` - ESXi login password
-* `REMOTE_DATASTORE` - ESXi datastore name where a VM image will be
-   created
-
-You also have to enable SSH and VNC on ESXi host.
-
-The following command will build a VM image on your ESXi:
-
-    packer build -only=esxi-iso freebsd-13.0-rc-minimal.json
-
-(Note that created VM will be unregistered from your Inventory.)
-
 ## Variants
 
-* `freebsd-13.0-rc-minimal.json` - FreeBSD 13.0-RC5
-* `freebsd-13.0-rc-ansible.json` - FreeBSD 13.0-RC5 +
+* `freebsd-13.0-release-minimal.json` - FreeBSD 13.0-RELEASE
+* `freebsd-13.0-release-ansible.json` - FreeBSD 13.0-RELEASE +
   [Ansible][] + [Ansible Lint] + [Testinfra][]
-* `freebsd-13.0-rc-dwm.json` - FreeBSD 13.0-RC5 + [X.Org][] +
+* `freebsd-13.0-release-dwm.json` - FreeBSD 13.0-RELEASE + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-13.0-rc-xfce.json` - FreeBSD 13.0-RC5 + [Xfce][] +
+* `freebsd-13.0-release-xfce.json` - FreeBSD 13.0-RELEASE + [Xfce][] +
   [SLiM][]
-* `freebsd-13.0-rc-zfs.json` - FreeBSD 13.0-RC5 on ZFS root
+* `freebsd-13.0-release-zfs.json` - FreeBSD 13.0-RELEASE on ZFS root
   file system
 
-While `freebsd-13.0-rc-*.json` templates generate amd64 boxes by
+While `freebsd-13.0-release-*.json` templates generate amd64 boxes by
 default, using `vars-freebsd-13.0-i386.json` generates i386 boxes:
 
-    packer build -var-file=vars-freebsd-13.0-i386.json freebsd-13.0-rc-minimal.json
+    packer build -var-file=vars-freebsd-13.0-i386.json freebsd-13.0-release-minimal.json
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/
@@ -199,6 +205,9 @@ or `-var-file` command line options to `packer`:
   is an empty string.
 * `hyperv_switch_name` - Network switch name on Packer Hyper-V builder.
   Default value is `Default Switch`.
+* `esxi_vnc_over_websocket` - Controlls whether or not to use VNC over
+  WebSocket feature for ESXi.  Default value is `true`.  Set to `false`
+  if your ESXi host version is prior to 6.7 which supports VNC server.
 
 - - -
 
