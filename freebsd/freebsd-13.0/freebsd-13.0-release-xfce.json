@@ -1,11 +1,11 @@
 {
   "variables": {
-    "variant": "dwm",
-    "vm_name": "FreeBSD-13.0-RC-amd64",
-    "iso_image": "FreeBSD-13.0-RC5-amd64-disc1.iso",
+    "variant": "xfce",
+    "vm_name": "FreeBSD-13.0-RELEASE-amd64",
+    "iso_image": "FreeBSD-13.0-RELEASE-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/13.0",
-    "iso_checksum": "sha256:785ea0b42266419d15d81225e12cdad480713195af9bef833384636c9749a682",
-    "box_version": "5.20210403",
+    "iso_checksum": "sha256:f78d4e5f53605592863852b39fa31a12f15893dc48cacecd875f2da72fa67ae5",
+    "box_version": "13.0.20210413",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -32,7 +32,8 @@
     "qemu_disaply": "",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:13:amd64",
-    "headless": "false"
+    "headless": "false",
+    "esxi_vnc_over_websocket": "true"
   },
   "builders": [
     {
@@ -178,6 +179,8 @@
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
+      "vnc_over_websocket": "{{user `esxi_vnc_over_websocket`}}",
+      "insecure_connection": true,
       "http_directory": ".",
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "skip_export": true,
@@ -328,7 +331,9 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant-11.1+.sh",
-        "../provisioners/dwm+dmenu+st.sh",
+        "../provisioners/xorg.sh",
+        "../provisioners/xfce.sh",
+        "../provisioners/slim.sh",
         "../provisioners/xrdp.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
@@ -337,15 +342,16 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
+        "XFCE=xfce-4.16",
         "XORG_MINIMAL=xorg-minimal-7.5.2_3",
+        "XTERM=xterm-363",
+        "XCLOCK=xclock-1.0.9",
+        "TWM=twm-1.0.11",
         "XRANDR=xrandr-1.5.1",
+        "SLIM=slim-1.3.6_21",
+        "SLIM_THEMES=slim-themes-1.0.1_2",
         "ARANDR=arandr-0.1.10_1",
-        "DWM=dwm-6.2_2",
-        "STERM=sterm-0.8.4",
-        "DMENU=dmenu-5.0",
-        "XRDP=xrdp-0.9.15,1",
-        "NCURSES=ncurses-6.2.20201219",
-        "XORG_FONTS=xorg-fonts-7.7_1"
+        "XRDP=xrdp-0.9.15,1"
       ]
     },
     {

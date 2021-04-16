@@ -1,11 +1,11 @@
 {
   "variables": {
-    "variant": "minimal",
-    "vm_name": "FreeBSD-13.0-RC-amd64",
-    "iso_image": "FreeBSD-13.0-RC5-amd64-disc1.iso",
+    "variant": "dwm",
+    "vm_name": "FreeBSD-13.0-RELEASE-amd64",
+    "iso_image": "FreeBSD-13.0-RELEASE-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/13.0",
-    "iso_checksum": "sha256:785ea0b42266419d15d81225e12cdad480713195af9bef833384636c9749a682",
-    "box_version": "5.20210403",
+    "iso_checksum": "sha256:f78d4e5f53605592863852b39fa31a12f15893dc48cacecd875f2da72fa67ae5",
+    "box_version": "13.0.20210413",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -32,7 +32,8 @@
     "qemu_disaply": "",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:13:amd64",
-    "headless": "false"
+    "headless": "false",
+    "esxi_vnc_over_websocket": "true"
   },
   "builders": [
     {
@@ -63,7 +64,8 @@
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "headless": "{{user `headless`}}",
       "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "16" ]
       ],
       "boot_command": [
         "<enter>",
@@ -71,7 +73,7 @@
         "s",
         "<wait5>",
         "dhclient {{user `virtualbox_netif`}}<enter><wait5>",
-        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `virtualbox_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -84,7 +86,7 @@
         "SUDO=sudo-1.9.5p2 ",
         "CA_ROOT_NSS=ca_root_nss-3.58 ",
         "NETIF={{user `virtualbox_netif`}} ",
-        "bsdinstall script /tmp/install.sh<enter>",
+        "bsdinstall script /tmp/install_with_x11.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
     },
@@ -122,7 +124,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "16777216"
       },
       "boot_command": [
         "<enter>",
@@ -130,7 +133,7 @@
         "s",
         "<wait5>",
         "dhclient {{user `vmware_netif`}}<enter><wait5>",
-        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `vmware_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -143,7 +146,7 @@
         "SUDO=sudo-1.9.5p2 ",
         "CA_ROOT_NSS=ca_root_nss-3.58 ",
         "NETIF={{user `vmware_netif`}} ",
-        "bsdinstall script /tmp/install.sh<enter>",
+        "bsdinstall script /tmp/install_with_x11.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
     },
@@ -176,6 +179,8 @@
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
+      "vnc_over_websocket": "{{user `esxi_vnc_over_websocket`}}",
+      "insecure_connection": true,
       "http_directory": ".",
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "skip_export": true,
@@ -189,7 +194,8 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "16777216"
       },
       "boot_command": [
         "<enter>",
@@ -197,7 +203,7 @@
         "s",
         "<wait5>",
         "dhclient {{user `vmware_netif`}}<enter><wait5>",
-        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `vmware_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -210,7 +216,7 @@
         "SUDO=sudo-1.9.5p2 ",
         "CA_ROOT_NSS=ca_root_nss-3.58 ",
         "NETIF={{user `vmware_netif`}} ",
-        "bsdinstall script /tmp/install.sh<enter>",
+        "bsdinstall script /tmp/install_with_x11.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
     },
@@ -253,7 +259,7 @@
         "s",
         "<wait5>",
         "dhclient {{user `qemu_netif`}}<enter><wait5>",
-        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `qemu_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -266,7 +272,7 @@
         "SUDO=sudo-1.9.5p2 ",
         "CA_ROOT_NSS=ca_root_nss-3.58 ",
         "NETIF={{user `qemu_netif`}} ",
-        "bsdinstall script /tmp/install.sh<enter>",
+        "bsdinstall script /tmp/install_with_x11.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
     },
@@ -302,7 +308,7 @@
         "s",
         "<wait5>",
         "dhclient {{user `hyperv_netif`}}<enter><wait5>",
-        "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
+        "fetch -o /tmp/install_with_x11.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.sh<enter>",
         "<wait>",
         "PARTITIONS={{user `hyperv_partition`}} ",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
@@ -315,7 +321,7 @@
         "SUDO=sudo-1.9.5p2 ",
         "CA_ROOT_NSS=ca_root_nss-3.58 ",
         "NETIF={{user `hyperv_netif`}} ",
-        "bsdinstall script /tmp/install.sh<enter>",
+        "bsdinstall script /tmp/install_with_x11.sh<enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>"
       ]
     }
@@ -323,13 +329,26 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "../provisioners/vagrant-11.1+.sh",
+      "scripts": [
+        "../provisioners/vagrant-11.1+.sh",
+        "../provisioners/dwm+dmenu+st.sh",
+        "../provisioners/xrdp.sh"
+      ],
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "VAGRANT_GROUP={{user `vagrant_group`}}"
+        "VAGRANT_GROUP={{user `vagrant_group`}}",
+        "XORG_MINIMAL=xorg-minimal-7.5.2_3",
+        "XRANDR=xrandr-1.5.1",
+        "ARANDR=arandr-0.1.10_1",
+        "DWM=dwm-6.2_2",
+        "STERM=sterm-0.8.4",
+        "DMENU=dmenu-5.0",
+        "XRDP=xrdp-0.9.15,1",
+        "NCURSES=ncurses-6.2.20201219",
+        "XORG_FONTS=xorg-fonts-7.7_1"
       ]
     },
     {
@@ -338,8 +357,7 @@
       "script": "../provisioners/virtualbox_ose_additions-10.4+.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "VIRTUALBOX_WITH_XORG=false",
-        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-nox11-5.2.44_3"
+        "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-5.2.44_3"
       ]
     },
     {
@@ -348,7 +366,10 @@
       "script": "../provisioners/vmware-guest.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools-nox11-11.2.0_2,2"
+        "VMWARE_WITH_XORG=1",
+        "OPEN_VM_TOOLS=open-vm-tools-11.2.0_2,2",
+        "XF86_VIDEO_VMWARE=xf86-video-vmware-13.3.0_6",
+        "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0_4"
       ]
     },
     {
