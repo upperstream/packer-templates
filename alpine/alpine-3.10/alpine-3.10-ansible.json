@@ -13,7 +13,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "10.8.20210331",
+    "box_version": "10.9.20210414",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.10"
