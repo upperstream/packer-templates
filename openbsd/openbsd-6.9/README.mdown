@@ -46,13 +46,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso openbsd-6.9-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.9_BETA-amd64-minimal-v20210409-virtualbox.box`
+You will find a vagrant box file named `OpenBSD-6.9_BETA-amd64-minimal-v20210423-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.9_BETA-amd64-minimal-v20210409`
+Then you can add the box named `OpenBSD-6.9_BETA-amd64-minimal-v20210423`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.9_BETA-amd64-minimal-v20210409-virtualbox.box --name OpenBSD-6.9_BETA-amd64-minimal-v20210409 --provider virtualbox
+    vagrant box add OpenBSD-6.9_BETA-amd64-minimal-v20210423-virtualbox.box --name OpenBSD-6.9_BETA-amd64-minimal-v20210423 --provider virtualbox
 
 ### VMware
 
@@ -60,13 +60,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso openbsd-6.9-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.9_BETA-amd64-minimal-v20210409-vmware.box`
+You will find a vagrant box file named `OpenBSD-6.9_BETA-amd64-minimal-v20210423-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.9_BETA-amd64-minimal-v20210409`
+Then you can add the box named `OpenBSD-6.9_BETA-amd64-minimal-v20210423`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.9_BETA-amd64-minimal-v20210409-vmware.box --name OpenBSD-6.9_BETA-amd64-minimal-v20210409 --provider vmware_desktop
+    vagrant box add OpenBSD-6.9_BETA-amd64-minimal-v20210423-vmware.box --name OpenBSD-6.9_BETA-amd64-minimal-v20210423 --provider vmware_desktop
 
 In the `output` directory you will also find a VM image that can be
 directly imported to VMware.
@@ -77,13 +77,13 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu openbsd-6.9-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.9_BETA-amd64-minimal-v20210409-libvirt.box`
+You will find a vagrant box file named `OpenBSD-6.9_BETA-amd64-minimal-v20210423-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.9_BETA-amd64-minimal-v20210409`
+Then you can add the box named `OpenBSD-6.9_BETA-amd64-minimal-v20210423`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.9_BETA-amd64-minimal-v20210409-libvirt.box --name OpenBSD-6.9_BETA-amd64-minimal-v20210409 -- provider libvirt
+    vagrant box add OpenBSD-6.9_BETA-amd64-minimal-v20210423-libvirt.box --name OpenBSD-6.9_BETA-amd64-minimal-v20210423 -- provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -94,13 +94,13 @@ From the terminal, invoke the following command for Hyper-V provider:
 
     packer build -only=hyperv-iso openbsd-6.9-minimal.json
 
-You will find a vagrant box file named `OpenBSD-6.9_BETA-amd64-minimal-v20210409-hyperv.box`
+You will find a vagrant box file named `OpenBSD-6.9_BETA-amd64-minimal-v20210423-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-6.9_BETA-amd64-minimal-v20210409`
+Then you can add the box named `OpenBSD-6.9_BETA-amd64-minimal-v20210423`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-6.9_BETA-amd64-minimal-v20210409-hyperv.box --name OpenBSD-6.9_BETA-amd64-minimal-v20210409 --provider hyperv
+    vagrant box add OpenBSD-6.9_BETA-amd64-minimal-v20210423-hyperv.box --name OpenBSD-6.9_BETA-amd64-minimal-v20210423 --provider hyperv
 
 ## Default settings
 

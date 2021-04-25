@@ -4,9 +4,9 @@
     "cpu": "amd64",
     "vm_name": "OpenBSD-6.9_BETA-amd64",
     "iso_image": "install69.iso",
-    "iso_checksum": "sha256:ce47d108642795965ec1d108faceb2e6f6d5b3b2d0cc0aeb2f3d3f0704767c7b",
+    "iso_checksum": "sha256:2a6eb543abd4793701e42cc9f5d9c5aaf4e38496e703cc253bceca87f0988665",
     "os_ver": "snapshots",
-    "box_version": "6.9.20210409",
+    "box_version": "20210423",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "40960",
@@ -22,7 +22,7 @@
     "vmware_guest_os_type": "other-64",
     "hyperv_switch_name": "Default Switch",
     "headless": "false",
-    "rsync_version": "3.2.3"
+    "esxi_vnc_over_websocket": "true"
   },
   "builders": [
     {
@@ -122,6 +122,8 @@
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
+      "vnc_over_websocket": "{{user `vnc_over_websocket`}}",
+      "insecure_connection": true,
       "http_directory": ".",
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "skip_export": true,
@@ -225,7 +227,7 @@
         "XFCE=4.16",
         "SLIM=1.3.6p25",
         "SLIM_THEMES=1.2.3p7",
-        "RSYNC={{user `rsync_version`}}"
+        "RSYNC=3.2.3"
       ]
     },
     {
