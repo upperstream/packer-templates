@@ -1,9 +1,9 @@
 {
-  "vm_name": "OpenBSD-6.9_BETA-i386",
+  "vm_name": "OpenBSD-6.9-i386",
   "cpu": "i386",
   "virtualbox_guest_os_type": "OpenBSD",
   "vmware_guest_os_type": "other",
-  "os_ver": "snapshots",
+  "os_ver": "6.9",
   "iso_image": "install69.iso",
-  "iso_checksum": "sha256:ac8d4801a9d3d68ee6832a36ffc3aad33fd46aeb6f94211864bb4fd34e722760"
+  "iso_checksum": "sha256:6635979f9fa8cfa7dfd6a2829ec59657b39549875f9f5cfa0bb72607b26fe922"
 }
