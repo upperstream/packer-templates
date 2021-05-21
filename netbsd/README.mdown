@@ -54,7 +54,13 @@
   * NetBSD 9.1 + X.Org
   * NetBSD 9.1 + X.Org + XDM + dwm + dmenu + st
   * NetBSD 9.1 + Xfce + XDM
+* [netbsd-9.2](netbsd-9.2/README.mdown) - templates for NetBSD 9.2
+  * NetBSD 9.2
+  * NetBSD 9.2 + Ansible + Ansible Lint + Testinfra
+  * NetBSD 9.2 + X.Org
+  * NetBSD 9.2 + X.Org + XDM + dwm + dmenu + st
+  * NetBSD 9.2 + Xfce + XDM
 
 - - -
 
-Copyright &copy; 2015-2020 Upperstream Software.
+Copyright &copy; 2015-2021 Upperstream Software.
