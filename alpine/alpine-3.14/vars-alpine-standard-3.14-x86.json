@@ -1,0 +1,9 @@
+{
+  "vm_name": "Alpine-standard-3.14-x86",
+  "iso_image": "alpine-standard-3.14.0-x86.iso",
+  "iso_checksum": "sha256:0b80988004107f78c8b1ddef99d53c22b2b5ee60e08702a5d6e80e3054c6ccb4",
+  "cpu": "x86",
+  "virtualbox_guest_os_type": "Linux",
+  "vmware_guest_os_type": "other3xlinux",
+  "esxi_guest_os_type": "linux"
+}

@@ -1,6 +1,6 @@
 {
   "variables": {
-    "variant": "ansible",
+    "variant": "docker",
     "num_cpus": "2",
     "mem_size": "512",
     "disk_size": "40960",
@@ -13,13 +13,13 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "12.7.20210414",
+    "box_version": "14.0.20210615",
     "headless": "false",
     "vm_name": "",
-    "os_ver": "v3.12",
+    "os_ver": "v3.14",
+    "esxi_vnc_over_websocket": "true",
     "qemu_use_default_display": "true",
-    "qemu_display": "",
-    "hyperv_switch_name": "Default Switch"
+    "qemu_display": ""
   },
   "builders": [
     {
@@ -150,6 +150,8 @@
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
+      "vnc_over_websocket": "{{user `esxi_vnc_over_websocket`}}",
+      "insecure_connection": true,
       "tools_upload_flavor": "linux",
       "http_directory": ".",
       "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-esxi",
@@ -236,59 +238,15 @@
         "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
         "DISK=vda sh /tmp/install.sh<enter><wait>"
       ]
-    },
-    {
-      "type": "hyperv-iso",
-      "boot_wait": "30s",
-      "cpus": "{{user `num_cpus`}}",
-      "memory": "{{user `mem_size`}}",
-      "disk_size": "{{user `disk_size`}}",
-      "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_urls": [
-        "./iso/{{user `iso_image`}}",
-        "http://dl-cdn.alpinelinux.org/alpine/{{user `os_ver`}}/releases/{{user `cpu`}}/{{user `iso_image`}}"
-      ],
-      "ssh_username": "{{user `ssh_username`}}",
-      "ssh_password": "{{user `ssh_password`}}",
-      "ssh_port": 22,
-      "ssh_timeout": "10000s",
-      "shutdown_command": "poweroff",
-      "http_directory": ".",
-      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-hyperv",
-      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
-      "headless": "{{user `headless`}}",
-      "switch_name": "{{user `hyperv_switch_name`}}",
-      "boot_command": [
-        "root<enter><wait>",
-        "/sbin/setup-interfaces -i << EOF<enter>",
-        "auto lo<enter>",
-        "iface lo inet loopback<enter>",
-        "<enter>",
-        "auto eth0<enter>",
-        "iface eth0 inet dhcp<enter>",
-        "<tab>hostname localhost<enter>",
-        "EOF<enter><wait>",
-        "/etc/init.d/networking start<enter><wait10><wait10><wait10><wait10>",
-        "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
-        "DISK=sda setup-alpine -f /tmp/answers.txt<enter><wait>",
-        "{{user `root_password`}}<enter><wait>",
-        "{{user `root_password`}}<enter><wait>",
-        "<wait10><wait10><wait10>",
-        "y<enter>",
-        "<wait10><wait10><wait10><wait10><wait10><wait10>",
-        "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_hyperv.sh<enter><wait>",
-        "DISK=sda sh /tmp/install.sh<enter><wait>"
-      ]
     }
   ],
   "provisioners": [
     {
       "type": "shell",
       "only": ["virtualbox-iso"],
-      "script": "../provisioners/virtualbox_alpine3.8+.sh",
+      "script": "../provisioners/virtualbox_alpine3.13+.sh",
       "environment_vars": [
-        "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.0.14-r0",
-        "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.111-r0",
+        "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.1.18-r0",
         "OS_VER={{user `os_ver`}}"
       ]
     },
@@ -297,8 +255,9 @@
       "only": ["vmware-iso", "esxi-iso"],
       "script": "../provisioners/vmware_alpine3.9+.sh",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools=11.1.0-r3",
-        "OS_VER={{user `os_ver`}}"
+        "OPEN_VM_TOOLS=open-vm-tools=11.2.5-r0",
+        "OS_VER={{user `os_ver`}}",
+        "CPU={{user `cpu`}}"
       ]
     },
     {
@@ -306,31 +265,30 @@
       "only": ["qemu"],
       "script": "../provisioners/nfs.sh",
       "environment_vars": [
-        "NFS_UTILS=nfs-utils=2.4.3-r1",
-        "UTIL_LINUX=util-linux=2.35.2-r0"
+        "NFS_UTILS=nfs-utils=2.5.3-r0",
+        "UTIL_LINUX=util-linux=2.37-r0"
       ]
     },
     {
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant.sh",
-        "../provisioners/ansible+testinfra_alpine3.12+.sh"
+        "../provisioners/docker_alpine3.8+.sh"
       ],
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USERNAME={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "ANSIBLE=ansible=2.9.14-r0",
-        "ANSIBLE_LINT=ansible-lint=4.2.0-r0",
-        "PYTHON_PIP=py3-pip=20.1.1-r0",
-        "TESTINFRA_VERSION=5.1.0",
+        "PYTHON_PIP=py3-pip=20.3.4-r1",
+        "DOCKER=docker=20.10.7-r1",
+        "DOCKER_COMPOSE_VERSION=1.29.2",
+        "CRYPTOGRAPHY_DONT_BUILD_RUST=1",
         "OS_VER={{user `os_ver`}}"
       ]
     },
     {
       "type": "shell",
-      "start_retry_timeout": "5m",
-      "only": ["virtualbox-iso", "vmware-iso", "qemu", "hyperv-iso"],
+      "only": ["virtualbox-iso", "vmware-iso", "qemu"],
       "script": "../provisioners/disk_cleanup.sh"
     },
     {
@@ -341,7 +299,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "only": ["virtualbox-iso", "hyperv-iso"],
+      "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
       "vagrantfile_template": "../vagrantfiles/Vagrantfile.Alpine"
