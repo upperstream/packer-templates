@@ -14,3 +14,8 @@ end_of_line = crlf
 [**.json]
 indent_style = space
 indent_size = 2
+
+# Indentation override for all shell script files
+[**.sh]
+indent_stype = tab
+indent_size = 4
