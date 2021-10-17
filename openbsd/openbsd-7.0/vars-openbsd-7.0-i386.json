@@ -1,0 +1,10 @@
+{
+  "vm_name": "OpenBSD-7.0-i386",
+  "cpu": "i386",
+  "virtualbox_guest_os_type": "OpenBSD",
+  "vmware_guest_os_type": "other",
+  "os_ver": "7.0",
+  "iso_image": "install70.iso",
+  "iso_checksum": "sha256:643bdc948fafe9c1b5225d791b657079b55ad77a2a14b3144bcb0dbb3ab32da5",
+  "qemu_binary": "qemu-system-i386"
+}
