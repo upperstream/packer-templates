@@ -2,11 +2,11 @@
   "variables": {
     "variant": "x11",
     "cpu": "amd64",
-    "vm_name": "OpenBSD-7.0_SNAPSHOT-amd64",
+    "vm_name": "OpenBSD-7.0-amd64",
     "iso_image": "install70.iso",
-    "iso_checksum": "sha256:94b8e3718fd6baf4cf0ebec4091988dd675df95338c4c8fddb6f1239090c0524",
-    "os_ver": "snapshots",
-    "box_version": "20210824",
+    "iso_checksum": "sha256:1882f9a23c9800e5dba3dbd2cf0126f552605c915433ef4c5bb672610a4ca3a4",
+    "os_ver": "7.0",
+    "box_version": "7.0.20211014",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "40960",
@@ -223,7 +223,7 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "RSYNC=rsync"
+        "RSYNC=rsync-3.2.3p0"
       ]
     },
     {
