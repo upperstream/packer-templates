@@ -3,8 +3,8 @@ set -e
 set -x
 
 # XORG_FONTS is optional
-pkg install -y ${XORG_MINIMAL:-"xorg-minimal"} ${XRANDR:-xrandr} ${XORG_FONTS-}
-pw groupmod video -m ${VAGRANT_USER:=vagrant} || pw groupmod wheel -m $VAGRANT_USER
+pkg install -y "${XORG_MINIMAL:-xorg-minimal}" "${XRANDR:-xrandr}" "${XORG_FONTS:-xorg-fonts}"
+pw groupmod video -m "${VAGRANT_USER:=vagrant}" || pw groupmod wheel -m $VAGRANT_USER
 echo "kern.vty=vt" >> /boot/loader.conf
 cat >> /usr/local/etc/X11/xorg.conf.d/screen-resolutions.conf << EOF
 Section "Screen"
@@ -20,8 +20,10 @@ Section "Screen"
 EndSection
 EOF
 
-pkg install -y ${ARANDR:-arandr} ${DWM:-dwm} ${STERM:-sterm} ${DMENU:-dmenu} ${NCURSES:-ncurses}
-
+pkg install -y "${ARANDR:-arandr}" "${DWM:-dwm}" "${STERM:-sterm}" "${DMENU:-dmenu}" "${NCURSES:-ncurses}"
+if [ "$TERMINFO_DB" ]; then
+	pkg install -y "${TERMINFO_DB}"
+fi
 for t in st st-256color; do infocmp -C $t >> /usr/share/misc/termcap; done
 cap_mkdb /usr/share/misc/termcap
 
@@ -40,4 +42,4 @@ cat > /home/$VAGRANT_USER/.xinitrc << EOF
 st &
 exec dwm
 EOF
-chown $VAGRANT_USER:${VAGRANT_GROUP:-vagrant} /home/$VAGRANT_USER/.xinitrc
+chown $VAGRANT_USER:"${VAGRANT_GROUP:-vagrant}" /home/$VAGRANT_USER/.xinitrc
