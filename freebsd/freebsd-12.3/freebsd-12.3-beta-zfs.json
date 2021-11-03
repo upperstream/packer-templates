@@ -2,10 +2,10 @@
   "variables": {
     "variant": "zfs",
     "vm_name": "FreeBSD-12.3-BETA-amd64",
-    "iso_image": "FreeBSD-12.3-BETA1-amd64-disc1.iso",
+    "iso_image": "FreeBSD-12.3-BETA2-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.3",
-    "iso_checksum": "sha256:5d607b32caeb8c7aa9fab8fa1247dc7c5734d2ea2d591e7729ed2baee6064c01",
-    "box_version": "1.20211022",
+    "iso_checksum": "sha256:0dca65e7f7ef3fa7894b297a50c0bf78c8243dee523cfa2123132cf1ce747dee",
+    "box_version": "2.20211029",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -32,7 +32,8 @@
     "qemu_disaply": "",
     "DISTRIBUTIONS": "'base.txz kernel.txz lib32.txz'",
     "ABI": "FreeBSD:12:amd64",
-    "headless": "false"
+    "headless": "false",
+    "esxi_vnc_over_websocket": "true"
   },
   "builders": [
     {
@@ -178,6 +179,8 @@
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
+      "vnc_over_websocket": "{{user `esxi_vnc_over_websocket`}}",
+      "insecure_connection": true,
       "http_directory": ".",
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}",
       "skip_export": true,
