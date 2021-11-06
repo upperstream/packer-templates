@@ -13,14 +13,64 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "13.5.20210414",
+    "box_version": "13.6.20210831",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.13",
+    "esxi_vnc_over_websocket": "true",
     "qemu_use_default_display": "true",
     "qemu_display": ""
   },
   "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "30s",
+      "cpus": "{{user `num_cpus`}}",
+      "memory": "{{user `mem_size`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_urls": [
+        "./iso/{{user `iso_image`}}",
+        "http://dl-cdn.alpinelinux.org/alpine/{{user `os_ver`}}/releases/{{user `cpu`}}/{{user `iso_image`}}"
+      ],
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_port": 22,
+      "ssh_timeout": "10000s",
+      "shutdown_command": "poweroff",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": ".vbox_version",
+      "http_directory": ".",
+      "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-virtualbox",
+      "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
+      "headless": "{{user `headless`}}",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+      ],
+      "boot_command": [
+        "root<enter><wait>",
+        "/sbin/setup-interfaces -i << EOF<enter>",
+        "auto lo<enter>",
+        "iface lo inet loopback<enter>",
+        "<enter>",
+        "auto eth0<enter>",
+        "iface eth0 inet dhcp<enter>",
+        "<tab>hostname localhost<enter>",
+        "EOF<enter>",
+        "/etc/init.d/networking --quiet start<enter><wait10><wait10>",
+        "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
+        "setup-alpine -f /tmp/answers.txt<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
+        "<wait10><wait10><wait10>",
+        "y<enter>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+        "sh /tmp/install.sh<enter><wait>"
+      ]
+    },
     {
       "type": "vmware-iso",
       "boot_wait": "30s",
@@ -100,6 +150,8 @@
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
+      "vnc_over_websocket": "{{user `esxi_vnc_over_websocket`}}",
+      "insecure_connection": true,
       "tools_upload_flavor": "linux",
       "http_directory": ".",
       "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-esxi",
@@ -191,6 +243,15 @@
   "provisioners": [
     {
       "type": "shell",
+      "only": ["virtualbox-iso"],
+      "script": "../provisioners/virtualbox_alpine3.13+.sh",
+      "environment_vars": [
+        "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.1.16-r1",
+        "OS_VER={{user `os_ver`}}"
+      ]
+    },
+    {
+      "type": "shell",
       "only": ["vmware-iso", "esxi-iso"],
       "script": "../provisioners/vmware_alpine3.9+.sh",
       "environment_vars": [
@@ -220,7 +281,7 @@
     {
       "type": "shell",
       "start_retry_timeout": "5m",
-      "only": ["vmware-iso", "qemu"],
+      "only": ["virtualbox-iso", "vmware-iso", "qemu"],
       "script": "../provisioners/disk_cleanup.sh"
     },
     {
@@ -229,6 +290,13 @@
     }
   ],
   "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox-iso"],
+      "compression_level": 9,
+      "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-{{ .Provider }}.box",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.Alpine"
+    },
     {
       "type": "vagrant",
       "only": ["vmware-iso", "qemu"],
