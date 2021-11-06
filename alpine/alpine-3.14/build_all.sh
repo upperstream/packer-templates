@@ -20,7 +20,7 @@ error() {
 }
 
 for f in vars-alpine-*.json; do
-  for g in alpine-3.14-minimal.json alpine-3.14-ansible.json alpine-3.14-dwm.json; do
+  for g in alpine-3.14-minimal.json alpine-3.14-ansible.json; do
     packer build -var-file=$f $@ $g || error
   done
 done
