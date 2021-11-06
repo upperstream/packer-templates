@@ -1,6 +1,6 @@
 {
-  "iso_image": "FreeBSD-12.3-BETA2-i386-disc1.iso",
-  "iso_checksum": "sha256:e64a5cd7c024cff8c901e1f1d6cb7927259ce44375dca02563605120c50e9f86",
+  "iso_image": "FreeBSD-12.3-BETA3-i386-disc1.iso",
+  "iso_checksum": "sha256:2a5717e91669f934841d9a8a48128de61db8fcc72efd7a9317ca84aee9a72aa7",
   "virtualbox_guest_os_type": "FreeBSD",
   "vmware_guest_os_type": "freebsd",
   "DISTRIBUTIONS": "'base.txz kernel.txz'",
