@@ -13,10 +13,11 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "11.11.20210414",
+    "box_version": "11.12.20210831",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.11",
+    "esxi_vnc_over_websocket": "true",
     "qemu_use_default_display": "true",
     "qemu_display": "",
     "hyperv_switch_name": "Default Switch"
@@ -150,6 +151,8 @@
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
+      "vnc_over_websocket": "{{user `esxi_vnc_over_websocket`}}",
+      "insecure_connection": true,
       "tools_upload_flavor": "linux",
       "http_directory": ".",
       "output_directory": "output/{{user `vm_name`}}-{{user `variant`}}-v{{user `box_version`}}-esxi",
@@ -288,7 +291,7 @@
       "script": "../provisioners/virtualbox_alpine3.8+.sh",
       "environment_vars": [
         "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.0.14-r0",
-        "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.111-r0",
+        "VIRTUALBOX_GUEST_MODULES_VIRT=virtualbox-guest-modules-virt=5.4.143-r0",
         "OS_VER={{user `os_ver`}}"
       ]
     },
