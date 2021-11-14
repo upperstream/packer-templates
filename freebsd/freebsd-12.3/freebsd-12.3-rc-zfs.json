@@ -1,11 +1,11 @@
 {
   "variables": {
     "variant": "zfs",
-    "vm_name": "FreeBSD-12.3-BETA-amd64",
-    "iso_image": "FreeBSD-12.3-BETA3-amd64-disc1.iso",
+    "vm_name": "FreeBSD-12.3-RC-amd64",
+    "iso_image": "FreeBSD-12.3-RC1-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.3",
-    "iso_checksum": "sha256:0c2069275f593b866359ec453e4c21536a51577d796f6454e668fba58808139d",
-    "box_version": "3.20211104",
+    "iso_checksum": "sha256:f3b2679b3e05cf48a61a3c007af5e6ccdd291e7d2fa914cc75e6d5441c9b59a6",
+    "box_version": "1.20211111",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
