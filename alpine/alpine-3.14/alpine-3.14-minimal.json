@@ -13,7 +13,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "14.2.20210827",
+    "box_version": "14.3.20211112",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.14",
@@ -266,7 +266,7 @@
       "script": "../provisioners/nfs.sh",
       "environment_vars": [
         "NFS_UTILS=nfs-utils=2.5.3-r0",
-        "UTIL_LINUX=util-linux=2.37-r0"
+        "UTIL_LINUX=util-linux=2.37.2-r0"
       ]
     },
     {

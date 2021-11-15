@@ -13,7 +13,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "14.2.20210827",
+    "box_version": "14.3.20211112",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.14",
@@ -266,7 +266,7 @@
       "script": "../provisioners/nfs.sh",
       "environment_vars": [
         "NFS_UTILS=nfs-utils=2.5.3-r0",
-        "UTIL_LINUX=util-linux=2.37-r0"
+        "UTIL_LINUX=util-linux=2.37.2-r0"
       ]
     },
     {
@@ -283,8 +283,8 @@
         "DOCKER=docker=20.10.9-r0",
         "DOCKER_COMPOSE_VERSION=1.29.2",
         "PY_PYNACL=py3-pynacl=1.4.0-r1",
-	"PY_BCRYPT=py3-bcrypt=3.2.0-r3",
-	"PY_CRYPTOGRAPHY=py3-cryptography=3.3.2-r1",
+        "PY_BCRYPT=py3-bcrypt=3.2.0-r3",
+        "PY_CRYPTOGRAPHY=py3-cryptography=3.3.2-r1",
         "OS_VER={{user `os_ver`}}"
       ]
     },
