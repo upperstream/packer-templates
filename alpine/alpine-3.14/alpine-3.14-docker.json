@@ -273,7 +273,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant.sh",
-        "../provisioners/docker_alpine3.14.sh"
+        "../provisioners/docker_alpine3.13+.sh"
       ],
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
