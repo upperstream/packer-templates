@@ -13,7 +13,7 @@
     "remote_username": "{{env `REMOTE_USERNAME`}}",
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
-    "box_version": "13.6.20210831",
+    "box_version": "13.7.20211112",
     "headless": "false",
     "vm_name": "",
     "os_ver": "v3.13",
@@ -273,7 +273,7 @@
       "type": "shell",
       "scripts": [
         "../provisioners/vagrant.sh",
-        "../provisioners/docker_alpine3.8+.sh"
+        "../provisioners/docker_alpine3.13+.sh"
       ],
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
@@ -282,7 +282,9 @@
         "PYTHON_PIP=py3-pip=20.3.4-r0",
         "DOCKER=docker=20.10.3-r1",
         "DOCKER_COMPOSE_VERSION=1.28.2",
-        "CRYPTOGRAPHY_DONT_BUILD_RUST=1",
+        "PY_PYNACL=py3-pynacl=1.4.0-r0",
+        "PY_BCRYPT=py3-bcrypt=3.2.0-r2",
+        "PY_CRYPTOGRAPHY=py3-cryptography=3.3.2-r0",
         "OS_VER={{user `os_ver`}}"
       ]
     },
