@@ -2,10 +2,10 @@
   "variables": {
     "variant": "ansible",
     "vm_name": "FreeBSD-12.3-RC-amd64",
-    "iso_image": "FreeBSD-12.3-RC1-amd64-disc1.iso",
+    "iso_image": "FreeBSD-12.3-RC2-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.3",
-    "iso_checksum": "sha256:f3b2679b3e05cf48a61a3c007af5e6ccdd291e7d2fa914cc75e6d5441c9b59a6",
-    "box_version": "1.20211111",
+    "iso_checksum": "sha256:a38b81845e6e0a83edf042bf9c2f05a8d3f46e5c1495509d5e9a25db04597a6e",
+    "box_version": "2.20211118",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
