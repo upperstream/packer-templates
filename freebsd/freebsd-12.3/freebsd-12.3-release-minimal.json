@@ -1,11 +1,11 @@
 {
   "variables": {
-    "variant": "ansible",
-    "vm_name": "FreeBSD-12.3-RC-amd64",
-    "iso_image": "FreeBSD-12.3-RC2-amd64-disc1.iso",
+    "variant": "minimal",
+    "vm_name": "FreeBSD-12.3-RELEASE-amd64",
+    "iso_image": "FreeBSD-12.3-RELEASE-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/12.3",
-    "iso_checksum": "sha256:a38b81845e6e0a83edf042bf9c2f05a8d3f46e5c1495509d5e9a25db04597a6e",
-    "box_version": "2.20211118",
+    "iso_checksum": "sha256:5f0c10ff9af582c7fca90f65868702aa02e80f344c186f0bc75639a687d65641",
+    "box_version": "12.3.20211207",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -82,7 +82,7 @@
         "VAGRANT_USER={{user `vagrant_username`}} ",
         "VAGRANT_PASSWORD={{user `vagrant_password`}} ",
         "VAGRANT_GROUP={{user `vagrant_group`}} ",
-        "SUDO=sudo-1.9.8p2 ",
+        "SUDO=sudo-1.9.8p2  ",
         "CA_ROOT_NSS=ca_root_nss-3.69_1 ",
         "NETIF={{user `virtualbox_netif`}} ",
         "bsdinstall script /tmp/install.sh<enter>",
@@ -326,21 +326,13 @@
   "provisioners": [
     {
       "type": "shell",
-      "scripts": [
-        "../provisioners/vagrant-11.1+.sh",
-        "../provisioners/ansible+testinfra-11.1+.sh"
-      ],
+      "script": "../provisioners/vagrant-11.1+.sh",
       "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}",
       "environment_vars": [
         "ROOT_PASSWORD={{user `root_password`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "PY27_PIP=py38-pip-20.3.4",
-        "ANSIBLE=py38-ansible-4.6.0",
-        "ANSIBLE_LINT=py38-ansible-lint-5.1.3",
-        "BRACEX=bracex==2.2",
-        "TESTINFRA=pytest-testinfra==6.4.0"
+        "VAGRANT_GROUP={{user `vagrant_group`}}"
       ]
     },
     {
