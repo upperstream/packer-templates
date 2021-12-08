@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 12.3-RC2
+# Packer templates for FreeBSD 12.3-RELEASE
 
-Templates to create Vagrant boxes for FreeBSD 12.3-RC2 (amd64 and
+Templates to create Vagrant boxes for FreeBSD 12.3-RELEASE (amd64 and
 i386).
 
 ## Prerequisites
@@ -39,29 +39,29 @@ i386).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso freebsd-12.3-rc-minimal.json
+    packer build -only=virtualbox-iso freebsd-12.3-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-12.3-RC-amd64-minimal-v2.20211118-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-12.3-RC-amd64-minimal-v2.20211118-virtualbox`
+Then you can add the box named `FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-virtualbox`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.3-RC-amd64-minimal-v2.20211118-virtualbox.box --name FreeBSD-12.3_RC-amd64-minimal-v2.20211118-virtualbox
+    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-virtualbox.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v2.20211118-virtualbox
 
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso freebsd-12.3-rc-minimal.json
+    packer build -only=vmware-iso freebsd-12.3-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-12.3-RC-amd64-v2.20211118-vmware.box`
+You will find a vagrant box file named `FreeBSD-12.3-RELEASE-amd64-v12.3.20211207-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-12.3-RC-amd64-minimal-v2.20211118-vmware`
+Then you can add the box named `FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-vmware`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.3-RC-amd64-minimal-v2.20211118-vmware.box --name FreeBSD-12.3_RC-amd64-minimal-v2.20211118-vmware
+    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-vmware.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v2.20211118-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -95,15 +95,15 @@ feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
 From the terminal, invoke the following command for Libvirt provider:
 
-    packer build -only=qemu freebsd-12.3-rc-minimal.json
+    packer build -only=qemu freebsd-12.3-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-12.3-RC-amd64-v2.20211118-libvirt.box`
+You will find a vagrant box file named `FreeBSD-12.3-RELEASE-amd64-v12.3.20211207-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-12.3-RC-amd64-minimal-v2.20211118-libvirt`
+Then you can add the box named `FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-libvirt`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.3-RC-amd64-minimal-v2.20211118-libvirt.box --name FreeBSD-12.3_RC-amd64-minimal-v2.20211118-libvirt
+    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-libvirt.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v2.20211118-libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -112,15 +112,15 @@ directly imported to QEMU.
 
 From the terminal, invoke the following command for Hyper-V provider:
 
-    packer build -only=hyperv-iso freebsd-12.3-rc-minimal.json
+    packer build -only=hyperv-iso freebsd-12.3-release-minimal.json
 
-You will find a vagrant box file named `FreeBSD-12.3-RC-amd64-v2.20211118-hyperv.box`
+You will find a vagrant box file named `FreeBSD-12.3-RELEASE-amd64-v12.3.20211207-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-12.3-RC-amd64-minimal-v2.20211118-hyperv`
+Then you can add the box named `FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-hyperv`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.3-RC-amd64-minimal-v2.20211118-hyperv.box --name FreeBSD-12.3_RC-amd64-minimal-v2.20211118-hyperv
+    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-hyperv.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v2.20211118-hyperv
 
 ## Default settings
 
@@ -148,20 +148,20 @@ SSH connection of this box is set to `/bin/sh`.
 
 ## Variants
 
-* `freebsd-12.3-rc-minimal.json` - FreeBSD 12.3-RC2
-* `freebsd-12.3-rc-ansible.json` - FreeBSD 12.3-RC2 +
+* `freebsd-12.3-release-minimal.json` - FreeBSD 12.3-RELEASE
+* `freebsd-12.3-release-ansible.json` - FreeBSD 12.3-RELEASE +
   [Ansible][] + [Ansible Lint] + [Testinfra][]
-* `freebsd-12.3-rc-dwm.json` - FreeBSD 12.3-RC2 + [X.Org][] +
+* `freebsd-12.3-release-dwm.json` - FreeBSD 12.3-RELEASE + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-12.3-rc-xfce.json` - FreeBSD 12.3-RC2 + [Xfce][] +
+* `freebsd-12.3-release-xfce.json` - FreeBSD 12.3-RELEASE + [Xfce][] +
   [SLiM][]
-* `freebsd-12.3-rc-zfs.json` - FreeBSD 12.3-RC2 on ZFS root
+* `freebsd-12.3-release-zfs.json` - FreeBSD 12.3-RELEASE on ZFS root
   file system
 
-While `freebsd-12.3-rc-*.json` templates generate amd64 boxes by
+While `freebsd-12.3-release-*.json` templates generate amd64 boxes by
 default, using `vars-freebsd-12.3-i386.json` generates i386 boxes:
 
-    packer build -var-file=vars-freebsd-12.3-i386.json freebsd-12.1-rc-minimal.json
+    packer build -var-file=vars-freebsd-12.3-i386.json freebsd-12.3-release-minimal.json
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/
