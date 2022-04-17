@@ -24,8 +24,12 @@ pkg install -y "${ARANDR:-arandr}" "${DWM:-dwm}" "${STERM:-sterm}" "${DMENU:-dme
 if [ "$TERMINFO_DB" ]; then
 	pkg install -y "${TERMINFO_DB}"
 fi
-for t in st st-256color; do infocmp -C $t >> /usr/share/misc/termcap; done
-cap_mkdb /usr/share/misc/termcap
+if ! grep -q '^st[^0-9A-Za-z]' /usr/share/misc/termcap; then
+	for t in st st-256color; do infocmp -C $t >> /usr/share/misc/termcap; done
+fi
+if [ ! -f /usr/share/misc/termcap.db ]; then
+	cap_mkdb /usr/share/misc/termcap
+fi
 
 cat >> /etc/X11/xorg.conf << EOF
 

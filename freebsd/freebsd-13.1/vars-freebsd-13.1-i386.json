@@ -1,0 +1,9 @@
+{
+  "iso_image": "FreeBSD-13.1-RC3-i386-disc1.iso",
+  "iso_checksum": "sha256:b2e48ab10936de22fec864bbe7dec310576bda9b33b077015b8769e7005b9eca",
+  "virtualbox_guest_os_type": "FreeBSD",
+  "vmware_guest_os_type": "freebsd",
+  "DISTRIBUTIONS": "'base.txz kernel.txz'",
+  "ABI": "FreeBSD:13:i386",
+  "vm_name": "FreeBSD-13.1-RC-i386"
+}
