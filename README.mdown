@@ -23,11 +23,9 @@
   * devuan-1.0 - Devuan Jessie 1.0.0 templates
   * devuan-2 - Devuan 2.1 ASCII templates
 * [freebsd](freebsd/README.mdown) - FreeBSD templates (amd64 and i386)
-  * freebsd-11.4 - FreeBSD 11.4 templates
-  * freebsd-12.1 - FreeBSD 12.1 templates
-  * freebsd-12.2 - FreeBSD 12.2 templates
   * freebsd-12.3 - FreeBSD 12.3 templates
   * freebsd-13.0 - FreeBSD 13.0 templates
+  * freebsd-13.1 - FreeBSD 13.1 templates
   * [more](freebsd/README.mdown)
 * [netbsd](netbsd/README.mdown) - NetBSD templates (amd64 and i386)
   * netbsd-7.2 - NetBSD 7.2 templates
@@ -71,4 +69,4 @@ permissions and limitations under the License.
 
 - - -
 
-Copyright &copy; 2014-2021 Upperstream Software.
+Copyright &copy; 2014-2022 Upperstream Software.
