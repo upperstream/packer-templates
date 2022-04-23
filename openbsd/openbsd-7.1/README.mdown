@@ -1,6 +1,6 @@
-# Packer templates for OpenBSD 7.1 SNAPSHOT
+# Packer templates for OpenBSD 7.1
 
-Templates to create Vagrant boxes for OpenBSD 7.1 SNAPSHOT (amd64 and i386).
+Templates to create Vagrant boxes for OpenBSD 7.1 (amd64 and i386).
 
 ## Prerequisites
 
@@ -46,13 +46,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso openbsd-7.1-minimal.json
 
-You will find a vagrant box file named `OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301-virtualbox.box`
+You will find a vagrant box file named `OpenBSD-7.1-amd64-minimal-v7.1.20220421-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301`
+Then you can add the box named `OpenBSD-7.1-amd64-minimal-v7.1.20220421`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301-virtualbox.box --name OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301 --provider virtualbox
+    vagrant box add OpenBSD-7.1-amd64-minimal-v7.1.20220421-virtualbox.box --name OpenBSD-7.1-amd64-minimal-v7.1.20220421 --provider virtualbox
 
 ### VMware
 
@@ -60,13 +60,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso openbsd-7.1-minimal.json
 
-You will find a vagrant box file named `OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301-vmware.box`
+You will find a vagrant box file named `OpenBSD-7.1-amd64-minimal-v7.1.20220421-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301`
+Then you can add the box named `OpenBSD-7.1-amd64-minimal-v7.1.20220421`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301-vmware.box --name OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301 --provider vmware_desktop
+    vagrant box add OpenBSD-7.1-amd64-minimal-v7.1.20220421-vmware.box --name OpenBSD-7.1-amd64-minimal-v7.1.20220421 --provider vmware_desktop
 
 In the `output` directory you will also find a VM image that can be
 directly imported to VMware.
@@ -77,13 +77,13 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu openbsd-7.1-minimal.json
 
-You will find a vagrant box file named `OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301-libvirt.box`
+You will find a vagrant box file named `OpenBSD-7.1-amd64-minimal-v7.1.20220421-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301`
+Then you can add the box named `OpenBSD-7.1-amd64-minimal-v7.1.20220421`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301-libvirt.box --name OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301 -- provider libvirt
+    vagrant box add OpenBSD-7.1-amd64-minimal-v7.1.20220421-libvirt.box --name OpenBSD-7.1-amd64-minimal-v7.1.20220421 -- provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -94,13 +94,13 @@ From the terminal, invoke the following command for Hyper-V provider:
 
     packer build -only=hyperv-iso openbsd-7.1-minimal.json
 
-You will find a vagrant box file named `OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301-hyperv.box`
+You will find a vagrant box file named `OpenBSD-7.1-amd64-minimal-v7.1.20220421-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301`
+Then you can add the box named `OpenBSD-7.1-amd64-minimal-v7.1.20220421`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301-hyperv.box --name OpenBSD-7.1_SNAPSHOT-amd64-minimal-v20220301 --provider hyperv
+    vagrant box add OpenBSD-7.1-amd64-minimal-v7.1.20220421-hyperv.box --name OpenBSD-7.1-amd64-minimal-v7.1.20220421 --provider hyperv
 
 ## Default settings
 
@@ -153,6 +153,9 @@ The following command will build a VM image on your ESXi:
 * `openbsd-7.1-ansible.json` - OpenBSD 7.1 with [Ansible][] +
   [Ansible Lint][] + [Testinfra][]
 * `openbsd-7.1-x11.json` - OpenBSD 7.1 with [X11][]
+* `openbsd-7.1-dwm.json` - OpenBSD 7.1 with X11 + [dwm][] + [dmenu][] +
+  [st][] + Xenodm
+* `openbsd-7.1-xfce.json` - OpenBSD 7.1 with [Xfce][] + Xenodm
 
 While `openbsd-7.1-*.json` templates generate amd64 boxes by default,
 using `vars-openbsd-7.1-i386.json` generates i386 boxes:
@@ -162,9 +165,12 @@ using `vars-openbsd-7.1-i386.json` generates i386 boxes:
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/
   "Ansible Lint Documentation &mdash; Ansible Documentation"
+[dwm]: http://dwm.suckless.org/
+  "suckless.org dwm - dynamic window manager"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/
   "Testinfra test your infrastructure &#8212; testinfra 3.2.1.dev2+g672a064.d20191006 documentation"
 [X11]: https://www.x.org/wiki/ "X.Org"
+[Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 
 ## Build parameters
 

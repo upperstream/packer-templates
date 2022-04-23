@@ -1,6 +1,6 @@
 {
   "variables": {
-    "variant": "ansible",
+    "variant": "xfce",
     "cpu": "amd64",
     "vm_name": "OpenBSD-7.1-amd64",
     "iso_image": "install71.iso",
@@ -8,7 +8,7 @@
     "os_ver": "7.1",
     "box_version": "7.1.20220421",
     "num_cpus": "2",
-    "mem_size": "512",
+    "mem_size": "1024",
     "disk_size": "40960",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
@@ -48,12 +48,13 @@
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}",
       "headless": "{{user `headless`}}",
       "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "12" ]
       ],
       "boot_command": [
         "a<enter><wait>",
         "<wait10>",
-        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.conf<enter><wait>",
         "<wait5>",
         "i<enter><wait>"
       ]
@@ -86,12 +87,13 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "12582912"
       },
       "boot_command": [
         "a<enter><wait>",
         "<wait10>",
-        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.conf<enter><wait>",
         "<wait5>",
         "i<enter><wait>"
       ]
@@ -134,12 +136,13 @@
         "ethernet0.wakeOnPcktRcv": "FALSE",
         "ethernet0.addressType": "generated",
         "remotedisplay.vnc.enabled": "TRUE",
-        "vhv.enable": "TRUE"
+        "vhv.enable": "TRUE",
+        "svga.vramSize": "12582912"
       },
       "boot_command": [
         "a<enter><wait>",
         "<wait10>",
-        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.conf<enter><wait>",
         "<wait5>",
         "i<enter><wait>"
       ]
@@ -173,7 +176,7 @@
       "boot_command": [
         "<wait10>a<enter><wait>",
         "<wait10>",
-        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.conf<enter><wait>",
         "<wait5>",
         "i<enter><wait>"
       ]
@@ -202,7 +205,7 @@
       "boot_command": [
         "<wait5>a<enter><wait>",
         "<wait10>",
-        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+        "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_with_x11.conf<enter><wait>",
         "<wait5>",
         "i<enter><wait>"
       ]
@@ -212,18 +215,17 @@
     {
       "type": "shell",
       "scripts": [
-        "../provisioners/ansible+testinfra_openbsd7.sh",
-        "../provisioners/vagrant_openbsd7.sh"
+        "../provisioners/vagrant_openbsd7.sh",
+        "../provisioners/x11_openbsd6.5+.sh",
+        "../provisioners/xfce_openbsd7.sh"
       ],
       "environment_vars": [
         "PKG_PATH={{user `package_server`}}/{{user `os_ver`}}/packages/{{user `cpu`}}",
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_GROUP={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
-        "ANSIBLE=ansible-5.5.0",
-        "ANSIBLE_LINT=ansible-lint-5.4.0",
-        "PY_PIP=py3-pip-22.0.4",
-        "TESTINFRA=pytest-testinfra==6.7.0",
+        "XFCE=xfce-4.16",
+        "GDM=gdm-41.3p1",
         "RSYNC=rsync-3.2.3p0"
       ]
     },

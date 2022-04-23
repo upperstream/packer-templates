@@ -79,10 +79,12 @@
   * OpenBSD 7.0 + X11 (amd64 and i386)
   * OpenBSD 7.0 + X11 + dwm + dmenu + st + SLiM (amd64 and i386)
   * OpenBSD 7.0 + Xfce + SLiM (amd64 and i386)
-* [openbsd-7.1](openbsd-7.1/README.mdown) - templates for OpenBSD 7.1 SNAPSHOT
-  * OpenBSD 7.1 SNAPSHOT (amd64 and i386)
-  * OpenBSD 7.1 SNAPSHOT + Ansible + Ansible Lint + Testinfra (amd64 and i386)
-  * OpenBSD 7.1 SNAPSHOT + X11 (amd64 and i386)
+* [openbsd-7.1](openbsd-7.1/README.mdown) - templates for OpenBSD 7.1
+  * OpenBSD 7.1 (amd64 and i386)
+  * OpenBSD 7.1 + Ansible + Ansible Lint + Testinfra (amd64 and i386)
+  * OpenBSD 7.1 + X11 (amd64 and i386)
+  * OpenBSD 7.0 + X11 + dwm + dmenu + st + Xenodm (amd64 and i386)
+  * OpenBSD 7.0 + Xfce + Xenodm (amd64 and i386)
 
 - - -
 
