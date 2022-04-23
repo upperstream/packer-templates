@@ -37,6 +37,7 @@
 * [openbsd](openbsd/README.mdown) - OpenBSD templates (amd64 and i386)
   * openbsd-6.9 - OpenBSD 6.9 templates
   * openbsd-7.0 - OpenBSD 7.0 templates
+  * openbsd-7.1 - OpenBSD 7.1 templates
   * [more](openbsd/README.mdown)
 * [opensuse](opensuse/README.mdown) - openSUSE templates (amd64)
   * leap-42.3 - openSUSE Leap 42.3 templates
