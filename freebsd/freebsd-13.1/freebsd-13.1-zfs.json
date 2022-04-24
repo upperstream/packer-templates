@@ -1,11 +1,11 @@
 {
   "variables": {
-    "variant": "minimal",
+    "variant": "zfs",
     "vm_name": "FreeBSD-13.1-RC-amd64",
-    "iso_image": "FreeBSD-13.1-RC3-amd64-disc1.iso",
+    "iso_image": "FreeBSD-13.1-RC4-amd64-disc1.iso",
     "path_to_iso": "FreeBSD/releases/ISO-IMAGES/13.1",
-    "iso_checksum": "sha256:c3fc2bf67a2034d818cb417fa8d388e2f2e281eb2370b752b7fbba5ce0525630",
-    "box_version": "3.20220414",
+    "iso_checksum": "sha256:34edb54b374a1ad657716786dfe6ab644c799a96922ec84743247dbdca9670cb",
+    "box_version": "4.20220421",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -74,7 +74,8 @@
         "dhclient {{user `virtualbox_netif`}}<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `virtualbox_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `virtualbox_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -133,7 +134,8 @@
         "dhclient {{user `vmware_netif`}}<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -202,7 +204,8 @@
         "dhclient {{user `vmware_netif`}}<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `vmware_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `vmware_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -258,7 +261,8 @@
         "dhclient {{user `qemu_netif`}}<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `qemu_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `qemu_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -307,7 +311,8 @@
         "dhclient {{user `hyperv_netif`}}<enter><wait5>",
         "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
         "<wait>",
-        "PARTITIONS={{user `hyperv_partition`}} ",
+        "export ZFSBOOT_DISKS={{user `hyperv_partition`}}<enter>",
+        "export nonInteractive=\"YES\"<enter>",
         "DISTRIBUTIONS={{user `DISTRIBUTIONS`}} ",
         "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
         "ABI={{user `ABI`}} ",
@@ -353,12 +358,6 @@
       "environment_vars": [
         "OPEN_VM_TOOLS=open-vm-tools-nox11-11.3.5_3,2"
       ]
-    },
-    {
-      "type": "shell",
-      "only": ["virtualbox-iso", "vmware-iso", "qemu", "hyperv-iso"],
-      "script": "../provisioners/disk_cleanup.sh",
-      "execute_command": "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     },
     {
       "type": "shell",

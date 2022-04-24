@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 13.1-RC3
+# Packer templates for FreeBSD 13.1-RC4
 
-Templates to create Vagrant boxes for FreeBSD 13.1-RC3
+Templates to create Vagrant boxes for FreeBSD 13.1-RC4
 
 ## Prerequisites
 
@@ -38,29 +38,29 @@ Templates to create Vagrant boxes for FreeBSD 13.1-RC3
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso freebsd-13.1-release-minimal.json
+    packer build -only=virtualbox-iso freebsd-13.1-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-minimal-v3.20220414-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-minimal-v4.20220421-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v3.20220414`
+Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v4.20220421`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v3.20220414-virtualbox.box --name FreeBSD-13.1-RC-amd64-minimal-v3.20220414 --provider virtualbox
+    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v4.20220421-virtualbox.box --name FreeBSD-13.1-RC-amd64-minimal-v4.20220421 --provider virtualbox
 
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso freebsd-13.1-release-minimal.json
+    packer build -only=vmware-iso freebsd-13.1-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v3.20220414-vmware.box`
+You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v4.20220421-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v3.20220414`
+Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v4.20220421`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v3.20220414-vmware.box --name FreeBSD-13.1-RC-amd64-minimal-v3.20220414 --provider vmware_desktop
+    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v4.20220421-vmware.box --name FreeBSD-13.1-RC-amd64-minimal-v4.20220421 --provider vmware_desktop
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -80,7 +80,7 @@ You also have to enable SSH on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso freebsd-13.1-release-minimal.json
+    packer build -only=esxi-iso freebsd-13.1-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
 
@@ -88,21 +88,21 @@ When you create a box on ESXi host version prior to 6.7, you need to
 enable VNC on the host and need to disable Packer's VNC over WebSocket
 feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
-    packer build -only=esxi-iso --var esxi_vnc_over_websocket=false freebsd-13.1-release-minimal.json
+    packer build -only=esxi-iso --var esxi_vnc_over_websocket=false freebsd-13.1-minimal.json
 
 ### QEMU/libvirt
 
 From the terminal, invoke the following command for Libvirt provider:
 
-    packer build -only=qemu freebsd-13.1-release-minimal.json
+    packer build -only=qemu freebsd-13.1-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v3.20220414-libvirt.box`
+You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v4.20220421-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v3.20220414`
+Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v4.20220421`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v3.20220414-libvirt.box --name FreeBSD-13.1-RC-amd64-minimal-v3.20220414 --provider libvirt
+    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v4.20220421-libvirt.box --name FreeBSD-13.1-RC-amd64-minimal-v4.20220421 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -111,15 +111,15 @@ directly imported to QEMU.
 
 From the terminal, invoke the following command for Hyper-V provider:
 
-    packer build -only=hyperv-iso freebsd-13.1-release-minimal.json
+    packer build -only=hyperv-iso freebsd-13.1-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v3.20220414-hyperv.box`
+You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v4.20220421-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v3.20220414`
+Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v4.20220421`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v3.20220414-hyperv.box --name FreeBSD-13.1-RC-amd64-minimal-v3.20220414 --provider hyperv
+    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v4.20220421-hyperv.box --name FreeBSD-13.1-RC-amd64-minimal-v4.20220421 --provider hyperv
 
 ## Default settings
 
@@ -147,20 +147,20 @@ SSH connection of this box is set to `/bin/sh`.
 
 ## Variants
 
-* `freebsd-13.1-release-minimal.json` - FreeBSD 13.1-RC
-* `freebsd-13.1-release-ansible.json` - FreeBSD 13.1-RC +
+* `freebsd-13.1-minimal.json` - FreeBSD 13.1-RC
+* `freebsd-13.1-ansible.json` - FreeBSD 13.1-RC +
   [Ansible][] + [Ansible Lint] + [Testinfra][]
-* `freebsd-13.1-release-dwm.json` - FreeBSD 13.1-RC + [X.Org][] +
+* `freebsd-13.1-dwm.json` - FreeBSD 13.1-RC + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-13.1-release-xfce.json` - FreeBSD 13.1-RC + [Xfce][] +
+* `freebsd-13.1-xfce.json` - FreeBSD 13.1-RC + [Xfce][] +
   [SLiM][]
-* `freebsd-13.1-release-zfs.json` - FreeBSD 13.1-RC on ZFS root
+* `freebsd-13.1-zfs.json` - FreeBSD 13.1-RC on ZFS root
   file system
 
-While `freebsd-13.1-release-*.json` templates generate amd64 boxes by
+While `freebsd-13.1-*.json` templates generate amd64 boxes by
 default, using `vars-freebsd-13.1-i386.json` generates i386 boxes:
 
-    packer build -var-file=vars-freebsd-13.1-i386.json freebsd-13.1-release-minimal.json
+    packer build -var-file=vars-freebsd-13.1-i386.json freebsd-13.1-minimal.json
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/
