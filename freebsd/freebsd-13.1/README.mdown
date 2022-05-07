@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 13.1-RC5
+# Packer templates for FreeBSD 13.1-RC6
 
-Templates to create Vagrant boxes for FreeBSD 13.1-RC5
+Templates to create Vagrant boxes for FreeBSD 13.1-RC6
 
 ## Prerequisites
 
@@ -40,13 +40,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso freebsd-13.1-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-minimal-v5.20220428-virtualbox.box`
+You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-minimal-v6.20220506-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v5.20220428`
+Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v6.20220506`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v5.20220428-virtualbox.box --name FreeBSD-13.1-RC-amd64-minimal-v5.20220428 --provider virtualbox
+    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v6.20220506-virtualbox.box --name FreeBSD-13.1-RC-amd64-minimal-v6.20220506 --provider virtualbox
 
 ### VMware
 
@@ -54,13 +54,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso freebsd-13.1-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v5.20220428-vmware.box`
+You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v6.20220506-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v5.20220428`
+Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v6.20220506`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v5.20220428-vmware.box --name FreeBSD-13.1-RC-amd64-minimal-v5.20220428 --provider vmware_desktop
+    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v6.20220506-vmware.box --name FreeBSD-13.1-RC-amd64-minimal-v6.20220506 --provider vmware_desktop
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -96,13 +96,13 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu freebsd-13.1-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v5.20220428-libvirt.box`
+You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v6.20220506-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v5.20220428`
+Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v6.20220506`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v5.20220428-libvirt.box --name FreeBSD-13.1-RC-amd64-minimal-v5.20220428 --provider libvirt
+    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v6.20220506-libvirt.box --name FreeBSD-13.1-RC-amd64-minimal-v6.20220506 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -113,13 +113,13 @@ From the terminal, invoke the following command for Hyper-V provider:
 
     packer build -only=hyperv-iso freebsd-13.1-minimal.json
 
-You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v5.20220428-hyperv.box`
+You will find a vagrant box file named `FreeBSD-13.1-RC-amd64-v6.20220506-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v5.20220428`
+Then you can add the box named `FreeBSD-13.1-RC-amd64-minimal-v6.20220506`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v5.20220428-hyperv.box --name FreeBSD-13.1-RC-amd64-minimal-v5.20220428 --provider hyperv
+    vagrant box add FreeBSD-13.1-RC-amd64-minimal-v6.20220506-hyperv.box --name FreeBSD-13.1-RC-amd64-minimal-v6.20220506 --provider hyperv
 
 ## Default settings
 
