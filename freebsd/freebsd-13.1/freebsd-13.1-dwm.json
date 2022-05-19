@@ -1,11 +1,11 @@
 {
   "variables": {
     "variant": "dwm",
-    "vm_name": "FreeBSD-13.1-RC-amd64",
-    "iso_image": "FreeBSD-13.1-RC6-amd64-disc1.iso",
-    "path_to_iso": "FreeBSD/releases/ISO-IMAGES/13.1",
-    "iso_checksum": "sha256:8460e67e52be16dfa30de4eea6492120217c59b49df09d921b0b29c6b27cf0cd",
-    "box_version": "6.20220506",
+    "vm_name": "FreeBSD-13.1-RELEASE-amd64",
+    "iso_image": "FreeBSD-13.1-RELEASE-amd64-disc1.iso",
+    "path_to_iso": "releases/ISO-IMAGES/13.1",
+    "iso_checksum": "sha256:697d81653fa246b921ddfcf1d15562c55249cc727b11fa3e47f470e2cf2b6a40",
+    "box_version": "13.1.20220512",
     "num_cpus": "2",
     "mem_size": "1024",
     "disk_size": "51200",
@@ -46,13 +46,11 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
-        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
+        "https://download.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp6.jp.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp11.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "https://ftp4.tw.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -101,13 +99,11 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
-        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
+        "https://download.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp6.jp.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp11.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "https://ftp4.tw.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -162,13 +158,11 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
-        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
+        "https://download.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp6.jp.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp11.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "https://ftp4.tw.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -229,13 +223,11 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
-        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
+        "https://download.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp6.jp.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp11.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "https://ftp4.tw.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
@@ -285,13 +277,11 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_urls": [
         "./iso/{{user `iso_image`}}",
-        "http://ftp.jp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp10.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp4.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp13.us.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp6.tw.freebsd.org/pub/{{user `path_to_iso`}}/{{user `iso_image`}}",
-        "http://ftp11.tw.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}"
+        "https://download.freebsd.org/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp.jp.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp6.jp.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "http://ftp11.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}",
+        "https://ftp4.tw.freebsd.org/pub/FreeBSD/{{user `path_to_iso`}}/{{user `iso_image`}}"
       ],
       "ssh_username": "root",
       "ssh_password": "{{user `root_password`}}",
