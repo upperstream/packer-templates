@@ -1,0 +1,7 @@
+vm_name = "Alpine-virt-3.17-armv7"
+iso_image = "alpine-virt-3.17.0-armv7.iso"
+iso_checksum = "sha256:7b21d0883de4e482d09592dbeea6de31ffb74319537da43746ce9c44923e8ebd"
+cpu = "armv7"
+virtualbox_guest_os_type = "Linux"
+vmware_guest_os_type = "arm-other5xlinux"
+esxi_guest_os_type = "arm-other5xlinux"

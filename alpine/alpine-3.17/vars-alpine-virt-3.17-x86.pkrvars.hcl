@@ -1,0 +1,7 @@
+vm_name = "Alpine-virt-3.17-x86"
+iso_image = "alpine-virt-3.17.0-x86.iso"
+iso_checksum = "sha256:5e28d521661d53a703b8898d7e538386dfaaee01004cd179c077432e8d88157e"
+cpu = "x86"
+virtualbox_guest_os_type = "Linux"
+vmware_guest_os_type = "other5xlinux"
+esxi_guest_os_type = "other5xlinux"

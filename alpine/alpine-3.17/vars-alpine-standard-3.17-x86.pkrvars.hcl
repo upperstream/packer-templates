@@ -1,0 +1,7 @@
+vm_name = "Alpine-standard-3.17-x86"
+iso_image = "alpine-standard-3.17.0-x86.iso"
+iso_checksum = "sha256:4f2879a67936efb0e970fc8523da54a09afdef6489bee45233bc84983a798b57"
+cpu = "x86"
+virtualbox_guest_os_type = "Linux"
+vmware_guest_os_type = "other5xlinux"
+esxi_guest_os_type = "other5xlinux"
