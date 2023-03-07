@@ -10,6 +10,11 @@ insert_final_newline = true
 [**.bat]
 end_of_line = crlf
 
+# Indentation override for all HCL files
+[**.hcl]
+indent_style = space
+indent_size = 2
+
 # Indentation override for all JSON files
 [**.json]
 indent_style = space
@@ -17,5 +22,5 @@ indent_size = 2
 
 # Indentation override for all shell script files
 [**.sh]
-indent_stype = tab
+indent_style = tab
 indent_size = 4
