@@ -147,9 +147,11 @@ use other types of synced folders:
 with Vagrant older versions.  SMB synced folder is not supported for
 FreeBSD guest.
 
-Because `doas` command is installed in this box instead of `sudo`, you
-need to add `rsync__rsync_path: 'doas rsync'` option to your
-Vagrantfile when you choose rsync type sync'ed folder.
+Because `doas` command is installed in this box instead of `sudo`,
+rsync path is set to `doas rsync` for `/vagrant` sync'ed folder by
+default.  You still need to add `rsync__rsync_path: "doas rsync"`
+option to your sync'ed folder settings when you choose rsync type
+sync'ed folder for other locations than `/vagrant`.
 
 ### SSH Shell
 
