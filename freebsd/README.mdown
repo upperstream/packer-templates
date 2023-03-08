@@ -14,11 +14,11 @@
   * FreeBSD 13.1-RELEASE + X.Org + dwm + dmenu + st
   * FreeBSD 13.1-RELEASE + Xfce
   * FreeBSD 13.1-RELEASE on ZFS root file system
-* [freebsd-13.2](freebsd-13.2/README.mdown) - templates for FreeBSD 13.2-RC1 (amd64 and i386)
-  * FreeBSD 13.2-RC1
-  * FreeBSD 13.2-RC1 + X.Org + dwm + dmenu + st
-  * FreeBSD 13.2-RC1 + Xfce
-  * FreeBSD 13.2-RC1 on ZFS root file system
+* [freebsd-13.2](freebsd-13.2/README.mdown) - templates for FreeBSD 13.2-RC2 (amd64 and i386)
+  * FreeBSD 13.2-RC2
+  * FreeBSD 13.2-RC2 + X.Org + dwm + dmenu + st
+  * FreeBSD 13.2-RC2 + Xfce
+  * FreeBSD 13.2-RC2 on ZFS root file system
 
 ## Outdated FreeBSD releases
 

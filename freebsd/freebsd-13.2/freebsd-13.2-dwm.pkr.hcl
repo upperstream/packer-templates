@@ -16,7 +16,7 @@ variable "arch" {
 
 variable "box_version" {
   type    = string
-  default = "1.20230304"
+  default = "2.20230311"
 }
 
 variable "disk_size" {
@@ -78,12 +78,12 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "sha256:60ca0d9525f50f1dfbeb2bf4354ab04a3a478c9d2318a1bff08217ecd39f525c"
+  default = "sha256:dfd9c42bc127563000abed050317f9c2be5e7e1034b5c44447591099056ce8d8"
 }
 
 variable "iso_image" {
   type    = string
-  default = "FreeBSD-13.2-RC1-amd64-disc1.iso"
+  default = "FreeBSD-13.2-RC2-amd64-disc1.iso"
 }
 
 variable "mem_size" {
