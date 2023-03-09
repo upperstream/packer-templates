@@ -69,6 +69,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # View the documentation for the provider you're using for more
   # information on available options.
+  config.vm.provider "parallels" do |prl|
+    # Disable checking if Parallels Tools have been installed
+    prl.check_guest_tools = false
+  end
 
   # Enable provisioning with CFEngine. CFEngine Community packages are
   # automatically installed. For example, configure the host as a

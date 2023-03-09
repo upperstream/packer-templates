@@ -1,0 +1,8 @@
+arch = "aarch64"
+iso_image = "FreeBSD-13.2-RC1-arm64-aarch64-disc1.iso"
+iso_checksum = "sha256:4fcb338a94364bd4d298b628ab7dbaca4a07b683c1896b208d9b7d7e4fe2ed35"
+virtualbox_guest_os_type = "FreeBSD"
+vmware_guest_os_type = "freebsd"
+DISTRIBUTIONS = "'base.txz kernel.txz'"
+ABI = "FreeBSD:13:aarch64"
+vm_name = "FreeBSD-13.2-RC-aarch64"

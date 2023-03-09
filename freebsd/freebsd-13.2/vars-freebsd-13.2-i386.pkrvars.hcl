@@ -1,3 +1,4 @@
+arch = "i386"
 iso_image = "FreeBSD-13.2-RC1-i386-disc1.iso"
 iso_checksum = "sha256:47d495b62be72467f170d39446d5b03eccd66d34c309a1326d001893987729e6"
 virtualbox_guest_os_type = "FreeBSD"

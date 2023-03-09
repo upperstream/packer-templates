@@ -128,6 +128,25 @@ following command:
 
     vagrant box add FreeBSD-13.2-RC-amd64-minimal-v1.20230304-hyperv.box --name FreeBSD-13.2-RC-amd64-minimal-v1.20230304 --provider hyperv
 
+### Parallels
+
+From the terminal, invoke the following command for Parallels provider:
+
+    packer build -only=parallels-iso.default -var-file vars-freebsd-13.2-aarch64.pkrvars.hcl freebsd-13.2-minimal.pkr.hcl
+
+You will find a vagrant box file named
+`FreeBSD-13.2-RC-aarch64-v1.20230304-parallels.box` in the same directory
+after the command has succeeded.
+
+Then you can add the box named
+`FreeBSD-13.2-RC-aarch64-minimal-v1.20230304` to your box list by the
+following command:
+
+    vagrant box add FreeBSD-13.2-RC-aarch64-minimal-v1.20230304-hyperv.box --name FreeBSD-13.2-RC-aarch64-minimal-v1.20230304 --provider parallels
+
+Parallels build is tested with only aarch64 guest on Apple Silicon Mac
+host.
+
 ## Default settings
 
 These default settings are done by the file `Vagrantfile.FreeBSD-13.2`
@@ -175,7 +194,12 @@ use `doas`.
   file system
 
 While `freebsd-13.2-*.pkr.hcl` templates generate amd64 boxes by
-default, using `vars-freebsd-13.2-i386.pkrvars.hcl` generates i386
+default, using `vars-freebsd-13.2-aarch64.pkrvars.hcl` generates
+aarch64 boxes:
+
+    packer build -var-file=vars-freebsd-13.2-aarch64.pkrvars.hcl freebsd-13.2-minimal.pkr.hcl
+
+and using `vars-freebsd-13.2-i386.pkrvars.hcl` generates i386
 boxes:
 
     packer build -var-file=vars-freebsd-13.2-i386.pkrvars.hcl freebsd-13.2-minimal.pkr.hcl
@@ -209,6 +233,10 @@ or `-var-file` command line options to `packer`:
 * `mem_size` - RAM size of the created VM.  Defaults to `1024` which
   means 1GB.
 * `num_cpus` - Number of virtual CPUs.  Defaults to `2`.
+* `parallels_netif` - Network interface for Parallels box. Defaults to
+  `vtnet0`.
+* `parallels_partition` - Disk name for Parallels box.  Defaults to
+  `ada0`.
 * `qemu_display` - Value for `-display` option for QEMU.  Defaults to
   an empty string.
 * `qemu_netif` - Network interface for QEMU box.  Defaults to `vtnet0`.
