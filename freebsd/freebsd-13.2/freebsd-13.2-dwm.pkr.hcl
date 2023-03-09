@@ -286,6 +286,7 @@ source "virtualbox-iso" "default" {
   ssh_timeout          = "10000s"
   ssh_username         = "root"
   vboxmanage = [
+    ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
     ["modifyvm", "{{ .Name }}", "--vram", "16"]
   ]
