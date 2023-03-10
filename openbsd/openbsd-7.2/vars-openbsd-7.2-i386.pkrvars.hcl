@@ -1,0 +1,8 @@
+vm_name = "OpenBSD-7.2-i386"
+cpu = "i386"
+virtualbox_guest_os_type = "OpenBSD"
+vmware_guest_os_type = "other"
+os_ver = "7.2"
+iso_image = "install72.iso"
+iso_checksum = "sha256:5d06d02d3a45af91134058d3f4e7e2897c51ac4f7401828ff1bb5914285b7632"
+qemu_binary = "qemu-system-i386"
