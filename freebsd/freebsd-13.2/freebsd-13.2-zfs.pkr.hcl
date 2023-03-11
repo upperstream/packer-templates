@@ -8,9 +8,15 @@ variable "DISTRIBUTIONS" {
   default = "'base.txz kernel.txz lib32.txz'"
 }
 
+variable "arch" {
+  type = string
+  default = "amd64"
+  description = "Architecture"
+}
+
 variable "box_version" {
   type    = string
-  default = "1.20230304"
+  default = "2.20230311"
 }
 
 variable "disk_size" {
@@ -72,12 +78,12 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "sha256:60ca0d9525f50f1dfbeb2bf4354ab04a3a478c9d2318a1bff08217ecd39f525c"
+  default = "sha256:dfd9c42bc127563000abed050317f9c2be5e7e1034b5c44447591099056ce8d8"
 }
 
 variable "iso_image" {
   type    = string
-  default = "FreeBSD-13.2-RC1-amd64-disc1.iso"
+  default = "FreeBSD-13.2-RC2-amd64-disc1.iso"
 }
 
 variable "mem_size" {
@@ -90,6 +96,18 @@ variable "num_cpus" {
   type        = string
   default     = "2"
   description = "Number of virtual CPUs."
+}
+
+variable "parallels_netif" {
+  type        = string
+  default     = "vtnet0"
+  description = "Network interface for Parallels box."
+}
+
+variable "parallels_partition" {
+  type        = string
+  default     = "ada0"
+  description = "Disk name for Parallels box."
 }
 
 variable "path_to_iso" {
@@ -193,7 +211,7 @@ variable "vmware_partition" {
 
 locals {
   boot_command = [
-    "<enter>",
+    "%s",
     "<wait10><wait10><wait10><wait10>",
     "s",
     "<wait5>",
@@ -215,6 +233,7 @@ locals {
     "bsdinstall script /tmp/install.sh<enter>",
     "<wait10><wait10><wait10><wait10><wait10><wait10>"
   ]
+  first_boot_command = (var.arch == "aarch64")? "" : "<enter>"
   iso_urls = [
     "./iso/${var.iso_image}",
     "https://download.freebsd.org/${var.path_to_iso}/${var.iso_image}",
@@ -226,7 +245,7 @@ locals {
 }
 
 source "hyperv-iso" "default" {
-  boot_command     = split("\n", format(join("\n", local.boot_command), var.hyperv_netif, var.hyperv_partition, var.hyperv_netif))
+  boot_command     = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.hyperv_netif, var.hyperv_partition, var.hyperv_netif))
   boot_wait        = "10s"
   cpus             = var.num_cpus
   disk_size        = var.disk_size
@@ -244,9 +263,30 @@ source "hyperv-iso" "default" {
   vm_name          = "${var.vm_name}-${var.variant}-v${var.box_version}"
 }
 
+source "parallels-iso" "default" {
+  boot_command           = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.parallels_netif, var.parallels_partition, var.parallels_netif))
+  boot_wait              = "10s"
+  cpus                   = "${var.num_cpus}"
+  disk_size              = "${var.disk_size}"
+  disk_type              = "expand"
+  guest_os_type          = "other"
+  http_directory         = "."
+  iso_checksum           = "${var.iso_checksum}"
+  iso_urls               = local.iso_urls
+  memory                 = "${var.mem_size}"
+  output_directory       = "output/${var.vm_name}-${var.variant}-v${var.box_version}-parallels"
+  parallels_tools_flavor = "other"
+  parallels_tools_mode   = "disable"
+  shutdown_command       = "shutdown -p now"
+  ssh_password           = "${var.root_password}"
+  ssh_username           = "root"
+  ssh_wait_timeout       = "10000s"
+  vm_name                = "${var.vm_name}-${var.variant}-v${var.box_version}"
+}
+
 source "qemu" "default" {
   accelerator         = "kvm"
-  boot_command        = split("\n", format(join("\n", local.boot_command), var.qemu_netif, var.qemu_partition, var.qemu_netif))
+  boot_command        = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.qemu_netif, var.qemu_partition, var.qemu_netif))
   boot_wait           = "10s"
   cpus                = var.num_cpus
   disk_compression    = true
@@ -270,7 +310,7 @@ source "qemu" "default" {
 }
 
 source "virtualbox-iso" "default" {
-  boot_command         = split("\n", format(join("\n", local.boot_command), var.virtualbox_netif, var.virtualbox_partition, var.virtualbox_netif))
+  boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.virtualbox_netif, var.virtualbox_partition, var.virtualbox_netif))
   boot_wait            = "10s"
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
@@ -287,13 +327,14 @@ source "virtualbox-iso" "default" {
   ssh_timeout          = "10000s"
   ssh_username         = "root"
   vboxmanage = [
+    ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"]
   ]
   vm_name = "${var.vm_name}-${var.variant}-v${var.box_version}"
 }
 
 source "vmware-iso" "default" {
-  boot_command         = split("\n", format(join("\n", local.boot_command), var.vmware_netif, var.vmware_partition, var.vmware_netif))
+  boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.vmware_netif, var.vmware_partition, var.vmware_netif))
   boot_wait            = "10s"
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
@@ -322,7 +363,7 @@ source "vmware-iso" "default" {
 }
 
 source "vmware-iso" "esxi" {
-  boot_command         = split("\n", format(join("\n", local.boot_command), var.vmware_netif, var.vmware_partition, var.vmware_netif))
+  boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.vmware_netif, var.vmware_partition, var.vmware_netif))
   boot_wait            = "10s"
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
@@ -362,6 +403,7 @@ source "vmware-iso" "esxi" {
 build {
   sources = [
     "source.hyperv-iso.default",
+    "source.parallels-iso.default",
     "source.qemu.default",
     "source.virtualbox-iso.default",
     "source.vmware-iso.default",
@@ -377,6 +419,14 @@ build {
     ]
     execute_command = "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     script          = "../provisioners/vagrant-11.1+.sh"
+  }
+
+  provisioner "shell" {
+    execute_command = "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
+    only = [
+      "parallels-iso.default"
+    ]
+    script = "../provisioners/parallels.sh"
   }
 
   provisioner "shell" {
@@ -412,6 +462,7 @@ build {
     compression_level = 9
     only = [
       "hyperv-iso.default",
+      "parallels-iso.default",
       "virtualbox-iso.default",
       "vmware-iso.default"
     ]

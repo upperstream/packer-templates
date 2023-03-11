@@ -1,13 +1,13 @@
-# Packer templates for FreeBSD 13.2-RC1
+# Packer templates for FreeBSD 13.2-RC2
 
-Templates to create Vagrant boxes for FreeBSD 13.2-RC1
+Templates to create Vagrant boxes for FreeBSD 13.2-RC2
 
 ## Prerequisites
 
 * [Packer][] version 1.8.5+
 * [Vagrant][] version 2.2.18+
-* [VirtualBox][] version 6.1.32+
-* [VMware][] Workstation version 16.2.1+ / VMware Fusion v10.0+
+* [VirtualBox][] version 7.0+
+* [VMware][] Workstation version 17.0+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) version 5.5+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
@@ -43,14 +43,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default freebsd-13.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.2-RC-amd64-minimal-v1.20230304-virtualbox.box` in the same
+`FreeBSD-13.2-RC-amd64-minimal-v2.20230311-virtualbox.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.2-RC-amd64-minimal-v1.20230304` to your box list by the
+`FreeBSD-13.2-RC-amd64-minimal-v2.20230311` to your box list by the
 following command:
 
-    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v1.20230304-virtualbox.box --name FreeBSD-13.2-RC-amd64-minimal-v1.20230304 --provider virtualbox
+    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v2.20230311-virtualbox.box --name FreeBSD-13.2-RC-amd64-minimal-v2.20230311 --provider virtualbox
 
 ### VMware
 
@@ -59,24 +59,24 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default freebsd-13.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.2-RC-amd64-v1.20230304-vmware.box` in the same directory
+`FreeBSD-13.2-RC-amd64-v2.20230311-vmware.box` in the same directory
 after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.2-RC-amd64-minimal-v1.20230304` to your box list by the
+`FreeBSD-13.2-RC-amd64-minimal-v2.20230311` to your box list by the
 following command:
 
-    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v1.20230304-vmware.box --name FreeBSD-13.2-RC-amd64-minimal-v1.20230304 --provider vmware_desktop
+    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v2.20230311-vmware.box --name FreeBSD-13.2-RC-amd64-minimal-v2.20230311 --provider vmware_desktop
 
 ### ESXi
 
 In order to build a VM image on ESXi, you need to provide the following
 environment variables:
 
-* `REMOTE_HOST` - ESXi host name or IP address
-* `REMOTE_USERNAME` - ESXi login user name
-* `REMOTE_PASSWORD` - ESXi login password
-* `REMOTE_DATASTORE` - ESXi datastore name where a VM image will be
+* `ESXI_REMOTE_HOST` - ESXi host name or IP address
+* `ESXI_REMOTE_USERNAME` - ESXi login user name
+* `ESXI_REMOTE_PASSWORD` - ESXi login password
+* `ESXI_REMOTE_DATASTORE` - ESXi datastore name where a VM image will be
    created
 
 You also have to enable SSH on ESXi host.
@@ -100,14 +100,14 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default freebsd-13.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.2-RC-amd64-v1.20230304-libvirt.box` in the same directory
+`FreeBSD-13.2-RC-amd64-v2.20230311-libvirt.box` in the same directory
 after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.2-RC-amd64-minimal-v1.20230304` to your box list by the
+`FreeBSD-13.2-RC-amd64-minimal-v2.20230311` to your box list by the
 following command:
 
-    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v1.20230304-libvirt.box --name FreeBSD-13.2-RC-amd64-minimal-v1.20230304 --provider libvirt
+    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v2.20230311-libvirt.box --name FreeBSD-13.2-RC-amd64-minimal-v2.20230311 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -119,14 +119,33 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default freebsd-13.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.2-RC-amd64-v1.20230304-hyperv.box` in the same directory
+`FreeBSD-13.2-RC-amd64-v2.20230311-hyperv.box` in the same directory
 after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.2-RC-amd64-minimal-v1.20230304` to your box list by the
+`FreeBSD-13.2-RC-amd64-minimal-v2.20230311` to your box list by the
 following command:
 
-    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v1.20230304-hyperv.box --name FreeBSD-13.2-RC-amd64-minimal-v1.20230304 --provider hyperv
+    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v2.20230311-hyperv.box --name FreeBSD-13.2-RC-amd64-minimal-v2.20230311 --provider hyperv
+
+### Parallels
+
+From the terminal, invoke the following command for Parallels provider:
+
+    packer build -only=parallels-iso.default -var-file vars-freebsd-13.2-aarch64.pkrvars.hcl freebsd-13.2-minimal.pkr.hcl
+
+You will find a vagrant box file named
+`FreeBSD-13.2-RC-aarch64-v2.20230311-parallels.box` in the same directory
+after the command has succeeded.
+
+Then you can add the box named
+`FreeBSD-13.2-RC-aarch64-minimal-v2.20230311` to your box list by the
+following command:
+
+    vagrant box add FreeBSD-13.2-RC-aarch64-minimal-v2.20230311-hyperv.box --name FreeBSD-13.2-RC-aarch64-minimal-v2.20230311 --provider parallels
+
+Parallels build is tested with only aarch64 guest on Apple Silicon Mac
+host.
 
 ## Default settings
 
@@ -147,14 +166,16 @@ use other types of synced folders:
 with Vagrant older versions.  SMB synced folder is not supported for
 FreeBSD guest.
 
-Because `doas` command is installed in this box instead of `sudo`, you
-need to add `rsync__rsync_path: 'doas rsync'` option to your
-Vagrantfile when you choose rsync type sync'ed folder.
+Because `doas` command is installed in this box instead of `sudo`,
+rsync path is set to `doas rsync` for `/vagrant` sync'ed folder by
+default.  You still need to add `rsync__rsync_path: "doas rsync"`
+option to your sync'ed folder settings when you choose rsync type
+sync'ed folder for other locations than `/vagrant`.
 
 ### SSH Shell
 
 Because Bash is not the standard shell for FreeBSD, default shell for
-SSH connection of this box is set to `/bin/sh`.
+non-interactive SSH connection of this box is set to `/bin/sh`.
 
 ### Substituting a user during SSH command execution
 
@@ -173,7 +194,12 @@ use `doas`.
   file system
 
 While `freebsd-13.2-*.pkr.hcl` templates generate amd64 boxes by
-default, using `vars-freebsd-13.2-i386.pkrvars.hcl` generates i386
+default, using `vars-freebsd-13.2-aarch64.pkrvars.hcl` generates
+aarch64 boxes:
+
+    packer build -var-file=vars-freebsd-13.2-aarch64.pkrvars.hcl freebsd-13.2-minimal.pkr.hcl
+
+and using `vars-freebsd-13.2-i386.pkrvars.hcl` generates i386
 boxes:
 
     packer build -var-file=vars-freebsd-13.2-i386.pkrvars.hcl freebsd-13.2-minimal.pkr.hcl
@@ -207,6 +233,10 @@ or `-var-file` command line options to `packer`:
 * `mem_size` - RAM size of the created VM.  Defaults to `1024` which
   means 1GB.
 * `num_cpus` - Number of virtual CPUs.  Defaults to `2`.
+* `parallels_netif` - Network interface for Parallels box. Defaults to
+  `vtnet0`.
+* `parallels_partition` - Disk name for Parallels box.  Defaults to
+  `ada0`.
 * `qemu_display` - Value for `-display` option for QEMU.  Defaults to
   an empty string.
 * `qemu_netif` - Network interface for QEMU box.  Defaults to `vtnet0`.

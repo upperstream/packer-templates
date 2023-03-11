@@ -47,7 +47,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder ".", "/vagrant", disabled: true
+  # This sets `doas rsync` to the default `rsync` path for sync'ed folder on
+  # `/vagrant`. For other folder locations, you still need to add
+  # `rsync__rsync_path: 'doas rsync'` to your Vagrantfile.
+  config.vm.synced_folder ".", "/vagrant", rsync__rsync_path: "doas rsync", disabled: true
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -66,6 +69,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # View the documentation for the provider you're using for more
   # information on available options.
+  config.vm.provider "parallels" do |prl|
+    # Disable checking if Parallels Tools have been installed
+    prl.check_guest_tools = false
+  end
 
   # Enable provisioning with CFEngine. CFEngine Community packages are
   # automatically installed. For example, configure the host as a
