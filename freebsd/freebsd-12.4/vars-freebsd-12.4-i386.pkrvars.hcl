@@ -1,0 +1,8 @@
+ABI = "FreeBSD:12:i386"
+DISTRIBUTIONS = "'base.txz kernel.txz'"
+iso_checksum = "sha256:73f4e4875ae4ab9e8695d1ec2cd42f1e4ab4c66b12d99194809eb623a18a7b0d"
+iso_image = "FreeBSD-12.4-RELEASE-i386-disc1.iso"
+qemu_binary = "qemu-system-i386"
+virtualbox_guest_os_type = "FreeBSD"
+vm_name = "FreeBSD-12.4-RELEASE-i386"
+vmware_guest_os_type = "freebsd"
