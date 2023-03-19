@@ -2,11 +2,11 @@
 
 ## Current FreeBSD releases
 
-* [freebsd-13.2](freebsd-13.2/README.mdown) - templates for FreeBSD 13.2-RC2 (amd64 and i386)
-  * FreeBSD 13.2-RC2
-  * FreeBSD 13.2-RC2 + X.Org + dwm + dmenu + st
-  * FreeBSD 13.2-RC2 + Xfce
-  * FreeBSD 13.2-RC2 on ZFS root file system
+* [freebsd-13.2](freebsd-13.2/README.mdown) - templates for FreeBSD 13.2-RC3 (amd64 and i386)
+  * FreeBSD 13.2-RC3
+  * FreeBSD 13.2-RC3 + X.Org + dwm + dmenu + st
+  * FreeBSD 13.2-RC3 + Xfce
+  * FreeBSD 13.2-RC3 on ZFS root file system
 * [freebsd-13.1](freebsd-13.1/README.mdown) - templates for FreeBSD 13.1-RELEASE (amd64 and i386)
   * FreeBSD 13.1-RELEASE
   * FreeBSD 13.1-RELEASE + Ansible + Ansible Lint + Testinfra

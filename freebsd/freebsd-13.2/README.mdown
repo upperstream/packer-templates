@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 13.2-RC2
+# Packer templates for FreeBSD 13.2-RC3
 
-Templates to create Vagrant boxes for FreeBSD 13.2-RC2
+Templates to create Vagrant boxes for FreeBSD 13.2-RC3
 
 ## Prerequisites
 
@@ -43,14 +43,16 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default freebsd-13.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.2-RC-amd64-minimal-v2.20230311-virtualbox.box` in the same
+`FreeBSD-13.2-RC-amd64-minimal-v3.20230318-virtualbox.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.2-RC-amd64-minimal-v2.20230311` to your box list by the
+`FreeBSD-13.2-RC-amd64-minimal-v3.20230318` to your box list by the
 following command:
 
-    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v2.20230311-virtualbox.box --name FreeBSD-13.2-RC-amd64-minimal-v2.20230311 --provider virtualbox
+    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v3.20230318-virtualbox.box --name FreeBSD-13.2-RC-amd64-minimal-v3.20230318 --provider virtualbox
+
+VirtualBox build is available for amd64 only.
 
 ### VMware
 
@@ -59,14 +61,14 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default freebsd-13.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.2-RC-amd64-v2.20230311-vmware.box` in the same directory
+`FreeBSD-13.2-RC-amd64-v3.20230318-vmware.box` in the same directory
 after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.2-RC-amd64-minimal-v2.20230311` to your box list by the
+`FreeBSD-13.2-RC-amd64-minimal-v3.20230318` to your box list by the
 following command:
 
-    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v2.20230311-vmware.box --name FreeBSD-13.2-RC-amd64-minimal-v2.20230311 --provider vmware_desktop
+    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v3.20230318-vmware.box --name FreeBSD-13.2-RC-amd64-minimal-v3.20230318 --provider vmware_desktop
 
 ### ESXi
 
@@ -100,14 +102,14 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default freebsd-13.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.2-RC-amd64-v2.20230311-libvirt.box` in the same directory
+`FreeBSD-13.2-RC-amd64-v3.20230318-libvirt.box` in the same directory
 after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.2-RC-amd64-minimal-v2.20230311` to your box list by the
+`FreeBSD-13.2-RC-amd64-minimal-v3.20230318` to your box list by the
 following command:
 
-    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v2.20230311-libvirt.box --name FreeBSD-13.2-RC-amd64-minimal-v2.20230311 --provider libvirt
+    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v3.20230318-libvirt.box --name FreeBSD-13.2-RC-amd64-minimal-v3.20230318 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -119,14 +121,14 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default freebsd-13.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.2-RC-amd64-v2.20230311-hyperv.box` in the same directory
+`FreeBSD-13.2-RC-amd64-v3.20230318-hyperv.box` in the same directory
 after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.2-RC-amd64-minimal-v2.20230311` to your box list by the
+`FreeBSD-13.2-RC-amd64-minimal-v3.20230318` to your box list by the
 following command:
 
-    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v2.20230311-hyperv.box --name FreeBSD-13.2-RC-amd64-minimal-v2.20230311 --provider hyperv
+    vagrant box add FreeBSD-13.2-RC-amd64-minimal-v3.20230318-hyperv.box --name FreeBSD-13.2-RC-amd64-minimal-v3.20230318 --provider hyperv
 
 ### Parallels
 
@@ -135,14 +137,14 @@ From the terminal, invoke the following command for Parallels provider:
     packer build -only=parallels-iso.default -var-file vars-freebsd-13.2-aarch64.pkrvars.hcl freebsd-13.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.2-RC-aarch64-v2.20230311-parallels.box` in the same directory
+`FreeBSD-13.2-RC-aarch64-v3.20230318-parallels.box` in the same directory
 after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.2-RC-aarch64-minimal-v2.20230311` to your box list by the
+`FreeBSD-13.2-RC-aarch64-minimal-v3.20230318` to your box list by the
 following command:
 
-    vagrant box add FreeBSD-13.2-RC-aarch64-minimal-v2.20230311-hyperv.box --name FreeBSD-13.2-RC-aarch64-minimal-v2.20230311 --provider parallels
+    vagrant box add FreeBSD-13.2-RC-aarch64-minimal-v3.20230318-hyperv.box --name FreeBSD-13.2-RC-aarch64-minimal-v3.20230318 --provider parallels
 
 Parallels build is tested with only aarch64 guest on Apple Silicon Mac
 host.
@@ -220,7 +222,7 @@ or `-var-file` command line options to `packer`:
 
 * `disk_size` - Disk size of the creating VM.  Defaults to `50120`
   which means 50GB.
-* `esxi_vnc_over_websocket` - Controlls whether or not to use VNC over
+* `esxi_vnc_over_websocket` - Controls whether or not to use VNC over
   WebSocket feature for ESXi.  Defaults to `true`.  Set to `false` if
   your ESXi host version is prior to 6.7 which supports VNC server.
 * `headless` - Launch the virtual machine in headless mode if set to
