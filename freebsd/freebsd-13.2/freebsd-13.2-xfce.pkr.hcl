@@ -1,3 +1,29 @@
+packer {
+  required_version = ">= 1.7.0"
+  required_plugins {
+    hyperv = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/hyperv"
+    }
+    parallels = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/parallels"
+    }
+    qemu = {
+      version = ">= 1.0.9"
+      source  = "github.com/hashicorp/qemu"
+    }
+    virtualbox = {
+      version = ">= 0.0.1"
+      source  = "github.com/hashicorp/virtualbox"
+    }
+    vmware = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/vmware"
+    }
+  }
+}
+
 variable "ABI" {
   type    = string
   default = "FreeBSD:13:amd64"
