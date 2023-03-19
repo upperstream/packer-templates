@@ -42,7 +42,7 @@ variable "arch" {
 
 variable "box_version" {
   type    = string
-  default = "2.20230311"
+  default = "3.20230318"
 }
 
 variable "disk_size" {
@@ -104,12 +104,12 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "sha256:dfd9c42bc127563000abed050317f9c2be5e7e1034b5c44447591099056ce8d8"
+  default = "sha256:a5e28fff4a1f13ef03b05f1437372d07cc4248788998663ae6f599791497fdae"
 }
 
 variable "iso_image" {
   type    = string
-  default = "FreeBSD-13.2-RC2-amd64-disc1.iso"
+  default = "FreeBSD-13.2-RC3-amd64-disc1.iso"
 }
 
 variable "mem_size" {
@@ -168,7 +168,7 @@ variable "qemu_use_default_display" {
 variable "root_password" {
   type        = string
   default     = "vagrant"
-  sensitive   = true
+  sensitive   = false
   description = "Password for `root` user."
 }
 
@@ -181,7 +181,7 @@ variable "vagrant_group" {
 variable "vagrant_password" {
   type        = string
   default     = "vagrant"
-  sensitive   = true
+  sensitive   = false
   description = "Password for `vagrant_username`.  This is also used for SSH password during build time."
 }
 
