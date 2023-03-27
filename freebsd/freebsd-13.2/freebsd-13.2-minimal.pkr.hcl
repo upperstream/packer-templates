@@ -110,12 +110,12 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "sha256:0aca7cd14eff11a8b4822de994b48124d8827e28d0d3225f0e12095c710915fd"
+  default = "sha256:46ecfe010232d0036dc2ed66c73c16699139290f97ac1847c6d89b9ccd6cda91"
 }
 
 variable "iso_image" {
   type    = string
-  default = "FreeBSD-13.2-RC4-amd64-disc1.iso"
+  default = "FreeBSD-13.2-RC5-amd64-disc1.iso"
 }
 
 variable "mem_size" {
