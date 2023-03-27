@@ -1,6 +1,6 @@
 arch = "i386"
-iso_image = "FreeBSD-13.2-RC3-i386-disc1.iso"
-iso_checksum = "sha256:5954f4edecc57f08dd458e07422479cb5e83e783b8171c90b5010bed80419798"
+iso_image = "FreeBSD-13.2-RC4-i386-disc1.iso"
+iso_checksum = "sha256:8e53a797e7aa97618a55e3a21789fec5a3f4ab4eabac6313d7ba084ed80eec33"
 virtualbox_guest_os_type = "FreeBSD"
 vmware_guest_os_type = "freebsd"
 DISTRIBUTIONS = "'base.txz kernel.txz'"
