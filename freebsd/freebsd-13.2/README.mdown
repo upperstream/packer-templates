@@ -220,6 +220,7 @@ boxes:
 The following parameters can be set at build time by supplying `-var`
 or `-var-file` command line options to `packer`:
 
+* `boot_wait` - Override `boot_wait` default setting, which is `10s`.
 * `disk_size` - Disk size of the creating VM.  Defaults to `50120`
   which means 50GB.
 * `esxi_vnc_over_websocket` - Controls whether or not to use VNC over

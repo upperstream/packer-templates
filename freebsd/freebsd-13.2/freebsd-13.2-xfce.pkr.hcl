@@ -40,6 +40,12 @@ variable "arch" {
   description = "Architecture"
 }
 
+variable "boot_wait" {
+  type = string
+  default = "10s"
+  description = "Override `boot_wait` default setting (10s)"
+}
+
 variable "box_version" {
   type    = string
   default = "4.20230325"
@@ -271,7 +277,7 @@ locals {
 
 source "hyperv-iso" "default" {
   boot_command     = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.hyperv_netif, var.hyperv_partition, var.hyperv_netif))
-  boot_wait        = "10s"
+  boot_wait        = var.boot_wait
   cpus             = var.num_cpus
   disk_size        = var.disk_size
   headless         = var.headless
@@ -290,7 +296,7 @@ source "hyperv-iso" "default" {
 
 source "parallels-iso" "default" {
   boot_command           = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.parallels_netif, var.parallels_partition, var.parallels_netif))
-  boot_wait              = "10s"
+  boot_wait              = var.boot_wait
   cpus                   = "${var.num_cpus}"
   disk_size              = "${var.disk_size}"
   disk_type              = "expand"
@@ -312,7 +318,7 @@ source "parallels-iso" "default" {
 source "qemu" "default" {
   accelerator         = "kvm"
   boot_command        = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.qemu_netif, var.qemu_partition, var.qemu_netif))
-  boot_wait           = "10s"
+  boot_wait           = var.boot_wait
   cpus                = var.num_cpus
   disk_compression    = true
   disk_interface      = "virtio"
@@ -336,7 +342,7 @@ source "qemu" "default" {
 
 source "virtualbox-iso" "default" {
   boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.virtualbox_netif, var.virtualbox_partition, var.virtualbox_netif))
-  boot_wait            = "10s"
+  boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
   guest_additions_mode = "disable"
@@ -361,7 +367,7 @@ source "virtualbox-iso" "default" {
 
 source "vmware-iso" "default" {
   boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.vmware_netif, var.vmware_partition, var.vmware_netif))
-  boot_wait            = "10s"
+  boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
   disk_type_id         = "0"
@@ -391,7 +397,7 @@ source "vmware-iso" "default" {
 
 source "vmware-iso" "esxi" {
   boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.vmware_netif, var.vmware_partition, var.vmware_netif))
-  boot_wait            = "10s"
+  boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
   disk_type_id         = "thin"
