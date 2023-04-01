@@ -48,7 +48,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "4.20230325"
+  default = "5.20230327"
 }
 
 variable "disk_size" {
