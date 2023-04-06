@@ -48,7 +48,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "5.20230327"
+  default = "6.20230402"
 }
 
 variable "disk_size" {
@@ -110,12 +110,12 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "sha256:46ecfe010232d0036dc2ed66c73c16699139290f97ac1847c6d89b9ccd6cda91"
+  default = "sha256:0ee70da2439dd32f5422955d9f0865bb2ca635759643114ebf1e3a7647364e2c"
 }
 
 variable "iso_image" {
   type    = string
-  default = "FreeBSD-13.2-RC5-amd64-disc1.iso"
+  default = "FreeBSD-13.2-RC6-amd64-disc1.iso"
 }
 
 variable "mem_size" {
