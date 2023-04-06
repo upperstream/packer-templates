@@ -18,7 +18,7 @@ EOF
 mkdir -p /usr/local/etc/pkg/repos/
 cat > /usr/local/etc/pkg/repos/FreeBSD.conf << EOF
 FreeBSD: {
-  url: pkg+http://pkg.freebsd.org/${ABI}/quarterly,
+  url: pkg+http://pkg.freebsd.org/${ABI}/release_2,
   enabled: true
 }
 EOF
