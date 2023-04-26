@@ -1,0 +1,5 @@
+iso_file_name = "NetBSD-9.3-evbarm-aarch64.iso"
+iso_checksum = "sha512:5d32e4d8e61b9e88a9d5beb31df348cf6ad5b36813bd1cef3c1f86598003ff0cd07aecc03e19f904849fe00e4fd1554a4bc9a1209c64a8b05aabae4582fb6cf0"
+virtualbox_guest_os_type = "NetBSD"
+vmware_guest_os_type = "netbsd"
+vm_name = "NetBSD-9.3-aarch64"
