@@ -1,0 +1,6 @@
+arch = "i386"
+iso_file_name = "NetBSD-9.3-i386.iso"
+iso_checksum = "sha512:dde2a33ffc01dd39b36e4ed528df066d3cb55f205d8217c69981a54bb4d638aeb097d54b403b100bf41fdc6f0c9c1982ab6fa63698043381990868fd4e8d8245"
+virtualbox_guest_os_type = "NetBSD"
+vmware_guest_os_type = "netbsd"
+vm_name = "NetBSD-9.3-i386"
