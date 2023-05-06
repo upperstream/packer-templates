@@ -5,6 +5,10 @@ packer {
       version = ">= 1.0.0"
       source  = "github.com/hashicorp/hyperv"
     }
+    parallels = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/parallels"
+    }
     qemu = {
       version = ">= 1.0.9"
       source  = "github.com/hashicorp/qemu"
@@ -146,6 +150,18 @@ variable "num_cpus" {
   description = "The number of CPUs of this box."
 }
 
+variable "parallels_boot_mode" {
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for Parallels box."
+}
+
+variable "parallels_tools_flavor" {
+  type        = string
+  default     = "lin"
+  description = "The flavour name of Parallels Tools."
+}
+
 variable "qemu_accelerator" {
   type        = string
   default     = "kvm"
@@ -275,6 +291,7 @@ locals {
   preseeders = {
     "default" : "preseed-buster.cfg"
     "hyperv-iso" : "preseed-buster-hyperv.cfg"
+    "parallels-iso" : "preseed-bullseye-parallels.cfg"
     "qemu" : "preseed-buster-qemu.cfg"
   }
   vm_name = "Debian-11-${var.cpu}-minimal"
@@ -302,6 +319,29 @@ source "hyperv-iso" "default" {
   ssh_username     = var.ssh_user
   switch_name      = var.hyperv_switch_name
   vm_name          = local.vm_name
+}
+
+source "parallels-iso" "default" {
+  boot_command = split("\n", format(join("\n", local.boot_command),
+    local.boot_parameter_edit[var.parallels_boot_mode],
+    local.preseeders["parallels-iso"],
+    local.boot_parameter_submit[var.parallels_boot_mode]
+  ))
+  boot_wait              = var.boot_wait
+  cpus                   = var.num_cpus
+  disk_size              = var.disk_size
+  http_directory         = "../http"
+  iso_checksum           = var.iso_checksum
+  iso_urls               = local.iso_urls
+  memory                 = var.mem_size
+  output_directory       = "output/${local.vm_name}-v${var.box_version}-parallels"
+  parallels_tools_flavor = var.parallels_tools_flavor
+  shutdown_command       = "sudo /sbin/shutdown -h now"
+  ssh_password           = var.ssh_pass
+  ssh_port               = 22
+  ssh_timeout            = "10000s"
+  ssh_username           = var.ssh_user
+  vm_name                = local.vm_name
 }
 
 source "qemu" "default" {
@@ -445,6 +485,7 @@ source "vmware-iso" "esxi" {
 build {
   sources = [
     "source.hyperv-iso.default",
+    "source.parallels-iso.default",
     "source.qemu.default",
     "source.virtualbox-iso.default",
     "source.vmware-iso.esxi",
@@ -485,6 +526,16 @@ build {
       "vmware-iso.esxi"
     ]
     script = "../provisioners/vmtools.sh"
+  }
+
+  provisioner "shell" {
+    environment_vars = [
+      "PRL_TOOLS=prl-tools-${var.parallels_tools_flavor}.iso"
+    ]
+    only = [
+      "parallels-iso.default"
+    ]
+    script = "../provisioners/parallels.sh"
   }
 
   provisioner "shell" {

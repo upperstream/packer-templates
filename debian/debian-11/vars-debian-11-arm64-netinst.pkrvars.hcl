@@ -1,0 +1,6 @@
+cpu = "arm64"
+iso_name = "debian-11.7.0-arm64-netinst.iso"
+iso_path = "11.7.0/arm64/iso-cd"
+iso_checksum = "sha256:174caba674fe3172938439257156b9cb8940bb5fd5ddf124256e81ec00ec460d"
+parallels_tools_flavor = "lin-arm"
+vmware_guest_os_type = "arm-debian11-64"

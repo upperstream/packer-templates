@@ -11,6 +11,7 @@ Templates to create Vagrant boxes for Debian 11.7 (amd64 and arm64).
 * [ESXi][] (vSphere Hypervisor) v5.5+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
+* [Parallels][] Desktop 18+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
     "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
@@ -18,6 +19,7 @@ Templates to create Vagrant boxes for Debian 11.7 (amd64 and arm64).
     "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
 [libvirt]: https://libvirt.org/ "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
+[Parallels]: https://www.parallels.com/products/desktop/ "Run Windows on Mac - Parallels Desktop 18 Virtual Machine for Mac"
 [QEMU]: https://www.qemu.org/ "QEMU"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
@@ -77,7 +79,8 @@ environment variables:
 * `ESXI_REMOTE_HOST` - ESXi host name or IP address
 * `ESXI_REMOTE_USERNAME` - ESXi login user name
 * `ESXI_REMOTE_PASSWORD` - ESXi login password
-* `ESXI_REMOTE_DATASTORE` - ESXi datastore name where a VM image will be created
+* `ESXI_REMOTE_DATASTORE` - ESXi datastore name where a VM image will
+  be created
 
 You also have to enable SSH and VNC on ESXi host.
 
@@ -109,6 +112,8 @@ to your box list by the following command:
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
 
+QEMU build intends to create an amd64 VM on amd64 Linux device.
+
 ### Hyper-V
 
 From the terminal, invoke the following command for Hyper-V provider:
@@ -123,6 +128,24 @@ Then you can add the box named `Debian-11-amd64-minimal-v11.7.20230429`
 to your box list by the following command:
 
     vagrant box add Debian-11-amd64-minimal-v11.7.20230429-hyperv.box --name Debian-11-amd64-minimal-v11.7.20230429 --provider hyperv
+
+### Parallels
+
+From the terminal, invoke the following command for Hyper-V provider:
+
+    packer build -only=parallels-iso.default debian-11-minimal.pkr.hcl
+
+You will find a vagrant box file named
+`Debian-11-arm64-minimal-v11.7.20230429-parallels.box` in the same
+directory after the command has succeeded.
+
+Then you can add the box named `Debian-11-arm64-minimal-v11.7.20230429`
+to your box list by the following command:
+
+    vagrant box add Debian-11-arm64-minimal-v11.7.20230429-parallels.box --name Debian-11-arm64-minimal-v11.7.20230429 --provider parallels
+
+Parallels build intends to create an arm64 VM on Apple Silicon Mac
+device.
 
 ## Variants
 
@@ -161,6 +184,10 @@ command line:
 * amd64 images
   * `vars-debian-11-amd64-dvd.pkrvars.hcl` - `debian-11.7.0-amd64-DVD-1.iso`
   * `vars-debian-11-amd64-netinst.pkrvars.hcl` - `debian-11.7.0-amd64-netinst.iso`
+* arm64 images
+  * `vars-debian-11-arm64-dvd.pkrvars.hcl` - `debian-11.7.0-arm64-DVD-1.iso`
+  * `vars-debian-11-arm64-netinst.pkrvars.hcl` - `debian-11.7.0-arm64-netinst.iso`
+  * `vars-debian-11-arm64-mini.pkrvars.hcl` - `mini.iso` (netboot CD)
 
 It is recommended to use "jigdo" to download large iso image file and
 put it in `./iso` directory.  Templates instruct `packer` to use the
@@ -190,6 +217,8 @@ or `-var-file` command line options to `packer`:
 * `mem_size` - RAM size of the created VM.  Defaults to `1024`, `1536`
   for `dwm` variant, and `2048` for `xfce` variant.
 * `num_cpus` - The number of CPUs of the VM.  Defaults to `2`.
+* `parallels_boot_mode` - Boot mode for QEMU VM, `bios` or `efi`.
+  Defaults to `efi`.
 * `qemu_accelerator` - QEMU accelerator name for QEMU VM.  Defaults to
   `kvm`.
 * `qemu_boot_mode` - Boot mode for QEMU VM, `bios` or `efi`.  Defaults

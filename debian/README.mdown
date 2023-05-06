@@ -3,11 +3,17 @@
 ## Current Debian releases
 
 * [debian-11](debian-11/README.mdown) - templates for Debian 11.7
+
+  Templates support amd64 and arm64.
+
   * Debian 11.7 minimal
   * Debian 11.7 + Docker + Docker Compose
   * Debian 11.7 + X.org + suckless tools
   * Debian 11.7 + Xfce
 * [debian-10](debian-10/README.mdown) - templates for Debian 10.10
+
+  Templates support amd64 only.
+
   * Debian 10.10 minimal
   * Debian 10.10 + Ansible + Ansible Lint + Testinfra
   * Debian 10.10 + Docker + Docker Compose
@@ -15,6 +21,8 @@
   * Debian 10.10 + Xfce
 
 ## Outdated Debian releases
+
+Templates support amd64 only.
 
 * [debian-9](debian-9/README.mdown) - templates for Debian 9.13
   * Debian 9.13 minimal
