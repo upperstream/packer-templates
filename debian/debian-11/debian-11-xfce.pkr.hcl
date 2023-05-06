@@ -251,6 +251,7 @@ locals {
     "locale=en_US.UTF-8 <wait>",
     "keymap=us <wait>",
     "tasks=standard,xfce-desktop <wait>",
+    "net.ifnames=0 <wait>",
     "%s<wait>"
   ]
   iso_urls = compact([
@@ -522,6 +523,7 @@ build {
       "vmware-iso.default"
     ]
     output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile-debian11"
   }
 
   post-processor "vagrant" {
