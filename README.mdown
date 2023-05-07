@@ -24,20 +24,20 @@
   * devuan-2 - Devuan 2.1 ASCII templates
 * [freebsd](freebsd/README.mdown) - FreeBSD templates (amd64 and i386)
   * freebsd-12.3 - FreeBSD 12.3 templates
-  * freebsd-13.0 - FreeBSD 13.0 templates
+  * freebsd-12.4 - FreeBSD 12.4 templates
   * freebsd-13.1 - FreeBSD 13.1 templates
+  * freebsd-13.2 - FreeBSD 13.2 templates
   * [more](freebsd/README.mdown)
 * [netbsd](netbsd/README.mdown) - NetBSD templates (amd64 and i386)
-  * netbsd-7.2 - NetBSD 7.2 templates
   * netbsd-8.2 - NetBSD 8.2 templates
   * netbsd-9.0 - NetBSD 9.0 templates
   * netbsd-9.1 - NetBSD 9.1 templates
   * netbsd-9.2 - NetBSD 9.2 templates
+  * netbsd-9.3 - NetBSD 9.3 templates
   * [more](netbsd/README.mdown)
 * [openbsd](openbsd/README.mdown) - OpenBSD templates (amd64 and i386)
-  * openbsd-6.9 - OpenBSD 6.9 templates
-  * openbsd-7.0 - OpenBSD 7.0 templates
-  * openbsd-7.1 - OpenBSD 7.1 templates
+  * openbsd-7.2 - OpenBSD 7.2 templates
+  * openbsd-7.3 - OpenBSD 7.3 templates
   * [more](openbsd/README.mdown)
 * [opensuse](opensuse/README.mdown) - openSUSE templates (amd64)
   * leap-42.3 - openSUSE Leap 42.3 templates
