@@ -1,23 +1,27 @@
 {
-    "cSpell.words": [
-        "aarch",
-        "dmenu",
-        "doas",
-        "esxi",
-        "freebsd",
-        "hyperv",
-        "netbsd",
-        "netif",
-        "openbsd",
-        "pkrvars",
-        "suckless",
-        "Testinfra",
-        "Upperstream",
-        "vars",
-        "virtualbox",
-        "vmware",
-        "vtbd",
-        "vtnet",
-        "Xenodm"
-    ]
+  "cSpell.words": [
+    "aarch",
+    "dmenu",
+    "doas",
+    "esxi",
+    "freebsd",
+    "hyperv",
+    "jigdo",
+    "netboot",
+    "netbsd",
+    "netinst",
+    "netif",
+    "openbsd",
+    "pkrvars",
+    "suckless",
+    "Testinfra",
+    "Upperstream",
+    "vars",
+    "virtualbox",
+    "vmware",
+    "vtbd",
+    "vtnet",
+    "Xenodm",
+    "xrdp"
+  ]
 }
