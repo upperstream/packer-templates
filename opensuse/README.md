@@ -2,7 +2,7 @@
 
 ## Contents
 
-* [leap-42.3](leap-42.3/README.mdown) - templates for openSUSE Leap 42.3
+* [leap-42.3](leap-42.3/README.md) - templates for openSUSE Leap 42.3
     * openSUSE Leap 42.3 minimal
     * openSUSE Leap 42.3 + Ansible + Testinfra
     * openSUSE Leap 42.3 + Docker
