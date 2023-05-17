@@ -500,7 +500,7 @@ build {
       "WGET=wget -O -"
     ]
     scripts = [
-      "../provisioners/base_debian11.sh",
+      "../provisioners/base_debian11+.sh",
       "../provisioners/vagrant.sh"
     ]
   }

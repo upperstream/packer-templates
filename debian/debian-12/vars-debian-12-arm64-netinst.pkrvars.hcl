@@ -1,0 +1,5 @@
+cpu = "arm64"
+iso_name = "debian-bookworm-DI-rc3-arm64-netinst.iso"
+iso_path = "bookworm_di_rc3/arm64/iso-cd"
+iso_checksum = "sha256:20c5f8a95116386de8f358f72559c0494b3286f376cab282cc5dcc37fbb64618"
+parallels_tools_flavor = "lin-arm"

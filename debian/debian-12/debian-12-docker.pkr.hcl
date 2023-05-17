@@ -1,29 +1,3 @@
-packer {
-  required_version = ">= 1.7.0"
-  required_plugins {
-    hyperv = {
-      version = ">= 1.0.0"
-      source  = "github.com/hashicorp/hyperv"
-    }
-    parallels = {
-      version = ">= 1.0.0"
-      source  = "github.com/hashicorp/parallels"
-    }
-    qemu = {
-      version = ">= 1.0.9"
-      source  = "github.com/hashicorp/qemu"
-    }
-    virtualbox = {
-      version = ">= 0.0.1"
-      source  = "github.com/hashicorp/virtualbox"
-    }
-    vmware = {
-      version = ">= 1.0.0"
-      source  = "github.com/hashicorp/vmware"
-    }
-  }
-}
-
 variable "boot_wait" {
   type        = string
   default     = "20s"
@@ -32,7 +6,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "11.7.20230429"
+  default     = "3.20230516"
   description = "Version number of this Vagrant box."
 }
 
@@ -116,19 +90,16 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:c2a261fb13eb36e080dad88b3a4847e577ec031c61d0329d6553257dd21d1b9a"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "mini.iso"
   description = "File name of the install media."
 }
 
 variable "iso_path" {
   type        = string
-  default     = "bullseye/main/installer-amd64/20210731+deb11u8/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -140,7 +111,7 @@ variable "iso_url" {
 
 variable "mem_size" {
   type        = string
-  default     = "2048"
+  default     = "1024"
   description = "Memory size of this box."
 }
 
@@ -239,7 +210,7 @@ variable "vmware_boot_mode" {
 
 variable "vmware_guest_os_type" {
   type        = string
-  default     = "debian11-64"
+  default     = "debian12-64"
   description = "Guest OS type of VMware box."
 }
 
@@ -266,7 +237,7 @@ locals {
     "passwd/user-password-again=${var.vagrant_password} <wait>",
     "locale=en_US.UTF-8 <wait>",
     "keymap=us <wait>",
-    "tasks=standard,xfce-desktop <wait>",
+    "tasks=standard <wait>",
     "net.ifnames=0 <wait>",
     "%s<wait>"
   ]
@@ -294,7 +265,7 @@ locals {
     "parallels-iso" : "preseed-bullseye-parallels.cfg"
     "qemu" : "preseed-buster-qemu.cfg"
   }
-  vm_name = "Debian-11-${var.cpu}-xfce"
+  vm_name = "Debian-bookworm_rc-${var.cpu}-docker"
 }
 
 source "hyperv-iso" "default" {
@@ -398,8 +369,7 @@ source "virtualbox-iso" "default" {
   ssh_username         = var.ssh_user
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
-    ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
-    ["modifyvm", "{{ .Name }}", "--vram", "32"]
+    ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"]
   ]
   virtualbox_version_file = ".vbox_version"
   vm_name                 = local.vm_name
@@ -435,7 +405,6 @@ source "vmware-iso" "default" {
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "svga.vramSize"             = "33554432"
     "vhv.enable"                = var.vmware_vhv_enabled
   }
 }
@@ -478,7 +447,6 @@ source "vmware-iso" "esxi" {
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "svga.vramSize"             = "33554432"
     "vhv.enable"                = var.esxi_vhv_enabled
   }
   vnc_disable_password = true
@@ -497,23 +465,23 @@ build {
 
   provisioner "shell" {
     environment_vars = [
+      "DOCKER_COMPOSE=docker-compose=1.29.2-3",
+      "DOCKER_IO=docker.io=20.10.24+dfsg1-1+b2",
       "INSTALL_FROM_DVD=${var.install_from_dvd}",
       "OPTIMISE_REPOS=1",
       "VAGRANT_USERNAME=${var.vagrant_username}",
-      "WGET=wget -O -",
-      "XRDP=xrdp=0.9.12-1.1"
+      "WGET=wget -O -"
     ]
     scripts = [
       "../provisioners/base_debian11+.sh",
       "../provisioners/vagrant.sh",
-      "../provisioners/xrdp.sh"
+      "../provisioners/docker-ce_debian11.sh"
     ]
   }
 
   provisioner "shell" {
     environment_vars = [
       "INSTALL_DKMS=true",
-      "VIRTUALBOX_WITH_XORG=1",
       "VBOX_VER=${var.virtualbox_version}"
     ]
     only = ["virtualbox-iso.default"]
@@ -525,10 +493,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools-desktop=2:11.2.5-2+deb11u1",
-      "VMWARE_WITH_XORG=1",
-      "XSERVER_XORG_INPUT_VMMOUSE=xserver-xorg-input-evdev=1:2.10.6-2",
-      "XSERVER_XORG_VIDEO_VMWARE=xserver-xorg-video-vmware=1:13.3.0-3"
+      "OPEN_VM_TOOLS=open-vm-tools=2:12.2.0-1"
     ]
     only = [
       "vmware-iso.default",
