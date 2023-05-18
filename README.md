@@ -27,7 +27,7 @@
   * freebsd-12.3 - FreeBSD 12.3 templates
   * freebsd-12.4 - FreeBSD 12.4 templates
   * freebsd-13.1 - FreeBSD 13.1 templates
-  * freebsd-13.2 - FreeBSD 13.2 templates
+  * freebsd-13.2 - FreeBSD 13.2 templates (amd64, i386, and arm64)
   * [more](freebsd/README.md)
 * [netbsd](netbsd/README.md) - NetBSD templates (amd64 and i386)
   * netbsd-8.2 - NetBSD 8.2 templates
