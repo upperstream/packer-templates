@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
     "aarch",
+    "cdrom",
     "dmenu",
     "doas",
     "esxi",
@@ -9,8 +10,8 @@
     "jigdo",
     "netboot",
     "netbsd",
-    "netinst",
     "netif",
+    "netinst",
     "openbsd",
     "pkrvars",
     "suckless",
@@ -23,5 +24,8 @@
     "vtnet",
     "Xenodm",
     "xrdp"
-  ]
+  ],
+  "markdownlint.config": {
+    "MD040": false
+  }
 }
