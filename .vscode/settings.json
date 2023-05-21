@@ -1,8 +1,10 @@
 {
   "cSpell.words": [
     "aarch",
+    "ansible",
     "archlinux",
     "centos",
+    "cleanup",
     "devuan",
     "dmenu",
     "doas",
@@ -17,7 +19,9 @@
     "openbsd",
     "opensuse",
     "pkrvars",
+    "preseed",
     "suckless",
+    "testinfra",
     "Testinfra",
     "tinycorelinux",
     "Upperstream",

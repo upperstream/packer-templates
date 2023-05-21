@@ -1,15 +1,14 @@
-# Packer templates for Ubuntu 18.04 LTS
+# Packer templates for Ubuntu 18.04.1 LTS
 
-Templates to create Vagrant boxes for Ubuntu 18.04 LTS (x86_64).
-
+Templates to create Vagrant boxes for Ubuntu 18.04.1 LTS (x86_64).
 
 ## Prerequisites
 
-* [Packer][] v1.1.3+
-* [Vagrant][] v1.9.8+
-* [VirtualBox][] Version 5.1.34+
-* [VMware][] Workstation v11.1.0+ / VMware Fusion v8.0+
-* [ESXi][] (vSphere Hypervisor) v5.5+
+* [Packer][] v1.8.7+
+* [Vagrant][] v2.3.6+
+* [VirtualBox][] Version 7.0+
+* [VMware][] Workstation v17.0+ / VMware Fusion v13.0+
+* [ESXi][] (vSphere Hypervisor) v7.0+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
         "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
@@ -19,12 +18,10 @@ Templates to create Vagrant boxes for Ubuntu 18.04 LTS (x86_64).
 [VMware]: http://www.vmware.com/
     "VMware Virtualization for Desktop &amp; Server, Application, Public &amp; Hybrid Clouds"
 
-
 ## Provisioned software tools
 
 * VirtualBox Guest Additions
 * `vagrant` user and its insecure public key
-
 
 ## How to create a box
 
@@ -34,13 +31,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso ubuntu-18.04-minimal.json
 
-You will find a vagrant box file named `Ubuntu-18.04-amd64-minimal-v1804.0.20180427-virtualbox.box`
+You will find a vagrant box file named `Ubuntu-18.04-amd64-minimal-v1804.1.20180726-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-18.04-amd64-minimal-v1804.0.20180427-virtualbox`
+Then you can add the box named `Ubuntu-18.04-amd64-minimal-v1804.1.20180726-virtualbox`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-18.04-amd64-minimal-v1804.0.20180427-virtualbox.box --name Ubuntu-18.04-amd64-minimal-v1804.0.20180427-virtualbox
+    vagrant box add Ubuntu-18.04-amd64-minimal-v1804.1.20180726-virtualbox.box --name Ubuntu-18.04-amd64-minimal-v1804.1.20180726-virtualbox
 
 ### VMware
 
@@ -48,17 +45,16 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso ubuntu-18.04-minimal.json
 
-You will find a vagrant box file named `Ubuntu-18.04-amd64-minimal-v1804.0.20180427-vmware.box`
+You will find a vagrant box file named `Ubuntu-18.04-amd64-minimal-v1804.1.20180726-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-18.04-amd64-minimal-v1804.0.20180427-vmware`
+Then you can add the box named `Ubuntu-18.04-amd64-minimal-v1804.1.20180726-vmware`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-18.04-amd64-minimal-v1804.0.20180427-vmware.box --name Ubuntu-18.04-amd64-minimal-v1804.0.20180427-vmware
+    vagrant box add Ubuntu-18.04-amd64-minimal-v1804.1.20180726-vmware.box --name Ubuntu-18.04-amd64-minimal-v1804.1.20180726-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
-
 
 ## Building a VM image on ESXi
 
@@ -78,7 +74,6 @@ The following command will build a VM image on your ESXi:
     packer build -only=esxi-iso ubuntu-18.04-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
-
 
 ## Variants
 
@@ -101,7 +96,6 @@ The following command will build a VM image on your ESXi:
 [Xfce]: https://xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
 
-
 ## Build parameters
 
 The following parameters can be set at build time by supplying `-var`
@@ -121,7 +115,6 @@ or `-var-file` command line options to `packer`:
 * `headless` - Launch the virtual machine in headless mode if set to
   `true`.  Default value is `false`.
 
-
 - - -
 
-Copyright &copy; 2018 Upperstream Software.
+Copyright &copy; 2018, 2023 Upperstream Software.
