@@ -1,8 +1,8 @@
 {
   "variables": {
-    "iso_name": "ubuntu-18.04.1-server-amd64.iso",
+    "iso_name": "ubuntu-18.04.6-server-amd64.iso",
     "iso_path": "18.04",
-    "iso_checksum": "sha256:a5b0ea5918f850124f3d72ef4b85bda82f0fcd02ec721be19c1a6952791c8ee8",
+    "iso_checksum": "sha256:f5cbb8104348f0097a8e513b10173a07dbc6684595e331cb06f93f385d0aecf6",
     "ssh_name": "vagrant",
     "ssh_pass": "vagrant",
     "vagrant_username": "vagrant",
@@ -11,10 +11,10 @@
     "remote_password": "{{env `REMOTE_PASSWORD`}}",
     "remote_datastore": "{{env `REMOTE_DATASTORE`}}",
     "vm_name": "Ubuntu-18.04-amd64-dwm",
-    "box_version": "1804.1.20180726",
+    "box_version": "1804.6.20210917",
     "preseed": "ubuntu-server.seed",
     "boot_wait": "10s",
-    "virtualbox_version": "5.1.34",
+    "virtualbox_version": "7.0.8",
     "esxi_vnc_over_websocket": "true",
     "num_cpus": "2",
     "mem_size": "1024",
