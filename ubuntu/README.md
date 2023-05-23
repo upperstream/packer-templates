@@ -40,12 +40,12 @@
   * Ubuntu Server 17.10.1 + Ansible + Testinfra
   * Ubuntu 17.10.1 + LXDE
   * Ubuntu 17.10.1 + Xfce
-* [ubuntu-18.04](ubuntu-18.04/README.md) - templates for Ubuntu 18.04.1
-  * Ubuntu Server 18.04.1 LTS
-  * Ubuntu Server 18.04.1 LTS + Ansible + Testinfra
-  * Ubuntu 18.04.1 LTS + X.org + suckless tools
-  * Ubuntu 18.04.1 LTS + LXDE
-  * Ubuntu 18.04.1 LTS + Xfce
+* [ubuntu-18.04](ubuntu-18.04/README.md) - templates for Ubuntu 18.04.6
+  * Ubuntu Server 18.04.6 LTS
+  * Ubuntu Server 18.04.6 LTS + Ansible + Testinfra
+  * Ubuntu 18.04.6 LTS + X.org + suckless tools
+  * Ubuntu 18.04.6 LTS + LXDE
+  * Ubuntu 18.04.6 LTS + Xfce
 
 - - -
 

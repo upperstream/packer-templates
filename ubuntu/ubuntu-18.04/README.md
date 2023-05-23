@@ -1,6 +1,6 @@
-# Packer templates for Ubuntu 18.04.1 LTS
+# Packer templates for Ubuntu 18.04.6 LTS
 
-Templates to create Vagrant boxes for Ubuntu 18.04.1 LTS (x86_64).
+Templates to create Vagrant boxes for Ubuntu 18.04.6 LTS (x86_64).
 
 ## Prerequisites
 
@@ -31,13 +31,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso ubuntu-18.04-minimal.json
 
-You will find a vagrant box file named `Ubuntu-18.04-amd64-minimal-v1804.1.20180726-virtualbox.box`
+You will find a vagrant box file named `Ubuntu-18.04-amd64-minimal-v1804.6.20210917-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-18.04-amd64-minimal-v1804.1.20180726-virtualbox`
+Then you can add the box named `Ubuntu-18.04-amd64-minimal-v1804.6.20210917-virtualbox`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-18.04-amd64-minimal-v1804.1.20180726-virtualbox.box --name Ubuntu-18.04-amd64-minimal-v1804.1.20180726-virtualbox
+    vagrant box add Ubuntu-18.04-amd64-minimal-v1804.6.20210917-virtualbox.box --name Ubuntu-18.04-amd64-minimal-v1804.6.20210917-virtualbox
 
 ### VMware
 
@@ -45,13 +45,13 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso ubuntu-18.04-minimal.json
 
-You will find a vagrant box file named `Ubuntu-18.04-amd64-minimal-v1804.1.20180726-vmware.box`
+You will find a vagrant box file named `Ubuntu-18.04-amd64-minimal-v1804.6.20210917-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-18.04-amd64-minimal-v1804.1.20180726-vmware`
+Then you can add the box named `Ubuntu-18.04-amd64-minimal-v1804.6.20210917-vmware`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-18.04-amd64-minimal-v1804.1.20180726-vmware.box --name Ubuntu-18.04-amd64-minimal-v1804.1.20180726-vmware
+    vagrant box add Ubuntu-18.04-amd64-minimal-v1804.6.20210917-vmware.box --name Ubuntu-18.04-amd64-minimal-v1804.6.20210917-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -78,8 +78,8 @@ The following command will build a VM image on your ESXi:
 ## Variants
 
 * `ubuntu-18.04-minimal.json` - Ubuntu Server 18.04 LTS
-* `ubuntu-18.04-ansible.json` - Ubuntu Server 18.04 LTS + [Ansible][]
-  + [Testinfra][]
+* `ubuntu-18.04-ansible.json` - Ubuntu Server 18.04 LTS + [Ansible][] +
+  [Testinfra][]
 * `ubuntu-18.04-dwm.json` - Ubuntu 18.04 LTS + [X.org][], [suckless][]
   tools, [ARandR][], and [xrdp][].
 * `ubuntu-18.04-lxde.json` - Ubuntu 18.04 LTS + [LXDE][]
