@@ -64,6 +64,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Disable checking if guest additions have been installed
     vb.check_guest_additions = false
   end
+  config.vm.provider "parallels" do |prl|
+    prl.check_guest_tools = false
+  end
   #
   # View the documentation for the provider you are using for more
   # information on available options.

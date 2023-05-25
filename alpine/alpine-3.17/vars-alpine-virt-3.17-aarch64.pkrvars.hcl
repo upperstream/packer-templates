@@ -1,6 +1,6 @@
 vm_name = "Alpine-virt-3.17-aarch64"
-iso_image = "alpine-virt-3.17.0-aarch64.iso"
-iso_checksum = "sha256:b03c78c826ea28d9723547107587d92be925ad37c5d23dfec316a1173023c673"
+iso_image = "alpine-virt-3.17.3-aarch64.iso"
+iso_checksum = "sha256:8a8cabc2f60d8e8ac8a5d81e69388df2487e12f54c80d5f0eeec779f9682fa51"
 cpu = "aarch64"
 virtualbox_guest_os_type = "Linux_64"
 vmware_guest_os_type = "arm-other5xlinux-64"

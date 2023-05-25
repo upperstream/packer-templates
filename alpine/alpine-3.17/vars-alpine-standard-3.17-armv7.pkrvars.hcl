@@ -1,6 +1,6 @@
 vm_name = "Alpine-standard-3.17-armv7"
-iso_image = "alpine-standard-3.17.0-armv7.iso"
-iso_checksum = "sha256:2f7bbc207b3cec1c1437dd281f6e34c4fbe4edf8da15f9e6a0187e25a53eea95"
+iso_image = "alpine-standard-3.17.3-armv7.iso"
+iso_checksum = "sha256:c5995a1f050a2587d15314e72d06910d7f48ed4cb0f54366d0280554511b8453"
 cpu = "armv7"
 virtualbox_guest_os_type = "Linux"
 vmware_guest_os_type = "arm-other5xlinux"

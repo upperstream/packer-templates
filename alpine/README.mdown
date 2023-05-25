@@ -28,8 +28,8 @@
   * Alpine Linux 3.14.3 (x86_64 and x86)
 * [alpine-3.14](alpine-3.14/README.mdown) - templates for Alpine Linux 3.14.3
   * Alpine Linux 3.14.3 (x86_64 and x86)
-* [alpine-3.17](alpine-3.17/README.mdown) - templates for Alpine Linux 3.17.0
-  * Alpine Linux 3.17 (x86_64, x86, armv7, and aarch64)
+* [alpine-3.17](alpine-3.17/README.mdown) - templates for Alpine Linux 3.17.3
+  * Alpine Linux 3.17.3 (x86_64, x86, armv7, and aarch64)
 
 - - -
 
