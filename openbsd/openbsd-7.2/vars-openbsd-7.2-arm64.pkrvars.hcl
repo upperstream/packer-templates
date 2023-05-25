@@ -1,0 +1,8 @@
+vm_name = "OpenBSD-7.2-arm64"
+cpu = "arm64"
+virtualbox_guest_os_type = "OpenBSD"
+vmware_guest_os_type = "other"
+os_ver = "7.2"
+iso_image = "install72.img"
+iso_checksum = "sha256:38626ef7b980698c25985c6976e26ea73a92aaf092325238f7be2dfa15061c30"
+qemu_binary = "qemu-system-aarch64"

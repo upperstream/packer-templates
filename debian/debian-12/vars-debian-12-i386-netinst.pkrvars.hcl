@@ -1,0 +1,5 @@
+cpu = "i386"
+iso_name = "debian-bookworm-DI-rc3-i386-netinst.iso"
+iso_path = "bookworm_di_rc3/i386/iso-cd"
+iso_checksum = "sha256:b2c2da68a2cd94a8238e41891e9e68439a645b2a4d8434638b344e241ab72fea"
+vmware_guest_os_type = "debian12"
