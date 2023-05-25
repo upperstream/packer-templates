@@ -1,0 +1,7 @@
+vm_name = "Alpine-standard-3.17-aarch64"
+iso_image = "alpine-standard-3.17.3-aarch64.iso"
+iso_checksum = "sha256:a5931edcd4077c38a51fa8fcd6fa9c11f12d622f05d24108fcf428090be65f41"
+cpu = "aarch64"
+virtualbox_guest_os_type = "Linux_64"
+vmware_guest_os_type = "arm-other5xlinux-64"
+esxi_guest_os_type = "arm-other5xlinux-64"
