@@ -164,17 +164,17 @@ variable "root_password" {
   description = "Password for the root user of this box."
 }
 
-variable "ssh_user" {
-  type        = string
-  default     = "root"
-  description = "SSH username to connect this box being created."
-}
-
 variable "ssh_pass" {
   type        = string
   default     = "vagrant"
   sensitive   = false
   description = "SSH password to connect this box being created."
+}
+
+variable "ssh_user" {
+  type        = string
+  default     = "root"
+  description = "SSH username to connect this box being created."
 }
 
 variable "vagrant_password" {
