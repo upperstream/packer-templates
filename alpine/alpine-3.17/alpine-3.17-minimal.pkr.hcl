@@ -537,7 +537,7 @@ build {
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_USERNAME=${var.vagrant_username}"
     ]
-    script = "../provisioners/vagrant_alpine3.17.sh"
+    script = "../provisioners/vagrant_alpine3.17+.sh"
   }
 
   provisioner "shell" {

@@ -545,7 +545,7 @@ build {
       "VAGRANT_USERNAME=${var.vagrant_username}"
     ]
     scripts = [
-      "../provisioners/vagrant_alpine3.17.sh",
+      "../provisioners/vagrant_alpine3.17+.sh",
       "../provisioners/docker_alpine3.13+.sh"
     ]
   }
