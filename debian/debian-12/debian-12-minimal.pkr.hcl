@@ -180,8 +180,14 @@ variable "ssh_pass" {
 variable "vagrant_password" {
   type        = string
   default     = "vagrant"
-  sensitive   = false
+  sensitive   = true
   description = "Password for the Vagrant user of this box."
+}
+
+variable "vagrant_ssh_public_key" {
+  type        = string
+  default     = ""
+  description = "SSH public key for Vagrant user"
 }
 
 variable "vagrant_username" {
@@ -507,6 +513,7 @@ build {
     environment_vars = [
       "INSTALL_FROM_DVD=${var.install_from_dvd}",
       "OPTIMISE_REPOS=1",
+      "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}",
       "WGET=wget -O -"
     ]

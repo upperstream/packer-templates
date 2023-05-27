@@ -237,8 +237,9 @@ or `-var-file` command line options to `packer`:
 * `root_password` - Password for `root` user.  Defaults to `vagrant`.
   Set `sensitive` attribute to `true` when you change this password.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to
-  `vagrant`.  Set `sensitive` attribute to `true` when you change this
-  password.
+  `vagrant`.
+* `vagrant_ssh_public_key` - SSH public key for Vagrant user.  Defaults
+  to the public key for the Vagrant insecure private key.
 * `vagrant_username` - User name used for run time.  Vagrant box is set
   for this user.  Default value is `vagrant`.
 * `virtualbox_boot_mode` - Boot mode for VirtualBox VM, `bios` or
