@@ -208,6 +208,12 @@ variable "virtualbox_version" {
   description = "Targeting VirtualBox version."
 }
 
+variable "vm_name" {
+  type        = string
+  default     = null
+  description = "Overriding VM name"
+}
+
 variable "vmware_boot_mode" {
   type        = string
   default     = "bios"
@@ -305,7 +311,7 @@ locals {
     "parallels-iso" : "preseed-bullseye-parallels.cfg"
     "qemu" : "preseed-buster-qemu.cfg"
   }
-  vm_name = "Debian-bookworm_rc-${var.cpu}-dwm"
+  vm_name = coalesce(var.vm_name, "Debian-bookworm_rc-${var.cpu}-dwm")
   vmware_vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
@@ -596,7 +602,10 @@ build {
     only = [
       "vmware-iso.default"
     ]
-    output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    output = join("", [
+      coalesce(var.vm_name, "./${local.vm_name}-v${var.box_version}"),
+      "-{{ .Provider }}.box"
+    ])
     vagrantfile_template = "../vagrantfiles/Vagrantfile-debian11"
   }
 
@@ -604,6 +613,9 @@ build {
     keep_input_artifact = true
     compression_level   = 9
     only                = ["qemu.default"]
-    output              = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    output = join("", [
+      coalesce(var.vm_name, "./${local.vm_name}-v${var.box_version}"),
+      "-{{ .Provider }}.box"
+    ])
   }
 }

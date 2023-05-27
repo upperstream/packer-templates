@@ -259,6 +259,9 @@ or `-var-file` command line options to `packer`:
   Defaults to `e1000`.
 * `vmware_vhv_enabled` - Instruct whether nested virtualisation is
   enabled for VMware box.  Defaults to `FALSE`.
+* `vm_name` - VM name of the box being created.  If this value is not
+  given, VM name will be determined based on Debian release version, CPU
+  name, and variant name.
 
 - - -
 
