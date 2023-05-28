@@ -2,11 +2,12 @@
 
 ## Contents
 
-* [alpine](alpine/README.md) - Alpine Linux templates (x86_64 and
-  x86)
-  * alpine-3.14 - Alpine Linux 3.14.3 templates
+* [alpine](alpine/README.md) - Alpine Linux templates
+  * alpine-3.14 - Alpine Linux 3.14.3 templates (x86_64 and x86)
   * alpine-3.17 - Alpine Linux 3.17.3 templates (x86_64, x86, armv7,
     and aarch64)
+  * alpine-3.18 - Alpine Linux 3.18.0 templates (x86_64, x86, and
+    aarch64)
   * [more](alpine/README.md)
 * [archlinux](archlinux/README.md) - Arch Linux templates (x86_64)
 * [centos](centos/README.md) - CentOS templates (x86_64 and i386)

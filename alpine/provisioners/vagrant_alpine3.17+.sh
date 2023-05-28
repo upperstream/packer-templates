@@ -3,7 +3,13 @@
 
 #shellcheck disable=SC2174
 mkdir -pm 700 /home/"$VAGRANT_USERNAME"/.ssh
-wget -O - 'https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub' >> /home/"$VAGRANT_USERNAME"/.ssh/authorized_keys
+
+if [ "$VAGRANT_SSH_PUBLIC_KEY" ]; then
+	echo "$VAGRANT_SSH_PUBLIC_KEY" >> /home/"$VAGRANT_USERNAME"/.ssh/authorized_keys
+else
+	wget -O - 'https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub' >> /home/"$VAGRANT_USERNAME"/.ssh/authorized_keys
+fi
+
 chown -R "$VAGRANT_USERNAME":"$VAGRANT_USERNAME" /home/"$VAGRANT_USERNAME"
 chmod -R og-rwx /home/"$VAGRANT_USERNAME"/.ssh
 cat > /usr/sbin/shutdown << 'EOF'
