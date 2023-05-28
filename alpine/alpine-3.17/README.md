@@ -222,13 +222,13 @@ host.
 
 ## Default settings
 
-These default settings are done by the file `Vagrantfile.Alpine3.17`
+These default settings are done by the file `Vagrantfile.Alpine3.17+`
 which will be included in the box.  You can override this setting by
 your own `Vagrantfile`.
 
 ### Synced Folder
 
-Synced Folder of this box is disabled by default, alhtough VirtualBox
+Synced Folder of this box is disabled by default, although VirtualBox
 Guest Additions is installed on the box.  You can enable this feature
 using `config.vm.synced_folder` method in your `Vagrantfile`.
 
