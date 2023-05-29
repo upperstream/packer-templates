@@ -1,7 +1,7 @@
-# Packer templates for Alpine Linux 3.17.3
+# Packer templates for Alpine Linux 3.18.0
 
-Templates to create Vagrant boxes for Alpine Linux 3.17.3. (x86_64,
-x86, aarch64, and armv7)
+Templates to create Vagrant boxes for Alpine Linux 3.18.0. (x86_64,
+x86, and aarch64)
 
 ## Prerequisites
 
@@ -50,22 +50,22 @@ From the terminal, invoke the following command for VirtualBox provider:
 
 ```
 packer build -only=virtualbox-iso.default \
-  -var-file=vars-alpine-standard-3.17-x86_64.pkrvars.hcl \
-  alpine-3.17-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.18-x86_64.pkrvars.hcl \
+  alpine-3.18-minimal.pkr.hcl
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-virtualbox.box` in
+`Alpine-standard-3.18-x86_64-minimal-v18.0.20230509-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329`
+`Alpine-standard-3.18-x86_64-minimal-v18.0.20230509`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-virtualbox.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.3.20230329 \
+  Alpine-standard-3.18-x86_64-minimal-v18.0.20230509-virtualbox.box \
+  --name Alpine-standard-3.18-x86_64-minimal-v18.0.20230509 \
   --provider virtualbox
 ```
 
@@ -78,22 +78,22 @@ From the terminal, invoke the following command for VMware provider:
 
 ```
 packer build -only=vmware-iso.default \
-  -var-file=vars-alpine-standard-3.17-x86_64.pkrvars.hcl \
-  alpine-3.17-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.18-x86_64.pkrvars.hcl \
+  alpine-3.18-minimal.pkr.hcl
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-vmware.box` in the
+`Alpine-standard-3.18-x86_64-minimal-v18.0.20230509-vmware.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329` to your box list
+`Alpine-standard-3.18-x86_64-minimal-v18.0.20230509` to your box list
 by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-vmware.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.3.20230329 \
+  Alpine-standard-3.18-x86_64-minimal-v18.0.20230509-vmware.box \
+  --name Alpine-standard-3.18-x86_64-minimal-v18.0.20230509 \
   --provider vmware
 ```
 
@@ -119,8 +119,8 @@ The following command will build a VM image on your ESXi:
 
 ```
 packer build -only=vmware-iso.esxi \
-  -var-file=vars-alpine-standard-3.17-x86_64.pkrvars.hcl \
-  alpine-3.17-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.18-x86_64.pkrvars.hcl \
+  alpine-3.18-minimal.pkr.hcl
 ```
 
 (Note that created VM will be unregistered from your Inventory.)
@@ -131,8 +131,8 @@ feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
 ```
 packer build -only=vmware-iso.esxi -var esxi_vnc_over_websocket=false \
-  -var-file=vars-alpine-standard-3.17-x86_64.pkrvars.hcl \
-  alpine-3.17-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.18-x86_64.pkrvars.hcl \
+  alpine-3.18-minimal.pkr.hcl
 ```
 
 ### QEMU/libvirt
@@ -141,22 +141,22 @@ From the terminal, invoke the following command for Libvirt provider:
 
 ```
 packer build -only=qemu.default \
-  -var-file=vars-alpine-standard-3.17-x86_64.pkrvars.hcl \
-  alpine-3.17-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.18-x86_64.pkrvars.hcl \
+  alpine-3.18-minimal.pkr.hcl
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-libvirt.box` in the
+`Alpine-standard-3.18-x86_64-minimal-v18.0.20230509-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329`
+`Alpine-standard-3.18-x86_64-minimal-v18.0.20230509`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-libvirt.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.3.20230329 \
+  Alpine-standard-3.18-x86_64-minimal-v18.0.20230509-libvirt.box \
+  --name Alpine-standard-3.18-x86_64-minimal-v18.0.20230509 \
   --provider libvirt
 ```
 
@@ -171,22 +171,22 @@ From the terminal, invoke the following command for Parallels provider:
 
 ```
 packer build -only=parallels-iso.default \
-  -var-file=vars-alpine-standard-3.17-x86_64.pkrvars.hcl \
-  alpine-3.17-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.18-x86_64.pkrvars.hcl \
+  alpine-3.18-minimal.pkr.hcl
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-parallels.box` in
+`Alpine-standard-3.18-x86_64-minimal-v18.0.20230509-parallels.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329`
+`Alpine-standard-3.18-x86_64-minimal-v18.0.20230509`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-parallels.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.3.20230329 \
+  Alpine-standard-3.18-x86_64-minimal-v18.0.20230509-parallels.box \
+  --name Alpine-standard-3.18-x86_64-minimal-v18.0.20230509 \
   --provider parallels
 ```
 
@@ -198,22 +198,22 @@ From the terminal, invoke the following command for Hyper-V provider:
 
 ```
 packer build -only=hyperv-iso.default \
-  -var-file=vars-alpine-standard-3.17-x86_64.pkrvars.hcl \
-  alpine-3.17-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.18-x86_64.pkrvars.hcl \
+  alpine-3.18-minimal.pkr.hcl
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-hyperv.box`
+`Alpine-standard-3.18-x86_64-minimal-v18.0.20230509-hyperv.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329`
+`Alpine-standard-3.18-x86_64-minimal-v18.0.20230509`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-hyperv.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.3.20230329 \
+  Alpine-standard-3.18-x86_64-minimal-v18.0.20230509-hyperv.box \
+  --name Alpine-standard-3.18-x86_64-minimal-v18.0.20230509 \
   --provider hyperv
 ```
 
@@ -239,10 +239,10 @@ for SSH connection of this box is set to `/bin/ash`.
 
 ## Variants
 
-* `alpine-3.17-minimal.pkr.hcl` - Alpine Linux 3.17.3
-* `alpine-3.17-ansible.pkr.hcl` - Alpine Linux 3.17.3 with [Ansible],
+* `alpine-3.18-minimal.pkr.hcl` - Alpine Linux 3.18.0
+* `alpine-3.18-ansible.pkr.hcl` - Alpine Linux 3.18.0 with [Ansible],
   [Ansible Lint], and [Testinfra]
-* `alpine-3.17-docker.pkr.hcl` - Alpine Linux 3.17.3 with [Docker] +
+* `alpine-3.18-docker.pkr.hcl` - Alpine Linux 3.18.0 with [Docker] +
   [Docker Compose]
 
 [Ansible]: https://www.ansible.com/
@@ -265,15 +265,14 @@ Templates support various CPUs.  The following list describes which
 * x86_64 - `vars-alpine-*-x86_64.pkrvars.hcl`
 * x86 - `vars-alpine-*-x64.pkrvars.hcl`
 * aarch64 - `vars-alpine-*-aarch64.pkrvars.hcl`
-* armv7 - `vars-alpine-*-armv7.pkrvars.hcl`
 
 Arm CPUs are tested with only `parallels-iso` builder on Apple Silicon
 machines.
 
 ## Optimised kernel for virtual machines
 
-Instead of `vars-alpine-standard-3.17-*.pkrvars.hcl` files you can use
-`vars-alpine-virt-3.17-*.pkrvars.hcl`.  These files instruct to use ISO
+Instead of `vars-alpine-standard-3.18-*.pkrvars.hcl` files you can use
+`vars-alpine-virt-3.18-*.pkrvars.hcl`.  These files instruct to use ISO
 images with kernels optimised for virtual machines.
 
 ## Build parameters
@@ -285,6 +284,7 @@ or `-var-file` command line options to `packer`:
   minutes while `15s` denotes 15 seconds.  Defaults to 30 seconds.
 * `disk_size` - Disk size of the created VM.  Defaults to `40960`
   which means 40GB.
+* `esxi_disk_name` - Disk name for ESXi box.
 * `esxi_keep_registered` - instructs whether build artefact should be
   kept in the inventory on ESXi.  Defaults to `false`.
 * `esxi_vnc_over_websocket` - Controlls whether or not to use VNC over
@@ -292,25 +292,41 @@ or `-var-file` command line options to `packer`:
   your ESXi host version is prior to 6.7 which supports VNC server.
 * `headless` - Launch the virtual machine in headless mode if set to
   `true`.  Defaults to `false`.
+* `hyperv_disk_name` - Disk name for Hyper-V box.
 * `hyperv_switch_name` - Network switch name on Packer Hyper-V builder.
   Default value is `Default Switch`.
 * `mem_size` - RAM size of the created VM.  Defaults to `512`
   which means 512MB.
 * `num_cpus` - The number of CPUs.  Defaults to `2`.
+* `parallels_disk_name` - Disk name for Parallels box.
+* `qemu_disk_name` - Disk name for QEMU box.
 * `qemu_display` - Value for `-display` option for QEMU.  Defaults to an
   empty string.
 * `qemu_use_default_display` - Do not pass `-display` option to QEMU if
   `true`.  Defaults to `false`.
 * `root_password` - Password for `root` user.  Defaults to `vagrant`.
-* `vagrant_username` - User name used for run time.  Vagrant box is set
-  for this user.  Defaults to `vagrant`.  This is also used for
-  SSH user name during build time.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to
   `vagrant`.  This is also used for SSH password during build time.
+* `vagrant_ssh_public_key` - SSH public key for Vagrant user.  Defaults
+  to the public key for the Vagrant insecure private key.
+* `vagrant_username` - User name used for run time.  Vagrant box is set
+  for this user.  Defaults to `vagrant`.  This is also used for SSH
+  user name during build time.
+* `virtualbox_disk_name` - Disk name for VirtualBox box.
 * `vm_name` - VM name.  This also affects box file name and output
   directory name.
+* `vmware_cdrom_adapter_type` - CD-ROM adapter type for VMware box.
+  Defaults to `ide`.
+* `vmware_disk_name` - Disk name for VMware box.  Defaults to `scsi`.
 * `vmware_fusion_app_path` - Path name to the VMware Fusion on Mac.
   Defaults to `/Applications/VMware Fusion.app`.
+* `vmware_hardware_version` - Virtual hardware version of VMware box.
+  Defaults to `9`.
+* `vmware_network` - Network type of VMware box.  Defaults to `nat`.
+* `vmware_network_adapter_type` - Network adapter type for VMware box.
+  Defaults to `e1000`.
+* `vmware_vhv_enabled` - Instruct whether nested virtualisation is
+  enabled for VMware box.  Defaults to `FALSE`.
 
 - - -
 
