@@ -6,7 +6,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "3.20230516"
+  default     = "4.20230528"
   description = "Version number of this Vagrant box."
 }
 
@@ -518,7 +518,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "DOCKER_COMPOSE=docker-compose=1.29.2-3",
-      "DOCKER_IO=docker.io=20.10.24+dfsg1-1+b2",
+      "DOCKER_IO=docker.io=20.10.24+dfsg1-1+b3",
       "INSTALL_FROM_DVD=${var.install_from_dvd}",
       "OPTIMISE_REPOS=1",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
