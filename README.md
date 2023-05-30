@@ -2,12 +2,12 @@
 
 ## Contents
 
-* [alpine](alpine/README.md) - Alpine Linux templates (x86_64 and
-  x86)
-  * alpine-3.11 - Alpine Linux 3.11.13 templates
-  * alpine-3.12 - Alpine Linux 3.12.9 templates
-  * alpine-3.13 - Alpine Linux 3.13.7 templates
-  * alpine-3.14 - Alpine Linux 3.14.3 templates
+* [alpine](alpine/README.md) - Alpine Linux templates
+  * alpine-3.14 - Alpine Linux 3.14.3 templates (x86_64 and x86)
+  * alpine-3.17 - Alpine Linux 3.17.3 templates (x86_64, x86, armv7,
+    and aarch64)
+  * alpine-3.18 - Alpine Linux 3.18.0 templates (x86_64, x86, and
+    aarch64)
   * [more](alpine/README.md)
 * [archlinux](archlinux/README.md) - Arch Linux templates (x86_64)
 * [centos](centos/README.md) - CentOS templates (x86_64 and i386)
@@ -27,7 +27,7 @@
   * freebsd-12.3 - FreeBSD 12.3 templates
   * freebsd-12.4 - FreeBSD 12.4 templates
   * freebsd-13.1 - FreeBSD 13.1 templates
-  * freebsd-13.2 - FreeBSD 13.2 templates
+  * freebsd-13.2 - FreeBSD 13.2 templates (amd64, i386, and arm64)
   * [more](freebsd/README.md)
 * [netbsd](netbsd/README.md) - NetBSD templates (amd64 and i386)
   * netbsd-8.2 - NetBSD 8.2 templates
@@ -51,7 +51,7 @@
   * ubuntu-14.04 - Ubuntu 14.04.5 templates
   * ubuntu-16.04 - Ubuntu 16.04.4 templates
   * ubuntu-17.10 - Ubuntu 17.10.1 templates
-  * ubuntu-18.04 - Ubuntu 18.04 templates
+  * ubuntu-18.04 - Ubuntu 18.04.6 templates
   * [more](ubuntu/README.md)
 
 ## Licensing
