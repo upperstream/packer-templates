@@ -6,7 +6,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "3.20230516"
+  default     = "4.20230528"
   description = "Version number of this Vagrant box."
 }
 
@@ -164,12 +164,6 @@ variable "root_password" {
   description = "Password for the root user of this box."
 }
 
-variable "ssh_user" {
-  type        = string
-  default     = "root"
-  description = "SSH username to connect this box being created."
-}
-
 variable "ssh_pass" {
   type        = string
   default     = "vagrant"
@@ -177,11 +171,23 @@ variable "ssh_pass" {
   description = "SSH password to connect this box being created."
 }
 
+variable "ssh_user" {
+  type        = string
+  default     = "root"
+  description = "SSH username to connect this box being created."
+}
+
 variable "vagrant_password" {
   type        = string
   default     = "vagrant"
-  sensitive   = false
+  sensitive   = true
   description = "Password for the Vagrant user of this box."
+}
+
+variable "vagrant_ssh_public_key" {
+  type        = string
+  default     = ""
+  description = "SSH public key for Vagrant user"
 }
 
 variable "vagrant_username" {
@@ -202,10 +208,28 @@ variable "virtualbox_version" {
   description = "Targeting VirtualBox version."
 }
 
+variable "vm_name" {
+  type        = string
+  default     = null
+  description = "Overriding VM name"
+}
+
 variable "vmware_boot_mode" {
   type        = string
   default     = "bios"
   description = "`bios` or `efi` for VMware box."
+}
+
+variable "vmware_cdrom_adapter_type" {
+  type        = string
+  default     = "ide"
+  description = "CD-ROM adapter type for VMware box."
+}
+
+variable "vmware_disk_adapter_type" {
+  type        = string
+  default     = "scsi"
+  description = "Disk adapter type for VMware box."
 }
 
 variable "vmware_guest_os_type" {
@@ -214,10 +238,32 @@ variable "vmware_guest_os_type" {
   description = "Guest OS type of VMware box."
 }
 
+variable "vmware_hardware_version" {
+  type        = string
+  default     = "9"
+  description = "Virtual hardware verison of VMware box."
+}
+
 variable "vmware_network" {
   type        = string
   default     = "nat"
   description = "Network type of VMware box.  This does not affect network for ESXi box."
+}
+
+variable "vmware_network_adapter_type" {
+  type        = string
+  default     = "e1000"
+  description = "Network adapter type for VMware box."
+}
+
+variable "vmware_svga_autodetect" {
+  type    = string
+  default = "TRUE"
+}
+
+variable "vmware_usb_xhci_present" {
+  type    = string
+  default = "TRUE"
 }
 
 variable "vmware_vhv_enabled" {
@@ -265,7 +311,16 @@ locals {
     "parallels-iso" : "preseed-bullseye-parallels.cfg"
     "qemu" : "preseed-buster-qemu.cfg"
   }
-  vm_name = "Debian-bookworm_rc-${var.cpu}-dwm"
+  vm_name = coalesce(var.vm_name, "Debian-bookworm_rc-${var.cpu}-dwm")
+  vmware_vmx_data = {
+    "ethernet0.addressType"     = "generated"
+    "ethernet0.present"         = "TRUE"
+    "ethernet0.wakeOnPcktRcv"   = "FALSE"
+    "remotedisplay.vnc.enabled" = "TRUE"
+    "vhv.enable"                = var.vmware_vhv_enabled
+    "svga.autodetect"           = var.vmware_svga_autodetect
+    "usb_xhci.present"          = var.vmware_usb_xhci_present
+  }
 }
 
 source "hyperv-iso" "default" {
@@ -383,7 +438,9 @@ source "vmware-iso" "default" {
     local.boot_parameter_submit[var.vmware_boot_mode]
   ))
   boot_wait            = var.boot_wait
+  cdrom_adapter_type   = var.vmware_cdrom_adapter_type
   cpus                 = var.num_cpus
+  disk_adapter_type    = var.vmware_disk_adapter_type
   disk_size            = var.disk_size
   disk_type_id         = "0"
   guest_os_type        = var.vmware_guest_os_type
@@ -393,22 +450,16 @@ source "vmware-iso" "default" {
   iso_urls             = local.iso_urls
   memory               = var.mem_size
   network              = var.vmware_network
-  network_adapter_type = "e1000"
+  network_adapter_type = var.vmware_network_adapter_type
   output_directory     = "output/${local.vm_name}-v${var.box_version}-vmware"
   shutdown_command     = "sudo /sbin/shutdown -h now"
   ssh_password         = var.ssh_pass
   ssh_port             = 22
   ssh_timeout          = "10000s"
   ssh_username         = var.ssh_user
+  version              = var.vmware_hardware_version
   vm_name              = local.vm_name
-  vmx_data = {
-    "ethernet0.addressType"     = "generated"
-    "ethernet0.present"         = "TRUE"
-    "ethernet0.wakeOnPcktRcv"   = "FALSE"
-    "remotedisplay.vnc.enabled" = "TRUE"
-    "svga.vramSize"             = "33554432"
-    "vhv.enable"                = var.vmware_vhv_enabled
-  }
+  vmx_data             = local.vmware_vmx_data
 }
 
 source "vmware-iso" "esxi" {
@@ -468,12 +519,13 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "DWM=dwm=6.4-1",
       "ARANDR=arandr=0.1.11-1",
+      "DWM=dwm=6.4-1",
       "INSTALL_FROM_DVD=${var.install_from_dvd}",
       "OPTIMISE_REPOS=1",
       "STTERM=stterm=0.9-1",
       "SUCKLESS_TOOLS=suckless-tools=47-1",
+      "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}",
       "WGET=wget -O -",
       "XORG=xorg=1:7.7+23",
@@ -550,7 +602,10 @@ build {
     only = [
       "vmware-iso.default"
     ]
-    output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    output = join("", [
+      coalesce(var.vm_name, "./${local.vm_name}-v${var.box_version}"),
+      "-{{ .Provider }}.box"
+    ])
     vagrantfile_template = "../vagrantfiles/Vagrantfile-debian11"
   }
 
@@ -558,6 +613,9 @@ build {
     keep_input_artifact = true
     compression_level   = 9
     only                = ["qemu.default"]
-    output              = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    output = join("", [
+      coalesce(var.vm_name, "./${local.vm_name}-v${var.box_version}"),
+      "-{{ .Provider }}.box"
+    ])
   }
 }
