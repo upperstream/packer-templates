@@ -619,7 +619,7 @@ build {
       "parallels-iso.default"
     ]
     output               = "${local.vm_name}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.17+"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.15+"
   }
 
   post-processor "vagrant" {
@@ -629,6 +629,6 @@ build {
       "qemu.default"
     ]
     output               = "${local.vm_name}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.17+"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.15+"
   }
 }
