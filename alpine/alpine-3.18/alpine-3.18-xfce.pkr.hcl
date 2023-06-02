@@ -583,7 +583,7 @@ build {
       "XRDP=xrdp=0.9.21.1-r0"
     ]
     scripts = [
-      "../provisioners/vagrant_alpine3.17+.sh",
+      "../provisioners/vagrant_alpine3.15+.sh",
       "../provisioners/xfce.sh"
     ]
   }

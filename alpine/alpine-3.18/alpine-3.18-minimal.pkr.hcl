@@ -578,7 +578,7 @@ build {
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}"
     ]
-    script = "../provisioners/vagrant_alpine3.17+.sh"
+    script = "../provisioners/vagrant_alpine3.15+.sh"
   }
 
   provisioner "shell" {

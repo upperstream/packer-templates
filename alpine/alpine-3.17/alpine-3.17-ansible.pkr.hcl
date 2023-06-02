@@ -543,7 +543,7 @@ build {
       "VAGRANT_USERNAME=${var.vagrant_username}"
     ]
     scripts = [
-      "../provisioners/vagrant_alpine3.17+.sh",
+      "../provisioners/vagrant_alpine3.15+.sh",
       "../provisioners/ansible+testinfra_alpine3.12+.sh"
     ]
   }
