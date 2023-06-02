@@ -1,29 +1,3 @@
-packer {
-  required_version = ">= 1.7.0"
-  required_plugins {
-    hyperv = {
-      version = ">= 1.0.0"
-      source  = "github.com/hashicorp/hyperv"
-    }
-    parallels = {
-      version = ">= 1.0.1"
-      source  = "github.com/hashicorp/parallels"
-    }
-    qemu = {
-      version = ">= 1.0.8"
-      source  = "github.com/hashicorp/qemu"
-    }
-    virtualbox = {
-      version = ">= 0.0.1"
-      source  = "github.com/hashicorp/virtualbox"
-    }
-    vmware = {
-      version = ">= 1.0.0"
-      source  = "github.com/hashicorp/vmware"
-    }
-  }
-}
-
 variable "boot_wait" {
   type        = string
   default     = "30s"
@@ -32,7 +6,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "18.0.20230509"
+  default     = "15.8.20230329"
   description = "Version number of this Vagrant box."
 }
 
@@ -98,7 +72,7 @@ variable "esxi_vnc_over_websocket" {
 variable "headless" {
   type        = string
   default     = "false"
-  description = "VM window is not diesplayed if false."
+  description = "VM window is not displayed if false."
 }
 
 variable "hyperv_disk_name" {
@@ -139,7 +113,7 @@ variable "num_cpus" {
 
 variable "os_ver" {
   type    = string
-  default = "v3.18"
+  default = "v3.15"
 }
 
 variable "parallels_disk_name" {
@@ -541,7 +515,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "OS_VER=${var.os_ver}",
-      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=7.0.6-r0"
+      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.1.22-r1"
     ]
     only = [
       "virtualbox-iso.*"
@@ -552,7 +526,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "CPU=${var.cpu}",
-      "OPEN_VM_TOOLS=open-vm-tools=12.2.0-r0",
+      "OPEN_VM_TOOLS=open-vm-tools=11.3.5-r2",
       "OS_VER=${var.os_ver}"
     ]
     only = [
@@ -563,8 +537,8 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "NFS_UTILS=nfs-utils=2.6.3-r1",
-      "UTIL_LINUX=util-linux=2.38.1-r7"
+      "NFS_UTILS=nfs-utils=2.5.4-r1",
+      "UTIL_LINUX=util-linux=2.37.4-r0"
     ]
     only = [
       "qemu.default"

@@ -1,29 +1,3 @@
-packer {
-  required_version = ">= 1.7.0"
-  required_plugins {
-    hyperv = {
-      version = ">= 1.0.0"
-      source  = "github.com/hashicorp/hyperv"
-    }
-    parallels = {
-      version = ">= 1.0.1"
-      source  = "github.com/hashicorp/parallels"
-    }
-    qemu = {
-      version = ">= 1.0.8"
-      source  = "github.com/hashicorp/qemu"
-    }
-    virtualbox = {
-      version = ">= 0.0.1"
-      source  = "github.com/hashicorp/virtualbox"
-    }
-    vmware = {
-      version = ">= 1.0.0"
-      source  = "github.com/hashicorp/vmware"
-    }
-  }
-}
-
 variable "boot_wait" {
   type        = string
   default     = "30s"
@@ -32,7 +6,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "18.0.20230509"
+  default     = "15.8.20230329"
   description = "Version number of this Vagrant box."
 }
 
@@ -139,7 +113,7 @@ variable "num_cpus" {
 
 variable "os_ver" {
   type    = string
-  default = "v3.18"
+  default = "v3.15"
 }
 
 variable "parallels_disk_name" {
@@ -207,7 +181,7 @@ variable "vagrant_username" {
 
 variable "variant" {
   type    = string
-  default = "minimal"
+  default = "dwm"
 }
 
 variable "virtualbox_disk_name" {
@@ -541,7 +515,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "OS_VER=${var.os_ver}",
-      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=7.0.6-r0"
+      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.1.22-r1"
     ]
     only = [
       "virtualbox-iso.*"
@@ -552,8 +526,10 @@ build {
   provisioner "shell" {
     environment_vars = [
       "CPU=${var.cpu}",
-      "OPEN_VM_TOOLS=open-vm-tools=12.2.0-r0",
-      "OS_VER=${var.os_ver}"
+      "OPEN_VM_TOOLS=open-vm-tools=11.3.5-r2",
+      "OS_VER=${var.os_ver}",
+      "XF86_INPUT=xf86-input-evdev=2.10.6-r1",
+      "XF86_VIDEO=xf86-video-vmware=13.3.0-r1"
     ]
     only = [
       "vmware-iso.*"
@@ -563,8 +539,8 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "NFS_UTILS=nfs-utils=2.6.3-r1",
-      "UTIL_LINUX=util-linux=2.38.1-r7"
+      "NFS_UTILS=nfs-utils=2.5.4-r1",
+      "UTIL_LINUX=util-linux=2.37.4-r0"
     ]
     only = [
       "qemu.default"
@@ -574,11 +550,24 @@ build {
 
   provisioner "shell" {
     environment_vars = [
+      "DMENU=dmenu=5.0-r0",
+      "DWM=dwm=6.2-r0",
+      "OS_VER=${var.os_ver}",
+      "SLIM=slim=1.3.6-r11",
+      "SLIM_THEMES=slim-themes=1.2.3-r3",
+      "ST=st=0.8.4-r0",
+      "SUDO_CMD=doas",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
-      "VAGRANT_USERNAME=${var.vagrant_username}"
+      "VAGRANT_USERNAME=${var.vagrant_username}",
+      "XRANDR=xrandr=1.5.1-r0",
+      "XRDP=xrdp=0.9.18.1-r0"
     ]
-    script = "../provisioners/vagrant_alpine3.15+.sh"
+    scripts = [
+      "../provisioners/vagrant_alpine3.15+.sh",
+      "../provisioners/dwm_alpine3.14+.sh",
+      "../provisioners/slim.sh"
+    ]
   }
 
   provisioner "shell" {

@@ -1,29 +1,3 @@
-packer {
-  required_version = ">= 1.7.0"
-  required_plugins {
-    hyperv = {
-      version = ">= 1.0.0"
-      source  = "github.com/hashicorp/hyperv"
-    }
-    parallels = {
-      version = ">= 1.0.1"
-      source  = "github.com/hashicorp/parallels"
-    }
-    qemu = {
-      version = ">= 1.0.8"
-      source  = "github.com/hashicorp/qemu"
-    }
-    virtualbox = {
-      version = ">= 0.0.1"
-      source  = "github.com/hashicorp/virtualbox"
-    }
-    vmware = {
-      version = ">= 1.0.0"
-      source  = "github.com/hashicorp/vmware"
-    }
-  }
-}
-
 variable "boot_wait" {
   type        = string
   default     = "30s"
@@ -32,7 +6,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "18.0.20230509"
+  default     = "15.8.20230329"
   description = "Version number of this Vagrant box."
 }
 
@@ -139,7 +113,7 @@ variable "num_cpus" {
 
 variable "os_ver" {
   type    = string
-  default = "v3.18"
+  default = "v3.15"
 }
 
 variable "parallels_disk_name" {
@@ -207,7 +181,7 @@ variable "vagrant_username" {
 
 variable "variant" {
   type    = string
-  default = "minimal"
+  default = "docker"
 }
 
 variable "virtualbox_disk_name" {
@@ -541,7 +515,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "OS_VER=${var.os_ver}",
-      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=7.0.6-r0"
+      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.1.22-r1"
     ]
     only = [
       "virtualbox-iso.*"
@@ -552,7 +526,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "CPU=${var.cpu}",
-      "OPEN_VM_TOOLS=open-vm-tools=12.2.0-r0",
+      "OPEN_VM_TOOLS=open-vm-tools=11.3.5-r2",
       "OS_VER=${var.os_ver}"
     ]
     only = [
@@ -563,8 +537,8 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "NFS_UTILS=nfs-utils=2.6.3-r1",
-      "UTIL_LINUX=util-linux=2.38.1-r7"
+      "NFS_UTILS=nfs-utils=2.5.4-r1",
+      "UTIL_LINUX=util-linux=2.37.4-r0"
     ]
     only = [
       "qemu.default"
@@ -574,11 +548,21 @@ build {
 
   provisioner "shell" {
     environment_vars = [
+      "DOCKER=docker=20.10.16-r0",
+      "DOCKER_COMPOSE_VERSION=1.29.2",
+      "OS_VER=${var.os_ver}",
+      "PYTHON_PIP=py3-pip=20.3.4-r1",
+      "PY_BCRYPT=py3-bcrypt=3.2.0-r4",
+      "PY_CRYPTOGRAPHY=py3-cryptography=3.3.2-r3",
+      "PY_PYNACL=py3-pynacl=1.4.0-r2",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}"
     ]
-    script = "../provisioners/vagrant_alpine3.15+.sh"
+    scripts = [
+      "../provisioners/vagrant_alpine3.15+.sh",
+      "../provisioners/docker_alpine3.13+.sh"
+    ]
   }
 
   provisioner "shell" {

@@ -537,7 +537,7 @@ build {
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_USERNAME=${var.vagrant_username}"
     ]
-    script = "../provisioners/vagrant_alpine3.17+.sh"
+    script = "../provisioners/vagrant_alpine3.15+.sh"
   }
 
   provisioner "shell" {
@@ -564,7 +564,7 @@ build {
       "parallels-iso.default"
     ]
     output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.17+"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.15+"
   }
 
   post-processor "vagrant" {
@@ -574,6 +574,6 @@ build {
       "qemu.default"
     ]
     output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.17+"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.15+"
   }
 }

@@ -222,7 +222,7 @@ host.
 
 ## Default settings
 
-These default settings are done by the file `Vagrantfile.Alpine3.17+`
+These default settings are done by the file `Vagrantfile.Alpine3.15+`
 which will be included in the box.  You can override this setting by
 your own `Vagrantfile`.
 
