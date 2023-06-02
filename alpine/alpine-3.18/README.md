@@ -36,7 +36,7 @@ x86, and aarch64)
 ## Provisioned software tools
 
 * sshd
-* sudo
+* doas
 * chronyd (NTP daemon)
 * rsync
 * NFS (installed but not enabled)
