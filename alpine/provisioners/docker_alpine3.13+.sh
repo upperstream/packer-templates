@@ -4,7 +4,7 @@
 set -e
 set -x
 
-sed -i "/${OS_VER:-edge}\/community/s/^#//" /etc/apk/repositories
+sed -i "/${OS_VER:-edge}\/community/s/^# *//" /etc/apk/repositories
 apk --update --no-cache add "${DOCKER:-docker}"
 apk --no-cache add "${PYTHON_PIP:-py3-pip}" "${PY_PYNACL:-py3-pynacl}" "${PY_BCRYPT:-py3-bcrypt}" "${PY_CRYPTOGRAPHY:-py3-cryptography}"
 if [ "$DOCKER_COMPOSE" ]; then
