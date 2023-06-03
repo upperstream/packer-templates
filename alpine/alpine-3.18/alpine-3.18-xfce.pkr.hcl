@@ -98,7 +98,7 @@ variable "esxi_vnc_over_websocket" {
 variable "headless" {
   type        = string
   default     = "false"
-  description = "VM window is not diesplayed if false."
+  description = "VM window is not displayed if false."
 }
 
 variable "hyperv_disk_name" {
@@ -139,7 +139,7 @@ variable "num_cpus" {
 
 variable "os_ver" {
   type    = string
-  default = "v3.18"
+  default = "3.18"
 }
 
 variable "parallels_disk_name" {
@@ -318,23 +318,24 @@ locals {
     "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/%s<enter><wait>",
     "DISK=%s sh /tmp/install.sh<enter><wait>"
   ]
-  vm_name = coalesce(var.vm_name, "${var.vm_name_base}-${var.os_ver}-${var.cpu}-${var.variant}-${var.box_version}")
+  iso_urls = [
+    "./iso/${var.iso_image}",
+    "http://dl-cdn.alpinelinux.org/alpine/v${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
+  ]
+  vm_name = coalesce(var.vm_name, "${var.vm_name_base}-${var.os_ver}-${var.cpu}-${var.variant}-v${var.box_version}")
 }
 
 source "hyperv-iso" "default" {
   boot_command = split("\n", format(
     join("\n", local.boot_command), var.hyperv_disk_name, var.hyperv_disk_name, "install_hyperv.sh", var.hyperv_disk_name
   ))
-  boot_wait      = var.boot_wait
-  cpus           = var.num_cpus
-  disk_size      = var.disk_size
-  headless       = var.headless
-  http_directory = "."
-  iso_checksum   = var.iso_checksum
-  iso_urls = [
-    "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
-  ]
+  boot_wait        = var.boot_wait
+  cpus             = var.num_cpus
+  disk_size        = var.disk_size
+  headless         = var.headless
+  http_directory   = "."
+  iso_checksum     = var.iso_checksum
+  iso_urls         = local.iso_urls
   memory           = var.mem_size
   output_directory = "output/${local.vm_name}-hyperv"
   shutdown_command = "poweroff"
@@ -350,17 +351,14 @@ source "parallels-iso" "default" {
   boot_command = split("\n", format(
     join("\n", local.boot_command), var.parallels_disk_name, var.parallels_disk_name, "install.sh", var.parallels_disk_name
   ))
-  boot_wait      = var.boot_wait
-  cpus           = var.num_cpus
-  disk_size      = var.disk_size
-  disk_type      = "expand"
-  guest_os_type  = "linux"
-  http_directory = "."
-  iso_checksum   = var.iso_checksum
-  iso_urls = [
-    "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
-  ]
+  boot_wait            = var.boot_wait
+  cpus                 = var.num_cpus
+  disk_size            = var.disk_size
+  disk_type            = "expand"
+  guest_os_type        = "linux"
+  http_directory       = "."
+  iso_checksum         = var.iso_checksum
+  iso_urls             = local.iso_urls
   memory               = var.mem_size
   output_directory     = "output/${local.vm_name}-parallels"
   parallels_tools_mode = "disable"
@@ -377,19 +375,16 @@ source "qemu" "default" {
   boot_command = split("\n", format(
     join("\n", local.boot_command), var.qemu_disk_name, var.qemu_disk_name, "install.sh", var.qemu_disk_name
   ))
-  boot_wait      = var.boot_wait
-  cpus           = var.num_cpus
-  disk_interface = "virtio"
-  disk_size      = var.disk_size
-  display        = var.qemu_display
-  format         = "qcow2"
-  headless       = var.headless
-  http_directory = "."
-  iso_checksum   = var.iso_checksum
-  iso_urls = [
-    "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
-  ]
+  boot_wait           = var.boot_wait
+  cpus                = var.num_cpus
+  disk_interface      = "virtio"
+  disk_size           = var.disk_size
+  display             = var.qemu_display
+  format              = "qcow2"
+  headless            = var.headless
+  http_directory      = "."
+  iso_checksum        = var.iso_checksum
+  iso_urls            = local.iso_urls
   memory              = var.mem_size
   net_device          = "virtio-net"
   output_directory    = "output/${local.vm_name}-qemu"
@@ -414,17 +409,14 @@ source "virtualbox-iso" "default" {
   headless             = var.headless
   http_directory       = "."
   iso_checksum         = var.iso_checksum
-  iso_urls = [
-    "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
-  ]
-  memory           = var.mem_size
-  output_directory = "output/${local.vm_name}-virtualbox"
-  shutdown_command = "poweroff"
-  ssh_password     = var.ssh_password
-  ssh_port         = 22
-  ssh_timeout      = "10000s"
-  ssh_username     = var.ssh_username
+  iso_urls             = local.iso_urls
+  memory               = var.mem_size
+  output_directory     = "output/${local.vm_name}-virtualbox"
+  shutdown_command     = "poweroff"
+  ssh_password         = var.ssh_password
+  ssh_port             = 22
+  ssh_timeout          = "10000s"
+  ssh_username         = var.ssh_username
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"]
@@ -437,21 +429,18 @@ source "vmware-iso" "default" {
   boot_command = split("\n", format(
     join("\n", local.boot_command), var.vmware_disk_name, var.vmware_disk_name, "install.sh", var.vmware_disk_name
   ))
-  boot_wait          = var.boot_wait
-  cdrom_adapter_type = var.vmware_cdrom_adapter_type
-  cpus               = var.num_cpus
-  disk_adapter_type  = var.vmware_disk_adapter_type
-  disk_size          = var.disk_size
-  disk_type_id       = "0"
-  fusion_app_path    = var.vmware_fusion_app_path
-  guest_os_type      = var.vmware_guest_os_type
-  headless           = var.headless
-  http_directory     = "."
-  iso_checksum       = var.iso_checksum
-  iso_urls = [
-    "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
-  ]
+  boot_wait            = var.boot_wait
+  cdrom_adapter_type   = var.vmware_cdrom_adapter_type
+  cpus                 = var.num_cpus
+  disk_adapter_type    = var.vmware_disk_adapter_type
+  disk_size            = var.disk_size
+  disk_type_id         = "0"
+  fusion_app_path      = var.vmware_fusion_app_path
+  guest_os_type        = var.vmware_guest_os_type
+  headless             = var.headless
+  http_directory       = "."
+  iso_checksum         = var.iso_checksum
+  iso_urls             = local.iso_urls
   memory               = var.mem_size
   network              = var.vmware_network
   network_adapter_type = var.vmware_network_adapter_type
@@ -479,19 +468,16 @@ source "vmware-iso" "esxi" {
   boot_command = split("\n", format(
     join("\n", local.boot_command), var.esxi_disk_name, var.esxi_disk_name, "install.sh", var.esxi_disk_name
   ))
-  boot_wait           = var.boot_wait
-  cpus                = var.num_cpus
-  disk_size           = var.disk_size
-  disk_type_id        = "thin"
-  guest_os_type       = var.esxi_guest_os_type
-  headless            = var.headless
-  http_directory      = "."
-  insecure_connection = true
-  iso_checksum        = var.iso_checksum
-  iso_urls = [
-    "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
-  ]
+  boot_wait               = var.boot_wait
+  cpus                    = var.num_cpus
+  disk_size               = var.disk_size
+  disk_type_id            = "thin"
+  guest_os_type           = var.esxi_guest_os_type
+  headless                = var.headless
+  http_directory          = "."
+  insecure_connection     = true
+  iso_checksum            = var.iso_checksum
+  iso_urls                = local.iso_urls
   keep_registered         = var.esxi_keep_registered
   memory                  = var.mem_size
   network                 = "bridged"
@@ -540,7 +526,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OS_VER=${var.os_ver}",
+      "OS_VER=v${var.os_ver}",
       "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions-x11=7.0.6-r0"
     ]
     only = [
@@ -553,7 +539,7 @@ build {
     environment_vars = [
       "CPU=${var.cpu}",
       "OPEN_VM_TOOLS=open-vm-tools=12.2.0-r0",
-      "OS_VER=${var.os_ver}",
+      "OS_VER=v${var.os_ver}",
       "XF86_INPUT=xf86-input-evdev=2.10.6-r1",
       "XF86_VIDEO=xf86-video-vmware=13.4.0-r0"
     ]
