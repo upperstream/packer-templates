@@ -240,22 +240,20 @@ for SSH connection of this box is set to `/bin/ash`.
 ## Variants
 
 * `alpine-3.15-minimal.pkr.hcl` - Alpine Linux 3.15.8
-* `alpine-3.15-ansible.pkr.hcl` - Alpine Linux 3.15.8 with [Ansible],
-  [Ansible Lint], and [Testinfra]
 * `alpine-3.15-docker.pkr.hcl` - Alpine Linux 3.15.8 with [Docker] +
   [Docker Compose]
+* `alpine-3.16-dwm.pkr.hcl` - Alpine Linux 3.15.8 with [X.org][], [suckless][]
+  tools, and [xrdp][].
+* `alpine-3.16-xfce.pkr.hcl` - Alpine Linux 3.15.8 with [Xfce][] + [xrdp][].
 
-[Ansible]: https://www.ansible.com/
-  "Ansible is Simple IT Automation"
-[Ansible Lint]: https://docs.ansible.com/ansible-lint/
-  "Ansible Lint Documentation &mdash; Ansible Documentation"
 [Docker]: https://www.docker.com/
   "Docker - Build, Ship and Run Any App, Anywhere"
 [Docker Compose]: https://docs.docker.com/compose/
   "Docker Compose - Docker Documentation"
-[Testinfra]: https://testinfra.readthedocs.io/en/latest/
-  "Testinfra test your infrastructure &#8212;
-  testinfra 7.0.2.dev1+gfc4bfd1.d20221210 documentation"
+[suckless]: http://suckless.org/ "suckless.org software that sucks less"
+[X.org]: https://www.x.org/wiki/ "X.Org"
+[Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
+[xrdp]: http://www.xrdp.org/ "xrdp"
 
 ## Supported CPUs
 
@@ -287,7 +285,7 @@ or `-var-file` command line options to `packer`:
 * `esxi_disk_name` - Disk name for ESXi box.
 * `esxi_keep_registered` - instructs whether build artefact should be
   kept in the inventory on ESXi.  Defaults to `false`.
-* `esxi_vnc_over_websocket` - Controlls whether or not to use VNC over
+* `esxi_vnc_over_websocket` - Controls whether or not to use VNC over
   WebSocket feature for ESXi.  Defaults to `true`.  Set to `false` if
   your ESXi host version is prior to 6.7 which supports VNC server.
 * `headless` - Launch the virtual machine in headless mode if set to
