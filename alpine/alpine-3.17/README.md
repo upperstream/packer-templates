@@ -287,7 +287,7 @@ or `-var-file` command line options to `packer`:
   which means 40GB.
 * `esxi_keep_registered` - instructs whether build artefact should be
   kept in the inventory on ESXi.  Defaults to `false`.
-* `esxi_vnc_over_websocket` - Controlls whether or not to use VNC over
+* `esxi_vnc_over_websocket` - Controls whether or not to use VNC over
   WebSocket feature for ESXi.  Defaults to `true`.  Set to `false` if
   your ESXi host version is prior to 6.7 which supports VNC server.
 * `headless` - Launch the virtual machine in headless mode if set to

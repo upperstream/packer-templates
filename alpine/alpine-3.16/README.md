@@ -1,6 +1,6 @@
-# Packer templates for Alpine Linux 3.15.8
+# Packer templates for Alpine Linux 3.16.5
 
-Templates to create Vagrant boxes for Alpine Linux 3.15.8. (x86_64,
+Templates to create Vagrant boxes for Alpine Linux 3.16.5. (x86_64,
 x86, and aarch64)
 
 ## Prerequisites
@@ -50,22 +50,22 @@ From the terminal, invoke the following command for VirtualBox provider:
 
 ```
 packer build -only=virtualbox-iso.default \
-  -var-file=vars-alpine-standard-3.15-x86_64.pkrvars.hcl \
-  alpine-3.15-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.16-x86_64.pkrvars.hcl \
+  alpine-3.16-minimal.pkr.hcl
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.15-x86_64-minimal-v15.8.20230329-virtualbox.box` in
+`Alpine-standard-3.16-x86_64-minimal-v16.5.20230329-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.15-x86_64-minimal-v15.8.20230329`
+`Alpine-standard-3.16-x86_64-minimal-v16.5.20230329`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.15-x86_64-minimal-v15.8.20230329-virtualbox.box \
-  --name Alpine-standard-3.15-x86_64-minimal-v15.8.20230329 \
+  Alpine-standard-3.16-x86_64-minimal-v16.5.20230329-virtualbox.box \
+  --name Alpine-standard-3.16-x86_64-minimal-v16.5.20230329 \
   --provider virtualbox
 ```
 
@@ -78,22 +78,22 @@ From the terminal, invoke the following command for VMware provider:
 
 ```
 packer build -only=vmware-iso.default \
-  -var-file=vars-alpine-standard-3.15-x86_64.pkrvars.hcl \
-  alpine-3.15-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.16-x86_64.pkrvars.hcl \
+  alpine-3.16-minimal.pkr.hcl
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.15-x86_64-minimal-v15.8.20230329-vmware.box` in the
+`Alpine-standard-3.16-x86_64-minimal-v16.5.20230329-vmware.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.15-x86_64-minimal-v15.8.20230329` to your box list
+`Alpine-standard-3.16-x86_64-minimal-v16.5.20230329` to your box list
 by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.15-x86_64-minimal-v15.8.20230329-vmware.box \
-  --name Alpine-standard-3.15-x86_64-minimal-v15.8.20230329 \
+  Alpine-standard-3.16-x86_64-minimal-v16.5.20230329-vmware.box \
+  --name Alpine-standard-3.16-x86_64-minimal-v16.5.20230329 \
   --provider vmware
 ```
 
@@ -119,8 +119,8 @@ The following command will build a VM image on your ESXi:
 
 ```
 packer build -only=vmware-iso.esxi \
-  -var-file=vars-alpine-standard-3.15-x86_64.pkrvars.hcl \
-  alpine-3.15-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.16-x86_64.pkrvars.hcl \
+  alpine-3.16-minimal.pkr.hcl
 ```
 
 (Note that created VM will be unregistered from your Inventory.)
@@ -131,8 +131,8 @@ feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
 ```
 packer build -only=vmware-iso.esxi -var esxi_vnc_over_websocket=false \
-  -var-file=vars-alpine-standard-3.15-x86_64.pkrvars.hcl \
-  alpine-3.15-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.16-x86_64.pkrvars.hcl \
+  alpine-3.16-minimal.pkr.hcl
 ```
 
 ### QEMU/libvirt
@@ -141,22 +141,22 @@ From the terminal, invoke the following command for Libvirt provider:
 
 ```
 packer build -only=qemu.default \
-  -var-file=vars-alpine-standard-3.15-x86_64.pkrvars.hcl \
-  alpine-3.15-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.16-x86_64.pkrvars.hcl \
+  alpine-3.16-minimal.pkr.hcl
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.15-x86_64-minimal-v15.8.20230329-libvirt.box` in the
+`Alpine-standard-3.16-x86_64-minimal-v16.5.20230329-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.15-x86_64-minimal-v15.8.20230329`
+`Alpine-standard-3.16-x86_64-minimal-v16.5.20230329`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.15-x86_64-minimal-v15.8.20230329-libvirt.box \
-  --name Alpine-standard-3.15-x86_64-minimal-v15.8.20230329 \
+  Alpine-standard-3.16-x86_64-minimal-v16.5.20230329-libvirt.box \
+  --name Alpine-standard-3.16-x86_64-minimal-v16.5.20230329 \
   --provider libvirt
 ```
 
@@ -171,22 +171,22 @@ From the terminal, invoke the following command for Parallels provider:
 
 ```
 packer build -only=parallels-iso.default \
-  -var-file=vars-alpine-standard-3.15-x86_64.pkrvars.hcl \
-  alpine-3.15-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.16-x86_64.pkrvars.hcl \
+  alpine-3.16-minimal.pkr.hcl
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.15-x86_64-minimal-v15.8.20230329-parallels.box` in
+`Alpine-standard-3.16-x86_64-minimal-v16.5.20230329-parallels.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.15-x86_64-minimal-v15.8.20230329`
+`Alpine-standard-3.16-x86_64-minimal-v16.5.20230329`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.15-x86_64-minimal-v15.8.20230329-parallels.box \
-  --name Alpine-standard-3.15-x86_64-minimal-v15.8.20230329 \
+  Alpine-standard-3.16-x86_64-minimal-v16.5.20230329-parallels.box \
+  --name Alpine-standard-3.16-x86_64-minimal-v16.5.20230329 \
   --provider parallels
 ```
 
@@ -198,22 +198,22 @@ From the terminal, invoke the following command for Hyper-V provider:
 
 ```
 packer build -only=hyperv-iso.default \
-  -var-file=vars-alpine-standard-3.15-x86_64.pkrvars.hcl \
-  alpine-3.15-minimal.pkr.hcl
+  -var-file=vars-alpine-standard-3.16-x86_64.pkrvars.hcl \
+  alpine-3.16-minimal.pkr.hcl
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.15-x86_64-minimal-v15.8.20230329-hyperv.box`
+`Alpine-standard-3.16-x86_64-minimal-v16.5.20230329-hyperv.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.15-x86_64-minimal-v15.8.20230329`
+`Alpine-standard-3.16-x86_64-minimal-v16.5.20230329`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.15-x86_64-minimal-v15.8.20230329-hyperv.box \
-  --name Alpine-standard-3.15-x86_64-minimal-v15.8.20230329 \
+  Alpine-standard-3.16-x86_64-minimal-v16.5.20230329-hyperv.box \
+  --name Alpine-standard-3.16-x86_64-minimal-v16.5.20230329 \
   --provider hyperv
 ```
 
@@ -239,12 +239,12 @@ for SSH connection of this box is set to `/bin/ash`.
 
 ## Variants
 
-* `alpine-3.15-minimal.pkr.hcl` - Alpine Linux 3.15.8
-* `alpine-3.15-docker.pkr.hcl` - Alpine Linux 3.15.8 with [Docker] +
+* `alpine-3.16-minimal.pkr.hcl` - Alpine Linux 3.16.5
+* `alpine-3.16-docker.pkr.hcl` - Alpine Linux 3.16.5 with [Docker] +
   [Docker Compose]
-* `alpine-3.16-dwm.pkr.hcl` - Alpine Linux 3.15.8 with [X.org][], [suckless][]
+* `alpine-3.16-dwm.pkr.hcl` - Alpine Linux 3.16.5 with [X.org][], [suckless][]
   tools, and [xrdp][].
-* `alpine-3.16-xfce.pkr.hcl` - Alpine Linux 3.15.8 with [Xfce][] + [xrdp][].
+* `alpine-3.16-xfce.pkr.hcl` - Alpine Linux 3.16.5 with [Xfce][] + [xrdp][].
 
 [Docker]: https://www.docker.com/
   "Docker - Build, Ship and Run Any App, Anywhere"
@@ -269,8 +269,8 @@ machines.
 
 ## Optimised kernel for virtual machines
 
-Instead of `vars-alpine-standard-3.15-*.pkrvars.hcl` files you can use
-`vars-alpine-virt-3.15-*.pkrvars.hcl`.  These files instruct to use ISO
+Instead of `vars-alpine-standard-3.16-*.pkrvars.hcl` files you can use
+`vars-alpine-virt-3.16-*.pkrvars.hcl`.  These files instruct to use ISO
 images with kernels optimised for virtual machines.
 
 ## Build parameters
