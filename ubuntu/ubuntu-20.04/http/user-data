@@ -1,0 +1,39 @@
+#cloud-config
+autoinstall:
+  apt:
+    mirror-selection:
+      primary:
+        - country-mirror
+        - arches: [i386, amd64]
+          uri: http://archive.ubuntu.com/ubuntu
+        - arches: [arm64]
+          uri: http://ports.ubuntu.com/ubuntu-ports
+    fallback: abort
+    preserve_sources_list: false
+  debconf-selections: |
+    tasksel tasksel/first multiselect Basic Ubuntu server
+    xserver-xorg xserver-xorg/autodetect_monitor boolean true
+  early-commands:
+    - systemctl stop ssh.service
+    - systemctl stop ssh.socket
+  identity:
+    hostname: ubuntu
+    username: vagrant
+    password: '$y$j9T$Ydgg.aiDKQkfj6Cw7cSWa1$Z4PqCd5YYVgt/HIIq2CAKXwxQx08UJcssw3vEJzoVX2'
+  late-commands:
+    - "sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=\x22\\(.*\\)\x22/GRUB_CMDLINE_LINUX_DEFAULT=\x22net.ifnames=0 biosdevnames=0 \\1\x22/' /target/etc/default/grub"
+    - curtin in-target --target=/target -- grub-mkconfig -o /boot/grub/grub.cfg
+  locale: en_US
+  network:
+    network:
+      ethernets:
+        eth0:
+          dhcp4: true
+      version: 2
+  ssh:
+    install-server: true
+    allow-pw: yes
+  storage:
+    layout:
+      name: direct
+  version: 1

@@ -46,6 +46,11 @@
   * Ubuntu 18.04.6 LTS + X.org + suckless tools
   * Ubuntu 18.04.6 LTS + LXDE
   * Ubuntu 18.04.6 LTS + Xfce
+* [ubuntu-20.04](ubuntu-20.04/README.md) - templates for Ubuntu 20.04.6
+  * Ubuntu Server 20.04.6 LTS
+  * Ubuntu 20.04.6 LTS + X.org + suckless tools
+  * Ubuntu 20.04.6 LTS + LXQt
+  * Ubuntu 20.04.6 LTS + Xfce
 
 - - -
 
