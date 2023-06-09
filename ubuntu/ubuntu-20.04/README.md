@@ -1,6 +1,6 @@
 # Packer templates for Ubuntu 20.04.6 LTS
 
-Templates to create Vagrant boxes for Ubuntu 20.04.6 LTS (amd64).
+Templates to create Vagrant boxes for Ubuntu 20.04.6 LTS (amd64 and arm64).
 
 ## Prerequisites
 
@@ -10,11 +10,13 @@ Templates to create Vagrant boxes for Ubuntu 20.04.6 LTS (amd64).
 * [VMware][] Workstation v17.0+ / VMware Fusion v13.0+
 * [ESXi][] (vSphere Hypervisor) v7.0+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
+* [Parallels][] Desktop 18+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
         "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
 [libvirt]: https://libvirt.org/ "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
+[Parallels]: https://www.parallels.com/products/desktop/ "Run Windows on Mac - Parallels Desktop 18 Virtual Machine for Mac"
 [QEMU]: https://www.qemu.org/ "QEMU"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
@@ -23,7 +25,7 @@ Templates to create Vagrant boxes for Ubuntu 20.04.6 LTS (amd64).
 
 ## Provisioned software tools
 
-* VirtualBox Guest Additions or [open-vm-tools][]
+* VirtualBox Guest Additions, [open-vm-tools][], or Parallels Tools
 * sshd
 * sudo
 * `vagrant` user and its insecure public key
@@ -64,7 +66,8 @@ to your box list by the following command:
     vagrant box add Ubuntu-20.04-amd64-minimal-v2004.6.20230323-vmware.box --name Ubuntu-20.04-amd64-minimal-v2004.6.20230323 --provider vmware_desktop
 
 VMware build intends to create amd64 box on amd64 device using VMware
-Workstation.
+Workstation, or create arm64 box on Apple Silicon Mac device using
+VMware Fusion.
 
 ### ESXi
 
@@ -110,6 +113,22 @@ directly imported to QEMU.
 
 QEMU build intends to create amd64 box on amd64 Linux device.
 
+### Parallels
+
+From the terminal, invoke the following command for Parallels provider:
+
+    packer build -only=parallels-iso.default -var-file vars-ubuntu-20.04-arm64.pkrvars.hcl ubuntu-20.04-minimal.pkr.hcl
+
+You will find a vagrant box file named `Ubuntu-20.04-arm64-minimal-v2004.5.20220901-parallels.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `Ubuntu-20.04-arm64-minimal-v2004.5.20220901`
+to your box list by the following command:
+
+    vagrant box add Ubuntu-20.04-arm64-minimal-v2004.5.20220901-parallels.box --name Ubuntu-20.04-arm64-minimal-v2004.5.20220901 --provider parallels
+
+Parallels build intends to create arm64 box on Apple Silicon Mac device.
+
 ## Variants
 
 * `ubuntu-20.04-minimal.pkr.hcl` - Ubuntu Server 20.04 LTS
@@ -126,6 +145,18 @@ QEMU build intends to create amd64 box on amd64 Linux device.
 [X.org]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: https://xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
+
+## Installer CD images
+
+While `ubuntu-20.04-*.pkr.hcl` templates use `ubuntu-20.04.6-live-server-amd64.iso`
+ISO image to create amd64 boxes by default, using `vars-ubuntu-20.04-arm64.pkrvars.hcl`
+creates arm64 boxes with `ubuntu-20.04.5-live-server-arm64.iso` ISO
+image:
+
+    packer build -var-file=vars-ubuntu-20.04-arm64.pkrvars.hcl ubuntu-20.04-minimal.pkr.hcl
+
+Note that arm64 ISO image stays with version 20.04.5 rather than
+version 20.04.6.
 
 ## Build parameters
 

@@ -86,6 +86,17 @@ variable "os_version" {
   default = "20.04.6"
 }
 
+variable "parallels_boot_command" {
+  type    = list(string)
+  default = null
+}
+
+variable "parallels_tools_flavor" {
+  type        = string
+  default     = "lin"
+  description = "The flavour name of Parallels Tools."
+}
+
 variable "qemu_display" {
   type    = string
   default = "gtk"
@@ -223,6 +234,27 @@ locals {
   }
 }
 
+source "parallels-iso" "default" {
+  boot_command               = coalesce(var.parallels_boot_command, local.boot_command)
+  boot_wait                  = var.boot_wait
+  cpus                       = var.num_cpus
+  disk_size                  = var.disk_size
+  guest_os_type              = "ubuntu"
+  http_directory             = "./http"
+  iso_checksum               = var.iso_checksum
+  iso_urls                   = local.iso_urls
+  memory                     = var.mem_size
+  output_directory           = "output/${local.vm_name}-v${var.box_version}-parallels"
+  parallels_tools_flavor     = var.parallels_tools_flavor
+  parallels_tools_guest_path = "/tmp/prl-tools-{{.Flavor}}.iso"
+  shutdown_command           = "sudo /sbin/shutdown -h now"
+  ssh_password               = var.ssh_password
+  ssh_port                   = 22
+  ssh_timeout                = "10000s"
+  ssh_username               = var.ssh_username
+  vm_name                    = local.vm_name
+}
+
 source "qemu" "default" {
   accelerator         = "kvm"
   boot_command        = local.boot_command
@@ -343,6 +375,7 @@ source "vmware-iso" "esxi" {
 
 build {
   sources = [
+    "source.parallels-iso.default",
     "source.qemu.default",
     "source.virtualbox-iso.default",
     "source.vmware-iso.default",
@@ -382,6 +415,17 @@ build {
       "vmware-iso.esxi"
     ]
     script = "../provisioners/vmware-server.sh"
+  }
+
+  provisioner "shell" {
+    environment_vars = [
+      "PRL_TOOLS=/tmp/prl-tools-${var.parallels_tools_flavor}.iso"
+    ]
+    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
+    only = [
+      "parallels-iso.default"
+    ]
+    script = "../provisioners/parallels.sh"
   }
 
   provisioner "shell" {

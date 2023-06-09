@@ -1,5 +1,7 @@
 # Packer templates for Ubuntu
 
+Templates support amd64 unless otherwise noted.
+
 ## Contents
 
 * [ubuntu-12.04](ubuntu-12.04/README.md) - template for Ubuntu 12.04.5
@@ -47,6 +49,7 @@
   * Ubuntu 18.04.6 LTS + LXDE
   * Ubuntu 18.04.6 LTS + Xfce
 * [ubuntu-20.04](ubuntu-20.04/README.md) - templates for Ubuntu 20.04.6
+  (amd64 and arm64)
   * Ubuntu Server 20.04.6 LTS
   * Ubuntu 20.04.6 LTS + X.org + suckless tools
   * Ubuntu 20.04.6 LTS + LXQt

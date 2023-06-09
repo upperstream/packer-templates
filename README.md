@@ -52,7 +52,7 @@
   * ubuntu-16.04 - Ubuntu 16.04.4 templates
   * ubuntu-17.10 - Ubuntu 17.10.1 templates
   * ubuntu-18.04 - Ubuntu 18.04.6 templates
-  * ubuntu-20.04 - Ubuntu 20.04.6 templates
+  * ubuntu-20.04 - Ubuntu 20.04.6 templates (amd64 and arm64)
   * [more](ubuntu/README.md)
 
 ## Licensing
