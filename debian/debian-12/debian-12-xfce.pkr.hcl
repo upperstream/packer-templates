@@ -171,6 +171,12 @@ variable "ssh_pass" {
   description = "SSH password to connect this box being created."
 }
 
+variable "ssh_timeout" {
+  type        = string
+  default     = "30m"
+  description = "SSH timeout to connect this box being created."
+}
+
 variable "ssh_user" {
   type        = string
   default     = "root"
@@ -341,7 +347,7 @@ source "hyperv-iso" "default" {
   shutdown_command = "sudo /sbin/shutdown -h now"
   ssh_password     = var.ssh_pass
   ssh_port         = 22
-  ssh_timeout      = "10000s"
+  ssh_timeout      = var.ssh_timeout
   ssh_username     = var.ssh_user
   switch_name      = var.hyperv_switch_name
   vm_name          = local.vm_name
@@ -365,7 +371,7 @@ source "parallels-iso" "default" {
   shutdown_command       = "sudo /sbin/shutdown -h now"
   ssh_password           = var.ssh_pass
   ssh_port               = 22
-  ssh_timeout            = "10000s"
+  ssh_timeout            = var.ssh_timeout
   ssh_username           = var.ssh_user
   vm_name                = local.vm_name
 }
@@ -394,7 +400,7 @@ source "qemu" "default" {
   shutdown_command    = "sudo /sbin/shutdown -h now"
   ssh_password        = var.ssh_pass
   ssh_port            = 22
-  ssh_timeout         = "10000s"
+  ssh_timeout         = var.ssh_timeout
   ssh_username        = var.ssh_user
   use_default_display = var.qemu_use_default_display
   vm_name             = local.vm_name
@@ -420,7 +426,7 @@ source "virtualbox-iso" "default" {
   shutdown_command     = "sudo /sbin/shutdown -h now"
   ssh_password         = var.ssh_pass
   ssh_port             = 22
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
@@ -455,7 +461,7 @@ source "vmware-iso" "default" {
   shutdown_command     = "sudo /sbin/shutdown -h now"
   ssh_password         = var.ssh_pass
   ssh_port             = 22
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
   version              = var.vmware_hardware_version
   vm_name              = local.vm_name
@@ -491,7 +497,7 @@ source "vmware-iso" "esxi" {
   skip_export          = true
   ssh_password         = var.ssh_pass
   ssh_port             = 22
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
   vm_name              = local.vm_name
   vmx_data = {

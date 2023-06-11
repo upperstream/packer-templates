@@ -236,6 +236,8 @@ or `-var-file` command line options to `packer`:
   to QEMU or not.  Defaults to `false`.
 * `root_password` - Password for `root` user.  Defaults to `vagrant`.
   Set `sensitive` attribute to `true` when you change this password.
+* `ssh_timeout` - SSH timeout to connect this box being created.
+  Defaults to `30m`.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to
   `vagrant`.
 * `vagrant_ssh_public_key` - SSH public key for Vagrant user.  Defaults
