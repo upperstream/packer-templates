@@ -6,7 +6,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "4.20230528"
+  default     = "12.0.20230610"
   description = "Version number of this Vagrant box."
 }
 
@@ -67,7 +67,7 @@ variable "esxi_vnc_over_websocket" {
 variable "headless" {
   type        = string
   default     = "false"
-  description = "VM window is not diesplayed if false."
+  description = "VM window is not displayed if false."
 }
 
 variable "hyperv_boot_mode" {
@@ -90,16 +90,19 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
+  default     = "sha256:61bd4ac9215a418924b48442ff84870082602b390b98037e5699e1fb0c6cb700"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
+  default     = "mini.iso"
   description = "File name of the install media."
 }
 
 variable "iso_path" {
   type        = string
+  default     = "Debian12.0/main/installer-amd64/20230607/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -296,11 +299,8 @@ locals {
   iso_urls = compact([
     var.iso_url,
     "./iso/${var.iso_name}",
-    "http://ftp.debian.org/debian/dists/${var.iso_path}/${var.iso_name}",
-    "http://ftp.jp.debian.org/debian/${var.iso_path}/${var.iso_name}",
-    "http://ftp.jp.debian.org/debian-cd/${var.iso_path}/${var.iso_name}",
+    "https://deb.debian.org/debian/dists/${var.iso_path}/${var.iso_name}",
     "http://cdimage.debian.org/debian-cd/${var.iso_path}/${var.iso_name}",
-    "http://cdimage.debian.org/cdimage/${var.iso_path}/${var.iso_name}",
     "http://cdimage.debian.org/cdimage/archive/${var.iso_path}/${var.iso_name}"
   ])
   boot_parameter_edit = {
@@ -317,7 +317,7 @@ locals {
     "parallels-iso" : "preseed-bullseye-parallels.cfg"
     "qemu" : "preseed-buster-qemu.cfg"
   }
-  vm_name = coalesce(var.vm_name, "Debian-bookworm_rc-${var.cpu}-dwm")
+  vm_name = coalesce(var.vm_name, "Debian-12-${var.cpu}-dwm")
   vmware_vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"

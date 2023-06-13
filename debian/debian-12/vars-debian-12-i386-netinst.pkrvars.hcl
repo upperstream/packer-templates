@@ -1,5 +1,5 @@
 cpu = "i386"
-iso_name = "debian-bookworm-DI-rc4-i386-netinst.iso"
-iso_path = "bookworm_di_rc4/i386/iso-cd"
-iso_checksum = "file:http://cdimage.debian.org/cdimage/bookworm_di_rc4/i386/iso-cd/SHA256SUMS"
+iso_name = "debian-12.0.0-i386-netinst.iso"
+iso_path = "12.0.0/i386/iso-cd"
+iso_checksum = "file:https://cdimage.debian.org/debian-cd/12.0.0/i386/iso-cd/SHA256SUMS"
 vmware_guest_os_type = "debian12"

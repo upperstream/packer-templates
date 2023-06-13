@@ -2,14 +2,14 @@
 
 ## Current Debian releases
 
-* [debian-12](debian-12/README.md) - templates for Debian Bookworm RC4
+* [debian-12](debian-12/README.md) - templates for Debian 12.0.0
 
   Templates support amd64, arm64, and i386.
 
-  * Debian Bookworm RC4 minimal
-  * Debian Bookworm RC4 + Docker + Docker Compose
-  * Debian Bookworm RC4 + X.org + suckless tools
-  * Debian Bookworm RC4 + Xfce
+  * Debian 12.0.0 minimal
+  * Debian 12.0.0 + Docker + Docker Compose
+  * Debian 12.0.0 + X.org + suckless tools
+  * Debian 12.0.0 + Xfce
 
 * [debian-11](debian-11/README.md) - templates for Debian 11.7
 

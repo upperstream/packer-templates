@@ -1,8 +1,8 @@
 cpu = "arm64"
 install_from_dvd = true
-iso_name = "debian-bookworm-DI-rc4-arm64-DVD-1.iso"
-iso_path = "bookworm_di_rc4/arm64/iso-dvd"
-iso_checksum = "file:http://cdimage.debian.org/cdimage/bookworm_di_rc4/arm64/iso-dvd/SHA256SUMS"
+iso_name = "debian-12.0.0-arm64-DVD-1.iso"
+iso_path = "12.0.0/arm64/iso-dvd"
+iso_checksum = "file:https://cdimage.debian.org/debian-cd/12.0.0/arm64/iso-dvd/SHA256SUMS"
 parallels_tools_flavor = "lin-arm"
 vmware_boot_mode = "efi"
 vmware_cdrom_adapter_type = "sata"
