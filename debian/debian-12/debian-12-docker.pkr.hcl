@@ -173,7 +173,7 @@ variable "ssh_pass" {
 
 variable "ssh_timeout" {
   type        = string
-  default     = "30m"
+  default     = "60m"
   description = "SSH timeout to connect this box being created."
 }
 
