@@ -179,7 +179,7 @@ amd64.
 Depending on situation you can specify either of var files on the
 command line:
 
-    packer build -var-file=vars-debian-10-amd64-full.pkrvars.hcl debian-11-minimal.pkr.hcl
+    packer build -var-file=vars-debian-11-amd64-full.pkrvars.hcl debian-11-minimal.pkr.hcl
 
 * amd64 images
   * `vars-debian-11-amd64-dvd.pkrvars.hcl` - `debian-11.7.0-amd64-DVD-1.iso`

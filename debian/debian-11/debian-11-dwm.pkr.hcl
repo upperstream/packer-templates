@@ -580,7 +580,7 @@ build {
       "vmware-iso.default"
     ]
     output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile-debian11"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.debian11+"
   }
 
   post-processor "vagrant" {
