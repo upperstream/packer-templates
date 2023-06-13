@@ -18,8 +18,9 @@ autoinstall:
     - systemctl stop ssh.socket
   identity:
     hostname: ubuntu
-    username: vagrant
-    password: '$y$j9T$Ydgg.aiDKQkfj6Cw7cSWa1$Z4PqCd5YYVgt/HIIq2CAKXwxQx08UJcssw3vEJzoVX2'
+    %{ for key, value in identity }
+    ${key}: ${value}
+    %{ endfor }
   late-commands:
     - "sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=\x22\\(.*\\)\x22/GRUB_CMDLINE_LINUX_DEFAULT=\x22net.ifnames=0 biosdevnames=0 \\1\x22/' /target/etc/default/grub"
     - curtin in-target --target=/target -- grub-mkconfig -o /boot/grub/grub.cfg

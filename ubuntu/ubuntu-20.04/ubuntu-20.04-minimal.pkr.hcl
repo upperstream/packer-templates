@@ -1,3 +1,25 @@
+packer {
+  required_version = ">= 1.7.0"
+  required_plugins {
+    parallels = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/parallels"
+    }
+    qemu = {
+      version = ">= 1.0.9"
+      source  = "github.com/hashicorp/qemu"
+    }
+    virtualbox = {
+      version = ">= 0.0.1"
+      source  = "github.com/hashicorp/virtualbox"
+    }
+    vmware = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/vmware"
+    }
+  }
+}
+
 variable "archive_mirror" {
   type    = string
   default = "http://archive.ubuntu.com/ubuntu"
@@ -235,19 +257,27 @@ locals {
 }
 
 source "parallels-iso" "default" {
-  boot_command               = coalesce(var.parallels_boot_command, local.boot_command)
-  boot_wait                  = var.boot_wait
-  cpus                       = var.num_cpus
-  disk_size                  = var.disk_size
-  guest_os_type              = "ubuntu"
-  http_directory             = "./http"
+  boot_command  = coalesce(var.parallels_boot_command, local.boot_command)
+  boot_wait     = var.boot_wait
+  cpus          = var.num_cpus
+  disk_size     = var.disk_size
+  guest_os_type = "ubuntu"
+  http_content = {
+    "/user-data" = templatefile("${path.root}/http/user-data.tmpl", {
+      identity = {
+        "username" = var.vagrant_username
+        "password" = bcrypt(var.vagrant_password)
+      }
+    })
+    "/meta-data" = file("${path.root}/http/meta-data")
+  }
   iso_checksum               = var.iso_checksum
   iso_urls                   = local.iso_urls
   memory                     = var.mem_size
   output_directory           = "output/${local.vm_name}-v${var.box_version}-parallels"
   parallels_tools_flavor     = var.parallels_tools_flavor
   parallels_tools_guest_path = "/tmp/prl-tools-{{.Flavor}}.iso"
-  shutdown_command           = "sudo /sbin/shutdown -h now"
+  shutdown_command           = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   ssh_password               = var.ssh_password
   ssh_port                   = 22
   ssh_timeout                = "10000s"
@@ -256,22 +286,30 @@ source "parallels-iso" "default" {
 }
 
 source "qemu" "default" {
-  accelerator         = "kvm"
-  boot_command        = local.boot_command
-  boot_wait           = var.boot_wait
-  cpus                = var.num_cpus
-  disk_interface      = "virtio"
-  disk_size           = var.disk_size
-  display             = var.qemu_display
-  format              = "qcow2"
-  headless            = var.headless
-  http_directory      = "./http"
+  accelerator    = "kvm"
+  boot_command   = local.boot_command
+  boot_wait      = var.boot_wait
+  cpus           = var.num_cpus
+  disk_interface = "virtio"
+  disk_size      = var.disk_size
+  display        = var.qemu_display
+  format         = "qcow2"
+  headless       = var.headless
+  http_content = {
+    "/user-data" = templatefile("${path.root}/http/user-data.tmpl", {
+      identity = {
+        "username" = var.vagrant_username
+        "password" = bcrypt(var.vagrant_password)
+      }
+    })
+    "/meta-data" = file("${path.root}/http/meta-data")
+  }
   iso_checksum        = var.iso_checksum
   iso_urls            = local.iso_urls
   memory              = var.mem_size
   net_device          = "virtio-net"
   output_directory    = "output/${local.vm_name}-v${var.box_version}-qemu"
-  shutdown_command    = "sudo /sbin/shutdown -h now"
+  shutdown_command    = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   ssh_password        = var.ssh_password
   ssh_port            = 22
   ssh_username        = var.ssh_username
@@ -288,16 +326,24 @@ source "virtualbox-iso" "default" {
   guest_additions_mode = "disable"
   guest_os_type        = "Ubuntu20_LTS_64"
   headless             = var.headless
-  http_directory       = "./http"
-  iso_checksum         = var.iso_checksum
-  iso_urls             = local.iso_urls
-  memory               = var.mem_size
-  output_directory     = "output/${local.vm_name}-v${var.box_version}-virtualbox"
-  shutdown_command     = "sudo /sbin/shutdown -h now"
-  ssh_password         = var.ssh_password
-  ssh_port             = 22
-  ssh_username         = var.ssh_username
-  ssh_wait_timeout     = "10000s"
+  http_content = {
+    "/user-data" = templatefile("${path.root}/http/user-data.tmpl", {
+      identity = {
+        "username" = var.vagrant_username
+        "password" = bcrypt(var.vagrant_password)
+      }
+    })
+    "/meta-data" = file("${path.root}/http/meta-data")
+  }
+  iso_checksum     = var.iso_checksum
+  iso_urls         = local.iso_urls
+  memory           = var.mem_size
+  output_directory = "output/${local.vm_name}-v${var.box_version}-virtualbox"
+  shutdown_command = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
+  ssh_password     = var.ssh_password
+  ssh_port         = 22
+  ssh_username     = var.ssh_username
+  ssh_wait_timeout = "10000s"
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"]
@@ -307,23 +353,31 @@ source "virtualbox-iso" "default" {
 }
 
 source "vmware-iso" "default" {
-  boot_command         = coalesce(var.vmware_boot_command, local.boot_command)
-  boot_wait            = var.boot_wait
-  cdrom_adapter_type   = var.vmware_cdrom_adapter_type
-  cpus                 = var.num_cpus
-  disk_adapter_type    = var.vmware_disk_adapter_type
-  disk_size            = var.disk_size
-  disk_type_id         = "0"
-  guest_os_type        = var.vmware_guest_os_type
-  headless             = var.headless
-  http_directory       = "./http"
+  boot_command       = coalesce(var.vmware_boot_command, local.boot_command)
+  boot_wait          = var.boot_wait
+  cdrom_adapter_type = var.vmware_cdrom_adapter_type
+  cpus               = var.num_cpus
+  disk_adapter_type  = var.vmware_disk_adapter_type
+  disk_size          = var.disk_size
+  disk_type_id       = "0"
+  guest_os_type      = var.vmware_guest_os_type
+  headless           = var.headless
+  http_content = {
+    "/user-data" = templatefile("${path.root}/http/user-data.tmpl", {
+      identity = {
+        "username" = var.vagrant_username
+        "password" = bcrypt(var.vagrant_password)
+      }
+    })
+    "/meta-data" = file("${path.root}/http/meta-data")
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
   network              = var.vmware_network
   network_adapter_type = var.vmware_network_adapter_type
   output_directory     = "output/${local.vm_name}-v${var.box_version}-vmware"
-  shutdown_command     = "sudo /sbin/shutdown -h now"
+  shutdown_command     = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   ssh_password         = var.ssh_password
   ssh_port             = 22
   ssh_username         = var.ssh_username
@@ -334,14 +388,22 @@ source "vmware-iso" "default" {
 }
 
 source "vmware-iso" "esxi" {
-  boot_command            = local.boot_command
-  boot_wait               = var.boot_wait
-  cpus                    = var.num_cpus
-  disk_size               = var.disk_size
-  disk_type_id            = "thin"
-  guest_os_type           = var.vmware_guest_os_type
-  headless                = var.headless
-  http_directory          = "./http"
+  boot_command  = local.boot_command
+  boot_wait     = var.boot_wait
+  cpus          = var.num_cpus
+  disk_size     = var.disk_size
+  disk_type_id  = "thin"
+  guest_os_type = var.vmware_guest_os_type
+  headless      = var.headless
+  http_content = {
+    "/user-data" = templatefile("${path.root}/http/user-data.tmpl", {
+      identity = {
+        "username" = var.vagrant_username
+        "password" = bcrypt(var.vagrant_password)
+      }
+    })
+    "/meta-data" = file("${path.root}/http/meta-data")
+  }
   insecure_connection     = true
   iso_checksum            = var.iso_checksum
   iso_urls                = local.iso_urls
@@ -354,7 +416,7 @@ source "vmware-iso" "esxi" {
   remote_password         = var.esxi_remote_password
   remote_type             = "esx5"
   remote_username         = var.esxi_remote_username
-  shutdown_command        = "sudo /sbin/shutdown -h now"
+  shutdown_command        = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   skip_export             = true
   ssh_password            = var.ssh_password
   ssh_port                = 22
@@ -385,10 +447,11 @@ build {
   provisioner "shell" {
     environment_vars = [
       "ARCHIVE_MIRROR=${var.archive_mirror}",
+      "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}",
       "VIRTUALBOX_VERSION=${var.virtualbox_version}"
     ]
-    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
+    execute_command = "echo '${var.vagrant_password}' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
     scripts = [
       "../provisioners/update_mirror.sh",
       "../provisioners/base_ubuntu1804+.sh",
@@ -401,7 +464,7 @@ build {
       "VAGRANT_USERNAME=${var.vagrant_username}",
       "VIRTUALBOX_VERSION=${var.virtualbox_version}"
     ]
-    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
+    execute_command = "echo '${var.vagrant_password}' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
     only = [
       "virtualbox-iso.default"
     ]
@@ -409,7 +472,7 @@ build {
   }
 
   provisioner "shell" {
-    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
+    execute_command = "echo '${var.vagrant_password}' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
     only = [
       "vmware-iso.default",
       "vmware-iso.esxi"
@@ -421,7 +484,7 @@ build {
     environment_vars = [
       "PRL_TOOLS=/tmp/prl-tools-${var.parallels_tools_flavor}.iso"
     ]
-    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
+    execute_command = "echo '${var.vagrant_password}' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
     only = [
       "parallels-iso.default"
     ]
@@ -429,7 +492,7 @@ build {
   }
 
   provisioner "shell" {
-    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
+    execute_command = "echo '${var.vagrant_password}' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
     except = [
       "vmware-iso.esxi"
     ]
@@ -440,7 +503,7 @@ build {
     environment_vars = [
       "VAGRANT_USERNAME=${var.vagrant_username}"
     ]
-    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
+    execute_command = "echo '${var.vagrant_password}' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
     script          = "../provisioners/cleanup.sh"
   }
 
