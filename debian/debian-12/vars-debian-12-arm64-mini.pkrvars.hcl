@@ -1,5 +1,7 @@
 cpu = "arm64"
 iso_name = "mini.iso"
+iso_path = "Debian12.0/main/installer-arm64/20230607/images/netboot"
+iso_checksum = "sha256:fea64c2c36f9ffde2aafb5f17aa4926d9f948741077d58f546485be65eb138fc"
 parallels_tools_flavor = "lin-arm"
 vmware_boot_mode = "efi"
 vmware_cdrom_adapter_type = "sata"

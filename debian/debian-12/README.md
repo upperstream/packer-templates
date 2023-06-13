@@ -1,7 +1,6 @@
-# Packer templates for Debian Bookworm RC4
+# Packer templates for Debian 12.0
 
-Templates to create Vagrant boxes for Debian Bookworm RC4 (amd64,
-arm64, and i386).
+Templates to create Vagrant boxes for Debian 12.0 (amd64, arm64, and i386).
 
 ## Prerequisites
 
@@ -46,13 +45,13 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-bookworm_rc-amd64-minimal-v4.20230528-virtualbox.box` in the
+`Debian-12-amd64-minimal-v12.0.20230610-virtualbox.box` in the
 same directory after the command has succeeded.
 
-Then you can add the box named `Debian-bookworm_rc-amd64-minimal-v4.20230528`
+Then you can add the box named `Debian-12-amd64-minimal-v12.0.20230610`
 to your box list by the following command:
 
-    vagrant box add Debian-bookworm_rc-amd64-minimal-v4.20230528-virtualbox.box --name Debian-bookworm_rc-amd64-minimal-v4.20230528 --provider virtualbox
+    vagrant box add Debian-12-amd64-minimal-v12.0.20230610-virtualbox.box --name Debian-12-amd64-minimal-v12.0.20230610 --provider virtualbox
 
 VirtualBox build intends to create amd64 box and i386 box on amd64 device.
 
@@ -63,19 +62,19 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-bookworm_rc-amd64-minimal-v4.20230528-vmware.box` in the same
+`Debian-12-amd64-minimal-v12.0.20230610-vmware.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-bookworm_rc-amd64-minimal-v4.20230528`
+Then you can add the box named `Debian-12-amd64-minimal-v12.0.20230610`
 to your box list by the following command:
 
-    vagrant box add Debian-bookworm_rc-amd64-minimal-v4.20230528-vmware.box --name Debian-bookworm_rc-amd64-minimal-v4.20230528 --provider vmware_desktop
+    vagrant box add Debian-12-amd64-minimal-v12.0.20230610-vmware.box --name Debian-12-amd64-minimal-v12.0.20230610 --provider vmware_desktop
 
 VMware build intends to create amd64 box or i386 box on amd64 device
 using VMware Workstation, or create arm64 box on Apple Silicon Mac
 device using VMware Fusion.
 
-## ESXi
+### ESXi
 
 In order to build a VM image on ESXi, you need to provide the following
 environment variables:
@@ -105,13 +104,13 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-bookworm_rc-amd64-minimal-v4.20230528-libvirt.box` in the same
+`Debian-12-amd64-minimal-v12.0.20230610-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-bookworm_rc-amd64-minimal-v4.20230528`
+Then you can add the box named `Debian-12-amd64-minimal-v12.0.20230610`
 to your box list by the following command:
 
-    vagrant box add Debian-bookworm_rc-amd64-minimal-v4.20230528-libvirt.box --name Debian-bookworm_rc-amd64-minimal-v4.20230528 --provider libvirt
+    vagrant box add Debian-12-amd64-minimal-v12.0.20230610-libvirt.box --name Debian-12-amd64-minimal-v12.0.20230610 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -126,31 +125,31 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-bookworm_rc-amd64-minimal-v4.20230528-hyperv.box` in the same
+`Debian-12-amd64-minimal-v12.0.20230610-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-bookworm_rc-amd64-minimal-v4.20230528`
+Then you can add the box named `Debian-12-amd64-minimal-v12.0.20230610`
 to your box list by the following command:
 
-    vagrant box add Debian-bookworm_rc-amd64-minimal-v4.20230528-hyperv.box --name Debian-bookworm_rc-amd64-minimal-v4.20230528 --provider hyperv
+    vagrant box add Debian-12-amd64-minimal-v12.0.20230610-hyperv.box --name Debian-12-amd64-minimal-v12.0.20230610 --provider hyperv
 
 Hyper-V build intends to create amd64 box and i386 box on Windows
 device.
 
 ### Parallels
 
-From the terminal, invoke the following command for Hyper-V provider:
+From the terminal, invoke the following command for Parallels provider:
 
     packer build -only=parallels-iso.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-bookworm_rc-arm64-minimal-v4.20230528-parallels.box` in the same
+`Debian-12-arm64-minimal-v12.0.20230610-parallels.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-bookworm_rc-arm64-minimal-v4.20230528`
+Then you can add the box named `Debian-12-arm64-minimal-v12.0.20230610`
 to your box list by the following command:
 
-    vagrant box add Debian-bookworm_rc-arm64-minimal-v4.20230528-parallels.box --name Debian-bookworm_rc-arm64-minimal-v4.20230528 --provider parallels
+    vagrant box add Debian-12-arm64-minimal-v12.0.20230610-parallels.box --name Debian-12-arm64-minimal-v12.0.20230610 --provider parallels
 
 Parallels build intends to create arm64 box on Apple Silicon Mac device.
 
@@ -170,31 +169,35 @@ Parallels build intends to create arm64 box on Apple Silicon Mac device.
 [Docker Compose]: https://docs.docker.com/compose/ "Docker Compose"
 [suckless]: http://suckless.org/ "suckless.org software that sucks less"
 [X.org]: https://www.x.org/wiki/ "X.Org"
-[Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
+[Xfce]: https://xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
 
 ## Installer CD images
 
 Optional var files are provided to instruct to use alternative
 installer CD images, i.e., `vars-debian-12-amd64-dvd.json` instructs to
-use `debian-bookworm-DI-RC4-amd64-DVD.iso` while
+use `debian-12.0.0-amd64-DVD.iso` while
 `vars-debian-12-amd64-netinst.pkrvars.hcl` does
-`debian-bookworm-DI-RC4-amd64-netinst.iso` respectively.
+`debian-12.0.0-amd64-netinst.iso` respectively.  Without using these
+var files, `debian-12-*.pkr.hcl` templates use netboot `mini.iso` for
+amd64.
 
 Depending on situation you can specify either of var files on the
 command line:
 
-    packer build -var-file=vars-debian-10-amd64-full.pkrvars.hcl debian-12-minimal.pkr.hcl
+    packer build -var-file=vars-debian-12-amd64-full.pkrvars.hcl debian-12-minimal.pkr.hcl
 
 * amd64 ISO images
-  * `vars-debian-12-amd64-dvd.pkrvars.hcl` - `debian-bookworm-DI-RC4-amd64-DVD-1.iso`
-  * `vars-debian-12-amd64-netinst.pkrvars.hcl` - `debian-bookworm-DI-RC4-amd64-netinst.iso`
+  * `vars-debian-12-amd64-dvd.pkrvars.hcl` - `debian-12.0.0-amd64-DVD-1.iso`
+  * `vars-debian-12-amd64-netinst.pkrvars.hcl` - `debian-12.0.0-amd64-netinst.iso`
 * arm64 ISO images
-  * `vars-debian-12-arm64-dvd.pkrvars.hcl` - `debian-bookworm-DI-RC4-arm64-DVD-1.iso`
-  * `vars-debian-12-arm64-netinst.pkrvars.hcl` - `debian-bookworm-DI-RC4-arm64-netinst.iso`
+  * `vars-debian-12-arm64-dvd.pkrvars.hcl` - `debian-12.0.0-arm64-DVD-1.iso`
+  * `vars-debian-12-arm64-netinst.pkrvars.hcl` - `debian-12.0.0-arm64-netinst.iso`
+  * `vars-debian-12-arm64-mini.pkrvars.hcl` - netboot CD `mini.iso`
 * i386 ISO images
-  * `vars-debian-12-i386-dvd.pkrvars.hcl` - `debian-bookworm-DI-RC4-i386-DVD-1.iso`
-  * `vars-debian-12-i386-netinst.pkrvars.hcl` - `debian-bookworm-DI-RC4-i386-netinst.iso`
+  * `vars-debian-12-i386-dvd.pkrvars.hcl` - `debian-12.0.0-i386-DVD-1.iso`
+  * `vars-debian-12-i386-netinst.pkrvars.hcl` - `debian-12.0.0-i386-netinst.iso`
+  * `vars-debian-12-i386-mini.pkrvars.hcl` - netboot CD `mini.iso`
 
 It is recommended to use "jigdo" to download large iso image file and
 put it in `./iso` directory.  Templates instruct `packer` to use the
@@ -236,6 +239,8 @@ or `-var-file` command line options to `packer`:
   to QEMU or not.  Defaults to `false`.
 * `root_password` - Password for `root` user.  Defaults to `vagrant`.
   Set `sensitive` attribute to `true` when you change this password.
+* `ssh_timeout` - SSH timeout to connect this box being created.
+  Defaults to `60m`.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to
   `vagrant`.
 * `vagrant_ssh_public_key` - SSH public key for Vagrant user.  Defaults

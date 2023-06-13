@@ -6,7 +6,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "4.20230528"
+  default     = "12.0.20230610"
   description = "Version number of this Vagrant box."
 }
 
@@ -67,7 +67,7 @@ variable "esxi_vnc_over_websocket" {
 variable "headless" {
   type        = string
   default     = "false"
-  description = "VM window is not diesplayed if false."
+  description = "VM window is not displayed if false."
 }
 
 variable "hyperv_boot_mode" {
@@ -90,16 +90,19 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
+  default     = "sha256:61bd4ac9215a418924b48442ff84870082602b390b98037e5699e1fb0c6cb700"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
+  default     = "mini.iso"
   description = "File name of the install media."
 }
 
 variable "iso_path" {
   type        = string
+  default     = "Debian12.0/main/installer-amd64/20230607/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -169,6 +172,12 @@ variable "ssh_pass" {
   default     = "vagrant"
   sensitive   = false
   description = "SSH password to connect this box being created."
+}
+
+variable "ssh_timeout" {
+  type        = string
+  default     = "60m"
+  description = "SSH timeout to connect this box being created."
 }
 
 variable "ssh_user" {
@@ -290,11 +299,8 @@ locals {
   iso_urls = compact([
     var.iso_url,
     "./iso/${var.iso_name}",
-    "http://ftp.debian.org/debian/dists/${var.iso_path}/${var.iso_name}",
-    "http://ftp.jp.debian.org/debian/${var.iso_path}/${var.iso_name}",
-    "http://ftp.jp.debian.org/debian-cd/${var.iso_path}/${var.iso_name}",
+    "https://deb.debian.org/debian/dists/${var.iso_path}/${var.iso_name}",
     "http://cdimage.debian.org/debian-cd/${var.iso_path}/${var.iso_name}",
-    "http://cdimage.debian.org/cdimage/${var.iso_path}/${var.iso_name}",
     "http://cdimage.debian.org/cdimage/archive/${var.iso_path}/${var.iso_name}"
   ])
   boot_parameter_edit = {
@@ -311,7 +317,7 @@ locals {
     "parallels-iso" : "preseed-bullseye-parallels.cfg"
     "qemu" : "preseed-buster-qemu.cfg"
   }
-  vm_name = coalesce(var.vm_name, "Debian-bookworm_rc-${var.cpu}-minimal")
+  vm_name = coalesce(var.vm_name, "Debian-12-${var.cpu}-minimal")
   vmware_vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
@@ -341,7 +347,7 @@ source "hyperv-iso" "default" {
   shutdown_command = "sudo /sbin/shutdown -h now"
   ssh_password     = var.ssh_pass
   ssh_port         = 22
-  ssh_timeout      = "10000s"
+  ssh_timeout      = var.ssh_timeout
   ssh_username     = var.ssh_user
   switch_name      = var.hyperv_switch_name
   vm_name          = local.vm_name
@@ -365,7 +371,7 @@ source "parallels-iso" "default" {
   shutdown_command       = "sudo /sbin/shutdown -h now"
   ssh_password           = var.ssh_pass
   ssh_port               = 22
-  ssh_timeout            = "10000s"
+  ssh_timeout            = var.ssh_timeout
   ssh_username           = var.ssh_user
   vm_name                = local.vm_name
 }
@@ -394,7 +400,7 @@ source "qemu" "default" {
   shutdown_command    = "sudo /sbin/shutdown -h now"
   ssh_password        = var.ssh_pass
   ssh_port            = 22
-  ssh_timeout         = "10000s"
+  ssh_timeout         = var.ssh_timeout
   ssh_username        = var.ssh_user
   use_default_display = var.qemu_use_default_display
   vm_name             = local.vm_name
@@ -420,7 +426,7 @@ source "virtualbox-iso" "default" {
   shutdown_command     = "sudo /sbin/shutdown -h now"
   ssh_password         = var.ssh_pass
   ssh_port             = 22
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
@@ -454,7 +460,7 @@ source "vmware-iso" "default" {
   shutdown_command     = "sudo /sbin/shutdown -h now"
   ssh_password         = var.ssh_pass
   ssh_port             = 22
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
   version              = var.vmware_hardware_version
   vm_name              = local.vm_name
@@ -490,7 +496,7 @@ source "vmware-iso" "esxi" {
   skip_export          = true
   ssh_password         = var.ssh_pass
   ssh_port             = 22
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
   vm_name              = local.vm_name
   vmx_data = {
@@ -592,7 +598,7 @@ build {
       coalesce(var.vm_name, "./${local.vm_name}-v${var.box_version}"),
       "-{{ .Provider }}.box"
     ])
-    vagrantfile_template = "../vagrantfiles/Vagrantfile-debian11"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.debian11+"
   }
 
   post-processor "vagrant" {

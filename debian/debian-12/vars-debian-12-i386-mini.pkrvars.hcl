@@ -1,0 +1,5 @@
+cpu = "i386"
+iso_name = "mini.iso"
+iso_path = "Debian12.0/main/installer-i386/20230607/images/netboot"
+iso_checksum = "sha256:5ca9498d70bfd95073d9aa26cbbb0e78e7cb31fbb9bca8c386b8023a0b72276b"
+vmware_guest_os_type = "debian12"
