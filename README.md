@@ -47,11 +47,12 @@
   * tinycorelinux-7 - Tiny Core Linux v7.2 templates
   * tinycorelinux-8 - Tiny Core Linux v8.2.1 templates
   * tinycorelinux-9 - Tiny Core Linux v9.0 templates
-* [ubuntu](ubuntu/README.md) - Ubuntu templates (x86_64)
+* [ubuntu](ubuntu/README.md) - Ubuntu templates (amd64)
   * ubuntu-14.04 - Ubuntu 14.04.5 templates
   * ubuntu-16.04 - Ubuntu 16.04.4 templates
   * ubuntu-17.10 - Ubuntu 17.10.1 templates
   * ubuntu-18.04 - Ubuntu 18.04.6 templates
+  * ubuntu-20.04 - Ubuntu 20.04.6 templates (amd64 and arm64)
   * [more](ubuntu/README.md)
 
 ## Licensing
