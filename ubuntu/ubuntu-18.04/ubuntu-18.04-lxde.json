@@ -276,7 +276,7 @@
       "only": ["vmware-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-v{{user `box_version`}}-{{ .Provider }}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile-ubuntu",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.ubuntu",
       "keep_input_artifact": true
     }
   ]

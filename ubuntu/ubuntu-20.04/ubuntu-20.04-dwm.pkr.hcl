@@ -527,7 +527,7 @@ build {
       "vmware-iso.esxi"
     ]
     output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile-ubuntu"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.ubuntu"
   }
 
   post-processor "vagrant" {
@@ -535,6 +535,6 @@ build {
     compression_level    = 9
     only                 = ["qemu.default"]
     output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile-ubuntu"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.ubuntu"
   }
 }
