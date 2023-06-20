@@ -113,7 +113,7 @@ The following command will build a VM image on your ESXi:
 ## Optimised kernel for virtual machines
 
 Instead of `vars-alpine-3.4-x86*.json` files you can use `vars-alpine-virt-3.4-x86*.json`.
-These files instruct to use ISO images with kernels optimised for virtual machines. 
+These files instruct to use ISO images with kernels optimised for virtual machines.
 
 ## Build parameters
 
@@ -123,6 +123,7 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 * `mem_size` - RAM size of the created VM.  Default value is `512` which means 512MB.
 * `disk_size` - Disk size of the created VM.  Default value is `40960` which means 40GB.
 * `root_password` - Password for `root` user.  Default value is `vagrant`.
+* `ssh_wait_timeout` - Timeout value in seconds for SSH connection.  Default value is `1800s`.
 * `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
   This is also used for SSH user name during build time.
 * `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
@@ -130,4 +131,4 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 
 - - -
 
-Copyright &copy; 2016 Upper Stream Software.
+Copyright &copy; 2016, 2023 Upperstream Software.

@@ -154,6 +154,12 @@ variable "ssh_password" {
   description = "SSH password to connect this box being created."
 }
 
+variable "ssh_timeout" {
+  type        = string
+  default     = "1800s"
+  description = "SSH timeout to connect this box being created."
+}
+
 variable "ssh_username" {
   type        = string
   default     = "root"
@@ -315,7 +321,7 @@ source "hyperv-iso" "default" {
   shutdown_command = "poweroff"
   ssh_password     = var.ssh_password
   ssh_port         = 22
-  ssh_timeout      = "10000s"
+  ssh_timeout      = var.ssh_timeout
   ssh_username     = var.ssh_username
   switch_name      = var.hyperv_switch_name
   vm_name          = local.vm_name
@@ -339,7 +345,7 @@ source "parallels-iso" "default" {
   shutdown_command     = "poweroff"
   ssh_password         = var.ssh_password
   ssh_port             = 22
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_username
   vm_name              = local.vm_name
 }
@@ -365,7 +371,7 @@ source "qemu" "default" {
   shutdown_command    = "poweroff"
   ssh_password        = var.ssh_password
   ssh_port            = 22
-  ssh_timeout         = "10000s"
+  ssh_timeout         = var.ssh_timeout
   ssh_username        = var.ssh_username
   use_default_display = var.qemu_use_default_display
   vm_name             = local.vm_name
@@ -389,7 +395,7 @@ source "virtualbox-iso" "default" {
   shutdown_command     = "poweroff"
   ssh_password         = var.ssh_password
   ssh_port             = 22
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_username
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
@@ -422,7 +428,7 @@ source "vmware-iso" "default" {
   shutdown_command     = "poweroff"
   ssh_password         = var.ssh_password
   ssh_port             = 22
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_username
   tools_upload_flavor  = ""
   version              = var.vmware_hardware_version
@@ -466,7 +472,7 @@ source "vmware-iso" "esxi" {
   skip_export             = true
   ssh_password            = var.ssh_password
   ssh_port                = 22
-  ssh_timeout             = "10000s"
+  ssh_timeout             = var.ssh_timeout
   ssh_username            = var.ssh_username
   tools_upload_flavor     = "linux"
   vm_name                 = local.vm_name

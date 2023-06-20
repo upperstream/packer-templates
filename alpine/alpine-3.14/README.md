@@ -165,6 +165,8 @@ or `-var-file` command line options to `packer`:
   which means 40GB.
 * `root_password` - Password for `root` user.  Default value is
   `vagrant`.
+* `ssh_timeout` - Timeout value for SSH connection.  Default value is
+  `1800s`.
 * `vagrant_username` - User name used for run time.  Vagrant box is set
   for this user.  Default value is `vagrant`.  This is also used for
   SSH user name during build time.
@@ -182,4 +184,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2021 Upperstream Software.
+Copyright &copy; 2021, 2023 Upperstream Software.

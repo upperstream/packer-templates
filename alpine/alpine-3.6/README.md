@@ -121,6 +121,7 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 * `mem_size` - RAM size of the created VM.  Default value is `512` which means 512MB.
 * `disk_size` - Disk size of the created VM.  Default value is `40960` which means 40GB.
 * `root_password` - Password for `root` user.  Default value is `vagrant`.
+* `ssh_wait_timeout` - Timeout in seconds for SSH connection.  Default value is `1800s`.
 * `vagrant_username` - User name used for run time.  Vagrant box is set for this user.  Default value is `vagrant`.
   This is also used for SSH user name during build time.
 * `vagrant_password` - Password for `vagrant_username`.  Default value is `vagrant`.
@@ -129,4 +130,4 @@ The following parameters can be set at build time by supplying `-var` or `-var-f
 
 - - -
 
-Copyright &copy; 2017 Upper Stream Software.
+Copyright &copy; 2017, 2023 Upperstream Software.
