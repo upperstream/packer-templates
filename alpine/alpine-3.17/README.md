@@ -303,11 +303,13 @@ or `-var-file` command line options to `packer`:
   `true`.  Defaults to `false`.
 * `root_password` - Password for `root` user.  Defaults to `vagrant`.
 * `ssh_timeout` - Timeout for SSH connection.  Defaults to `1800s`.
-* `vagrant_username` - User name used for run time.  Vagrant box is set
-  for this user.  Defaults to `vagrant`.  This is also used for
-  SSH user name during build time.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to
   `vagrant`.  This is also used for SSH password during build time.
+* `vagrant_ssh_public_key` - SSH public key for Vagrant user.  Defaults
+  to the public key for the Vagrant insecure private key.
+* `vagrant_username` - User name used for run time.  Vagrant box is set
+  for this user.  Defaults to `vagrant`.  This is also used for SSH
+  user name during build time.
 * `vm_name` - VM name.  This also affects box file name and output
   directory name.
 * `vmware_fusion_app_path` - Path name to the VMware Fusion on Mac.

@@ -149,14 +149,22 @@ variable "ssh_username" {
 }
 
 variable "vagrant_password" {
-  type      = string
-  default   = "vagrant"
-  sensitive = false
+  type        = string
+  default     = "vagrant"
+  sensitive   = true
+  description = "Password for the Vagrant user of this box."
+}
+
+variable "vagrant_ssh_public_key" {
+  type        = string
+  default     = ""
+  description = "SSH public key for Vagrant user"
 }
 
 variable "vagrant_username" {
-  type    = string
-  default = "vagrant"
+  type        = string
+  default     = "vagrant"
+  description = "Username for the Vagrant user of this box."
 }
 
 variable "variant" {
@@ -548,6 +556,7 @@ build {
       "PY_CRYPTOGRAPHY=py3-cryptography=38.0.3-r1",
       "PY_PYNACL=py3-pynacl=1.5.0-r1",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
+      "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}"
     ]
     scripts = [
