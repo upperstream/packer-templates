@@ -1,7 +1,7 @@
-# Packer templates for Alpine Linux 3.17.3
+# Packer templates for Alpine Linux 3.17.4
 
-Templates to create Vagrant boxes for Alpine Linux 3.17.3. (x86_64,
-x86, aarch64, and armv7)
+Templates to create Vagrant boxes for Alpine Linux 3.17.4. (x86_64,
+x86, and aarch64)
 
 ## Prerequisites
 
@@ -55,17 +55,17 @@ packer build -only=virtualbox-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-virtualbox.box` in
+`Alpine-standard-3.17-x86_64-minimal-v17.4.20230614-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329`
+`Alpine-standard-3.17-x86_64-minimal-v17.4.20230614`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-virtualbox.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.3.20230329 \
+  Alpine-standard-3.17-x86_64-minimal-v17.4.20230614-virtualbox.box \
+  --name Alpine-standard-3.17-x86_64-minimal-v17.4.20230614 \
   --provider virtualbox
 ```
 
@@ -83,17 +83,17 @@ packer build -only=vmware-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-vmware.box` in the
+`Alpine-standard-3.17-x86_64-minimal-v17.4.20230614-vmware.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329` to your box list
+`Alpine-standard-3.17-x86_64-minimal-v17.4.20230614` to your box list
 by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-vmware.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.3.20230329 \
+  Alpine-standard-3.17-x86_64-minimal-v17.4.20230614-vmware.box \
+  --name Alpine-standard-3.17-x86_64-minimal-v17.4.20230614 \
   --provider vmware
 ```
 
@@ -146,17 +146,17 @@ packer build -only=qemu.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-libvirt.box` in the
+`Alpine-standard-3.17-x86_64-minimal-v17.4.20230614-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329`
+`Alpine-standard-3.17-x86_64-minimal-v17.4.20230614`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-libvirt.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.3.20230329 \
+  Alpine-standard-3.17-x86_64-minimal-v17.4.20230614-libvirt.box \
+  --name Alpine-standard-3.17-x86_64-minimal-v17.4.20230614 \
   --provider libvirt
 ```
 
@@ -176,17 +176,17 @@ packer build -only=parallels-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-parallels.box` in
+`Alpine-standard-3.17-x86_64-minimal-v17.4.20230614-parallels.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329`
+`Alpine-standard-3.17-x86_64-minimal-v17.4.20230614`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-parallels.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.3.20230329 \
+  Alpine-standard-3.17-x86_64-minimal-v17.4.20230614-parallels.box \
+  --name Alpine-standard-3.17-x86_64-minimal-v17.4.20230614 \
   --provider parallels
 ```
 
@@ -203,17 +203,17 @@ packer build -only=hyperv-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-hyperv.box`
+`Alpine-standard-3.17-x86_64-minimal-v17.4.20230614-hyperv.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.3.20230329`
+`Alpine-standard-3.17-x86_64-minimal-v17.4.20230614`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.3.20230329-hyperv.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.3.20230329 \
+  Alpine-standard-3.17-x86_64-minimal-v17.4.20230614-hyperv.box \
+  --name Alpine-standard-3.17-x86_64-minimal-v17.4.20230614 \
   --provider hyperv
 ```
 
@@ -239,11 +239,14 @@ for SSH connection of this box is set to `/bin/ash`.
 
 ## Variants
 
-* `alpine-3.17-minimal.pkr.hcl` - Alpine Linux 3.17.3
-* `alpine-3.17-ansible.pkr.hcl` - Alpine Linux 3.17.3 with [Ansible],
+* `alpine-3.17-minimal.pkr.hcl` - Alpine Linux 3.17.4
+* `alpine-3.17-ansible.pkr.hcl` - Alpine Linux 3.17.4 with [Ansible],
   [Ansible Lint], and [Testinfra]
-* `alpine-3.17-docker.pkr.hcl` - Alpine Linux 3.17.3 with [Docker] +
+* `alpine-3.17-docker.pkr.hcl` - Alpine Linux 3.17.4 with [Docker] +
   [Docker Compose]
+* `alpine-3.17-dwm.pkr.hcl` - Alpine Linux 3.17.4 with [X.org][], [suckless][]
+  tools, and [xrdp][].
+* `alpine-3.17-xfce.pkr.hcl` - Alpine Linux 3.17.4 with [Xfce][] + [xrdp][].
 
 [Ansible]: https://www.ansible.com/
   "Ansible is Simple IT Automation"
@@ -253,9 +256,13 @@ for SSH connection of this box is set to `/bin/ash`.
   "Docker - Build, Ship and Run Any App, Anywhere"
 [Docker Compose]: https://docs.docker.com/compose/
   "Docker Compose - Docker Documentation"
+[suckless]: http://suckless.org/ "suckless.org software that sucks less"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/
   "Testinfra test your infrastructure &#8212;
   testinfra 7.0.2.dev1+gfc4bfd1.d20221210 documentation"
+[X.org]: https://www.x.org/wiki/ "X.Org"
+[Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
+[xrdp]: http://www.xrdp.org/ "xrdp"
 
 ## Supported CPUs
 
@@ -265,7 +272,6 @@ Templates support various CPUs.  The following list describes which
 * x86_64 - `vars-alpine-*-x86_64.pkrvars.hcl`
 * x86 - `vars-alpine-*-x64.pkrvars.hcl`
 * aarch64 - `vars-alpine-*-aarch64.pkrvars.hcl`
-* armv7 - `vars-alpine-*-armv7.pkrvars.hcl`
 
 Arm CPUs are tested with only `parallels-iso` builder on Apple Silicon
 machines.
@@ -285,6 +291,7 @@ or `-var-file` command line options to `packer`:
   minutes while `15s` denotes 15 seconds.  Defaults to 30 seconds.
 * `disk_size` - Disk size of the created VM.  Defaults to `40960`
   which means 40GB.
+* `esxi_disk_name` - Disk name for ESXi box.
 * `esxi_keep_registered` - instructs whether build artefact should be
   kept in the inventory on ESXi.  Defaults to `false`.
 * `esxi_vnc_over_websocket` - Controls whether or not to use VNC over
@@ -292,11 +299,14 @@ or `-var-file` command line options to `packer`:
   your ESXi host version is prior to 6.7 which supports VNC server.
 * `headless` - Launch the virtual machine in headless mode if set to
   `true`.  Defaults to `false`.
+* `hyperv_disk_name` - Disk name for Hyper-V box.
 * `hyperv_switch_name` - Network switch name on Packer Hyper-V builder.
   Default value is `Default Switch`.
 * `mem_size` - RAM size of the created VM.  Defaults to `512`
   which means 512MB.
 * `num_cpus` - The number of CPUs.  Defaults to `2`.
+* `parallels_disk_name` - Disk name for Parallels box.
+* `qemu_disk_name` - Disk name for QEMU box.
 * `qemu_display` - Value for `-display` option for QEMU.  Defaults to an
   empty string.
 * `qemu_use_default_display` - Do not pass `-display` option to QEMU if
@@ -310,8 +320,10 @@ or `-var-file` command line options to `packer`:
 * `vagrant_username` - User name used for run time.  Vagrant box is set
   for this user.  Defaults to `vagrant`.  This is also used for SSH
   user name during build time.
+* `virtualbox_disk_name` - Disk name for VirtualBox box.
 * `vm_name` - VM name.  This also affects box file name and output
   directory name.
+* `vmware_disk_name` - Disk name for VMware box.  Defaults to `scsi`.
 * `vmware_fusion_app_path` - Path name to the VMware Fusion on Mac.
   Defaults to `/Applications/VMware Fusion.app`.
 
