@@ -213,7 +213,7 @@ variable "vagrant_username" {
 
 variable "variant" {
   type    = string
-  default = "ansible"
+  default = "xfce"
 }
 
 variable "virtualbox_disk_name" {
@@ -482,7 +482,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "OS_VER=v${var.os_ver}",
-      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=7.0.2-r0"
+      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions-x11=7.0.2-r0"
     ]
     only = [
       "virtualbox-iso.*"
@@ -494,7 +494,9 @@ build {
     environment_vars = [
       "CPU=${var.cpu}",
       "OPEN_VM_TOOLS=open-vm-tools=12.1.0-r0",
-      "OS_VER=v${var.os_ver}"
+      "OS_VER=v${var.os_ver}",
+      "XF86_INPUT=xf86-input-evdev=2.10.6-r1",
+      "XF86_VIDEO=xf86-video-vmware=13.3.0-r2"
     ]
     only = [
       "vmware-iso.*"
@@ -515,18 +517,16 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "ANSIBLE=ansible=6.6.0-r0",
-      "ANSIBLE_LINT=ansible-lint=6.9.1-r0",
       "OS_VER=v${var.os_ver}",
-      "PYTHON_PIP=py3-pip=22.3.1-r1",
-      "PYTEST_TESTINFRA=pytest-testinfra==7.0.0",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
-      "VAGRANT_USERNAME=${var.vagrant_username}"
+      "VAGRANT_USERNAME=${var.vagrant_username}",
+      "XRANDR=xrandr=1.5.1-r1",
+      "XRDP=xrdp=0.9.21.1-r0"
     ]
     scripts = [
       "../provisioners/vagrant_alpine3.15+.sh",
-      "../provisioners/ansible+testinfra_alpine3.12+.sh"
+      "../provisioners/xfce.sh"
     ]
   }
 

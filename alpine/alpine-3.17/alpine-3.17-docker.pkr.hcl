@@ -25,23 +25,33 @@ packer {
 }
 
 variable "boot_wait" {
-  type    = string
-  default = "30s"
+  type        = string
+  default     = "30s"
+  description = "Override `boot_wait` default setting, which is 30s."
 }
 
 variable "box_version" {
-  type    = string
-  default = "17.3.20230329"
+  type        = string
+  default     = "17.4.20230614"
+  description = "Version number of this Vagrant box."
 }
 
 variable "cpu" {
-  type    = string
-  default = null
+  type        = string
+  default     = null
+  description = "CPU name.  This is used as a part of box name."
 }
 
 variable "disk_size" {
-  type    = string
-  default = "40960"
+  type        = string
+  default     = "40960"
+  description = "The size of the primary storage."
+}
+
+variable "esxi_disk_name" {
+  type        = string
+  default     = "sda"
+  description = "Disk name for ESXi box"
 }
 
 variable "esxi_guest_os_type" {
@@ -55,86 +65,119 @@ variable "esxi_keep_registered" {
 }
 
 variable "esxi_remote_datastore" {
-  type    = string
-  default = "${env("ESXI_REMOTE_DATASTORE")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_DATASTORE")}"
+  description = "ESXi datastore name to create this box in."
 }
 
 variable "esxi_remote_host" {
-  type    = string
-  default = "${env("ESXI_REMOTE_HOST")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_HOST")}"
+  description = "Remote host name of the ESXi server to create this box on."
 }
 
 variable "esxi_remote_password" {
-  type      = string
-  default   = "${env("ESXI_REMOTE_PASSWORD")}"
-  sensitive = true
+  type        = string
+  default     = "${env("ESXI_REMOTE_PASSWORD")}"
+  sensitive   = true
+  description = "SSH password for the ESXi server to create this box."
 }
 
 variable "esxi_remote_username" {
-  type    = string
-  default = "${env("ESXI_REMOTE_USERNAME")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_USERNAME")}"
+  description = "SSH username for the ESXi server to create this box."
 }
 
 variable "esxi_vnc_over_websocket" {
-  type    = string
-  default = "true"
+  type        = string
+  default     = "true"
+  description = "Connect VNC server over a websocket for building ESXi box."
 }
 
 variable "headless" {
-  type    = string
-  default = "false"
+  type        = string
+  default     = "false"
+  description = "VM window is not displayed if false."
+}
+
+variable "hyperv_disk_name" {
+  type        = string
+  default     = "sda"
+  description = "Disk name for Hyper-V box"
 }
 
 variable "hyperv_switch_name" {
-  type    = string
-  default = "Default Switch"
+  type        = string
+  default     = "Default Switch"
+  description = "Switch name for Hyper-V box."
 }
 
 variable "iso_checksum" {
-  type    = string
-  default = null
+  type        = string
+  default     = null
+  description = "SHA256 checksum of the install media."
 }
 
 variable "iso_image" {
-  type    = string
-  default = null
+  type        = string
+  default     = null
+  description = "File name of the install media."
 }
 
 variable "mem_size" {
-  type    = string
-  default = "512"
+  type        = string
+  default     = "512"
+  description = "Memory size of this box."
 }
 
 variable "num_cpus" {
-  type    = string
-  default = "2"
+  type        = string
+  default     = "2"
+  description = "The number of CPUs of this box."
 }
 
 variable "os_ver" {
   type    = string
-  default = "v3.17"
+  default = "3.17"
+}
+
+variable "parallels_disk_name" {
+  type        = string
+  default     = "sda"
+  description = "Disk name for Parallels box"
+}
+
+variable "qemu_disk_name" {
+  type        = string
+  default     = "vda"
+  description = "Disk name for QEMU box"
 }
 
 variable "qemu_display" {
-  type    = string
-  default = ""
+  type        = string
+  default     = ""
+  description = "Display name for QEMU box."
 }
 
 variable "qemu_use_default_display" {
-  type    = string
-  default = "true"
+  type        = string
+  default     = "true"
+  description = "Use the default display for QEMU box if true."
 }
 
 variable "root_password" {
-  type      = string
-  default   = "vagrant"
-  sensitive = false
+  type        = string
+  default     = "vagrant"
+  sensitive   = false
+  description = "Password for the root user of this box."
 }
 
 variable "ssh_password" {
-  type      = string
-  default   = "vagrant"
-  sensitive = false
+  type        = string
+  default     = "vagrant"
+  sensitive   = false
+  description = "SSH password to connect this box being created."
 }
 
 variable "ssh_timeout" {
@@ -144,24 +187,39 @@ variable "ssh_timeout" {
 }
 
 variable "ssh_username" {
-  type    = string
-  default = "root"
+  type        = string
+  default     = "root"
+  description = "SSH username to connect this box being created."
 }
 
 variable "vagrant_password" {
-  type      = string
-  default   = "vagrant"
-  sensitive = false
+  type        = string
+  default     = "vagrant"
+  sensitive   = true
+  description = "Password for the Vagrant user of this box."
+}
+
+variable "vagrant_ssh_public_key" {
+  type        = string
+  default     = ""
+  description = "SSH public key for Vagrant user"
 }
 
 variable "vagrant_username" {
-  type    = string
-  default = "vagrant"
+  type        = string
+  default     = "vagrant"
+  description = "Username for the Vagrant user of this box."
 }
 
 variable "variant" {
   type    = string
   default = "docker"
+}
+
+variable "virtualbox_disk_name" {
+  type        = string
+  default     = "sda"
+  description = "Disk name for VirtualBox box"
 }
 
 variable "virtualbox_guest_os_type" {
@@ -170,8 +228,21 @@ variable "virtualbox_guest_os_type" {
 }
 
 variable "vm_name" {
-  type    = string
-  default = ""
+  type        = string
+  default     = ""
+  description = "Overriding VM name"
+}
+
+variable "vm_name_base" {
+  type        = string
+  default     = ""
+  description = "Base part of default VM name"
+}
+
+variable "vmware_disk_name" {
+  type        = string
+  default     = "sda"
+  description = "Disk name for VMware box"
 }
 
 variable "vmware_fusion_app_path" {
@@ -180,11 +251,12 @@ variable "vmware_fusion_app_path" {
 }
 
 variable "vmware_guest_os_type" {
-  type    = string
-  default = null
+  type        = string
+  default     = null
+  description = "Guest OS type of VMware box."
 }
 
-source "hyperv-iso" "default" {
+locals {
   boot_command = [
     "root<enter><wait>",
     "/sbin/setup-interfaces -i << EOF<enter>",
@@ -197,150 +269,98 @@ source "hyperv-iso" "default" {
     "EOF<enter><wait>",
     "/etc/init.d/networking --quiet start<enter><wait10><wait10>",
     "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
-    "DISK=sda ERASE_DISKS=/dev/sda setup-alpine -f /tmp/answers.txt<enter><wait><wait10>",
+    "DISK=%s ERASE_DISKS=/dev/%s setup-alpine -f /tmp/answers.txt<enter><wait><wait10>",
     "${var.root_password}<enter><wait>",
     "${var.root_password}<enter><wait>",
     "<wait10><wait10><wait10>",
     "<wait10><wait10><wait10><wait10><wait10><wait10>",
     "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_hyperv.sh<enter><wait>",
-    "DISK=sda sh /tmp/install.sh<enter><wait>"
+    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/%s<enter><wait>",
+    "DISK=%s sh /tmp/install.sh<enter><wait>"
   ]
-  boot_wait      = var.boot_wait
-  cpus           = var.num_cpus
-  disk_size      = var.disk_size
-  headless       = var.headless
-  http_directory = "."
-  iso_checksum   = var.iso_checksum
   iso_urls = [
     "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
+    "http://dl-cdn.alpinelinux.org/alpine/v${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
   ]
+  vm_name = coalesce(var.vm_name, "${var.vm_name_base}-${var.os_ver}-${var.cpu}-${var.variant}-v${var.box_version}")
+}
+
+source "hyperv-iso" "default" {
+  boot_command = split("\n", format(
+    join("\n", local.boot_command), var.hyperv_disk_name, var.hyperv_disk_name, "install_hyperv.sh", var.hyperv_disk_name
+  ))
+  boot_wait        = var.boot_wait
+  cpus             = var.num_cpus
+  disk_size        = var.disk_size
+  headless         = var.headless
+  http_directory   = "."
+  iso_checksum     = var.iso_checksum
+  iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-hyperv"
+  output_directory = "output/${local.vm_name}-hyperv"
   shutdown_command = "poweroff"
   ssh_password     = var.ssh_password
   ssh_port         = 22
   ssh_timeout      = var.ssh_timeout
   ssh_username     = var.ssh_username
   switch_name      = var.hyperv_switch_name
-  vm_name          = "${var.vm_name}-${var.variant}"
+  vm_name          = local.vm_name
 }
 
 source "parallels-iso" "default" {
-  boot_command = [
-    "root<enter><wait>",
-    "/sbin/setup-interfaces -i << EOF<enter>",
-    "auto lo<enter>",
-    "iface lo inet loopback<enter>",
-    "<enter>",
-    "auto eth0<enter>",
-    "iface eth0 inet dhcp<enter>",
-    "<tab>hostname localhost<enter>",
-    "EOF<enter><wait>",
-    "/etc/init.d/networking --quiet start<enter><wait10><wait10>",
-    "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
-    "DISK=sda ERASE_DISKS=/dev/sda setup-alpine -f /tmp/answers.txt<enter><wait><wait10>",
-    "${var.root_password}<enter><wait>",
-    "${var.root_password}<enter><wait>",
-    "<wait10><wait10><wait10>",
-    "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
-    "DISK=sda sh /tmp/install.sh<enter><wait>"
-  ]
-  boot_wait      = var.boot_wait
-  cpus           = var.num_cpus
-  disk_size      = var.disk_size
-  disk_type      = "expand"
-  guest_os_type  = "linux"
-  http_directory = "."
-  iso_checksum   = var.iso_checksum
-  iso_urls = [
-    "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
-  ]
+  boot_command = split("\n", format(
+    join("\n", local.boot_command), var.parallels_disk_name, var.parallels_disk_name, "install.sh", var.parallels_disk_name
+  ))
+  boot_wait            = var.boot_wait
+  cpus                 = var.num_cpus
+  disk_size            = var.disk_size
+  disk_type            = "expand"
+  guest_os_type        = "linux"
+  http_directory       = "."
+  iso_checksum         = var.iso_checksum
+  iso_urls             = local.iso_urls
   memory               = var.mem_size
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-parallels"
+  output_directory     = "output/${local.vm_name}-parallels"
   parallels_tools_mode = "disable"
   shutdown_command     = "poweroff"
   ssh_password         = var.ssh_password
   ssh_port             = 22
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_username
-  vm_name              = "${var.vm_name}-${var.variant}"
+  vm_name              = local.vm_name
 }
 
 source "qemu" "default" {
   accelerator = "kvm"
-  boot_command = [
-    "root<enter><wait>",
-    "/sbin/setup-interfaces -i << EOF<enter>",
-    "auto lo<enter>",
-    "iface lo inet loopback<enter>",
-    "<enter>",
-    "auto eth0<enter>",
-    "iface eth0 inet dhcp<enter>",
-    "<tab>hostname localhost<enter>",
-    "EOF<enter><wait>",
-    "/etc/init.d/networking --quiet start<enter><wait10><wait10>",
-    "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
-    "DISK=vda ERASE_DISKS=/dev/vda setup-alpine -f /tmp/answers.txt<enter><wait><wait10>",
-    "${var.root_password}<enter><wait>",
-    "${var.root_password}<enter><wait>",
-    "<wait10><wait10><wait10>",
-    "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
-    "DISK=vda sh /tmp/install.sh<enter><wait>"
-  ]
-  boot_wait      = var.boot_wait
-  cpus           = var.num_cpus
-  disk_interface = "virtio"
-  disk_size      = var.disk_size
-  display        = var.qemu_display
-  format         = "qcow2"
-  headless       = var.headless
-  http_directory = "."
-  iso_checksum   = var.iso_checksum
-  iso_urls = [
-    "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
-  ]
+  boot_command = split("\n", format(
+    join("\n", local.boot_command), var.qemu_disk_name, var.qemu_disk_name, "install.sh", var.qemu_disk_name
+  ))
+  boot_wait           = var.boot_wait
+  cpus                = var.num_cpus
+  disk_interface      = "virtio"
+  disk_size           = var.disk_size
+  display             = var.qemu_display
+  format              = "qcow2"
+  headless            = var.headless
+  http_directory      = "."
+  iso_checksum        = var.iso_checksum
+  iso_urls            = local.iso_urls
   memory              = var.mem_size
   net_device          = "virtio-net"
-  output_directory    = "output/${var.vm_name}-${var.variant}-v${var.box_version}-qemu"
+  output_directory    = "output/${local.vm_name}-qemu"
   shutdown_command    = "poweroff"
   ssh_password        = var.ssh_password
   ssh_port            = 22
   ssh_timeout         = var.ssh_timeout
   ssh_username        = var.ssh_username
   use_default_display = var.qemu_use_default_display
-  vm_name             = "${var.vm_name}-${var.variant}"
+  vm_name             = local.vm_name
 }
 
 source "virtualbox-iso" "default" {
-  boot_command = [
-    "root<enter><wait>",
-    "/sbin/setup-interfaces -i << EOF<enter>",
-    "auto lo<enter>",
-    "iface lo inet loopback<enter>",
-    "<enter>",
-    "auto eth0<enter>",
-    "iface eth0 inet dhcp<enter>",
-    "<tab>hostname localhost<enter>",
-    "EOF<enter><wait>",
-    "/etc/init.d/networking --quiet start<enter><wait10><wait10>",
-    "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
-    "DISK=sda ERASE_DISKS=/dev/sda setup-alpine -f /tmp/answers.txt<enter><wait><wait10>",
-    "${var.root_password}<enter><wait>",
-    "${var.root_password}<enter><wait>",
-    "<wait10><wait10><wait10>",
-    "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
-    "DISK=sda sh /tmp/install.sh<enter><wait>"
-  ]
+  boot_command = split("\n", format(
+    join("\n", local.boot_command), var.virtualbox_disk_name, var.virtualbox_disk_name, "install.sh", var.virtualbox_disk_name
+  ))
   boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
@@ -349,71 +369,47 @@ source "virtualbox-iso" "default" {
   headless             = var.headless
   http_directory       = "."
   iso_checksum         = var.iso_checksum
-  iso_urls = [
-    "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
-  ]
-  memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-virtualbox"
-  shutdown_command = "poweroff"
-  ssh_password     = var.ssh_password
-  ssh_port         = 22
-  ssh_timeout      = var.ssh_timeout
-  ssh_username     = var.ssh_username
+  iso_urls             = local.iso_urls
+  memory               = var.mem_size
+  output_directory     = "output/${local.vm_name}-virtualbox"
+  shutdown_command     = "poweroff"
+  ssh_password         = var.ssh_password
+  ssh_port             = 22
+  ssh_timeout          = var.ssh_timeout
+  ssh_username         = var.ssh_username
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"]
   ]
   virtualbox_version_file = ".vbox_version"
-  vm_name                 = "${var.vm_name}-${var.variant}"
+  vm_name                 = local.vm_name
 }
 
 source "vmware-iso" "default" {
-  boot_command = [
-    "root<enter><wait>",
-    "/sbin/setup-interfaces -i << EOF<enter>",
-    "auto lo<enter>",
-    "iface lo inet loopback<enter>",
-    "<enter>",
-    "auto eth0<enter>",
-    "iface eth0 inet dhcp<enter>",
-    "<tab>hostname localhost<enter>",
-    "EOF<enter><wait>",
-    "/etc/init.d/networking --quiet start<enter><wait10><wait10>",
-    "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
-    "DISK=sda ERASE_DISKS=/dev/sda setup-alpine -f /tmp/answers.txt<enter><wait><wait10>",
-    "${var.root_password}<enter><wait>",
-    "${var.root_password}<enter><wait>",
-    "<wait10><wait10><wait10>",
-    "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
-    "DISK=sda sh /tmp/install.sh<enter><wait>"
-  ]
-  boot_wait       = var.boot_wait
-  cpus            = var.num_cpus
-  disk_size       = var.disk_size
-  disk_type_id    = "0"
-  fusion_app_path = var.vmware_fusion_app_path
-  guest_os_type   = var.vmware_guest_os_type
-  headless        = var.headless
-  http_directory  = "."
-  iso_checksum    = var.iso_checksum
-  iso_urls = [
-    "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
-  ]
+  boot_command = split("\n", format(
+    join("\n", local.boot_command), var.vmware_disk_name, var.vmware_disk_name, "install.sh", var.vmware_disk_name
+  ))
+  boot_wait            = var.boot_wait
+  cpus                 = var.num_cpus
+  disk_size            = var.disk_size
+  disk_type_id         = "0"
+  fusion_app_path      = var.vmware_fusion_app_path
+  guest_os_type        = var.vmware_guest_os_type
+  headless             = var.headless
+  http_directory       = "."
+  iso_checksum         = var.iso_checksum
+  iso_urls             = local.iso_urls
   memory               = var.mem_size
   network              = "nat"
   network_adapter_type = "e1000"
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-vmware"
+  output_directory     = "output/${local.vm_name}-vmware"
   shutdown_command     = "poweroff"
   ssh_password         = var.ssh_password
   ssh_port             = 22
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_username
   tools_upload_flavor  = ""
-  vm_name              = "${var.vm_name}-${var.variant}"
+  vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
@@ -424,58 +420,37 @@ source "vmware-iso" "default" {
 }
 
 source "vmware-iso" "esxi" {
-  boot_command = [
-    "root<enter><wait>",
-    "/sbin/setup-interfaces -i << EOF<enter>",
-    "auto lo<enter>",
-    "iface lo inet loopback<enter>",
-    "<enter>",
-    "auto eth0<enter>",
-    "iface eth0 inet dhcp<enter>",
-    "<tab>hostname localhost<enter>",
-    "EOF<enter><wait>",
-    "/etc/init.d/networking --quiet start<enter><wait10><wait10>",
-    "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
-    "DISK=sda ERASE_DISKS=/dev/sda setup-alpine -f /tmp/answers.txt<enter><wait><wait10>",
-    "${var.root_password}<enter><wait>",
-    "${var.root_password}<enter><wait>",
-    "<wait10><wait10><wait10>",
-    "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
-    "DISK=sda sh /tmp/install.sh<enter><wait>"
-  ]
-  boot_wait           = var.boot_wait
-  cpus                = var.num_cpus
-  disk_size           = var.disk_size
-  disk_type_id        = "thin"
-  guest_os_type       = var.esxi_guest_os_type
-  headless            = var.headless
-  http_directory      = "."
-  insecure_connection = true
-  iso_checksum        = var.iso_checksum
-  iso_urls = [
-    "./iso/${var.iso_image}",
-    "http://dl-cdn.alpinelinux.org/alpine/${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
-  ]
-  keep_registered      = var.esxi_keep_registered
-  memory               = var.mem_size
-  network              = "bridged"
-  network_adapter_type = "e1000"
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-esxi"
-  remote_datastore     = var.esxi_remote_datastore
-  remote_host          = var.esxi_remote_host
-  remote_password      = var.esxi_remote_password
-  remote_type          = "esx5"
-  remote_username      = var.esxi_remote_username
-  shutdown_command     = "poweroff"
-  skip_export          = true
-  ssh_password         = var.ssh_password
-  ssh_port             = 22
-  ssh_timeout          = var.ssh_timeout
-  ssh_username         = var.ssh_username
-  tools_upload_flavor  = "linux"
-  vm_name              = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  boot_command = split("\n", format(
+    join("\n", local.boot_command), var.esxi_disk_name, var.esxi_disk_name, "install.sh", var.esxi_disk_name
+  ))
+  boot_wait               = var.boot_wait
+  cpus                    = var.num_cpus
+  disk_size               = var.disk_size
+  disk_type_id            = "thin"
+  guest_os_type           = var.esxi_guest_os_type
+  headless                = var.headless
+  http_directory          = "."
+  insecure_connection     = true
+  iso_checksum            = var.iso_checksum
+  iso_urls                = local.iso_urls
+  keep_registered         = var.esxi_keep_registered
+  memory                  = var.mem_size
+  network                 = "bridged"
+  network_adapter_type    = "e1000"
+  remote_datastore        = var.esxi_remote_datastore
+  remote_host             = var.esxi_remote_host
+  remote_output_directory = local.vm_name
+  remote_password         = var.esxi_remote_password
+  remote_type             = "esx5"
+  remote_username         = var.esxi_remote_username
+  shutdown_command        = "poweroff"
+  skip_export             = true
+  ssh_password            = var.ssh_password
+  ssh_port                = 22
+  ssh_timeout             = var.ssh_timeout
+  ssh_username            = var.ssh_username
+  tools_upload_flavor     = "linux"
+  vm_name                 = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.networkName"     = "VM Network"
@@ -506,7 +481,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OS_VER=${var.os_ver}",
+      "OS_VER=v${var.os_ver}",
       "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=7.0.2-r0"
     ]
     only = [
@@ -519,7 +494,7 @@ build {
     environment_vars = [
       "CPU=${var.cpu}",
       "OPEN_VM_TOOLS=open-vm-tools=12.1.0-r0",
-      "OS_VER=${var.os_ver}"
+      "OS_VER=v${var.os_ver}"
     ]
     only = [
       "vmware-iso.*"
@@ -530,7 +505,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "NFS_UTILS=nfs-utils=2.6.2-r0",
-      "UTIL_LINUX=util-linux=2.38.1-r0"
+      "UTIL_LINUX=util-linux=2.38.1-r1"
     ]
     only = [
       "qemu.default"
@@ -542,12 +517,13 @@ build {
     environment_vars = [
       "DOCKER=docker=20.10.24-r2",
       "DOCKER_COMPOSE=docker-cli-compose=2.15.1-r3",
-      "OS_VER=${var.os_ver}",
+      "OS_VER=v${var.os_ver}",
       "PYTHON_PIP=py3-pip=22.3.1-r1",
       "PY_BCRYPT=py3-bcrypt=4.0.1-r0",
       "PY_CRYPTOGRAPHY=py3-cryptography=38.0.3-r1",
       "PY_PYNACL=py3-pynacl=1.5.0-r1",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
+      "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}"
     ]
     scripts = [
@@ -579,7 +555,7 @@ build {
       "vmware-iso.default",
       "parallels-iso.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-{{ .Provider }}.box"
+    output               = "${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.15+"
   }
 
@@ -589,7 +565,7 @@ build {
     only = [
       "qemu.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-{{ .Provider }}.box"
+    output               = "${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.15+"
   }
 }
