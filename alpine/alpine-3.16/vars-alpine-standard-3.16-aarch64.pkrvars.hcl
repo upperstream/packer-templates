@@ -1,6 +1,6 @@
 vm_name_base = "Alpine-standard"
-iso_image = "alpine-standard-3.16.5-aarch64.iso"
-iso_checksum = "file:https://dl-cdn.alpinelinux.org/alpine/v3.16/releases/aarch64/alpine-standard-3.16.5-aarch64.iso.sha256"
+iso_image = "alpine-standard-3.16.6-aarch64.iso"
+iso_checksum = "file:https://dl-cdn.alpinelinux.org/alpine/v3.16/releases/aarch64/alpine-standard-3.16.6-aarch64.iso.sha256"
 cpu = "aarch64"
 esxi_guest_os_type = "arm-other5xlinux-64"
 virtualbox_guest_os_type = "Linux_64"
