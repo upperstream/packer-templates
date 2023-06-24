@@ -7,7 +7,7 @@ Templates support x86_64, x86, and aarch64.
 * [alpine-3.18](alpine-3.18/README.md) - templates for Alpine Linux 3.18.2
 * [alpine-3.17](alpine-3.17/README.md) - templates for Alpine Linux 3.17.4
 * [alpine-3.16](alpine-3.16/README.md) - templates for Alpine Linux 3.16.6
-* [alpine-3.15](alpine-3.15/README.md) - templates for Alpine Linux 3.15.8
+* [alpine-3.15](alpine-3.15/README.md) - templates for Alpine Linux 3.15.9
 
 ## Outdated Alpine Linux releases
 
