@@ -2,14 +2,14 @@
 
 ## Current Debian releases
 
-* [debian-12](debian-12/README.md) - templates for Debian 12.0.0
+* [debian-12](debian-12/README.md) - templates for Debian 12.1
 
   Templates support amd64, arm64, and i386.
 
-  * Debian 12.0.0 minimal
-  * Debian 12.0.0 + Docker + Docker Compose
-  * Debian 12.0.0 + X.org + suckless tools
-  * Debian 12.0.0 + Xfce
+  * Debian 12.1 minimal
+  * Debian 12.1 + Docker + Docker Compose
+  * Debian 12.1 + X.org + suckless tools
+  * Debian 12.1 + Xfce
 
 * [debian-11](debian-11/README.md) - templates for Debian 11.7
 
@@ -19,6 +19,7 @@
   * Debian 11.7 + Docker + Docker Compose
   * Debian 11.7 + X.org + suckless tools
   * Debian 11.7 + Xfce
+
 * [debian-10](debian-10/README.md) - templates for Debian 10.10
 
   Templates support amd64 only.

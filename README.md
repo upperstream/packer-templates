@@ -18,7 +18,7 @@
 * [debian](debian/README.md) - Debian templates (amd64)
   * debian-10 - Debian 10.10 templates
   * debian-11 - Debian 11.7 templates
-  * debian-12 - Debian 12.0 templates (amd64, arm64, and i386)
+  * debian-12 - Debian 12.1 templates (amd64, arm64, and i386)
   * [more](debian/README.md)
 * [devuan](devuan) - Devuan templates (amd64)
   * devuan-1.0 - Devuan Jessie 1.0.0 templates
