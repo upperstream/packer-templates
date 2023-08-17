@@ -43,13 +43,13 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso debian-10-amd64-minimal.json
 
 You will find a vagrant box file named
-`Debian-10-amd64-minimal-v10.10.20210619-virtualbox.box` in the same
+`Debian-10-amd64-minimal-v10.13.20220910-virtualbox.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-10-amd64-minimal-v10.10.20210619`
+Then you can add the box named `Debian-10-amd64-minimal-v10.13.20220910`
 to your box list by the following command:
 
-    vagrant box add Debian-10-amd64-minimal-v10.10.20210619-virtualbox.box --name Debian-10-amd64-minimal-v10.10.20210619 --provider virtualbox
+    vagrant box add Debian-10-amd64-minimal-v10.13.20220910-virtualbox.box --name Debian-10-amd64-minimal-v10.13.20220910 --provider virtualbox
 
 ### VMware
 
@@ -58,13 +58,13 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso debian-10-amd64-minimal.json
 
 You will find a vagrant box file named
-`Debian-10-amd64-minimal-v10.10.20210619-vmware.box` in the same
+`Debian-10-amd64-minimal-v10.13.20220910-vmware.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-10-amd64-minimal-v10.10.20210619`
+Then you can add the box named `Debian-10-amd64-minimal-v10.13.20220910`
 to your box list by the following command:
 
-    vagrant box add Debian-10-amd64-minimal-v10.10.20210619-vmware.box --name Debian-10-amd64-minimal-v10.10.20210619 --provider vmware_desktop
+    vagrant box add Debian-10-amd64-minimal-v10.13.20220910-vmware.box --name Debian-10-amd64-minimal-v10.13.20220910 --provider vmware_desktop
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -98,13 +98,13 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu debian-10-amd64-minimal.json
 
-You will find a vagrant box file named `Debian-10-amd64-minimal-v10.10.20210619-libvirt.box`
+You will find a vagrant box file named `Debian-10-amd64-minimal-v10.13.20220910-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-10-amd64-minimal-v10.10.20210619`
+Then you can add the box named `Debian-10-amd64-minimal-v10.13.20220910`
 to your box list by the following command:
 
-    vagrant box add Debian-10-amd64-minimal-v10.10.20210619-libvirt.box --name Debian-10-amd64-minimal-v10.10.20210619 --provider libvirt
+    vagrant box add Debian-10-amd64-minimal-v10.13.20220910-libvirt.box --name Debian-10-amd64-minimal-v10.13.20220910 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -115,13 +115,13 @@ From the terminal, invoke the following command for Hyper-V provider:
 
     packer build -only=hyperv-iso debian-10-amd64-minimal.json
 
-You will find a vagrant box file named `Debian-10-amd64-minimal-v10.10.20210619-hyperv.box`
+You will find a vagrant box file named `Debian-10-amd64-minimal-v10.13.20220910-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Debian-10-amd64-minimal-v10.10.20210619`
+Then you can add the box named `Debian-10-amd64-minimal-v10.13.20220910`
 to your box list by the following command:
 
-    vagrant box add Debian-10-amd64-minimal-v10.10.20210619-hyperv.box --name Debian-10-amd64-minimal-v10.10.20210619 --provider hyperv
+    vagrant box add Debian-10-amd64-minimal-v10.13.20220910-hyperv.box --name Debian-10-amd64-minimal-v10.13.20220910 --provider hyperv
 
 ## Variants
 
@@ -155,9 +155,9 @@ to your box list by the following command:
 
 Optional var files are provided to instruct to use alternative
 installer CD images, i.e., `vars-debian-10-amd64-full.json` instructs to
-use `debian-10.10.0-amd64-xfce-CD-1.iso` while
+use `debian-10.13.0-amd64-xfce-CD-1.iso` while
 `vars-debian-10-amd64-netinst.json` does
-`debian-10.10.0-amd64-netinst.iso` respectively.  Without using these
+`debian-10.13.0-amd64-netinst.iso` respectively.  Without using these
 var files, `debian-10-amd64-*.json` templates use `mini.iso`.
 
 Depending on situation you can specify either of var files on the

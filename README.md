@@ -15,8 +15,8 @@
   * centos-6.9 - CentOS 6.9 templates
   * centos-7 - CentOS 7.8.2003 templates (x86_64 only)
   * [more](centos/README.md)
-* [debian](debian/README.md) - Debian templates (amd64)
-  * debian-10 - Debian 10.10 templates
+* [debian](debian/README.md) - Debian templates (amd64 and arm64)
+  * debian-10 - Debian 10.13 templates
   * debian-11 - Debian 11.7 templates
   * debian-12 - Debian 12.1 templates (amd64, arm64, and i386)
   * [more](debian/README.md)
