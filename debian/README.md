@@ -20,15 +20,15 @@
   * Debian 11.7 + X.org + suckless tools
   * Debian 11.7 + Xfce
 
-* [debian-10](debian-10/README.md) - templates for Debian 10.10
+* [debian-10](debian-10/README.md) - templates for Debian 10.13
 
-  Templates support amd64 only.
+  Templates support amd64 and arm64.
 
-  * Debian 10.10 minimal
-  * Debian 10.10 + Ansible + Ansible Lint + Testinfra
-  * Debian 10.10 + Docker + Docker Compose
-  * Debian 10.10 + X.org + suckless tools
-  * Debian 10.10 + Xfce
+  * Debian 10.13 minimal
+  * Debian 10.13 + Ansible + Ansible Lint + Testinfra
+  * Debian 10.13 + Docker + Docker Compose
+  * Debian 10.13 + X.org + suckless tools
+  * Debian 10.13 + Xfce
 
 ## Outdated Debian releases
 
