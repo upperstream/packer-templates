@@ -499,7 +499,7 @@ build {
       "vmware-iso.default"
     ]
     output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2+"
   }
 
   post-processor "vagrant" {
@@ -509,6 +509,6 @@ build {
       "qemu.default"
     ]
     output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2+"
   }
 }

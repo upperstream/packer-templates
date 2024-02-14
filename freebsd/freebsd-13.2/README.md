@@ -151,7 +151,7 @@ host.
 
 ## Default settings
 
-These default settings are done by the file `Vagrantfile.FreeBSD-13.2`
+These default settings are done by the file `Vagrantfile.FreeBSD-13.2+`
 which will be included in the box.  Users can override this setting by
 users' own `Vagrantfile`s.
 
