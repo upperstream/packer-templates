@@ -2,7 +2,10 @@
 set -e
 set -x
 
-pkg install -y ${VIRTUALBOX_OSE_ADDITIONS:-"virtualbox-ose-additions-4.3.38"}
+if ! pkg search "${VIRTUALBOX_OSE_ADDITIONS:="virtualbox-ose-additions-4.3.38"}" 2>/dev/null; then
+	exit
+fi
+pkg install -y "$VIRTUALBOX_OSE_ADDITIONS"
 cat >> /etc/rc.conf << EOF
 hald_enable="YES"
 dbus_enable="YES"

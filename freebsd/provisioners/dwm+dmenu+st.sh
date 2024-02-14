@@ -20,7 +20,8 @@ Section "Screen"
 EndSection
 EOF
 
-pkg install -y "${ARANDR:-arandr}" "${DWM:-dwm}" "${STERM:-sterm}" "${DMENU:-dmenu}" "${NCURSES:-ncurses}"
+pkg install -y "${ARANDR:-arandr}" || true
+pkg install -y "${DWM:-dwm}" "${STERM:-sterm}" "${DMENU:-dmenu}" "${NCURSES:-ncurses}"
 if [ "$TERMINFO_DB" ]; then
 	pkg install -y "${TERMINFO_DB}"
 fi
