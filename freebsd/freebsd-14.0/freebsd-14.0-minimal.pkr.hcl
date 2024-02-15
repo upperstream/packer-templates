@@ -26,7 +26,7 @@ packer {
 
 variable "ABI" {
   type    = string
-  default = "FreeBSD:13:amd64"
+  default = "FreeBSD:14:amd64"
 }
 
 variable "DISTRIBUTIONS" {
@@ -35,20 +35,26 @@ variable "DISTRIBUTIONS" {
 }
 
 variable "arch" {
-  type = string
-  default = "amd64"
+  type        = string
+  default     = "amd64"
   description = "Architecture"
 }
 
 variable "boot_wait" {
-  type = string
-  default = "10s"
+  type        = string
+  default     = "10s"
   description = "Override `boot_wait` default setting (10s)"
 }
 
 variable "box_version" {
   type    = string
-  default = "13.2.20230411"
+  default = "14.0.20231120"
+}
+
+variable "ca_root_nss_version" {
+  type        = string
+  default     = "3.93"
+  description = "Version of `ca_root_nss` package."
 }
 
 variable "disk_size" {
@@ -110,12 +116,12 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "sha256:b76ab084e339ee05f59be81354c8cb7dfadf9518e0548f88017d2759a910f17c"
+  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/14.0/CHECKSUM.SHA256-FreeBSD-14.0-RELEASE-amd64"
 }
 
 variable "iso_image" {
   type    = string
-  default = "FreeBSD-13.2-RELEASE-amd64-disc1.iso"
+  default = "FreeBSD-14.0-RELEASE-amd64-disc1.iso"
 }
 
 variable "mem_size" {
@@ -144,13 +150,29 @@ variable "parallels_partition" {
 
 variable "path_to_iso" {
   type    = string
-  default = "releases/ISO-IMAGES/13.2"
+  default = "releases/ISO-IMAGES/14.0"
+}
+
+variable "qemu_accelerator" {
+  type    = string
+  default = "kvm"
+}
+
+variable "qemu_binary" {
+  type        = string
+  default     = "qemu-system-x86_64"
+  description = "The name of QEMU binary"
 }
 
 variable "qemu_display" {
   type        = string
   default     = ""
   description = "Value for `-display` option for QEMU."
+}
+
+variable "qemu_machine_type" {
+  type    = string
+  default = "pc"
 }
 
 variable "qemu_netif" {
@@ -221,8 +243,14 @@ variable "virtualbox_partition" {
 
 variable "vm_name" {
   type        = string
-  default     = "FreeBSD-13.2-RELEASE-amd64"
+  default     = "FreeBSD-14.0-RELEASE-amd64"
   description = "VM name of the creating box."
+}
+
+variable "vmware_disk_adapter_type" {
+  type        = string
+  default     = "scsi"
+  description = "Disk adapter type for VMware box."
 }
 
 variable "vmware_guest_os_type" {
@@ -230,10 +258,22 @@ variable "vmware_guest_os_type" {
   default = "freebsd-64"
 }
 
+variable "vmware_hardware_version" {
+  type        = string
+  default     = "9"
+  description = "Hardware version for VMware box."
+}
+
 variable "vmware_netif" {
   type        = string
   default     = "em0"
   description = "Network interface name for VMware box."
+}
+
+variable "vmware_network_adapter_type" {
+  type        = string
+  default     = "e1000"
+  description = "Network adapter type for VMware box."
 }
 
 variable "vmware_partition" {
@@ -250,21 +290,10 @@ locals {
     "dhclient %s<enter><wait5>",
     "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
     "<wait>",
-    "PARTITIONS=%s ",
-    "DISTRIBUTIONS=${var.DISTRIBUTIONS} ",
-    "BSDINSTALL_DISTSITE=/usr/freebsd-dist ",
-    "ABI=${var.ABI} ",
-    "ROOT_PASSWORD=${var.root_password} ",
-    "VAGRANT_USER=${var.vagrant_username} ",
-    "VAGRANT_PASSWORD=${var.vagrant_password} ",
-    "VAGRANT_GROUP=${var.vagrant_group} ",
-    "DOAS=doas-6.3p9 ",
-    "CA_ROOT_NSS=ca_root_nss-3.86 ",
-    "NETIF=%s ",
     "bsdinstall script /tmp/install.sh<enter>",
     "<wait10><wait10><wait10><wait10><wait10><wait10>"
   ]
-  first_boot_command = (var.arch == "aarch64")? "" : "<enter>"
+  first_boot_command = (var.arch == "aarch64") ? "" : "<enter>"
   iso_urls = [
     "./iso/${var.iso_image}",
     "https://download.freebsd.org/${var.path_to_iso}/${var.iso_image}",
@@ -276,12 +305,32 @@ locals {
 }
 
 source "hyperv-iso" "default" {
-  boot_command     = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.hyperv_netif, var.hyperv_partition, var.hyperv_netif))
-  boot_wait        = var.boot_wait
-  cpus             = var.num_cpus
-  disk_size        = var.disk_size
-  headless         = var.headless
-  http_directory   = "."
+  boot_command = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.hyperv_netif))
+  boot_wait    = var.boot_wait
+  cpus         = var.num_cpus
+  disk_size    = var.disk_size
+  headless     = var.headless
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      "variables" = {
+        "BSDINSTALL_DISTSITE"     = "/usr/freebsd-dist"
+        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export ZFSBOOT_DISKS"    = var.hyperv_partition
+        "export nonInteractive"   = "YES"
+        "export ABI"              = var.ABI
+        "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
+        "export DOAS"             = "doas-6.3p9"
+        "export NETIF"            = var.hyperv_netif
+        "export ROOT_PASSWORD"    = var.root_password
+        "export VAGRANT_USER"     = var.vagrant_username
+        "export VAGRANT_PASSWORD" = var.vagrant_password
+        "export VAGRANT_GROUP"    = var.vagrant_group
+      },
+      "make_conf" = {
+        "WITHOUT_X11" = "YES"
+      }
+    })
+  }
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
@@ -295,13 +344,33 @@ source "hyperv-iso" "default" {
 }
 
 source "parallels-iso" "default" {
-  boot_command           = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.parallels_netif, var.parallels_partition, var.parallels_netif))
-  boot_wait              = var.boot_wait
-  cpus                   = "${var.num_cpus}"
-  disk_size              = "${var.disk_size}"
-  disk_type              = "expand"
-  guest_os_type          = "other"
-  http_directory         = "."
+  boot_command  = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.parallels_netif))
+  boot_wait     = var.boot_wait
+  cpus          = "${var.num_cpus}"
+  disk_size     = "${var.disk_size}"
+  disk_type     = "expand"
+  guest_os_type = "freebsd"
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      "variables" = {
+        "BSDINSTALL_DISTSITE"     = "/usr/freebsd-dist"
+        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export ZFSBOOT_DISKS"    = var.parallels_partition
+        "export nonInteractive"   = "YES"
+        "export ABI"              = var.ABI
+        "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
+        "export DOAS"             = "doas-6.3p9"
+        "export NETIF"            = var.parallels_netif
+        "export ROOT_PASSWORD"    = var.root_password
+        "export VAGRANT_USER"     = var.vagrant_username
+        "export VAGRANT_PASSWORD" = var.vagrant_password
+        "export VAGRANT_GROUP"    = var.vagrant_group
+      },
+      "make_conf" = {
+        "WITHOUT_X11" = "YES"
+      }
+    })
+  }
   iso_checksum           = "${var.iso_checksum}"
   iso_urls               = local.iso_urls
   memory                 = "${var.mem_size}"
@@ -316,22 +385,44 @@ source "parallels-iso" "default" {
 }
 
 source "qemu" "default" {
-  accelerator         = "kvm"
-  boot_command        = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.qemu_netif, var.qemu_partition, var.qemu_netif))
-  boot_wait           = var.boot_wait
-  cpus                = var.num_cpus
-  disk_compression    = true
-  disk_interface      = "virtio"
-  disk_size           = var.disk_size
-  display             = var.qemu_display
-  format              = "qcow2"
-  headless            = var.headless
-  http_directory      = "."
+  accelerator      = var.qemu_accelerator
+  boot_command     = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.qemu_netif))
+  boot_wait        = var.boot_wait
+  cpus             = var.num_cpus
+  disk_compression = true
+  disk_interface   = "virtio"
+  disk_size        = var.disk_size
+  display          = var.qemu_display
+  format           = "qcow2"
+  headless         = var.headless
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      "variables" = {
+        "BSDINSTALL_DISTSITE"     = "/usr/freebsd-dist"
+        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export ZFSBOOT_DISKS"    = var.qemu_partition
+        "export nonInteractive"   = "YES"
+        "export ABI"              = var.ABI
+        "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
+        "export DOAS"             = "doas-6.3p9"
+        "export NETIF"            = var.qemu_netif
+        "export ROOT_PASSWORD"    = var.root_password
+        "export VAGRANT_USER"     = var.vagrant_username
+        "export VAGRANT_PASSWORD" = var.vagrant_password
+        "export VAGRANT_GROUP"    = var.vagrant_group
+      },
+      "make_conf" = {
+        "WITHOUT_X11" = "YES"
+      }
+    })
+  }
   iso_checksum        = var.iso_checksum
   iso_urls            = local.iso_urls
+  machine_type        = var.qemu_machine_type
   memory              = var.mem_size
   net_device          = "virtio-net"
   output_directory    = "output/${var.vm_name}-${var.variant}-v${var.box_version}-qemu"
+  qemu_binary         = var.qemu_binary
   shutdown_command    = "shutdown -p now"
   ssh_password        = var.root_password
   ssh_username        = "root"
@@ -341,22 +432,42 @@ source "qemu" "default" {
 }
 
 source "virtualbox-iso" "default" {
-  boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.virtualbox_netif, var.virtualbox_partition, var.virtualbox_netif))
+  boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.virtualbox_netif))
   boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
   guest_additions_mode = "disable"
   guest_os_type        = var.virtualbox_guest_os_type
   headless             = var.headless
-  http_directory       = "."
-  iso_checksum         = var.iso_checksum
-  iso_urls             = local.iso_urls
-  memory               = var.mem_size
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-virtualbox"
-  shutdown_command     = "shutdown -p now"
-  ssh_password         = var.root_password
-  ssh_timeout          = "10000s"
-  ssh_username         = "root"
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      "variables" = {
+        "BSDINSTALL_DISTSITE"     = "/usr/freebsd-dist"
+        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export ZFSBOOT_DISKS"    = var.virtualbox_partition
+        "export nonInteractive"   = "YES"
+        "export ABI"              = var.ABI
+        "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
+        "export DOAS"             = "doas-6.3p9"
+        "export NETIF"            = var.virtualbox_netif
+        "export ROOT_PASSWORD"    = var.root_password
+        "export VAGRANT_USER"     = var.vagrant_username
+        "export VAGRANT_PASSWORD" = var.vagrant_password
+        "export VAGRANT_GROUP"    = var.vagrant_group
+      },
+      "make_conf" = {
+        "WITHOUT_X11" = "YES"
+      }
+    })
+  }
+  iso_checksum     = var.iso_checksum
+  iso_urls         = local.iso_urls
+  memory           = var.mem_size
+  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-virtualbox"
+  shutdown_command = "shutdown -p now"
+  ssh_password     = var.root_password
+  ssh_timeout      = "10000s"
+  ssh_username     = "root"
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"]
@@ -365,43 +476,86 @@ source "virtualbox-iso" "default" {
 }
 
 source "vmware-iso" "default" {
-  boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.vmware_netif, var.vmware_partition, var.vmware_netif))
-  boot_wait            = var.boot_wait
-  cpus                 = var.num_cpus
-  disk_size            = var.disk_size
-  disk_type_id         = "0"
-  guest_os_type        = var.vmware_guest_os_type
-  headless             = var.headless
-  http_directory       = "."
+  boot_command      = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.vmware_netif))
+  boot_wait         = var.boot_wait
+  cpus              = var.num_cpus
+  disk_adapter_type = var.vmware_disk_adapter_type
+  disk_size         = var.disk_size
+  disk_type_id      = "0"
+  guest_os_type     = var.vmware_guest_os_type
+  headless          = var.headless
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      "variables" = {
+        "BSDINSTALL_DISTSITE"     = "/usr/freebsd-dist"
+        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export ZFSBOOT_DISKS"    = var.vmware_partition
+        "export nonInteractive"   = "YES"
+        "export ABI"              = var.ABI
+        "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
+        "export DOAS"             = "doas-6.3p9"
+        "export NETIF"            = var.vmware_netif
+        "export ROOT_PASSWORD"    = var.root_password
+        "export VAGRANT_USER"     = var.vagrant_username
+        "export VAGRANT_PASSWORD" = var.vagrant_password
+        "export VAGRANT_GROUP"    = var.vagrant_group
+      },
+      "make_conf" = {
+        "WITHOUT_X11" = "YES"
+      }
+    })
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
   network              = "nat"
-  network_adapter_type = "e1000"
+  network_adapter_type = var.vmware_network_adapter_type
   output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-vmware"
   shutdown_command     = "shutdown -p now"
   ssh_password         = var.root_password
   ssh_timeout          = "10000s"
   ssh_username         = "root"
+  usb                  = true
+  version              = var.vmware_hardware_version
   vm_name              = "${var.vm_name}-${var.variant}-v${var.box_version}"
   vmx_data = {
-    "ethernet0.addressType"     = "generated"
-    "ethernet0.present"         = "TRUE"
-    "ethernet0.wakeOnPcktRcv"   = "FALSE"
-    "remotedisplay.vnc.enabled" = "TRUE"
-    "vhv.enable"                = "TRUE"
+    "ethernet0.addressType"   = "generated"
+    "ethernet0.present"       = "TRUE"
+    "ethernet0.wakeOnPcktRcv" = "FALSE"
+    "usb_xhci.present"        = "TRUE"
+    "vhv.enable"              = "TRUE"
   }
 }
 
 source "vmware-iso" "esxi" {
-  boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.vmware_netif, var.vmware_partition, var.vmware_netif))
-  boot_wait            = var.boot_wait
-  cpus                 = var.num_cpus
-  disk_size            = var.disk_size
-  disk_type_id         = "thin"
-  guest_os_type        = var.vmware_guest_os_type
-  headless             = var.headless
-  http_directory       = "."
+  boot_command  = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.vmware_netif))
+  boot_wait     = var.boot_wait
+  cpus          = var.num_cpus
+  disk_size     = var.disk_size
+  disk_type_id  = "thin"
+  guest_os_type = var.vmware_guest_os_type
+  headless      = var.headless
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      "variables" = {
+        "BSDINSTALL_DISTSITE"     = "/usr/freebsd-dist"
+        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export ZFSBOOT_DISKS"    = var.vmware_partition
+        "export nonInteractive"   = "YES"
+        "export ABI"              = var.ABI
+        "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
+        "export DOAS"             = "doas-6.3p9"
+        "export NETIF"            = var.vmware_netif
+        "export ROOT_PASSWORD"    = var.root_password
+        "export VAGRANT_USER"     = var.vagrant_username
+        "export VAGRANT_PASSWORD" = var.vagrant_password
+        "export VAGRANT_GROUP"    = var.vagrant_group
+      },
+      "make_conf" = {
+        "WITHOUT_X11" = "YES"
+      }
+    })
+  }
   insecure_connection  = true
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
@@ -419,6 +573,7 @@ source "vmware-iso" "esxi" {
   ssh_password         = var.root_password
   ssh_timeout          = "10000s"
   ssh_username         = "root"
+  version              = var.vmware_hardware_version
   vm_name              = "${var.vm_name}-${var.variant}-v${var.box_version}"
   vmx_data = {
     "ethernet0.addressType"     = "generated"
@@ -462,7 +617,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-nox11-6.1.36",
+      "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-nox11-6.1.46",
       "VIRTUALBOX_WITH_XORG=false"
     ]
     execute_command = "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
@@ -474,7 +629,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools-nox11-12.1.5_1,2"
+      "OPEN_VM_TOOLS=open-vm-tools-nox11-12.3.0,2"
     ]
     execute_command = "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     only = [
@@ -482,14 +637,6 @@ build {
       "vmware-iso.esxi"
     ]
     script = "../provisioners/vmware-guest.sh"
-  }
-
-  provisioner "shell" {
-    execute_command = "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
-    except = [
-      "vmware-iso.esxi"
-    ]
-    script = "../provisioners/disk_cleanup.sh"
   }
 
   provisioner "shell" {
