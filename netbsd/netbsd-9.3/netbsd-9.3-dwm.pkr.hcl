@@ -522,7 +522,7 @@ build {
     execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
     scripts = [
       "../provisioners/vagrant_netbsd8+.sh",
-      "../provisioners/dwm+st+dmenu_netbsd9.3.sh"
+      "../provisioners/dwm+st+dmenu_netbsd9.3+.sh"
     ]
   }
 
@@ -548,7 +548,7 @@ build {
       "vmware-iso.default"
     ]
     output               = "./${var.vm_name}-${var.variant}-v${var.box_ver}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-9.3"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-9.3+"
   }
 
   post-processor "vagrant" {
@@ -558,6 +558,6 @@ build {
       "qemu.default"
     ]
     output               = "./${var.vm_name}-${var.variant}-v${var.box_ver}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-9.3"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-9.3+"
   }
 }
