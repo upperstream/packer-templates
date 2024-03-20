@@ -1,0 +1,8 @@
+arch = "aarch64"
+iso_file_name = "NetBSD-10.0_RC1-evbarm-aarch64.iso"
+iso_checksum = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC1/iso/SHA512"
+virtualbox_guest_os_type = "NetBSD"
+vmware_disk_adapter_type = "sata"
+vmware_guest_os_type = "arm-other-64"
+vmware_hardware_version = "19"
+vm_name = "NetBSD-10_RC-aarch64"

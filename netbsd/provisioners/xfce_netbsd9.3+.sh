@@ -15,14 +15,12 @@ sed 's/^DisplayManager\._0\(.*\)/!DisplayManager._0\1/' /tmp/xdm-config > /etc/X
 rm /tmp/xdm-config
 echo "DisplayManager*authName:        MIT-MAGIC-COOKIE-1" >> /etc/X11/xdm/xdm-config
 
-for f in famd dbus hal; do cp /usr/pkg/share/examples/rc.d/$f /etc/rc.d/; done
+HAL=${HAL%%-*}
+for f in famd dbus $HAL; do test -f "$f" && cp /usr/pkg/share/examples/rc.d/"$f" /etc/rc.d/; done
 
-cat >> /etc/rc.conf << EOF
-rpcbind=YES
-famd=YES
-dbus=YES
-hal=YES
-EOF
+for f in rpcbind famd dbus $HAL; do
+	echo "$f=YES" >> /etc/rc.conf
+done
 
 (cd /usr/pkg/etc/xdg/xfce4/; patch -p6 << 'EOF')
 --- xinitrc.orig        2023-04-20 20:44:31.981388500 +0900
