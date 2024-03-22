@@ -24,8 +24,8 @@
   * devuan-1.0 - Devuan Jessie 1.0.0 templates
   * devuan-2 - Devuan 2.1 ASCII templates
 * [freebsd](freebsd/README.md) - FreeBSD templates (amd64, i386, and arm64)
-  * freebsd-12.4 - FreeBSD 12.4 templates (amd64 and i386)
   * freebsd-13.2 - FreeBSD 13.2 templates
+  * freebsd-13.3 - FreeBSD 13.3 templates
   * freebsd-14.0 - FreeBSD 14.0 templates
   * [more](freebsd/README.md)
 * [netbsd](netbsd/README.md) - NetBSD templates (amd64 and i386)
