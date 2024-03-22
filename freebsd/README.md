@@ -6,21 +6,22 @@
   * FreeBSD 14.0-RELEASE
   * FreeBSD 14.0-RELEASE + X.Org + dwm + dmenu + st
   * FreeBSD 14.0-RELEASE + Xfce
+* [freebsd-13.3](freebsd-13.3/README.md) - templates for FreeBSD 13.3-RELEASE (amd64, i386, and arm64)
+  * FreeBSD 13.3-RELEASE
+  * FreeBSD 13.3-RELEASE + X.Org + dwm + dmenu + st
+  * FreeBSD 13.3-RELEASE + Xfce
+  * FreeBSD 13.3-RELEASE on ZFS root file system
 * [freebsd-13.2](freebsd-13.2/README.md) - templates for FreeBSD 13.2-RELEASE (amd64, i386, and arm64)
   * FreeBSD 13.2-RELEASE
   * FreeBSD 13.2-RELEASE + X.Org + dwm + dmenu + st
   * FreeBSD 13.2-RELEASE + Xfce
   * FreeBSD 13.2-RELEASE on ZFS root file system
-* [freebsd-12.4](freebsd-12.4/README.md) - templates for FreeBSD 12.4-RELEASE (amd64 and i386)
-  * FreeBSD 12.4-RELEASE
-  * FreeBSD 12.4-RELEASE + X.Org + dwm + dmenu + st
-  * FreeBSD 12.4-RELEASE + Xfce
-  * FreeBSD 12.4-RELEASE on ZFS root file system
 
 ## Outdated FreeBSD releases
 
 * [freebsd-13.1](freebsd-13.1/README.md) - templates for FreeBSD 13.1-RELEASE (amd64 and i386)
 * [freebsd-13.0](freebsd-13.0/README.md) - templates for FreeBSD 13.0-RELEASE (amd64 and i386)
+* [freebsd-12.4](freebsd-12.4/README.md) - templates for FreeBSD 12.4-RELEASE (amd64 and i386)
 * [freebsd-12.3](freebsd-12.3/README.md) - templates for FreeBSD 12.3-RELEASE (amd64 and i386)
 * [freebsd-12.2](freebsd-12.2/README.md) - templates for FreeBSD 12.2-RELEASE (amd64 and i386)
 * [freebsd-12.1](freebsd-12.1/README.md) - templates for FreeBSD 12.1-RELEASE (amd64 and i386)
