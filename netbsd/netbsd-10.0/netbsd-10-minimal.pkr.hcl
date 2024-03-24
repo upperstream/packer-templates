@@ -13,6 +13,10 @@ packer {
       version = ">= 1.0.10"
       source  = "github.com/hashicorp/qemu"
     }
+    vagrant = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/vagrant"
+    }
     virtualbox = {
       version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
@@ -37,7 +41,7 @@ variable "boot_wait" {
 
 variable "box_ver" {
   type    = string
-  default = "3.20240117"
+  default = "4.20240207"
 }
 
 variable "disk_size" {
@@ -132,17 +136,17 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC3/iso/SHA512"
+  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC4/iso/SHA512"
 }
 
 variable "iso_file_name" {
   type    = string
-  default = "NetBSD-10.0_RC3-amd64.iso"
+  default = "NetBSD-10.0_RC4-amd64.iso"
 }
 
 variable "iso_path" {
   type    = string
-  default = "NetBSD/NetBSD-10.0_RC3/images"
+  default = "NetBSD/NetBSD-10.0_RC4/images"
 }
 
 variable "iso_url" {
