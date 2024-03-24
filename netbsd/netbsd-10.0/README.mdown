@@ -1,6 +1,6 @@
-# Packer templates for NetBSD 10.0 RC3
+# Packer templates for NetBSD 10.0 RC4
 
-Templates to create Vagrant boxes for NetBSD 10.0 RC3 (amd64 and i386).
+Templates to create Vagrant boxes for NetBSD 10.0 RC4 (amd64 and i386).
 
 ## Prerequisites
 
@@ -40,14 +40,14 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso.default netbsd-10-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-10_RC-amd64-minimal-v3.20240117-virtualbox.box`
+You will find a vagrant box file named `NetBSD-10_RC-amd64-minimal-v4.20240207-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10_RC-amd64-minimal-v3.20240117`
+Then you can add the box named `NetBSD-10_RC-amd64-minimal-v4.20240207`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10_RC-amd64-minimal-v3.20240117-virtualbox.box \
-        --name NetBSD-10_RC-amd64-minimal-v3.20240117 --provider virtualbox
+    vagrant box add NetBSD-10_RC-amd64-minimal-v4.20240207-virtualbox.box \
+        --name NetBSD-10_RC-amd64-minimal-v4.20240207 --provider virtualbox
 
 ### VMware
 
@@ -55,14 +55,14 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso.default netbsd-10-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-10_RC-amd64-minimal-v3.20240117-vmware.box`
+You will find a vagrant box file named `NetBSD-10_RC-amd64-minimal-v4.20240207-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10_RC-amd64-minimal-v3.20240117`
+Then you can add the box named `NetBSD-10_RC-amd64-minimal-v4.20240207`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10_RC-amd64-minimal-v3.20240117-vmware.box \
-        --name NetBSD-10_RC-amd64-minimal-v3.20240117 --provider vmware_desktop
+    vagrant box add NetBSD-10_RC-amd64-minimal-v4.20240207-vmware.box \
+        --name NetBSD-10_RC-amd64-minimal-v4.20240207 --provider vmware_desktop
 
 ### ESXi
 
@@ -95,14 +95,14 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu netbsd-10-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-10_RC-amd64-minimal-v3.20240117-libvirt.box`
+You will find a vagrant box file named `NetBSD-10_RC-amd64-minimal-v4.20240207-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10_RC-amd64-minimal-v3.20240117`
+Then you can add the box named `NetBSD-10_RC-amd64-minimal-v4.20240207`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10_RC-amd64-minimal-v3.20240117-libvirt.box \
-        --name NetBSD-10_RC-amd64-minimal-v3.20240117 --provider libvirt
+    vagrant box add NetBSD-10_RC-amd64-minimal-v4.20240207-libvirt.box \
+        --name NetBSD-10_RC-amd64-minimal-v4.20240207 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -119,14 +119,14 @@ Because Packer Hyper-V builder cannot detect IP address of a NetBSD VM,
 you must provide static network settings so that the VM is configured to
 have a static IP address.
 
-You will find a vagrant box file named `NetBSD-10_RC-amd64-minimal-v3.20240117-hyperv.box`
+You will find a vagrant box file named `NetBSD-10_RC-amd64-minimal-v4.20240207-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10_RC-amd64-minimal-v3.20240117`
+Then you can add the box named `NetBSD-10_RC-amd64-minimal-v4.20240207`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10_RC-amd64-minimal-v3.20240117-hyperv.box \
-        --name NetBSD-10_RC-amd64-minimal-v3.20240117 --provider hyperv
+    vagrant box add NetBSD-10_RC-amd64-minimal-v4.20240207-hyperv.box \
+        --name NetBSD-10_RC-amd64-minimal-v4.20240207 --provider hyperv
 
 ## Default settings
 

@@ -13,6 +13,10 @@ packer {
       version = ">= 1.0.10"
       source  = "github.com/hashicorp/qemu"
     }
+    vagrant = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/vagrant"
+    }
     virtualbox = {
       version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
@@ -37,7 +41,7 @@ variable "boot_wait" {
 
 variable "box_ver" {
   type    = string
-  default = "3.20240117"
+  default = "4.20240207"
 }
 
 variable "disk_size" {
@@ -132,17 +136,17 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC3/iso/SHA512"
+  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC4/iso/SHA512"
 }
 
 variable "iso_file_name" {
   type    = string
-  default = "NetBSD-10.0_RC3-amd64.iso"
+  default = "NetBSD-10.0_RC4-amd64.iso"
 }
 
 variable "iso_path" {
   type    = string
-  default = "NetBSD/NetBSD-10.0_RC3/images"
+  default = "NetBSD/NetBSD-10.0_RC4/images"
 }
 
 variable "iso_url" {
@@ -234,7 +238,7 @@ variable "vagrant_username" {
 
 variable "variant" {
   type    = string
-  default = "dwm"
+  default = "xorg"
 }
 
 variable "virtualbox_disk_name" {
@@ -301,7 +305,6 @@ locals {
     "b<enter><wait10><wait10><wait10>",                         # Shall we continue? - Yes
     "${local.selector_bootblocks[var.arch]}",                   # Select bootblocks - Use BIOS console; skip for aarch64
     "d<enter><wait>",                                           # Select distribution - Custom installation
-    "${local.selector_compiler_tools[var.arch]}",               # Distribution sets - Compiler tools - f (i386: e)
     "${local.selector_manual_pages[var.arch]}",                 # Distribution sets - Manual pages - i (i386: h)
     "${local.selector_text_processors[var.arch]}",              # Distribution sets - Text processing tools - m (i386: l)
     "${local.selector_x11[var.arch]}",                          # Distribution sets - X11 sets - n (i386: m)
@@ -310,7 +313,7 @@ locals {
     "x<enter><wait>",                                           # Distribution sets - X11 sets - Install selected X11 sets
     "x<enter><wait>",                                           # Distribution sets - Install selected sets
     "a<enter><wait10><wait10><wait10><wait10><wait10><wait10>", # Install from - CD-ROM
-    "<wait10><wait10><wait10><wait10><wait10>",                 # Wait for installation
+    "<wait10><wait10><wait10>",                                 # Wait for installation
     "<enter><wait5>",                                           # Installation complete - Hit enter to continue
     "${var.ssh_password}<enter><wait>",                         # New password - root password
     "${var.ssh_password}<enter><wait>",                         # Weak password warning - root password
@@ -318,7 +321,6 @@ locals {
     "${local.selector_random_number_generator[var.arch]}",      # Random number generator; not now - only for aarch64
     "g<enter><wait>",                                           # Configure the additional items - Enable sshd
     "h<enter><wait>",                                           # Configure the additional items - Enable ntpd
-    "k<enter><wait>",                                           # Configure the additional items - Enable xdm
     "x<enter><wait>",                                           # Configure the additional items - Finished configuring
     "<enter><wait10>",                                          # Hit enter to continue
     "x<enter><wait10>",                                         # Exit Install System
@@ -347,11 +349,6 @@ locals {
     "amd64" : "a<enter><wait>",
     "i386" : "a<enter><wait>",
     "aarch64" : ""
-  }
-  selector_compiler_tools = {
-    "amd64" : "f<enter><wait>",
-    "i386" : "e<enter><wait>",
-    "aarch64" : "f<enter><wait>"
   }
   selector_manual_pages = {
     "amd64" : "i<enter><wait>",
@@ -598,20 +595,16 @@ build {
   provisioner "shell" {
     environment_vars = [
       "DOAS=doas-6.3p2nb1",
-      "DMENU=dmenu-5.2nb2",
-      "DWM=dwm-6.4nb2",
       "RSYNC=rsync-3.2.7nb2",
-      "ST_TERM=st-term-0.9nb2",
+      "USE_DEFAULT_XINITRC=YES",
       "VAGRANT_GROUP=${var.vagrant_group}",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
-      "VAGRANT_USER=${var.vagrant_username}",
-      "X11VNC=x11vnc-0.9.16nb15",
-      "XRANDR=xrandr-1.5.2"
+      "VAGRANT_USER=${var.vagrant_username}"
     ]
     execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
     scripts = [
       "../provisioners/vagrant_netbsd8+.sh",
-      "../provisioners/dwm+st+dmenu_netbsd9.3+.sh"
+      "../provisioners/xorg.sh"
     ]
   }
 

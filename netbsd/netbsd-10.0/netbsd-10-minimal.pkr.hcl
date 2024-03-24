@@ -13,6 +13,10 @@ packer {
       version = ">= 1.0.10"
       source  = "github.com/hashicorp/qemu"
     }
+    vagrant = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/vagrant"
+    }
     virtualbox = {
       version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
@@ -37,7 +41,7 @@ variable "boot_wait" {
 
 variable "box_ver" {
   type    = string
-  default = "3.20240117"
+  default = "4.20240207"
 }
 
 variable "disk_size" {
@@ -132,17 +136,17 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC3/iso/SHA512"
+  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC4/iso/SHA512"
 }
 
 variable "iso_file_name" {
   type    = string
-  default = "NetBSD-10.0_RC3-amd64.iso"
+  default = "NetBSD-10.0_RC4-amd64.iso"
 }
 
 variable "iso_path" {
   type    = string
-  default = "NetBSD/NetBSD-10.0_RC3/images"
+  default = "NetBSD/NetBSD-10.0_RC4/images"
 }
 
 variable "iso_url" {
@@ -153,7 +157,7 @@ variable "iso_url" {
 
 variable "mem_size" {
   type    = string
-  default = "1024"
+  default = "512"
 }
 
 variable "num_cpus" {
@@ -234,7 +238,7 @@ variable "vagrant_username" {
 
 variable "variant" {
   type    = string
-  default = "xorg"
+  default = "minimal"
 }
 
 variable "virtualbox_disk_name" {
@@ -303,10 +307,6 @@ locals {
     "d<enter><wait>",                                           # Select distribution - Custom installation
     "${local.selector_manual_pages[var.arch]}",                 # Distribution sets - Manual pages - i (i386: h)
     "${local.selector_text_processors[var.arch]}",              # Distribution sets - Text processing tools - m (i386: l)
-    "${local.selector_x11[var.arch]}",                          # Distribution sets - X11 sets - n (i386: m)
-    "f<enter><wait>",                                           # Distribution sets - X11 sets - Select all the above sets
-    "b<enter><wait>",                                           # Distribution sets - X11 sets - but X11 programming
-    "x<enter><wait>",                                           # Distribution sets - X11 sets - Install selected X11 sets
     "x<enter><wait>",                                           # Distribution sets - Install selected sets
     "a<enter><wait10><wait10><wait10><wait10><wait10><wait10>", # Install from - CD-ROM
     "<wait10>",                                                 # Wait for installation
@@ -355,11 +355,6 @@ locals {
     "amd64" : "m<enter><wait>",
     "i386" : "l<enter><wait>",
     "aarch64" : "m<enter><wait>"
-  }
-  selector_x11 = {
-    "amd64" : "n<enter><wait>",
-    "i386" : "m<enter><wait>",
-    "aarch64" : "n<enter><wait>"
   }
   selector_random_number_generator = {
     "amd64" : "",
@@ -577,31 +572,14 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools-12.1.5nb1"
-      #      "XF86_INPUT_VMMOUSE=xf86-input-vmmouse",
-      #      "XF86_VIDEO_VMWARE=xf86-video-vmware"
-    ]
-    execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
-    only = [
-      "vmware-iso.*"
-    ]
-    script = "../provisioners/vmware-xorg_netbsd8+.sh"
-  }
-
-  provisioner "shell" {
-    environment_vars = [
       "DOAS=doas-6.3p2nb1",
       "RSYNC=rsync-3.2.7nb2",
-      "USE_DEFAULT_XINITRC=YES",
       "VAGRANT_GROUP=${var.vagrant_group}",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_USER=${var.vagrant_username}"
     ]
     execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
-    scripts = [
-      "../provisioners/vagrant_netbsd8+.sh",
-      "../provisioners/xorg.sh"
-    ]
+    script          = "../provisioners/vagrant_netbsd8+.sh"
   }
 
   provisioner "shell" {

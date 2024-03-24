@@ -13,6 +13,10 @@ packer {
       version = ">= 1.0.10"
       source  = "github.com/hashicorp/qemu"
     }
+    vagrant = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/vagrant"
+    }
     virtualbox = {
       version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
@@ -37,7 +41,7 @@ variable "boot_wait" {
 
 variable "box_ver" {
   type    = string
-  default = "3.20240117"
+  default = "4.20240207"
 }
 
 variable "disk_size" {
@@ -132,17 +136,17 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC3/iso/SHA512"
+  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC4/iso/SHA512"
 }
 
 variable "iso_file_name" {
   type    = string
-  default = "NetBSD-10.0_RC3-amd64.iso"
+  default = "NetBSD-10.0_RC4-amd64.iso"
 }
 
 variable "iso_path" {
   type    = string
-  default = "NetBSD/NetBSD-10.0_RC3/images"
+  default = "NetBSD/NetBSD-10.0_RC4/images"
 }
 
 variable "iso_url" {
@@ -153,7 +157,7 @@ variable "iso_url" {
 
 variable "mem_size" {
   type    = string
-  default = "512"
+  default = "2048"
 }
 
 variable "num_cpus" {
@@ -234,7 +238,7 @@ variable "vagrant_username" {
 
 variable "variant" {
   type    = string
-  default = "minimal"
+  default = "xfce"
 }
 
 variable "virtualbox_disk_name" {
@@ -301,11 +305,16 @@ locals {
     "b<enter><wait10><wait10><wait10>",                         # Shall we continue? - Yes
     "${local.selector_bootblocks[var.arch]}",                   # Select bootblocks - Use BIOS console; skip for aarch64
     "d<enter><wait>",                                           # Select distribution - Custom installation
+    "${local.selector_compiler_tools[var.arch]}",               # Distribution sets - Compiler tools - f (i386: e)
     "${local.selector_manual_pages[var.arch]}",                 # Distribution sets - Manual pages - i (i386: h)
     "${local.selector_text_processors[var.arch]}",              # Distribution sets - Text processing tools - m (i386: l)
+    "${local.selector_x11[var.arch]}",                          # Distribution sets - X11 sets - n (i386: m)
+    "f<enter><wait>",                                           # Distribution sets - X11 sets - Select all the above sets
+    "b<enter><wait>",                                           # Distribution sets - X11 sets - but X11 programming
+    "x<enter><wait>",                                           # Distribution sets - X11 sets - Install selected X11 sets
     "x<enter><wait>",                                           # Distribution sets - Install selected sets
     "a<enter><wait10><wait10><wait10><wait10><wait10><wait10>", # Install from - CD-ROM
-    "<wait10>",                                                 # Wait for installation
+    "<wait10><wait10><wait10><wait10><wait10><wait10>",         # Wait for installation
     "<enter><wait5>",                                           # Installation complete - Hit enter to continue
     "${var.ssh_password}<enter><wait>",                         # New password - root password
     "${var.ssh_password}<enter><wait>",                         # Weak password warning - root password
@@ -313,6 +322,7 @@ locals {
     "${local.selector_random_number_generator[var.arch]}",      # Random number generator; not now - only for aarch64
     "g<enter><wait>",                                           # Configure the additional items - Enable sshd
     "h<enter><wait>",                                           # Configure the additional items - Enable ntpd
+    "k<enter><wait>",                                           # Configure the additional items - Enable xdm
     "x<enter><wait>",                                           # Configure the additional items - Finished configuring
     "<enter><wait10>",                                          # Hit enter to continue
     "x<enter><wait10>",                                         # Exit Install System
@@ -342,6 +352,11 @@ locals {
     "i386" : "a<enter><wait>",
     "aarch64" : ""
   }
+  selector_compiler_tools = {
+    "amd64" : "f<enter><wait>",
+    "i386" : "e<enter><wait>",
+    "aarch64" : "f<enter><wait>"
+  }
   selector_manual_pages = {
     "amd64" : "i<enter><wait>",
     "i386" : "h<enter><wait>",
@@ -351,6 +366,11 @@ locals {
     "amd64" : "m<enter><wait>",
     "i386" : "l<enter><wait>",
     "aarch64" : "m<enter><wait>"
+  }
+  selector_x11 = {
+    "amd64" : "n<enter><wait>",
+    "i386" : "m<enter><wait>",
+    "aarch64" : "n<enter><wait>"
   }
   selector_random_number_generator = {
     "amd64" : "",
@@ -568,14 +588,34 @@ build {
 
   provisioner "shell" {
     environment_vars = [
+      "OPEN_VM_TOOLS=open-vm-tools-12.1.5nb1"
+      #      "XF86_INPUT_VMMOUSE=xf86-input-vmmouse",
+      #      "XF86_VIDEO_VMWARE=xf86-video-vmware"
+    ]
+    execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
+    only = [
+      "vmware-iso.*"
+    ]
+    script = "../provisioners/vmware-xorg_netbsd8+.sh"
+  }
+
+  provisioner "shell" {
+    environment_vars = [
       "DOAS=doas-6.3p2nb1",
+      "FAM=fam-2.7.0nb9",
       "RSYNC=rsync-3.2.7nb2",
       "VAGRANT_GROUP=${var.vagrant_group}",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
-      "VAGRANT_USER=${var.vagrant_username}"
+      "VAGRANT_USER=${var.vagrant_username}",
+      "X11VNC=x11vnc-0.9.16nb15",
+      "XFCE4=xfce4-4.18.1nb6",
+      "XRANDR=xrandr-1.5.2"
     ]
     execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
-    script          = "../provisioners/vagrant_netbsd8+.sh"
+    scripts = [
+      "../provisioners/vagrant_netbsd8+.sh",
+      "../provisioners/xfce_netbsd9.3+.sh"
+    ]
   }
 
   provisioner "shell" {
