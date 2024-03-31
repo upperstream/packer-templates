@@ -1,6 +1,6 @@
 arch = "aarch64"
-iso_file_name = "NetBSD-10.0_RC4-evbarm-aarch64.iso"
-iso_checksum = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC4/iso/SHA512"
+iso_file_name = "NetBSD-10.0_RC5-evbarm-aarch64.iso"
+iso_checksum = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC5/iso/SHA512"
 virtualbox_guest_os_type = "NetBSD"
 vmware_cdrom_adapter_type = "sata"
 vmware_disk_adapter_type = "sata"

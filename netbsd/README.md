@@ -2,7 +2,7 @@
 
 ## Current NetBSD releases
 
-* [netbsd-10](netbsd-10/README.md) - templates for NetBSD 10.0 RC4
+* [netbsd-10](netbsd-10/README.md) - templates for NetBSD 10.0 RC5
   * NetBSD 10
   * NetBSD 10 + X.Org
   * NetBSD 10 + X.Org + XDM + dwm + dmenu + st
