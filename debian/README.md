@@ -2,7 +2,7 @@
 
 ## Current Debian releases
 
-* [debian-12](debian-12/README.md) - templates for Debian 12.1
+* [debian-12](debian-12/README.md) - templates for Debian 12.5
 
   Templates support amd64, arm64, and i386.
 
@@ -50,4 +50,4 @@ Templates support amd64 only.
 
 - - -
 
-Copyright &copy; 2015-2021, 2023 Upperstream Software.
+Copyright &copy; 2015-2021, 2023, 2024 Upperstream Software.
