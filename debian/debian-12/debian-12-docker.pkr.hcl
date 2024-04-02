@@ -6,7 +6,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "12.1.20230722"
+  default     = "12.5.20240210"
   description = "Version number of this Vagrant box."
 }
 
@@ -90,7 +90,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:c55ab1a1f0ad2ab2ad20e3f2cfe4ef9c3095fc405b02f0b74a320c128fd73515"
+  default     = "sha256:915bc47370ac7ecc35984c36be280c0b094bf79b0f1f9755142cc2f41384a0e4"
   description = "SHA256 checksum of the install media."
 }
 
@@ -102,7 +102,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian12.1/main/installer-amd64/20230607+deb12u1/images/netboot"
+  default     = "Debian12.5/main/installer-amd64/20230607+deb12u5/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -209,6 +209,12 @@ variable "virtualbox_boot_mode" {
   type        = string
   default     = "bios"
   description = "`bios` or `efi` for VirtualBox box."
+}
+
+variable "virtualbox_guest_os_type" {
+  type        = string
+  default     = "Debian_64"
+  description = "Guest OS type of VirtualBox box."
 }
 
 variable "virtualbox_version" {
@@ -416,7 +422,7 @@ source "virtualbox-iso" "default" {
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
   guest_additions_mode = "disable"
-  guest_os_type        = "Debian11_64"
+  guest_os_type        = var.virtualbox_guest_os_type
   headless             = var.headless
   http_directory       = "../http"
   iso_checksum         = var.iso_checksum
@@ -552,7 +558,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools=2:12.2.0-1"
+      "OPEN_VM_TOOLS=open-vm-tools=2:12.2.0-1+deb12u2"
     ]
     only = [
       "vmware-iso.default",
