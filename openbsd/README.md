@@ -2,19 +2,22 @@
 
 ## Current OpenBSD releases
 
+* [openbsd-7.5](openbsd-7.5/README.md) - templates for OpenBSD 7.5
+  (amd64, i386, and arm64)
+  * OpenBSD 7.5
+  * OpenBSD 7.5 + X11
+  * OpenBSD 7.5 + X11 + dwm + dmenu + st + Xenodm
+  * OpenBSD 7.5 + Xfce + Xenodm
 * [openbsd-7.4](openbsd-7.4/README.md) - templates for OpenBSD 7.4
-  * OpenBSD 7.4 (amd64 and i386)
-  * OpenBSD 7.4 + X11 (amd64 and i386)
-  * OpenBSD 7.4 + X11 + dwm + dmenu + st + Xenodm (amd64 and i386)
-  * OpenBSD 7.4 + Xfce + Xenodm (amd64 and i386)
+   (amd64 and i386)
+  * OpenBSD 7.4
+  * OpenBSD 7.4 + X11
+  * OpenBSD 7.4 + X11 + dwm + dmenu + st + Xenodm
+  * OpenBSD 7.4 + Xfce + Xenodm
+
+## Outdated OpenBSD releases (amd64 and i386)
+
 * [openbsd-7.3](openbsd-7.3/README.md) - templates for OpenBSD 7.3
-  * OpenBSD 7.3 (amd64 and i386)
-  * OpenBSD 7.3 + X11 (amd64 and i386)
-  * OpenBSD 7.3 + X11 + dwm + dmenu + st + Xenodm (amd64 and i386)
-  * OpenBSD 7.3 + Xfce + Xenodm (amd64 and i386)
-
-## Outdated OpenBSD releases
-
 * [openbsd-7.2](openbsd-7.2/README.md) - templates for OpenBSD 7.2
 * [openbsd-7.1](openbsd-7.1/README.md) - templates for OpenBSD 7.1
 * [openbsd-7.0](openbsd-7.0/README.md) - templates for OpenBSD 7.0
@@ -35,4 +38,4 @@
 
 - - -
 
-Copyright &copy; 2015-2023 Upperstream Software.
+Copyright &copy; 2015-2024 Upperstream Software.
