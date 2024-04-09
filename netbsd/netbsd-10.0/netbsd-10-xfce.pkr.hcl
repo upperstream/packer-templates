@@ -22,7 +22,7 @@ packer {
       source  = "github.com/hashicorp/virtualbox"
     }
     vmware = {
-      version = ">= 1.0.0"
+      version = ">= 1.0.11"
       source  = "github.com/hashicorp/vmware"
     }
   }
@@ -41,7 +41,7 @@ variable "boot_wait" {
 
 variable "box_ver" {
   type    = string
-  default = "5.20240228"
+  default = "6.20240314"
 }
 
 variable "disk_size" {
@@ -136,17 +136,17 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC5/iso/SHA512"
+  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC6/iso/SHA512"
 }
 
 variable "iso_file_name" {
   type    = string
-  default = "NetBSD-10.0_RC5-amd64.iso"
+  default = "NetBSD-10.0_RC6-amd64.iso"
 }
 
 variable "iso_path" {
   type    = string
-  default = "NetBSD/NetBSD-10.0_RC5/images"
+  default = "NetBSD/NetBSD-10.0_RC6/images"
 }
 
 variable "iso_url" {
@@ -170,6 +170,12 @@ variable "os_ver" {
   default = "10"
 }
 
+variable "package_arch" {
+  type        = string
+  default     = "amd64"
+  description = "Architecture for binary packages."
+}
+
 variable "package_server" {
   type    = string
   default = "http://cdn.netbsd.org"
@@ -184,6 +190,12 @@ variable "partition_name" {
   type        = string
   default     = "dk0"
   description = "Partition name of which NetBSD is install on"
+}
+
+variable "parallels_netif" {
+  type        = string
+  default     = "vtnet0"
+  description = "Network interface for Parallels box."
 }
 
 variable "qemu_accelerator" {
@@ -281,7 +293,7 @@ variable "vmware_guest_os_type" {
 variable "vmware_hardware_version" {
   type        = string
   default     = "9"
-  description = "Virtual hardware verison of VMware box."
+  description = "Hardware version for VMware box."
 }
 
 variable "vmware_network_adapter_type" {
@@ -516,6 +528,7 @@ source "vmware-iso" "default" {
   ssh_port             = 22
   ssh_timeout          = "10000s"
   ssh_username         = var.ssh_username
+  usb                  = true
   version              = var.vmware_hardware_version
   vm_name              = "${var.vm_name}-${var.variant}-v${var.box_ver}"
   vmx_data = {
@@ -523,6 +536,7 @@ source "vmware-iso" "default" {
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
+    "usb_xhci.present"          = "TRUE"
     "vhv.enable"                = "TRUE"
   }
 }
@@ -581,7 +595,7 @@ build {
 
   provisioner "shell" {
     inline = [
-      "echo \"PKG_PATH=${var.package_server}/pub/pkgsrc/packages/NetBSD/`uname -m`/10.0/All\" > /etc/pkg_install.conf"
+      "echo \"PKG_PATH=${var.package_server}/pub/pkgsrc/packages/NetBSD/${var.package_arch}/10.0/All\" > /etc/pkg_install.conf"
     ]
     inline_shebang = "/bin/sh -ex"
   }
