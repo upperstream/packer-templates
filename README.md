@@ -50,6 +50,7 @@
 * [ubuntu](ubuntu/README.md) - Ubuntu templates (amd64 and arm64)
   * ubuntu-20.04 - Ubuntu 20.04.6 templates
   * ubuntu-22.04 - Ubuntu 22.04.3 templates
+  * ubuntu-24.04 - Ubuntu 24.04 templates
   * [more](ubuntu/README.md)
 
 ## Licensing
