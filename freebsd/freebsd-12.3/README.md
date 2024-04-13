@@ -47,7 +47,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-virtualbox`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-virtualbox.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v2.20211118-virtualbox
+    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-virtualbox.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-virtualbox
 
 ### VMware
 
@@ -61,7 +61,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-vmware`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-vmware.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v2.20211118-vmware
+    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-vmware.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-vmware
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -103,7 +103,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-libvirt`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-libvirt.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v2.20211118-libvirt
+    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-libvirt.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -120,7 +120,7 @@ in the same directory after the command has succeeded.
 Then you can add the box named `FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-hyperv`
 to your box list by the following command:
 
-    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-hyperv.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v2.20211118-hyperv
+    vagrant box add FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-hyperv.box --name FreeBSD-12.3-RELEASE-amd64-minimal-v12.3.20211207-hyperv
 
 ## Default settings
 

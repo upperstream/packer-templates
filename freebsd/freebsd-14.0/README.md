@@ -1,7 +1,7 @@
 # Packer templates for FreeBSD 14.0-RELEASE
 
 Templates to create Vagrant boxes for FreeBSD 14.0-RELEASE on ZFS root
-file system.
+file system.  (amd64, i386, and arm64)
 
 ## Prerequisites
 
@@ -70,6 +70,9 @@ Then you can add the box named
 the following command:
 
     vagrant box add FreeBSD-14.0-RELEASE-amd64-minimal-v14.0.20231120-vmware.box --name FreeBSD-14.0-RELEASE-amd64-minimal-v14.0.20231120 --provider vmware_desktop
+
+VMware build is tested with amd64 and i386 guests on amd64 host, and
+arm64 guest on Apple Silicon Mac host.
 
 ### ESXi
 
@@ -145,9 +148,9 @@ Then you can add the box named
 `FreeBSD-14.0-RELEASE-aarch64-minimal-v14.0.20231120` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-14.0-RELEASE-aarch64-minimal-v14.0.20231120-parallels.box --name FreeBSD-14.0-RELEASE-aarch64-minimal-v3.20230318 --provider parallels
+    vagrant box add FreeBSD-14.0-RELEASE-aarch64-minimal-v14.0.20231120-parallels.box --name FreeBSD-14.0-RELEASE-aarch64-minimal-v14.0.20231120 --provider parallels
 
-Parallels build is tested with only aarch64 guest on Apple Silicon Mac
+Parallels build is tested with only arm64 guest on Apple Silicon Mac
 host.
 
 ## Default settings

@@ -50,7 +50,7 @@ Then you can add the box named
 `FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411-virtualbox.box --name FreeBSD-13.2-RELEASE-amd64-minimal-v3.20230318 --provider virtualbox
+    vagrant box add FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411-virtualbox.box --name FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411 --provider virtualbox
 
 VirtualBox build is available for amd64 only.
 
@@ -68,7 +68,7 @@ Then you can add the box named
 `FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411-vmware.box --name FreeBSD-13.2-RELEASE-amd64-minimal-v3.20230318 --provider vmware_desktop
+    vagrant box add FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411-vmware.box --name FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411 --provider vmware_desktop
 
 ### ESXi
 
@@ -109,7 +109,7 @@ Then you can add the box named
 `FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411-libvirt.box --name FreeBSD-13.2-RELEASE-amd64-minimal-v3.20230318 --provider libvirt
+    vagrant box add FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411-libvirt.box --name FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -128,7 +128,7 @@ Then you can add the box named
 `FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411-hyperv.box --name FreeBSD-13.2-RELEASE-amd64-minimal-v3.20230318 --provider hyperv
+    vagrant box add FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411-hyperv.box --name FreeBSD-13.2-RELEASE-amd64-minimal-v13.2.20230411 --provider hyperv
 
 ### Parallels
 
@@ -144,7 +144,7 @@ Then you can add the box named
 `FreeBSD-13.2-RELEASE-aarch64-minimal-v13.2.20230411` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-13.2-RELEASE-aarch64-minimal-v13.2.20230411-hyperv.box --name FreeBSD-13.2-RELEASE-aarch64-minimal-v3.20230318 --provider parallels
+    vagrant box add FreeBSD-13.2-RELEASE-aarch64-minimal-v13.2.20230411-hyperv.box --name FreeBSD-13.2-RELEASE-aarch64-minimal-v13.2.20230411 --provider parallels
 
 Parallels build is tested with only aarch64 guest on Apple Silicon Mac
 host.
