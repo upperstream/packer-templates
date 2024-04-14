@@ -41,7 +41,7 @@ variable "boot_wait" {
 
 variable "box_ver" {
   type    = string
-  default = "6.20240314"
+  default = "10.0.20240328"
 }
 
 variable "disk_size" {
@@ -136,17 +136,17 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0_RC6/iso/SHA512"
+  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0/iso/SHA512"
 }
 
 variable "iso_file_name" {
   type    = string
-  default = "NetBSD-10.0_RC6-amd64.iso"
+  default = "NetBSD-10.0-amd64.iso"
 }
 
 variable "iso_path" {
   type    = string
-  default = "NetBSD/NetBSD-10.0_RC6/images"
+  default = "NetBSD/NetBSD-10.0/images"
 }
 
 variable "iso_url" {
@@ -174,6 +174,12 @@ variable "package_arch" {
   type        = string
   default     = "amd64"
   description = "Architecture for binary packages."
+}
+
+variable "package_branch" {
+  type        = string
+  default     = "10.0_2023Q4"
+  description = "pkgsrc branch name for binary packages."
 }
 
 variable "package_server" {
@@ -265,7 +271,7 @@ variable "virtualbox_guest_os_type" {
 
 variable "vm_name" {
   type    = string
-  default = "NetBSD-10_RC-amd64"
+  default = "NetBSD-10.0-amd64"
 }
 
 variable "vmware_cdrom_adapter_type" {
@@ -373,20 +379,53 @@ locals {
     "i386" : "",
     "aarch64" : "x<enter><wait>"
   }
+  selector_install_script = {
+    "generic" : [
+      "cat >> /mnt/etc/rc.conf << EOF",
+      "#critical_filesystems_local=/var",
+      "dhcpcd=YES",
+      "rpcbind=YES",
+      "#nfs_client=YES",
+      "no_swap=YES",
+      "lockd=YES",
+      "statd=YES",
+      "hostname=\"$HOSTNAME\"",
+      "EOF",
+    ],
+    "hyperv" : [
+      "cat >> /mnt/etc/rc.conf << EOF",
+      "#critical_filesystems_local=/var",
+      "dhcpcd=YES",
+      "rpcbind=YES",
+      "#nfs_client=YES",
+      "no_swap=YES",
+      "lockd=YES",
+      "statd=YES",
+      "hostname=$HOSTNAME",
+      "ifconfig_$NETIF=\"inet $HOST_CIDR\"",
+      "defaultroute=$GATEWAY",
+      "EOF",
+      "echo \"nameserver $GATEWAY\" > /mnt/etc/resolv.conf"
+    ]
+  }
 }
 
 source "hyperv-iso" "default" {
   boot_command = concat(local.boot_command_common, [
     "ifconfig ${var.hyperv_netif} inet ${var.hyperv_host_cidr}<enter><wait5>",
     "ifconfig ${var.hyperv_netif} up<enter><wait10>",
-    "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install_hyperv.sh<wait><enter><wait5>",
+    "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<wait><enter><wait5>",
     "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} DISK=${var.hyperv_disk_name} PARTITION=${var.partition_name} HOSTNAME=${var.hostname} HOST_CIDR=${var.hyperv_host_cidr} GATEWAY=${var.hyperv_gateway} NETIF=${var.hyperv_netif} sh /tmp/install.sh<wait><enter><wait5>"
   ])
   boot_wait        = var.boot_wait
   cpus             = var.num_cpus
   disk_size        = var.disk_size
   headless         = var.headless
-  http_directory   = "."
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      lines = local.selector_install_script["hyperv"]
+    })
+  }
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
@@ -410,7 +449,11 @@ source "parallels-iso" "default" {
   disk_size              = var.disk_size
   disk_type              = "expand"
   guest_os_type          = "other"
-  http_directory         = "."
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      lines = local.selector_install_script["generic"]
+    })
+  }
   iso_checksum           = var.iso_checksum
   iso_urls               = local.iso_urls
   memory                 = var.mem_size
@@ -435,7 +478,11 @@ source "qemu" "default" {
   display          = var.qemu_display
   format           = "qcow2"
   headless         = var.headless
-  http_directory   = "."
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      lines = local.selector_install_script["generic"]
+    })
+  }
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
@@ -468,7 +515,11 @@ source "virtualbox-iso" "default" {
   guest_additions_mode = "disable"
   guest_os_type        = var.virtualbox_guest_os_type
   headless             = var.headless
-  http_directory       = "."
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      lines = local.selector_install_script["generic"]
+    })
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
@@ -500,7 +551,11 @@ source "vmware-iso" "default" {
   disk_type_id         = "0"
   guest_os_type        = var.vmware_guest_os_type
   headless             = var.headless
-  http_directory       = "."
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      lines = local.selector_install_script["generic"]
+    })
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
@@ -536,7 +591,11 @@ source "vmware-iso" "esxi" {
   disk_type_id         = "thin"
   guest_os_type        = var.vmware_guest_os_type
   headless             = var.headless
-  http_directory       = "."
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      lines = local.selector_install_script["generic"]
+    })
+  }
   insecure_connection  = true
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
@@ -579,7 +638,7 @@ build {
 
   provisioner "shell" {
     inline = [
-      "echo \"PKG_PATH=${var.package_server}/pub/pkgsrc/packages/NetBSD/${var.package_arch}/10.0/All\" > /etc/pkg_install.conf"
+      "echo \"PKG_PATH=${var.package_server}/pub/pkgsrc/packages/NetBSD/${var.package_arch}/${var.package_branch}/All\" > /etc/pkg_install.conf"
     ]
     inline_shebang = "/bin/sh -ex"
   }
