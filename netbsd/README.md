@@ -1,8 +1,10 @@
-# Packer templates for NetBSD (amd64 and i386)
+# Packer templates for NetBSD
 
 ## Current NetBSD releases
 
-* [netbsd-10.0](netbsd-10.0/README.md) - templates for NetBSD 10.0 RC6
+Templates support amd64 and i386 architectures unless otherwise noted.
+
+* [netbsd-10.0](netbsd-10.0/README.md) - templates for NetBSD 10.0
   (amd64, i386, and aarch64)
   * NetBSD 10
   * NetBSD 10 + X.Org
@@ -52,6 +54,8 @@
 
 ## Outdated NetBSD releases
 
+Templates support amd64 and i386 architectures.
+
 * [netbsd-7.2](netbsd-7.2/README.md) - templates for NetBSD 7.2
   * NetBSD 7.2
   * NetBSD 7.2 + Ansible + Testinfra
@@ -77,4 +81,4 @@
 
 - - -
 
-Copyright &copy; 2015-2021, 2023 Upperstream Software.
+Copyright &copy; 2015-2021, 2023, 2024 Upperstream Software.

@@ -34,7 +34,7 @@
   * netbsd-9.1 - NetBSD 9.1 templates
   * netbsd-9.2 - NetBSD 9.2 templates
   * netbsd-9.3 - NetBSD 9.3 templates
-  * netbsd-10.0 - NetBSD 10.0 templates
+  * netbsd-10.0 - NetBSD 10.0 templates (amd64, i386, and aarch64)
   * [more](netbsd/README.md)
 * [openbsd](openbsd/README.md) - OpenBSD templates
   * openbsd-7.4 - OpenBSD 7.4 templates (amd64 and i386)
