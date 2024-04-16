@@ -1,0 +1,12 @@
+cpu = "arm64"
+iso_name = "desktop-arm64.iso"
+iso_path = "Devuan-Arm64-Installer/chimaera/"
+iso_checksum = "file:https://arm-files.devuan.org/Devuan-Arm64-Installer/chimaera/desktop-sha256sum.txt"
+install_from_dvd = true
+parallels_tools_flavor = "lin-arm"
+vmware_boot_mode = "efi"
+vmware_cdrom_adapter_type = "sata"
+vmware_disk_adapter_type = "sata"
+vmware_guest_os_type = "arm-debian11-64"
+vmware_hardware_version = "20"
+vmware_network_adapter_type = "e1000e"

@@ -8,8 +8,8 @@ DEVUAN_VERSION=${DEVUAN_VERSION:-jessie}
 if [ "${INSTALL_FROM_DVD:-false}" = "true" ]; then
   sed -e "/^#deb cdrom:.*$/a\
 \
-deb http://auto.mirror.devuan.org/merged $DEVUAN_VERSION main\
-deb-src http://auto.mirror.devuan.org/merged $DEVUAN_VERSION main" \
+deb http://${DEVUAN_MIRROR_SERVER:=auto.mirror.devuan.org}/merged $DEVUAN_VERSION main\n\
+deb-src http://$DEVUAN_MIRROR_SERVER/merged $DEVUAN_VERSION main" \
       -e 's/^# deb http:/deb http:/' \
       -e 's/^# deb-src http:/deb-src http:/' /etc/apt/sources.list > /tmp/sources.list
   mv /tmp/sources.list /etc/apt/sources.list
