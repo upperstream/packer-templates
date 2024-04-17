@@ -1,6 +1,7 @@
 # Packer templates for Devuan 4.0.0
 
-Templates to create Vagrant boxes for Devuan 4.0.0 Chimaera (amd64 and arm64).
+Templates to create Vagrant boxes for Devuan 4.0.0 Chimaera (amd64,
+i386, and arm64).
 
 ## Prerequisites
 
@@ -122,8 +123,8 @@ device.
 
 * `devuan-4-minimal.pkr.hcl` - Devuan 4.0 Chimaera minimal
   installation
-* `devuan-4-dwm.pkr.hcl` - Devuan 4.0 Chimaera with [X.org][], [suckless][]
-  tools, [ARandR][], and [xrdp][]
+* `devuan-4-dwm.pkr.hcl` - Devuan 4.0 Chimaera with [X.org][],
+  [suckless][] tools, [ARandR][], and [xrdp][]
 * `devuan-4-xfce.pkr.hcl` - Devuan 4.0 Chimaera with [Xfce][] +
   [xrdp][]
 
@@ -141,13 +142,13 @@ installer CD image or DVD image, i.e., `vars-devuan-4-amd64-CD.pkr.hcl`
 instructs to use `devuan_chimaera_4.0.0_amd64_netinstall.iso` while
 `vars-devuan-4-amd64-DVD.pkr.hcl` does `devuan_chimaera_4.0.0_amd64_desktop.iso`.
 Without using these var files, `devuan-4-*.pkr.hcl` templates use
-`devuan_chimaera_4.0.0_amd64_server.iso`.  Also var files for arm64,
-`vars-devuan-4-arm64-CD.pkrvars.hcl` and `vars-devuan-4-arm64-DVD.pkrvars.hcl`
+`devuan_chimaera_4.0.0_amd64_server.iso`.  Also var files for i386, `vars-devuan-4-i386-CD.pkrvars.hcl` and `vars-devuan-4-i386-DVD.pkrvars`;
+and for arm64, `vars-devuan-4-arm64-CD.pkrvars.hcl` and `vars-devuan-4-arm64-DVD.pkrvars.hcl`
 are provided.
 
 Depending on situation you can specify the var file on the command line:
 
-    packer build -var-file=vars-devuan-4-amd64-CD.pkr.hcl devuan-4-minimal.pkr.hcl
+    packer build -var-file=vars-devuan-4-i386-CD.pkr.hcl devuan-4-minimal.pkr.hcl
 
 or
 
@@ -181,8 +182,8 @@ or `-var-file` command line options to `packer`:
   Defaults to `efi`.
 * `root_password` - Password for `root` user.  Defaults to
   `vagrant`.
-* `ssh_name` - User name to connect VM via SSH during VM build.  Defaults
-  to `vagrant`.
+* `ssh_name` - User name to connect VM via SSH during VM build.
+  Defaults to `vagrant`.
 * `ssh_pass` - Password to connect VM via SSH during VM build.  Defaults
   to `vagrant`.
 * `ssh_timeout` - Timeout for SSH connection.  Defaults to `60m`.
