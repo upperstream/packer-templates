@@ -360,7 +360,10 @@ d-i grub-installer/with_other_os boolean true
 # To install grub to multiple disks:
 #d-i grub-installer/bootdev  string (hd0,0) (hd1,0) (hd2,0)
 # To install to a particular device:
-d-i grub-installer/bootdev  string /dev/sda
+%{ for key, value in grub-installer }
+d-i grub-installer/${key} ${value}
+%{ endfor ~}
+#d-i grub-installer/bootdev  string /dev/sda
 
 # Optional password for grub, either in clear text
 #d-i grub-installer/password password r00tme

@@ -10,6 +10,7 @@ i386, and arm64).
 * [VirtualBox][] Version 6.1.26+
 * [VMware][] Workstation v17.0+ / VMware Fusion v13.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
+* [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
 * [Parallels][] Desktop 18+
 
@@ -17,8 +18,10 @@ i386, and arm64).
     "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
 [Hyper-V]: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/
     "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
+[libvirt]: https://libvirt.org/ "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
 [Parallels]: https://www.parallels.com/products/desktop/ "Run Windows on Mac - Parallels Desktop 18 Virtual Machine for Mac"
+[QEMU]: https://www.qemu.org/ "QEMU"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
 [VMware]: http://www.vmware.com/
@@ -180,6 +183,14 @@ or `-var-file` command line options to `packer`:
 * `num_cpus` - The number of CPUs of the VM.  Defaults to `2`.
 * `parallels_boot_mode` - Boot mode for QEMU VM, `bios` or `efi`.
   Defaults to `efi`.
+* `qemu_accelerator` - QEMU accelerator name for QEMU VM.  Defaults to
+  `kvm`.
+* `qemu_boot_mode` - Boot mode for QEMU VM, `bios` or `efi`.  Defaults
+  to `bios`.
+* `qemu_display` - What QEMU `-display` option to use.  Defaults to an
+  empty string.
+* `qemu_use_default_display` - Determines to pass a `-display` option
+  to QEMU or not.  Defaults to `false`.
 * `root_password` - Password for `root` user.  Defaults to
   `vagrant`.
 * `ssh_name` - User name to connect VM via SSH during VM build.

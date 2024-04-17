@@ -9,6 +9,10 @@ packer {
       version = ">= 1.0.0"
       source  = "github.com/hashicorp/parallels"
     }
+    qemu = {
+      version = ">= 1.0.9"
+      source  = "github.com/hashicorp/qemu"
+    }
     vagrant = {
       source  = "github.com/hashicorp/vagrant"
       version = "~> 1"
@@ -160,6 +164,30 @@ variable "parallels_tools_flavor" {
   type        = string
   default     = "lin"
   description = "The flavour name of Parallels Tools."
+}
+
+variable "qemu_accelerator" {
+  type        = string
+  default     = "kvm"
+  description = "QEMU accelerator name for QEMU box."
+}
+
+variable "qemu_boot_mode" {
+  type        = string
+  default     = "bios"
+  description = "`bios` or `efi` for QEMU box."
+}
+
+variable "qemu_display" {
+  type        = string
+  default     = ""
+  description = "Display name for QEMU box."
+}
+
+variable "qemu_use_default_display" {
+  type        = string
+  default     = "true"
+  description = "Use the default display for QEMU box if true."
 }
 
 variable "root_password" {
@@ -349,7 +377,10 @@ source "hyperv-iso" "default" {
         "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list; \\",
         "    apt-install hyperv-daemons"
 
-      ]
+      ],
+      grub-installer = {
+        "bootdev" = "string /dev/sda"
+      }
     })
   }
   iso_checksum     = var.iso_checksum
@@ -380,7 +411,10 @@ source "parallels-iso" "default" {
         "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list"
-      ]
+      ],
+      grub-installer = {
+        "bootdev" = "string /dev/sda"
+      }
     })
   }
   iso_checksum           = var.iso_checksum
@@ -394,6 +428,47 @@ source "parallels-iso" "default" {
   ssh_timeout            = var.ssh_timeout
   ssh_username           = var.ssh_name
   vm_name                = local.vm_name
+}
+
+source "qemu" "default" {
+  accelerator = var.qemu_accelerator
+  boot_command = split("\n", format(join("\n", local.boot_command),
+    local.boot_parameter_edit[var.qemu_boot_mode],
+    local.boot_parameter_submit[var.qemu_boot_mode]
+  ))
+  boot_wait        = var.boot_wait
+  cpus             = var.num_cpus
+  disk_compression = true
+  disk_interface   = "virtio"
+  disk_size        = var.disk_size
+  display          = var.qemu_display
+  format           = "qcow2"
+  headless         = var.headless
+  http_content = {
+    "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
+      late_command = [
+        "d-i preseed/late_command string \\",
+        "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list"
+      ],
+      grub-installer = {
+        "bootdev" = "string /dev/vda"
+      }
+    })
+  }
+  iso_checksum        = var.iso_checksum
+  iso_urls            = local.iso_urls
+  memory              = var.mem_size
+  net_device          = "virtio-net"
+  output_directory    = "output/${local.vm_name}-v${var.box_version}-qemu"
+  shutdown_command    = "sudo /sbin/shutdown -h now"
+  ssh_password        = var.ssh_pass
+  ssh_port            = 22
+  ssh_timeout         = var.ssh_timeout
+  ssh_username        = var.ssh_name
+  use_default_display = var.qemu_use_default_display
+  vm_name             = local.vm_name
 }
 
 source "virtualbox-iso" "default" {
@@ -414,7 +489,10 @@ source "virtualbox-iso" "default" {
         "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list"
-      ]
+      ],
+      grub-installer = {
+        "bootdev" = "string /dev/sda"
+      }
     })
   }
   iso_checksum     = var.iso_checksum
@@ -454,7 +532,10 @@ source "vmware-iso" "default" {
         "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list"
-      ]
+      ],
+      grub-installer = {
+        "bootdev" = "string /dev/sda"
+      }
     })
   }
   iso_checksum         = var.iso_checksum
@@ -491,7 +572,10 @@ source "vmware-iso" "esxi" {
         "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list"
-      ]
+      ],
+      grub-installer = {
+        "bootdev" = "string /dev/sda"
+      }
     })
   }
   iso_checksum         = var.iso_checksum
@@ -528,6 +612,7 @@ build {
   sources = [
     "source.hyperv-iso.default",
     "source.parallels-iso.default",
+    "source.qemu.default",
     "source.virtualbox-iso.default",
     "source.vmware-iso.default",
     "source.vmware-iso.esxi"
@@ -594,8 +679,16 @@ build {
   post-processor "vagrant" {
     compression_level = 9
     except = [
+      "qemu.default",
       "vmware-iso.esxi"
     ]
     output = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+  }
+
+  post-processor "vagrant" {
+    keep_input_artifact = true
+    compression_level   = 9
+    only                = ["qemu.default"]
+    output              = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
   }
 }
