@@ -46,6 +46,12 @@ variable "cpu" {
   description = "CPU name.  This is used as a part of box name."
 }
 
+variable "desktop" {
+  type        = string
+  default     = "xfce"
+  description = "Desktop environment to install.  This is used as a part of box name.  Valid values are `xfce`, `kde`, `lxqt`, `mate`,  and `cinnamon`.  Defaults to `xfce`."
+}
+
 variable "disk_size" {
   type        = string
   default     = "51200"
@@ -327,6 +333,7 @@ locals {
     "tasks=standard <wait>",
     "net.ifnames=0 <wait>",
     "biosdevnames=0 <wait>",
+    "tasks=${var.desktop}-desktop <wait>",
     "%s<wait>"
   ]
   iso_urls = compact([
@@ -347,7 +354,7 @@ locals {
     "bios" : "<enter>"
     "efi" : "<leftCtrlOn>x<leftCtrlOff>"
   }
-  vm_name = coalesce(var.vm_name, "Devuan-4-${var.cpu}-xfce")
+  vm_name = coalesce(var.vm_name, "Devuan-4-${var.cpu}-${var.desktop}")
   vmware_vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"

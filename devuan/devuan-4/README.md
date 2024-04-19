@@ -128,11 +128,23 @@ device.
   installation
 * `devuan-4-dwm.pkr.hcl` - Devuan 4.0 Chimaera with [X.org][],
   [suckless][] tools, [ARandR][], and [xrdp][]
-* `devuan-4-xfce.pkr.hcl` - Devuan 4.0 Chimaera with [Xfce][] +
-  [xrdp][]
+* `devuan-4-desktop.pkr.hcl` - Devuan 4.0 Chimaera with [xrdp][] + various desktop environment such as:
+  * `xfce` - [Xfce][] (default)
+  * `cinnamon` [Cinnamon][]
+  * `kde` - [KDE Plasma][]
+  * `lxqt` - [LXQt][]
+  * `mate` - [MATE][]
+
+  Adding `-var 'desktop=xfce'` to the command line can specify the
+  desktop environment.
 
 [ARandR]: https://christian.amsuess.com/tools/arandr/
     "ARandR: Another XRandR GUI"
+[Cinnamon]: https://projects.linuxmint.com/cinnamon/
+    "Linux Mint Projects by linuxmint"
+[KDE Plasma]: https://kde.org/plasma-desktop/ "KDE Plasma Desktop"
+[LXQt]: https://lxqt-project.org/ "LXQt"
+[MATE]: https://mate-desktop.org/ "MATE Desktop Environment"
 [suckless]: http://suckless.org/ "suckless.org software that sucks less"
 [X.org]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
@@ -145,7 +157,8 @@ installer CD image or DVD image, i.e., `vars-devuan-4-amd64-CD.pkr.hcl`
 instructs to use `devuan_chimaera_4.0.0_amd64_netinstall.iso` while
 `vars-devuan-4-amd64-DVD.pkr.hcl` does `devuan_chimaera_4.0.0_amd64_desktop.iso`.
 Without using these var files, `devuan-4-*.pkr.hcl` templates use
-`devuan_chimaera_4.0.0_amd64_server.iso`.  Also var files for i386, `vars-devuan-4-i386-CD.pkrvars.hcl` and `vars-devuan-4-i386-DVD.pkrvars`;
+`devuan_chimaera_4.0.0_amd64_server.iso`.  Also var files for i386,
+`vars-devuan-4-i386-CD.pkrvars.hcl` and `vars-devuan-4-i386-DVD.pkrvars`;
 and for arm64, `vars-devuan-4-arm64-CD.pkrvars.hcl` and `vars-devuan-4-arm64-DVD.pkrvars.hcl`
 are provided.
 
@@ -163,6 +176,8 @@ The following parameters can be set at build time by supplying `-var`
 or `-var-file` command line options to `packer`:
 
 * `boot_wait` - Override `boot_wait` default setting, which is `10s`.
+* `desktop` - Specify the desktop environment to install.  Defaults to
+  `xfce`.  (Only valid for `devuan-4-desktop.pkr.hcl` variant)
 * `disk_size` - Disk size of the created VM.  Defaults to `51200`,
   which means 50GB.
 * `esxi_boot_mode` - Boot mode for ESXi VM, `bios` or `efi`.  Defaults
