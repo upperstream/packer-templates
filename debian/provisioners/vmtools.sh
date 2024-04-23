@@ -1,10 +1,11 @@
-#!/bin/sh
-set -e
-set -x
+#!/bin/sh -ex
+# shellcheck disable=SC2006
 
-apt-get install -y "${OPEN_VM_TOOLS:-open-vm-tools}"
+case "`uname -m`" in
+	amd64|i386) apt-get install -y "${OPEN_VM_TOOLS:-open-vm-tools}";;
+	*) : ;;
+esac
 if [ "$VMWARE_WITH_XORG" = "1" ]; then
-	# shellcheck disable=SC2006
 	case "`uname -m`" in
 		amd64|i386) apt-get install -y "${XSERVER_XORG_VIDEO_VMWARE:-xserver-xorg-video-vmware}";;
 		*) : ;;

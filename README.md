@@ -15,10 +15,10 @@
   * centos-6.9 - CentOS 6.9 templates
   * centos-7 - CentOS 7.8.2003 templates (x86_64 only)
   * [more](centos/README.md)
-* [debian](debian/README.md) - Debian templates (amd64 and arm64)
-  * debian-10 - Debian 10.13 templates
-  * debian-11 - Debian 11.7 templates
-  * debian-12 - Debian 12.5 templates (amd64, arm64, and i386)
+* [debian](debian/README.md) - Debian templates (amd64, arm64, and i386)
+  * debian-10 - Debian 10.13 templates (amd64 and arm64)
+  * debian-11 - Debian 11.9 templates
+  * debian-12 - Debian 12.5 templates
   * [more](debian/README.md)
 * [devuan](devuan/README.md) - Devuan templates
   * devuan-4 - Devuan 4.0 Chimaera templates (amd64, i386, and arm64)

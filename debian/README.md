@@ -6,19 +6,19 @@
 
   Templates support amd64, arm64, and i386.
 
-  * Debian 12.1 minimal
-  * Debian 12.1 + Docker + Docker Compose
-  * Debian 12.1 + X.org + suckless tools
-  * Debian 12.1 + Xfce
+  * Debian 12.5 minimal
+  * Debian 12.5 + Docker + Docker Compose
+  * Debian 12.5 + X.org + suckless tools
+  * Debian 12.5 + Xfce
 
-* [debian-11](debian-11/README.md) - templates for Debian 11.7
+* [debian-11](debian-11/README.md) - templates for Debian 11.9
 
-  Templates support amd64 and arm64.
+  Templates support amd64, i386 and arm64.
 
-  * Debian 11.7 minimal
-  * Debian 11.7 + Docker + Docker Compose
-  * Debian 11.7 + X.org + suckless tools
-  * Debian 11.7 + Xfce
+  * Debian 11.9 minimal
+  * Debian 11.9 + Docker + Docker Compose
+  * Debian 11.9 + X.org + suckless tools
+  * Debian 11.9 + Xfce
 
 * [debian-10](debian-10/README.md) - templates for Debian 10.13
 
