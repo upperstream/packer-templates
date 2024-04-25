@@ -42,6 +42,12 @@ variable "cpu" {
   description = "CPU name.  This is used as a part of box name."
 }
 
+variable "desktop" {
+  type        = string
+  default     = "xfce"
+  description = "Desktop environment to install.  This is used as a part of box name.  Valid values are `xfce`, `cinnamon`, `gnome`, `gnome-flashback`, `kde`, `lxde`, `lxqt`, and `mate`.  Defaults to `xfce`."
+}
+
 variable "disk_size" {
   type        = string
   default     = "51200"
@@ -312,7 +318,7 @@ locals {
     "%s<wait><down><down><down><down><left> auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
     "locale=en_US.UTF-8 <wait>",
     "keymap=us <wait>",
-    "tasks=standard,xfce-desktop <wait>",
+    "tasks=standard,${var.desktop}-desktop <wait>",
     "net.ifnames=0 <wait>",
     "biosdevnames=0 <wait>",
     "%s<wait>"
@@ -340,7 +346,7 @@ locals {
     "user-password"       = "string ${var.vagrant_password}",
     "user-password-again" = "string ${var.vagrant_password}"
   }
-  vm_name = coalesce(var.vm_name, "Debian-11-${var.cpu}-xfce")
+  vm_name = coalesce(var.vm_name, "Debian-11-${var.cpu}-${var.desktop}")
   vmware_vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"

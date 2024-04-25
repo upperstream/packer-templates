@@ -18,7 +18,15 @@
   * Debian 11.9 minimal
   * Debian 11.9 + Docker + Docker Compose
   * Debian 11.9 + X.org + suckless tools
-  * Debian 11.9 + Xfce
+  * Debian 11.9 + choice of desktop environments:
+    * Xfce (default)
+    * Cinnamon
+    * GNOME
+    * GNOME Flashback
+    * KDE Plasma
+    * LXDE
+    * LXQt
+    * MATE
 
 * [debian-10](debian-10/README.md) - templates for Debian 10.13
 
