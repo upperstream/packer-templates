@@ -1,6 +1,6 @@
-# Packer templates for Ubuntu 24.04 LTS Beta
+# Packer templates for Ubuntu 24.04 LTS
 
-Templates to create Vagrant boxes for Ubuntu 24.04 LTS Beta (amd64 and
+Templates to create Vagrant boxes for Ubuntu 24.04 LTS (amd64 and
 arm64).
 
 ## Prerequisites
@@ -46,34 +46,34 @@ arm64).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso.default ubuntu-24.04-beta-minimal.pkr.hcl
+    packer build -only=virtualbox-iso.default ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412-virtualbox.box`
+You will find a vagrant box file named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412`
+Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412-virtualbox.box --name Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412 --provider virtualbox
+    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.0.20240425-virtualbox.box --name Ubuntu-24.04-amd64-minimal-v2404.0.20240425 --provider virtualbox
 
-VirtualBox build intends to create amd64 box on amd64 device.
+VirtualBox build intends to create amd64 box on amd64 host.
 
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso.default ubuntu-24.04-beta-minimal.pkr.hcl
+    packer build -only=vmware-iso.default ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412-vmware.box`
+You will find a vagrant box file named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412`
+Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412-vmware.box --name Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412 --provider vmware_desktop
+    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.0.20240425-vmware.box --name Ubuntu-24.04-amd64-minimal-v2404.0.20240425 --provider vmware_desktop
 
-VMware build intends to create amd64 box on amd64 device using VMware
-Workstation, or create arm64 box on Apple Silicon Mac device using
+VMware build intends to create amd64 box on amd64 host using VMware
+Workstation, or create arm64 box on Apple Silicon Mac host using
 VMware Fusion.
 
 ### ESXi
@@ -91,13 +91,13 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=vmware-iso.esxi ubuntu-24.04-beta-minimal.pkr.hcl
+    packer build -only=vmware-iso.esxi ubuntu-24.04-minimal.pkr.hcl
 
 When you create a box on ESXi host version prior to 6.7, you need to
 enable VNC on the host and need to disable Packer's VNC over WebSocket
 feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
-    packer build -only=vmware-iso.esxi -var esxi-vnc-over-websocket=false ubuntu-24.04-beta-minimal.pkr.hcl
+    packer build -only=vmware-iso.esxi -var esxi-vnc-over-websocket=false ubuntu-24.04-minimal.pkr.hcl
 
 (Note that created VM will be unregistered from your Inventory.)
 
@@ -105,64 +105,65 @@ feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
 From the terminal, invoke the following command for Libvirt provider:
 
-    packer build -only=qemu.default ubuntu-24.04-beta-minimal.pkr.hcl
+    packer build -only=qemu.default ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412-libvirt.box` in the same
+You will find a vagrant box file named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412`
+Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412-libvirt.box --name Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412 --provider libvirt
+    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.0.20240425-libvirt.box --name Ubuntu-24.04-amd64-minimal-v2404.0.20240425 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
 
-QEMU build intends to create amd64 box on amd64 Linux device.
+QEMU build intends to create amd64 box on amd64 Linux host.
 
 ### Hyper-V
 
 From the terminal, invoke the following command for Hyper-V provider:
 
-    packer build -only=hyperv-iso.default ubuntu-24.04-beta-minimal.pkr.hcl
+    packer build -only=hyperv-iso.default ubuntu-24.04-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412-hyperv.box` in the same
+`Ubuntu-24.04-amd64-minimal-v2404.0.20240425-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412`
+Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412-hyperv.box --name Ubuntu-24.04-BETA-amd64-minimal-v2404.0.20240412 --provider hyperv
+    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.0.20240425-hyperv.box --name Ubuntu-24.04-amd64-minimal-v2404.0.20240425 --provider hyperv
 
-Hyper-V build intends to create amd64 box on Windows device.
+Hyper-V build intends to create amd64 box on Windows host.
 
 ### Parallels
 
 From the terminal, invoke the following command for Parallels provider:
 
-    packer build -only=parallels-iso.default -var-file vars-ubuntu-24.04-BETA-arm64.pkrvars.hcl ubuntu-24.04-beta-minimal.pkr.hcl
+    packer build -only=parallels-iso.default -var-file vars-ubuntu-24.04-arm64.pkrvars.hcl ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-BETA-arm64-minimal-v2404.0.20240412-parallels.box`
+You will find a vagrant box file named `Ubuntu-24.04-arm64-minimal-v2404.0.20240425-parallels.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-BETA-arm64-minimal-v2404.0.20240412`
+Then you can add the box named `Ubuntu-24.04-arm64-minimal-v2404.0.20240425`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-BETA-arm64-minimal-v2404.0.20240412-parallels.box --name Ubuntu-24.04-BETA-arm64-minimal-v2404.0.20240412 --provider parallels
+    vagrant box add Ubuntu-24.04-arm64-minimal-v2404.0.20240425-parallels.box --name Ubuntu-24.04-arm64-minimal-v2404.0.20240425 --provider parallels
 
-Parallels build intends to create arm64 box on Apple Silicon Mac device.
+Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 ## Variants
 
-* `ubuntu-24.04-beta-minimal.pkr.hcl` - Ubuntu Server 24.04 LTS Beta
-* `ubuntu-24.04-beta-dwm.pkr.hcl` - Ubuntu 24.04 LTS Beta + [X.org][],
-  [suckless][] tools, [ARandR][], and [xrdp][].
-* `ubuntu-24.04-beta-lxqt.pkr.hcl` - Ubuntu 24.04 LTS Beta + [LXQt][]
-* `ubuntu-24.04-beta-xfce.pkr.hcl` - Ubuntu 24.04 LTS Beta + [Xfce][]
+* `ubuntu-24.04-minimal.pkr.hcl` - Ubuntu Server 24.04 LTS
+* `ubuntu-24.04-dwm.pkr.hcl` - Ubuntu 24.04 LTS + [X.org][],
+  [dwm][], [suckless][] tools, [ARandR][], and [xrdp][].
+* `ubuntu-24.04-lxqt.pkr.hcl` - Ubuntu 24.04 LTS + [LXQt][]
+* `ubuntu-24.04-xfce.pkr.hcl` - Ubuntu 24.04 LTS + [Xfce][]
 
 [ARandR]: https://christian.amsuess.com/tools/arandr/
     "ARandR: Another XRandR GUI"
+[dwm]: https://dwm.suckless.org/ "dwm - dynamic window manager"
 [LXQt]: https://lxqt-project.org/ "LXQt - The Lightweight Qt Desktop
     Environment"
 [suckless]: http://suckless.org/ "suckless.org software that sucks less"
@@ -170,14 +171,14 @@ Parallels build intends to create arm64 box on Apple Silicon Mac device.
 [Xfce]: https://xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
 
-## Installer CD images
+## Installer ISO images
 
-While `ubuntu-24.04-beta-*.pkr.hcl` templates use `ubuntu-24.04-BETA-live-server-amd64.iso`
-ISO image to create amd64 boxes by default, using `vars-ubuntu-24.04-beta-arm64.pkrvars.hcl`
-creates arm64 boxes with `ubuntu-24.04-BETA-live-server-arm64.iso` ISO
+While `ubuntu-24.04-*.pkr.hcl` templates use `ubuntu-24.04-live-server-amd64.iso`
+ISO image to create amd64 boxes by default, using `vars-ubuntu-24.04-arm64.pkrvars.hcl`
+creates arm64 boxes with `ubuntu-24.04-live-server-arm64.iso` ISO
 image:
 
-    packer build -var-file=vars-ubuntu-24.04-beta-arm64.pkrvars.hcl ubuntu-24.04-beta-minimal.pkr.hcl
+    packer build -var-file=vars-ubuntu-24.04-arm64.pkrvars.hcl ubuntu-24.04-minimal.pkr.hcl
 
 ## Build parameters
 

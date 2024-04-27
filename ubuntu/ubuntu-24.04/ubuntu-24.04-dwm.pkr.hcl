@@ -33,7 +33,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "2404.0.20240412"
+  default     = "2404.0.20240425"
   description = "Version number of this Vagrant box."
 }
 
@@ -103,7 +103,7 @@ variable "iso_checksum" {
 
 variable "iso_name" {
   type        = string
-  default     = "ubuntu-24.04-beta-live-server-amd64.iso"
+  default     = "ubuntu-24.04-live-server-amd64.iso"
   description = "File name of the install media."
 }
 
@@ -217,7 +217,7 @@ variable "vm_name" {
 
 variable "vm_name_base" {
   type        = string
-  default     = "Ubuntu-24.04-BETA-amd64"
+  default     = "Ubuntu-24.04-amd64"
   description = "Base part of default VM name"
 }
 

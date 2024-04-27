@@ -5,18 +5,18 @@
 Templates support amd64 and arm64 unless otherwise noted.
 
 * [ubuntu-24.04](ubuntu-24.04/README.md) - templates for Ubuntu 24.04
-  * Ubuntu Server 24.04 LTS Beta
-  * Ubuntu 24.04 LTS Beta + X.org + suckless tools
-  * Ubuntu 24.04 LTS Beta + LXQt
-  * Ubuntu 24.04 LTS Beta + Xfce
+  * Ubuntu Server 24.04 LTS
+  * Ubuntu 24.04 LTS + X.org + dwm + suckless tools
+  * Ubuntu 24.04 LTS + LXQt
+  * Ubuntu 24.04 LTS + Xfce
 * [ubuntu-22.04](ubuntu-22.04/README.md) - templates for Ubuntu 22.04.3
   * Ubuntu Server 22.04.3 LTS
-  * Ubuntu 22.04.3 LTS + X.org + suckless tools
+  * Ubuntu 22.04.3 LTS + X.org + dwm + suckless tools
   * Ubuntu 22.04.3 LTS + LXQt
   * Ubuntu 22.04.3 LTS + Xfce
 * [ubuntu-20.04](ubuntu-20.04/README.md) - templates for Ubuntu 20.04.6
   * Ubuntu Server 20.04.6 LTS
-  * Ubuntu 20.04.6 LTS + X.org + suckless tools
+  * Ubuntu 20.04.6 LTS + X.org + dwm + suckless tools
   * Ubuntu 20.04.6 LTS + LXQt
   * Ubuntu 20.04.6 LTS + Xfce
 
@@ -27,7 +27,7 @@ Templates support amd64 unless otherwise noted.
 * [ubuntu-18.04](ubuntu-18.04/README.md) - templates for Ubuntu 18.04.6
   * Ubuntu Server 18.04.6 LTS
   * Ubuntu Server 18.04.6 LTS + Ansible + Testinfra
-  * Ubuntu 18.04.6 LTS + X.org + suckless tools
+  * Ubuntu 18.04.6 LTS + X.org + dwm + suckless tools
   * Ubuntu 18.04.6 LTS + LXDE
   * Ubuntu 18.04.6 LTS + Xfce
 * [ubuntu-17.10](ubuntu-17.10/README.md) - templates for Ubuntu 17.10.1

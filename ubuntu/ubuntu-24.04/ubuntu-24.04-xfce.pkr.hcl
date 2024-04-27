@@ -33,7 +33,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "2404.0.20240412"
+  default     = "2404.0.20240425"
   description = "Version number of this Vagrant box."
 }
 
@@ -103,7 +103,7 @@ variable "iso_checksum" {
 
 variable "iso_name" {
   type        = string
-  default     = "ubuntu-24.04-beta-live-server-amd64.iso"
+  default     = "ubuntu-24.04-live-server-amd64.iso"
   description = "File name of the install media."
 }
 
@@ -115,7 +115,7 @@ variable "iso_url" {
 
 variable "mem_size" {
   type        = string
-  default     = "2048"
+  default     = "4096"
   description = "Memory size of this box."
 }
 
@@ -217,7 +217,7 @@ variable "vm_name" {
 
 variable "vm_name_base" {
   type        = string
-  default     = "Ubuntu-24.04-BETA-amd64"
+  default     = "Ubuntu-24.04-amd64"
   description = "Base part of default VM name"
 }
 
@@ -296,7 +296,7 @@ locals {
     "https://releases.ubuntu.com/${var.os_version}/${var.iso_name}",
     "https://cdimages.ubuntu.com/ubuntu/releases/${var.os_version}/${var.release}/${var.iso_name}"
   ])
-  vm_name = coalesce(var.vm_name, "${var.vm_name_base}-minimal")
+  vm_name = coalesce(var.vm_name, "${var.vm_name_base}-xfce")
   vmware_vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
@@ -433,7 +433,8 @@ source "virtualbox-iso" "default" {
   ssh_username     = var.ssh_username
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
-    ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"]
+    ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
+    ["modifyvm", "{{ .Name }}", "--vram", "16"]
   ]
   virtualbox_version_file = ".vbox_version"
   vm_name                 = local.vm_name
@@ -518,6 +519,7 @@ source "vmware-iso" "esxi" {
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
+    "svga.vramSize"             = "16777216"
     "vhv.enable"                = "TRUE"
   }
   vnc_disable_password = true
@@ -537,6 +539,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "ARCHIVE_MIRROR=${var.archive_mirror}",
+      "DEBIAN_FRONTEND=noninteractive",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}",
       "VIRTUALBOX_VERSION=${var.virtualbox_version}"
@@ -545,7 +548,8 @@ build {
     scripts = [
       "../provisioners/update_mirror.sh",
       "../provisioners/base_ubuntu1804+.sh",
-      "../provisioners/vagrant.sh"
+      "../provisioners/vagrant.sh",
+      "../provisioners/xfce.sh"
     ]
   }
 
@@ -553,7 +557,8 @@ build {
     environment_vars = [
       "USE_VIRTUALBOX_UBUNTU_PACKAGE=yes",
       "VAGRANT_USERNAME=${var.vagrant_username}",
-      "VIRTUALBOX_VERSION=${var.virtualbox_version}"
+      "VIRTUALBOX_VERSION=${var.virtualbox_version}",
+      "VIRTUALBOX_WITH_XORG=yes"
     ]
     execute_command = "echo '${var.vagrant_password}' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
     only = [
@@ -563,12 +568,15 @@ build {
   }
 
   provisioner "shell" {
+    environment_vars = [
+      "DEBIAN_FRONTEND=noninteractive"
+    ]
     execute_command = "echo '${var.vagrant_password}' | {{ .Vars }} sudo -E -S sh -ex '{{ .Path }}'"
     only = [
       "vmware-iso.default",
       "vmware-iso.esxi"
     ]
-    script = "../provisioners/vmware-server.sh"
+    script = "../provisioners/vmware-desktop.sh"
   }
 
   provisioner "shell" {
