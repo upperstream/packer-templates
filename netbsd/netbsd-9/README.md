@@ -5,9 +5,9 @@ Templates to create Vagrant boxes for NetBSD 9.0 (amd64 and i386).
 
 ## Prerequisites
 
-* [Packer][] v1.4.1+
+* [Packer][] v1.4.1 - v1.5.6; see the note 1 for compatibility issue
 * [Vagrant][] v2.2.6+
-* [VirtualBox][] v5.2.32+
+* [VirtualBox][] v5.2.32 - v6.x; see the note 2 for compatibility issue
 * [VMware][] Workstation v15.0+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
 
@@ -19,6 +19,18 @@ Templates to create Vagrant boxes for NetBSD 9.0 (amd64 and i386).
 [VMware]: http://www.vmware.com/
   "VMware Virtualization for Desktop &amp; Server, Application, Public &amp; Hybrid Clouds"
 
+### Notes for compatibility issues
+
+1. Delete `iso_checksum_type` from the JSON config file if you use
+   Packer later than v1.5.6, or run `packer fix` command to update the
+   config file.
+2. Add `["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"]`
+   to the `vboxmanege` array in the JSON config file if you use
+   VirtualBox v7.0 or later.
+3. Depending on when you create a box, you may need to update the
+   PKG_PATH do download packages from the NetBSD CDN and each package
+   version because the designated pkgsrc branch in the JSON config file
+   may be obsolete.
 
 ## Provisioned software tools
 
@@ -35,7 +47,7 @@ Templates to create Vagrant boxes for NetBSD 9.0 (amd64 and i386).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso netbsd-9.0-amd64-minimal.json
+    packer build -only=virtualbox-iso netbsd-9-amd64-minimal.json
 
 You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v9.0.20200428-virtualbox.box`
 in the same directory after the command has succeeded.
@@ -49,7 +61,7 @@ to your box list by the following command:
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso netbsd-9.0-and64-minimal.json
+    packer build -only=vmware-iso netbsd-9-and64-minimal.json
 
 You will find a vagrant box file named `NetBSD-9.0-amd64-minimal-v9.0.20200428-vmware.box`
 in the same directory after the command has succeeded.
@@ -95,26 +107,26 @@ You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=esxi-iso netbsd-9.0-amd64-minimal.json
+    packer build -only=esxi-iso netbsd-9-amd64-minimal.json
 
 (Note that created VM will be unregistered from your Inventory.)
 
 
 ## Variants
 
-* `netbsd-9.0-minmal.json` - NetBSD 9.0
-* `netbsd-9.0-ansible.json` - NetBSD 9.0 + [Ansible][] +
+* `netbsd-9-minmal.json` - NetBSD 9.0
+* `netbsd-9-ansible.json` - NetBSD 9.0 + [Ansible][] +
   [Ansible Lint][] + [Testinfra][]
-* `netbsd-9.0-xorg.json` - NetBSD 9.0 + [X.Org][]
-* `netbsd-9.0-dwm.json` - NetBSD 9.0 + X.Org + [dwm][] + [st][]
+* `netbsd-9-xorg.json` - NetBSD 9.0 + [X.Org][]
+* `netbsd-9-dwm.json` - NetBSD 9.0 + X.Org + [dwm][] + [st][]
   + [dmenu][], with [XDM] enabled
-* `netbsd-9.0-xfce.json` - NetBSD 9.0 + [Xfce][], with XDM enabled
+* `netbsd-9-xfce.json` - NetBSD 9.0 + [Xfce][], with XDM enabled
   (amd64 only)
 
-While `netbsd-9.0-amd64-*.json` templates generate amd64 boxes,
-`netbsd-9.0-i386-*.json` templates generate i386 boxes:
+While `netbsd-9-amd64-*.json` templates generate amd64 boxes,
+`netbsd-9-i386-*.json` templates generate i386 boxes:
 
-    packer build netbsd-9.0-i386-minimal.json
+    packer build netbsd-9-i386-minimal.json
 
 [Ansible]: https://www.ansible.com/ "Ansible is Simple IT Automation"
 [Ansible Lint]: https://docs.ansible.com/ansible-lint/
@@ -160,4 +172,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2019, 2020 Upperstream Software.
+Copyright &copy; 2019, 2020, 2024 Upperstream Software.
