@@ -31,7 +31,6 @@
   * [more](freebsd/README.md)
 * [netbsd](netbsd/README.md) - NetBSD templates (amd64 and i386)
   * netbsd-8.2 - NetBSD 8.2 templates
-  * netbsd-9.0 - NetBSD 9.0 templates
   * netbsd-9.1 - NetBSD 9.1 templates
   * netbsd-9.2 - NetBSD 9.2 templates
   * netbsd-9.3 - NetBSD 9.3 templates
