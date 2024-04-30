@@ -2,9 +2,9 @@
   "variables": {
     "ssh_username": "root",
     "ssh_password": "vagrant",
-    "os_ver": "9.1",
+    "os_ver": "9.2",
     "variant": "xorg",
-    "box_ver": "9.1.20201018",
+    "box_ver": "9.2.20210512",
     "remote_host": "{{env `REMOTE_HOST`}}",
     "remote_port": "{{env `REMOTE_PORT`}}",
     "remote_username": "{{env `REMOTE_USERNAME`}}",
@@ -18,13 +18,14 @@
     "disk_size": "40960",
     "hostname": "vagrant",
     "headless": "false",
+    "dist_server": "http://cdn.netbsd.org",
     "package_server": "http://cdn.netbsd.org",
-    "iso_file_name": "NetBSD-9.1-amd64.iso",
-    "iso_path": "NetBSD/NetBSD-9.1/images",
-    "iso_checksum": "sha512:65bddc95945991c3b2021f9c8ded7f34c25f0a7611b7aa15a15fe23399e902307e926ae97fcd01dc1662ac67b5f6e4be643c6a2b581692ddcb616d30125066f9",
+    "iso_file_name": "NetBSD-9.2-amd64.iso",
+    "iso_path": "NetBSD/NetBSD-9.2/images",
+    "iso_checksum": "sha512:5ee0ea101f73386b9b424f5d1041e371db3c42fdd6f4e4518dc79c4a08f31d43091ebe93425c9f0dcaaed2b51131836fe6774f33f89030b58d64709b35fda72f",
     "virtualbox_geust_os_type": "NetBSD_64",
     "vmware_guest_os_type": "other-64",
-    "vm_name": "NetBSD-9.1-amd64",
+    "vm_name": "NetBSD-9.2-amd64",
     "qemu_binary": "qemu-system-x86_64",
     "qemu_accelerator": "kvm",
     "qemu_use_default_display": "true",
@@ -33,7 +34,8 @@
     "hyperv_ssh_host": "xxx.xxx.xxx.xxx",
     "hyperv_host_cidr": "xxx.xxx.xxx.xxx/x",
     "hyperv_gateway": "xxx.xxx.xxx.xxx",
-    "hyperv_netif": "hvn0"
+    "hyperv_netif": "hvn0",
+    "esxi_vnc_over_websocket": "true"
   },
   "builders": [
     {
@@ -43,7 +45,7 @@
       "guest_os_type": "{{user `virtualbox_geust_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
-        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+        "{{user `dist_server`}}/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "ssh_username": "{{user `ssh_username`}}",
@@ -109,7 +111,7 @@
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
-        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+        "{{user `dist_server`}}/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "ssh_username": "{{user `ssh_username`}}",
@@ -179,7 +181,7 @@
       "guest_os_type": "{{user `vmware_guest_os_type`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
-        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+        "{{user `dist_server`}}/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "iso_checksum": "{{user `iso_checksum`}}",
       "ssh_username": "{{user `ssh_username`}}",
@@ -192,6 +194,8 @@
       "remote_username": "{{user `remote_username`}}",
       "remote_password": "{{user `remote_password`}}",
       "remote_datastore": "{{user `remote_datastore`}}",
+      "vnc_over_websocket": "{{user `esxi_vnc_over_websocket`}}",
+      "insecure_connection": true,
       "output_directory": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "vm_name": "{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}",
       "headless": "{{user `headless`}}",
@@ -254,7 +258,7 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
-        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+        "{{user `dist_server`}}/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
@@ -315,14 +319,14 @@
     },
     {
       "type": "hyperv-iso",
-      "boot_wait": "10s",
+      "boot_wait": "20s",
       "cpus": "{{user `num_cpus`}}",
       "memory": "{{user `mem_size`}}",
       "disk_size": "{{user `disk_size`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_urls": [
         "./iso/{{user `iso_file_name`}}",
-        "http://cdn.netbsd.org/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
+        "{{user `dist_server`}}/pub/{{user `iso_path`}}/{{user `iso_file_name`}}"
       ],
       "ssh_host": "{{user `hyperv_ssh_host`}}",
       "ssh_username": "{{user `ssh_username`}}",
@@ -378,7 +382,7 @@
     {
       "type": "shell",
       "inline": [
-        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/9.0_2020Q2/All\" > /etc/pkg_install.conf"
+        "echo \"PKG_PATH={{user `package_server`}}/pub/pkgsrc/packages/NetBSD/`uname -m`/9.0_2020Q4/All\" > /etc/pkg_install.conf"
       ],
       "inline_shebang": "/bin/sh -ex"
     },
@@ -388,7 +392,7 @@
       "script": "../provisioners/vmware-xorg_netbsd8+.sh",
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}",
       "environment_vars": [
-        "OPEN_VM_TOOLS=open-vm-tools-10.3.0nb10",
+        "OPEN_VM_TOOLS=open-vm-tools-10.3.0nb12",
         "XF86_VIDEO_VMWARE=xf86-video-vmware-13.3.0",
         "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0nb2"
       ]
@@ -404,8 +408,8 @@
         "VAGRANT_USER={{user `vagrant_username`}}",
         "VAGRANT_PASSWORD={{user `vagrant_password`}}",
         "VAGRANT_GROUP={{user `vagrant_group`}}",
-        "SUDO=sudo-1.8.31p1",
-        "RSYNC=rsync-3.1.3nb2",
+        "SUDO=sudo-1.9.5p2nb1",
+        "RSYNC=rsync-3.2.3",
         "USE_DEFAULT_XINITRC=YES"
       ]
     },

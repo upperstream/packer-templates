@@ -15,18 +15,12 @@ Templates support amd64 and i386 architectures unless otherwise noted.
   * NetBSD 9.3 + X.Org
   * NetBSD 9.3 + X.Org + XDM + dwm + dmenu + st
   * NetBSD 9.3 + Xfce + XDM
-* [netbsd-9.2](netbsd-9.2/README.md) - templates for NetBSD 9.2
+* [netbsd-9.2](netbsd-9/README.md) - templates for NetBSD 9.2
   * NetBSD 9.2
   * NetBSD 9.2 + Ansible + Ansible Lint + Testinfra
   * NetBSD 9.2 + X.Org
   * NetBSD 9.2 + X.Org + XDM + dwm + dmenu + st
   * NetBSD 9.2 + Xfce + XDM
-* [netbsd-9.1](netbsd-9/README.md) - templates for NetBSD 9.1
-  * NetBSD 9.1
-  * NetBSD 9.1 + Ansible + Ansible Lint + Testinfra
-  * NetBSD 9.1 + X.Org
-  * NetBSD 9.1 + X.Org + XDM + dwm + dmenu + st
-  * NetBSD 9.1 + Xfce + XDM
 * [netbsd-8.2](netbsd-8.2/README.md) - templates for NetBSD 8.2
   * NetBSD 8.2
   * NetBSD 8.2 + Ansible + Ansible Lint + Testinfra

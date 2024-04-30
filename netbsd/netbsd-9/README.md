@@ -1,13 +1,13 @@
-# Packer templates for NetBSD 9.1
+# Packer templates for NetBSD 9.2
 
-Templates to create Vagrant boxes for NetBSD 9.1 (amd64 and i386).
+Templates to create Vagrant boxes for NetBSD 9.2 (amd64 and i386).
 
 ## Prerequisites
 
-* [Packer][] v1.6.2+
-* [Vagrant][] v2.2.6+
-* [VirtualBox][] v6.1.10+; see the note 1 for compatibility issue
-* [VMware][] Workstation v15.5+ / VMware Fusion v10.0+
+* [Packer][] v1.6.3+
+* [Vagrant][] v2.2.10+
+* [VirtualBox][] v6.1.14+; see the note 1 for compatibility issue
+* [VMware][] Workstation v15.5.6+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
@@ -50,14 +50,14 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso netbsd-9-amd64-minimal.json
 
-You will find a vagrant box file named `NetBSD-9.1-amd64-minimal-v9.1.20201018-virtualbox.box`
+You will find a vagrant box file named `NetBSD-9.2-amd64-minimal-v9.2.20210512-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018`
+Then you can add the box named `NetBSD-9.2-amd64-minimal-v9.2.20210512`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-virtualbox.box \
-        --name NetBSD-9.1-amd64-minimal-v9.1.20201018 --provider virtualbox
+    vagrant box add NetBSD-9.2-amd64-minimal-v9.2.20210512-virtualbox.box \
+        --name NetBSD-9.2-amd64-minimal-v9.2.20210512 --provider virtualbox
 
 ### VMware
 
@@ -65,17 +65,42 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso netbsd-9-and64-minimal.json
 
-You will find a vagrant box file named `NetBSD-9.1-amd64-minimal-v9.1.20201018-vmware.box`
+You will find a vagrant box file named `NetBSD-9.2-amd64-minimal-v9.2.20210512-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018`
+Then you can add the box named `NetBSD-9.2-amd64-minimal-v9.2.20210512`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-vmware.box \
-        --name NetBSD-9.1-amd64-minimal-v9.1.20201018 --provider vmware_desktop
+    vagrant box add NetBSD-9.2-amd64-minimal-v9.2.20210512-vmware.box \
+        --name NetBSD-9.2-amd64-minimal-v9.2.20210512 --provider vmware_desktop
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
+
+### ESXi
+
+In order to build a VM image on ESXi, you need to provide the following
+environment variables:
+
+* `REMOTE_HOST` - ESXi host name or IP address
+* `REMOTE_USERNAME` - ESXi login user name
+* `REMOTE_PASSWORD` - ESXi login password
+* `REMOTE_DATASTORE` - ESXi datastore name where a VM image will be
+  created
+
+You also have to enable SSH.
+
+The following command will build a VM image on your ESXi:
+
+    packer build -only=esxi-iso netbsd-9-amd64-minimal.json
+
+(Note that created VM will be unregistered from your Inventory.)
+
+When you create a box on ESXi host version prior to 6.7, you need to
+enable VNC on the host and need to disable Packer's VNC over WebSocket
+feature by adding `-var esxi_vnc_over_websocket=false` parameter:
+
+    packer build -only=esxi-iso -var esxi_vnc_over_websocket=false netbsd-9-amd64-minimal.json
 
 ### QEMU/libvirt
 
@@ -83,14 +108,14 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu netbsd-9-and64-minimal.json
 
-You will find a vagrant box file named `NetBSD-9.1-amd64-minimal-v9.1.20201018-libvirt.box`
+You will find a vagrant box file named `NetBSD-9.2-amd64-minimal-v9.2.20210512-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018`
+Then you can add the box named `NetBSD-9.2-amd64-minimal-v9.2.20210512`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-libvirt.box \
-        --name NetBSD-9.1-amd64-minimal-v9.1.20201018 --provider libvirt
+    vagrant box add NetBSD-9.2-amd64-minimal-v9.2.20210512-libvirt.box \
+        --name NetBSD-9.2-amd64-minimal-v9.2.20210512 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -107,14 +132,14 @@ Because Packer Hyper-V builder cannot detect IP address of a NetBSD VM,
 you must provide static network settings so that the VM is configured to
 have a static IP address.
 
-You will find a vagrant box file named `NetBSD-9.1-amd64-minimal-v9.1.20201018-hyperv.box`
+You will find a vagrant box file named `NetBSD-9.2-amd64-minimal-v9.2.20210512-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.1-amd64-minimal-v9.1.20201018`
+Then you can add the box named `NetBSD-9.2-amd64-minimal-v9.2.20210512`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.1-amd64-minimal-v9.1.20201018-hyperv.box \
-        --name NetBSD-9.1-amd64-minimal-v9.1.20201018 --provider hyperv
+    vagrant box add NetBSD-9.2-amd64-minimal-v9.2.20210512-hyperv.box \
+        --name NetBSD-9.2-amd64-minimal-v9.2.20210512 --provider hyperv
 
 ## Default settings
 
@@ -132,35 +157,15 @@ this box is disabled by default.
 Because Bash is not the standard shell for NetBSD, default shell for
 SSH connection of this box is set to `/bin/sh`.
 
-## Building a VM image on ESXi
-
-In order to build a VM image on ESXi, you need to provide the following
-environment variables:
-
-* `REMOTE_HOST` - ESXi host name or IP address
-* `REMOTE_USERNAME` - ESXi login user name
-* `REMOTE_PASSWORD` - ESXi login password
-* `REMOTE_DATASTORE` - ESXi datastore name where a VM image will be
-  created
-
-You also have to enable SSH and VNC on ESXi host.
-
-The following command will build a VM image on your ESXi:
-
-    packer build -only=esxi-iso netbsd-9-amd64-minimal.json
-
-(Note that created VM will be unregistered from your Inventory.)
-
 ## Variants
 
-* `netbsd-9-*-minmal.json` - NetBSD 9.1
-* `netbsd-9-*-ansible.json` - NetBSD 9.1 + [Ansible][] +
+* `netbsd-9-*-minmal.json` - NetBSD 9.2
+* `netbsd-9-*-ansible.json` - NetBSD 9.2 + [Ansible][] +
   [Ansible Lint][] + [Testinfra][]
-* `netbsd-9-*-xorg.json` - NetBSD 9.1 + [X.Org][]
-* `netbsd-9-*-dwm.json` - NetBSD 9.1 + X.Org + [dwm][] + [st][] +
+* `netbsd-9-*-xorg.json` - NetBSD 9.2 + [X.Org][]
+* `netbsd-9-*-dwm.json` - NetBSD 9.2 + X.Org + [dwm][] + [st][] +
   [dmenu][], with [XDM] enabled
-* `netbsd-9-*-xfce.json` - NetBSD 9.1 + [Xfce][], with XDM enabled
-  (amd64 only)
+* `netbsd-9-*-xfce.json` - NetBSD 9.2 + [Xfce][], with XDM enabled
 
 While `netbsd-9-amd64-*.json` templates generate amd64 boxes,
 `netbsd-9-i386-*.json` templates generate i386 boxes:
@@ -227,7 +232,10 @@ or `-var-file` command line options to `packer`:
   appropriate value.
 * `hyperv_netif` - Network interface name of the VM being build with
   Hyper-V builder.  Default value is `hvn0`.
+* `esxi_vnc_over_websocket` - Controlls whether or not to use VNC over
+  WebSocket feature for ESXi.  Default value is `true`.  Set to `false`
+  if your ESXi host version is prior to 6.7 which supports VNC server.
 
 - - -
 
-Copyright &copy; 2019, 2020, 2024 Upperstream Software.
+Copyright &copy; 2019-2021, 2024 Upperstream Software.
