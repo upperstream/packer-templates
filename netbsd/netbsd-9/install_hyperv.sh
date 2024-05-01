@@ -1,7 +1,10 @@
 #!/bin/sh
+# shellcheck disable=SC3028
+
 set -e
 set -x
-mount /dev/$HDD /mnt
+dkctl "$DISK" makewedges
+mount /dev/"$PARTITION" /mnt
 sed \
   -e 's/^#PermitRootLogin [a-z][a-z-]*$/PermitRootLogin yes/' \
   -e 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /mnt/etc/ssh/sshd_config \
@@ -17,6 +20,7 @@ statd=YES
 hostname=$HOSTNAME
 ifconfig_$NETIF="inet $HOST_CIDR"
 defaultroute=$GATEWAY
+dhcpcd=YES
 EOF
 echo "nameserver $GATEWAY" > /mnt/etc/resolv.conf
 umount /mnt

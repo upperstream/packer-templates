@@ -1,5 +1,10 @@
 #!/bin/sh
-mount /dev/$HDD /mnt
+# shellcheck disable=SC3028
+
+set -e
+set -x
+dkctl "$DISK" makewedges
+mount /dev/"$PARTITION" /mnt
 sed \
   -e 's/^#PermitRootLogin [a-z][a-z-]*$/PermitRootLogin yes/' \
   -e 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /mnt/etc/ssh/sshd_config \
@@ -13,7 +18,7 @@ rpcbind=YES
 no_swap=YES
 lockd=YES
 statd=YES
-hostname=$HOSTNAME
+hostname="$HOSTNAME"
 EOF
 umount /mnt
 reboot
