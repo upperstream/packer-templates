@@ -1,6 +1,6 @@
-# Packer templates for NetBSD 9.3
+# Packer templates for NetBSD 9.4
 
-Templates to create Vagrant boxes for NetBSD 9.3 (amd64 and i386).
+Templates to create Vagrant boxes for NetBSD 9.4 (amd64 and i386).
 
 ## Prerequisites
 
@@ -38,36 +38,39 @@ Templates to create Vagrant boxes for NetBSD 9.3 (amd64 and i386).
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso.default netbsd-9.3-minimal.pkr.hcl
+    packer build -only=virtualbox-iso.default netbsd-9-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`NetBSD-9.3-amd64-minimal-v9.3.20220804-virtualbox.box` in the same
+`NetBSD-9-amd64-minimal-v9.4.20240420-virtualbox.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.3-amd64-minimal-v9.3.20220804`
+Then you can add the box named `NetBSD-9-amd64-minimal-v9.4.20240420`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.3-amd64-minimal-v9.3.20220804-virtualbox.box \
-        --name NetBSD-9.3-amd64-minimal-v9.3.20220804 --provider virtualbox
+    vagrant box add NetBSD-9-amd64-minimal-v9.4.20240420-virtualbox.box \
+        --name NetBSD-9-amd64-minimal-v9.4.20240420 --provider virtualbox
+
+VirtualBox build intends to create amd64 box and i386 box on amd64 device.
 
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso.default netbsd-9.3-minimal.pkr.hcl
+    packer build -only=vmware-iso.default netbsd-9-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`NetBSD-9.3-amd64-minimal-v9.3.20220804-vmware.box` in the same
+`NetBSD-9-amd64-minimal-v9.4.20240420-vmware.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.3-amd64-minimal-v9.3.20220804`
+Then you can add the box named `NetBSD-9-amd64-minimal-v9.4.20240420`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.3-amd64-minimal-v9.3.20220804-vmware.box \
-        --name NetBSD-9.3-amd64-minimal-v9.3.20220804 --provider vmware_desktop
+    vagrant box add NetBSD-9-amd64-minimal-v9.4.20240420-vmware.box \
+        --name NetBSD-9-amd64-minimal-v9.4.20240420 --provider vmware_desktop
 
-In the `output` directory you will also find a VM image that can be
-directly imported from VMware.
+VMware build intends to create amd64 box or i386 box on amd64 device
+using VMware Workstation, or create arm64 box on Apple Silicon Mac
+device using VMware Fusion.
 
 ### ESXi
 
@@ -84,7 +87,7 @@ You also have to enable SSH.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=vmware-iso.esxi netbsd-9.3-minimal.pkr.hcl
+    packer build -only=vmware-iso.esxi netbsd-9-minimal.pkr.hcl
 
 (Note that created VM will be unregistered from your Inventory.)
 
@@ -92,26 +95,29 @@ When you create a box on ESXi host version prior to 6.7, you need to
 enable VNC on the host and need to disable Packer's VNC over WebSocket
 feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
-    packer build -only=vmware-iso.esxi -var esxi_vnc_over_websocket=false netbsd-9.3-minimal.pkr.hcl
+    packer build -only=vmware-iso.esxi -var esxi_vnc_over_websocket=false netbsd-9-minimal.pkr.hcl
 
 ### QEMU/libvirt
 
 From the terminal, invoke the following command for Libvirt provider:
 
-    packer build -only=qemu.default netbsd-9.3-minimal.pkr.hcl
+    packer build -only=qemu.default netbsd-9-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`NetBSD-9.3-amd64-minimal-v9.3.20220804-libvirt.box` in the same
+`NetBSD-9-amd64-minimal-v9.4.20240420-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.3-amd64-minimal-v9.3.20220804`
+Then you can add the box named `NetBSD-9-amd64-minimal-v9.4.20240420`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.3-amd64-minimal-v9.3.20220804-libvirt.box \
-        --name NetBSD-9.3-amd64-minimal-v9.3.20220804 --provider libvirt
+    vagrant box add NetBSD-9-amd64-minimal-v9.4.20240420-libvirt.box \
+        --name NetBSD-9-amd64-minimal-v9.4.20240420 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
+
+QEMU build intends to create amd64 box and i386 box on amd64 Linux
+device.
 
 ### Hyper-V
 
@@ -119,25 +125,25 @@ From the terminal, invoke the following command for Hyper-V provider:
 
     packer build -only=hyperv-iso.default -var hyperv_ssh_host=xxx.xxx.xxx.xxx \
         -var hyperv_host_cidr=xxx.xxx.xxx.xxx/x \
-        -var hyperv_gateway=xxx.xxx.xxx.xxx netbsd-9.3-minimal.pkr.hcl
+        -var hyperv_gateway=xxx.xxx.xxx.xxx netbsd-9-minimal.pkr.hcl
 
 Because Packer Hyper-V builder cannot detect IP address of a NetBSD VM,
 you must provide static network settings so that the VM is configured to
 have a static IP address.
 
 You will find a vagrant box file named
-`NetBSD-9.3-amd64-minimal-v9.3.20220804-hyperv.box` in the same
+`NetBSD-9-amd64-minimal-v9.4.20240420-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9.3-amd64-minimal-v9.3.20220804`
+Then you can add the box named `NetBSD-9-amd64-minimal-v9.4.20240420`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9.3-amd64-minimal-v9.3.20220804-hyperv.box \
-        --name NetBSD-9.3-amd64-minimal-v9.3.20220804 --provider hyperv
+    vagrant box add NetBSD-9-amd64-minimal-v9.4.20240420-hyperv.box \
+        --name NetBSD-9-amd64-minimal-v9.4.20240420 --provider hyperv
 
 ## Default settings
 
-These default settings are done by the file `Vagrantfile.NetBSD-9.3+`
+These default settings are done by the file `Vagrantfile.NetBSD-9.4+`
 which will be included in the box.  Users can override this setting by
 users' own `Vagrantfile`s.
 
@@ -165,16 +171,16 @@ use `doas`.
 
 ## Variants
 
-* `netbsd-9.3-minimal.pkr.hcl` - NetBSD 9.3
-* `netbsd-9.3-xorg.pkr.hcl` - NetBSD 9.3 + [X.Org][]
-* `netbsd-9.3-dwm.pkr.hcl` - NetBSD 9.3 + X.Org + [dwm][] + [st][] +
+* `netbsd-9-minimal.pkr.hcl` - NetBSD 9.4
+* `netbsd-9-xorg.pkr.hcl` - NetBSD 9.4 + [X.Org][]
+* `netbsd-9-dwm.pkr.hcl` - NetBSD 9.4 + X.Org + [dwm][] + [st][] +
   [dmenu][], with [XDM] enabled
-* `netbsd-9.3-xfce.pkr.hcl` - NetBSD 9.3 + [Xfce][], with XDM enabled
+* `netbsd-9-xfce.pkr.hcl` - NetBSD 9.4 + [Xfce][], with XDM enabled
 
-While `netbsd-9.3-*.pkr.hcl` templates generate amd64 boxes by default,
-using `vars-netbsd-9.3-i386.pkrvars.hcl` templates generate i386 boxes:
+While `netbsd-9-*.pkr.hcl` templates generate amd64 boxes by default,
+using `vars-netbsd-9-i386.pkrvars.hcl` templates generate i386 boxes:
 
-    packer build -var-file=vars-netbsd-9.3-i386.pkrvars.hcl netbsd-9.3-minimal.okr.hcl
+    packer build -var-file=vars-netbsd-9-i386.pkrvars.hcl netbsd-9-minimal.okr.hcl
 
 [dmenu]: http://tools.suckless.org/dmenu/ "dmenu | suckless.org tools"
 [dwm]: http://dwm.suckless.org/
@@ -225,6 +231,8 @@ or `-var-file` command line options to `packer`:
   `true`.  Default value is `false`.
 * `ssh_password` - SSH password for `ssh_user` during build time.
   Default value is `vagrant`.
+* `ssh_timeout` - SSH timeout to connect this box being created.
+  Defaults to `60m`.
 * `ssh_username` - User name to login via SSH during build time.
   Default value is `root`.
 * `vagrant_group` - Group name that `vagrant_username` belongs to.
@@ -233,9 +241,17 @@ or `-var-file` command line options to `packer`:
   `vagrant`.
 * `vagrant_username` - User name during run time.  Vagrant box is set
   for this user.  Default value is `vagrant`.
+* `vmware_cdrom_adapter_type` - CD-ROM adapter type for VMware box.
+  Defaults to `ide`.
+* `vmware_disk_adapter_type` - Disk adapter type for VMware box.
+  Defaults to `scsi`.
+* `vmware_hardware_version` - Virtual hardware version of VMware box.
+  Defaults to `9`.
+* `vmware_network_adapter_type` - Network adapter type of VMware box.
+  Defaults to `e1000`.
 * `vm_name` - VM name.  This also affects box file name and output
   directory name.
 
 - - -
 
-Copyright &copy; 2023 Upperstream Software.
+Copyright &copy; 2023, 2024 Upperstream Software.
