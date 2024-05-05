@@ -20,9 +20,10 @@
   * debian-11 - Debian 11.9 templates
   * debian-12 - Debian 12.5 templates
   * [more](debian/README.md)
-* [devuan](devuan/README.md) - Devuan templates
+* [devuan](devuan/README.md) - Devuan templates (amd64 and i386)
+  * devuan-3 - Devuan 3.1.1 Beowulf templates
   * devuan-4 - Devuan 4.0 Chimaera templates (amd64, i386, and arm64)
-  * devuan-5 - Devuan 5.0 Daedalus templates (amd64, and i386)
+  * devuan-5 - Devuan 5.0 Daedalus templates
   * [more](devaun/README.md)
 * [freebsd](freebsd/README.md) - FreeBSD templates (amd64, i386, and arm64)
   * freebsd-13.2 - FreeBSD 13.2 templates

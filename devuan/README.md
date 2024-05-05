@@ -2,10 +2,11 @@
 
 ## Current Devuan release
 
+Templates support amd64 and i386 architectures unless otherwise noted.
+
 * [devuan-5](devuan-5/README.md) - templates for Devuan 5.0 Daedalus
-  (amd64 and i386)
   * Devuan 5.0 Daedalus minimal
-  * Devuan 5.0 Daedalus + X.org + suckless tools
+  * Devuan 5.0 Daedalus + X.org + dwm + suckless tools
   * Devuan 5.0 Daedalus + choice of Desktop Environment
     * Xfce (default)
     * Cinnamon
@@ -15,8 +16,17 @@
 * [devuan-4](devuan-4/README.md) - templates for Devuan 4.0 Chimaera
   (and64, i386, and arm64)
   * Devuan 4.0 Chimaera minimal
-  * Devuan 4.0 Chimaera + X.org + suckless tools
+  * Devuan 4.0 Chimaera + X.org + dwm + suckless tools
   * Devuan 4.0 Chimaera + choice of Desktop Environment
+    * Xfce (default)
+    * Cinnamon
+    * KDE Plasma
+    * LXQt
+    * MATE
+* [devuan-3](devuan-3/README.md) - templates for Devuan 3.1.1 Beowulf
+  * Devuan 3.1.1 Beowulf minimal
+  * Devuan 3.1.1 Beowulf + X.org + dwm + suckless tools
+  * Devuan 3.1.1 Beowulf + choice of Desktop Environment
     * Xfce (default)
     * Cinnamon
     * KDE Plasma
