@@ -1,11 +1,11 @@
-# Packer templates for Alpine Linux 3.15.9
+# Packer templates for Alpine Linux 3.15.11
 
-Templates to create Vagrant boxes for Alpine Linux 3.15.9. (x86_64,
+Templates to create Vagrant boxes for Alpine Linux 3.15.11. (x86_64,
 x86, and aarch64)
 
 ## Prerequisites
 
-* [Packer][] version 1.6.6+
+* [Packer][] version 1.8.7+
 * [Vagrant][] version 2.2.18+
 * [Virtualbox][] version 7.0+
 * [VMware][] Workstation version 17.0+ / VMware Fusion v13.0+
@@ -55,17 +55,17 @@ packer build -only=virtualbox-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.15-x86_64-minimal-v15.9.20230614-virtualbox.box` in
+`Alpine-standard-3.15-x86_64-minimal-v15.11.20231130-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.15-x86_64-minimal-v15.9.20230614`
+`Alpine-standard-3.15-x86_64-minimal-v15.11.20231130`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.15-x86_64-minimal-v15.9.20230614-virtualbox.box \
-  --name Alpine-standard-3.15-x86_64-minimal-v15.9.20230614 \
+  Alpine-standard-3.15-x86_64-minimal-v15.11.20231130-virtualbox.box \
+  --name Alpine-standard-3.15-x86_64-minimal-v15.11.20231130 \
   --provider virtualbox
 ```
 
@@ -83,17 +83,17 @@ packer build -only=vmware-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.15-x86_64-minimal-v15.9.20230614-vmware.box` in the
+`Alpine-standard-3.15-x86_64-minimal-v15.11.20231130-vmware.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.15-x86_64-minimal-v15.9.20230614` to your box list
+`Alpine-standard-3.15-x86_64-minimal-v15.11.20231130` to your box list
 by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.15-x86_64-minimal-v15.9.20230614-vmware.box \
-  --name Alpine-standard-3.15-x86_64-minimal-v15.9.20230614 \
+  Alpine-standard-3.15-x86_64-minimal-v15.11.20231130-vmware.box \
+  --name Alpine-standard-3.15-x86_64-minimal-v15.11.20231130 \
   --provider vmware
 ```
 
@@ -146,17 +146,17 @@ packer build -only=qemu.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.15-x86_64-minimal-v15.9.20230614-libvirt.box` in the
+`Alpine-standard-3.15-x86_64-minimal-v15.11.20231130-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.15-x86_64-minimal-v15.9.20230614`
+`Alpine-standard-3.15-x86_64-minimal-v15.11.20231130`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.15-x86_64-minimal-v15.9.20230614-libvirt.box \
-  --name Alpine-standard-3.15-x86_64-minimal-v15.9.20230614 \
+  Alpine-standard-3.15-x86_64-minimal-v15.11.20231130-libvirt.box \
+  --name Alpine-standard-3.15-x86_64-minimal-v15.11.20231130 \
   --provider libvirt
 ```
 
@@ -176,17 +176,17 @@ packer build -only=parallels-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.15-x86_64-minimal-v15.9.20230614-parallels.box` in
+`Alpine-standard-3.15-x86_64-minimal-v15.11.20231130-parallels.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.15-x86_64-minimal-v15.9.20230614`
+`Alpine-standard-3.15-x86_64-minimal-v15.11.20231130`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.15-x86_64-minimal-v15.9.20230614-parallels.box \
-  --name Alpine-standard-3.15-x86_64-minimal-v15.9.20230614 \
+  Alpine-standard-3.15-x86_64-minimal-v15.11.20231130-parallels.box \
+  --name Alpine-standard-3.15-x86_64-minimal-v15.11.20231130 \
   --provider parallels
 ```
 
@@ -203,17 +203,17 @@ packer build -only=hyperv-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.15-x86_64-minimal-v15.9.20230614-hyperv.box`
+`Alpine-standard-3.15-x86_64-minimal-v15.11.20231130-hyperv.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.15-x86_64-minimal-v15.9.20230614`
+`Alpine-standard-3.15-x86_64-minimal-v15.11.20231130`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.15-x86_64-minimal-v15.9.20230614-hyperv.box \
-  --name Alpine-standard-3.15-x86_64-minimal-v15.9.20230614 \
+  Alpine-standard-3.15-x86_64-minimal-v15.11.20231130-hyperv.box \
+  --name Alpine-standard-3.15-x86_64-minimal-v15.11.20231130 \
   --provider hyperv
 ```
 
@@ -239,12 +239,12 @@ for SSH connection of this box is set to `/bin/ash`.
 
 ## Variants
 
-* `alpine-3.15-minimal.pkr.hcl` - Alpine Linux 3.15.9
-* `alpine-3.15-docker.pkr.hcl` - Alpine Linux 3.15.9 with [Docker] +
+* `alpine-3.15-minimal.pkr.hcl` - Alpine Linux 3.15.11
+* `alpine-3.15-docker.pkr.hcl` - Alpine Linux 3.15.11 with [Docker] +
   [Docker Compose]
-* `alpine-3.16-dwm.pkr.hcl` - Alpine Linux 3.15.9 with [X.org][], [suckless][]
+* `alpine-3.16-dwm.pkr.hcl` - Alpine Linux 3.15.11 with [X.org][], [suckless][]
   tools, and [xrdp][].
-* `alpine-3.16-xfce.pkr.hcl` - Alpine Linux 3.15.9 with [Xfce][] + [xrdp][].
+* `alpine-3.16-xfce.pkr.hcl` - Alpine Linux 3.15.11 with [Xfce][] + [xrdp][].
 
 [Docker]: https://www.docker.com/
   "Docker - Build, Ship and Run Any App, Anywhere"
@@ -329,4 +329,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2023 Upperstream Software.
+Copyright &copy; 2023, 2024 Upperstream Software.
