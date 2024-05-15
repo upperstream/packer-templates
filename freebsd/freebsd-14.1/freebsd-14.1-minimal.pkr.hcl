@@ -48,7 +48,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "1.20240505"
+  default = "2.20240512"
 }
 
 variable "ca_root_nss_version" {
@@ -122,12 +122,12 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/14.1/CHECKSUM.SHA256-FreeBSD-14.1-BETA1-amd64"
+  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/14.1/CHECKSUM.SHA256-FreeBSD-14.1-BETA2-amd64"
 }
 
 variable "iso_image" {
   type    = string
-  default = "FreeBSD-14.1-BETA1-amd64-disc1.iso"
+  default = "FreeBSD-14.1-BETA2-amd64-disc1.iso"
 }
 
 variable "mem_size" {
