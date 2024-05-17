@@ -1,6 +1,6 @@
-# Packer templates for Alpine Linux 3.16.6
+# Packer templates for Alpine Linux 3.16.9
 
-Templates to create Vagrant boxes for Alpine Linux 3.16.6. (x86_64,
+Templates to create Vagrant boxes for Alpine Linux 3.16.9. (x86_64,
 x86, and aarch64)
 
 ## Prerequisites
@@ -17,7 +17,7 @@ x86, and aarch64)
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
   "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
 [Hyper-V]: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/
-    "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
+  "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
 [libvirt]: https://libvirt.org/
   "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/
@@ -35,12 +35,15 @@ x86, and aarch64)
 
 ## Provisioned software tools
 
+* VirtualBox Guest Additions, [open-vm-tools][], or Hyper-V daemons
 * sshd
 * doas
 * chronyd (NTP daemon)
 * rsync
 * NFS (installed but not enabled)
 * `vagrant` user and its insecure public key
+
+Note that `sudo` is not installed while `doas` is.
 
 ## How to create a box
 
@@ -55,17 +58,17 @@ packer build -only=virtualbox-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.16-x86_64-minimal-v16.6.20230614-virtualbox.box` in
+`Alpine-standard-3.16-x86_64-minimal-v16.9.20240126-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.16-x86_64-minimal-v16.6.20230614`
+`Alpine-standard-3.16-x86_64-minimal-v16.9.20240126`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.16-x86_64-minimal-v16.6.20230614-virtualbox.box \
-  --name Alpine-standard-3.16-x86_64-minimal-v16.6.20230614 \
+  Alpine-standard-3.16-x86_64-minimal-v16.9.20240126-virtualbox.box \
+  --name Alpine-standard-3.16-x86_64-minimal-v16.9.20240126 \
   --provider virtualbox
 ```
 
@@ -83,24 +86,22 @@ packer build -only=vmware-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.16-x86_64-minimal-v16.6.20230614-vmware.box` in the
+`Alpine-standard-3.16-x86_64-minimal-v16.9.20240126-vmware.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.16-x86_64-minimal-v16.6.20230614` to your box list
+`Alpine-standard-3.16-x86_64-minimal-v16.9.20240126` to your box list
 by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.16-x86_64-minimal-v16.6.20230614-vmware.box \
-  --name Alpine-standard-3.16-x86_64-minimal-v16.6.20230614 \
+  Alpine-standard-3.16-x86_64-minimal-v16.9.20240126-vmware.box \
+  --name Alpine-standard-3.16-x86_64-minimal-v16.9.20240126 \
   --provider vmware
 ```
 
-In the `output` directory you will also find a VM image that can be
-directly imported to VMware.
-
-VMware build intends to create x86_64 box and x86 box on x86_64 host.
+VMware build intends to create x86_64 box and x86 box on x86_64 host,
+and aarch64 box on Apple Silicon Mac host.
 
 ### ESXi
 
@@ -113,7 +114,7 @@ environment variables:
 * `ESXI_REMOTE_DATASTORE` - ESXi datastore name where a VM image will be
   created
 
-You also have to enable SSH and VNC on ESXi host.
+You also have to enable SSH on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
@@ -146,51 +147,25 @@ packer build -only=qemu.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.16-x86_64-minimal-v16.6.20230614-libvirt.box` in the
+`Alpine-standard-3.16-x86_64-minimal-v16.9.20240126-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.16-x86_64-minimal-v16.6.20230614`
+`Alpine-standard-3.16-x86_64-minimal-v16.9.20240126`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.16-x86_64-minimal-v16.6.20230614-libvirt.box \
-  --name Alpine-standard-3.16-x86_64-minimal-v16.6.20230614 \
+  Alpine-standard-3.16-x86_64-minimal-v16.9.20240126-libvirt.box \
+  --name Alpine-standard-3.16-x86_64-minimal-v16.9.20240126 \
   --provider libvirt
 ```
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
 
-QEMU build intends to create x86_64 box and x86 box on x86_64 host.
-
-### Parallels
-
-From the terminal, invoke the following command for Parallels provider:
-
-```
-packer build -only=parallels-iso.default \
-  -var-file=vars-alpine-standard-3.16-x86_64.pkrvars.hcl \
-  alpine-3.16-minimal.pkr.hcl
-```
-
-You will find a vagrant box file named
-`Alpine-standard-3.16-x86_64-minimal-v16.6.20230614-parallels.box` in
-the same directory after the command has succeeded.
-
-Then you can add the box named
-`Alpine-standard-3.16-x86_64-minimal-v16.6.20230614`
-to your box list by the following command:
-
-```
-vagrant box add \
-  Alpine-standard-3.16-x86_64-minimal-v16.6.20230614-parallels.box \
-  --name Alpine-standard-3.16-x86_64-minimal-v16.6.20230614 \
-  --provider parallels
-```
-
-Parallels build intends to create aarch64 box on Apple Silicon host.
+QEMU build intends to create x86_64 box and x86 box on x86_64 Linux
+host.
 
 ### Hyper-V
 
@@ -203,22 +178,49 @@ packer build -only=hyperv-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.16-x86_64-minimal-v16.6.20230614-hyperv.box`
+`Alpine-standard-3.16-x86_64-minimal-v16.9.20240126-hyperv.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.16-x86_64-minimal-v16.6.20230614`
+`Alpine-standard-3.16-x86_64-minimal-v16.9.20240126`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.16-x86_64-minimal-v16.6.20230614-hyperv.box \
-  --name Alpine-standard-3.16-x86_64-minimal-v16.6.20230614 \
+  Alpine-standard-3.16-x86_64-minimal-v16.9.20240126-hyperv.box \
+  --name Alpine-standard-3.16-x86_64-minimal-v16.9.20240126 \
   --provider hyperv
 ```
 
 Hyper-V build intends to create x86 box and x86_64 box on Windows 10
 host.
+
+### Parallels
+
+From the terminal, invoke the following command for Parallels provider:
+
+```
+packer build -only=parallels-iso.default \
+  -var-file=vars-alpine-standard-3.16-x86_64.pkrvars.hcl \
+  alpine-3.16-minimal.pkr.hcl
+```
+
+You will find a vagrant box file named
+`Alpine-standard-3.16-x86_64-minimal-v16.9.20240126-parallels.box` in
+the same directory after the command has succeeded.
+
+Then you can add the box named
+`Alpine-standard-3.16-x86_64-minimal-v16.9.20240126`
+to your box list by the following command:
+
+```
+vagrant box add \
+  Alpine-standard-3.16-x86_64-minimal-v16.9.20240126-parallels.box \
+  --name Alpine-standard-3.16-x86_64-minimal-v16.9.20240126 \
+  --provider parallels
+```
+
+Parallels build intends to create aarch64 box on Apple Silicon Mac host.
 
 ## Default settings
 
@@ -232,25 +234,44 @@ Synced Folder of this box is disabled by default, although VirtualBox
 Guest Additions is installed on the box.  You can enable this feature
 using `config.vm.synced_folder` method in your `Vagrantfile`.
 
+Because `doas` command is installed in this box instead of `sudo`, the
+rsync path needs to be `doas rsync` for rsync type sync'ed folder.  You
+can add `rsync__rsync_path: "doas rsync"` option to your sync'ed folder
+settings when you choose rsync type sync'ed folder to implement this
+requirement.
+
 ### SSH Shell
 
 Because Bash is not the standard shell for Alpine Linux, default shell
 for SSH connection of this box is set to `/bin/ash`.
 
+### Substituting a user during SSH command execution
+
+Because `doas` command is installed in this box instead of `sudo`,
+command for SSH command execution in privileged mode is configured to
+use `doas`.
+
 ## Variants
 
-* `alpine-3.16-minimal.pkr.hcl` - Alpine Linux 3.16.6
-* `alpine-3.16-docker.pkr.hcl` - Alpine Linux 3.16.6 with [Docker] +
+* `alpine-3.16-minimal.pkr.hcl` - Alpine Linux 3.16.9
+* `alpine-3.16-docker.pkr.hcl` - Alpine Linux 3.16.9 with [Docker] and
   [Docker Compose]
-* `alpine-3.16-dwm.pkr.hcl` - Alpine Linux 3.16.6 with [X.org][], [suckless][]
-  tools, and [xrdp][].
-* `alpine-3.16-xfce.pkr.hcl` - Alpine Linux 3.16.6 with [Xfce][] + [xrdp][].
+* `alpine-3.16-dwm.pkr.hcl` - Alpine Linux 3.16.9 with [X.org][],
+  [dwm][], [dmenu][], [st][], [SLiM][], and [xrdp][].
+* `alpine-3.16-xfce.pkr.hcl` - Alpine Linux 3.16.9 with [Xfce][] and
+  [xrdp][].
 
+[dmenu]: http://tools.suckless.org/dmenu/
+  "dmenu | suckless.org tools"
 [Docker]: https://www.docker.com/
   "Docker - Build, Ship and Run Any App, Anywhere"
 [Docker Compose]: https://docs.docker.com/compose/
   "Docker Compose - Docker Documentation"
-[suckless]: http://suckless.org/ "suckless.org software that sucks less"
+[dwm]: http://dwm.suckless.org/
+  "suckless.org dwm - dynamic window manager"
+[SLiM]: https://sourceforge.net/projects/slim.berlios/
+  "SLiM download | SourceForge.net"
+[st]: http://st.suckless.org/ "suckless.org st - simple terminal"
 [X.org]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
@@ -263,9 +284,6 @@ Templates support various CPUs.  The following list describes which
 * x86_64 - `vars-alpine-*-x86_64.pkrvars.hcl`
 * x86 - `vars-alpine-*-x64.pkrvars.hcl`
 * aarch64 - `vars-alpine-*-aarch64.pkrvars.hcl`
-
-Arm CPUs are tested with only `parallels-iso` builder on Apple Silicon
-machines.
 
 ## Optimised kernel for virtual machines
 
@@ -285,6 +303,11 @@ or `-var-file` command line options to `packer`:
 * `esxi_disk_name` - Disk name for ESXi box.
 * `esxi_keep_registered` - instructs whether build artefact should be
   kept in the inventory on ESXi.  Defaults to `false`.
+* `esxi_remote_datastore` - ESXi datastore name where a VM image will
+  be created.
+* `esxi_remote_host` - ESXi host name or IP address.
+* `esxi_remote_password` - ESXi login password.
+* `esxi_remote_username` - ESXi login user name.
 * `esxi_vnc_over_websocket` - Controls whether or not to use VNC over
   WebSocket feature for ESXi.  Defaults to `true`.  Set to `false` if
   your ESXi host version is prior to 6.7 which supports VNC server.
@@ -329,4 +352,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2023 Upperstream Software.
+Copyright &copy; 2023, 2024 Upperstream Software.
