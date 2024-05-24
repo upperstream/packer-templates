@@ -32,7 +32,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "18.2.20230614"
+  default     = "18.6.20240126"
   description = "Version number of this Vagrant box."
 }
 
@@ -170,13 +170,7 @@ variable "root_password" {
   type        = string
   default     = "vagrant"
   sensitive   = false
-  description = "Password for the root user of this box."
-}
-
-variable "ssh_timeout" {
-  type        = string
-  default     = "1800s"
-  description = "SSH timeout to connect this box being created."
+  description = "Password for the root user of this box.  Change the `sensitive` value to `true` if you want to hide the password."
 }
 
 variable "ssh_password" {
@@ -184,6 +178,12 @@ variable "ssh_password" {
   default     = "vagrant"
   sensitive   = false
   description = "SSH password to connect this box being created."
+}
+
+variable "ssh_timeout" {
+  type        = string
+  default     = "1800s"
+  description = "SSH timeout to connect this box being created."
 }
 
 variable "ssh_username" {
@@ -195,8 +195,8 @@ variable "ssh_username" {
 variable "vagrant_password" {
   type        = string
   default     = "vagrant"
-  sensitive   = true
-  description = "Password for the Vagrant user of this box."
+  sensitive   = false
+  description = "Password for the Vagrant user of this box.  Change the `sensitive` value to `true` if you want to hide the password."
 }
 
 variable "vagrant_ssh_public_key" {
@@ -321,7 +321,7 @@ locals {
     "<wait10><wait10><wait10>",
     "<wait10><wait10><wait10><wait10><wait10><wait10>",
     "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/%s<enter><wait>",
+    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
     "DISK=%s sh /tmp/install.sh<enter><wait>"
   ]
   iso_urls = [
@@ -333,13 +333,23 @@ locals {
 
 source "hyperv-iso" "default" {
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.hyperv_disk_name, var.hyperv_disk_name, "install_hyperv.sh", var.hyperv_disk_name
+    join("\n", local.boot_command), var.hyperv_disk_name, var.hyperv_disk_name, var.hyperv_disk_name
   ))
   boot_wait        = var.boot_wait
   cpus             = var.num_cpus
   disk_size        = var.disk_size
   headless         = var.headless
-  http_directory   = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = [
+        "apk add --root=/mnt hvtools",
+        "chroot /mnt sh -c \"rc-update add hv_fcopy_daemon default && \\",
+        "rc-update add hv_kvp_daemon default && \\",
+        "rc-update add hv_vss_daemon default\""
+      ]
+    })
+  }
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
@@ -355,14 +365,19 @@ source "hyperv-iso" "default" {
 
 source "parallels-iso" "default" {
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.parallels_disk_name, var.parallels_disk_name, "install.sh", var.parallels_disk_name
+    join("\n", local.boot_command), var.parallels_disk_name, var.parallels_disk_name, var.parallels_disk_name
   ))
   boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
   disk_type            = "expand"
   guest_os_type        = "linux"
-  http_directory       = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = []
+    })
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
@@ -379,7 +394,7 @@ source "parallels-iso" "default" {
 source "qemu" "default" {
   accelerator = "kvm"
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.qemu_disk_name, var.qemu_disk_name, "install.sh", var.qemu_disk_name
+    join("\n", local.boot_command), var.qemu_disk_name, var.qemu_disk_name, var.qemu_disk_name
   ))
   boot_wait           = var.boot_wait
   cpus                = var.num_cpus
@@ -388,7 +403,12 @@ source "qemu" "default" {
   display             = var.qemu_display
   format              = "qcow2"
   headless            = var.headless
-  http_directory      = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = []
+    })
+  }
   iso_checksum        = var.iso_checksum
   iso_urls            = local.iso_urls
   memory              = var.mem_size
@@ -405,7 +425,7 @@ source "qemu" "default" {
 
 source "virtualbox-iso" "default" {
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.virtualbox_disk_name, var.virtualbox_disk_name, "install.sh", var.virtualbox_disk_name
+    join("\n", local.boot_command), var.virtualbox_disk_name, var.virtualbox_disk_name, var.virtualbox_disk_name
   ))
   boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
@@ -413,7 +433,12 @@ source "virtualbox-iso" "default" {
   guest_additions_mode = "disable"
   guest_os_type        = var.virtualbox_guest_os_type
   headless             = var.headless
-  http_directory       = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = []
+    })
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
@@ -433,7 +458,7 @@ source "virtualbox-iso" "default" {
 
 source "vmware-iso" "default" {
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.vmware_disk_name, var.vmware_disk_name, "install.sh", var.vmware_disk_name
+    join("\n", local.boot_command), var.vmware_disk_name, var.vmware_disk_name, var.vmware_disk_name
   ))
   boot_wait            = var.boot_wait
   cdrom_adapter_type   = var.vmware_cdrom_adapter_type
@@ -444,7 +469,12 @@ source "vmware-iso" "default" {
   fusion_app_path      = var.vmware_fusion_app_path
   guest_os_type        = var.vmware_guest_os_type
   headless             = var.headless
-  http_directory       = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = []
+    })
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
@@ -472,7 +502,7 @@ source "vmware-iso" "default" {
 
 source "vmware-iso" "esxi" {
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.esxi_disk_name, var.esxi_disk_name, "install.sh", var.esxi_disk_name
+    join("\n", local.boot_command), var.esxi_disk_name, var.esxi_disk_name, var.esxi_disk_name
   ))
   boot_wait               = var.boot_wait
   cpus                    = var.num_cpus
@@ -480,7 +510,12 @@ source "vmware-iso" "esxi" {
   disk_type_id            = "thin"
   guest_os_type           = var.esxi_guest_os_type
   headless                = var.headless
-  http_directory          = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = []
+    })
+  }
   insecure_connection     = true
   iso_checksum            = var.iso_checksum
   iso_urls                = local.iso_urls
@@ -533,7 +568,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "OS_VER=v${var.os_ver}",
-      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=7.0.6-r0"
+      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=7.0.10-r1"
     ]
     only = [
       "virtualbox-iso.*"
@@ -544,7 +579,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "CPU=${var.cpu}",
-      "OPEN_VM_TOOLS=open-vm-tools=12.2.0-r0",
+      "OPEN_VM_TOOLS=open-vm-tools=12.3.0-r0",
       "OS_VER=v${var.os_ver}"
     ]
     only = [
@@ -566,13 +601,14 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "DOCKER=docker=23.0.6-r2",
-      "DOCKER_COMPOSE=docker-cli-compose=2.17.3-r2",
+      "DOCKER=docker=25.0.5-r0",
+      "DOCKER_COMPOSE=docker-cli-compose=2.17.3-r8",
       "OS_VER=v${var.os_ver}",
       "PYTHON_PIP=py3-pip=23.1.2-r0",
       "PY_BCRYPT=py3-bcrypt=4.0.1-r2",
-      "PY_CRYPTOGRAPHY=py3-cryptography=40.0.2-r1",
+      "PY_CRYPTOGRAPHY=py3-cryptography=41.0.3-r0",
       "PY_PYNACL=py3-pynacl=1.5.0-r4",
+      "SUDO_CMD=doas",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}"

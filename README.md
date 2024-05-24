@@ -4,9 +4,8 @@
 
 * [alpine](alpine/README.md) - Alpine Linux templates (x86_64, x86, and
   aarch64)
-  * alpine-3.16 - Alpine Linux 3.16.9 templates
   * alpine-3.17 - Alpine Linux 3.17.7 templates
-  * alpine-3.18 - Alpine Linux 3.18.2 templates
+  * alpine-3.18 - Alpine Linux 3.18.6 templates
   * alpine-3.19 - Alpine Linux 3.19.1 templates
   * [more](alpine/README.md)
 * [archlinux](archlinux/README.md) - Arch Linux templates (x86_64)
