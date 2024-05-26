@@ -14,24 +14,30 @@ file system.  (amd64, i386, and arm64)
 * [Hyper-V][] on Windows 10
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
-    "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
+  "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
 [Hyper-V]: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/
-    "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
+  "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
 [libvirt]: https://libvirt.org/ "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
+[Parallels]: https://www.parallels.com/products/desktop/
+  "Parallels Desktop18 for Mac"
 [QEMU]: https://www.qemu.org/ "QEMU"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
 [VMware]: http://www.vmware.com/
-    "VMware Virtualization for Desktop &amp; Server, Application,
-    Public &amp; Hybrid Clouds"
+  "VMware Virtualization for Desktop &amp; Server, Application,
+  Public &amp; Hybrid Clouds"
 
 ## Provisioned software tools
 
+* VirtualBox Guest Additions, [open-vm-tools][], or Hyper-V daemons
 * sshd
 * doas
 * `vagrant` user and its insecure public key
 * ntpd enabled
+
+[open-vm-tools]: https://github.com/vmware/open-vm-tools
+  "Official repository of VMware open-vm-tools project"
 
 Note that `sudo` is not installed while `doas` is.
 
@@ -71,8 +77,8 @@ the following command:
 
     vagrant box add FreeBSD-14.0-RELEASE-amd64-minimal-v14.0.20231120-vmware.box --name FreeBSD-14.0-RELEASE-amd64-minimal-v14.0.20231120 --provider vmware_desktop
 
-VMware build is tested with amd64 and i386 guests on amd64 host, and
-arm64 guest on Apple Silicon Mac host.
+VMware build intends to create amd64 and i386 boxes on amd64 host, and
+aarch64 box on Apple Silicon Mac host.
 
 ### ESXi
 
@@ -118,6 +124,9 @@ the following command:
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
 
+QEMU build intends to create amd64 box and i386 box on amd64 Linux
+host.
+
 ### Hyper-V
 
 From the terminal, invoke the following command for Hyper-V provider:
@@ -133,6 +142,9 @@ Then you can add the box named
 the following command:
 
     vagrant box add FreeBSD-14.0-RELEASE-amd64-minimal-v14.0.20231120-hyperv.box --name FreeBSD-14.0-RELEASE-amd64-minimal-v14.0.20231120 --provider hyperv
+
+Hyper-V build intends to create amd64 box and i386 box on Windows
+host.
 
 ### Parallels
 
@@ -191,10 +203,10 @@ use `doas`.
 
 ## Variants
 
-* `freebsd-14.0-minimal.pkr.hcl` - FreeBSD 14.0-RC
-* `freebsd-14.0-dwm.pkr.hcl` - FreeBSD 14.0-RC + [X.Org][] +
+* `freebsd-14.0-minimal.pkr.hcl` - FreeBSD 14.0-RELEASE
+* `freebsd-14.0-dwm.pkr.hcl` - FreeBSD 14.0-RELEASE + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-14.0-xfce.pkr.hcl` - FreeBSD 14.0-RC + [Xfce][] +
+* `freebsd-14.0-xfce.pkr.hcl` - FreeBSD 14.0-RELEASE + [Xfce][] +
   [SLiM][]
 
 While `freebsd-14.0-*.pkr.hcl` templates generate amd64 boxes by

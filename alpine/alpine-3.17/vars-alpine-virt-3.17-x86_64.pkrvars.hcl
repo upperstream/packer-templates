@@ -1,5 +1,5 @@
-iso_image = "alpine-virt-3.17.4-x86_64.iso"
-iso_checksum = "file:https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-virt-3.17.4-x86_64.iso.sha256"
+iso_image = "alpine-virt-3.17.7-x86_64.iso"
+iso_checksum = "file:https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-virt-3.17.7-x86_64.iso.sha256"
 cpu = "x86_64"
 virtualbox_guest_os_type = "Linux_64"
 vm_name_base = "Alpine-virt"

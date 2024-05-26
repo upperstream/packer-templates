@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 set -x
-mount -t ext4 /dev/${DISK:-sda}3 /mnt || true
+mount -t ext4 /dev/$${DISK:-sda}3 /mnt
 apk add --root=/mnt --no-cache openssl openssh
 ln -s /etc/init.d/sshd /mnt/etc/runlevels/default/sshd
 cp /mnt/etc/ssh/sshd_config /tmp/sshd_config
@@ -11,4 +11,7 @@ sed \
   -e 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' \
   -e 's/^#UseDNS no/UseDNS no/' /tmp/sshd_config > /mnt/etc/ssh/sshd_config
 rm /tmp/sshd_config
+%{ for line in additional_lines ~}
+${line}
+%{ endfor ~}
 reboot

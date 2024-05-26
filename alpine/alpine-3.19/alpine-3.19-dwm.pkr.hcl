@@ -32,7 +32,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "17.4.20230614"
+  default     = "19.1.20240126"
   description = "Version number of this Vagrant box."
 }
 
@@ -139,7 +139,7 @@ variable "num_cpus" {
 
 variable "os_ver" {
   type    = string
-  default = "3.17"
+  default = "3.19"
 }
 
 variable "parallels_disk_name" {
@@ -213,7 +213,7 @@ variable "vagrant_username" {
 
 variable "variant" {
   type    = string
-  default = "ansible"
+  default = "dwm"
 }
 
 variable "virtualbox_disk_name" {
@@ -239,6 +239,18 @@ variable "vm_name_base" {
   description = "Base part of default VM name"
 }
 
+variable "vmware_cdrom_adapter_type" {
+  type        = string
+  default     = "ide"
+  description = "CD-ROM adapter type for VMware box."
+}
+
+variable "vmware_disk_adapter_type" {
+  type        = string
+  default     = "scsi"
+  description = "Disk adapter type for VMware box."
+}
+
 variable "vmware_disk_name" {
   type        = string
   default     = "sda"
@@ -254,6 +266,40 @@ variable "vmware_guest_os_type" {
   type        = string
   default     = null
   description = "Guest OS type of VMware box."
+}
+
+variable "vmware_hardware_version" {
+  type        = string
+  default     = "9"
+  description = "Virtual hardware version of VMware box."
+}
+
+variable "vmware_network" {
+  type        = string
+  default     = "nat"
+  description = "Network type of VMware box.  This does not affect network for ESXi box."
+}
+
+variable "vmware_network_adapter_type" {
+  type        = string
+  default     = "e1000"
+  description = "Network adapter type for VMware box."
+}
+
+variable "vmware_svga_autodetect" {
+  type    = string
+  default = "TRUE"
+}
+
+variable "vmware_usb_xhci_present" {
+  type    = string
+  default = "TRUE"
+}
+
+variable "vmware_vhv_enabled" {
+  type        = string
+  default     = "FALSE"
+  description = "Enable nested virtualisation."
 }
 
 locals {
@@ -275,7 +321,7 @@ locals {
     "<wait10><wait10><wait10>",
     "<wait10><wait10><wait10><wait10><wait10><wait10>",
     "<wait10><wait10><wait10><wait10><wait10><wait10>",
-    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/%s<enter><wait>",
+    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
     "DISK=%s sh /tmp/install.sh<enter><wait>"
   ]
   iso_urls = [
@@ -287,13 +333,23 @@ locals {
 
 source "hyperv-iso" "default" {
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.hyperv_disk_name, var.hyperv_disk_name, "install_hyperv.sh", var.hyperv_disk_name
+    join("\n", local.boot_command), var.hyperv_disk_name, var.hyperv_disk_name, var.hyperv_disk_name
   ))
   boot_wait        = var.boot_wait
   cpus             = var.num_cpus
   disk_size        = var.disk_size
   headless         = var.headless
-  http_directory   = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = [
+        "apk add --root=/mnt hvtools",
+        "chroot /mnt sh -c \"rc-update add hv_fcopy_daemon default && \\",
+        "rc-update add hv_kvp_daemon default && \\",
+        "rc-update add hv_vss_daemon default\""
+      ]
+    })
+  }
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
@@ -309,14 +365,19 @@ source "hyperv-iso" "default" {
 
 source "parallels-iso" "default" {
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.parallels_disk_name, var.parallels_disk_name, "install.sh", var.parallels_disk_name
+    join("\n", local.boot_command), var.parallels_disk_name, var.parallels_disk_name, var.parallels_disk_name
   ))
   boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
   disk_type            = "expand"
   guest_os_type        = "linux"
-  http_directory       = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = []
+    })
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
@@ -333,7 +394,7 @@ source "parallels-iso" "default" {
 source "qemu" "default" {
   accelerator = "kvm"
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.qemu_disk_name, var.qemu_disk_name, "install.sh", var.qemu_disk_name
+    join("\n", local.boot_command), var.qemu_disk_name, var.qemu_disk_name, var.qemu_disk_name
   ))
   boot_wait           = var.boot_wait
   cpus                = var.num_cpus
@@ -342,7 +403,12 @@ source "qemu" "default" {
   display             = var.qemu_display
   format              = "qcow2"
   headless            = var.headless
-  http_directory      = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = []
+    })
+  }
   iso_checksum        = var.iso_checksum
   iso_urls            = local.iso_urls
   memory              = var.mem_size
@@ -359,7 +425,7 @@ source "qemu" "default" {
 
 source "virtualbox-iso" "default" {
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.virtualbox_disk_name, var.virtualbox_disk_name, "install.sh", var.virtualbox_disk_name
+    join("\n", local.boot_command), var.virtualbox_disk_name, var.virtualbox_disk_name, var.virtualbox_disk_name
   ))
   boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
@@ -367,7 +433,12 @@ source "virtualbox-iso" "default" {
   guest_additions_mode = "disable"
   guest_os_type        = var.virtualbox_guest_os_type
   headless             = var.headless
-  http_directory       = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = []
+    })
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
@@ -387,21 +458,28 @@ source "virtualbox-iso" "default" {
 
 source "vmware-iso" "default" {
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.vmware_disk_name, var.vmware_disk_name, "install.sh", var.vmware_disk_name
+    join("\n", local.boot_command), var.vmware_disk_name, var.vmware_disk_name, var.vmware_disk_name
   ))
   boot_wait            = var.boot_wait
+  cdrom_adapter_type   = var.vmware_cdrom_adapter_type
   cpus                 = var.num_cpus
+  disk_adapter_type    = var.vmware_disk_adapter_type
   disk_size            = var.disk_size
   disk_type_id         = "0"
   fusion_app_path      = var.vmware_fusion_app_path
   guest_os_type        = var.vmware_guest_os_type
   headless             = var.headless
-  http_directory       = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = []
+    })
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
-  network              = "nat"
-  network_adapter_type = "e1000"
+  network              = var.vmware_network
+  network_adapter_type = var.vmware_network_adapter_type
   output_directory     = "output/${local.vm_name}-vmware"
   shutdown_command     = "poweroff"
   ssh_password         = var.ssh_password
@@ -409,19 +487,22 @@ source "vmware-iso" "default" {
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_username
   tools_upload_flavor  = ""
+  version              = var.vmware_hardware_version
   vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "vhv.enable"                = "TRUE"
+    "vhv.enable"                = var.vmware_vhv_enabled
+    "svga.autodetect"           = var.vmware_svga_autodetect
+    "usb_xhci.present"          = var.vmware_usb_xhci_present
   }
 }
 
 source "vmware-iso" "esxi" {
   boot_command = split("\n", format(
-    join("\n", local.boot_command), var.esxi_disk_name, var.esxi_disk_name, "install.sh", var.esxi_disk_name
+    join("\n", local.boot_command), var.esxi_disk_name, var.esxi_disk_name, var.esxi_disk_name
   ))
   boot_wait               = var.boot_wait
   cpus                    = var.num_cpus
@@ -429,7 +510,12 @@ source "vmware-iso" "esxi" {
   disk_type_id            = "thin"
   guest_os_type           = var.esxi_guest_os_type
   headless                = var.headless
-  http_directory          = "."
+  http_content = {
+    "/answers.txt" = file("${path.root}/answers.txt")
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = []
+    })
+  }
   insecure_connection     = true
   iso_checksum            = var.iso_checksum
   iso_urls                = local.iso_urls
@@ -482,7 +568,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "OS_VER=v${var.os_ver}",
-      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=7.0.2-r0"
+      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions-x11=7.0.12-r1"
     ]
     only = [
       "virtualbox-iso.*"
@@ -493,8 +579,10 @@ build {
   provisioner "shell" {
     environment_vars = [
       "CPU=${var.cpu}",
-      "OPEN_VM_TOOLS=open-vm-tools=12.1.0-r0",
-      "OS_VER=v${var.os_ver}"
+      "OPEN_VM_TOOLS=open-vm-tools=12.3.0-r0",
+      "OS_VER=v${var.os_ver}",
+      "XF86_INPUT=xf86-input-evdev=2.10.6-r2",
+      "XF86_VIDEO=xf86-video-vmware=13.4.0-r2"
     ]
     only = [
       "vmware-iso.*"
@@ -504,8 +592,8 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "NFS_UTILS=nfs-utils=2.6.2-r0",
-      "UTIL_LINUX=util-linux=2.38.1-r1"
+      "NFS_UTILS=nfs-utils=2.6.4-r0",
+      "UTIL_LINUX=util-linux=2.39.3-r0"
     ]
     only = [
       "qemu.default"
@@ -515,18 +603,22 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "ANSIBLE=ansible=6.6.0-r0",
-      "ANSIBLE_LINT=ansible-lint=6.9.1-r0",
-      "OS_VER=v${var.os_ver}",
-      "PYTHON_PIP=py3-pip=22.3.1-r1",
-      "PYTEST_TESTINFRA=pytest-testinfra==7.0.0",
+      "DMENU=dmenu=5.2-r1",
+      "DWM=dwm=6.4-r1",
+      "SLIM=slim=1.4.0-r0",
+      "SLIM_THEMES=slim-themes=1.2.3-r3",
+      "ST=st=0.9-r1",
+      "SUDO_CMD=doas",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
-      "VAGRANT_USERNAME=${var.vagrant_username}"
+      "VAGRANT_USERNAME=${var.vagrant_username}",
+      "XRANDR=xrandr=1.5.2-r0",
+      "XRDP=xrdp=0.9.23.1-r0"
     ]
     scripts = [
       "../provisioners/vagrant_alpine3.15+.sh",
-      "../provisioners/ansible+testinfra_alpine3.12+.sh"
+      "../provisioners/dwm_alpine3.14+.sh",
+      "../provisioners/slim.sh"
     ]
   }
 

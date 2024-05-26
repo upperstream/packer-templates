@@ -32,7 +32,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "16.9.20240126"
+  default     = "19.1.20240126"
   description = "Version number of this Vagrant box."
 }
 
@@ -139,7 +139,7 @@ variable "num_cpus" {
 
 variable "os_ver" {
   type    = string
-  default = "3.16"
+  default = "3.19"
 }
 
 variable "parallels_disk_name" {
@@ -170,7 +170,7 @@ variable "root_password" {
   type        = string
   default     = "vagrant"
   sensitive   = false
-  description = "Password for the root user of this box.  Change the `sensitive` value to `true` if you want to hide the password."
+  description = "Password for the root user of this box."
 }
 
 variable "ssh_password" {
@@ -195,8 +195,8 @@ variable "ssh_username" {
 variable "vagrant_password" {
   type        = string
   default     = "vagrant"
-  sensitive   = false
-  description = "Password for the Vagrant user of this box.  Change the `sensitive` value to `true` if you want to hide the password."
+  sensitive   = true
+  description = "Password for the Vagrant user of this box."
 }
 
 variable "vagrant_ssh_public_key" {
@@ -213,7 +213,7 @@ variable "vagrant_username" {
 
 variable "variant" {
   type    = string
-  default = "minimal"
+  default = "xfce"
 }
 
 variable "virtualbox_disk_name" {
@@ -568,7 +568,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "OS_VER=v${var.os_ver}",
-      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions=6.1.36-r0"
+      "VIRTUALBOX_GUEST_ADDITIONS=virtualbox-guest-additions-x11=7.0.12-r1"
     ]
     only = [
       "virtualbox-iso.*"
@@ -579,8 +579,10 @@ build {
   provisioner "shell" {
     environment_vars = [
       "CPU=${var.cpu}",
-      "OPEN_VM_TOOLS=open-vm-tools=12.1.0-r0",
-      "OS_VER=v${var.os_ver}"
+      "OPEN_VM_TOOLS=open-vm-tools=12.3.0-r0",
+      "OS_VER=v${var.os_ver}",
+      "XF86_INPUT=xf86-input-evdev=2.10.6-r2",
+      "XF86_VIDEO=xf86-video-vmware=13.4.0-r2"
     ]
     only = [
       "vmware-iso.*"
@@ -590,8 +592,8 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "NFS_UTILS=nfs-utils=2.6.1-r1",
-      "UTIL_LINUX=util-linux=2.38-r1"
+      "NFS_UTILS=nfs-utils=2.6.4-r0",
+      "UTIL_LINUX=util-linux=2.39.3-r0"
     ]
     only = [
       "qemu.default"
@@ -601,12 +603,16 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "SUDO_CMD=doas",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
-      "VAGRANT_USERNAME=${var.vagrant_username}"
+      "VAGRANT_USERNAME=${var.vagrant_username}",
+      "XRANDR=xrandr=1.5.2-r0",
+      "XRDP=xrdp=0.9.23.1-r0"
     ]
-    script = "../provisioners/vagrant_alpine3.15+.sh"
+    scripts = [
+      "../provisioners/vagrant_alpine3.15+.sh",
+      "../provisioners/xfce.sh"
+    ]
   }
 
   provisioner "shell" {
