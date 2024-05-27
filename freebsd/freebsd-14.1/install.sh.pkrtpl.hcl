@@ -2,7 +2,7 @@
 ${config_key}=${config_value}
 %{ endfor ~}
 
-#!/bin/sh -ux
+#!/bin/sh -eux
 %{ for config_key, config_value in make_conf }
 echo '${config_key}=${config_value}' >> /etc/make.conf
 %{ endfor ~}
@@ -21,7 +21,7 @@ EOF
 mkdir -p /usr/local/etc/pkg/repos/
 cat > /usr/local/etc/pkg/repos/FreeBSD.conf << EOF
 FreeBSD: {
-  url: pkg+http://pkg.freebsd.org/$${ABI}/latest,
+  url: pkg+http://pkg.freebsd.org/$${ABI}/release_1,
   enabled: true
 }
 EOF
