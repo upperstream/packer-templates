@@ -48,7 +48,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "3.20240519"
+  default = "1.20240526"
 }
 
 variable "ca_root_nss_version" {
@@ -65,7 +65,7 @@ variable "disk_size" {
 
 variable "doas_version" {
   type        = string
-  default     = "6.3p9_1"
+  default     = "6.3p12"
   description = "Version of `doas` package."
 }
 
@@ -122,12 +122,12 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/14.1/CHECKSUM.SHA256-FreeBSD-14.1-BETA3-amd64"
+  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/14.1/CHECKSUM.SHA256-FreeBSD-14.1-RC1-amd64"
 }
 
 variable "iso_image" {
   type    = string
-  default = "FreeBSD-14.1-BETA3-amd64-disc1.iso"
+  default = "FreeBSD-14.1-RC1-amd64-disc1.iso"
 }
 
 variable "mem_size" {
@@ -144,7 +144,7 @@ variable "num_cpus" {
 
 variable "open_vm_tools_version" {
   type        = string
-  default     = "12.4.0,2"
+  default     = "12.3.5_1,2"
   description = "Version of `open-vm-tools` package."
 }
 
@@ -255,7 +255,7 @@ variable "virtualbox_partition" {
 
 variable "vm_name" {
   type        = string
-  default     = "FreeBSD-14.1-BETA-amd64"
+  default     = "FreeBSD-14.1-RC-amd64"
   description = "VM name of the creating box."
 }
 
