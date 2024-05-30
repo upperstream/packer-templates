@@ -4,6 +4,7 @@
 
 Templates support x86_64, x86, and aarch64.
 
+* [alpine-3.20](alpine-3.20/README.md) - templates for Alpine Linux 3.20.0
 * [alpine-3.19](alpine-3.19/README.md) - templates for Alpine Linux 3.19.1
 * [alpine-3.18](alpine-3.18/README.md) - templates for Alpine Linux 3.18.6
 * [alpine-3.17](alpine-3.17/README.md) - templates for Alpine Linux 3.17.7
