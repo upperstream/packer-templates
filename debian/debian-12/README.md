@@ -155,12 +155,12 @@ Parallels build intends to create arm64 box on Apple Silicon Mac device.
 
 ## Variants
 
-* `debian-12-minimal.pkr.hcl` - Debian bookworm_rc minimal installation
-* `debian-12-docker.pkr.hcl` - Debian bookworm_rc with [Docker][] +
+* `debian-12-minimal.pkr.hcl` - Debian 12.5 minimal installation
+* `debian-12-docker.pkr.hcl` - Debian 12.5 with [Docker][] +
   [Docker Compose][]
-* `debian-12-dwm.pkr.hcl` - Debian bookworm_rc with [X.org][], [suckless][]
+* `debian-12-dwm.pkr.hcl` - Debian 12.5 with [X.org][], [suckless][]
   tools, [ARandR][], and [xrdp][].
-* `debian-12-xfce.pkr.hcl` - Debian bookworm_rc with [Xfce][] + [xrdp][].
+* `debian-12-xfce.pkr.hcl` - Debian 12.5 with [Xfce][] + [xrdp][].
 
 [ARandR]: https://christian.amsuess.com/tools/arandr/
     "ARandR: Another XRandR GUI"
