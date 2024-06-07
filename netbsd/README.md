@@ -27,7 +27,7 @@ Templates support amd64 and i386 architectures unless otherwise noted.
   * NetBSD 8.1 + X.Org
   * NetBSD 8.1 + X.Org + XDM + dwm + dmenu + st
   * NetBSD 8.1 + Xfce + XDM
-* [netbsd-8.0](netbsd-8.0/README.md) - templates for NetBSD 8.0
+* [netbsd-8.0](netbsd-8/README.md) - templates for NetBSD 8.0
   * NetBSD 8.0
   * NetBSD 8.0 + Ansible + Ansible Lint + Testinfra
   * NetBSD 8.0 + X.Org
@@ -63,4 +63,4 @@ Templates support amd64 and i386 architectures.
 
 - - -
 
-Copyright &copy; 2015-2021, 2023, 2024 Upperstream Software.
+Copyright &copy; 2015-2021, 2023, 2024 Upperstream.
