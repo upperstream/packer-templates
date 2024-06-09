@@ -1,24 +1,25 @@
-# Packer templates for NetBSD 8.1
+# Packer templates for NetBSD 8.2
 
-Templates to create Vagrant boxes for NetBSD 8.1 (amd64 and i386).
-
+Templates to create Vagrant boxes for NetBSD 8.2 (amd64 and i386).
 
 ## Prerequisites
 
-* [Packer][] v1.3.3+
+* [Packer][] v1.4.1+
 * [Vagrant][] v2.0.2+
-* [VirtualBox][] v5.2.32+
+* [VirtualBox][] v5.2.36+
 * [VMware][] Workstation v15.0+ / VMware Fusion v10.0+
 * [ESXi][] (vSphere Hypervisor) v5.5+
+* [QEMU][] version 4.2+ / [libvirt][] 6.0+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
   "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
+[libvirt]: https://libvirt.org/ "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
+[QEMU]: https://www.qemu.org/ "QEMU"
 [Vagrant]: https://www.vagrantup.com/ "Vagrant"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
 [VMware]: http://www.vmware.com/
   "VMware Virtualization for Desktop &amp; Server, Application, Public &amp; Hybrid Clouds"
-
 
 ## Provisioned software tools
 
@@ -28,7 +29,6 @@ Templates to create Vagrant boxes for NetBSD 8.1 (amd64 and i386).
 * ntpd
 * `vagrant` user and its insecure public key
 
-
 ## How to create a box
 
 ### VirtualBox
@@ -37,13 +37,13 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso netbsd-8-minimal.json
 
-You will find a vagrant box file named `NetBSD-8.1-amd64-minimal-v8.1.20190912-virtualbox.box`
+You will find a vagrant box file named `NetBSD-8.2-amd64-minimal-v8.2.20200909-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-8.1-amd64-minimal-v8.1.20190912-virtualbox`
+Then you can add the box named `NetBSD-8.2-amd64-minimal-v8.2.20200909-virtualbox`
 to your box list by the following command:
 
-    vagrant box add NetBSD-8.1-amd64-minimal-v8.1.20190912-virtualbox.box --name NetBSD-8.1-amd64-minimal-v8.1.20190912-virtualbox
+    vagrant box add NetBSD-8.2-amd64-minimal-v8.2.20200909-virtualbox.box --name NetBSD-8.2-amd64-minimal-v8.2.20200909-virtualbox
 
 ### VMware
 
@@ -51,17 +51,33 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso netbsd-8-minimal.json
 
-You will find a vagrant box file named `NetBSD-8.1-amd64-minimal-v8.1.20190912-vmware.box`
+You will find a vagrant box file named `NetBSD-8.2-amd64-minimal-v8.2.20200909-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-8.1-amd64-minimal-v8.1.20190912-vmware`
+Then you can add the box named `NetBSD-8.2-amd64-minimal-v8.2.20200909-vmware`
 to your box list by the following command:
 
-    vagrant box add NetBSD-8.1-amd64-minimal-v8.1.20190912-vmware.box --name NetBSD-8.1-amd64-minimal-v8.1.20190912-vmware
+    vagrant box add NetBSD-8.2-amd64-minimal-v8.2.20200909-vmware.box --name NetBSD-8.2-amd64-minimal-v8.2.20200909-vmware
 
 In the `output` directory you will also find a VM image that can be
-directly imported from VMware.
+directly imported to VMware.
 
+### QEMU/libvirt
+
+From the terminal, invoke the following command for Libvirt provider:
+
+    packer build -only=qemu netbsd-8-minimal.json
+
+You will find a vagrant box file named `NetBSD-8.2-amd64-minimal-v8.2.20200909-libvirt.box`
+in the same directory after the command has succeeded.
+
+Then you can add the box named `NetBSD-8.2-amd64-minimal-v8.2.20200909-libvirt`
+to your box list by the following command:
+
+    vagrant box add NetBSD-8.2-amd64-minimal-v8.2.20200909-libvirt.box --name NetBSD-8.2-amd64-minimal-v8.2.20200909-libvirt
+
+In the `output` directory you will also find a VM image that can be
+directly imported to QEMU.
 
 ## Default settings
 
@@ -78,7 +94,6 @@ this box is disabled by default.
 
 Because Bash is not the standard shell for NetBSD, default shell for
 SSH connection of this box is set to `/bin/sh`.
-
 
 ## Building a VM image on ESXi
 
@@ -99,16 +114,15 @@ The following command will build a VM image on your ESXi:
 
 (Note that created VM will be unregistered from your Inventory.)
 
-
 ## Variants
 
-* `netbsd-8-minmal.json` - NetBSD 8.1
-* `netbsd-8-ansible.json` - NetBSD 8.1 + [Ansible][] +
+* `netbsd-8-minmal.json` - NetBSD 8.2
+* `netbsd-8-ansible.json` - NetBSD 8.2 + [Ansible][] +
   [Ansible Lint][] + [Testinfra][]
-* `netbsd-8-xorg.json` - NetBSD 8.1 + [X.Org][]
-* `netbsd-8-dwm.json` - NetBSD 8.1 + X.Org + [dwm][] + [st][]
-  + [dmenu][], with [XDM] enabled
-* `netbsd-8-xfce.json` - NetBSD 8.1 + [Xfce][], with XDM enabled
+* `netbsd-8-xorg.json` - NetBSD 8.2 + [X.Org][]
+* `netbsd-8-dwm.json` - NetBSD 8.2 + X.Org + [dwm][] + [st][] +
+  [dmenu][], with [XDM] enabled
+* `netbsd-8-xfce.json` - NetBSD 8.2 + [Xfce][], with XDM enabled
 
 While `netbsd-8-*.json` templates generate amd64 boxes by default,
 using `vars-netbsd-8-i386.json` generates i386 boxes:
@@ -123,11 +137,10 @@ using `vars-netbsd-8-i386.json` generates i386 boxes:
   "suckless.org dwm - dynamic window manager"
 [st]: http://st.suckless.org/ "suckless.org st - simple terminal"
 [Testinfra]: https://testinfra.readthedocs.io/en/latest/
-  "Testinfra test your infrastructure &#8212; testinfra 3.0.6.dev0+g1fee986.d20190529 documentation"
+  "Testinfra test your infrastructure &#8212; testinfra 5.0.1.dev12+g9044fe4.d20200501 documentation"
 [X.Org]: https://www.x.org/wiki/ "X.Org"
 [XDM]: https://www.x.org/releases/X11R7.6/doc/man/man1/xdm.1.xhtml "XDM"
 [Xfce]: http://www.xfce.org/ "Xfce Desktop Environment"
-
 
 ## Build parameters
 
@@ -156,18 +169,8 @@ or `-var-file` command line options to `packer`:
   `true`.  Default value is `false`.
 * `package_server` - Host name to download pakages from.  Default value
   is `http://cdn.netbsd.org`.
-
-
-## Notes
-
-* Due to an issue with Ruby Net::SSH package, `vagrant up` a NetBSD 7.1
-  box fails when you use Vagrant version prior to 1.9.6 or Net::SSH
-  version prior to 4.2.0.rc1.  You need to upgrade Vagrant or Ruby
-  Net::SSH, otherwise you can manually apply [this patch](../patches/net-ssh.patch).
-  See https://github.com/mitchellh/vagrant/issues/6640,
-  https://github.com/mitchellh/vagrant/pull/8661, and
-  https://github.com/net-ssh/net-ssh/pull/525 for further information.
+* `qemu_accelerator` - QEMU accelerator.  Default value os `kvm`.
 
 - - -
 
-Copyright &copy; 2017-2019 Upperstream Software.
+Copyright &copy; 2017-2019, 2020 Upperstream Software.

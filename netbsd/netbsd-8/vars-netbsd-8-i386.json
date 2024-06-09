@@ -1,9 +1,10 @@
 {
-  "iso_file_name": "NetBSD-8.1-i386.iso",
-  "iso_path": "NetBSD/NetBSD-8.1/images",
-  "iso_checksum": "e54545f2f0a600671509a10b60eb47e6a7c819a2e4d3b082b6f34a4f28945c103fb1f253644fec824fe06bfac204dbb915a7dcbd52b63ab79421b628b25a856b",
+  "iso_file_name": "NetBSD-8.2-i386.iso",
+  "iso_path": "NetBSD/NetBSD-8.2/images",
   "iso_checksum_type": "sha512",
+  "iso_checksum": "092e9158bf7b05dca4a3a0eb8cad3a998e6f6049f3d2c76b3046c5916fc5b97774930cab008f88d5962fadede58a5c666bcdb4d4b7336a9dac644805c96f9ec2",
+  "vm_name": "NetBSD-8.2-i386",
   "virtualbox_geust_os_type": "NetBSD",
   "vmware_guest_os_type": "other",
-  "vm_name": "NetBSD-8.1-i386"
+  "qemu_binary": "qemu-system-i386"
 }
