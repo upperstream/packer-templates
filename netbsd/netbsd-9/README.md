@@ -143,7 +143,7 @@ to your box list by the following command:
 
 ## Default settings
 
-These default settings are done by the file `Vagrantfile.NetBSD-9.4+`
+These default settings are done by the file `Vagrantfile.NetBSD-8.3+`
 which will be included in the box.  Users can override this setting by
 users' own `Vagrantfile`s.
 
@@ -254,4 +254,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2023, 2024 Upperstream Software.
+Copyright &copy; 2023, 2024 Upperstream.

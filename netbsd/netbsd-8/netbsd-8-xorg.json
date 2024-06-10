@@ -370,14 +370,14 @@
       "only": ["virtualbox-iso"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD-sh"
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD-8.3+"
     },
     {
       "type": "vagrant",
       "only": ["vmware-iso", "qemu"],
       "compression_level": 9,
       "output": "./{{user `vm_name`}}-{{user `variant`}}-v{{user `box_ver`}}-{{.Provider}}.box",
-      "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD-sh",
+      "vagrantfile_template": "../vagrantfiles/Vagrantfile.NetBSD-8.3+",
       "keep_input_artifact": true
     }
   ]
