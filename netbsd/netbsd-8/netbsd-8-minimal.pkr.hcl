@@ -2,28 +2,24 @@ packer {
   required_version = ">= 1.7.0"
   required_plugins {
     hyperv = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/hyperv"
-    }
-    parallels = {
       version = ">= 1.0.0"
-      source  = "github.com/hashicorp/parallels"
     }
     qemu = {
-      version = ">= 1.0.10"
       source  = "github.com/hashicorp/qemu"
+      version = ">= 1.0.10"
     }
     vagrant = {
-      version = ">= 1.1.0"
       source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.0"
     }
     virtualbox = {
-      version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.0.0"
     }
     vmware = {
-      version = ">= 1.0.11"
       source  = "github.com/hashicorp/vmware"
+      version = ">= 1.0.11"
     }
   }
 }
@@ -35,18 +31,20 @@ variable "arch" {
 
 variable "boot_wait" {
   type        = string
-  default     = "5s"
+  default     = "10s"
   description = "Override `boot_wait` default setting (10s)"
 }
 
-variable "box_ver" {
-  type    = string
-  default = "10.0.20240328"
+variable "box_version" {
+  type        = string
+  default     = "8.3.20240504"
+  description = "Version number of this Vagrant box."
 }
 
 variable "disk_size" {
-  type    = string
-  default = "40960"
+  type        = string
+  default     = "40960"
+  description = "The size of the primary storage."
 }
 
 variable "dist_server" {
@@ -60,38 +58,45 @@ variable "esxi_disk_name" {
 }
 
 variable "esxi_remote_datastore" {
-  type    = string
-  default = "${env("ESXI_REMOTE_DATASTORE")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_DATASTORE")}"
+  description = "ESXi datastore name to create this box in."
 }
 
 variable "esxi_remote_host" {
-  type    = string
-  default = "${env("ESXI_REMOTE_HOST")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_HOST")}"
+  description = "Remote host name of the ESXi server to create this box on."
 }
 
 variable "esxi_remote_password" {
-  type    = string
-  default = "${env("ESXI_REMOTE_PASSWORD")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_PASSWORD")}"
+  description = "SSH password for the ESXi server to create this box."
 }
 
 variable "esxi_remote_port" {
-  type    = string
-  default = "${env("ESXI_REMOTE_PORT")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_PORT")}"
+  description = "SSH port number for the ESXi server to connect."
 }
 
 variable "esxi_remote_username" {
-  type    = string
-  default = "${env("ESXI_REMOTE_USERNAME")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_USERNAME")}"
+  description = "SSH username for the ESXi server to create this box."
 }
 
 variable "esxi_vnc_over_websocket" {
-  type    = string
-  default = "true"
+  type        = string
+  default     = "true"
+  description = "Connect VNC server over a websocket for building ESXi box."
 }
 
 variable "headless" {
-  type    = string
-  default = "false"
+  type        = string
+  default     = "false"
+  description = "VM window is not displayed if false."
 }
 
 variable "hostname" {
@@ -100,8 +105,9 @@ variable "hostname" {
 }
 
 variable "hyperv_disk_name" {
-  type    = string
-  default = "sd0"
+  type        = string
+  default     = "sd0"
+  description = "Disk name for Hyper-V box"
 }
 
 variable "hyperv_gateway" {
@@ -135,18 +141,21 @@ variable "hyperv_switch_name" {
 }
 
 variable "iso_checksum" {
-  type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0/iso/SHA512"
+  type        = string
+  default     = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-8.3/iso/SHA512"
+  description = "SHA256 checksum of the install media."
 }
 
 variable "iso_file_name" {
-  type    = string
-  default = "NetBSD-10.0-amd64.iso"
+  type        = string
+  default     = "NetBSD-8.3-amd64.iso"
+  description = "File name of the install media."
 }
 
 variable "iso_path" {
-  type    = string
-  default = "NetBSD/NetBSD-10.0/images"
+  type        = string
+  default     = "NetBSD/NetBSD-8.3/images"
+  description = "Relative path to search the install media."
 }
 
 variable "iso_url" {
@@ -156,57 +165,43 @@ variable "iso_url" {
 }
 
 variable "mem_size" {
-  type    = string
-  default = "2048"
+  type        = string
+  default     = "512"
+  description = "Memory size of this box."
 }
 
 variable "num_cpus" {
-  type    = string
-  default = "2"
+  type        = string
+  default     = "2"
+  description = "The number of CPUs of this box."
 }
 
 variable "os_ver" {
   type    = string
-  default = "10"
+  default = "8.3"
 }
 
 variable "package_arch" {
   type        = string
   default     = "amd64"
-  description = "Architecture for binary packages."
+  description = "Architecture name for binary packages."
 }
 
 variable "package_branch" {
   type        = string
-  default     = "10.0_2023Q4"
+  default     = "8.0_2023Q3"
   description = "pkgsrc branch name for binary packages."
 }
 
 variable "package_server" {
   type    = string
-  default = "http://cdn.netbsd.org"
-}
-
-variable parallels_disk_name {
-  type    = string
-  default = "wd0"
-}
-
-variable "partition_name" {
-  type        = string
-  default     = "dk0"
-  description = "Partition name of which NetBSD is install on"
-}
-
-variable "parallels_netif" {
-  type        = string
-  default     = "vtnet0"
-  description = "Network interface for Parallels box."
+  default = "http://nyftp.netbsd.org"
 }
 
 variable "qemu_accelerator" {
-  type    = string
-  default = "kvm"
+  type        = string
+  default     = "kvm"
+  description = "QEMU accelerator name for QEMU box."
 }
 
 variable "qemu_binary" {
@@ -215,28 +210,40 @@ variable "qemu_binary" {
 }
 
 variable "qemu_disk_name" {
-  type    = string
-  default = "sd0"
+  type        = string
+  default     = "sd0"
+  description = "Disk name for QEMU box"
 }
 
 variable "qemu_display" {
-  type    = string
-  default = ""
+  type        = string
+  default     = ""
+  description = "Display name for QEMU box."
 }
 
 variable "qemu_use_default_display" {
-  type    = string
-  default = "true"
+  type        = string
+  default     = "true"
+  description = "Use the default display for QEMU box if true."
 }
 
 variable "ssh_password" {
-  type    = string
-  default = "vagrant"
+  type        = string
+  default     = "vagrant"
+  sensitive   = false
+  description = "SSH password to connect this box being created.  Change the `sensitive` value to `true` if you want to hide the password."
+}
+
+variable "ssh_timeout" {
+  type        = string
+  default     = "60m"
+  description = "SSH timeout to connect this box being created."
 }
 
 variable "ssh_username" {
-  type    = string
-  default = "root"
+  type        = string
+  default     = "root"
+  description = "SSH username to connect this box being created."
 }
 
 variable "vagrant_group" {
@@ -245,33 +252,34 @@ variable "vagrant_group" {
 }
 
 variable "vagrant_password" {
-  type    = string
-  default = "vagrant"
+  type        = string
+  default     = "vagrant"
+  sensitive   = false
+  description = "Password for the Vagrant user of this box.  Change the `sensitive` value to `true` if you want to hide the password."
 }
 
 variable "vagrant_username" {
-  type    = string
-  default = "vagrant"
-}
-
-variable "variant" {
-  type    = string
-  default = "xfce"
+  type        = string
+  default     = "vagrant"
+  description = "Username for the Vagrant user of this box."
 }
 
 variable "virtualbox_disk_name" {
-  type    = string
-  default = "wd0"
+  type        = string
+  default     = "wd0"
+  description = "Disk name for VirtualBox box"
 }
 
 variable "virtualbox_guest_os_type" {
-  type    = string
-  default = "NetBSD_64"
+  type        = string
+  default     = "NetBSD_64"
+  description = "Guest OS type of VirtualBox box."
 }
 
 variable "vm_name" {
-  type    = string
-  default = "NetBSD-10.0-amd64"
+  type        = string
+  default     = null
+  description = "Overriding VM name"
 }
 
 variable "vmware_cdrom_adapter_type" {
@@ -287,19 +295,27 @@ variable "vmware_disk_adapter_type" {
 }
 
 variable "vmware_disk_name" {
-  type    = string
-  default = "sd0"
+  type        = string
+  default     = "sd0"
+  description = "Disk name for VMware box"
 }
 
 variable "vmware_guest_os_type" {
-  type    = string
-  default = "other-64"
+  type        = string
+  default     = "other-64"
+  description = "Guest OS type of VMware box."
 }
 
 variable "vmware_hardware_version" {
   type        = string
   default     = "9"
-  description = "Hardware version for VMware box."
+  description = "Virtual hardware version of VMware box."
+}
+
+variable "vmware_network" {
+  type        = string
+  default     = "nat"
+  description = "Network type of VMware box.  This does not affect network for ESXi box."
 }
 
 variable "vmware_network_adapter_type" {
@@ -308,39 +324,47 @@ variable "vmware_network_adapter_type" {
   description = "Network adapter type for VMware box."
 }
 
+variable "vmware_svga_autodetect" {
+  type    = string
+  default = "TRUE"
+}
+
+variable "vmware_vhv_enabled" {
+  type        = string
+  default     = "FALSE"
+  description = "Enable nested virtualisation."
+}
+
 locals {
   boot_command_common = [
-    "1<wait10><wait10><wait10><wait10>",                        # Welcome message
+    "1<wait10><wait10><wait5>",                                 # Welcome message
     "a<enter><wait>",                                           # Installation messages in English
-    "${local.selector_keyboard_type[var.arch]}",                # Keyboard type - unchanged; skip for aarch64
-    "a<enter><wait>",                                           # NetBSD-10.0 Install System - Install NewtBSD to hard disk
+    "a<enter><wait>",                                           # Keyboard type - unchanged
+    "a<enter><wait>",                                           # NetBSD-8.3 Install System - Install NewtBSD to hard disk
     "b<enter><wait>",                                           # Shall we continue? - Yes
     "a<enter><wait>",                                           # Available disks - sd0
-    "a<enter><wait>",                                           # Select a parittioning scheme - GPT
-    "${local.selector_partition_geometry[var.arch]}",           # Partition geometry - This is correct geometry; skip for aarch64
-    "b<enter><wait>",                                           # Partition sizes - Use default partition sizes
+    "a<enter><wait>",                                           # This disk matches the following BIOS disk - This is the correct geometry
+    "b<enter><wait>",                                           # We are going to install NetBSD o the disk sd0 - Use the entire disk
+    "a<enter><wait>",                                           # Do you want to install the NetBSD bootcode? - Yes
+    "b<enter><wait>",                                           # Choose your installation - Use the existing partition sizes
     "x<enter><wait>",                                           # Review partition sizes - Partition sizes ok
-    "b<enter><wait10><wait10><wait10>",                         # Shall we continue? - Yes
-    "${local.selector_bootblocks[var.arch]}",                   # Select bootblocks - Use BIOS console; skip for aarch64
+    "<enter><wait>",                                            # Please enter a name for your NetBSD disk - Hit enter to continue with default name
+    "b<enter><wait10><wait10><wait10><wait10>",                 # Shall we continue? - Yes
+    "a<enter><wait>x<enter><wait>",                             # Select bootblocks - Use BIOS console
     "d<enter><wait>",                                           # Select distribution - Custom installation
-    "${local.selector_compiler_tools[var.arch]}",               # Distribution sets - Compiler tools - f (i386: e)
-    "${local.selector_manual_pages[var.arch]}",                 # Distribution sets - Manual pages - i (i386: h)
-    "${local.selector_text_processors[var.arch]}",              # Distribution sets - Text processing tools - m (i386: l)
-    "${local.selector_x11[var.arch]}",                          # Distribution sets - X11 sets - n (i386: m)
-    "f<enter><wait>",                                           # Distribution sets - X11 sets - Select all the above sets
-    "b<enter><wait>",                                           # Distribution sets - X11 sets - but X11 programming
-    "x<enter><wait>",                                           # Distribution sets - X11 sets - Install selected X11 sets
+    "${local.selector_manual_pages[var.arch]}",                 # Distribution sets - Manual pages - g (i386: g)
+    "${local.selector_text_processors[var.arch]}",              # Distribution sets - Text processing tools - j (i386: j)
     "x<enter><wait>",                                           # Distribution sets - Install selected sets
     "a<enter><wait10><wait10><wait10><wait10><wait10><wait10>", # Install from - CD-ROM
-    "<wait10><wait10><wait10><wait10><wait10><wait10><wait10>", # Wait for installation
+    "<wait10>",                                                 # Wait for installation
     "<enter><wait5>",                                           # Installation complete - Hit enter to continue
+    "d<enter><wait>",                                           # Change root password
+    "a<enter><wait>",                                           # Do you want to set a root password for the system now? - Yes
     "${var.ssh_password}<enter><wait>",                         # New password - root password
     "${var.ssh_password}<enter><wait>",                         # Weak password warning - root password
     "${var.ssh_password}<enter><wait5>",                        # Retype new password - root password
-    "${local.selector_random_number_generator[var.arch]}",      # Random number generator; not now - only for aarch64
     "g<enter><wait>",                                           # Configure the additional items - Enable sshd
     "h<enter><wait>",                                           # Configure the additional items - Enable ntpd
-    "k<enter><wait>",                                           # Configure the additional items - Enable xdm
     "x<enter><wait>",                                           # Configure the additional items - Finished configuring
     "<enter><wait10>",                                          # Hit enter to continue
     "x<enter><wait10>",                                         # Exit Install System
@@ -348,52 +372,20 @@ locals {
   install_script_common = [
     "dhcpcd<wait><enter><wait10><wait5>",
     "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<wait><enter><wait5>",
-    "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} DISK=%s PARTITION=%s HOSTNAME=${var.hostname} sh /tmp/install.sh<wait><enter><wait5>"
+    "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} PARTITION=%sa HOSTNAME=${var.hostname} sh /tmp/install.sh<wait><enter><wait5>"
   ]
   iso_urls = compact([
     var.iso_url,
     "./iso/${var.iso_file_name}",
     "${var.dist_server}/pub/${var.iso_path}/${var.iso_file_name}"
   ])
-  selector_keyboard_type = {
-    "amd64" : "a<enter><wait>",
-    "i386" : "a<enter><wait>",
-    "aarch64" : ""
-  }
-  selector_partition_geometry = {
-    "amd64" : "a<enter><wait>",
-    "i386" : "a<enter><wait>",
-    "aarch64" : ""
-  }
-  selector_bootblocks = {
-    "amd64" : "a<enter><wait>",
-    "i386" : "a<enter><wait>",
-    "aarch64" : ""
-  }
-  selector_compiler_tools = {
-    "amd64" : "f<enter><wait>",
-    "i386" : "e<enter><wait>",
-    "aarch64" : "f<enter><wait>"
-  }
   selector_manual_pages = {
-    "amd64" : "i<enter><wait>",
-    "i386" : "h<enter><wait>",
-    "aarch64" : "i<enter><wait>"
+    "amd64" : "g<enter><wait>",
+    "i386" : "g<enter><wait>"
   }
   selector_text_processors = {
-    "amd64" : "m<enter><wait>",
-    "i386" : "l<enter><wait>",
-    "aarch64" : "m<enter><wait>"
-  }
-  selector_x11 = {
-    "amd64" : "n<enter><wait>",
-    "i386" : "m<enter><wait>",
-    "aarch64" : "n<enter><wait>"
-  }
-  selector_random_number_generator = {
-    "amd64" : "",
-    "i386" : "",
-    "aarch64" : "x<enter><wait>"
+    "amd64" : "j<enter><wait>",
+    "i386" : "j<enter><wait>"
   }
   selector_install_script = {
     "generic" : [
@@ -424,6 +416,7 @@ locals {
       "echo \"nameserver $GATEWAY\" > /mnt/etc/resolv.conf"
     ]
   }
+  vm_name = coalesce(var.vm_name, "NetBSD-8-${var.arch}-minimal")
 }
 
 source "hyperv-iso" "default" {
@@ -431,12 +424,12 @@ source "hyperv-iso" "default" {
     "ifconfig ${var.hyperv_netif} inet ${var.hyperv_host_cidr}<enter><wait5>",
     "ifconfig ${var.hyperv_netif} up<enter><wait10>",
     "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<wait><enter><wait5>",
-    "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} DISK=${var.hyperv_disk_name} PARTITION=${var.partition_name} HOSTNAME=${var.hostname} HOST_CIDR=${var.hyperv_host_cidr} GATEWAY=${var.hyperv_gateway} NETIF=${var.hyperv_netif} sh /tmp/install.sh<wait><enter><wait5>"
+    "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} PARTITION=${var.hyperv_disk_name}a HOSTNAME=${var.hostname} HOST_CIDR=${var.hyperv_host_cidr} GATEWAY=${var.hyperv_gateway} NETIF=${var.hyperv_netif} sh /tmp/install.sh<wait><enter><wait5>"
   ])
-  boot_wait        = var.boot_wait
-  cpus             = var.num_cpus
-  disk_size        = var.disk_size
-  headless         = var.headless
+  boot_wait = var.boot_wait
+  cpus      = var.num_cpus
+  disk_size = var.disk_size
+  headless  = var.headless
   http_content = {
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       lines = local.selector_install_script["hyperv"]
@@ -445,52 +438,27 @@ source "hyperv-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-hyperv"
+  output_directory = "output/${local.vm_name}-v${var.box_version}-hyperv"
   shutdown_command = "/sbin/shutdown -p now"
   ssh_host         = var.hyperv_ssh_host
   ssh_password     = var.ssh_password
+  ssh_timeout      = var.ssh_timeout
   ssh_username     = var.ssh_username
-  ssh_wait_timeout = "10000s"
   switch_name      = var.hyperv_switch_name
-  vm_name          = "${var.vm_name}-${var.variant}-v${var.box_ver}"
-}
-
-source "parallels-iso" "default" {
-  boot_command = concat(
-    local.boot_command_common,
-    split("\n", format(join("\n", local.install_script_common), var.parallels_disk_name, var.partition_name))
-  )
-  boot_wait              = var.boot_wait
-  cpus                   = var.num_cpus
-  disk_size              = var.disk_size
-  disk_type              = "expand"
-  guest_os_type          = "other"
-  http_content = {
-    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
-      lines = local.selector_install_script["generic"]
-    })
-  }
-  iso_checksum           = var.iso_checksum
-  iso_urls               = local.iso_urls
-  memory                 = var.mem_size
-  output_directory       = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-parallels"
-  parallels_tools_flavor = "other"
-  parallels_tools_mode   = "disable"
-  shutdown_command       = "/sbin/shutdown -p now"
-  ssh_password           = var.ssh_password
-  ssh_username           = var.ssh_username
-  ssh_timeout            = "10000s"
-  vm_name                = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name          = local.vm_name
 }
 
 source "qemu" "default" {
   accelerator = var.qemu_accelerator
   boot_command = concat(
     local.boot_command_common,
-    split("\n", format(join("\n", local.install_script_common), var.qemu_disk_name, var.partition_name))
+    split("\n", format(join("\n", local.install_script_common), var.qemu_disk_name))
   )
   boot_wait        = var.boot_wait
+  cpus             = var.num_cpus
+  disk_compression = true
   disk_interface   = "virtio-scsi"
+  disk_size        = var.disk_size
   display          = var.qemu_display
   format           = "qcow2"
   headless         = var.headless
@@ -503,27 +471,25 @@ source "qemu" "default" {
   iso_urls         = local.iso_urls
   memory           = var.mem_size
   net_device       = "virtio-net-pci"
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-qemu"
+  output_directory = "output/${local.vm_name}-v${var.box_version}-qemu"
   qemu_binary      = var.qemu_binary
   qemuargs = [
     ["-smp", "cpus=1,maxcpus=${var.num_cpus},threads=${var.num_cpus}"],
-    ["-device", "virtio-rng-pci"],
-    ["-device", "virtio-scsi-pci,id=scsi0"],
-    ["-device", "scsi-hd,bus=scsi0.0,drive=drive0"]
+    ["-display", "gtk"]
   ]
   shutdown_command    = "/sbin/shutdown -p now"
   ssh_password        = var.ssh_password
   ssh_port            = 22
-  ssh_timeout         = "10000s"
+  ssh_timeout         = var.ssh_timeout
   ssh_username        = var.ssh_username
   use_default_display = var.qemu_use_default_display
-  vm_name             = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name             = local.vm_name
 }
 
 source "virtualbox-iso" "default" {
   boot_command = concat(
     local.boot_command_common,
-    split("\n", format(join("\n", local.install_script_common), var.virtualbox_disk_name, var.partition_name))
+    split("\n", format(join("\n", local.install_script_common), var.virtualbox_disk_name))
   )
   boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
@@ -536,37 +502,37 @@ source "virtualbox-iso" "default" {
       lines = local.selector_install_script["generic"]
     })
   }
-  iso_checksum         = var.iso_checksum
-  iso_urls             = local.iso_urls
-  memory               = var.mem_size
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-virtualbox"
-  shutdown_command     = "/sbin/shutdown -p now"
-  ssh_password         = var.ssh_password
-  ssh_port             = 22
-  ssh_timeout          = "10000s"
-  ssh_username         = var.ssh_username
+  iso_checksum     = var.iso_checksum
+  iso_urls         = local.iso_urls
+  memory           = var.mem_size
+  output_directory = "output/${local.vm_name}-v${var.box_version}-virtualbox"
+  shutdown_command = "/sbin/shutdown -p now"
+  ssh_password     = var.ssh_password
+  ssh_port         = 22
+  ssh_timeout      = var.ssh_timeout
+  ssh_username     = var.ssh_username
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
     ["modifyvm", "{{ .Name }}", "--natdnsproxy1", "on"],
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"]
   ]
   virtualbox_version_file = ".vbox_version"
-  vm_name                 = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name                 = local.vm_name
 }
 
 source "vmware-iso" "default" {
   boot_command = concat(
     local.boot_command_common,
-    split("\n", format(join("\n", local.install_script_common), var.vmware_disk_name, var.partition_name))
+    split("\n", format(join("\n", local.install_script_common), var.vmware_disk_name))
   )
-  boot_wait            = var.boot_wait
-  cdrom_adapter_type   = var.vmware_cdrom_adapter_type
-  cpus                 = var.num_cpus
-  disk_adapter_type    = var.vmware_disk_adapter_type
-  disk_size            = var.disk_size
-  disk_type_id         = "0"
-  guest_os_type        = var.vmware_guest_os_type
-  headless             = var.headless
+  boot_wait          = var.boot_wait
+  cdrom_adapter_type = var.vmware_cdrom_adapter_type
+  cpus               = var.num_cpus
+  disk_adapter_type  = var.vmware_disk_adapter_type
+  disk_size          = var.disk_size
+  disk_type_id       = "0"
+  guest_os_type      = var.vmware_guest_os_type
+  headless           = var.headless
   http_content = {
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       lines = local.selector_install_script["generic"]
@@ -575,23 +541,21 @@ source "vmware-iso" "default" {
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
-  network              = "nat"
+  network              = var.vmware_network
   network_adapter_type = var.vmware_network_adapter_type
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-vmware"
+  output_directory     = "output/${local.vm_name}-v${var.box_version}-vmware"
   shutdown_command     = "/sbin/shutdown -p now"
   ssh_password         = var.ssh_password
   ssh_port             = 22
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_username
-  usb                  = true
   version              = var.vmware_hardware_version
-  vm_name              = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "usb_xhci.present"          = "TRUE"
     "vhv.enable"                = "TRUE"
   }
 }
@@ -599,14 +563,14 @@ source "vmware-iso" "default" {
 source "vmware-iso" "esxi" {
   boot_command = concat(
     local.boot_command_common,
-    split("\n", format(join("\n", local.install_script_common), var.esxi_disk_name, var.partition_name))
+    split("\n", format(join("\n", local.install_script_common), var.esxi_disk_name))
   )
-  boot_wait            = var.boot_wait
-  cpus                 = var.num_cpus
-  disk_size            = var.disk_size
-  disk_type_id         = "thin"
-  guest_os_type        = var.vmware_guest_os_type
-  headless             = var.headless
+  boot_wait     = var.boot_wait
+  cpus          = var.num_cpus
+  disk_size     = var.disk_size
+  disk_type_id  = "thin"
+  guest_os_type = var.vmware_guest_os_type
+  headless      = var.headless
   http_content = {
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       lines = local.selector_install_script["generic"]
@@ -618,7 +582,7 @@ source "vmware-iso" "esxi" {
   memory               = var.mem_size
   network              = "bridged"
   network_adapter_type = "e1000"
-  output_directory     = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  output_directory     = "${local.vm_name}-v${var.box_version}"
   remote_datastore     = var.esxi_remote_datastore
   remote_host          = var.esxi_remote_host
   remote_password      = var.esxi_remote_password
@@ -628,9 +592,9 @@ source "vmware-iso" "esxi" {
   skip_export          = true
   ssh_password         = var.ssh_password
   ssh_port             = 22
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_username
-  vm_name              = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.networkName"     = "VM Network"
@@ -639,13 +603,13 @@ source "vmware-iso" "esxi" {
     "remotedisplay.vnc.enabled" = "TRUE"
     "vhv.enable"                = "TRUE"
   }
-  vnc_over_websocket = "${var.esxi_vnc_over_websocket}"
+  vnc_disable_password = true
+  vnc_over_websocket   = var.esxi_vnc_over_websocket
 }
 
 build {
   sources = [
     "source.hyperv-iso.default",
-    "source.parallels-iso.default",
     "source.qemu.default",
     "source.virtualbox-iso.default",
     "source.vmware-iso.default",
@@ -661,34 +625,14 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools-12.1.5nb1"
-      #      "XF86_INPUT_VMMOUSE=xf86-input-vmmouse",
-      #      "XF86_VIDEO_VMWARE=xf86-video-vmware"
-    ]
-    execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
-    only = [
-      "vmware-iso.*"
-    ]
-    script = "../provisioners/vmware-xorg_netbsd8+.sh"
-  }
-
-  provisioner "shell" {
-    environment_vars = [
       "DOAS=doas-6.3p2nb1",
-      "FAM=fam-2.7.0nb9",
-      "RSYNC=rsync-3.2.7nb2",
+      "RSYNC=rsync-3.2.7nb1",
       "VAGRANT_GROUP=${var.vagrant_group}",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
-      "VAGRANT_USER=${var.vagrant_username}",
-      "X11VNC=x11vnc-0.9.16nb15",
-      "XFCE4=xfce4-4.18.1nb6",
-      "XRANDR=xrandr-1.5.2"
+      "VAGRANT_USER=${var.vagrant_username}"
     ]
     execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
-    scripts = [
-      "../provisioners/vagrant_netbsd8+.sh",
-      "../provisioners/xfce_netbsd9.3+.sh"
-    ]
+    script          = "../provisioners/vagrant_netbsd8+.sh"
   }
 
   provisioner "shell" {
@@ -709,11 +653,10 @@ build {
     compression_level = 9
     only = [
       "hyperv-iso.default",
-      "parallels-iso.default",
       "virtualbox-iso.default",
       "vmware-iso.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_ver}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-8.3+"
   }
 
@@ -723,7 +666,7 @@ build {
     only = [
       "qemu.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_ver}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-8.3+"
   }
 }

@@ -32,7 +32,7 @@
   * freebsd-14.1 - FreeBSD 14.1 templates
   * [more](freebsd/README.md)
 * [netbsd](netbsd/README.md) - NetBSD templates (amd64 and i386)
-  * netbsd-8.2 - NetBSD 8.2 templates
+  * netbsd-8.3 - NetBSD 8.3 templates
   * netbsd-9.4 - NetBSD 9.4 templates
   * netbsd-10.0 - NetBSD 10.0 templates (amd64, i386, and aarch64)
   * [more](netbsd/README.md)
@@ -70,4 +70,4 @@ permissions and limitations under the License.
 
 - - -
 
-Copyright &copy; 2014-2024 Upperstream Software.
+Copyright &copy; 2014-2024 Upperstream.

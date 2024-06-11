@@ -704,7 +704,7 @@ build {
       "vmware-iso.default"
     ]
     output               = "./${var.vm_name}-${var.variant}-v${var.box_ver}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-9.3+"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-8.3+"
   }
 
   post-processor "vagrant" {
@@ -714,6 +714,6 @@ build {
       "qemu.default"
     ]
     output               = "./${var.vm_name}-${var.variant}-v${var.box_ver}-{{ .Provider }}.box"
-    vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-9.3+"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-8.3+"
   }
 }

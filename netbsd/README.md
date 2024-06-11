@@ -15,29 +15,16 @@ Templates support amd64 and i386 architectures unless otherwise noted.
   * NetBSD 9.4 + X.Org
   * NetBSD 9.4 + X.Org + XDM + dwm + dmenu + st
   * NetBSD 9.4 + Xfce + XDM
-* [netbsd-8.2](netbsd-8.2/README.md) - templates for NetBSD 8.2
-  * NetBSD 8.2
-  * NetBSD 8.2 + Ansible + Ansible Lint + Testinfra
-  * NetBSD 8.2 + X.Org
-  * NetBSD 8.2 + X.Org + XDM + dwm + dmenu + st
-  * NetBSD 8.2 + Xfce + XDM
-* [netbsd-8.1](netbsd-8.1/README.md) - templates for NetBSD 8.1
-  * NetBSD 8.1
-  * NetBSD 8.1 + Ansible + Ansible Lint + Testinfra
-  * NetBSD 8.1 + X.Org
-  * NetBSD 8.1 + X.Org + XDM + dwm + dmenu + st
-  * NetBSD 8.1 + Xfce + XDM
-* [netbsd-8.0](netbsd-8.0/README.md) - templates for NetBSD 8.0
-  * NetBSD 8.0
-  * NetBSD 8.0 + Ansible + Ansible Lint + Testinfra
-  * NetBSD 8.0 + X.Org
-  * NetBSD 8.0 + X.Org + XDM + dwm + dmenu + st
-  * NetBSD 8.0 + Xfce + XDM
 
 ## Outdated NetBSD releases
 
 Templates support amd64 and i386 architectures.
 
+* [netbsd-8.3](netbsd-8/README.md) - templates for NetBSD 8.3
+  * NetBSD 8.3
+  * NetBSD 8.3 + X.Org
+  * NetBSD 8.3 + X.Org + XDM + dwm + dmenu + st
+  * NetBSD 8.3 + Xfce + XDM
 * [netbsd-7.2](netbsd-7.2/README.md) - templates for NetBSD 7.2
   * NetBSD 7.2
   * NetBSD 7.2 + Ansible + Testinfra
@@ -63,4 +50,4 @@ Templates support amd64 and i386 architectures.
 
 - - -
 
-Copyright &copy; 2015-2021, 2023, 2024 Upperstream Software.
+Copyright &copy; 2015-2021, 2023, 2024 Upperstream.
