@@ -27,3 +27,7 @@ indent_size = 2
 [**.sh]
 indent_style = tab
 indent_size = 4
+
+# Keep trailing whitespaces in markdown files
+[**.md]
+trim_trailing_whitespace = false
