@@ -1,22 +1,26 @@
-#!/bin/sh
-. "$1"
+#!/bin/sh -ex
 
-sfdisk /dev/sda << EOF
+%{ for config_key, config_value in variables }
+export ${config_key}=${config_value}
+%{ endfor ~}
+
+sfdisk /dev/"$DISK" << EOF
 ,,L
 EOF
+PARTITION="$${DISK}1"
 
-yes | mkfs.ext4 /dev/sda1
-mount /dev/sda1 /mnt
+yes | mkfs.ext4 "/dev/$PARTITION"
+mount "/dev/$PARTITION" /mnt
 timedatectl set-ntp true
-fallocate -l ${SWAP_SIZE:-500M} /mnt/swapfile
+fallocate -l "$${SWAP_SIZE:-500M}" /mnt/swapfile
 chmod 600 /mnt/swapfile
 mkswap /mnt/swapfile
 
-printf "Server = %s\n" ${MIRROR:-http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/$repo/os/$arch} | cat - /etc/pacman.d/mirrorlist > /tmp/mirrorlist
+printf "Server = %s\n" "$${MIRROR:-http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/\$repo/os/\$arch}" | cat - /etc/pacman.d/mirrorlist > /tmp/mirrorlist
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 mv /tmp/mirrorlist /etc/pacman.d/mirrorlist
 
-pacstrap /mnt base
+pacstrap -K /mnt base linux linux-firmware
 
 genfstab -U /mnt >> /mnt/etc/fstab
 echo "/swapfile		none		swap	defaults	0 0" >> /mnt/etc/fstab
