@@ -603,6 +603,8 @@ build {
 
   provisioner "shell" {
     environment_vars = [
+      "OS_VER=v${var.os_ver}",
+      "SUDO_CMD=doas",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}",

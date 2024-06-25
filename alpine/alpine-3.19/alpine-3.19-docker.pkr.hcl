@@ -601,13 +601,14 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "DOCKER=docker=25.0.5-r0",
-      "DOCKER_COMPOSE=docker-cli-compose=2.23.3-r2",
+      "DOCKER=docker=25.0.5-r1",
+      "DOCKER_COMPOSE=docker-cli-compose=2.23.3-r3",
       "OS_VER=v${var.os_ver}",
       "PYTHON_PIP=py3-pip=23.3.1-r0",
       "PY_BCRYPT=py3-bcrypt=4.1.1-r0",
       "PY_CRYPTOGRAPHY=py3-cryptography=41.0.7-r0",
       "PY_PYNACL=py3-pynacl=1.5.0-r4",
+      "SUDO_CMD=doas",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}"

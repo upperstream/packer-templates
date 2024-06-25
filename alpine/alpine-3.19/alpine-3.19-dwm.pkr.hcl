@@ -605,6 +605,7 @@ build {
     environment_vars = [
       "DMENU=dmenu=5.2-r1",
       "DWM=dwm=6.4-r1",
+      "OS_VER=v${var.os_ver}",
       "SLIM=slim=1.4.0-r0",
       "SLIM_THEMES=slim-themes=1.2.3-r3",
       "ST=st=0.9-r1",
