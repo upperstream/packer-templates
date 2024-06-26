@@ -32,7 +32,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "19.1.20240126"
+  default     = "19.2.20240618"
   description = "Version number of this Vagrant box."
 }
 
@@ -170,7 +170,7 @@ variable "root_password" {
   type        = string
   default     = "vagrant"
   sensitive   = false
-  description = "Password for the root user of this box."
+  description = "Password for the root user of this box.  Change the `sensitive` value to `true` if you want to hide the password."
 }
 
 variable "ssh_password" {
@@ -195,8 +195,8 @@ variable "ssh_username" {
 variable "vagrant_password" {
   type        = string
   default     = "vagrant"
-  sensitive   = true
-  description = "Password for the Vagrant user of this box."
+  sensitive   = false
+  description = "Password for the Vagrant user of this box.  Change the `sensitive` value to `true` if you want to hide the password."
 }
 
 variable "vagrant_ssh_public_key" {
@@ -603,6 +603,8 @@ build {
 
   provisioner "shell" {
     environment_vars = [
+      "OS_VER=v${var.os_ver}",
+      "SUDO_CMD=doas",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}",
