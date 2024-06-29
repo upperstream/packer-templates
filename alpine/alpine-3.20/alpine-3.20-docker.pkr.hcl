@@ -32,7 +32,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "20.0.20240522"
+  default     = "20.1.20240618"
   description = "Version number of this Vagrant box."
 }
 
@@ -601,8 +601,8 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "DOCKER=docker=26.1.3-r0",
-      "DOCKER_COMPOSE=docker-cli-compose=2.27.0-r1",
+      "DOCKER=docker=26.1.3-r1",
+      "DOCKER_COMPOSE=docker-cli-compose=2.27.0-r2",
       "OS_VER=v${var.os_ver}",
       "PYTHON_PIP=py3-pip=24.0-r2",
       "PY_BCRYPT=py3-bcrypt=4.1.3-r0",
