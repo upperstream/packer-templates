@@ -1,3 +1,33 @@
+packer {
+  required_version = ">= 1.7.0"
+  required_plugins {
+    hyperv = {
+      source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.3"
+    }
+    parallels = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/parallels"
+    }
+    qemu = {
+      source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.0"
+    }
+    vagrant = {
+      source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.4"
+    }
+    virtualbox = {
+      source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.0.5"
+    }
+    vmware = {
+      source  = "github.com/hashicorp/vmware"
+      version = ">= 1.0.11"
+    }
+  }
+}
+
 variable "boot_wait" {
   type        = string
   default     = "20s"
@@ -6,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "12.5.20240210"
+  default     = "12.6.20240629"
   description = "Version number of this Vagrant box."
 }
 
@@ -90,7 +120,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:915bc47370ac7ecc35984c36be280c0b094bf79b0f1f9755142cc2f41384a0e4"
+  default     = "sha256:402c0b876c7da0f5682a68a6705636592aa217fe934a64ee36f731e9afc6b99f"
   description = "SHA256 checksum of the install media."
 }
 
@@ -102,7 +132,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian12.5/main/installer-amd64/20230607+deb12u5/images/netboot"
+  default     = "Debian12.6/main/installer-amd64/20230607+deb12u6/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -329,6 +359,7 @@ locals {
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
+    "svga.vramSize"             = "33554432"
     "vhv.enable"                = var.vmware_vhv_enabled
     "svga.autodetect"           = var.vmware_svga_autodetect
     "usb_xhci.present"          = var.vmware_usb_xhci_present
@@ -435,8 +466,8 @@ source "virtualbox-iso" "default" {
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
   vboxmanage = [
-    ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
+    ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
     ["modifyvm", "{{ .Name }}", "--vram", "32"]
   ]
   virtualbox_version_file = ".vbox_version"
@@ -493,6 +524,7 @@ source "vmware-iso" "esxi" {
   memory               = var.mem_size
   network              = "bridged"
   network_adapter_type = "e1000"
+  network_name         = "VM Network"
   output_directory     = "${local.vm_name}-v${var.box_version}"
   remote_datastore     = var.esxi_remote_datastore
   remote_host          = var.esxi_remote_host
@@ -508,7 +540,6 @@ source "vmware-iso" "esxi" {
   vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
-    "ethernet0.networkName"     = "VM Network"
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
@@ -525,8 +556,8 @@ build {
     "source.parallels-iso.default",
     "source.qemu.default",
     "source.virtualbox-iso.default",
-    "source.vmware-iso.esxi",
-    "source.vmware-iso.default"
+    "source.vmware-iso.default",
+    "source.vmware-iso.esxi"
   ]
 
   provisioner "shell" {
