@@ -1,6 +1,6 @@
 cpu = "i386"
 iso_name = "mini.iso"
-iso_path = "Debian11.9/main/installer-i386/20210731+deb11u10/images/netboot"
-iso_checksum = "sha256:1c05e7cdc6af3252e8a36dc799ebc13ca93cb9a0c9d3fd192e645350560feec9"
+iso_path = "Debian11.10/main/installer-i386/20210731+deb11u11/images/netboot"
+iso_checksum = "sha256:6edbc4741fbfe2c5cc04326b4c875ee00d428e1c23a20883ea3c5bb5f3081c4b"
 virtualbox_guest_os_type = "Debian"
 vmware_guest_os_type = "debian11"

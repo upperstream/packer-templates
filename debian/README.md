@@ -2,9 +2,9 @@
 
 ## Current Debian releases
 
-* [debian-12](debian-12/README.md) - templates for Debian 12.6
+Templates support amd64, arm64, and i386.
 
-  Templates support amd64, arm64, and i386.
+* [debian-12](debian-12/README.md) - templates for Debian 12.6
 
   * Debian 12.6 minimal
   * Debian 12.6 + Docker + Docker Compose
@@ -19,14 +19,12 @@
     * LXQt
     * MATE
 
-* [debian-11](debian-11/README.md) - templates for Debian 11.9
+* [debian-11](debian-11/README.md) - templates for Debian 11.10
 
-  Templates support amd64, i386 and arm64.
-
-  * Debian 11.9 minimal
-  * Debian 11.9 + Docker + Docker Compose
-  * Debian 11.9 + X.org + suckless tools
-  * Debian 11.9 + choice of desktop environments:
+  * Debian 11.10 minimal
+  * Debian 11.10 + Docker + Docker Compose
+  * Debian 11.10 + X.org + suckless tools
+  * Debian 11.10 + choice of desktop environments:
     * Xfce (default)
     * Cinnamon
     * GNOME
