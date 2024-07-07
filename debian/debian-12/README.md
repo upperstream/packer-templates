@@ -242,7 +242,8 @@ or `-var-file` command line options to `packer`:
 * `ssh_timeout` - SSH timeout to connect this box being created.
   Defaults to `60m`.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to
-  `vagrant`.
+  `vagrant`.  Set `sensitive` attribute to `true` when you change this
+  password.
 * `vagrant_ssh_public_key` - SSH public key for Vagrant user.  Defaults
   to the public key for the Vagrant insecure private key.
 * `vagrant_username` - User name used for run time.  Vagrant box is set
