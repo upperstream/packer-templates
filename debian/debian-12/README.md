@@ -160,13 +160,34 @@ Parallels build intends to create arm64 box on Apple Silicon Mac host.
   [Docker Compose][]
 * `debian-12-dwm.pkr.hcl` - Debian 12.6 with [X.org][], [suckless][]
   tools, [ARandR][], and [xrdp][].
-* `debian-12-xfce.pkr.hcl` - Debian 12.6 with [Xfce][] + [xrdp][].
+* `debian-12-desktop.pkr.hcl` - Debian 12.6 with [xrdp][] + various
+  desktop environment such as:
+  * `xfce` - [Xfce][] (default)
+  * `cinnamon` [Cinnamon][]
+  * `gnome` - [GNOME][]
+  * `gnome-flashback` - [GNOME Flashback][]
+  * `kde` - [KDE Plasma][]
+  * `lxde` - [LXDE][]
+  * `lxqt` - [LXQt][]
+  * `mate` - [MATE][]
+
+  Adding `-var 'desktop=xfce'` to the command line can specify the
+  desktop environment.
 
 [ARandR]: https://christian.amsuess.com/tools/arandr/
     "ARandR: Another XRandR GUI"
+[Cinnamon]: https://projects.linuxmint.com/cinnamon/
+    "Linux Mint Projects by linuxmint"
 [Docker]: https://www.docker.com/
     "Docker - Build, Ship and Run Any App, Anywhere"
 [Docker Compose]: https://docs.docker.com/compose/ "Docker Compose"
+[GNOME]: https://www.gnome.org/ "GNOME"
+[GNOME Flashback]: https://wiki.gnome.org/Projects/GnomeFlashback
+    "Gnome Flashback"
+[KDE Plasma]: https://kde.org/plasma-desktop/ "KDE Plasma Desktop"
+[LXDE]: https://lxde.org/ "LXDE"
+[LXQt]: https://lxqt-project.org/ "LXQt"
+[MATE]: https://mate-desktop.org/ "MATE Desktop Environment"
 [suckless]: http://suckless.org/ "suckless.org software that sucks less"
 [X.org]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: https://xfce.org/ "Xfce Desktop Environment"
@@ -209,6 +230,8 @@ The following parameters can be set at build time by supplying `-var`
 or `-var-file` command line options to `packer`:
 
 * `boot_wait` - Override `boot_wait` default setting, which is `10s`.
+* `desktop` - Specify the desktop environment to install.  Defaults to
+  `xfce`.  (Only valid for `debian-11-desktop.pkr.hcl` variant)
 * `disk_size` - Disk size of the created box.  Defaults to `51200`,
   which means 50GB.
 * `esxi_boot_mode` - Boot mode for ESXi VM, `bios` or `efi`.  Defaults
