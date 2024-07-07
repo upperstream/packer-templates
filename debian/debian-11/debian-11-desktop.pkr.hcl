@@ -2,24 +2,28 @@ packer {
   required_version = ">= 1.7.0"
   required_plugins {
     hyperv = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.3"
     }
     parallels = {
       version = ">= 1.0.0"
       source  = "github.com/hashicorp/parallels"
     }
     qemu = {
-      version = ">= 1.0.9"
       source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.0"
+    }
+    vagrant = {
+      source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.4"
     }
     virtualbox = {
-      version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.0.5"
     }
     vmware = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/vmware"
+      version = ">= 1.0.11"
     }
   }
 }
@@ -32,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "11.9.20240210"
+  default     = "11.10.20240629"
   description = "Version number of this Vagrant box."
 }
 
@@ -122,7 +126,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:23d67de1214f7bb62cf6456822ea22e4cd5100d0b034a713efa23ddc6121f3f1"
+  default     = "sha256:af0b09bf317b0339cfca884b1eb61b2a6967bb922281d7705d80b7845346e1ba"
   description = "SHA256 checksum of the install media."
 }
 
@@ -134,7 +138,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "bullseye/main/installer-amd64/20210731+deb11u10/images/netboot"
+  default     = "bullseye/main/installer-amd64/20210731+deb11u11/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -196,7 +200,7 @@ variable "root_password" {
   type        = string
   default     = "vagrant"
   sensitive   = false
-  description = "Password for the root user of this box."
+  description = "Password for the root user of this box.  Change the `sensitive` value to `true` if you want to hide the password."
 }
 
 variable "ssh_pass" {
@@ -222,7 +226,7 @@ variable "vagrant_password" {
   type        = string
   default     = "vagrant"
   sensitive   = false
-  description = "Password for the Vagrant user of this box."
+  description = "Password for the Vagrant user of this box.  Change the `sensitive` value to `true` if you want to hide the password."
 }
 
 variable "vagrant_username" {
