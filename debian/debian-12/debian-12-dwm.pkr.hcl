@@ -1,3 +1,33 @@
+packer {
+  required_version = ">= 1.7.0"
+  required_plugins {
+    hyperv = {
+      source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.3"
+    }
+    parallels = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/parallels"
+    }
+    qemu = {
+      source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.0"
+    }
+    vagrant = {
+      source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.4"
+    }
+    virtualbox = {
+      source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.0.5"
+    }
+    vmware = {
+      source  = "github.com/hashicorp/vmware"
+      version = ">= 1.0.11"
+    }
+  }
+}
+
 variable "boot_wait" {
   type        = string
   default     = "20s"
@@ -6,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "12.5.20240210"
+  default     = "12.6.20240629"
   description = "Version number of this Vagrant box."
 }
 
@@ -90,7 +120,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:915bc47370ac7ecc35984c36be280c0b094bf79b0f1f9755142cc2f41384a0e4"
+  default     = "sha256:402c0b876c7da0f5682a68a6705636592aa217fe934a64ee36f731e9afc6b99f"
   description = "SHA256 checksum of the install media."
 }
 
@@ -102,7 +132,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian12.5/main/installer-amd64/20230607+deb12u5/images/netboot"
+  default     = "Debian12.6/main/installer-amd64/20230607+deb12u6/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -164,7 +194,7 @@ variable "root_password" {
   type        = string
   default     = "vagrant"
   sensitive   = false
-  description = "Password for the root user of this box."
+  description = "Password for the root user of this box.  Change the `sensitive` value to `true` if you want to hide the password."
 }
 
 variable "ssh_pass" {
@@ -189,8 +219,8 @@ variable "ssh_user" {
 variable "vagrant_password" {
   type        = string
   default     = "vagrant"
-  sensitive   = true
-  description = "Password for the Vagrant user of this box."
+  sensitive   = false
+  description = "Password for the Vagrant user of this box.  Change the `sensitive` value to `true` if you want to hide the password."
 }
 
 variable "vagrant_ssh_public_key" {
@@ -289,13 +319,7 @@ variable "vmware_vhv_enabled" {
 
 locals {
   boot_command = [
-    "%s<wait><down><down><down><down><left> auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/%s <wait>",
-    "passwd/root-password=${var.root_password} <wait>",
-    "passwd/root-password-again=${var.root_password} <wait>",
-    "passwd/user-fullname=${var.vagrant_username} <wait>",
-    "passwd/username=${var.vagrant_username} <wait>",
-    "passwd/user-password=${var.vagrant_password} <wait>",
-    "passwd/user-password-again=${var.vagrant_password} <wait>",
+    "%s<wait><down><down><down><down><left> auto priority=critical preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
     "locale=en_US.UTF-8 <wait>",
     "keymap=us <wait>",
     "tasks=standard <wait>",
@@ -317,11 +341,13 @@ locals {
     "bios" : "<enter>"
     "efi" : "<leftCtrlOn>x<leftCtrlOff>"
   }
-  preseeders = {
-    "default" : "preseed-buster.cfg"
-    "hyperv-iso" : "preseed-buster-hyperv.cfg"
-    "parallels-iso" : "preseed-bullseye-parallels.cfg"
-    "qemu" : "preseed-buster-qemu.cfg"
+  passwd = {
+    "root-password"       = "string ${var.root_password}",
+    "root-password-again" = "string ${var.root_password}",
+    "user-fullname"       = "string ${var.vagrant_username}",
+    "username"            = "string ${var.vagrant_username}",
+    "user-password"       = "string ${var.vagrant_password}",
+    "user-password-again" = "string ${var.vagrant_password}"
   }
   vm_name = coalesce(var.vm_name, "Debian-12-${var.cpu}-dwm")
   vmware_vmx_data = {
@@ -329,6 +355,7 @@ locals {
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
+    "svga.vramSize"             = "33554432"
     "vhv.enable"                = var.vmware_vhv_enabled
     "svga.autodetect"           = var.vmware_svga_autodetect
     "usb_xhci.present"          = var.vmware_usb_xhci_present
@@ -338,14 +365,27 @@ locals {
 source "hyperv-iso" "default" {
   boot_command = split("\n", format(join("\n", local.boot_command),
     local.boot_parameter_edit[var.hyperv_boot_mode],
-    local.preseeders["hyperv-iso"],
     local.boot_parameter_submit[var.hyperv_boot_mode]
   ))
   boot_wait        = var.boot_wait
   cpus             = var.num_cpus
   disk_size        = var.disk_size
   headless         = var.headless
-  http_directory   = "../http"
+  http_content = {
+    "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
+      late_command = [
+        "d-i preseed/late_command string \\",
+        "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list; \\",
+        "    apt-install hyperv-daemons"
+      ],
+      passwd = local.passwd,
+      grub-installer = {
+        "bootdev" = "string /dev/sda"
+      }
+    })
+  }
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
@@ -362,13 +402,25 @@ source "hyperv-iso" "default" {
 source "parallels-iso" "default" {
   boot_command = split("\n", format(join("\n", local.boot_command),
     local.boot_parameter_edit[var.parallels_boot_mode],
-    local.preseeders["parallels-iso"],
     local.boot_parameter_submit[var.parallels_boot_mode]
   ))
   boot_wait              = var.boot_wait
   cpus                   = var.num_cpus
   disk_size              = var.disk_size
-  http_directory         = "../http"
+  http_content = {
+    "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
+      late_command = [
+        "d-i preseed/late_command string \\",
+        "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list"
+      ],
+      passwd = local.passwd,
+      grub-installer = {
+        "bootdev" = "string /dev/sda"
+      }
+    })
+  }
   iso_checksum           = var.iso_checksum
   iso_urls               = local.iso_urls
   memory                 = var.mem_size
@@ -386,7 +438,6 @@ source "qemu" "default" {
   accelerator = var.qemu_accelerator
   boot_command = split("\n", format(join("\n", local.boot_command),
     local.boot_parameter_edit[var.qemu_boot_mode],
-    local.preseeders["qemu"],
     local.boot_parameter_submit[var.qemu_boot_mode]
   ))
   boot_wait           = var.boot_wait
@@ -397,7 +448,20 @@ source "qemu" "default" {
   display             = var.qemu_display
   format              = "qcow2"
   headless            = var.headless
-  http_directory      = "../http"
+  http_content = {
+    "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
+      late_command = [
+        "d-i preseed/late_command string \\",
+        "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list"
+      ],
+      passwd = local.passwd,
+      grub-installer = {
+        "bootdev" = "string /dev/vda"
+      }
+    })
+  }
   iso_checksum        = var.iso_checksum
   iso_urls            = local.iso_urls
   memory              = var.mem_size
@@ -415,7 +479,6 @@ source "qemu" "default" {
 source "virtualbox-iso" "default" {
   boot_command = split("\n", format(join("\n", local.boot_command),
     local.boot_parameter_edit[var.virtualbox_boot_mode],
-    local.preseeders["default"],
     local.boot_parameter_submit[var.virtualbox_boot_mode]
   ))
   boot_wait            = var.boot_wait
@@ -424,7 +487,20 @@ source "virtualbox-iso" "default" {
   guest_additions_mode = "disable"
   guest_os_type        = var.virtualbox_guest_os_type
   headless             = var.headless
-  http_directory       = "../http"
+  http_content = {
+    "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
+      late_command = [
+        "d-i preseed/late_command string \\",
+        "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list"
+      ],
+      passwd = local.passwd,
+      grub-installer = {
+        "bootdev" = "string /dev/sda"
+      }
+    })
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
@@ -435,8 +511,8 @@ source "virtualbox-iso" "default" {
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
   vboxmanage = [
-    ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
+    ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
     ["modifyvm", "{{ .Name }}", "--vram", "32"]
   ]
   virtualbox_version_file = ".vbox_version"
@@ -446,7 +522,6 @@ source "virtualbox-iso" "default" {
 source "vmware-iso" "default" {
   boot_command = split("\n", format(join("\n", local.boot_command),
     local.boot_parameter_edit[var.vmware_boot_mode],
-    local.preseeders["default"],
     local.boot_parameter_submit[var.vmware_boot_mode]
   ))
   boot_wait            = var.boot_wait
@@ -457,7 +532,20 @@ source "vmware-iso" "default" {
   disk_type_id         = "0"
   guest_os_type        = var.vmware_guest_os_type
   headless             = var.headless
-  http_directory       = "../http"
+  http_content = {
+    "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
+      late_command = [
+        "d-i preseed/late_command string \\",
+        "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list"
+      ],
+      passwd = local.passwd,
+      grub-installer = {
+        "bootdev" = "string /dev/sda"
+      }
+    })
+  }
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
@@ -477,7 +565,6 @@ source "vmware-iso" "default" {
 source "vmware-iso" "esxi" {
   boot_command = split("\n", format(join("\n", local.boot_command),
     local.boot_parameter_edit[var.esxi_boot_mode],
-    local.preseeders["default"],
     local.boot_parameter_submit[var.esxi_boot_mode]
   ))
   boot_wait            = var.boot_wait
@@ -486,13 +573,27 @@ source "vmware-iso" "esxi" {
   disk_type_id         = "thin"
   guest_os_type        = var.vmware_guest_os_type
   headless             = var.headless
-  http_directory       = "../http"
+  http_content = {
+    "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
+      late_command = [
+        "d-i preseed/late_command string \\",
+        "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list"
+      ],
+      passwd = local.passwd,
+      grub-installer = {
+        "bootdev" = "string /dev/sda"
+      }
+    })
+  }
   insecure_connection  = true
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
   network              = "bridged"
   network_adapter_type = "e1000"
+  network_name         = "VM Network"
   output_directory     = "${local.vm_name}-v${var.box_version}"
   remote_datastore     = var.esxi_remote_datastore
   remote_host          = var.esxi_remote_host
@@ -508,7 +609,6 @@ source "vmware-iso" "esxi" {
   vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
-    "ethernet0.networkName"     = "VM Network"
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
@@ -525,8 +625,8 @@ build {
     "source.parallels-iso.default",
     "source.qemu.default",
     "source.virtualbox-iso.default",
-    "source.vmware-iso.esxi",
-    "source.vmware-iso.default"
+    "source.vmware-iso.default",
+    "source.vmware-iso.esxi"
   ]
 
   provisioner "shell" {
