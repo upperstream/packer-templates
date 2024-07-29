@@ -1,11 +1,20 @@
 # Changelog
 
-## 20240727
+## [20240730]
 
-### Added
+* Changed
 
-* Add `CHANGELOG.md` file (this file) to record notable changes.
+  * alpine-3.19: Upgrade templates to Alpine Linux 3.19.3.
 
-### Changed
+## [20240727]
 
-* alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
+* Added
+
+  * Add `CHANGELOG.md` file (this file) to record notable changes.
+
+* Changed
+
+  * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
+
+[20240730]: https://github.com/upperstream/packer-templates/compare/20240727...20240730
+[20240727]: https://github.com/upperstream/packer-templates/releases/tag/202407027
