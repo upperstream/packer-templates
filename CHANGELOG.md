@@ -17,4 +17,4 @@
   * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
 
 [20240730]: https://github.com/upperstream/packer-templates/compare/20240727...20240730
-[20240727]: https://github.com/upperstream/packer-templates/releases/tag/202407027
+[20240727]: https://github.com/upperstream/packer-templates/releases/tag/20240727
