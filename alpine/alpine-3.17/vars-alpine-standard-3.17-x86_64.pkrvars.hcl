@@ -1,5 +1,5 @@
-iso_image = "alpine-standard-3.17.8-x86_64.iso"
-iso_checksum = "file:https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-standard-3.17.8-x86_64.iso.sha256"
+iso_image = "alpine-standard-3.17.9-x86_64.iso"
+iso_checksum = "file:https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-standard-3.17.9-x86_64.iso.sha256"
 cpu = "x86_64"
 virtualbox_guest_os_type = "Linux_64"
 vm_name_base = "Alpine-standard"
