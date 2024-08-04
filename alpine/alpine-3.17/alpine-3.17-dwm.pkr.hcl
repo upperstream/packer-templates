@@ -32,7 +32,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "17.8.20240618"
+  default     = "17.9.20240722"
   description = "Version number of this Vagrant box."
 }
 

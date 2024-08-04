@@ -3,6 +3,7 @@
 ## [Unreleased][]
 
 * Changed
+  * alpine-3.17: Upgrade templates to Alpine Linux 3.17.9.
   * alpine-3.18: Upgrade templates to Alpine Linux 3.18.8.
 
 ## [20240730][]
