@@ -2,6 +2,9 @@
 
 ## [Unreleased][]
 
+* Added
+  * freebsd-13.4: Templates for FreeBSD 13.4-BETA1
+
 * Changed
   * alpine-3.17: Upgrade templates to Alpine Linux 3.17.9.
   * alpine-3.18: Upgrade templates to Alpine Linux 3.18.8.
