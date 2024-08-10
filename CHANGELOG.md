@@ -8,6 +8,7 @@
 * Changed
   * alpine-3.17: Upgrade templates to Alpine Linux 3.17.9.
   * alpine-3.18: Upgrade templates to Alpine Linux 3.18.8.
+  * freebsd-13.4: Upgrade templates to FreeBSD 13.4-BETA2.
 
 ## [20240730][]
 
