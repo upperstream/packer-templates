@@ -605,7 +605,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-6.1.50",
+      "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-nox11-6.1.50",
       "VIRTUALBOX_WITH_XORG=false"
     ]
     execute_command = "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
