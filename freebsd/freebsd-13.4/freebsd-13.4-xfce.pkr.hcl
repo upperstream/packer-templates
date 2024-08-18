@@ -13,6 +13,10 @@ packer {
       version = ">= 1.0.9"
       source  = "github.com/hashicorp/qemu"
     }
+    vagrant = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/vagrant"
+    }
     virtualbox = {
       version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
@@ -54,7 +58,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "2.20240810"
+  default = "3.20240817"
 }
 
 variable "ca_root_nss_version" {
@@ -128,12 +132,12 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-BETA2-amd64"
+  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-BETA3-amd64"
 }
 
 variable "iso_image" {
   type    = string
-  default = "FreeBSD-13.4-BETA2-amd64-disc1.iso"
+  default = "FreeBSD-13.4-BETA3-amd64-disc1.iso"
 }
 
 variable "mem_size" {
@@ -163,6 +167,12 @@ variable "parallels_partition" {
 variable "path_to_iso" {
   type    = string
   default = "releases/ISO-IMAGES/13.4"
+}
+
+variable "qemu_binary" {
+  type        = string
+  default     = "qemu-system-x86_64"
+  description = "Name of QEMU binary"
 }
 
 variable "qemu_display" {
@@ -417,6 +427,7 @@ source "qemu" "default" {
   memory              = var.mem_size
   net_device          = "virtio-net"
   output_directory    = "output/${var.vm_name}-${var.variant}-v${var.box_version}-qemu"
+  qemu_binary         = var.qemu_binary
   shutdown_command    = "shutdown -p now"
   ssh_password        = var.root_password
   ssh_username        = "root"
