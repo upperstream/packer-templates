@@ -58,7 +58,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "3.20240817"
+  default = "1.20240824"
 }
 
 variable "ca_root_nss_version" {
@@ -132,12 +132,12 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-BETA3-amd64"
+  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-RC1-amd64"
 }
 
 variable "iso_image" {
   type    = string
-  default = "FreeBSD-13.4-BETA3-amd64-disc1.iso"
+  default = "FreeBSD-13.4-RC1-amd64-disc1.iso"
 }
 
 variable "mem_size" {
@@ -249,7 +249,7 @@ variable "virtualbox_partition" {
 
 variable "vm_name" {
   type        = string
-  default     = "FreeBSD-13.4-BETA-amd64"
+  default     = "FreeBSD-13.4-RC-amd64"
   description = "VM name of the creating box."
 }
 
