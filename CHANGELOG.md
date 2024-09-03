@@ -3,12 +3,13 @@
 ## [Unreleased][]
 
 * Changed
-  * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RC1
+  * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RC2; use
+    `release_4` branch for packages instead of `quarterly`.
 
 ## [20240818][]
 
 * Added
-  * freebsd-13.4: Templates for FreeBSD 13.4-BETA3
+  * freebsd-13.4: Templates for FreeBSD 13.4-BETA3.
 
 * Changed
   * alpine-3.17: Upgrade templates to Alpine Linux 3.17.9.
