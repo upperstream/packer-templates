@@ -4,12 +4,12 @@
 
 Templates support amd64, arm64, and i386.
 
-* [debian-12](debian-12/README.md) - templates for Debian 12.6
+* [debian-12](debian-12/README.md) - templates for Debian 12.7
 
-  * Debian 12.6 minimal
-  * Debian 12.6 + Docker + Docker Compose
-  * Debian 12.6 + X.org + suckless tools
-  * Debian 12.6 + choice of desktop environments:
+  * Debian 12.7 minimal
+  * Debian 12.7 + Docker + Docker Compose
+  * Debian 12.7 + X.org + suckless tools
+  * Debian 12.7 + choice of desktop environments:
     * Xfce (default)
     * Cinnamon
     * GNOME
