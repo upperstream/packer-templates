@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "12.6.20240629"
+  default     = "12.7.20240831"
   description = "Version number of this Vagrant box."
 }
 
@@ -120,7 +120,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:402c0b876c7da0f5682a68a6705636592aa217fe934a64ee36f731e9afc6b99f"
+  default     = "sha256:12e3dc4b97eee8e553181861b7139086d662a977b78aedc7a73e862c5c104f12"
   description = "SHA256 checksum of the install media."
 }
 
@@ -132,7 +132,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian12.6/main/installer-amd64/20230607+deb12u6/images/netboot"
+  default     = "Debian12.7/main/installer-amd64/20230607+deb12u7/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -170,6 +170,12 @@ variable "qemu_accelerator" {
   type        = string
   default     = "kvm"
   description = "QEMU accelerator name for QEMU box."
+}
+
+variable "qemu_binary" {
+  type        = string
+  default     = "qemu-system-x86_64"
+  description = "Name of QEMU binary"
 }
 
 variable "qemu_boot_mode" {
@@ -243,7 +249,7 @@ variable "virtualbox_boot_mode" {
 
 variable "virtualbox_guest_os_type" {
   type        = string
-  default     = "Debian_64"
+  default     = "Debian12_64"
   description = "Guest OS type of VirtualBox box."
 }
 
@@ -285,8 +291,8 @@ variable "vmware_guest_os_type" {
 
 variable "vmware_hardware_version" {
   type        = string
-  default     = "9"
-  description = "Virtual hardware verison of VMware box."
+  default     = "13"
+  description = "Virtual hardware version of VMware box."
 }
 
 variable "vmware_network" {
@@ -324,6 +330,7 @@ locals {
     "keymap=us <wait>",
     "tasks=standard <wait>",
     "net.ifnames=0 <wait>",
+    "biosdevnames=0 <wait>",
     "%s<wait>"
   ]
   iso_urls = compact([
@@ -466,6 +473,7 @@ source "qemu" "default" {
   memory              = var.mem_size
   net_device          = "virtio-net"
   output_directory    = "output/${local.vm_name}-v${var.box_version}-qemu"
+  qemu_binary         = var.qemu_binary
   shutdown_command    = "sudo /sbin/shutdown -h now"
   ssh_password        = var.ssh_pass
   ssh_port            = 22
@@ -510,8 +518,8 @@ source "virtualbox-iso" "default" {
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
   vboxmanage = [
-    ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
-    ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"]
+    ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
+    ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"]
   ]
   virtualbox_version_file = ".vbox_version"
   vm_name                 = local.vm_name
@@ -591,6 +599,7 @@ source "vmware-iso" "esxi" {
   memory               = var.mem_size
   network              = "bridged"
   network_adapter_type = "e1000"
+  network_name         = "VM Network"
   output_directory     = "${local.vm_name}-v${var.box_version}"
   remote_datastore     = var.esxi_remote_datastore
   remote_host          = var.esxi_remote_host
@@ -606,7 +615,6 @@ source "vmware-iso" "esxi" {
   vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
-    "ethernet0.networkName"     = "VM Network"
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
@@ -622,8 +630,8 @@ build {
     "source.parallels-iso.default",
     "source.qemu.default",
     "source.virtualbox-iso.default",
-    "source.vmware-iso.esxi",
-    "source.vmware-iso.default"
+    "source.vmware-iso.default",
+    "source.vmware-iso.esxi"
   ]
 
   provisioner "shell" {
