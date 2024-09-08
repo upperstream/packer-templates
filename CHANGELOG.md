@@ -1,5 +1,19 @@
 # Changelog
 
+## [Unreleased][]
+
+* Changed
+  * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RC3 with the
+    following changes:
+    * Add `ssh_timeout` to define SSH timeout, whose default value is
+      `60m`.
+    * Rename `iso_image` variable to `iso_name`.
+    * Rename `path_to_iso` variable to `iso_path`.
+    * ESXi
+      * Add `esxi_hardware_version` variable so that the virtual
+        hardware version for ESXi build can be different from the one
+        for VMware build.  Default value is `19`.
+
 ## [20240908][]
 
 * Changed
@@ -59,6 +73,7 @@
 * Changed
   * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
 
+[Unreleased]: https://github.com/upperstream/packer-templates/compare/20240908...HEAD
 [20240908]: https://github.com/upperstream/packer-templates/compare/20240818...20240908
 [20240818]: https://github.com/upperstream/packer-templates/compare/20240730...20240818
 [20240730]: https://github.com/upperstream/packer-templates/compare/20240727...20240730

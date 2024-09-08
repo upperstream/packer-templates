@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 13.4-RC2
+# Packer templates for FreeBSD 13.4-RC3
 
-Templates to create Vagrant boxes for FreeBSD 13.4-RC2 (amd64, i386, and arm64)
+Templates to create Vagrant boxes for FreeBSD 13.4-RC3 (amd64, i386, and arm64)
 
 ## Prerequisites
 
@@ -50,14 +50,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default freebsd-13.4-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.4-RC-amd64-minimal-v2.20240831-virtualbox.box` in
+`FreeBSD-13.4-RC-amd64-minimal-v3.20240907-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.4-RC-amd64-minimal-v2.20240831` to your box list by
+`FreeBSD-13.4-RC-amd64-minimal-v3.20240907` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v2.20240831-virtualbox.box --name FreeBSD-13.4-RC-amd64-minimal-v2.20240831 --provider virtualbox
+    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v3.20240907-virtualbox.box --name FreeBSD-13.4-RC-amd64-minimal-v3.20240907 --provider virtualbox
 
 VirtualBox build intends to create amd64 box and i386 box on amd64 host.
 
@@ -68,14 +68,14 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default freebsd-13.4-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.4-RC2-amd64-v2.20240831-vmware.box` in the same
+`FreeBSD-13.4-RC3-amd64-v3.20240907-vmware.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.4-RC-amd64-minimal-v2.20240831` to your box list by
+`FreeBSD-13.4-RC-amd64-minimal-v3.20240907` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v2.20240831-vmware.box --name FreeBSD-13.4-RC-amd64-minimal-v2.20240831 --provider vmware_desktop
+    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v3.20240907-vmware.box --name FreeBSD-13.4-RC-amd64-minimal-v3.20240907 --provider vmware_desktop
 
 VMware build intends to create amd64 and i386 boxes on amd64 host, and
 aarch64 box on Apple Silicon Mac host.
@@ -112,14 +112,14 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default freebsd-13.4-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.4-RC-amd64-minimal-v2.20240831-libvirt.box` in the same
+`FreeBSD-13.4-RC-amd64-minimal-v3.20240907-libvirt.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.4-RC-amd64-minimal-v2.20240831` to your box list by
+`FreeBSD-13.4-RC-amd64-minimal-v3.20240907` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v2.20240831-libvirt.box --name FreeBSD-13.4-RC-amd64-minimal-v2.20240831 --provider libvirt
+    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v3.20240907-libvirt.box --name FreeBSD-13.4-RC-amd64-minimal-v3.20240907 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -134,14 +134,14 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default freebsd-13.4-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.4-RC-amd64-minimal-v2.20240831-hyperv.box` in the same
+`FreeBSD-13.4-RC-amd64-minimal-v3.20240907-hyperv.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.4-RC-amd64-minimal-v2.20240831` to your box list by
+`FreeBSD-13.4-RC-amd64-minimal-v3.20240907` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v2.20240831-hyperv.box --name FreeBSD-13.4-RC-amd64-minimal-v2.20240831 --provider hyperv
+    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v3.20240907-hyperv.box --name FreeBSD-13.4-RC-amd64-minimal-v3.20240907 --provider hyperv
 
 Hyper-V build intends to create amd64 box and i386 box on Windows
 host.
@@ -153,14 +153,14 @@ From the terminal, invoke the following command for Parallels provider:
     packer build -only=parallels-iso.default -var-file vars-freebsd-13.4-aarch64.pkrvars.hcl freebsd-13.4-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.4-RC-aarch64-v2.20240831-parallels.box` in the same
+`FreeBSD-13.4-RC-aarch64-v3.20240907-parallels.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.4-RC-aarch64-minimal-v2.20240831` to your box list
+`FreeBSD-13.4-RC-aarch64-minimal-v3.20240907` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-13.4-RC-aarch64-minimal-v2.20240831-hyperv.box --name FreeBSD-13.4-RC-aarch64-minimal-v2.20240831 --provider parallels
+    vagrant box add FreeBSD-13.4-RC-aarch64-minimal-v3.20240907-hyperv.box --name FreeBSD-13.4-RC-aarch64-minimal-v3.20240907 --provider parallels
 
 Parallels build intends to create aarch64 box on Apple Silicon Mac
 host.
@@ -203,12 +203,12 @@ use `doas`.
 
 ## Variants
 
-* `freebsd-13.4-minimal.pkr.hcl` - FreeBSD 13.4-RC2
-* `freebsd-13.4-dwm.pkr.hcl` - FreeBSD 13.4-RC2 + [X.Org][] +
+* `freebsd-13.4-minimal.pkr.hcl` - FreeBSD 13.4-RC3
+* `freebsd-13.4-dwm.pkr.hcl` - FreeBSD 13.4-RC3 + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-13.4-xfce.pkr.hcl` - FreeBSD 13.4-RC2 + [Xfce][] +
+* `freebsd-13.4-xfce.pkr.hcl` - FreeBSD 13.4-RC3 + [Xfce][] +
   [SLiM][]
-* `freebsd-13.4-zfs.pkr.hcl` - FreeBSD 13.4-RC2 on ZFS root
+* `freebsd-13.4-zfs.pkr.hcl` - FreeBSD 13.4-RC3 on ZFS root
   file system
 
 While `freebsd-13.4-*.pkr.hcl` templates generate amd64 boxes by
@@ -239,6 +239,8 @@ or `-var-file` command line options to `packer`:
 * `boot_wait` - Override `boot_wait` default setting, which is `10s`.
 * `disk_size` - Disk size of the creating VM.  Defaults to `50120`
   which means 50GB.
+* `esxi_hardware_version` - Virtual hardware version of ESXi box.
+  Defaults to `19`.
 * `esxi_remote_datastore` - ESXi datastore name where a VM image will
   be created.
 * `esxi_remote_host` - ESXi host name or IP address.
@@ -271,6 +273,8 @@ or `-var-file` command line options to `packer`:
 * `qemu_use_default_display` - Do not pass `-display` option to QEMU if
   `true`.  Defaults to `false`.
 * `root_password` - Password for `root` user.  Defaults to `vagrant`.
+* `ssh_timeout` - SSH timeout to connect this box being created.
+  Defaults to `60m`.
 * `vagrant_group` - Group name that `vagrant_username` belongs to.
   Defaults to `vagrant`.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to
@@ -287,7 +291,7 @@ or `-var-file` command line options to `packer`:
 * `vmware_disk_adapter_type` - Disk adapter type for VMware.  Defaults
   to `scsi`.
 * `vmware_hardware_version` - Hardware version for VMware.  Defaults to
-  `9`.
+  `13`.
 * `vmware_netif` - Network interface name for VMware box.  Defaults to
   `em0`.
 * `vmware_network_adapter_type` - Network adapter type for VMware.

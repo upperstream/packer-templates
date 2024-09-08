@@ -58,7 +58,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "2.20240831"
+  default = "3.20240907"
 }
 
 variable "ca_root_nss_version" {
@@ -77,6 +77,12 @@ variable "doas_version" {
   type        = string
   default     = "6.3p12"
   description = "Version of `doas` package."
+}
+
+variable "esxi_hardware_version" {
+  type        = string
+  default     = "19"
+  description = "Virtual hardware version of ESXi box."
 }
 
 variable "esxi_remote_datastore" {
@@ -132,12 +138,18 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-RC2-amd64"
+  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-RC3-amd64"
 }
 
-variable "iso_image" {
+variable "iso_name" {
   type    = string
-  default = "FreeBSD-13.4-RC2-amd64-disc1.iso"
+  default = "FreeBSD-13.4-RC3-amd64-disc1.iso"
+}
+
+variable "iso_path" {
+  type    = string
+  default = "releases/ISO-IMAGES/13.4"
+  description = "Relative path to search the install media."
 }
 
 variable "mem_size" {
@@ -162,11 +174,6 @@ variable "parallels_partition" {
   type        = string
   default     = "ada0"
   description = "Disk name for Parallels box."
-}
-
-variable "path_to_iso" {
-  type    = string
-  default = "releases/ISO-IMAGES/13.4"
 }
 
 variable "qemu_binary" {
@@ -204,6 +211,12 @@ variable "root_password" {
   default     = "vagrant"
   sensitive   = false
   description = "Password for `root` user."
+}
+
+variable "ssh_timeout" {
+  type        = string
+  default     = "60m"
+  description = "SSH timeout to connect this box being created."
 }
 
 variable "vagrant_group" {
@@ -301,12 +314,12 @@ locals {
   ]
   first_boot_command = (var.arch == "aarch64") ? "" : "<enter>"
   iso_urls = [
-    "./iso/${var.iso_image}",
-    "https://download.freebsd.org/${var.path_to_iso}/${var.iso_image}",
-    "http://ftp.jp.freebsd.org/pub/FreeBSD/${var.path_to_iso}/${var.iso_image}",
-    "http://ftp6.jp.freebsd.org/pub/FreeBSD/${var.path_to_iso}/${var.iso_image}",
-    "http://ftp11.freebsd.org/pub/FreeBSD/${var.path_to_iso}/${var.iso_image}",
-    "https://ftp4.tw.freebsd.org/pub/FreeBSD/${var.path_to_iso}/${var.iso_image}"
+    "./iso/${var.iso_name}",
+    "https://download.freebsd.org/${var.iso_path}/${var.iso_name}",
+    "http://ftp.jp.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}",
+    "http://ftp6.jp.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}",
+    "http://ftp11.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}",
+    "https://ftp4.tw.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}"
   ]
 }
 
@@ -344,7 +357,7 @@ source "hyperv-iso" "default" {
   shutdown_command = "shutdown -p now"
   ssh_password     = var.root_password
   ssh_username     = "root"
-  ssh_wait_timeout = "10000s"
+  ssh_timeout      = var.ssh_timeout
   switch_name      = var.hyperv_switch_name
   vm_name          = "${var.vm_name}-${var.variant}-v${var.box_version}"
 }
@@ -386,7 +399,7 @@ source "parallels-iso" "default" {
   shutdown_command       = "shutdown -p now"
   ssh_password           = "${var.root_password}"
   ssh_username           = "root"
-  ssh_wait_timeout       = "10000s"
+  ssh_timeout            = var.ssh_timeout
   vm_name                = "${var.vm_name}-${var.variant}-v${var.box_version}"
 }
 
@@ -431,7 +444,7 @@ source "qemu" "default" {
   shutdown_command    = "shutdown -p now"
   ssh_password        = var.root_password
   ssh_username        = "root"
-  ssh_wait_timeout    = "10000s"
+  ssh_timeout         = var.ssh_timeout
   use_default_display = var.qemu_use_default_display
   vm_name             = "${var.vm_name}-${var.variant}-v${var.box_version}"
 }
@@ -471,7 +484,7 @@ source "virtualbox-iso" "default" {
   output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-virtualbox"
   shutdown_command = "shutdown -p now"
   ssh_password     = var.root_password
-  ssh_timeout      = "10000s"
+  ssh_timeout      = var.ssh_timeout
   ssh_username     = "root"
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
@@ -519,7 +532,7 @@ source "vmware-iso" "default" {
   output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-vmware"
   shutdown_command     = "shutdown -p now"
   ssh_password         = var.root_password
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = "root"
   usb                  = true
   version              = var.vmware_hardware_version
@@ -578,9 +591,9 @@ source "vmware-iso" "esxi" {
   shutdown_command     = "shutdown -p now"
   skip_export          = true
   ssh_password         = var.root_password
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = "root"
-  version              = var.vmware_hardware_version
+  version              = var.esxi_hardware_version
   vm_name              = "${var.vm_name}-${var.variant}-v${var.box_version}"
   vmx_data = {
     "ethernet0.addressType"     = "generated"
