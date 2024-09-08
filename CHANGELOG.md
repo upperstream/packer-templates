@@ -1,21 +1,39 @@
 # Changelog
 
-## [Unreleased][]
+## [20240908][]
 
 * Changed
+  * debian-11: Upgrade templates to Debian 11.11 including the
+    following changes:
+    * ESXi:
+      * Add `esxi_guest_os_type` and `esxi_hardware_version` variables
+        so that these values can be different from those for VMware
+        build.  Default values are `debian11-64` and `19` respectively.
+    * QEMU:
+      * Add `qemu_binary` variables so that QEMU binary name for
+        creating x86 box can be set to `qemu-system-i386`.  Default
+        value is of `qemu-system-x86_64`.
+    * VirtualBox:
+      * Guest OS Type is now `Debian11_64` or `Debian11` instead of
+        `Debian_64` or `Debian` respectively.
+    * VMware:
+      * Virtual hardware version is now `13` as [Packer Plugin for
+        VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
+        requires the virtual hardware version `13` or greater.
   * debian-12: Upgrade templates to Debian 12.7 including the following
     changes:
+    * QEMU:
+      * Add `qemu_binary` variables so that QEMU binary name for
+        creating x86 box can be set to `qemu-system-i386`.  Default
+        value is of `qemu-system-x86_64`.
+    * VirtualBox:
+      * Guest OS Type is now `Debian12_64` or `Debian12` instead of
+        `Debian_64` or `Debian` respectively.
     * VMware:
       * Virtual hardware version is now `13` as [Packer Plugin for
         VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
         requires the virtual hardware version `13` or greater.
       * Add `biosdevnames=0` kernel parameter to VMware box.
-    * VirtualBox:
-      * Guest OS Type is now `Debian12_64` or `Debian12` instead of
-        `Debian_64` or `Debian` respectively.
-    * QEMU:
-      * QEMU binary name for creating x86 box is now `qemu-system-i386`
-        instead of `qemu-system-x86_64`.
   * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RC2; use
     `release_4` branch for packages instead of `quarterly`.
 
@@ -41,7 +59,7 @@
 * Changed
   * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
 
-[Unreleased]: https://github.com/upperstream/packer-templates/compare/20240818...HEAD
+[20240908]: https://github.com/upperstream/packer-templates/compare/20240818...20240908
 [20240818]: https://github.com/upperstream/packer-templates/compare/20240730...20240818
 [20240730]: https://github.com/upperstream/packer-templates/compare/20240727...20240730
 [20240727]: https://github.com/upperstream/packer-templates/releases/tag/20240727

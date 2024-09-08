@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "11.10.20240629"
+  default     = "11.11.20240831"
   description = "Version number of this Vagrant box."
 }
 
@@ -56,6 +56,18 @@ variable "esxi_boot_mode" {
   type        = string
   default     = "bios"
   description = "`bios` or `efi` for ESXi box."
+}
+
+variable "esxi_guest_os_type" {
+  type        = string
+  default     = "debian11-64"
+  description = "Guest OS type of ESXi box.  Change to `other5xlinux-64` or `other5xlinux` if you want to use USB 3.1 controller with this box."
+}
+
+variable "esxi_hardware_version" {
+  type        = string
+  default     = "19"
+  description = "Virtual hardware version of ESXi box."
 }
 
 variable "esxi_vhv_enabled" {
@@ -120,7 +132,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:af0b09bf317b0339cfca884b1eb61b2a6967bb922281d7705d80b7845346e1ba"
+  default     = "sha256:02e05977694b8c1dc6100d1a8b5504b815cf671c6a5e95c3d4466cddcffb1c0f"
   description = "SHA256 checksum of the install media."
 }
 
@@ -132,7 +144,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "bullseye/main/installer-amd64/20210731+deb11u11/images/netboot"
+  default     = "bullseye/main/installer-amd64/20210731+deb11u12/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -170,6 +182,12 @@ variable "qemu_accelerator" {
   type        = string
   default     = "kvm"
   description = "QEMU accelerator name for QEMU box."
+}
+
+variable "qemu_binary" {
+  type        = string
+  default     = "qemu-system-x86_64"
+  description = "Name of QEMU binary"
 }
 
 variable "qemu_boot_mode" {
@@ -237,7 +255,7 @@ variable "virtualbox_boot_mode" {
 
 variable "virtualbox_guest_os_type" {
   type        = string
-  default     = "Debian_64"
+  default     = "Debian11_64"
   description = "Guest OS type of VirtualBox box."
 }
 
@@ -279,8 +297,8 @@ variable "vmware_guest_os_type" {
 
 variable "vmware_hardware_version" {
   type        = string
-  default     = "9"
-  description = "Virtual hardware verison of VMware box."
+  default     = "13"
+  description = "Virtual hardware version of VMware box."
 }
 
 variable "vmware_network" {
@@ -461,6 +479,7 @@ source "qemu" "default" {
   memory              = var.mem_size
   net_device          = "virtio-net"
   output_directory    = "output/${local.vm_name}-v${var.box_version}-qemu"
+  qemu_binary         = var.qemu_binary
   shutdown_command    = "sudo /sbin/shutdown -h now"
   ssh_password        = var.ssh_pass
   ssh_port            = 22
@@ -564,7 +583,7 @@ source "vmware-iso" "esxi" {
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
   disk_type_id         = "thin"
-  guest_os_type        = var.vmware_guest_os_type
+  guest_os_type        = var.esxi_guest_os_type
   headless             = var.headless
   http_content = {
     "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
@@ -598,6 +617,7 @@ source "vmware-iso" "esxi" {
   ssh_port             = 22
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
+  version              = var.esxi_hardware_version
   vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
