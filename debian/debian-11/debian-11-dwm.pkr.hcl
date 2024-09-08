@@ -255,7 +255,7 @@ variable "virtualbox_boot_mode" {
 
 variable "virtualbox_guest_os_type" {
   type        = string
-  default     = "Debian_64"
+  default     = "Debian11_64"
   description = "Guest OS type of VirtualBox box."
 }
 
