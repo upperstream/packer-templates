@@ -287,7 +287,7 @@ or `-var-file` command line options to `packer`:
 * `vmware_disk_adapter_type` - Disk adapter type for VMware box.
   Defaults to `scsi`.
 * `vmware_hardware_version` - Virtual hardware version of VMware box.
-  Defaults to `9`.
+  Defaults to `13`.
 * `vmware_network` - Network type of VMware box.  Defaults to `nat`.
 * `vmware_network_adapter_type` - Network adapter type of VMware box.
   Defaults to `e1000`.

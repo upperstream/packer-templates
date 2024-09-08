@@ -297,8 +297,8 @@ variable "vmware_guest_os_type" {
 
 variable "vmware_hardware_version" {
   type        = string
-  default     = "9"
-  description = "Virtual hardware verison of VMware box."
+  default     = "13"
+  description = "Virtual hardware version of VMware box."
 }
 
 variable "vmware_network" {

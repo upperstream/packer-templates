@@ -13,6 +13,10 @@
       * Add `qemu_binary` variables so that QEMU binary name for
         creating x86 box can be set to `qemu-system-i386`.  Default
         value is of `qemu-system-x86_64`.
+    * VMware:
+      * Virtual hardware version is now `13` as [Packer Plugin for
+        VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
+        requires the virtual hardware version `13` or greater.
   * debian-12: Upgrade templates to Debian 12.7 including the following
     changes:
     * QEMU:
