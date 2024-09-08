@@ -5,6 +5,8 @@
 * Changed
   * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RC3 with the
     following changes:
+    * Add `ssh_timeout` to define SSH timeout, whose default value is
+      `60m`.
     * ESXi
       * Add `esxi_hardware_version` variable so that the virtual
         hardware version for ESXi build can be different from the one

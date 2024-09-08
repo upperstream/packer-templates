@@ -273,6 +273,8 @@ or `-var-file` command line options to `packer`:
 * `qemu_use_default_display` - Do not pass `-display` option to QEMU if
   `true`.  Defaults to `false`.
 * `root_password` - Password for `root` user.  Defaults to `vagrant`.
+* `ssh_timeout` - SSH timeout to connect this box being created.
+  Defaults to `60m`.
 * `vagrant_group` - Group name that `vagrant_username` belongs to.
   Defaults to `vagrant`.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to

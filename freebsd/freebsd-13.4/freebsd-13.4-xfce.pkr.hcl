@@ -212,6 +212,12 @@ variable "root_password" {
   description = "Password for `root` user."
 }
 
+variable "ssh_timeout" {
+  type        = string
+  default     = "60m"
+  description = "SSH timeout to connect this box being created."
+}
+
 variable "vagrant_group" {
   type        = string
   default     = "vagrant"
@@ -350,7 +356,7 @@ source "hyperv-iso" "default" {
   shutdown_command = "shutdown -p now"
   ssh_password     = var.root_password
   ssh_username     = "root"
-  ssh_wait_timeout = "10000s"
+  ssh_timeout      = var.ssh_timeout
   switch_name      = var.hyperv_switch_name
   vm_name          = "${var.vm_name}-${var.variant}-v${var.box_version}"
 }
@@ -392,7 +398,7 @@ source "parallels-iso" "default" {
   shutdown_command       = "shutdown -p now"
   ssh_password           = "${var.root_password}"
   ssh_username           = "root"
-  ssh_wait_timeout       = "10000s"
+  ssh_timeout            = var.ssh_timeout
   vm_name                = "${var.vm_name}-${var.variant}-v${var.box_version}"
 }
 
@@ -437,7 +443,7 @@ source "qemu" "default" {
   shutdown_command    = "shutdown -p now"
   ssh_password        = var.root_password
   ssh_username        = "root"
-  ssh_wait_timeout    = "10000s"
+  ssh_timeout         = var.ssh_timeout
   use_default_display = var.qemu_use_default_display
   vm_name             = "${var.vm_name}-${var.variant}-v${var.box_version}"
 }
@@ -477,7 +483,7 @@ source "virtualbox-iso" "default" {
   output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-virtualbox"
   shutdown_command = "shutdown -p now"
   ssh_password     = var.root_password
-  ssh_timeout      = "10000s"
+  ssh_timeout      = var.ssh_timeout
   ssh_username     = "root"
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
@@ -525,7 +531,7 @@ source "vmware-iso" "default" {
   output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-vmware"
   shutdown_command     = "shutdown -p now"
   ssh_password         = var.root_password
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = "root"
   usb                  = true
   version              = var.vmware_hardware_version
@@ -584,7 +590,7 @@ source "vmware-iso" "esxi" {
   shutdown_command     = "shutdown -p now"
   skip_export          = true
   ssh_password         = var.root_password
-  ssh_timeout          = "10000s"
+  ssh_timeout          = var.ssh_timeout
   ssh_username         = "root"
   version              = var.esxi_hardware_version
   vm_name              = "${var.vm_name}-${var.variant}-v${var.box_version}"
