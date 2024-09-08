@@ -190,6 +190,12 @@ variable "qemu_accelerator" {
   description = "QEMU accelerator name for QEMU box."
 }
 
+variable "qemu_binary" {
+  type        = string
+  default     = "qemu-system-x86_64"
+  description = "Name of QEMU binary"
+}
+
 variable "qemu_boot_mode" {
   type        = string
   default     = "bios"
@@ -480,6 +486,7 @@ source "qemu" "default" {
   memory              = var.mem_size
   net_device          = "virtio-net"
   output_directory    = "output/${local.vm_name}-v${var.box_version}-qemu"
+  qemu_binary         = var.qemu_binary
   shutdown_command    = "sudo /sbin/shutdown -h now"
   ssh_password        = var.ssh_pass
   ssh_port            = 22

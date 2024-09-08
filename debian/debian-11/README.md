@@ -260,6 +260,7 @@ or `-var-file` command line options to `packer`:
   Defaults to `efi`.
 * `qemu_accelerator` - QEMU accelerator name for QEMU VM.  Defaults to
   `kvm`.
+* `qemu_binary` - QEMU binary name.  Defaults to `qemu-system-x86_64`.
 * `qemu_boot_mode` - Boot mode for QEMU VM, `bios` or `efi`.  Defaults
   to `bios`.
 * `qemu_display` - What QEMU `-display` option to use.  Defaults to an

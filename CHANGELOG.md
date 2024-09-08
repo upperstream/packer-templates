@@ -9,8 +9,16 @@
       * Add `esxi_guest_os_type` and `esxi_hardware_version` variables
         so that these values can be different from those for VMware
         build.  Default values are `debian11-64` and `19` respectively.
+    * QEMU:
+      * Add `qemu_binary` variables so that QEMU binary name for
+        creating x86 box can be set to `qemu-system-i386`.  Default
+        value is of `qemu-system-x86_64`.
   * debian-12: Upgrade templates to Debian 12.7 including the following
     changes:
+    * QEMU:
+      * Add `qemu_binary` variables so that QEMU binary name for
+        creating x86 box can be set to `qemu-system-i386`.  Default
+        value is of `qemu-system-x86_64`.
     * VMware:
       * Virtual hardware version is now `13` as [Packer Plugin for
         VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
@@ -19,9 +27,6 @@
     * VirtualBox:
       * Guest OS Type is now `Debian12_64` or `Debian12` instead of
         `Debian_64` or `Debian` respectively.
-    * QEMU:
-      * QEMU binary name for creating x86 box is now `qemu-system-i386`
-        instead of `qemu-system-x86_64`.
   * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RC2; use
     `release_4` branch for packages instead of `quarterly`.
 
