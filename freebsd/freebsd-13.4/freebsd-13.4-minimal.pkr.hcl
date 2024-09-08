@@ -73,6 +73,12 @@ variable "doas_version" {
   description = "Version of `doas` package."
 }
 
+variable "esxi_hardware_version" {
+  type        = string
+  default     = "19"
+  description = "Virtual hardware version of ESXi box."
+}
+
 variable "esxi_remote_datastore" {
   type    = string
   default = "${env("ESXI_REMOTE_DATASTORE")}"
@@ -572,7 +578,7 @@ source "vmware-iso" "esxi" {
   ssh_password         = var.root_password
   ssh_timeout          = "10000s"
   ssh_username         = "root"
-  version              = var.vmware_hardware_version
+  version              = var.esxi_hardware_version
   vm_name              = "${var.vm_name}-${var.variant}-v${var.box_version}"
   vmx_data = {
     "ethernet0.addressType"     = "generated"

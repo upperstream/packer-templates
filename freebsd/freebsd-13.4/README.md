@@ -239,6 +239,8 @@ or `-var-file` command line options to `packer`:
 * `boot_wait` - Override `boot_wait` default setting, which is `10s`.
 * `disk_size` - Disk size of the creating VM.  Defaults to `50120`
   which means 50GB.
+* `esxi_hardware_version` - Virtual hardware version of ESXi box.
+  Defaults to `19`.
 * `esxi_remote_datastore` - ESXi datastore name where a VM image will
   be created.
 * `esxi_remote_host` - ESXi host name or IP address.
