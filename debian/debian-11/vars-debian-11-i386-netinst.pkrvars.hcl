@@ -1,4 +1,5 @@
 cpu = "i386"
+esxi_guest_os_type = "debian11"
 iso_name = "debian-11.10.0-i386-netinst.iso"
 iso_path = "11.10.0/i386/iso-cd"
 iso_checksum = "file:https://cdimage.debian.org/cdimage/archive/11.10.0/i386/iso-cd/SHA256SUMS"

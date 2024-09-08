@@ -3,6 +3,12 @@
 ## [Unreleased][]
 
 * Changed
+  * debian-11: Upgrade templates to Debian 11.11 including the
+    following changes:
+    * ESXi:
+      * Add `esxi_guest_os_type` and `esxi_hardware_version` variables
+        so that these values can be different from those for VMware
+        build.  Default values are `debian11-64` and `19` respectively.
   * debian-12: Upgrade templates to Debian 12.7 including the following
     changes:
     * VMware:

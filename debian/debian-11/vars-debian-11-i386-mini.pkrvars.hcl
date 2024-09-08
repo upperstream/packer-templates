@@ -1,4 +1,5 @@
 cpu = "i386"
+esxi_guest_os_type = "debian11"
 iso_name = "mini.iso"
 iso_path = "Debian11.10/main/installer-i386/20210731+deb11u11/images/netboot"
 iso_checksum = "sha256:6edbc4741fbfe2c5cc04326b4c875ee00d428e1c23a20883ea3c5bb5f3081c4b"

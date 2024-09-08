@@ -237,6 +237,11 @@ or `-var-file` command line options to `packer`:
   which means 50GB.
 * `esxi_boot_mode` - Boot mode for ESXi VM, `bios` or `efi`.  Defaults
   to `bios`.
+* `esxi_guest_os_type` - Guest OS type of ESXi box.  Defaults to
+  `debian11-64`.  Change to `other5xlinux-64` or `other5xlinux` if you
+  want to use USB 3.1 controller with this box.
+* `esxi_hardware_version` - Virtual hardware version of ESXi box.
+  Defaults to `19`.
 * `esxi_vhv_enabled` - Instruct whether nested virtualisation is
   enabled for ESXi box.  Defaults to `TRUE`.
 * `esxi_vnc_over_websocket` - Controls whether or not to use VNC over

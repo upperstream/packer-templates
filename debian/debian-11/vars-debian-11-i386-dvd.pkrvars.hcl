@@ -1,4 +1,5 @@
 cpu = "i386"
+esxi_guest_os_type = "debian11"
 install_from_dvd = true
 iso_name = "debian-11.10.0-i386-DVD-1.iso"
 iso_path = "11.10.0/i386/iso-dvd"
