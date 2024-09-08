@@ -1,9 +1,10 @@
 cpu = "arm64"
 install_from_dvd = true
-iso_name = "debian-11.10.0-arm64-DVD-1.iso"
-iso_path = "11.10.0/arm64/iso-dvd"
-iso_checksum = "file:https://cdimage.debian.org/cdimage/archive/11.10.0/arm64/iso-dvd/SHA256SUMS"
+iso_name = "debian-11.11.0-arm64-DVD-1.iso"
+iso_path = "11.11.0/arm64/iso-dvd"
+iso_checksum = "file:https://cdimage.debian.org/cdimage/archive/11.11.0/arm64/iso-dvd/SHA256SUMS"
 parallels_tools_flavor = "lin-arm"
+qemu_binary = "qemu-system-aarch64"
 vmware_boot_mode = "efi"
 vmware_cdrom_adapter_type = "sata"
 vmware_disk_adapter_type = "sata"
