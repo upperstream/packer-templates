@@ -7,6 +7,8 @@
     following changes:
     * Add `ssh_timeout` to define SSH timeout, whose default value is
       `60m`.
+    * Rename `iso_image` variable to `iso_name`.
+    * Rename `path_to_iso` variable to `iso_path`.
     * ESXi
       * Add `esxi_hardware_version` variable so that the virtual
         hardware version for ESXi build can be different from the one

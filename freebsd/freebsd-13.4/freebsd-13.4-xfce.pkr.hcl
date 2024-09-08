@@ -58,7 +58,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "2.20240831"
+  default = "3.20240907"
 }
 
 variable "ca_root_nss_version" {
@@ -138,12 +138,18 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-RC2-amd64"
+  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-RC3-amd64"
 }
 
-variable "iso_image" {
+variable "iso_name" {
   type    = string
-  default = "FreeBSD-13.4-RC2-amd64-disc1.iso"
+  default = "FreeBSD-13.4-RC3-amd64-disc1.iso"
+}
+
+variable "iso_path" {
+  type    = string
+  default = "releases/ISO-IMAGES/13.4"
+  description = "Relative path to search the install media."
 }
 
 variable "mem_size" {
@@ -168,11 +174,6 @@ variable "parallels_partition" {
   type        = string
   default     = "ada0"
   description = "Disk name for Parallels box."
-}
-
-variable "path_to_iso" {
-  type    = string
-  default = "releases/ISO-IMAGES/13.4"
 }
 
 variable "qemu_binary" {
@@ -313,12 +314,12 @@ locals {
   ]
   first_boot_command = (var.arch == "aarch64") ? "" : "<enter>"
   iso_urls = [
-    "./iso/${var.iso_image}",
-    "https://download.freebsd.org/${var.path_to_iso}/${var.iso_image}",
-    "http://ftp.jp.freebsd.org/pub/FreeBSD/${var.path_to_iso}/${var.iso_image}",
-    "http://ftp6.jp.freebsd.org/pub/FreeBSD/${var.path_to_iso}/${var.iso_image}",
-    "http://ftp11.freebsd.org/pub/FreeBSD/${var.path_to_iso}/${var.iso_image}",
-    "https://ftp4.tw.freebsd.org/pub/FreeBSD/${var.path_to_iso}/${var.iso_image}"
+    "./iso/${var.iso_name}",
+    "https://download.freebsd.org/${var.iso_path}/${var.iso_name}",
+    "http://ftp.jp.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}",
+    "http://ftp6.jp.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}",
+    "http://ftp11.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}",
+    "https://ftp4.tw.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}"
   ]
 }
 
