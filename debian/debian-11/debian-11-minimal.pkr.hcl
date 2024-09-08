@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "11.10.20240629"
+  default     = "11.11.20240831"
   description = "Version number of this Vagrant box."
 }
 
@@ -132,7 +132,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:af0b09bf317b0339cfca884b1eb61b2a6967bb922281d7705d80b7845346e1ba"
+  default     = "sha256:02e05977694b8c1dc6100d1a8b5504b815cf671c6a5e95c3d4466cddcffb1c0f"
   description = "SHA256 checksum of the install media."
 }
 
@@ -144,7 +144,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "bullseye/main/installer-amd64/20210731+deb11u11/images/netboot"
+  default     = "bullseye/main/installer-amd64/20210731+deb11u12/images/netboot"
   description = "Relative path to search the install media."
 }
 

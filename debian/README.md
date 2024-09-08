@@ -19,12 +19,12 @@ Templates support amd64, arm64, and i386.
     * LXQt
     * MATE
 
-* [debian-11](debian-11/README.md) - templates for Debian 11.10
+* [debian-11](debian-11/README.md) - templates for Debian 11.11
 
-  * Debian 11.10 minimal
-  * Debian 11.10 + Docker + Docker Compose
-  * Debian 11.10 + X.org + suckless tools
-  * Debian 11.10 + choice of desktop environments:
+  * Debian 11.11 minimal
+  * Debian 11.11 + Docker + Docker Compose
+  * Debian 11.11 + X.org + suckless tools
+  * Debian 11.11 + choice of desktop environments:
     * Xfce (default)
     * Cinnamon
     * GNOME

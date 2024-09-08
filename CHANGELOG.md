@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased][]
+## [20240908][]
 
 * Changed
   * debian-11: Upgrade templates to Debian 11.11 including the
@@ -59,7 +59,7 @@
 * Changed
   * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
 
-[Unreleased]: https://github.com/upperstream/packer-templates/compare/20240818...HEAD
+[20240908]: https://github.com/upperstream/packer-templates/compare/20240818...20240908
 [20240818]: https://github.com/upperstream/packer-templates/compare/20240730...20240818
 [20240730]: https://github.com/upperstream/packer-templates/compare/20240727...20240730
 [20240727]: https://github.com/upperstream/packer-templates/releases/tag/20240727
