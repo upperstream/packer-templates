@@ -1,21 +1,29 @@
 packer {
   required_version = ">= 1.7.0"
   required_plugins {
+    hyperv = {
+      source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.3"
+    }
     parallels = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/parallels"
+      version = ">= 1.0.0"
     }
     qemu = {
-      version = ">= 1.0.9"
       source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.0"
+    }
+    vagrant = {
+      source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.4"
     }
     virtualbox = {
-      version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.0.5"
     }
     vmware = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/vmware"
+      version = ">= 1.0.11"
     }
   }
 }
@@ -33,7 +41,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "2404.0.20240425"
+  default     = "2404.1.20240829"
   description = "Version number of this Vagrant box."
 }
 
@@ -97,13 +105,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://releases.ubuntu.com/24.04/SHA256SUMS"
+  default     = "file:https://releases.ubuntu.com/24.04.1/SHA256SUMS"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "ubuntu-24.04-live-server-amd64.iso"
+  default     = "ubuntu-24.04.1-live-server-amd64.iso"
   description = "File name of the install media."
 }
 
@@ -127,12 +135,13 @@ variable "num_cpus" {
 
 variable "os_version" {
   type    = string
-  default = "24.04"
+  default = "24.04.1"
 }
 
 variable "parallels_boot_mode" {
-  type    = string
-  default = "efi"
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for Parallels box."
 }
 
 variable "parallels_tools_flavor" {
@@ -147,23 +156,27 @@ variable "release" {
 }
 
 variable "qemu_boot_mode" {
-  type    = string
-  default = "efi"
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for QEMU box."
 }
 
 variable "qemu_display" {
-  type    = string
-  default = "gtk"
+  type        = string
+  default     = ""
+  description = "Display name for QEMU box."
 }
 
 variable "qemu_use_default_display" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = true
+  description = "Use the default display for QEMU box if true."
 }
 
 variable "ssh_password" {
   type        = string
   default     = "vagrant"
+  sensitive   = false
   description = "Password for the root user of this box."
 }
 
@@ -182,7 +195,7 @@ variable "ssh_username" {
 variable "vagrant_password" {
   type        = string
   default     = "vagrant"
-  sensitive   = true
+  sensitive   = false
   description = "Password for the Vagrant user of this box."
 }
 
@@ -199,8 +212,9 @@ variable "vagrant_username" {
 }
 
 variable "virtualbox_boot_mode" {
-  type    = string
-  default = "efi"
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for VirtualBox box."
 }
 
 variable "virtualbox_version" {
@@ -222,8 +236,9 @@ variable "vm_name_base" {
 }
 
 variable "vmware_boot_mode" {
-  type    = string
-  default = "efi"
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for VMware box."
 }
 
 variable "vmware_cdrom_adapter_type" {
@@ -246,8 +261,8 @@ variable "vmware_guest_os_type" {
 
 variable "vmware_hardware_version" {
   type        = string
-  default     = "9"
-  description = "Virtual hardware verison of VMware box."
+  default     = "13"
+  description = "Virtual hardware version of VMware box."
 }
 
 variable "vmware_network" {

@@ -4,11 +4,11 @@
 
 Templates support amd64 and arm64 unless otherwise noted.
 
-* [ubuntu-24.04](ubuntu-24.04/README.md) - templates for Ubuntu 24.04
-  * Ubuntu Server 24.04 LTS
-  * Ubuntu 24.04 LTS + X.org + dwm + suckless tools
-  * Ubuntu 24.04 LTS + LXQt
-  * Ubuntu 24.04 LTS + Xfce
+* [ubuntu-24.04.1](ubuntu-24.04.1/README.md) - templates for Ubuntu 24.04.1
+  * Ubuntu Server 24.04.1 LTS
+  * Ubuntu 24.04.1 LTS + X.org + dwm + suckless tools
+  * Ubuntu 24.04.1 LTS + LXQt
+  * Ubuntu 24.04.1 LTS + Xfce
 * [ubuntu-22.04](ubuntu-22.04/README.md) - templates for Ubuntu 22.04.3
   * Ubuntu Server 22.04.3 LTS
   * Ubuntu 22.04.3 LTS + X.org + dwm + suckless tools
@@ -71,4 +71,4 @@ Templates support amd64 unless otherwise noted.
 
 - - -
 
-Copyright &copy; 2014-2018, 2023, 2024 Upperstream Software.
+Copyright &copy; 2014-2018, 2023, 2024 Upperstream.
