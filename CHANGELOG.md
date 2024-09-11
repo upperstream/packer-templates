@@ -5,6 +5,10 @@
 * Changed
   * ubuntu-24.04: Upgrade templates to Ubuntu 24.04.1 including the
     following changes:
+    * ESXi:
+      * Add `esxi_guest_os_type` and `esxi_hardware_version` variables
+        so that these values can be different from those for VMware
+        build.  Default values are `ubuntu-64` and `19` respectively.
     * VMware:
       * Virtual hardware version is now `13` as [Packer Plugin for
         VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
