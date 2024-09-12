@@ -5,6 +5,12 @@
 * Changed
   * ubuntu-24.04: Upgrade templates to Ubuntu 24.04.1 including the
     following changes:
+    * Change naming convention for VM name and box file name so that
+      box name can be easily made CPU independent:
+      * VM name: `Ubuntu-24.04-{cpu}-{variant}` to
+        `Ubuntu-24.04-{variant}`
+      * Box filename: `Ubuntu-24.04-{cpu}-{variant}-{boxversion}-{provider}.box`
+        to `Ubuntu-24.04-{variant}-{boxversion}-{cpu}-{provider}.box`
     * ESXi:
       * Add `esxi_guest_os_type` and `esxi_hardware_version` variables
         so that these values can be different from those for VMware

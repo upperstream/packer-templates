@@ -48,13 +48,14 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso.default ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-amd64-minimal-v2404.1.20240829-virtualbox.box`
-in the same directory after the command has succeeded.
+You will find a vagrant box file named
+`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-virtualbox.box` in the
+same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.1.20240829`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.1.20240829-virtualbox.box --name Ubuntu-24.04-amd64-minimal-v2404.1.20240829 --provider virtualbox
+    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-virtualbox.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider virtualbox
 
 VirtualBox build intends to create amd64 box on amd64 host.
 
@@ -64,13 +65,14 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso.default ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-amd64-minimal-v2404.1.20240829-vmware.box`
-in the same directory after the command has succeeded.
+You will find a vagrant box file named
+`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-vmware.box` in the same
+directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.1.20240829`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.1.20240829-vmware.box --name Ubuntu-24.04-amd64-minimal-v2404.1.20240829 --provider vmware_desktop
+    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-vmware.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider vmware_desktop
 
 VMware build intends to create amd64 box on amd64 host using VMware
 Workstation, or create arm64 box on Apple Silicon Mac host using
@@ -105,13 +107,14 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu.default ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-amd64-minimal-v2404.1.20240829-libvirt.box` in the same
+You will find a vagrant box file named
+`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.1.20240829`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.1.20240829-libvirt.box --name Ubuntu-24.04-amd64-minimal-v2404.1.20240829 --provider libvirt
+    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-libvirt.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -125,13 +128,13 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default ubuntu-24.04-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Ubuntu-24.04-amd64-minimal-v2404.1.20240829-hyperv.box` in the same
+`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.1.20240829`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.1.20240829-hyperv.box --name Ubuntu-24.04-amd64-minimal-v2404.1.20240829 --provider hyperv
+    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-hyperv.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider hyperv
 
 Hyper-V build intends to create amd64 box on Windows host.
 
@@ -141,13 +144,14 @@ From the terminal, invoke the following command for Parallels provider:
 
     packer build -only=parallels-iso.default -var-file vars-ubuntu-24.04-arm64.pkrvars.hcl ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-arm64-minimal-v2404.1.20240829-parallels.box`
+You will find a vagrant box file named
+`Ubuntu-24.04-minimal-v2404.1.20240829-arm64-parallels.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-arm64-minimal-v2404.1.20240829`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-arm64-minimal-v2404.1.20240829-parallels.box --name Ubuntu-24.-arm64-minimal-v2404.1.20240829 --provider parallels
+    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-arm64-parallels.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider parallels
 
 Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
