@@ -1,6 +1,6 @@
-# Packer templates for Ubuntu 24.04 LTS
+# Packer templates for Ubuntu 24.04.1 LTS
 
-Templates to create Vagrant boxes for Ubuntu 24.04 LTS (amd64 and
+Templates to create Vagrant boxes for Ubuntu 24.04.1 LTS (amd64 and
 arm64).
 
 ## Prerequisites
@@ -48,13 +48,14 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso.default ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425-virtualbox.box`
-in the same directory after the command has succeeded.
+You will find a vagrant box file named
+`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-virtualbox.box` in the
+same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.0.20240425-virtualbox.box --name Ubuntu-24.04-amd64-minimal-v2404.0.20240425 --provider virtualbox
+    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-virtualbox.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider virtualbox
 
 VirtualBox build intends to create amd64 box on amd64 host.
 
@@ -64,13 +65,14 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso.default ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425-vmware.box`
-in the same directory after the command has succeeded.
+You will find a vagrant box file named
+`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-vmware.box` in the same
+directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.0.20240425-vmware.box --name Ubuntu-24.04-amd64-minimal-v2404.0.20240425 --provider vmware_desktop
+    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-vmware.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider vmware_desktop
 
 VMware build intends to create amd64 box on amd64 host using VMware
 Workstation, or create arm64 box on Apple Silicon Mac host using
@@ -99,21 +101,20 @@ feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
     packer build -only=vmware-iso.esxi -var esxi-vnc-over-websocket=false ubuntu-24.04-minimal.pkr.hcl
 
-(Note that created VM will be unregistered from your Inventory.)
-
 ### QEMU/libvirt
 
 From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu.default ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425-libvirt.box` in the same
+You will find a vagrant box file named
+`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.0.20240425-libvirt.box --name Ubuntu-24.04-amd64-minimal-v2404.0.20240425 --provider libvirt
+    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-libvirt.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -127,13 +128,13 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default ubuntu-24.04-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Ubuntu-24.04-amd64-minimal-v2404.0.20240425-hyperv.box` in the same
+`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-amd64-minimal-v2404.0.20240425`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-amd64-minimal-v2404.0.20240425-hyperv.box --name Ubuntu-24.04-amd64-minimal-v2404.0.20240425 --provider hyperv
+    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-hyperv.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider hyperv
 
 Hyper-V build intends to create amd64 box on Windows host.
 
@@ -143,23 +144,24 @@ From the terminal, invoke the following command for Parallels provider:
 
     packer build -only=parallels-iso.default -var-file vars-ubuntu-24.04-arm64.pkrvars.hcl ubuntu-24.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-24.04-arm64-minimal-v2404.0.20240425-parallels.box`
+You will find a vagrant box file named
+`Ubuntu-24.04-minimal-v2404.1.20240829-arm64-parallels.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-arm64-minimal-v2404.0.20240425`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-arm64-minimal-v2404.0.20240425-parallels.box --name Ubuntu-24.04-arm64-minimal-v2404.0.20240425 --provider parallels
+    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-arm64-parallels.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider parallels
 
 Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 ## Variants
 
-* `ubuntu-24.04-minimal.pkr.hcl` - Ubuntu Server 24.04 LTS
-* `ubuntu-24.04-dwm.pkr.hcl` - Ubuntu 24.04 LTS + [X.org][],
+* `ubuntu-24.04-minimal.pkr.hcl` - Ubuntu Server 24.04.1 LTS
+* `ubuntu-24.04-dwm.pkr.hcl` - Ubuntu 24.04.1 LTS + [X.org][],
   [dwm][], [suckless][] tools, [ARandR][], and [xrdp][].
-* `ubuntu-24.04-lxqt.pkr.hcl` - Ubuntu 24.04 LTS + [LXQt][]
-* `ubuntu-24.04-xfce.pkr.hcl` - Ubuntu 24.04 LTS + [Xfce][]
+* `ubuntu-24.04-lxqt.pkr.hcl` - Ubuntu 24.04.1 LTS + [LXQt][]
+* `ubuntu-24.04-xfce.pkr.hcl` - Ubuntu 24.04.1 LTS + [Xfce][]
 
 [ARandR]: https://christian.amsuess.com/tools/arandr/
     "ARandR: Another XRandR GUI"
@@ -173,9 +175,9 @@ Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 ## Installer ISO images
 
-While `ubuntu-24.04-*.pkr.hcl` templates use `ubuntu-24.04-live-server-amd64.iso`
+While `ubuntu-24.04-*.pkr.hcl` templates use `ubuntu-24.04.1-live-server-amd64.iso`
 ISO image to create amd64 boxes by default, using `vars-ubuntu-24.04-arm64.pkrvars.hcl`
-creates arm64 boxes with `ubuntu-24.04-live-server-arm64.iso` ISO
+creates arm64 boxes with `ubuntu-24.04.1-live-server-arm64.iso` ISO
 image:
 
     packer build -var-file=vars-ubuntu-24.04-arm64.pkrvars.hcl ubuntu-24.04-minimal.pkr.hcl
@@ -191,6 +193,11 @@ or `-var-file` command line options to `packer`:
 * `disk_size` - Disk size of the created box.  Defaults to `51200`,
   which means 50GB.
 * `esxi_boot_mode` - Boot mode for ESXi box.  Defaults to `efi`.
+* `esxi_guest_os_type` - Guest OS type of ESXi box.  Defaults to
+  `debian11-64`.  Change to `other5xlinux-64` or `other5xlinux` if you
+  want to use USB 3.1 controller with this box.
+* `esxi_hardware_version` - Virtual hardware version of ESXi box.
+  Defaults to `19`.
 * `esxi_remote_datastore` - ESXi datastore name to create this box in.
 * `esxi_remote_host` - Remote host name of the ESXi server to create
   this box on.
@@ -236,7 +243,7 @@ or `-var-file` command line options to `packer`:
 * `vmware_disk_adapter_type` - Disk adapter type for VMware box.
   Defaults to `scsi`.
 * `vmware_hardware_version` - Virtual hardware version of VMware box.
-  Defaults to `9`.
+  Defaults to `13`.
 * `vmware_network` - Network type of VMware box.  Defaults to `nat`.
 * `vmware_network_adapter_type` - Network adapter type of VMware box.
   Defaults to `e1000`.
@@ -245,4 +252,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2024 Upperstream Software.
+Copyright &copy; 2024 Upperstream.

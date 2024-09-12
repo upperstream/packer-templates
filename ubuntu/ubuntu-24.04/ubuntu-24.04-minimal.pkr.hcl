@@ -1,21 +1,29 @@
 packer {
   required_version = ">= 1.7.0"
   required_plugins {
+    hyperv = {
+      source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.3"
+    }
     parallels = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/parallels"
+      version = ">= 1.0.0"
     }
     qemu = {
-      version = ">= 1.0.9"
       source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.0"
+    }
+    vagrant = {
+      source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.4"
     }
     virtualbox = {
-      version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.0.5"
     }
     vmware = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/vmware"
+      version = ">= 1.0.11"
     }
   }
 }
@@ -33,8 +41,14 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "2404.0.20240425"
+  default     = "2404.1.20240829"
   description = "Version number of this Vagrant box."
+}
+
+variable "cpu" {
+  type        = string
+  default     = "amd64"
+  description = "CPU"
 }
 
 variable "disk_size" {
@@ -46,6 +60,18 @@ variable "disk_size" {
 variable "esxi_boot_mode" {
   type    = string
   default = "efi"
+}
+
+variable "esxi_guest_os_type" {
+  type        = string
+  default     = "ubuntu-64"
+  description = "Guest OS type of ESXi box.  Change to `other5xlinux-64` or `other5xlinux` if you want to use USB 3.1 controller with this box."
+}
+
+variable "esxi_hardware_version" {
+  type        = string
+  default     = "19"
+  description = "Virtual hardware version of ESXi box."
 }
 
 variable "esxi_remote_datastore" {
@@ -97,13 +123,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://releases.ubuntu.com/24.04/SHA256SUMS"
+  default     = "file:https://releases.ubuntu.com/24.04.1/SHA256SUMS"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "ubuntu-24.04-live-server-amd64.iso"
+  default     = "ubuntu-24.04.1-live-server-amd64.iso"
   description = "File name of the install media."
 }
 
@@ -127,12 +153,13 @@ variable "num_cpus" {
 
 variable "os_version" {
   type    = string
-  default = "24.04"
+  default = "24.04.1"
 }
 
 variable "parallels_boot_mode" {
-  type    = string
-  default = "efi"
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for Parallels box."
 }
 
 variable "parallels_tools_flavor" {
@@ -147,23 +174,27 @@ variable "release" {
 }
 
 variable "qemu_boot_mode" {
-  type    = string
-  default = "efi"
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for QEMU box."
 }
 
 variable "qemu_display" {
-  type    = string
-  default = "gtk"
+  type        = string
+  default     = ""
+  description = "Display name for QEMU box."
 }
 
 variable "qemu_use_default_display" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = true
+  description = "Use the default display for QEMU box if true."
 }
 
 variable "ssh_password" {
   type        = string
   default     = "vagrant"
+  sensitive   = false
   description = "Password for the root user of this box."
 }
 
@@ -182,7 +213,7 @@ variable "ssh_username" {
 variable "vagrant_password" {
   type        = string
   default     = "vagrant"
-  sensitive   = true
+  sensitive   = false
   description = "Password for the Vagrant user of this box."
 }
 
@@ -199,8 +230,9 @@ variable "vagrant_username" {
 }
 
 variable "virtualbox_boot_mode" {
-  type    = string
-  default = "efi"
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for VirtualBox box."
 }
 
 variable "virtualbox_version" {
@@ -217,13 +249,14 @@ variable "vm_name" {
 
 variable "vm_name_base" {
   type        = string
-  default     = "Ubuntu-24.04-amd64"
+  default     = "Ubuntu-24.04"
   description = "Base part of default VM name"
 }
 
 variable "vmware_boot_mode" {
-  type    = string
-  default = "efi"
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for VMware box."
 }
 
 variable "vmware_cdrom_adapter_type" {
@@ -246,8 +279,8 @@ variable "vmware_guest_os_type" {
 
 variable "vmware_hardware_version" {
   type        = string
-  default     = "9"
-  description = "Virtual hardware verison of VMware box."
+  default     = "13"
+  description = "Virtual hardware version of VMware box."
 }
 
 variable "vmware_network" {
@@ -331,7 +364,7 @@ source "hyperv-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${local.vm_name}-v${var.box_version}-hyperv"
+  output_directory = "output/${local.vm_name}-v${var.box_version}-${var.cpu}-hyperv"
   shutdown_command = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   ssh_password     = var.ssh_password
   ssh_port         = 22
@@ -359,7 +392,7 @@ source "parallels-iso" "default" {
   iso_checksum               = var.iso_checksum
   iso_urls                   = local.iso_urls
   memory                     = var.mem_size
-  output_directory           = "output/${local.vm_name}-v${var.box_version}-parallels"
+  output_directory           = "output/${local.vm_name}-v${var.box_version}-${var.cpu}-parallels"
   parallels_tools_flavor     = var.parallels_tools_flavor
   parallels_tools_guest_path = "/tmp/prl-tools-{{.Flavor}}.iso"
   shutdown_command           = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
@@ -394,7 +427,7 @@ source "qemu" "default" {
   iso_urls            = local.iso_urls
   memory              = var.mem_size
   net_device          = "virtio-net"
-  output_directory    = "output/${local.vm_name}-v${var.box_version}-qemu"
+  output_directory    = "output/${local.vm_name}-v${var.box_version}-${var.cpu}-qemu"
   shutdown_command    = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   ssh_password        = var.ssh_password
   ssh_port            = 22
@@ -425,7 +458,7 @@ source "virtualbox-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${local.vm_name}-v${var.box_version}-virtualbox"
+  output_directory = "output/${local.vm_name}-v${var.box_version}-${var.cpu}-virtualbox"
   shutdown_command = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   ssh_password     = var.ssh_password
   ssh_port         = 22
@@ -464,7 +497,7 @@ source "vmware-iso" "default" {
   memory               = var.mem_size
   network              = var.vmware_network
   network_adapter_type = var.vmware_network_adapter_type
-  output_directory     = "output/${local.vm_name}-v${var.box_version}-vmware"
+  output_directory     = "output/${local.vm_name}-v${var.box_version}-${var.cpu}-vmware"
   shutdown_command     = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   ssh_password         = var.ssh_password
   ssh_port             = 22
@@ -481,7 +514,7 @@ source "vmware-iso" "esxi" {
   cpus          = var.num_cpus
   disk_size     = var.disk_size
   disk_type_id  = "thin"
-  guest_os_type = var.vmware_guest_os_type
+  guest_os_type = var.esxi_guest_os_type
   headless      = var.headless
   http_content = {
     "/user-data" = templatefile("${path.root}/http/user-data.pkrtpl", {
@@ -501,7 +534,7 @@ source "vmware-iso" "esxi" {
   network_adapter_type    = "e1000"
   remote_datastore        = var.esxi_remote_datastore
   remote_host             = var.esxi_remote_host
-  remote_output_directory = coalesce(var.vm_name, "${local.vm_name}-v${var.box_version}")
+  remote_output_directory = coalesce(var.vm_name, "${local.vm_name}-v${var.box_version}-${var.cpu}")
   remote_password         = var.esxi_remote_password
   remote_type             = "esx5"
   remote_username         = var.esxi_remote_username
@@ -511,6 +544,7 @@ source "vmware-iso" "esxi" {
   ssh_port                = 22
   ssh_timeout             = var.ssh_timeout
   ssh_username            = var.ssh_username
+  version                 = var.esxi_hardware_version
   vm_name                 = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
@@ -612,7 +646,7 @@ build {
       "qemu.default",
       "vmware-iso.esxi"
     ]
-    output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-v${var.box_version}-${var.cpu}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.ubuntu"
   }
 
@@ -620,7 +654,7 @@ build {
     keep_input_artifact  = true
     compression_level    = 9
     only                 = ["qemu.default"]
-    output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-v${var.box_version}-${var.cpu}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.ubuntu"
   }
 }
