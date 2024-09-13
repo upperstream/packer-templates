@@ -13,6 +13,24 @@
       * Add `esxi_hardware_version` variable so that the virtual
         hardware version for ESXi build can be different from the one
         for VMware build.  Default value is `19`.
+  * ubuntu-24.04: Upgrade templates to Ubuntu 24.04.1 including the
+    following changes:
+    * Change naming convention for VM name and box file name so that
+      box name can be easily made CPU independent:
+      * VM name: `Ubuntu-24.04-{cpu}-{variant}` to
+        `Ubuntu-24.04-{variant}`
+      * Box filename: `Ubuntu-24.04-{cpu}-{variant}-{boxversion}-{provider}.box`
+        to `Ubuntu-24.04-{variant}-{boxversion}-{cpu}-{provider}.box`
+    * ESXi:
+      * Add `esxi_guest_os_type` and `esxi_hardware_version` variables
+        so that these values can be different from those for VMware
+        build.  Default values are `ubuntu-64` and `19` respectively.
+    * VMware:
+      * Virtual hardware version is now `13` as [Packer Plugin for
+        VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
+        requires the virtual hardware version `13` or greater.
+    * QEMU:
+      * Use default display instead of GTK
 
 ## [20240908][]
 
@@ -31,9 +49,9 @@
       * Guest OS Type is now `Debian11_64` or `Debian11` instead of
         `Debian_64` or `Debian` respectively.
     * VMware:
-      * Virtual hardware version is now `13` as [Packer Plugin for
-        VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
-        requires the virtual hardware version `13` or greater.
+      * Virtual hardware version is now `13` as Packer Plugin for
+        VMware v1.1.0 requires the virtual hardware version `13` or
+        greater.
   * debian-12: Upgrade templates to Debian 12.7 including the following
     changes:
     * QEMU:
@@ -44,9 +62,9 @@
       * Guest OS Type is now `Debian12_64` or `Debian12` instead of
         `Debian_64` or `Debian` respectively.
     * VMware:
-      * Virtual hardware version is now `13` as [Packer Plugin for
-        VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
-        requires the virtual hardware version `13` or greater.
+      * Virtual hardware version is now `13` as Packer Plugin for
+        VMware v1.1.0 requires the virtual hardware version `13` or
+        greater.
       * Add `biosdevnames=0` kernel parameter to VMware box.
   * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RC2; use
     `release_4` branch for packages instead of `quarterly`.
