@@ -50,14 +50,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default freebsd-13.4-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.4-RC-amd64-minimal-v3.20240907-virtualbox.box` in
+`FreeBSD-13.4-RC-minimal-v3.20240907-amd64-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.4-RC-amd64-minimal-v3.20240907` to your box list by
+`FreeBSD-13.4-RC-minimal-v3.20240907` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v3.20240907-virtualbox.box --name FreeBSD-13.4-RC-amd64-minimal-v3.20240907 --provider virtualbox
+    vagrant box add FreeBSD-13.4-RC-minimal-v3.20240907-amd64-virtualbox.box --name FreeBSD-13.4-RC-minimal-v3.20240907 --provider virtualbox
 
 VirtualBox build intends to create amd64 box and i386 box on amd64 host.
 
@@ -68,14 +68,14 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default freebsd-13.4-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.4-RC3-amd64-v3.20240907-vmware.box` in the same
+`FreeBSD-13.4-RC-v3.20240907-amd64-vmware.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.4-RC-amd64-minimal-v3.20240907` to your box list by
+`FreeBSD-13.4-RC-minimal-v3.20240907` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v3.20240907-vmware.box --name FreeBSD-13.4-RC-amd64-minimal-v3.20240907 --provider vmware_desktop
+    vagrant box add FreeBSD-13.4-RC-minimal-v3.20240907-amd64-vmware.box --name FreeBSD-13.4-RC-minimal-v3.20240907 --provider vmware_desktop
 
 VMware build intends to create amd64 and i386 boxes on amd64 host, and
 aarch64 box on Apple Silicon Mac host.
@@ -112,14 +112,14 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default freebsd-13.4-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.4-RC-amd64-minimal-v3.20240907-libvirt.box` in the same
+`FreeBSD-13.4-RC-minimal-v3.20240907-amd64-libvirt.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.4-RC-amd64-minimal-v3.20240907` to your box list by
+`FreeBSD-13.4-RC-minimal-v3.20240907` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v3.20240907-libvirt.box --name FreeBSD-13.4-RC-amd64-minimal-v3.20240907 --provider libvirt
+    vagrant box add FreeBSD-13.4-RC-minimal-v3.20240907-amd64-libvirt.box --name FreeBSD-13.4-RC-minimal-v3.20240907 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -134,14 +134,14 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default freebsd-13.4-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.4-RC-amd64-minimal-v3.20240907-hyperv.box` in the same
+`FreeBSD-13.4-RC-minimal-v3.20240907-amd64-hyperv.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.4-RC-amd64-minimal-v3.20240907` to your box list by
+`FreeBSD-13.4-RC-minimal-v3.20240907` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.4-RC-amd64-minimal-v3.20240907-hyperv.box --name FreeBSD-13.4-RC-amd64-minimal-v3.20240907 --provider hyperv
+    vagrant box add FreeBSD-13.4-RC-minimal-v3.20240907-amd64-hyperv.box --name FreeBSD-13.4-RC-minimal-v3.20240907 --provider hyperv
 
 Hyper-V build intends to create amd64 box and i386 box on Windows
 host.
@@ -153,14 +153,14 @@ From the terminal, invoke the following command for Parallels provider:
     packer build -only=parallels-iso.default -var-file vars-freebsd-13.4-aarch64.pkrvars.hcl freebsd-13.4-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.4-RC-aarch64-v3.20240907-parallels.box` in the same
+`FreeBSD-13.4-RC-minimal-v3.20240907-aarch64-parallels.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.4-RC-aarch64-minimal-v3.20240907` to your box list
+`FreeBSD-13.4-RC-minimal-v3.20240907` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-13.4-RC-aarch64-minimal-v3.20240907-hyperv.box --name FreeBSD-13.4-RC-aarch64-minimal-v3.20240907 --provider parallels
+    vagrant box add FreeBSD-13.4-RC-minimal-v3.20240907-aarch64-hyperv.box --name FreeBSD-13.4-RC-minimal-v3.20240907 --provider parallels
 
 Parallels build intends to create aarch64 box on Apple Silicon Mac
 host.

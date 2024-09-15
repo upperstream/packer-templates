@@ -5,6 +5,12 @@
 * Changed
   * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RC3 with the
     following changes:
+    * Change naming convention for VM name and box file name so that
+      box name can be easily made architecture independent:
+      * VM name: `FreeBSD-13.4-RC-{arch}-{variant}-{boxversion}` to
+        `FreeBSD-13.4-RC-{variant}-{boxversion}`
+      * Box filename: `FreeBSD-13.4-RC-{arch}-{variant}-{boxversion}-{provider}.box`
+        to `FreeBSD-13.4-RC-{variant}-{boxversion}-{arch}-{provider}.box`
     * Add `ssh_timeout` to define SSH timeout, whose default value is
       `60m`.
     * Rename `iso_image` variable to `iso_name`.
