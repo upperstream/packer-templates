@@ -290,8 +290,8 @@ or `-var-file` command line options to `packer`:
   directory name.
 * `vmware_disk_adapter_type` - Disk adapter type for VMware.  Defaults
   to `scsi`.
-* `vmware_hardware_version` - Hardware version for VMware.  Defaults to
-  `13`.
+* `vmware_hardware_version` - Virtual hardware version of VMware box.
+  Defaults to `13`.
 * `vmware_netif` - Network interface name for VMware box.  Defaults to
   `em0`.
 * `vmware_network_adapter_type` - Network adapter type for VMware.

@@ -19,6 +19,10 @@
       * Add `esxi_hardware_version` variable so that the virtual
         hardware version for ESXi build can be different from the one
         for VMware build.  Default value is `19`.
+    * VMware:
+      * Virtual hardware version is now `13` as [Packer Plugin for
+        VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
+        requires the virtual hardware version `13` or greater.
   * ubuntu-24.04: Upgrade templates to Ubuntu 24.04.1 including the
     following changes:
     * Change naming convention for VM name and box file name so that
