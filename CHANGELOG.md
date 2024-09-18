@@ -1,10 +1,16 @@
 # Changelog
 
-## [Unreleased][]
+## [20240919][]
 
 * Changed
-  * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RC3 with the
+  * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RELEASE with the
     following changes:
+    * Change naming convention for VM name and box file name so that
+      box name can be easily made architecture independent:
+      * VM name: `FreeBSD-13.4-RELEASE-{arch}-{variant}-{boxversion}` to
+        `FreeBSD-13.4-RELEASE-{variant}-{boxversion}`
+      * Box filename: `FreeBSD-13.4-RELEASE-{arch}-{variant}-{boxversion}-{provider}.box`
+        to `FreeBSD-13.4-RELEASE-{variant}-{boxversion}-{arch}-{provider}.box`
     * Add `ssh_timeout` to define SSH timeout, whose default value is
       `60m`.
     * Rename `iso_image` variable to `iso_name`.
@@ -13,6 +19,10 @@
       * Add `esxi_hardware_version` variable so that the virtual
         hardware version for ESXi build can be different from the one
         for VMware build.  Default value is `19`.
+    * VMware:
+      * Virtual hardware version is now `13` as [Packer Plugin for
+        VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
+        requires the virtual hardware version `13` or greater.
   * ubuntu-24.04: Upgrade templates to Ubuntu 24.04.1 including the
     following changes:
     * Change naming convention for VM name and box file name so that
@@ -91,7 +101,7 @@
 * Changed
   * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
 
-[Unreleased]: https://github.com/upperstream/packer-templates/compare/20240908...HEAD
+[20240919]: https://github.com/upperstream/packer-templates/compare/20240908...20240919
 [20240908]: https://github.com/upperstream/packer-templates/compare/20240818...20240908
 [20240818]: https://github.com/upperstream/packer-templates/compare/20240730...20240818
 [20240730]: https://github.com/upperstream/packer-templates/compare/20240727...20240730

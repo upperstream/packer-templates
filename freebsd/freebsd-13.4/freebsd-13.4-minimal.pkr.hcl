@@ -2,28 +2,28 @@ packer {
   required_version = ">= 1.7.0"
   required_plugins {
     hyperv = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.3"
     }
     parallels = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/parallels"
+      version = ">= 1.0.0"
     }
     qemu = {
-      version = ">= 1.0.9"
       source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.0"
     }
     vagrant = {
-      version = ">= 1.1.0"
       source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.4"
     }
     virtualbox = {
-      version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.0.5"
     }
     vmware = {
-      version = ">= 1.0.11"
       source  = "github.com/hashicorp/vmware"
+      version = ">= 1.0.11"
     }
   }
 }
@@ -41,7 +41,7 @@ variable "DISTRIBUTIONS" {
 variable "arch" {
   type        = string
   default     = "amd64"
-  description = "Architecture"
+  description = "Architecture name"
 }
 
 variable "boot_wait" {
@@ -52,7 +52,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "3.20240907"
+  default = "13.4.20240917"
 }
 
 variable "ca_root_nss_version" {
@@ -80,24 +80,28 @@ variable "esxi_hardware_version" {
 }
 
 variable "esxi_remote_datastore" {
-  type    = string
-  default = "${env("ESXI_REMOTE_DATASTORE")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_DATASTORE")}"
+  description = "ESXi datastore name to create this box in."
 }
 
 variable "esxi_remote_host" {
-  type    = string
-  default = "${env("ESXI_REMOTE_HOST")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_HOST")}"
+  description = "Remote host name of the ESXi server to create this box on."
 }
 
 variable "esxi_remote_password" {
-  type      = string
-  default   = "${env("ESXI_REMOTE_PASSWORD")}"
-  sensitive = true
+  type        = string
+  default     = "${env("ESXI_REMOTE_PASSWORD")}"
+  sensitive   = true
+  description = "SSH password for the ESXi server to create this box."
 }
 
 variable "esxi_remote_username" {
-  type    = string
-  default = "${env("ESXI_REMOTE_USERNAME")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_USERNAME")}"
+  description = "SSH username for the ESXi server to create this box."
 }
 
 variable "esxi_vnc_over_websocket" {
@@ -131,18 +135,20 @@ variable "hyperv_switch_name" {
 }
 
 variable "iso_checksum" {
-  type    = string
-  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-RC3-amd64"
+  type        = string
+  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-RELEASE-amd64"
+  description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
-  type    = string
-  default = "FreeBSD-13.4-RC3-amd64-disc1.iso"
+  type        = string
+  default     = "FreeBSD-13.4-RELEASE-amd64-disc1.iso"
+  description = "File name of the install media."
 }
 
 variable "iso_path" {
-  type    = string
-  default = "releases/ISO-IMAGES/13.4"
+  type        = string
+  default     = "releases/ISO-IMAGES/13.4"
   description = "Relative path to search the install media."
 }
 
@@ -238,8 +244,9 @@ variable "variant" {
 }
 
 variable "virtualbox_guest_os_type" {
-  type    = string
-  default = "FreeBSD_64"
+  type        = string
+  default     = "FreeBSD_64"
+  description = "Guest OS type of VirtualBox box."
 }
 
 variable "virtualbox_netif" {
@@ -256,7 +263,7 @@ variable "virtualbox_partition" {
 
 variable "vm_name" {
   type        = string
-  default     = "FreeBSD-13.4-RC-amd64"
+  default     = "FreeBSD-13.4-RELEASE"
   description = "VM name of the creating box."
 }
 
@@ -267,13 +274,14 @@ variable "vmware_disk_adapter_type" {
 }
 
 variable "vmware_guest_os_type" {
-  type    = string
-  default = "freebsd-64"
+  type        = string
+  default     = "freebsd-64"
+  description = "Guest OS type of VMware box."
 }
 
 variable "vmware_hardware_version" {
   type        = string
-  default     = "9"
+  default     = "13"
   description = "Hardware version for VMware box."
 }
 
@@ -347,7 +355,7 @@ source "hyperv-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-hyperv"
+  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-hyperv"
   shutdown_command = "shutdown -p now"
   ssh_password     = var.root_password
   ssh_username     = "root"
@@ -387,7 +395,7 @@ source "parallels-iso" "default" {
   iso_checksum           = "${var.iso_checksum}"
   iso_urls               = local.iso_urls
   memory                 = "${var.mem_size}"
-  output_directory       = "output/${var.vm_name}-${var.variant}-v${var.box_version}-parallels"
+  output_directory       = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-parallels"
   parallels_tools_flavor = "other"
   parallels_tools_mode   = "disable"
   shutdown_command       = "shutdown -p now"
@@ -433,7 +441,7 @@ source "qemu" "default" {
   iso_urls            = local.iso_urls
   memory              = var.mem_size
   net_device          = "virtio-net"
-  output_directory    = "output/${var.vm_name}-${var.variant}-v${var.box_version}-qemu"
+  output_directory    = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-qemu"
   qemu_binary         = var.qemu_binary
   shutdown_command    = "shutdown -p now"
   ssh_password        = var.root_password
@@ -475,7 +483,7 @@ source "virtualbox-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-virtualbox"
+  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-virtualbox"
   shutdown_command = "shutdown -p now"
   ssh_password     = var.root_password
   ssh_timeout      = var.ssh_timeout
@@ -522,7 +530,7 @@ source "vmware-iso" "default" {
   memory               = var.mem_size
   network              = "nat"
   network_adapter_type = var.vmware_network_adapter_type
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-vmware"
+  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-vmware"
   shutdown_command     = "shutdown -p now"
   ssh_password         = var.root_password
   ssh_timeout          = var.ssh_timeout
@@ -574,7 +582,7 @@ source "vmware-iso" "esxi" {
   memory               = var.mem_size
   network              = "bridged"
   network_adapter_type = "e1000"
-  output_directory     = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  output_directory     = "${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}"
   remote_datastore     = var.esxi_remote_datastore
   remote_host          = var.esxi_remote_host
   remote_password      = var.esxi_remote_password
@@ -672,7 +680,7 @@ build {
       "virtualbox-iso.default",
       "vmware-iso.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-{{ .Provider }}.box"
+    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2+"
   }
 
@@ -682,7 +690,7 @@ build {
     only = [
       "qemu.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-{{ .Provider }}.box"
+    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2+"
   }
 }
