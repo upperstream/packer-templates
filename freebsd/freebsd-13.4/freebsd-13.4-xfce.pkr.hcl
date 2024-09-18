@@ -2,28 +2,28 @@ packer {
   required_version = ">= 1.7.0"
   required_plugins {
     hyperv = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.3"
     }
     parallels = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/parallels"
+      version = ">= 1.0.0"
     }
     qemu = {
-      version = ">= 1.0.9"
       source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.0"
     }
     vagrant = {
-      version = ">= 1.1.0"
       source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.4"
     }
     virtualbox = {
-      version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.0.5"
     }
     vmware = {
-      version = ">= 1.0.11"
       source  = "github.com/hashicorp/vmware"
+      version = ">= 1.0.11"
     }
   }
 }
@@ -47,7 +47,7 @@ variable "arandr_version" {
 variable "arch" {
   type        = string
   default     = "amd64"
-  description = "Architecture"
+  description = "Architecture name"
 }
 
 variable "boot_wait" {
@@ -58,7 +58,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "3.20240907"
+  default = "13.4.20240917"
 }
 
 variable "ca_root_nss_version" {
@@ -86,24 +86,28 @@ variable "esxi_hardware_version" {
 }
 
 variable "esxi_remote_datastore" {
-  type    = string
-  default = "${env("ESXI_REMOTE_DATASTORE")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_DATASTORE")}"
+  description = "ESXi datastore name to create this box in."
 }
 
 variable "esxi_remote_host" {
-  type    = string
-  default = "${env("ESXI_REMOTE_HOST")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_HOST")}"
+  description = "Remote host name of the ESXi server to create this box on."
 }
 
 variable "esxi_remote_password" {
-  type      = string
-  default   = "${env("ESXI_REMOTE_PASSWORD")}"
-  sensitive = true
+  type        = string
+  default     = "${env("ESXI_REMOTE_PASSWORD")}"
+  sensitive   = true
+  description = "SSH password for the ESXi server to create this box."
 }
 
 variable "esxi_remote_username" {
-  type    = string
-  default = "${env("ESXI_REMOTE_USERNAME")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_USERNAME")}"
+  description = "SSH username for the ESXi server to create this box."
 }
 
 variable "esxi_vnc_over_websocket" {
@@ -137,18 +141,20 @@ variable "hyperv_switch_name" {
 }
 
 variable "iso_checksum" {
-  type    = string
-  default = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-RC3-amd64"
+  type        = string
+  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.4/CHECKSUM.SHA256-FreeBSD-13.4-RELEASE-amd64"
+  description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
-  type    = string
-  default = "FreeBSD-13.4-RC3-amd64-disc1.iso"
+  type        = string
+  default     = "FreeBSD-13.4-RELEASE-amd64-disc1.iso"
+  description = "File name of the install media."
 }
 
 variable "iso_path" {
-  type    = string
-  default = "releases/ISO-IMAGES/13.4"
+  type        = string
+  default     = "releases/ISO-IMAGES/13.4"
   description = "Relative path to search the install media."
 }
 
@@ -244,8 +250,9 @@ variable "variant" {
 }
 
 variable "virtualbox_guest_os_type" {
-  type    = string
-  default = "FreeBSD_64"
+  type        = string
+  default     = "FreeBSD_64"
+  description = "Guest OS type of VirtualBox box."
 }
 
 variable "virtualbox_netif" {
@@ -262,7 +269,7 @@ variable "virtualbox_partition" {
 
 variable "vm_name" {
   type        = string
-  default     = "FreeBSD-13.4-RC"
+  default     = "FreeBSD-13.4-RELEASE"
   description = "VM name of the creating box."
 }
 
@@ -273,8 +280,9 @@ variable "vmware_disk_adapter_type" {
 }
 
 variable "vmware_guest_os_type" {
-  type    = string
-  default = "freebsd-64"
+  type        = string
+  default     = "freebsd-64"
+  description = "Guest OS type of VMware box."
 }
 
 variable "vmware_hardware_version" {

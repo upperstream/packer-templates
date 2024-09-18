@@ -25,7 +25,6 @@
   * devuan-5 - Devuan 5.0 Daedalus templates
   * [more](devaun/README.md)
 * [freebsd](freebsd/README.md) - FreeBSD templates (amd64, i386, and arm64)
-  * freebsd-13.2 - FreeBSD 13.2 templates
   * freebsd-13.3 - FreeBSD 13.3 templates
   * freebsd-13.4 - FreeBSD 13.4 templates
   * freebsd-14.0 - FreeBSD 14.0 templates
