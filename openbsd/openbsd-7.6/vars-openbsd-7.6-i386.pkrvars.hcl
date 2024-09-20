@@ -1,0 +1,8 @@
+cpu = "i386"
+virtualbox_guest_os_type = "OpenBSD"
+vmware_guest_os_type = "other"
+os_ver = "snapshots"
+iso_image = "install76.iso"
+iso_checksum = "file:https://cdn.openbsd.org/pub/OpenBSD/snapshots/i386/SHA256"
+package_arch = "i386"
+qemu_binary = "qemu-system-i386"

@@ -2,6 +2,9 @@
 
 ## [Unreleased][]
 
+* Added
+  * OpenBSD: Add templates for OpenBSD 7.6 snapshot 20240919
+
 * Changed
   * openbsd-7.5: Rename Vagrantfile template from
     `Vagrantfile.OpenBSD-7.5` to `Vagrantfile.OpenBSD-7.5+`

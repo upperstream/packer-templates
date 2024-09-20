@@ -2,6 +2,12 @@
 
 ## Current OpenBSD releases
 
+* [openbsd-7.6](openbsd-7.6/README.md) - templates for OpenBSD 7.6
+  snapshot (amd64, i386, and arm64)
+  * OpenBSD 7.6
+  * OpenBSD 7.6 + X11
+  * OpenBSD 7.6 + X11 + dwm + dmenu + st + Xenodm
+  * OpenBSD 7.6 + Xfce + Xenodm
 * [openbsd-7.5](openbsd-7.5/README.md) - templates for OpenBSD 7.5
   (amd64, i386, and arm64)
   * OpenBSD 7.5
@@ -38,4 +44,4 @@
 
 - - -
 
-Copyright &copy; 2015-2024 Upperstream Software.
+Copyright &copy; 2015-2024 Upperstream.
