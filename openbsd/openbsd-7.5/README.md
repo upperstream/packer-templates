@@ -59,6 +59,8 @@ to your box list by the following command:
 
     vagrant box add OpenBSD-7.5-amd64-minimal-v7.5.20240405-virtualbox.box --name OpenBSD-7.5-amd64-minimal-v7.5.20240405 --provider virtualbox
 
+VirtualBox build intends to create amd64 box and i386 box on amd64 host.
+
 ### VMware
 
 From the terminal, invoke the following command for VMware provider:
@@ -86,7 +88,7 @@ environment variables:
 * `ESXI_REMOTE_USERNAME` - ESXi login user name
 * `ESXI_REMOTE_PASSWORD` - ESXi login password
 * `ESXI_REMOTE_DATASTORE` - ESXi datastore name where a VM image will be
-   created
+  created
 
 You also have to enable SSH on ESXi host.
 
@@ -120,8 +122,8 @@ to your box list by the following command:
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
 
-QEMU/libvirt build is tested with only amd64 and i386 guests on amd64
-host.
+QEMU/libvirt build intends to create amd64 and i386 boxes on amd64
+Linux host.
 
 ### Hyper-V
 
@@ -137,6 +139,8 @@ Then you can add the box named `OpenBSD-7.5-amd64-minimal-v7.5.20240405`
 to your box list by the following command:
 
     vagrant box add OpenBSD-7.5-amd64-minimal-v7.5.20240405-hyperv.box --name OpenBSD-7.5-amd64-minimal-v7.5.20240405 --provider hyperv
+
+Hyper-V build intends to create amd64 and i386 boxes on Windows host.
 
 ### Parallels
 
@@ -154,13 +158,12 @@ by the following command:
 
     vagrant box add OpenBSD-7.5-arm64-minimal-v7.5.20240405-parallels.box --name OpenBSD-7.5-arm64-minimal-v7.5.20240405 --provider parallels
 
-Parallels build is tested with only arm64 guest on Apple Silicon Mac
-host.
+Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 ## Default settings
 
 These default settings below are done by the file
-`Vagrantfile.OpenBSD-7.5` which will be included in the box.  Users can
+`Vagrantfile.OpenBSD-7.5+` which will be included in the box.  Users can
 override this setting by users' own `Vagrantfile`s.
 
 ### Synced Folder
@@ -222,6 +225,14 @@ The following parameters can be set at build time by supplying `-var` or
 * `boot_wait` - Override `boot_wait` default setting, which is `20s`.
 * `disk_size` - Disk size of the created VM.  Defaults to `40960`,
   which means 40GB.
+* `esxi_remote_datastore` - ESXi datastore name where a VM image will
+  be created.
+* `esxi_remote_host` - ESXi host name or IP address.
+* `esxi_remote_password` - ESXi login password.
+* `esxi_remote_username` - ESXi login user name.
+* `esxi_vnc_over_websocket` - Controls whether or not to use VNC over
+  WebSocket feature for ESXi.  Defaults to `true`.  Set to `false` if
+  your ESXi host version is prior to 6.7 which supports VNC server.
 * `headless` - Launch the virtual machine in headless mode if set to
   `true`.  Defaults to `false`.
 * `hyperv_switch_name` - Network switch name for Hyper-V provider.
@@ -250,4 +261,4 @@ The following parameters can be set at build time by supplying `-var` or
 
 - - -
 
-Copyright &copy; 2024 Upperstream Software.
+Copyright &copy; 2024 Upperstream.

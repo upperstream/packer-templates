@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased][]
+
+* Changed
+  * openbsd-7.5: Rename Vagrantfile template from
+    `Vagrantfile.OpenBSD-7.5` to `Vagrantfile.OpenBSD-7.5+`
+
 ## [20240919][]
 
 * Changed
@@ -9,7 +15,8 @@
       box name can be easily made architecture independent:
       * VM name: `FreeBSD-13.4-RELEASE-{arch}-{variant}-{boxversion}` to
         `FreeBSD-13.4-RELEASE-{variant}-{boxversion}`
-      * Box filename: `FreeBSD-13.4-RELEASE-{arch}-{variant}-{boxversion}-{provider}.box`
+      * Box filename:
+        `FreeBSD-13.4-RELEASE-{arch}-{variant}-{boxversion}-{provider}.box`
         to `FreeBSD-13.4-RELEASE-{variant}-{boxversion}-{arch}-{provider}.box`
     * Add `ssh_timeout` to define SSH timeout, whose default value is
       `60m`.
@@ -29,8 +36,9 @@
       box name can be easily made CPU independent:
       * VM name: `Ubuntu-24.04-{cpu}-{variant}` to
         `Ubuntu-24.04-{variant}`
-      * Box filename: `Ubuntu-24.04-{cpu}-{variant}-{boxversion}-{provider}.box`
-        to `Ubuntu-24.04-{variant}-{boxversion}-{cpu}-{provider}.box`
+      * Box filename:
+        `Ubuntu-24.04-{cpu}-{variant}-{boxversion}-{provider}.box` to
+        `Ubuntu-24.04-{variant}-{boxversion}-{cpu}-{provider}.box`
     * ESXi:
       * Add `esxi_guest_os_type` and `esxi_hardware_version` variables
         so that these values can be different from those for VMware
@@ -101,8 +109,15 @@
 * Changed
   * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
 
-[20240919]: https://github.com/upperstream/packer-templates/compare/20240908...20240919
-[20240908]: https://github.com/upperstream/packer-templates/compare/20240818...20240908
-[20240818]: https://github.com/upperstream/packer-templates/compare/20240730...20240818
-[20240730]: https://github.com/upperstream/packer-templates/compare/20240727...20240730
-[20240727]: https://github.com/upperstream/packer-templates/releases/tag/20240727
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20240919...HEAD
+[20240919]:
+  https://github.com/upperstream/packer-templates/compare/20240908...20240919
+[20240908]:
+  https://github.com/upperstream/packer-templates/compare/20240818...20240908
+[20240818]:
+  https://github.com/upperstream/packer-templates/compare/20240730...20240818
+[20240730]:
+  https://github.com/upperstream/packer-templates/compare/20240727...20240730
+[20240727]:
+  https://github.com/upperstream/packer-templates/releases/tag/20240727
