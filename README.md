@@ -24,7 +24,8 @@
   * devuan-4 - Devuan 4.0 Chimaera templates (amd64, i386, and arm64)
   * devuan-5 - Devuan 5.0 Daedalus templates
   * [more](devaun/README.md)
-* [freebsd](freebsd/README.md) - FreeBSD templates (amd64, i386, and arm64)
+* [freebsd](freebsd/README.md) - FreeBSD templates (amd64, i386, and
+  arm64)
   * freebsd-13.3 - FreeBSD 13.3 templates
   * freebsd-13.4 - FreeBSD 13.4 templates
   * freebsd-14.0 - FreeBSD 14.0 templates
@@ -38,6 +39,8 @@
 * [openbsd](openbsd/README.md) - OpenBSD templates
   * openbsd-7.4 - OpenBSD 7.4 templates (amd64 and i386)
   * openbsd-7.5 - OpenBSD 7.5 templates (amd64, i386, and arm64)
+  * openbsd-7.6 - OpenBSD 7.6 Snapshot templates (amd64, i386, and
+    arm64)
   * [more](openbsd/README.md)
 * [opensuse](opensuse/README.md) - openSUSE templates (amd64)
   * leap-42.3 - openSUSE Leap 42.3 templates

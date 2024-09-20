@@ -2,28 +2,28 @@ packer {
   required_version = ">= 1.7.0"
   required_plugins {
     hyperv = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.3"
     }
     parallels = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/parallels"
+      version = ">= 1.0.0"
     }
     qemu = {
-      version = ">= 1.0.9"
       source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.0"
     }
     vagrant = {
-      version = "~> 1"
       source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.4"
     }
     virtualbox = {
-      version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.0.5"
     }
     vmware = {
-      version = ">= 1.0.11"
       source  = "github.com/hashicorp/vmware"
+      version = ">= 1.0.11"
     }
   }
 }
@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "7.5.20240405"
+  default = "20240919"
 }
 
 variable "cpu" {
@@ -50,31 +50,41 @@ variable "disk_size" {
   description = "Disk size of the creating VM."
 }
 
+variable "esxi_hardware_version" {
+  type        = string
+  default     = "19"
+  description = "Virtual hardware version of ESXi box."
+}
+
 variable "esxi_remote_datastore" {
-  type    = string
-  default = "${env("ESXI_REMOTE_DATASTORE")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_DATASTORE")}"
+  description = "ESXi datastore name to create this box in."
 }
 
 variable "esxi_remote_host" {
-  type    = string
-  default = "${env("ESXI_REMOTE_HOST")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_HOST")}"
+  description = "Remote host name of the ESXi server to create this box on."
 }
 
 variable "esxi_remote_password" {
-  type      = string
-  default   = "${env("ESXI_REMOTE_PASSWORD")}"
-  sensitive = true
+  type        = string
+  default     = "${env("ESXI_REMOTE_PASSWORD")}"
+  sensitive   = true
+  description = "SSH password for the ESXi server to create this box."
 }
 
 variable "esxi_remote_username" {
-  type    = string
-  default = "${env("ESXI_REMOTE_USERNAME")}"
+  type        = string
+  default     = "${env("ESXI_REMOTE_USERNAME")}"
+  description = "SSH username for the ESXi server to create this box."
 }
 
 variable "esxi_vnc_over_websocket" {
   type        = string
   default     = "true"
-  description = "Controlls whether or not to use VNC over WebSocket feature for ESXi."
+  description = "Controls whether or not to use VNC over WebSocket feature for ESXi."
 }
 
 variable "headless" {
@@ -90,13 +100,15 @@ variable "hyperv_switch_name" {
 }
 
 variable "iso_checksum" {
-  type    = string
-  default = "file:https://cdn.openbsd.org/pub/OpenBSD/7.5/amd64/SHA256"
+  type        = string
+  default     = "file:https://cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/SHA256"
+  description = "SHA256 checksum of the install media."
 }
 
 variable "iso_image" {
-  type    = string
-  default = "install75.iso"
+  type        = string
+  default     = "install76.iso"
+  description = "File name of the install media."
 }
 
 variable "iso_url" {
@@ -119,7 +131,7 @@ variable "num_cpus" {
 
 variable "os_ver" {
   type    = string
-  default = "7.5"
+  default = "snapshots"
 }
 
 variable "package_arch" {
@@ -135,8 +147,9 @@ variable "package_server" {
 }
 
 variable "qemu_binary" {
-  type    = string
-  default = "qemu-system-x86_64"
+  type        = string
+  default     = "qemu-system-x86_64"
+  description = "Name of QEMU binary"
 }
 
 variable "root_password" {
@@ -161,17 +174,18 @@ variable "vagrant_username" {
 
 variable "variant" {
   type    = string
-  default = "xfce"
+  default = "x11"
 }
 
 variable "virtualbox_guest_os_type" {
-  type    = string
-  default = "OpenBSD_64"
+  type        = string
+  default     = "OpenBSD_64"
+  description = "Guest OS type of VirtualBox box."
 }
 
 variable "vm_name" {
   type        = string
-  default     = "OpenBSD-7.5-amd64"
+  default     = "OpenBSD-7.6-snapshot"
   description = "VM name of the creating box."
 }
 
@@ -188,7 +202,7 @@ variable "vmware_guest_os_type" {
 
 variable "vmware_hardware_version" {
   type        = string
-  default     = "9"
+  default     = "13"
   description = "Hardware version for VMware box."
 }
 
@@ -225,6 +239,12 @@ source "hyperv-iso" "default" {
       install_x11 = {
         "Do you expect to run the X Window System" = "yes"
       },
+      location_of_sets = {
+        "Location of sets" = "cd0"
+      },
+      server_directory = {
+        "Server directory" = "pub/OpenBSD/${var.os_ver}/${var.cpu}"
+      },
       set_names = {
         "Set name(s)" = "-c* -game*"
       }
@@ -233,7 +253,7 @@ source "hyperv-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-hyperv"
+  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.cpu}-hyperv"
   shutdown_command = "shutdown -h -p now"
   ssh_password     = var.root_password
   ssh_username     = "root"
@@ -254,6 +274,12 @@ source "parallels-iso" "default" {
       install_x11 = {
         "Do you expect to run the X Window System" = "yes"
       },
+      location_of_sets = {
+        "Location of sets" = "cd0"
+      },
+      server_directory = {
+        "Server directory" = "pub/OpenBSD/${var.os_ver}/${var.cpu}"
+      },
       set_names = {
         "Set name(s)" = "-c* -game*"
       }
@@ -262,7 +288,7 @@ source "parallels-iso" "default" {
   iso_checksum           = "${var.iso_checksum}"
   iso_urls               = local.iso_urls
   memory                 = var.mem_size
-  output_directory       = "output/${var.vm_name}-${var.variant}-v${var.box_version}-hyperv"
+  output_directory       = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.cpu}-parallels"
   parallels_tools_flavor = "other"
   parallels_tools_mode   = "disable"
   shutdown_command       = "shutdown -h -p now"
@@ -287,6 +313,12 @@ source "qemu" "default" {
       install_x11 = {
         "Do you expect to run the X Window System" = "yes"
       },
+      location_of_sets = {
+        "Location of sets" = "cd0"
+      },
+      server_directory = {
+        "Server directory" = "pub/OpenBSD/${var.os_ver}/${var.cpu}"
+      },
       set_names = {
         "Set name(s)" = "-c* -game*"
       }
@@ -296,7 +328,7 @@ source "qemu" "default" {
   iso_urls            = local.iso_urls
   memory              = var.mem_size
   net_device          = "virtio-net"
-  output_directory    = "output/${var.vm_name}-${var.variant}-v${var.box_version}-qemu"
+  output_directory    = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.cpu}-qemu"
   qemu_binary         = var.qemu_binary
   shutdown_command    = "shutdown -h -p now"
   ssh_password        = var.root_password
@@ -320,6 +352,12 @@ source "virtualbox-iso" "default" {
       install_x11 = {
         "Do you expect to run the X Window System" = "yes"
       },
+      location_of_sets = {
+        "Location of sets" = "cd0"
+      },
+      server_directory = {
+        "Server directory" = "pub/OpenBSD/${var.os_ver}/${var.cpu}"
+      },
       set_names = {
         "Set name(s)" = "-c* -game*"
       }
@@ -328,7 +366,7 @@ source "virtualbox-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-virtualbox"
+  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.cpu}-virtualbox"
   shutdown_command = "shutdown -h -p now"
   ssh_password     = var.root_password
   ssh_timeout      = "10000s"
@@ -355,6 +393,12 @@ source "vmware-iso" "default" {
       install_x11 = {
         "Do you expect to run the X Window System" = "yes"
       },
+      location_of_sets = {
+        "Location of sets" = "cd0"
+      },
+      server_directory = {
+        "Server directory" = "pub/OpenBSD/${var.os_ver}/${var.cpu}"
+      },
       set_names = {
         "Set name(s)" = "-c* -game*"
       }
@@ -365,7 +409,7 @@ source "vmware-iso" "default" {
   memory               = var.mem_size
   network              = "nat"
   network_adapter_type = var.vmware_network_adapter_type
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-vmware"
+  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.cpu}-vmware"
   shutdown_command     = "shutdown -h -p now"
   ssh_password         = var.root_password
   ssh_timeout          = "10000s"
@@ -378,7 +422,6 @@ source "vmware-iso" "default" {
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "svga.vramSize"             = "12582912"
     "usb_xhci.present"          = "TRUE"
     "vhv.enable"                = "TRUE"
   }
@@ -397,6 +440,12 @@ source "vmware-iso" "esxi" {
       install_x11 = {
         "Do you expect to run the X Window System" = "yes"
       },
+      location_of_sets = {
+        "Location of sets" = "cd0"
+      },
+      server_directory = {
+        "Server directory" = "pub/OpenBSD/${var.os_ver}/${var.cpu}"
+      },
       set_names = {
         "Set name(s)" = "-c* -game*"
       }
@@ -407,7 +456,7 @@ source "vmware-iso" "esxi" {
   iso_urls            = local.iso_urls
   memory              = var.mem_size
   network             = "bridged"
-  output_directory    = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  output_directory    = "${var.vm_name}-${var.variant}-v${var.box_version}-${var.cpu}"
   remote_datastore    = var.esxi_remote_datastore
   remote_host         = var.esxi_remote_host
   remote_password     = var.esxi_remote_password
@@ -443,18 +492,15 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "GDM=gdm-45.0.1p1",
       "PKG_PATH=${var.package_server}/${var.os_ver}/packages/${var.package_arch}",
-      "RSYNC=rsync-3.2.7p1",
+      "RSYNC=rsync-3.3.0p2",
       "VAGRANT_USER=${var.vagrant_username}",
       "VAGRANT_GROUP=${var.vagrant_username}",
-      "VAGRANT_PASSWORD=${var.vagrant_password}",
-      "XFCE=xfce-4.18.1"
+      "VAGRANT_PASSWORD=${var.vagrant_password}"
     ]
     scripts = [
       "../provisioners/vagrant_openbsd7.sh",
-      "../provisioners/x11_openbsd6.5+.sh",
-      "../provisioners/xfce_openbsd7.sh"
+      "../provisioners/x11_openbsd6.5+.sh"
     ]
   }
 
@@ -477,7 +523,7 @@ build {
       "virtualbox-iso.default",
       "vmware-iso.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-{{ .Provider }}.box"
+    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-${var.cpu}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.OpenBSD-7.5+"
   }
 
@@ -487,7 +533,7 @@ build {
     only = [
       "qemu.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-{{ .Provider }}.box"
+    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-${var.cpu}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.OpenBSD-7.5+"
   }
 }
