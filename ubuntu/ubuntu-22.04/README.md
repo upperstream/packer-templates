@@ -190,6 +190,11 @@ or `-var-file` command line options to `packer`:
 * `disk_size` - Disk size of the created box.  Defaults to `51200`,
   which means 50GB.
 * `esxi_boot_mode` - Boot mode for ESXi box.  Defaults to `efi`.
+* `esxi_guest_os_type` - Guest OS type of ESXi box.  Defaults to
+  `debian11-64`.  Change to `other5xlinux-64` or `other5xlinux` if you
+  want to use USB 3.1 controller with this box.
+* `esxi_hardware_version` - Virtual hardware version of ESXi box.
+  Defaults to `19`.
 * `esxi_remote_datastore` - ESXi datastore name to create this box in.
 * `esxi_remote_host` - Remote host name of the ESXi server to create
   this box on.
@@ -235,7 +240,7 @@ or `-var-file` command line options to `packer`:
 * `vmware_disk_adapter_type` - Disk adapter type for VMware box.
   Defaults to `scsi`.
 * `vmware_hardware_version` - Virtual hardware version of VMware box.
-  Defaults to `9`.
+  Defaults to `13`.
 * `vmware_network` - Network type of VMware box.  Defaults to `nat`.
 * `vmware_network_adapter_type` - Network adapter type of VMware box.
   Defaults to `e1000`.
@@ -244,4 +249,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2023 Upperstream Software.
+Copyright &copy; 2023, 2024 Upperstream.

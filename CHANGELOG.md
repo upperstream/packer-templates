@@ -3,11 +3,18 @@
 ## [Unreleased][]
 
 * Changed
-  * ubuntu-22.04: Change naming convention for VM name and box file name so that
-    box name can be easily made CPU independent:
-    * VM name: `Ubuntu-22.04-{cpu}-{variant}` to `Ubuntu-22.04-{variant}`
-    * Box filename: `Ubuntu-22.04-{cpu}-{variant}-{boxversion}-{provider}.box` to
-      `Ubuntu-22.04-{variant}-{boxversion}-{cpu}-{provider}.box`
+  * ubuntu-22.04
+    * Change naming convention for VM name and box file name so that
+      box name can be easily made CPU independent:
+      * VM name: `Ubuntu-22.04-{cpu}-{variant}` to `Ubuntu-22.04-{variant}`
+      * Box filename: `Ubuntu-22.04-{cpu}-{variant}-{boxversion}-{provider}.box`
+        to `Ubuntu-22.04-{variant}-{boxversion}-{cpu}-{provider}.box`
+    * ESXi: Add `esxi_hardware_version` variable so that the virtual
+      hardware version for ESXi build can be different from the one for
+      VMware build.  Default value is `19`.
+    * VMware: Virtual hardware version is now `13` as [Packer Plugin
+      for VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
+      requires the virtual hardware version `13` or greater.
 
 ## [20241015][]
 

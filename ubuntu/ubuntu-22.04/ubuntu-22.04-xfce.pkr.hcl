@@ -54,6 +54,18 @@ variable "esxi_boot_mode" {
   default = "efi"
 }
 
+variable "esxi_guest_os_type" {
+  type        = string
+  default     = "ubuntu-64"
+  description = "Guest OS type of ESXi box.  Change to `other5xlinux-64` or `other5xlinux` if you want to use USB 3.1 controller with this box."
+}
+
+variable "esxi_hardware_version" {
+  type        = string
+  default     = "19"
+  description = "Virtual hardware version of ESXi box."
+}
+
 variable "esxi_remote_datastore" {
   type        = string
   default     = "${env("ESXI_REMOTE_DATASTORE")}"
@@ -241,8 +253,8 @@ variable "vmware_guest_os_type" {
 
 variable "vmware_hardware_version" {
   type        = string
-  default     = "9"
-  description = "Virtual hardware verison of VMware box."
+  default     = "13"
+  description = "Virtual hardware version of VMware box."
 }
 
 variable "vmware_network" {
@@ -476,7 +488,7 @@ source "vmware-iso" "esxi" {
   cpus          = var.num_cpus
   disk_size     = var.disk_size
   disk_type_id  = "thin"
-  guest_os_type = var.vmware_guest_os_type
+  guest_os_type = var.esxi_guest_os_type
   headless      = var.headless
   http_content = {
     "/user-data" = templatefile("${path.root}/http/user-data.pkrtpl", {
@@ -506,6 +518,7 @@ source "vmware-iso" "esxi" {
   ssh_port                = 22
   ssh_timeout             = var.ssh_timeout
   ssh_username            = var.ssh_username
+  version                 = var.esxi_hardware_version
   vm_name                 = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
