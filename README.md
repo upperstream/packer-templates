@@ -36,11 +36,10 @@
   * netbsd-9.4 - NetBSD 9.4 templates
   * netbsd-10.0 - NetBSD 10.0 templates (amd64, i386, and aarch64)
   * [more](netbsd/README.md)
-* [openbsd](openbsd/README.md) - OpenBSD templates
-  * openbsd-7.4 - OpenBSD 7.4 templates (amd64 and i386)
-  * openbsd-7.5 - OpenBSD 7.5 templates (amd64, i386, and arm64)
-  * openbsd-7.6 - OpenBSD 7.6 Snapshot templates (amd64, i386, and
-    arm64)
+* [openbsd](openbsd/README.md) - OpenBSD templates (amd64, i386, and
+  arm64)
+  * openbsd-7.5 - OpenBSD 7.5 templates
+  * openbsd-7.6 - OpenBSD 7.6 templates
   * [more](openbsd/README.md)
 * [opensuse](opensuse/README.md) - openSUSE templates (amd64)
   * leap-42.3 - openSUSE Leap 42.3 templates
