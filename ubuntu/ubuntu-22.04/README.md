@@ -1,12 +1,12 @@
-# Packer templates for Ubuntu 22.04.3 LTS
+# Packer templates for Ubuntu 22.04.5 LTS
 
-Templates to create Vagrant boxes for Ubuntu 22.04.3 LTS (amd64 and
+Templates to create Vagrant boxes for Ubuntu 22.04.5 LTS (amd64 and
 arm64).
 
 ## Prerequisites
 
-* [Packer][] v1.8.7+
-* [Vagrant][] v2.3.6+
+* [Packer][] v1.10+
+* [Vagrant][] v2.4+
 * [VirtualBox][] v7.0+
 * [VMware][] Workstation v17.0+ / VMware Fusion v13.0+
 * [ESXi][] (vSphere Hypervisor) v7.0+
@@ -48,15 +48,15 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso.default ubuntu-22.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-22.04-amd64-minimal-v2022.3.20230811-virtualbox.box`
+You will find a vagrant box file named `Ubuntu-22.04-minimal-v2204.5.20240912-amd64-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-22.04-amd64-minimal-v2022.3.20230811`
+Then you can add the box named `Ubuntu-22.04-minimal-v2204.5.20240912`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-22.04-amd64-minimal-v2022.3.20230811-virtualbox.box --name Ubuntu-22.04-amd64-minimal-v2022.3.20230811 --provider virtualbox
+    vagrant box add Ubuntu-22.04-minimal-v2204.5.20240912-amd64-virtualbox.box --name Ubuntu-22.04-minimal-v2204.5.20240912 --provider virtualbox
 
-VirtualBox build intends to create amd64 box on amd64 device.
+VirtualBox build intends to create amd64 box on amd64 host.
 
 ### VMware
 
@@ -64,16 +64,16 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso.default ubuntu-22.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-22.04-amd64-minimal-v2022.3.20230811-vmware.box`
+You will find a vagrant box file named `Ubuntu-22.04-minimal-v2204.5.20240912-amd64-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-22.04-amd64-minimal-v2022.3.20230811`
+Then you can add the box named `Ubuntu-22.04-minimal-v2204.5.20240912`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-22.04-amd64-minimal-v2022.3.20230811-vmware.box --name Ubuntu-22.04-amd64-minimal-v2022.3.20230811 --provider vmware_desktop
+    vagrant box add Ubuntu-22.04-minimal-v2204.5.20240912-amd64-vmware.box --name Ubuntu-22.04-minimal-v2204.5.20240912 --provider vmware_desktop
 
-VMware build intends to create amd64 box on amd64 device using VMware
-Workstation, or create arm64 box on Apple Silicon Mac device using
+VMware build intends to create amd64 box on amd64 host using VMware
+Workstation, or create arm64 box on Apple Silicon Mac host using
 VMware Fusion.
 
 ### ESXi
@@ -99,26 +99,24 @@ feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
     packer build -only=vmware-iso.esxi -var esxi-vnc-over-websocket=false ubuntu-22.04-minimal.pkr.hcl
 
-(Note that created VM will be unregistered from your Inventory.)
-
 ### QEMU/libvirt
 
 From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu.default ubuntu-22.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-22.04-amd64-minimal-v2022.3.20230811-libvirt.box` in the same
+You will find a vagrant box file named `Ubuntu-22.04-minimal-v2204.5.20240912-amd64-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-22.04-amd64-minimal-v2022.3.20230811`
+Then you can add the box named `Ubuntu-22.04-minimal-v2204.5.20240912`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-22.04-amd64-minimal-v2022.3.20230811-libvirt.box --name Ubuntu-22.04-amd64-minimal-v2022.3.20230811 --provider libvirt
+    vagrant box add Ubuntu-22.04-minimal-v2204.5.20240912-amd64-libvirt.box --name Ubuntu-22.04-minimal-v2204.5.20240912 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
 
-QEMU build intends to create amd64 box on amd64 Linux device.
+QEMU build intends to create amd64 box on amd64 Linux host.
 
 ### Hyper-V
 
@@ -127,15 +125,15 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default ubuntu-22.04-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Ubuntu-22.04-amd64-minimal-v2022.3.20230811-hyperv.box` in the same
+`Ubuntu-22.04-minimal-v2204.5.20240912-amd64-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-22.04-amd64-minimal-v2022.3.20230811`
+Then you can add the box named `Ubuntu-22.04-minimal-v2204.5.20240912`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-22.04-amd64-minimal-v2022.3.20230811-hyperv.box --name Ubuntu-22.04-amd64-minimal-v2022.3.20230811 --provider hyperv
+    vagrant box add Ubuntu-22.04-minimal-v2204.5.20240912-amd64-hyperv.box --name Ubuntu-22.04-minimal-v2204.5.20240912 --provider hyperv
 
-Hyper-V build intends to create amd64 box on Windows device.
+Hyper-V build intends to create amd64 box on Windows host.
 
 ### Parallels
 
@@ -143,26 +141,27 @@ From the terminal, invoke the following command for Parallels provider:
 
     packer build -only=parallels-iso.default -var-file vars-ubuntu-22.04-arm64.pkrvars.hcl ubuntu-22.04-minimal.pkr.hcl
 
-You will find a vagrant box file named `Ubuntu-22.04-arm64-minimal-v2022.3.20230811-parallels.box`
+You will find a vagrant box file named `Ubuntu-22.04-minimal-v2204.5.20240912-amd64-parallels.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-22.04-arm64-minimal-v2022.3.20230811`
+Then you can add the box named `Ubuntu-22.04-minimal-v2204.5.20240912`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-22.04-arm64-minimal-v2022.3.20230811-parallels.box --name Ubuntu-22.04-arm64-minimal-v2022.3.20230811 --provider parallels
+    vagrant box add Ubuntu-22.04-minimal-v2204.5.20240912-amd64-parallels.box --name Ubuntu-22.04-minimal-v2204.5.20240912 --provider parallels
 
-Parallels build intends to create arm64 box on Apple Silicon Mac device.
+Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 ## Variants
 
 * `ubuntu-22.04-minimal.pkr.hcl` - Ubuntu Server 22.04 LTS
 * `ubuntu-22.04-dwm.pkr.hcl` - Ubuntu 22.04 LTS + [X.org][],
-  [suckless][] tools, [ARandR][], and [xrdp][].
+  [dwm][], [suckless][] tools, [ARandR][], and [xrdp][].
 * `ubuntu-22.04-lxqt.pkr.hcl` - Ubuntu 22.04 LTS + [LXQt][]
 * `ubuntu-22.04-xfce.pkr.hcl` - Ubuntu 22.04 LTS + [Xfce][]
 
 [ARandR]: https://christian.amsuess.com/tools/arandr/
     "ARandR: Another XRandR GUI"
+[dwm]: https://dwm.suckless.org/ "dwm - dynamic window manager"
 [LXQt]: https://lxqt-project.org/ "LXQt - The Lightweight Qt Desktop
     Environment"
 [suckless]: http://suckless.org/ "suckless.org software that sucks less"
@@ -170,11 +169,11 @@ Parallels build intends to create arm64 box on Apple Silicon Mac device.
 [Xfce]: https://xfce.org/ "Xfce Desktop Environment"
 [xrdp]: http://www.xrdp.org/ "xrdp"
 
-## Installer CD images
+## Installer ISO images
 
-While `ubuntu-22.04-*.pkr.hcl` templates use `ubuntu-22.04.3-live-server-amd64.iso`
+While `ubuntu-22.04-*.pkr.hcl` templates use `ubuntu-22.04.5-live-server-amd64.iso`
 ISO image to create amd64 boxes by default, using `vars-ubuntu-22.04-arm64.pkrvars.hcl`
-creates arm64 boxes with `ubuntu-22.04.3-live-server-arm64.iso` ISO
+creates arm64 boxes with `ubuntu-22.04.5-live-server-arm64.iso` ISO
 image:
 
     packer build -var-file=vars-ubuntu-22.04-arm64.pkrvars.hcl ubuntu-22.04-minimal.pkr.hcl
@@ -190,6 +189,11 @@ or `-var-file` command line options to `packer`:
 * `disk_size` - Disk size of the created box.  Defaults to `51200`,
   which means 50GB.
 * `esxi_boot_mode` - Boot mode for ESXi box.  Defaults to `efi`.
+* `esxi_guest_os_type` - Guest OS type of ESXi box.  Defaults to
+  `debian11-64`.  Change to `other5xlinux-64` or `other5xlinux` if you
+  want to use USB 3.1 controller with this box.
+* `esxi_hardware_version` - Virtual hardware version of ESXi box.
+  Defaults to `19`.
 * `esxi_remote_datastore` - ESXi datastore name to create this box in.
 * `esxi_remote_host` - Remote host name of the ESXi server to create
   this box on.
@@ -217,7 +221,7 @@ or `-var-file` command line options to `packer`:
 * `qemu_display` - What QEMU `-display` option to use.  Defaults to an
   empty string.
 * `qemu_use_default_display` - Determines to pass a `-display` option
-  to QEMU or not.  Defaults to `false`.
+  to QEMU or not.  Defaults to `true`.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to
   `vagrant`.
 * `vagrant_ssh_public_key` - SSH public key for Vagrant user.  Defaults
@@ -235,7 +239,7 @@ or `-var-file` command line options to `packer`:
 * `vmware_disk_adapter_type` - Disk adapter type for VMware box.
   Defaults to `scsi`.
 * `vmware_hardware_version` - Virtual hardware version of VMware box.
-  Defaults to `9`.
+  Defaults to `13`.
 * `vmware_network` - Network type of VMware box.  Defaults to `nat`.
 * `vmware_network_adapter_type` - Network adapter type of VMware box.
   Defaults to `e1000`.
@@ -244,4 +248,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2023 Upperstream Software.
+Copyright &copy; 2023, 2024 Upperstream.

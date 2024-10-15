@@ -50,7 +50,7 @@
   * tinycorelinux-9 - Tiny Core Linux v9.0 templates
 * [ubuntu](ubuntu/README.md) - Ubuntu templates (amd64 and arm64)
   * ubuntu-20.04 - Ubuntu 20.04.6 templates
-  * ubuntu-22.04 - Ubuntu 22.04.3 templates
+  * ubuntu-22.04 - Ubuntu 22.04.5 templates
   * ubuntu-24.04 - Ubuntu 24.04.1 templates
   * [more](ubuntu/README.md)
 
