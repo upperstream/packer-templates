@@ -1,4 +1,4 @@
-# Packer templates for OpenBSD 7.6 snapshot
+# Packer templates for OpenBSD 7.6
 
 Templates to create Vagrant boxes for OpenBSD 7.6 (amd64, i386, and
 arm64).
@@ -51,13 +51,13 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default openbsd-7.6-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`OpenBSD-7.6-snapshot-minimal-v20240919-amd64-virtualbox.box` in the same
+`OpenBSD-7.6-minimal-v7.6.20241007-amd64-virtualbox.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-7.6-snapshot-minimal-v20240919`
-to your box list by the following command:
+Then you can add the box named `OpenBSD-7.6-minimal-v7.6.20241007` to
+your box list by the following command:
 
-    vagrant box add OpenBSD-7.6-snapshot-minimal-v20240919-amd64-virtualbox.box --name OpenBSD-7.6-snapshot-minimal-v20240919 --provider virtualbox
+    vagrant box add OpenBSD-7.6-minimal-v7.6.20241007-amd64-virtualbox.box --name OpenBSD-7.6-minimal-v7.6.20241007 --provider virtualbox
 
 VirtualBox build intends to create amd64 box and i386 box on amd64 host.
 
@@ -68,13 +68,13 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default openbsd-7.6-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`OpenBSD-7.6-snapshot-minimal-v20240919-amd64-vmware.box` in the same
+`OpenBSD-7.6-minimal-v7.6.20241007-amd64-vmware.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-7.6-snapshot-minimal-v20240919`
-to your box list by the following command:
+Then you can add the box named `OpenBSD-7.6-minimal-v7.6.20241007` to
+your box list by the following command:
 
-    vagrant box add OpenBSD-7.6-snapshot-minimal-v20240919-amd64-vmware.box --name OpenBSD-7.6-snapshot-minimal-v20240919 --provider vmware_desktop
+    vagrant box add OpenBSD-7.6-minimal-v7.6.20241007-amd64-vmware.box --name OpenBSD-7.6-minimal-v7.6.20241007 --provider vmware_desktop
 
 VMware build intends to create amd64 and i386 boxes on amd64 host, and
 arm64 box on Apple Silicon Mac host.
@@ -111,13 +111,13 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default openbsd-7.6-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`OpenBSD-7.6-snapshot-minimal-v20240919-amd64-libvirt.box` in the same
+`OpenBSD-7.6-minimal-v7.6.20241007-amd64-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-7.6-snapshot-minimal-v20240919`
+Then you can add the box named `OpenBSD-7.6-minimal-v7.6.20241007`
 to your box list by the following command:
 
-    vagrant box add OpenBSD-7.6-snapshot-minimal-v20240919-amd64-libvirt.box --name OpenBSD-7.6-snapshot-minimal-v20240919 --provider libvirt
+    vagrant box add OpenBSD-7.6-minimal-v7.6.20241007-amd64-libvirt.box --name OpenBSD-7.6-minimal-v7.6.20241007 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -132,13 +132,13 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default openbsd-7.6-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`OpenBSD-7.6-snapshot-minimal-v20240919-amd64-hyperv.box` in the same
+`OpenBSD-7.6-minimal-v7.6.20241007-amd64-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-7.6-snapshot-minimal-v20240919`
-to your box list by the following command:
+Then you can add the box named `OpenBSD-7.6-minimal-v7.6.20241007` to
+your box list by the following command:
 
-    vagrant box add OpenBSD-7.6-snapshot-minimal-v20240919-amd64-hyperv.box --name OpenBSD-7.6-snapshot-minimal-v20240919 --provider hyperv
+    vagrant box add OpenBSD-7.6-minimal-v7.6.20241007-amd64-hyperv.box --name OpenBSD-7.6-minimal-v7.6.20241007 --provider hyperv
 
 Hyper-V build intends to create amd64 and i386 boxes on Windows host.
 
@@ -149,20 +149,21 @@ From the terminal, invoke the following command for Parallels provider:
     packer build -only=parallels-iso.default -var-file vars-openbsd-7.6-arm64.pkrvars.hcl openbsd-7.6-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`OpenBSD-7.6-snapshot-minimal-v120240919-arm64-parallels.box` in the same directory after the command has succeeded.
+`OpenBSD-7.6-minimal-v120240919-arm64-parallels.box` in the same
+directory after the command has succeeded.
 
-Then you can add the box named `OpenBSD-7.6-snapshot-minimal-v20240919` to your
-box list by the following command:
+Then you can add the box named `OpenBSD-7.6-minimal-v7.6.20241007` to
+your box list by the following command:
 
-    vagrant box add OpenBSD-7.6-snapshot-minimal-v20240919-arm64-parallels.box --name OpenBSD-7.6-snapshot-minimal-v20240919 --provider parallels
+    vagrant box add OpenBSD-7.6-minimal-v7.6.20241007-arm64-parallels.box --name OpenBSD-7.6-minimal-v7.6.20241007 --provider parallels
 
 Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 ## Default settings
 
-These default settings below are done by the file
-`Vagrantfile.OpenBSD-7.5+` which will be included in the box.  Users
-can override this setting by users' own `Vagrantfile`s.
+These default settings below are done by the file `Vagrantfile.OpenBSD-7.5+`
+which will be included in the box.  Users can override this setting by
+users' own `Vagrantfile`s.
 
 ### Synced Folder
 

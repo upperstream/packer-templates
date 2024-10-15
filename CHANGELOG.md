@@ -1,10 +1,9 @@
 # Changelog
 
-## [Unreleased][]
+## [20241015][]
 
 * Added
-  * OpenBSD: Add templates for OpenBSD 7.6 snapshot 20240919
-
+  * OpenBSD: Add templates for OpenBSD 7.6
 * Changed
   * openbsd-7.5: Rename Vagrantfile template from
     `Vagrantfile.OpenBSD-7.5` to `Vagrantfile.OpenBSD-7.5+`
@@ -94,7 +93,6 @@
 
 * Added
   * freebsd-13.4: Templates for FreeBSD 13.4-BETA3.
-
 * Changed
   * alpine-3.17: Upgrade templates to Alpine Linux 3.17.9.
   * alpine-3.18: Upgrade templates to Alpine Linux 3.18.8.
@@ -108,12 +106,11 @@
 
 * Added
   * Add `CHANGELOG.md` file (this file) to record notable changes.
-
 * Changed
   * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
 
-[Unreleased]:
-  https://github.com/upperstream/packer-templates/compare/20240919...HEAD
+[20241015]:
+  https://github.com/upperstream/packer-templates/compare/20240919...20241015
 [20240919]:
   https://github.com/upperstream/packer-templates/compare/20240908...20240919
 [20240908]:

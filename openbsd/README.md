@@ -2,27 +2,22 @@
 
 ## Current OpenBSD releases
 
+Both support amd64, i386, and arm64.
+
 * [openbsd-7.6](openbsd-7.6/README.md) - templates for OpenBSD 7.6
-  snapshot (amd64, i386, and arm64)
   * OpenBSD 7.6
   * OpenBSD 7.6 + X11
   * OpenBSD 7.6 + X11 + dwm + dmenu + st + Xenodm
   * OpenBSD 7.6 + Xfce + Xenodm
 * [openbsd-7.5](openbsd-7.5/README.md) - templates for OpenBSD 7.5
-  (amd64, i386, and arm64)
   * OpenBSD 7.5
   * OpenBSD 7.5 + X11
   * OpenBSD 7.5 + X11 + dwm + dmenu + st + Xenodm
   * OpenBSD 7.5 + Xfce + Xenodm
-* [openbsd-7.4](openbsd-7.4/README.md) - templates for OpenBSD 7.4
-   (amd64 and i386)
-  * OpenBSD 7.4
-  * OpenBSD 7.4 + X11
-  * OpenBSD 7.4 + X11 + dwm + dmenu + st + Xenodm
-  * OpenBSD 7.4 + Xfce + Xenodm
 
 ## Outdated OpenBSD releases (amd64 and i386)
 
+* [openbsd-7.4](openbsd-7.4/README.md) - templates for OpenBSD 7.4
 * [openbsd-7.3](openbsd-7.3/README.md) - templates for OpenBSD 7.3
 * [openbsd-7.2](openbsd-7.2/README.md) - templates for OpenBSD 7.2
 * [openbsd-7.1](openbsd-7.1/README.md) - templates for OpenBSD 7.1

@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "20240919"
+  default = "7.6.20241007"
 }
 
 variable "cpu" {
@@ -101,7 +101,7 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/SHA256"
+  default     = "file:https://cdn.openbsd.org/pub/OpenBSD/7.6/amd64/SHA256"
   description = "SHA256 checksum of the install media."
 }
 
@@ -131,7 +131,7 @@ variable "num_cpus" {
 
 variable "os_ver" {
   type    = string
-  default = "snapshots"
+  default = "7.6"
 }
 
 variable "package_arch" {
@@ -185,7 +185,7 @@ variable "virtualbox_guest_os_type" {
 
 variable "vm_name" {
   type        = string
-  default     = "OpenBSD-7.6-snapshot"
+  default     = "OpenBSD-7.6"
   description = "VM name of the creating box."
 }
 
