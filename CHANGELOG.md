@@ -12,6 +12,7 @@
     * ESXi: Add `esxi_hardware_version` variable so that the virtual
       hardware version for ESXi build can be different from the one for
       VMware build.  Default value is `19`.
+    * QEMU: Use default display instead of GTK
     * VMware: Virtual hardware version is now `13` as [Packer Plugin
       for VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
       requires the virtual hardware version `13` or greater.

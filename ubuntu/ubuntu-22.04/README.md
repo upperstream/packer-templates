@@ -222,7 +222,7 @@ or `-var-file` command line options to `packer`:
 * `qemu_display` - What QEMU `-display` option to use.  Defaults to an
   empty string.
 * `qemu_use_default_display` - Determines to pass a `-display` option
-  to QEMU or not.  Defaults to `false`.
+  to QEMU or not.  Defaults to `true`.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to
   `vagrant`.
 * `vagrant_ssh_public_key` - SSH public key for Vagrant user.  Defaults

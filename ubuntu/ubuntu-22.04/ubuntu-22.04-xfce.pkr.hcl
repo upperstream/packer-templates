@@ -159,13 +159,15 @@ variable "qemu_boot_mode" {
 }
 
 variable "qemu_display" {
-  type    = string
-  default = "gtk"
+  type        = string
+  default     = ""
+  description = "Display name for QEMU box."
 }
 
 variable "qemu_use_default_display" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = true
+  description = "Use the default display for QEMU box if true."
 }
 
 variable "ssh_password" {
