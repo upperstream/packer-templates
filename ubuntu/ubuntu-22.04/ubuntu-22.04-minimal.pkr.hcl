@@ -1,21 +1,29 @@
 packer {
   required_version = ">= 1.7.0"
   required_plugins {
+    hyperv = {
+      source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.3"
+    }
     parallels = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/parallels"
+      version = ">= 1.0.0"
     }
     qemu = {
-      version = ">= 1.0.9"
       source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.0"
+    }
+    vagrant = {
+      source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.4"
     }
     virtualbox = {
-      version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.0.5"
     }
     vmware = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/vmware"
+      version = ">= 1.0.11"
     }
   }
 }
@@ -33,7 +41,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "2204.3.20230811"
+  default     = "2204.5.20240912"
   description = "Version number of this Vagrant box."
 }
 
@@ -115,14 +123,20 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://releases.ubuntu.com/22.04.3/SHA256SUMS"
+  default     = "file:https://releases.ubuntu.com/22.04.5/SHA256SUMS"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "ubuntu-22.04.3-live-server-amd64.iso"
+  default     = "ubuntu-22.04.5-live-server-amd64.iso"
   description = "File name of the install media."
+}
+
+variable "iso_url" {
+  type        = string
+  default     = null
+  description = "Full path to the install media.  This URL will be the first preference if set."
 }
 
 variable "mem_size" {
@@ -139,12 +153,13 @@ variable "num_cpus" {
 
 variable "os_version" {
   type    = string
-  default = "22.04.3"
+  default = "22.04.5"
 }
 
 variable "parallels_boot_mode" {
-  type    = string
-  default = "efi"
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for Parallels box."
 }
 
 variable "parallels_tools_flavor" {
@@ -153,9 +168,15 @@ variable "parallels_tools_flavor" {
   description = "The flavour name of Parallels Tools."
 }
 
-variable "qemu_boot_mode" {
+variable "release" {
   type    = string
-  default = "efi"
+  default = "release"
+}
+
+variable "qemu_boot_mode" {
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for QEMU box."
 }
 
 variable "qemu_display" {
@@ -173,6 +194,7 @@ variable "qemu_use_default_display" {
 variable "ssh_password" {
   type        = string
   default     = "vagrant"
+  sensitive   = false
   description = "Password for the root user of this box."
 }
 
@@ -191,7 +213,7 @@ variable "ssh_username" {
 variable "vagrant_password" {
   type        = string
   default     = "vagrant"
-  sensitive   = true
+  sensitive   = false
   description = "Password for the Vagrant user of this box."
 }
 
@@ -208,8 +230,9 @@ variable "vagrant_username" {
 }
 
 variable "virtualbox_boot_mode" {
-  type    = string
-  default = "efi"
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for VirtualBox box."
 }
 
 variable "virtualbox_version" {
@@ -231,8 +254,9 @@ variable "vm_name_base" {
 }
 
 variable "vmware_boot_mode" {
-  type    = string
-  default = "efi"
+  type        = string
+  default     = "efi"
+  description = "`bios` or `efi` for VMware box."
 }
 
 variable "vmware_cdrom_adapter_type" {
@@ -299,20 +323,21 @@ locals {
   boot_command = [
     "%s<left><left><left><left>autoinstall <wait>ds='nocloud-net;<wait>s=http://{{.HTTPIP}}:<wait>{{.HTTPPort}}/' <wait>net.ifnames=0 biosdevnames=0 <wait5>%s",
   ]
-  iso_urls = [
+  iso_urls = compact([
+    var.iso_url,
     "iso/${var.iso_name}",
     "https://releases.ubuntu.com/${var.os_version}/${var.iso_name}",
-    "https://cdimages.ubuntu.com/ubuntu/releases/${var.os_version}/release/${var.iso_name}"
-  ]
+    "https://cdimages.ubuntu.com/ubuntu/releases/${var.os_version}/${var.release}/${var.iso_name}"
+  ])
   vm_name = coalesce(var.vm_name, "${var.vm_name_base}-minimal")
   vmware_vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "vhv.enable"                = var.vmware_vhv_enabled
     "svga.autodetect"           = var.vmware_svga_autodetect
     "usb_xhci.present"          = var.vmware_usb_xhci_present
+    "vhv.enable"                = var.vmware_vhv_enabled
   }
 }
 

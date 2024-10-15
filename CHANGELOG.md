@@ -3,7 +3,8 @@
 ## [Unreleased][]
 
 * Changed
-  * ubuntu-22.04
+  * ubuntu-22.04: Upgrade templates to Ubuntu 22.04.5 including the
+    following changes:
     * Change naming convention for VM name and box file name so that
       box name can be easily made CPU independent:
       * VM name: `Ubuntu-22.04-{cpu}-{variant}` to `Ubuntu-22.04-{variant}`
