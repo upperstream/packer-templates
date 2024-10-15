@@ -37,6 +37,12 @@ variable "box_version" {
   description = "Version number of this Vagrant box."
 }
 
+variable "cpu" {
+  type        = string
+  default     = "amd64"
+  description = "CPU"
+}
+
 variable "disk_size" {
   type        = string
   default     = "51200"
@@ -206,7 +212,7 @@ variable "vm_name" {
 
 variable "vm_name_base" {
   type        = string
-  default     = "Ubuntu-22.04-amd64"
+  default     = "Ubuntu-22.04"
   description = "Base part of default VM name"
 }
 
@@ -319,7 +325,7 @@ source "hyperv-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${local.vm_name}-v${var.box_version}-hyperv"
+  output_directory = "output/${local.vm_name}-v${var.box_version}-${var.cpu}-hyperv"
   shutdown_command = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   ssh_password     = var.ssh_password
   ssh_port         = 22
@@ -347,7 +353,7 @@ source "parallels-iso" "default" {
   iso_checksum               = var.iso_checksum
   iso_urls                   = local.iso_urls
   memory                     = var.mem_size
-  output_directory           = "output/${local.vm_name}-v${var.box_version}-parallels"
+  output_directory           = "output/${local.vm_name}-v${var.box_version}-${var.cpu}-parallels"
   parallels_tools_flavor     = var.parallels_tools_flavor
   parallels_tools_guest_path = "/tmp/prl-tools-{{.Flavor}}.iso"
   shutdown_command           = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
@@ -382,7 +388,7 @@ source "qemu" "default" {
   iso_urls            = local.iso_urls
   memory              = var.mem_size
   net_device          = "virtio-net"
-  output_directory    = "output/${local.vm_name}-v${var.box_version}-qemu"
+  output_directory    = "output/${local.vm_name}-v${var.box_version}-${var.cpu}-qemu"
   shutdown_command    = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   ssh_password        = var.ssh_password
   ssh_port            = 22
@@ -413,7 +419,7 @@ source "virtualbox-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${local.vm_name}-v${var.box_version}-virtualbox"
+  output_directory = "output/${local.vm_name}-v${var.box_version}-${var.cpu}-virtualbox"
   shutdown_command = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   ssh_password     = var.ssh_password
   ssh_port         = 22
@@ -453,7 +459,7 @@ source "vmware-iso" "default" {
   memory               = var.mem_size
   network              = var.vmware_network
   network_adapter_type = var.vmware_network_adapter_type
-  output_directory     = "output/${local.vm_name}-v${var.box_version}-vmware"
+  output_directory     = "output/${local.vm_name}-v${var.box_version}-${var.cpu}-vmware"
   shutdown_command     = "echo ${var.vagrant_password} | sudo -S /sbin/shutdown -h now"
   ssh_password         = var.ssh_password
   ssh_port             = 22
@@ -490,7 +496,7 @@ source "vmware-iso" "esxi" {
   network_adapter_type    = "e1000"
   remote_datastore        = var.esxi_remote_datastore
   remote_host             = var.esxi_remote_host
-  remote_output_directory = coalesce(var.vm_name, "${local.vm_name}-v${var.box_version}")
+  remote_output_directory = coalesce(var.vm_name, "${local.vm_name}-v${var.box_version}-${var.cpu}")
   remote_password         = var.esxi_remote_password
   remote_type             = "esx5"
   remote_username         = var.esxi_remote_username
@@ -613,7 +619,7 @@ build {
       "qemu.default",
       "vmware-iso.esxi"
     ]
-    output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-v${var.box_version}-${var.cpu}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.ubuntu"
   }
 
@@ -621,7 +627,7 @@ build {
     keep_input_artifact  = true
     compression_level    = 9
     only                 = ["qemu.default"]
-    output               = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-v${var.box_version}-${var.cpu}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.ubuntu"
   }
 }

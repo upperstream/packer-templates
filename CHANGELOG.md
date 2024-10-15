@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased][]
+
+* Changed
+  * ubuntu-22.04: Change naming convention for VM name and box file name so that
+    box name can be easily made CPU independent:
+    * VM name: `Ubuntu-22.04-{cpu}-{variant}` to `Ubuntu-22.04-{variant}`
+    * Box filename: `Ubuntu-22.04-{cpu}-{variant}-{boxversion}-{provider}.box` to
+      `Ubuntu-22.04-{variant}-{boxversion}-{cpu}-{provider}.box`
+
 ## [20241015][]
 
 * Added
@@ -109,6 +118,8 @@
 * Changed
   * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
 
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20241015...HEAD
 [20241015]:
   https://github.com/upperstream/packer-templates/compare/20240919...20241015
 [20240919]:
