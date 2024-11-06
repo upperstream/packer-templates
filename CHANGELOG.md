@@ -1,7 +1,9 @@
 # Changelog
 
-## [Unreleased][]
+## [20241106][]
 
+* Added
+  * FreeBSD: Add templates for FreeBSD 14.2-BETA1
 * Changed
   * ubuntu-22.04: Upgrade templates to Ubuntu 22.04.5 including the
     following changes:
@@ -127,8 +129,8 @@
 * Changed
   * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
 
-[Unreleased]:
-  https://github.com/upperstream/packer-templates/compare/20241015...HEAD
+[20241106]:
+  https://github.com/upperstream/packer-templates/compare/20241015...20241106
 [20241015]:
   https://github.com/upperstream/packer-templates/compare/20240919...20241015
 [20240919]:
