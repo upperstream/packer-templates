@@ -2,7 +2,7 @@
 
 if [ "$VMWARE_WITH_XORG" = "1" ]; then
 
-	pkg install -y "${OPEN_VM_TOOLS:-"open-vm-tools"}" "${XF86_VIDEO_VMWARE:-"xf86-video-vmware"} ${XF86_INPUT_VMMOUSE:-"xf86-input-vmmouse"}" || true
+	pkg install -y "${OPEN_VM_TOOLS:-"open-vm-tools"}" "${XF86_VIDEO_VMWARE:-"xf86-video-vmware"}" "${XF86_INPUT_VMMOUSE:-"xf86-input-vmmouse"}" || true
 
 	cat >> /etc/rc.conf <<-EOF
 		hald_enable="YES"
