@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased][]
+
+* Changed
+  * FreeBSD: Correct the provisioner script for VMware build, which did
+    not install video driver and mouse driver for amd64 VMware guest
+  * freebsd-14.2: Upgrade templates to FreeBSD 14.2-BETA2
+
 ## [20241106][]
 
 * Added
@@ -129,6 +136,8 @@
 * Changed
   * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
 
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20241106...HEAD
 [20241106]:
   https://github.com/upperstream/packer-templates/compare/20241015...20241106
 [20241015]:
