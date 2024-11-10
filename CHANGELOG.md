@@ -5,6 +5,7 @@
 * Changed
   * FreeBSD: Correct the provisioner script for VMware build, which did
     not install video driver and mouse driver for amd64 VMware guest
+  * freebsd-14.2: Upgrade templates to FreeBSD 14.2-BETA2
 
 ## [20241106][]
 
