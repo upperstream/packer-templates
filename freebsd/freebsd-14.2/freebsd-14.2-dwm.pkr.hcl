@@ -52,7 +52,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "3.20241117"
+  default = "1.20241123"
 }
 
 variable "ca_root_nss_version" {
@@ -136,13 +136,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/14.2/CHECKSUM.SHA256-FreeBSD-14.2-BETA3-amd64"
+  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/14.2/CHECKSUM.SHA256-FreeBSD-14.2-RC1-amd64"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "FreeBSD-14.2-BETA3-amd64-disc1.iso"
+  default     = "FreeBSD-14.2-RC1-amd64-disc1.iso"
   description = "File name of the install media."
 }
 
@@ -172,7 +172,7 @@ variable "num_cpus" {
 
 variable "open_vm_tools_version" {
   type        = string
-  default     = "12.4.0,2"
+  default     = "12.5.0,2"
   description = "Version of `open-vm-tools` package."
 }
 
@@ -285,7 +285,7 @@ variable "virtualbox_partition" {
 
 variable "vm_name" {
   type        = string
-  default     = "FreeBSD-14.2-BETA"
+  default     = "FreeBSD-14.2-RC"
   description = "VM name of the creating box."
 }
 
