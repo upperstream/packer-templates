@@ -1,28 +1,35 @@
 # Changelog
 
+## [Unreleased][]
+
+* Changed
+  * Update notation of [`CHANGELOG.md`](CHANGELOG.md) file (this file).
+
 ## [20241124][]
 
 * Changed
-  * FreeBSD: Correct the provisioner script for VMware build, which did
-    not install video driver and mouse driver for amd64 VMware guest
-  * freebsd-14.2: Upgrade templates to FreeBSD 14.2-RC1
+  * [FreeBSD](freebsd/README.md): Correct the provisioner script for
+    VMware build, which did not install video driver and mouse driver
+    for amd64 VMware guest.
+  * [FreeBSD 14.2](freebsd/freebsd-14.2/README.md): Upgrade templates
+    to FreeBSD 14.2-RC1.
 
 ## [20241106][]
 
 * Added
-  * FreeBSD: Add templates for FreeBSD 14.2-BETA1
+  * FreeBSD: Add templates for FreeBSD 14.2-BETA1.
 * Changed
-  * ubuntu-22.04: Upgrade templates to Ubuntu 22.04.5 including the
-    following changes:
+  * [Ubuntu 22.04](ubuntu/ubuntu-22.04/README.md): Upgrade templates to
+    Ubuntu 22.04.5 including the following changes:
     * Change naming convention for VM name and box file name so that
       box name can be easily made CPU independent:
-      * VM name: `Ubuntu-22.04-{cpu}-{variant}` to `Ubuntu-22.04-{variant}`
+      * VM name: `Ubuntu-22.04-{cpu}-{variant}` to `Ubuntu-22.04-{variant}`.
       * Box filename: `Ubuntu-22.04-{cpu}-{variant}-{boxversion}-{provider}.box`
-        to `Ubuntu-22.04-{variant}-{boxversion}-{cpu}-{provider}.box`
+        to `Ubuntu-22.04-{variant}-{boxversion}-{cpu}-{provider}.box`.
     * ESXi: Add `esxi_hardware_version` variable so that the virtual
       hardware version for ESXi build can be different from the one for
       VMware build.  Default value is `19`.
-    * QEMU: Use default display instead of GTK
+    * QEMU: Use default display instead of GTK.
     * VMware: Virtual hardware version is now `13` as [Packer Plugin
       for VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
       requires the virtual hardware version `13` or greater.
@@ -30,23 +37,23 @@
 ## [20241015][]
 
 * Added
-  * OpenBSD: Add templates for OpenBSD 7.6
+  * [OpenBSD](openbsd/README.md): Add templates for [OpenBSD 7.6](openbsd/openbsd-7.6/README.md).
 * Changed
-  * openbsd-7.5: Rename Vagrantfile template from
-    `Vagrantfile.OpenBSD-7.5` to `Vagrantfile.OpenBSD-7.5+`
+  * [OpenBSD 7.5](openbsd/openbsd-7.5/README.md): Rename Vagrantfile
+    template from `Vagrantfile.OpenBSD-7.5` to `Vagrantfile.OpenBSD-7.5+`.
 
 ## [20240919][]
 
 * Changed
-  * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RELEASE with the
-    following changes:
+  * [FreeBSD 13.4](freebsd/freebsd-13.4/README.md): Upgrade templates to
+    FreeBSD 13.4-RELEASE with the following changes:
     * Change naming convention for VM name and box file name so that
       box name can be easily made architecture independent:
       * VM name: `FreeBSD-13.4-RELEASE-{arch}-{variant}-{boxversion}` to
-        `FreeBSD-13.4-RELEASE-{variant}-{boxversion}`
+        `FreeBSD-13.4-RELEASE-{variant}-{boxversion}`.
       * Box filename:
         `FreeBSD-13.4-RELEASE-{arch}-{variant}-{boxversion}-{provider}.box`
-        to `FreeBSD-13.4-RELEASE-{variant}-{boxversion}-{arch}-{provider}.box`
+        to `FreeBSD-13.4-RELEASE-{variant}-{boxversion}-{arch}-{provider}.box`.
     * Add `ssh_timeout` to define SSH timeout, whose default value is
       `60m`.
     * Rename `iso_image` variable to `iso_name`.
@@ -59,15 +66,15 @@
       * Virtual hardware version is now `13` as [Packer Plugin for
         VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
         requires the virtual hardware version `13` or greater.
-  * ubuntu-24.04: Upgrade templates to Ubuntu 24.04.1 including the
-    following changes:
+  * [Ubuntu 24.04](ubuntu/ubuntu-24.04/README.md): Upgrade templates to
+    Ubuntu 24.04.1 including the following changes:
     * Change naming convention for VM name and box file name so that
       box name can be easily made CPU independent:
       * VM name: `Ubuntu-24.04-{cpu}-{variant}` to
-        `Ubuntu-24.04-{variant}`
+        `Ubuntu-24.04-{variant}`.
       * Box filename:
         `Ubuntu-24.04-{cpu}-{variant}-{boxversion}-{provider}.box` to
-        `Ubuntu-24.04-{variant}-{boxversion}-{cpu}-{provider}.box`
+        `Ubuntu-24.04-{variant}-{boxversion}-{cpu}-{provider}.box`.
     * ESXi:
       * Add `esxi_guest_os_type` and `esxi_hardware_version` variables
         so that these values can be different from those for VMware
@@ -77,13 +84,13 @@
         VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
         requires the virtual hardware version `13` or greater.
     * QEMU:
-      * Use default display instead of GTK
+      * Use default display instead of GTK.
 
 ## [20240908][]
 
 * Changed
-  * debian-11: Upgrade templates to Debian 11.11 including the
-    following changes:
+  * [Debian 11](debian/debian-11/README.md): Upgrade templates to
+    Debian 11.11 including the following changes:
     * ESXi:
       * Add `esxi_guest_os_type` and `esxi_hardware_version` variables
         so that these values can be different from those for VMware
@@ -99,8 +106,8 @@
       * Virtual hardware version is now `13` as Packer Plugin for
         VMware v1.1.0 requires the virtual hardware version `13` or
         greater.
-  * debian-12: Upgrade templates to Debian 12.7 including the following
-    changes:
+  * [Debian 12](debian/debian-12/README.md): Upgrade templates to
+    Debian 12.7 including the following changes:
     * QEMU:
       * Add `qemu_binary` variables so that QEMU binary name for
         creating x86 box can be set to `qemu-system-i386`.  Default
@@ -113,29 +120,35 @@
         VMware v1.1.0 requires the virtual hardware version `13` or
         greater.
       * Add `biosdevnames=0` kernel parameter to VMware box.
-  * freebsd-13.4: Upgrade templates to FreeBSD 13.4-RC2; use
+  * FreeBSD 13.4: Upgrade templates to FreeBSD 13.4-RC2; use
     `release_4` branch for packages instead of `quarterly`.
 
 ## [20240818][]
 
 * Added
-  * freebsd-13.4: Templates for FreeBSD 13.4-BETA3.
+  * FreeBSD 13.4: Templates for FreeBSD 13.4-BETA3.
 * Changed
-  * alpine-3.17: Upgrade templates to Alpine Linux 3.17.9.
-  * alpine-3.18: Upgrade templates to Alpine Linux 3.18.8.
+  * [Alpine 3.17](alpine/alpine-3.17/README.md): Upgrade templates to
+    Alpine Linux 3.17.9.
+  * [Alpine 3.18](alpine/alpine-3.18/README.md): Upgrade templates to
+    Alpine Linux 3.18.8.
 
 ## [20240730][]
 
 * Changed
-  * alpine-3.19: Upgrade templates to Alpine Linux 3.19.3.
+  * [Alpine 3.19](alpine/alpine-3.19/README.md): Upgrade templates to
+    Alpine Linux 3.19.3.
 
 ## [20240727][]
 
 * Added
   * Add `CHANGELOG.md` file (this file) to record notable changes.
 * Changed
-  * alpine-3.20: Upgrade templates to Alpine Linux 3.20.2.
+  * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
+    Alpine Linux 3.20.2.
 
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20241124...HEAD
 [20241124]:
   https://github.com/upperstream/packer-templates/compare/20241106...20241124
 [20241106]:
