@@ -1,9 +1,11 @@
 # Changelog
 
-## [Unreleased][]
+## [20241203][]
 
 * Changed
   * Update notation of [`CHANGELOG.md`](CHANGELOG.md) file (this file).
+  * [FreeBSD 14.2](freebsd/freebsd-14.2/README.md): Upgrade templates
+    to FreeBSD 14.2-RELEASE.
 
 ## [20241124][]
 
@@ -147,8 +149,8 @@
   * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
     Alpine Linux 3.20.2.
 
-[Unreleased]:
-  https://github.com/upperstream/packer-templates/compare/20241124...HEAD
+[20241203]:
+  https://github.com/upperstream/packer-templates/compare/20241124...20241203
 [20241124]:
   https://github.com/upperstream/packer-templates/compare/20241106...20241124
 [20241106]:
