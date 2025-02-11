@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased][]
+
+* Changed
+  * [FreeBSD 13.4](freebsd/freebsd-13.4/README.md): Fix README.md to
+    correct Vagrant box filename for on Parallels.
+
 ## [20241203][]
 
 * Changed
@@ -149,6 +155,8 @@
   * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
     Alpine Linux 3.20.2.
 
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20241203...HEAD
 [20241203]:
   https://github.com/upperstream/packer-templates/compare/20241124...20241203
 [20241124]:

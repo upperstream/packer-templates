@@ -160,7 +160,7 @@ Then you can add the box named
 `FreeBSD-13.4-RELEASE-minimal-v13.4.20240917` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-13.4-RELEASE-minimal-v13.4.20240917-aarch64-hyperv.box --name FreeBSD-13.4-RELEASE-minimal-v13.4.20240917 --provider parallels
+    vagrant box add FreeBSD-13.4-RELEASE-minimal-v13.4.20240917-aarch64-parallels.box --name FreeBSD-13.4-RELEASE-minimal-v13.4.20240917 --provider parallels
 
 Parallels build intends to create aarch64 box on Apple Silicon Mac
 host.
