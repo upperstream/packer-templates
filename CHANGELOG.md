@@ -1,7 +1,9 @@
 # Changelog
 
-## [Unreleased][]
+## [20250212][]
 
+* Added
+  * [FreeBSD](freebsd/README.md): Add templates for FreeBSD 13.5-BETA1.
 * Changed
   * [FreeBSD 13.4](freebsd/freebsd-13.4/README.md): Fix README.md to
     correct Vagrant box filename for on Parallels.
@@ -16,11 +18,9 @@
 ## [20241124][]
 
 * Changed
-  * [FreeBSD](freebsd/README.md): Correct the provisioner script for
-    VMware build, which did not install video driver and mouse driver
-    for amd64 VMware guest.
-  * [FreeBSD 14.2](freebsd/freebsd-14.2/README.md): Upgrade templates
-    to FreeBSD 14.2-RC1.
+  * FreeBSD: Correct the provisioner script for VMware build, which did
+    not install video driver and mouse driver for amd64 VMware guest.
+  * FreeBSD 14.2: Upgrade templates to FreeBSD 14.2-RC1.
 
 ## [20241106][]
 
@@ -155,8 +155,8 @@
   * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
     Alpine Linux 3.20.2.
 
-[Unreleased]:
-  https://github.com/upperstream/packer-templates/compare/20241203...HEAD
+[20250212]:
+  https://github.com/upperstream/packer-templates/compare/20241203...20250212
 [20241203]:
   https://github.com/upperstream/packer-templates/compare/20241124...20241203
 [20241124]:
