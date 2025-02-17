@@ -316,7 +316,7 @@ locals {
     "a<enter><wait>",                                           # NetBSD-9.4 Install System - Install NewtBSD to hard disk
     "b<enter><wait>",                                           # Shall we continue? - Yes
     "a<enter><wait>",                                           # Available disks - sd0
-    "a<enter><wait>",                                           # Select a parittioning scheme - GPT
+    "a<enter><wait>",                                           # Select a partitioning scheme - GPT
     "${local.selector_partition_geometry[var.arch]}",           # Partition geometry - This is correct geometry; skip for aarch64
     "b<enter><wait>",                                           # Partition sizes - Use default partition sizes
     "x<enter><wait>",                                           # Review partition sizes - Partition sizes ok

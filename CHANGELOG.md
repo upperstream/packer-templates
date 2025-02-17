@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased][]
+
+* Changed
+  * [NetBSD](netbsd/README.md): Correct typos in comments.
+
 ## [20250212][]
 
 * Added
@@ -155,6 +160,8 @@
   * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
     Alpine Linux 3.20.2.
 
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20250212...HEAD
 [20250212]:
   https://github.com/upperstream/packer-templates/compare/20241203...20250212
 [20241203]:
