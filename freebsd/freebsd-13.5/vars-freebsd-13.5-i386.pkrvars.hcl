@@ -1,6 +1,6 @@
 arch = "i386"
-iso_name = "FreeBSD-13.5-BETA1-i386-disc1.iso"
-iso_checksum = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.5/CHECKSUM.SHA256-FreeBSD-13.5-BETA1-i386"
+iso_name = "FreeBSD-13.5-BETA2-i386-disc1.iso"
+iso_checksum = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.5/CHECKSUM.SHA256-FreeBSD-13.5-BETA2-i386"
 qemu_binary = "qemu-system-i386"
 virtualbox_guest_os_type = "FreeBSD"
 vmware_guest_os_type = "freebsd"
