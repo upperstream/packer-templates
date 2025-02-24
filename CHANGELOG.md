@@ -4,7 +4,7 @@
 
 * Changed
   * [FreeBSD 13.5](freebsd/freebsd-13.5/README.md): Upgrade templates
-    to FreeBSD 13.5-BETA2.
+    to FreeBSD 13.5-BETA3.
   * [NetBSD](netbsd/README.md): Correct typos in comments.
 
 ## [20250212][]

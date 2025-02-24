@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 13.5-BETA2
+# Packer templates for FreeBSD 13.5-BETA3
 
-Templates to create Vagrant boxes for FreeBSD 13.5-BETA2 (amd64, i386, and arm64)
+Templates to create Vagrant boxes for FreeBSD 13.5-BETA3 (amd64, i386, and arm64)
 
 ## Prerequisites
 
@@ -51,14 +51,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default freebsd-13.5-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.5-BETA-minimal-v2.20250214-amd64-virtualbox.box` in
+`FreeBSD-13.5-BETA-minimal-v3.20250222-amd64-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.5-BETA-minimal-v2.20250214` to your box list by
+`FreeBSD-13.5-BETA-minimal-v3.20250222` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.5-BETA-minimal-v2.20250214-amd64-virtualbox.box --name FreeBSD-13.5-BETA-minimal-v2.20250214 --provider virtualbox
+    vagrant box add FreeBSD-13.5-BETA-minimal-v3.20250222-amd64-virtualbox.box --name FreeBSD-13.5-BETA-minimal-v3.20250222 --provider virtualbox
 
 VirtualBox build intends to create amd64 box and i386 box on amd64 host.
 
@@ -69,14 +69,14 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default freebsd-13.5-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.5-BETA-v2.20250214-amd64-vmware.box` in the same
+`FreeBSD-13.5-BETA-v3.20250222-amd64-vmware.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.5-BETA-minimal-v2.20250214` to your box list by
+`FreeBSD-13.5-BETA-minimal-v3.20250222` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.5-BETA-minimal-v2.20250214-amd64-vmware.box --name FreeBSD-13.5-BETA-minimal-v2.20250214 --provider vmware_desktop
+    vagrant box add FreeBSD-13.5-BETA-minimal-v3.20250222-amd64-vmware.box --name FreeBSD-13.5-BETA-minimal-v3.20250222 --provider vmware_desktop
 
 VMware build intends to create amd64 and i386 boxes on amd64 host, and
 aarch64 box on Apple Silicon Mac host.
@@ -113,14 +113,14 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default freebsd-13.5-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.5-BETA-minimal-v2.20250214-amd64-libvirt.box` in the same
+`FreeBSD-13.5-BETA-minimal-v3.20250222-amd64-libvirt.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.5-BETA-minimal-v2.20250214` to your box list by
+`FreeBSD-13.5-BETA-minimal-v3.20250222` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.5-BETA-minimal-v2.20250214-amd64-libvirt.box --name FreeBSD-13.5-BETA-minimal-v2.20250214 --provider libvirt
+    vagrant box add FreeBSD-13.5-BETA-minimal-v3.20250222-amd64-libvirt.box --name FreeBSD-13.5-BETA-minimal-v3.20250222 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -135,14 +135,14 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default freebsd-13.5-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.5-BETA-minimal-v2.20250214-amd64-hyperv.box` in the same
+`FreeBSD-13.5-BETA-minimal-v3.20250222-amd64-hyperv.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.5-BETA-minimal-v2.20250214` to your box list by
+`FreeBSD-13.5-BETA-minimal-v3.20250222` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-13.5-BETA-minimal-v2.20250214-amd64-hyperv.box --name FreeBSD-13.5-BETA-minimal-v2.20250214 --provider hyperv
+    vagrant box add FreeBSD-13.5-BETA-minimal-v3.20250222-amd64-hyperv.box --name FreeBSD-13.5-BETA-minimal-v3.20250222 --provider hyperv
 
 Hyper-V build intends to create amd64 box and i386 box on Windows
 host.
@@ -154,14 +154,14 @@ From the terminal, invoke the following command for Parallels provider:
     packer build -only=parallels-iso.default -var-file vars-freebsd-13.5-aarch64.pkrvars.hcl freebsd-13.5-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-13.5-BETA-minimal-v2.20250214-aarch64-parallels.box` in the same
+`FreeBSD-13.5-BETA-minimal-v3.20250222-aarch64-parallels.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-13.5-BETA-minimal-v2.20250214` to your box list
+`FreeBSD-13.5-BETA-minimal-v3.20250222` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-13.5-BETA-minimal-v2.20250214-aarch64-parallels.box --name FreeBSD-13.5-BETA-minimal-v2.20250214 --provider parallels
+    vagrant box add FreeBSD-13.5-BETA-minimal-v3.20250222-aarch64-parallels.box --name FreeBSD-13.5-BETA-minimal-v3.20250222 --provider parallels
 
 Parallels build intends to create aarch64 box on Apple Silicon Mac
 host.
@@ -204,12 +204,12 @@ use `doas`.
 
 ## Variants
 
-* `freebsd-13.5-minimal.pkr.hcl` - FreeBSD 13.5-BETA2
-* `freebsd-13.5-dwm.pkr.hcl` - FreeBSD 13.5-BETA2 + [X.Org][] +
+* `freebsd-13.5-minimal.pkr.hcl` - FreeBSD 13.5-BETA3
+* `freebsd-13.5-dwm.pkr.hcl` - FreeBSD 13.5-BETA3 + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-13.5-xfce.pkr.hcl` - FreeBSD 13.5-BETA2 + [Xfce][] +
+* `freebsd-13.5-xfce.pkr.hcl` - FreeBSD 13.5-BETA3 + [Xfce][] +
   [SLiM][]
-* `freebsd-13.5-zfs.pkr.hcl` - FreeBSD 13.5-BETA2 on ZFS root
+* `freebsd-13.5-zfs.pkr.hcl` - FreeBSD 13.5-BETA3 on ZFS root
   file system
 
 While `freebsd-13.5-*.pkr.hcl` templates generate amd64 boxes by
