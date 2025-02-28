@@ -1,6 +1,6 @@
-# Packer templates for NetBSD 10.0
+# Packer templates for NetBSD 10.1
 
-Templates to create Vagrant boxes for NetBSD 10.0 (amd64, i386, and aarch64).
+Templates to create Vagrant boxes for NetBSD 10.1 (amd64, i386, and aarch64).
 
 ## Prerequisites
 
@@ -40,14 +40,14 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso.default netbsd-10-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-10.0-amd64-minimal-v10.0.20240328-virtualbox.box`
+You will find a vagrant box file named `NetBSD-10-minimal-v10.1.20241216-amd64-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10.0-amd64-minimal-v10.0.20240328`
+Then you can add the box named `NetBSD-10-minimal-v10.1.20241216`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10.0-amd64-minimal-v10.0.20240328-virtualbox.box \
-        --name NetBSD-10.0-amd64-minimal-v10.0.20240328 --provider virtualbox
+    vagrant box add NetBSD-10-minimal-v10.1.20241216-amd64-virtualbox.box \
+        --name NetBSD-10-minimal-v10.1.20241216-amd64 --provider virtualbox
 
 ### VMware
 
@@ -55,14 +55,14 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso.default netbsd-10-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-10.0-amd64-minimal-v10.0.20240328-vmware.box`
+You will find a vagrant box file named `NetBSD-10-minimal-v10.1.20241216-amd64-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10.0-amd64-minimal-v10.0.20240328`
+Then you can add the box named `NetBSD-10-minimal-v10.1.20241216`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10.0-amd64-minimal-v10.0.20240328-vmware.box \
-        --name NetBSD-10.0-amd64-minimal-v10.0.20240328 --provider vmware_desktop
+    vagrant box add NetBSD-10-minimal-v10.1.20241216-amd64-vmware.box \
+        --name NetBSD-10-minimal-v10.1.20241216-amd64 --provider vmware_desktop
 
 VMware build is tested with amd64 and i386 guests on amd64 host, and
 evbarm aarch64 guest on Apple Silicon Mac host.
@@ -98,14 +98,14 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu netbsd-10-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-10.0-amd64-minimal-v10.0.20240328-libvirt.box`
+You will find a vagrant box file named `NetBSD-10-minimal-v10.1.20241216-amd64-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10.0-amd64-minimal-v10.0.20240328`
+Then you can add the box named `NetBSD-10-minimal-v10.1.20241216`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10.0-amd64-minimal-v10.0.20240328-libvirt.box \
-        --name NetBSD-10.0-amd64-minimal-v10.0.20240328 --provider libvirt
+    vagrant box add NetBSD-10-minimal-v10.1.20241216-amd64-libvirt.box \
+        --name NetBSD-10-minimal-v10.1.20241216-amd64 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -125,14 +125,14 @@ Because Packer Hyper-V builder cannot detect IP address of a NetBSD VM,
 you must provide static network settings so that the VM is configured to
 have a static IP address.
 
-You will find a vagrant box file named `NetBSD-10.0-amd64-minimal-v10.0.20240328-hyperv.box`
+You will find a vagrant box file named `NetBSD-10-minimal-v10.1.20241216-amd64-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10.0-amd64-minimal-v10.0.20240328`
+Then you can add the box named `NetBSD-10-minimal-v10.1.20241216`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10.0-amd64-minimal-v10.0.20240328-hyperv.box \
-        --name NetBSD-10.0-amd64-minimal-v10.0.20240328 --provider hyperv
+    vagrant box add NetBSD-10-minimal-v10.1.20241216-amd64-hyperv.box \
+        --name NetBSD-10-minimal-v10.1.20241216-amd64 --provider hyperv
 
 ## Default settings
 
@@ -264,4 +264,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2024 Upperstream.
+Copyright &copy; 2024, 2025 Upperstream.

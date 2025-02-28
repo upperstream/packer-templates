@@ -8,6 +8,7 @@
   * [NetBSD](netbsd/README.md): Correct typos in comments.
   * [NetBSD 10](netbsd/netbsd-10/README.md): Rename directory name from
     `netbsd-10.0` to `netbsd-10`.
+  * NetBSD 10: Upgrade templates to NetBSD 10.1
 
 ## [20250212][]
 

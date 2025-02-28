@@ -41,7 +41,7 @@ variable "boot_wait" {
 
 variable "box_ver" {
   type    = string
-  default = "10.0.20240328"
+  default = "10.1.20241216"
 }
 
 variable "disk_size" {
@@ -136,17 +136,17 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.0/iso/SHA512"
+  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.1/iso/SHA512"
 }
 
 variable "iso_file_name" {
   type    = string
-  default = "NetBSD-10.0-amd64.iso"
+  default = "NetBSD-10.1-amd64.iso"
 }
 
 variable "iso_path" {
   type    = string
-  default = "NetBSD/NetBSD-10.0/images"
+  default = "NetBSD/NetBSD-10.1/images"
 }
 
 variable "iso_url" {
@@ -178,7 +178,7 @@ variable "package_arch" {
 
 variable "package_branch" {
   type        = string
-  default     = "10.0_2023Q4"
+  default     = "10.1"
   description = "pkgsrc branch name for binary packages."
 }
 
@@ -271,7 +271,7 @@ variable "virtualbox_guest_os_type" {
 
 variable "vm_name" {
   type    = string
-  default = "NetBSD-10.0-amd64"
+  default = "NetBSD-10"
 }
 
 variable "vmware_cdrom_adapter_type" {
@@ -424,6 +424,7 @@ locals {
       "echo \"nameserver $GATEWAY\" > /mnt/etc/resolv.conf"
     ]
   }
+  vm_name = "${var.vm_name}-${var.variant}-v${var.box_ver}-${var.arch}"
 }
 
 source "hyperv-iso" "default" {
@@ -445,14 +446,14 @@ source "hyperv-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-hyperv"
+  output_directory = "output/${local.vm_name}-hyperv"
   shutdown_command = "/sbin/shutdown -p now"
   ssh_host         = var.hyperv_ssh_host
   ssh_password     = var.ssh_password
   ssh_username     = var.ssh_username
   ssh_wait_timeout = "10000s"
   switch_name      = var.hyperv_switch_name
-  vm_name          = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name          = "${local.vm_name}"
 }
 
 source "parallels-iso" "default" {
@@ -473,14 +474,14 @@ source "parallels-iso" "default" {
   iso_checksum           = var.iso_checksum
   iso_urls               = local.iso_urls
   memory                 = var.mem_size
-  output_directory       = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-parallels"
+  output_directory       = "output/${local.vm_name}-parallels"
   parallels_tools_flavor = "other"
   parallels_tools_mode   = "disable"
   shutdown_command       = "/sbin/shutdown -p now"
   ssh_password           = var.ssh_password
   ssh_username           = var.ssh_username
   ssh_timeout            = "10000s"
-  vm_name                = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name                = "${local.vm_name}"
 }
 
 source "qemu" "default" {
@@ -503,7 +504,7 @@ source "qemu" "default" {
   iso_urls         = local.iso_urls
   memory           = var.mem_size
   net_device       = "virtio-net-pci"
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-qemu"
+  output_directory = "output/${local.vm_name}-qemu"
   qemu_binary      = var.qemu_binary
   qemuargs = [
     ["-smp", "cpus=1,maxcpus=${var.num_cpus},threads=${var.num_cpus}"],
@@ -517,7 +518,7 @@ source "qemu" "default" {
   ssh_timeout         = "10000s"
   ssh_username        = var.ssh_username
   use_default_display = var.qemu_use_default_display
-  vm_name             = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name             = "${local.vm_name}"
 }
 
 source "virtualbox-iso" "default" {
@@ -539,7 +540,7 @@ source "virtualbox-iso" "default" {
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-virtualbox"
+  output_directory     = "output/${local.vm_name}-virtualbox"
   shutdown_command     = "/sbin/shutdown -p now"
   ssh_password         = var.ssh_password
   ssh_port             = 22
@@ -551,7 +552,7 @@ source "virtualbox-iso" "default" {
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"]
   ]
   virtualbox_version_file = ".vbox_version"
-  vm_name                 = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name                 = "${local.vm_name}"
 }
 
 source "vmware-iso" "default" {
@@ -577,7 +578,7 @@ source "vmware-iso" "default" {
   memory               = var.mem_size
   network              = "nat"
   network_adapter_type = var.vmware_network_adapter_type
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-vmware"
+  output_directory     = "output/${local.vm_name}-vmware"
   shutdown_command     = "/sbin/shutdown -p now"
   ssh_password         = var.ssh_password
   ssh_port             = 22
@@ -585,7 +586,7 @@ source "vmware-iso" "default" {
   ssh_username         = var.ssh_username
   usb                  = true
   version              = var.vmware_hardware_version
-  vm_name              = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name              = "${local.vm_name}"
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
@@ -618,7 +619,7 @@ source "vmware-iso" "esxi" {
   memory               = var.mem_size
   network              = "bridged"
   network_adapter_type = "e1000"
-  output_directory     = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  output_directory     = "${local.vm_name}"
   remote_datastore     = var.esxi_remote_datastore
   remote_host          = var.esxi_remote_host
   remote_password      = var.esxi_remote_password
@@ -630,7 +631,7 @@ source "vmware-iso" "esxi" {
   ssh_port             = 22
   ssh_timeout          = "10000s"
   ssh_username         = var.ssh_username
-  vm_name              = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name              = "${local.vm_name}"
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.networkName"     = "VM Network"
@@ -661,7 +662,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools-12.1.5nb1"
+      "OPEN_VM_TOOLS=open-vm-tools-12.4.5nb5"
       #      "XF86_INPUT_VMMOUSE=xf86-input-vmmouse",
       #      "XF86_VIDEO_VMWARE=xf86-video-vmware"
     ]
@@ -675,15 +676,15 @@ build {
   provisioner "shell" {
     environment_vars = [
       "DOAS=doas-6.3p2nb1",
-      "DMENU=dmenu-5.2nb2",
-      "DWM=dwm-6.4nb2",
-      "RSYNC=rsync-3.2.7nb2",
-      "ST_TERM=st-term-0.9nb2",
+      "DMENU=dmenu-5.3",
+      "DWM=dwm-6.5",
+      "RSYNC=rsync-3.4.1",
+      "ST_TERM=st-term-0.9.2nb1",
       "VAGRANT_GROUP=${var.vagrant_group}",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_USER=${var.vagrant_username}",
-      "X11VNC=x11vnc-0.9.16nb15",
-      "XRANDR=xrandr-1.5.2"
+      "X11VNC=x11vnc-0.9.16nb20",
+      "XRANDR=xrandr-1.5.3"
     ]
     execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
     scripts = [
@@ -714,7 +715,7 @@ build {
       "virtualbox-iso.default",
       "vmware-iso.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_ver}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-8.3+"
   }
 
@@ -724,7 +725,7 @@ build {
     only = [
       "qemu.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_ver}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-8.3+"
   }
 }
