@@ -6,6 +6,8 @@
   * [FreeBSD 13.5](freebsd/freebsd-13.5/README.md): Upgrade templates
     to FreeBSD 13.5-BETA3.
   * [NetBSD](netbsd/README.md): Correct typos in comments.
+  * [NetBSD 10](netbsd/netbsd-10/README.md): Rename directory name from
+    `netbsd-10.0` to `netbsd-10`.
 
 ## [20250212][]
 

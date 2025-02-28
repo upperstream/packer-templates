@@ -4,12 +4,12 @@
 
 Templates support amd64 and i386 architectures unless otherwise noted.
 
-* [netbsd-10.0](netbsd-10.0/README.md) - templates for NetBSD 10.0
+* [netbsd-10](netbsd-10/README.md) - templates for NetBSD 10.0
   (amd64, i386, and aarch64)
-  * NetBSD 10
-  * NetBSD 10 + X.Org
-  * NetBSD 10 + X.Org + XDM + dwm + dmenu + st
-  * NetBSD 10 + Xfce + XDM
+  * NetBSD 10.0
+  * NetBSD 10.0 + X.Org
+  * NetBSD 10.0 + X.Org + XDM + dwm + dmenu + st
+  * NetBSD 10.0 + Xfce + XDM
 * [netbsd-9.4](netbsd-9/README.md) - templates for NetBSD 9.4
   * NetBSD 9.4
   * NetBSD 9.4 + X.Org
@@ -50,4 +50,4 @@ Templates support amd64 and i386 architectures.
 
 - - -
 
-Copyright &copy; 2015-2021, 2023, 2024 Upperstream.
+Copyright &copy; 2015-2021, 2023-2025 Upperstream.
