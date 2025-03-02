@@ -3,6 +3,8 @@
     "aarch",
     "ansible",
     "archlinux",
+    "biosdevnames",
+    "boxversion",
     "cdrom",
     "centos",
     "chronyd",

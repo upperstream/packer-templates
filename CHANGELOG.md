@@ -9,6 +9,8 @@
   * [NetBSD 10](netbsd/netbsd-10/README.md): Rename directory name from
     `netbsd-10.0` to `netbsd-10`.
   * NetBSD 10: Upgrade templates to NetBSD 10.1
+  * [Debian 12](debian/debian-12/REAADME.md): Upgrade templates to
+    Debian 12.9.
 
 ## [20250212][]
 
@@ -124,8 +126,8 @@
       * Virtual hardware version is now `13` as Packer Plugin for
         VMware v1.1.0 requires the virtual hardware version `13` or
         greater.
-  * [Debian 12](debian/debian-12/README.md): Upgrade templates to
-    Debian 12.7 including the following changes:
+  * Debian 12: Upgrade templates to Debian 12.7 including the following
+    changes:
     * QEMU:
       * Add `qemu_binary` variables so that QEMU binary name for
         creating x86 box can be set to `qemu-system-i386`.  Default

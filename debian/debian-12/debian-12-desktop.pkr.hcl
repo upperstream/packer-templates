@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "12.7.20240831"
+  default     = "12.9.20250111"
   description = "Version number of this Vagrant box."
 }
 
@@ -126,7 +126,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:12e3dc4b97eee8e553181861b7139086d662a977b78aedc7a73e862c5c104f12"
+  default     = "sha256:5db98d2c215af13685ad9e482d0fd1d556054f09bfe26e2981020eae6e539dc8"
   description = "SHA256 checksum of the install media."
 }
 
@@ -138,7 +138,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian12.7/main/installer-amd64/20230607+deb12u7/images/netboot"
+  default     = "Debian12.9/main/installer-amd64/20230607+deb12u9/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -362,7 +362,7 @@ locals {
     "user-password"       = "string ${var.vagrant_password}",
     "user-password-again" = "string ${var.vagrant_password}"
   }
-  vm_name = coalesce(var.vm_name, "Debian-12-${var.cpu}-${var.desktop}")
+  vm_name = coalesce(var.vm_name, "Debian-12-${var.desktop}-v${var.box_version}-${var.cpu}")
   vmware_vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
@@ -402,7 +402,7 @@ source "hyperv-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${local.vm_name}-v${var.box_version}-hyperv"
+  output_directory = "output/${local.vm_name}-hyperv"
   shutdown_command = "sudo /sbin/shutdown -h now"
   ssh_password     = var.ssh_pass
   ssh_port         = 22
@@ -437,7 +437,7 @@ source "parallels-iso" "default" {
   iso_checksum           = var.iso_checksum
   iso_urls               = local.iso_urls
   memory                 = var.mem_size
-  output_directory       = "output/${local.vm_name}-v${var.box_version}-parallels"
+  output_directory       = "output/${local.vm_name}-parallels"
   parallels_tools_flavor = var.parallels_tools_flavor
   shutdown_command       = "sudo /sbin/shutdown -h now"
   ssh_password           = var.ssh_pass
@@ -479,7 +479,7 @@ source "qemu" "default" {
   iso_urls            = local.iso_urls
   memory              = var.mem_size
   net_device          = "virtio-net"
-  output_directory    = "output/${local.vm_name}-v${var.box_version}-qemu"
+  output_directory    = "output/${local.vm_name}-qemu"
   qemu_binary         = var.qemu_binary
   shutdown_command    = "sudo /sbin/shutdown -h now"
   ssh_password        = var.ssh_pass
@@ -518,7 +518,7 @@ source "virtualbox-iso" "default" {
   iso_checksum         = var.iso_checksum
   iso_urls             = local.iso_urls
   memory               = var.mem_size
-  output_directory     = "output/${local.vm_name}-v${var.box_version}-virtualbox"
+  output_directory     = "output/${local.vm_name}-virtualbox"
   shutdown_command     = "sudo /sbin/shutdown -h now"
   ssh_password         = var.ssh_pass
   ssh_port             = 22
@@ -565,7 +565,7 @@ source "vmware-iso" "default" {
   memory               = var.mem_size
   network              = var.vmware_network
   network_adapter_type = var.vmware_network_adapter_type
-  output_directory     = "output/${local.vm_name}-v${var.box_version}-vmware"
+  output_directory     = "output/${local.vm_name}-vmware"
   shutdown_command     = "sudo /sbin/shutdown -h now"
   ssh_password         = var.ssh_pass
   ssh_port             = 22
