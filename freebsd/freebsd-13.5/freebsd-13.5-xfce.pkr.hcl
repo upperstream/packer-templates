@@ -40,7 +40,7 @@ variable "DISTRIBUTIONS" {
 
 variable "arandr_version" {
   type        = string
-  default     = "0.1.10_4"
+  default     = "0.1.11_1"
   description = "arandr version"
 }
 
@@ -58,12 +58,12 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "3.20250222"
+  default = "1.20250302"
 }
 
 variable "ca_root_nss_version" {
   type        = string
-  default     = "3.93_2"
+  default     = "3.104"
   description = "Version of `ca_root_nss` package."
 }
 
@@ -142,13 +142,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.5/CHECKSUM.SHA256-FreeBSD-13.5-BETA3-amd64"
+  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/13.5/CHECKSUM.SHA256-FreeBSD-13.5-RC1-amd64"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "FreeBSD-13.5-BETA3-amd64-disc1.iso"
+  default     = "FreeBSD-13.5-RC1-amd64-disc1.iso"
   description = "File name of the install media."
 }
 
@@ -269,7 +269,7 @@ variable "virtualbox_partition" {
 
 variable "vm_name" {
   type        = string
-  default     = "FreeBSD-13.5-BETA"
+  default     = "FreeBSD-13.5-RC"
   description = "VM name of the creating box."
 }
 
@@ -329,6 +329,7 @@ locals {
     "http://ftp11.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}",
     "https://ftp4.tw.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}"
   ]
+  vm_name = "${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}"
 }
 
 source "hyperv-iso" "default" {
@@ -361,13 +362,13 @@ source "hyperv-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-hyperv"
+  output_directory = "output/${local.vm_name}-hyperv"
   shutdown_command = "shutdown -p now"
   ssh_password     = var.root_password
   ssh_username     = "root"
   ssh_timeout      = var.ssh_timeout
   switch_name      = var.hyperv_switch_name
-  vm_name          = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name          = local.vm_name
 }
 
 source "parallels-iso" "default" {
@@ -401,14 +402,14 @@ source "parallels-iso" "default" {
   iso_checksum           = "${var.iso_checksum}"
   iso_urls               = local.iso_urls
   memory                 = "${var.mem_size}"
-  output_directory       = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-parallels"
+  output_directory       = "output/${local.vm_name}-parallels"
   parallels_tools_flavor = "other"
   parallels_tools_mode   = "disable"
   shutdown_command       = "shutdown -p now"
   ssh_password           = "${var.root_password}"
   ssh_username           = "root"
   ssh_timeout            = var.ssh_timeout
-  vm_name                = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name                = local.vm_name
 }
 
 source "qemu" "default" {
@@ -447,14 +448,14 @@ source "qemu" "default" {
   iso_urls            = local.iso_urls
   memory              = var.mem_size
   net_device          = "virtio-net"
-  output_directory    = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-qemu"
+  output_directory    = "output/${local.vm_name}-qemu"
   qemu_binary         = var.qemu_binary
   shutdown_command    = "shutdown -p now"
   ssh_password        = var.root_password
   ssh_username        = "root"
   ssh_timeout         = var.ssh_timeout
   use_default_display = var.qemu_use_default_display
-  vm_name             = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name             = local.vm_name
 }
 
 source "virtualbox-iso" "default" {
@@ -489,7 +490,7 @@ source "virtualbox-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-virtualbox"
+  output_directory = "output/${local.vm_name}-virtualbox"
   shutdown_command = "shutdown -p now"
   ssh_password     = var.root_password
   ssh_timeout      = var.ssh_timeout
@@ -499,7 +500,7 @@ source "virtualbox-iso" "default" {
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
     ["modifyvm", "{{ .Name }}", "--vram", "16"]
   ]
-  vm_name = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name = local.vm_name
 }
 
 source "vmware-iso" "default" {
@@ -537,14 +538,14 @@ source "vmware-iso" "default" {
   memory               = var.mem_size
   network              = "nat"
   network_adapter_type = var.vmware_network_adapter_type
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-vmware"
+  output_directory     = "output/${local.vm_name}-vmware"
   shutdown_command     = "shutdown -p now"
   ssh_password         = var.root_password
   ssh_timeout          = var.ssh_timeout
   ssh_username         = "root"
   usb                  = true
   version              = var.vmware_hardware_version
-  vm_name              = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"   = "generated"
     "ethernet0.present"       = "TRUE"
@@ -590,7 +591,7 @@ source "vmware-iso" "esxi" {
   memory               = var.mem_size
   network              = "bridged"
   network_adapter_type = "e1000"
-  output_directory     = "${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}"
+  output_directory     = "${local.vm_name}"
   remote_datastore     = var.esxi_remote_datastore
   remote_host          = var.esxi_remote_host
   remote_password      = var.esxi_remote_password
@@ -602,7 +603,7 @@ source "vmware-iso" "esxi" {
   ssh_timeout          = var.ssh_timeout
   ssh_username         = "root"
   version              = var.esxi_hardware_version
-  vm_name              = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.networkName"     = "VM Network"
@@ -636,11 +637,11 @@ build {
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_USER=${var.vagrant_username}",
       "XCLOCK=xclock-1.0.9_1",
-      "XFCE=xfce-4.18_1",
+      "XFCE=xfce-4.20",
       "XORG_MINIMAL=xorg-minimal-7.5.2_3",
       "XRANDR=xrandr-1.5.2_1",
-      "XRDP=xrdp-0.9.26,1",
-      "XTERM=xterm-392"
+      "XRDP=xrdp-0.10.2_2,1",
+      "XTERM=xterm-396"
     ]
     execute_command = "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     scripts = [
@@ -666,7 +667,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-6.1.50"
+      "VIRTUALBOX_OSE_ADDITIONS=virtualbox-ose-additions-6.1.50.1304000_1"
     ]
     execute_command = "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     only = [
@@ -677,7 +678,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools-12.4.0,2",
+      "OPEN_VM_TOOLS=open-vm-tools-12.5.0_1,2",
       "VMWARE_WITH_XORG=1",
       "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0_7",
       "XF86_VIDEO_VMWARE=xf86-video-vmware-13.3.0_8"
@@ -711,7 +712,7 @@ build {
       "virtualbox-iso.default",
       "vmware-iso.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2+"
   }
 
@@ -721,7 +722,7 @@ build {
     only = [
       "qemu.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2+"
   }
 }
