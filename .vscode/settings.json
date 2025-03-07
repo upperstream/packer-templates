@@ -23,6 +23,8 @@
     "hyperv",
     "jigdo",
     "localhostreachable",
+    "Lubuntu",
+    "LXDE",
     "lxqt",
     "modifyvm",
     "netboot",
@@ -31,6 +33,7 @@
     "netinst",
     "openbsd",
     "opensuse",
+    "other5xlinux",
     "pkrtpl",
     "pkrvars",
     "preseed",
@@ -59,7 +62,8 @@
     "XORG",
     "xrandr",
     "xrdp",
-    "xterm"
+    "xterm",
+    "Xubuntu"
   ],
   "markdownlint.config": {
     "MD040": false

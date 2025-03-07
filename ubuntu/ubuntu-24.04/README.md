@@ -1,6 +1,6 @@
-# Packer templates for Ubuntu 24.04.1 LTS
+# Packer templates for Ubuntu 24.04.2 LTS
 
-Templates to create Vagrant boxes for Ubuntu 24.04.1 LTS (amd64 and
+Templates to create Vagrant boxes for Ubuntu 24.04.2 LTS (amd64 and
 arm64).
 
 ## Prerequisites
@@ -49,13 +49,13 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default ubuntu-24.04-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-virtualbox.box` in the
+`Ubuntu-24.04-minimal-v2404.2.20250220-amd64-virtualbox.box` in the
 same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.2.20250220`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-virtualbox.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider virtualbox
+    vagrant box add Ubuntu-24.04-minimal-v2404.2.20250220-amd64-virtualbox.box --name Ubuntu-24.04-minimal-v2404.2.20250220 --provider virtualbox
 
 VirtualBox build intends to create amd64 box on amd64 host.
 
@@ -66,13 +66,13 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default ubuntu-24.04-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-vmware.box` in the same
+`Ubuntu-24.04-minimal-v2404.2.20250220-amd64-vmware.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.2.20250220`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-vmware.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider vmware_desktop
+    vagrant box add Ubuntu-24.04-minimal-v2404.2.20250220-amd64-vmware.box --name Ubuntu-24.04-minimal-v2404.2.20250220 --provider vmware_desktop
 
 VMware build intends to create amd64 box on amd64 host using VMware
 Workstation, or create arm64 box on Apple Silicon Mac host using
@@ -108,13 +108,13 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default ubuntu-24.04-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-libvirt.box` in the same
+`Ubuntu-24.04-minimal-v2404.2.20250220-amd64-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.2.20250220`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-libvirt.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider libvirt
+    vagrant box add Ubuntu-24.04-minimal-v2404.2.20250220-amd64-libvirt.box --name Ubuntu-24.04-minimal-v2404.2.20250220 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -128,13 +128,13 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default ubuntu-24.04-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Ubuntu-24.04-minimal-v2404.1.20240829-amd64-hyperv.box` in the same
+`Ubuntu-24.04-minimal-v2404.2.20250220-amd64-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.2.20250220`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-amd64-hyperv.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider hyperv
+    vagrant box add Ubuntu-24.04-minimal-v2404.2.20250220-amd64-hyperv.box --name Ubuntu-24.04-minimal-v2404.2.20250220 --provider hyperv
 
 Hyper-V build intends to create amd64 box on Windows host.
 
@@ -145,23 +145,23 @@ From the terminal, invoke the following command for Parallels provider:
     packer build -only=parallels-iso.default -var-file vars-ubuntu-24.04-arm64.pkrvars.hcl ubuntu-24.04-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Ubuntu-24.04-minimal-v2404.1.20240829-arm64-parallels.box`
+`Ubuntu-24.04-minimal-v2404.2.20250220-arm64-parallels.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `Ubuntu-24.04-minimal-v2404.1.20240829`
+Then you can add the box named `Ubuntu-24.04-minimal-v2404.2.20250220`
 to your box list by the following command:
 
-    vagrant box add Ubuntu-24.04-minimal-v2404.1.20240829-arm64-parallels.box --name Ubuntu-24.04-minimal-v2404.1.20240829 --provider parallels
+    vagrant box add Ubuntu-24.04-minimal-v2404.2.20250220-arm64-parallels.box --name Ubuntu-24.04-minimal-v2404.2.20250220 --provider parallels
 
 Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 ## Variants
 
-* `ubuntu-24.04-minimal.pkr.hcl` - Ubuntu Server 24.04.1 LTS
-* `ubuntu-24.04-dwm.pkr.hcl` - Ubuntu 24.04.1 LTS + [X.org][],
+* `ubuntu-24.04-minimal.pkr.hcl` - Ubuntu Server 24.04.2 LTS
+* `ubuntu-24.04-dwm.pkr.hcl` - Ubuntu 24.04.2 LTS + [X.org][],
   [dwm][], [suckless][] tools, [ARandR][], and [xrdp][].
-* `ubuntu-24.04-lxqt.pkr.hcl` - Ubuntu 24.04.1 LTS + [LXQt][]
-* `ubuntu-24.04-xfce.pkr.hcl` - Ubuntu 24.04.1 LTS + [Xfce][]
+* `ubuntu-24.04-lxqt.pkr.hcl` - Ubuntu 24.04.2 LTS + [LXQt][]
+* `ubuntu-24.04-xfce.pkr.hcl` - Ubuntu 24.04.2 LTS + [Xfce][]
 
 [ARandR]: https://christian.amsuess.com/tools/arandr/
     "ARandR: Another XRandR GUI"
@@ -175,9 +175,9 @@ Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 ## Installer ISO images
 
-While `ubuntu-24.04-*.pkr.hcl` templates use `ubuntu-24.04.1-live-server-amd64.iso`
+While `ubuntu-24.04-*.pkr.hcl` templates use `ubuntu-24.04.2-live-server-amd64.iso`
 ISO image to create amd64 boxes by default, using `vars-ubuntu-24.04-arm64.pkrvars.hcl`
-creates arm64 boxes with `ubuntu-24.04.1-live-server-arm64.iso` ISO
+creates arm64 boxes with `ubuntu-24.04.2-live-server-arm64.iso` ISO
 image:
 
     packer build -var-file=vars-ubuntu-24.04-arm64.pkrvars.hcl ubuntu-24.04-minimal.pkr.hcl
@@ -252,4 +252,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2024 Upperstream.
+Copyright &copy; 2024, 2025 Upperstream.

@@ -11,6 +11,8 @@
   * NetBSD 10: Upgrade templates to NetBSD 10.1
   * [Debian 12](debian/debian-12/REAADME.md): Upgrade templates to
     Debian 12.9.
+  * [Ubuntu 24.04](ubuntu/ubuntu-24.04/README.md): Upgrade templates to
+    Ubuntu 24.04.2.
 
 ## [20250212][]
 
