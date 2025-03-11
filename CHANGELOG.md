@@ -1,10 +1,10 @@
 # Changelog
 
-## [Unreleased][]
+## [20250311][]
 
 * Changed
   * [FreeBSD 13.5](freebsd/freebsd-13.5/README.md): Upgrade templates
-    to FreeBSD 13.5-RC1.
+    to FreeBSD 13.5-RELEASE.
   * [NetBSD](netbsd/README.md): Correct typos in comments.
   * [NetBSD 10](netbsd/netbsd-10/README.md): Rename directory name from
     `netbsd-10.0` to `netbsd-10`.
@@ -169,8 +169,8 @@
   * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
     Alpine Linux 3.20.2.
 
-[Unreleased]:
-  https://github.com/upperstream/packer-templates/compare/20250212...HEAD
+[20250311]:
+  https://github.com/upperstream/packer-templates/compare/20250212...20250311
 [20250212]:
   https://github.com/upperstream/packer-templates/compare/20241203...20250212
 [20241203]:
