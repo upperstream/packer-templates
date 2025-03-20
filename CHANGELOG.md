@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased][]
+
+* Changed
+  * [Debian 12](debian/debian-12/README.md): Upgrade templates to
+    Debian 12.10.
+
 ## [20250311][]
 
 * Changed
@@ -169,6 +175,8 @@
   * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
     Alpine Linux 3.20.2.
 
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20250311...HEAD
 [20250311]:
   https://github.com/upperstream/packer-templates/compare/20250212...20250311
 [20250212]:

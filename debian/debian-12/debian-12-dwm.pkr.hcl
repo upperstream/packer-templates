@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "12.9.20250111"
+  default     = "12.10.20250315"
   description = "Version number of this Vagrant box."
 }
 
@@ -120,7 +120,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:5db98d2c215af13685ad9e482d0fd1d556054f09bfe26e2981020eae6e539dc8"
+  default     = "sha256:ec7779d1b49ed0ed997e25fdfba4e166c46e37cdd1475b05aa3011929c3ba3fc"
   description = "SHA256 checksum of the install media."
 }
 
@@ -132,7 +132,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian12.9/main/installer-amd64/20230607+deb12u9/images/netboot"
+  default     = "Debian12.10/main/installer-amd64/20230607+deb12u10/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -602,7 +602,7 @@ source "vmware-iso" "esxi" {
   network              = "bridged"
   network_adapter_type = "e1000"
   network_name         = "VM Network"
-  output_directory     = "${local.vm_name}-v${var.box_version}"
+  output_directory     = "${local.vm_name}"
   remote_datastore     = var.esxi_remote_datastore
   remote_host          = var.esxi_remote_host
   remote_password      = var.esxi_remote_password
@@ -714,7 +714,10 @@ build {
       "parallels-iso.default",
       "virtualbox-iso.default"
     ]
-    output = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    output = join("", [
+      coalesce(var.vm_name, "./${local.vm_name}"),
+      "-{{ .Provider }}.box"
+    ])
   }
 
   post-processor "vagrant" {
@@ -723,7 +726,7 @@ build {
       "vmware-iso.default"
     ]
     output = join("", [
-      coalesce(var.vm_name, "./${local.vm_name}-v${var.box_version}"),
+      coalesce(var.vm_name, "./${local.vm_name}"),
       "-{{ .Provider }}.box"
     ])
     vagrantfile_template = "../vagrantfiles/Vagrantfile.debian11+"
@@ -734,7 +737,7 @@ build {
     compression_level   = 9
     only                = ["qemu.default"]
     output = join("", [
-      coalesce(var.vm_name, "./${local.vm_name}-v${var.box_version}"),
+      coalesce(var.vm_name, "./${local.vm_name}"),
       "-{{ .Provider }}.box"
     ])
   }
