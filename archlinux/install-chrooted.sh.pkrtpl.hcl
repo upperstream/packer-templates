@@ -35,7 +35,6 @@ systemctl enable sshd.service
 
 if [ "$CONFIG_HYPERV_GUEST" = "yes" ]; then
   echo y | pacman -S hyperv
-  systemctl enable hv_fcopy_daemon.service
   systemctl enable hv_kvp_daemon.service
   systemctl enable hv_vss_daemon.service
 fi
