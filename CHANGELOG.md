@@ -3,11 +3,12 @@
 ## [Unreleased][]
 
 * Changed
-  * [Debian 12](debian/debian-12/README.md): Upgrade templates to
-    Debian 12.10.
   * [Arch Linux](archlinux/README.md): Hyper-V box stops using
     `hv_fcopy_daemon.service` since it was removed from Hyper-V package
     recent update.
+  * Arch Linux: Upgrade templates to Arch Linux 2025.04.01.
+  * [Debian 12](debian/debian-12/README.md): Upgrade templates to
+    Debian 12.10.
 
 ## [20250311][]
 

@@ -37,7 +37,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "20240601.0"
+  default     = "20250401.0"
   description = "Version number of this Vagrant box."
 }
 
@@ -108,19 +108,19 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://geo.mirror.pkgbuild.com/iso/2024.06.01/sha256sums.txt"
+  default     = "file:https://geo.mirror.pkgbuild.com/iso/2025.04.01/sha256sums.txt"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_image" {
   type        = string
-  default     = "archlinux-2024.06.01-x86_64.iso"
+  default     = "archlinux-2025.04.01-x86_64.iso"
   description = "File name of the install media."
 }
 
 variable "iso_path" {
   type        = string
-  default     = "iso/2024.06.01"
+  default     = "iso/2025.04.01"
   description = "Relative path to search the install media."
 }
 
@@ -279,7 +279,7 @@ locals {
     "iso/${var.iso_image}",
     "${var.mirror_site}/${var.iso_path}/${var.iso_image}"
   ]
-  vm_name = coalesce(var.vm_name, "ArchLinux-${var.arch}-minimal")
+  vm_name = coalesce(var.vm_name, "ArchLinux-minimal-v${var.box_version}-${var.arch}")
 }
 
 source "hyperv-iso" "default" {
@@ -311,13 +311,13 @@ source "hyperv-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${local.vm_name}-v${var.box_version}-hyperv"
+  output_directory = "output/${local.vm_name}-hyperv"
   shutdown_command = "sudo /sbin/shutdown -h now"
   ssh_password     = var.vagrant_password
   ssh_timeout      = var.ssh_timeout
   ssh_username     = var.vagrant_username
   switch_name      = var.hyperv_switch_name
-  vm_name          = "${local.vm_name}-v${var.box_version}"
+  vm_name          = "${local.vm_name}"
 }
 
 source "qemu" "default" {
@@ -354,13 +354,13 @@ source "qemu" "default" {
   iso_urls            = local.iso_urls
   memory              = var.mem_size
   net_device          = "virtio-net"
-  output_directory    = "output/${local.vm_name}-v${var.box_version}-qemu"
+  output_directory    = "output/${local.vm_name}-qemu"
   shutdown_command    = "sudo /sbin/shutdown -h now"
   ssh_password        = var.vagrant_password
   ssh_timeout         = var.ssh_timeout
   ssh_username        = var.vagrant_username
   use_default_display = var.qemu_use_default_display
-  vm_name             = "${local.vm_name}-v${var.box_version}"
+  vm_name             = "${local.vm_name}"
 }
 
 source "virtualbox-iso" "default" {
@@ -393,7 +393,7 @@ source "virtualbox-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${local.vm_name}-v${var.box_version}-virtualbox"
+  output_directory = "output/${local.vm_name}-virtualbox"
   shutdown_command = "sudo poweroff"
   ssh_password     = var.vagrant_password
   ssh_timeout      = var.ssh_timeout
@@ -402,7 +402,7 @@ source "virtualbox-iso" "default" {
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"]
   ]
-  vm_name = "${local.vm_name}-v${var.box_version}"
+  vm_name = "${local.vm_name}"
 }
 
 source "vmware-iso" "default" {
@@ -438,13 +438,13 @@ source "vmware-iso" "default" {
   memory               = var.mem_size
   network              = var.vmware_network
   network_adapter_type = var.vmware_network_adapter_type
-  output_directory     = "output/${local.vm_name}-v${var.box_version}-vmware"
+  output_directory     = "output/${local.vm_name}-vmware"
   shutdown_command     = "sudo poweroff"
   ssh_password         = var.vagrant_password
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.vagrant_username
   version              = var.vmware_hardware_version
-  vm_name              = "${local.vm_name}-v${var.box_version}"
+  vm_name              = "${local.vm_name}"
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
@@ -487,7 +487,7 @@ source "vmware-iso" "esxi" {
   iso_checksum        = var.iso_checksum
   iso_urls            = local.iso_urls
   memory              = var.mem_size
-  output_directory    = "${local.vm_name}-v${var.box_version}"
+  output_directory    = "${local.vm_name}"
   remote_datastore    = var.esxi_remote_datastore
   remote_host         = var.esxi_remote_host
   remote_password     = var.esxi_remote_password
@@ -497,7 +497,7 @@ source "vmware-iso" "esxi" {
   ssh_password        = var.vagrant_password
   ssh_timeout         = var.ssh_timeout
   ssh_username        = var.vagrant_username
-  vm_name             = "${local.vm_name}-v${var.box_version}"
+  vm_name             = "${local.vm_name}"
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.connectionType"  = "bridged"
@@ -560,7 +560,7 @@ build {
       "virtualbox-iso.default",
       "vmware-iso.default"
     ]
-    output = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    output = "./${local.vm_name}-{{ .Provider }}.box"
   }
 
   post-processor "vagrant" {
@@ -569,6 +569,6 @@ build {
     only = [
       "qemu.default"
     ]
-    output = "./${local.vm_name}-v${var.box_version}-{{ .Provider }}.box"
+    output = "./${local.vm_name}-{{ .Provider }}.box"
   }
 }
