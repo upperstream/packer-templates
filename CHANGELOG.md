@@ -2,6 +2,8 @@
 
 ## [Unreleased][]
 
+* Added
+  * Add `.clinerules` file for Cline to work properly.
 * Changed
   * [Arch Linux](archlinux/README.md): Hyper-V box stops using
     `hv_fcopy_daemon.service` since it was removed from Hyper-V package
