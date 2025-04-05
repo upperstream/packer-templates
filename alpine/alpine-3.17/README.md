@@ -1,6 +1,6 @@
-# Packer templates for Alpine Linux 3.17.9
+# Packer templates for Alpine Linux 3.17.10
 
-Templates to create Vagrant boxes for Alpine Linux 3.17.9. (x86_64,
+Templates to create Vagrant boxes for Alpine Linux 3.17.10. (x86_64,
 x86, and aarch64)
 
 ## Prerequisites
@@ -61,17 +61,17 @@ packer build -only=virtualbox-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.9.20240722-virtualbox.box` in
+`Alpine-standard-3.17-minimal-v17.10.20240926-x86_64-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.9.20240722`
+`Alpine-standard-3.17-minimal-v17.10.20240926-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.9.20240722-virtualbox.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.9.20240722 \
+  Alpine-standard-3.17-minimal-v17.10.20240926-x86_64-virtualbox.box \
+  --name Alpine-standard-3.17-minimal-v17.10.20240926-x86_64 \
   --provider virtualbox
 ```
 
@@ -89,17 +89,17 @@ packer build -only=vmware-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.9.20240722-vmware.box` in the
+`Alpine-standard-3.17-minimal-v17.10.20240926-x86_64-vmware.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.9.20240722` to your box list
+`Alpine-standard-3.17-minimal-v17.10.20240926-x86_64` to your box list
 by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.9.20240722-vmware.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.9.20240722 \
+  Alpine-standard-3.17-minimal-v17.10.20240926-x86_64-vmware.box \
+  --name Alpine-standard-3.17-minimal-v17.10.20240926-x86_64 \
   --provider vmware
 ```
 
@@ -150,17 +150,17 @@ packer build -only=qemu.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.9.20240722-libvirt.box` in the
+`Alpine-standard-3.17-minimal-v17.10.20240926-x86_64-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.9.20240722`
+`Alpine-standard-3.17-minimal-v17.10.20240926-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.9.20240722-libvirt.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.9.20240722 \
+  Alpine-standard-3.17-minimal-v17.10.20240926-x86_64-libvirt.box \
+  --name Alpine-standard-3.17-minimal-v17.10.20240926-x86_64 \
   --provider libvirt
 ```
 
@@ -181,17 +181,17 @@ packer build -only=hyperv-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.9.20240722-hyperv.box`
+`Alpine-standard-3.17-minimal-v17.10.20240926-x86_64-hyperv.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.9.20240722`
+`Alpine-standard-3.17-minimal-v17.10.20240926-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.9.20240722-hyperv.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.9.20240722 \
+  Alpine-standard-3.17-minimal-v17.10.20240926-x86_64-hyperv.box \
+  --name Alpine-standard-3.17-minimal-v17.10.20240926-x86_64 \
   --provider hyperv
 ```
 
@@ -209,17 +209,17 @@ packer build -only=parallels-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.17-x86_64-minimal-v17.9.20240722-parallels.box` in
+`Alpine-standard-3.17-minimal-v17.10.20240926-x86_64-parallels.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.17-x86_64-minimal-v17.9.20240722`
+`Alpine-standard-3.17-minimal-v17.10.20240926-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.17-x86_64-minimal-v17.9.20240722-parallels.box \
-  --name Alpine-standard-3.17-x86_64-minimal-v17.9.20240722 \
+  Alpine-standard-3.17-minimal-v17.10.20240926-x86_64-parallels.box \
+  --name Alpine-standard-3.17-minimal-v17.10.20240926-x86_64 \
   --provider parallels
 ```
 
@@ -256,12 +256,12 @@ use `doas`.
 
 ## Variants
 
-* `alpine-3.17-minimal.pkr.hcl` - Alpine Linux 3.17.9
-* `alpine-3.17-docker.pkr.hcl` - Alpine Linux 3.17.9 with [Docker] and
+* `alpine-3.17-minimal.pkr.hcl` - Alpine Linux 3.17.10
+* `alpine-3.17-docker.pkr.hcl` - Alpine Linux 3.17.10 with [Docker] and
   [Docker Compose]
-* `alpine-3.17-dwm.pkr.hcl` - Alpine Linux 3.17.9 with [X.org][],
+* `alpine-3.17-dwm.pkr.hcl` - Alpine Linux 3.17.10 with [X.org][],
   [dwm][], [dmenu][], [st][], [SLiM][], and [xrdp][].
-* `alpine-3.17-xfce.pkr.hcl` - Alpine Linux 3.17.9 with [Xfce][] and
+* `alpine-3.17-xfce.pkr.hcl` - Alpine Linux 3.17.10 with [Xfce][] and
   [xrdp][].
 
 [dmenu]: http://tools.suckless.org/dmenu/
@@ -355,4 +355,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2023, 2024 Upperstream.
+Copyright &copy; 2023-2025 Upperstream.

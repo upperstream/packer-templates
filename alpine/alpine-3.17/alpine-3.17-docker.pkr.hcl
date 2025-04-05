@@ -32,7 +32,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "17.9.20240722"
+  default     = "17.10.20240926"
   description = "Version number of this Vagrant box."
 }
 
@@ -328,7 +328,7 @@ locals {
     "./iso/${var.iso_image}",
     "http://dl-cdn.alpinelinux.org/alpine/v${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
   ]
-  vm_name = coalesce(var.vm_name, "${var.vm_name_base}-${var.os_ver}-${var.cpu}-${var.variant}-v${var.box_version}")
+  vm_name = coalesce(var.vm_name, "${var.vm_name_base}-${var.os_ver}-${var.variant}-v${var.box_version}-${var.cpu}")
 }
 
 source "hyperv-iso" "default" {
