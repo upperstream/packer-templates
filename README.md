@@ -32,9 +32,9 @@
   * freebsd-14.2 - FreeBSD 14.2 templates
   * [more](freebsd/README.md)
 * [netbsd](netbsd/README.md) - NetBSD templates (amd64 and i386)
-  * netbsd-8.3 - NetBSD 8.3 templates
-  * netbsd-9.4 - NetBSD 9.4 templates
-  * netbsd-10.0 - NetBSD 10.0 templates (amd64, i386, and aarch64)
+  * netbsd-8 - NetBSD 8.3 templates
+  * netbsd-9 - NetBSD 9.4 templates
+  * netbsd-10 - NetBSD 10.1 templates (amd64, i386, and aarch64)
   * [more](netbsd/README.md)
 * [openbsd](openbsd/README.md) - OpenBSD templates (amd64, i386, and
   arm64)
