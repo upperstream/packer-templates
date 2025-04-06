@@ -1,6 +1,6 @@
 vm_name_base = "Alpine-virt"
-iso_image = "alpine-virt-3.18.8-aarch64.iso"
-iso_checksum = "file:https://dl-cdn.alpinelinux.org/alpine/v3.18/releases/aarch64/alpine-virt-3.18.8-aarch64.iso.sha256"
+iso_image = "alpine-virt-3.18.12-aarch64.iso"
+iso_checksum = "file:https://dl-cdn.alpinelinux.org/alpine/v3.18/releases/aarch64/alpine-virt-3.18.12-aarch64.iso.sha256"
 cpu = "aarch64"
 esxi_guest_os_type = "arm-other5xlinux-64"
 virtualbox_guest_os_type = "Linux_64"

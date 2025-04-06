@@ -7,6 +7,8 @@
 * Changed
   * [Alpine 3.17](alpine/alpine-3.17/README.md): Upgrade templates to
     Alpine Linux 3.17.10.  VM name format has CPU architecture last.
+  * [Alpine 3.18](alpine/alpine-3.18/README.md): Upgrade templates to
+    Alpine Linux 3.18.12.  VM name format has CPU architecture last.
   * [Arch Linux](archlinux/README.md): Hyper-V box stops using
     `hv_fcopy_daemon.service` since it was removed from Hyper-V package
     recent update.
