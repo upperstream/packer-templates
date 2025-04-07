@@ -1,6 +1,6 @@
-# Packer templates for Alpine Linux 3.19.3
+# Packer templates for Alpine Linux 3.19.7
 
-Templates to create Vagrant boxes for Alpine Linux 3.19.3. (x86_64,
+Templates to create Vagrant boxes for Alpine Linux 3.19.7. (x86_64,
 x86, and aarch64)
 
 ## Prerequisites
@@ -55,17 +55,17 @@ packer build -only=virtualbox-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.19-x86_64-minimal-v19.3.20240722-virtualbox.box` in
+`Alpine-3.19-minimal-v19.7.20250213-x86_64-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.19-x86_64-minimal-v19.3.20240722`
+`Alpine-3.19-minimal-v19.7.20250213-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.19-x86_64-minimal-v19.3.20240722-virtualbox.box \
-  --name Alpine-standard-3.19-x86_64-minimal-v19.3.20240722 \
+  Alpine-3.19-minimal-v19.7.20250213-x86_64-virtualbox.box \
+  --name Alpine-3.19-minimal-v19.7.20250213-x86_64 \
   --provider virtualbox
 ```
 
@@ -83,17 +83,17 @@ packer build -only=vmware-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.19-x86_64-minimal-v19.3.20240722-vmware.box` in the
+`Alpine-3.19-minimal-v19.7.20250213-x86_64-vmware.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.19-x86_64-minimal-v19.3.20240722` to your box list
+`Alpine-3.19-minimal-v19.7.20250213-x86_64` to your box list
 by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.19-x86_64-minimal-v19.3.20240722-vmware.box \
-  --name Alpine-standard-3.19-x86_64-minimal-v19.3.20240722 \
+  Alpine-3.19-minimal-v19.7.20250213-x86_64-vmware.box \
+  --name Alpine-3.19-minimal-v19.7.20250213-x86_64 \
   --provider vmware
 ```
 
@@ -146,17 +146,17 @@ packer build -only=qemu.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.19-x86_64-minimal-v19.3.20240722-libvirt.box` in the
+`Alpine-3.19-minimal-v19.7.20250213-x86_64-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.19-x86_64-minimal-v19.3.20240722`
+`Alpine-3.19-minimal-v19.7.20250213-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.19-x86_64-minimal-v19.3.20240722-libvirt.box \
-  --name Alpine-standard-3.19-x86_64-minimal-v19.3.20240722 \
+  Alpine-3.19-minimal-v19.7.20250213-x86_64-libvirt.box \
+  --name Alpine-3.19-minimal-v19.7.20250213-x86_64 \
   --provider libvirt
 ```
 
@@ -176,17 +176,17 @@ packer build -only=parallels-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.19-x86_64-minimal-v19.3.20240722-parallels.box` in
+`Alpine-3.19-minimal-v19.7.20250213-x86_64-parallels.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.19-x86_64-minimal-v19.3.20240722`
+`Alpine-3.19-minimal-v19.7.20250213-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.19-x86_64-minimal-v19.3.20240722-parallels.box \
-  --name Alpine-standard-3.19-x86_64-minimal-v19.3.20240722 \
+  Alpine-3.19-minimal-v19.7.20250213-x86_64-parallels.box \
+  --name Alpine-3.19-minimal-v19.7.20250213-x86_64 \
   --provider parallels
 ```
 
@@ -203,17 +203,17 @@ packer build -only=hyperv-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.19-x86_64-minimal-v19.3.20240722-hyperv.box`
+`Alpine-3.19-minimal-v19.7.20250213-x86_64-hyperv.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.19-x86_64-minimal-v19.3.20240722`
+`Alpine-3.19-minimal-v19.7.20250213-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.19-x86_64-minimal-v19.3.20240722-hyperv.box \
-  --name Alpine-standard-3.19-x86_64-minimal-v19.3.20240722 \
+  Alpine-3.19-minimal-v19.7.20250213-x86_64-hyperv.box \
+  --name Alpine-3.19-minimal-v19.7.20250213-x86_64 \
   --provider hyperv
 ```
 
@@ -239,12 +239,12 @@ for SSH connection of this box is set to `/bin/ash`.
 
 ## Variants
 
-* `alpine-3.19-minimal.pkr.hcl` - Alpine Linux 3.19.3
-* `alpine-3.19-docker.pkr.hcl` - Alpine Linux 3.19.3 with [Docker] +
+* `alpine-3.19-minimal.pkr.hcl` - Alpine Linux 3.19.7
+* `alpine-3.19-docker.pkr.hcl` - Alpine Linux 3.19.7 with [Docker] +
   [Docker Compose]
-* `alpine-3.16-dwm.pkr.hcl` - Alpine Linux 3.19.3 with [X.org][], [suckless][]
+* `alpine-3.19-dwm.pkr.hcl` - Alpine Linux 3.19.7 with [X.org][], [suckless][]
   tools, and [xrdp][].
-* `alpine-3.16-xfce.pkr.hcl` - Alpine Linux 3.19.3 with [Xfce][] + [xrdp][].
+* `alpine-3.19-xfce.pkr.hcl` - Alpine Linux 3.19.7 with [Xfce][] + [xrdp][].
 
 [Docker]: https://www.docker.com/
   "Docker - Build, Ship and Run Any App, Anywhere"
@@ -329,4 +329,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2024 Upperstream Software.
+Copyright &copy; 2025 Upperstream Software.

@@ -30,9 +30,15 @@ variable "boot_wait" {
   description = "Override `boot_wait` default setting, which is 30s."
 }
 
+variable "alpine_version" {
+  type        = string
+  default     = "3.19.7"
+  description = "Full Alpine Linux version (e.g., 3.19.7)."
+}
+
 variable "box_version" {
   type        = string
-  default     = "19.3.20240722"
+  default     = "19.7.20250213"
   description = "Version number of this Vagrant box."
 }
 
@@ -328,7 +334,8 @@ locals {
     "./iso/${var.iso_image}",
     "http://dl-cdn.alpinelinux.org/alpine/v${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
   ]
-  vm_name = coalesce(var.vm_name, "${var.vm_name_base}-${var.os_ver}-${var.cpu}-${var.variant}-v${var.box_version}")
+  # Use os_ver (e.g., "3.19") for naming, not the full alpine_version (e.g., "3.19.7")
+  vm_name = coalesce(var.vm_name, "${var.vm_name_base}-${var.os_ver}-${var.variant}-v${var.box_version}-${var.cpu}")
 }
 
 source "hyperv-iso" "default" {
