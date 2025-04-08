@@ -32,7 +32,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "20.2.20240722"
+  default     = "20.6.20250213"
   description = "Version number of this Vagrant box."
 }
 
@@ -328,7 +328,7 @@ locals {
     "./iso/${var.iso_image}",
     "http://dl-cdn.alpinelinux.org/alpine/v${var.os_ver}/releases/${var.cpu}/${var.iso_image}"
   ]
-  vm_name = coalesce(var.vm_name, "${var.vm_name_base}-${var.os_ver}-${var.cpu}-${var.variant}-v${var.box_version}")
+  vm_name = coalesce(var.vm_name, "${var.vm_name_base}-${var.os_ver}-${var.variant}-v${var.box_version}-${var.cpu}")
 }
 
 source "hyperv-iso" "default" {
@@ -601,7 +601,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "DOCKER=docker=26.1.3-r2",
+      "DOCKER=docker=26.1.5-r0",
       "DOCKER_COMPOSE=docker-cli-compose=2.27.0-r3",
       "OS_VER=v${var.os_ver}",
       "PYTHON_PIP=py3-pip=24.0-r2",

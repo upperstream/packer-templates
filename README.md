@@ -7,7 +7,7 @@
   * alpine-3.17 - Alpine Linux 3.17.10 templates
   * alpine-3.18 - Alpine Linux 3.18.12 templates
   * alpine-3.19 - Alpine Linux 3.19.7 templates
-  * alpine-3.20 - Alpine Linux 3.20.2 templates
+  * alpine-3.20 - Alpine Linux 3.20.6 templates
   * [more](alpine/README.md)
 * [archlinux](archlinux/README.md) - Arch Linux templates (x86_64)
 * [centos](centos/README.md) - CentOS templates (x86_64 and i386)
