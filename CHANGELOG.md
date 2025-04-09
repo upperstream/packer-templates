@@ -1,9 +1,10 @@
 # Changelog
 
-## [Unreleased][]
+## [20250410][]
 
 * Added
-  * Add `.clinerules` file for Cline to work properly.
+  * [Alpine](alpine/README.md): Add templates for [Alpine Linux
+    3.21.3](alpine/alpine-3.21/README.md).
 * Changed
   * [Alpine 3.17](alpine/alpine-3.17/README.md): Upgrade templates to
     Alpine Linux 3.17.10.  VM name format has CPU architecture last.
@@ -189,8 +190,8 @@
   * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
     Alpine Linux 3.20.2.
 
-[Unreleased]:
-  https://github.com/upperstream/packer-templates/compare/20250311...HEAD
+[20250410]:
+  https://github.com/upperstream/packer-templates/compare/20250311...20250410
 [20250311]:
   https://github.com/upperstream/packer-templates/compare/20250212...20250311
 [20250212]:
