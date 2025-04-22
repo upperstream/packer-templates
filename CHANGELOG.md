@@ -1,8 +1,15 @@
 # Changelog
 
+## [Unreleased][]
+
+* Fixed
+  * [Ubuntu](ubuntu/README.md): Fixed links for Ubuntu 24.04 in
+    README.md. ([#279](https://github.com/upperstream/packer-templates/pull/279))
+
 ## [20250410][]
 
 * Added
+  * Add `.clinerules` file for Cline to work properly.
   * [Alpine](alpine/README.md): Add templates for [Alpine Linux
     3.21.3](alpine/alpine-3.21/README.md).
 * Changed
@@ -190,6 +197,8 @@
   * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
     Alpine Linux 3.20.2.
 
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20250410...HEAD
 [20250410]:
   https://github.com/upperstream/packer-templates/compare/20250311...20250410
 [20250311]:
