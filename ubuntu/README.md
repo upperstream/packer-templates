@@ -4,7 +4,7 @@
 
 Templates support amd64 and arm64 unless otherwise noted.
 
-* [ubuntu-24.04.2](ubuntu-24.04.2/README.md) - templates for Ubuntu 24.04.2
+* [ubuntu-24.04](ubuntu-24.04/README.md) - templates for Ubuntu 24.04.2
   * Ubuntu Server 24.04.2 LTS
   * Ubuntu 24.04.2 LTS + X.org + dwm + suckless tools
   * Ubuntu 24.04.2 LTS + LXQt
