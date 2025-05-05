@@ -2,6 +2,8 @@
 
 ## [Unreleased][]
 
+* Added
+  * [OpenBSD](openbsd/README.md): Add templates for [OpenBSD 7.7](openbsd/openbsd-7.7/README.md).
 * Fixed
   * [Ubuntu](ubuntu/README.md): Fixed links for Ubuntu 24.04 in
     README.md. ([#279](https://github.com/upperstream/packer-templates/pull/279))

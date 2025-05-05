@@ -197,6 +197,31 @@ available version of the packages, do the following:
    `replace_in_file` tool to update the hardcoded version strings
    within the `environment_vars` in the `.pkr.hcl` files.
 
+### Instructions for OpenBSD templates
+
+This section applies when you are working for templates for OpenBSD
+(sitting in any directories in `openbsd/`).
+
+When you are instructed to update the template files to use the latest
+available version of the packages, do the following:
+
+1. Examine the `provisioner "shell"` blocks within the relevant
+   `.pkr.hcl` files.
+2. Identify any packages installed with **hardcoded versions** specified
+   in the `environment_vars` (e.g., `PACKAGE_NAME=package=1.2.3`).
+   Packages installed without an explicit version (e.g., `pkg_add package`)
+   do not need manual version updates, as `pkg_add` will fetch the
+   latest during the build.
+3. For each package with a hardcoded version:
+   * Determine the target OpenBSD version (e.g., `7.7`) and relevant
+     architecture (e.g., `amd64`, `arm64`) based on the template context.
+   * Construct the URL for the package page on the OpenBSD package
+     website (e.g., "${var.package_server}/${var.os_ver}/packages/${var.package_arch}").
+   * Determine each package's version from the package website.
+4. Once all necessary latest versions are gathered, use the
+   `replace_in_file` tool to update the hardcoded version strings
+   within the `environment_vars` in the `.pkr.hcl` files.
+
 ## Common Patterns and Best Practices
 
 ### Template organization

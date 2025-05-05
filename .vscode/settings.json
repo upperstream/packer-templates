@@ -26,6 +26,7 @@
     "DNSOPTS",
     "doas",
     "elogind",
+    "endfor",
     "esxi",
     "evdev",
     "fcopy",
