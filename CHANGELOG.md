@@ -3,6 +3,7 @@
 ## [Unreleased][]
 
 * Added
+  * [FreeBSD](freebsd/README.md): Add templates for [FreeBSD 14.3-BETA1](freebsd/freebsd-14.3/README.md).
   * [OpenBSD](openbsd/README.md): Add templates for [OpenBSD 7.7](openbsd/openbsd-7.7/README.md).
 * Fixed
   * [Ubuntu](ubuntu/README.md): Fixed links for Ubuntu 24.04 in
