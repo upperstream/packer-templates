@@ -1,6 +1,6 @@
-# Packer templates for Debian 12.10
+# Packer templates for Debian 12.11
 
-Templates to create Vagrant boxes for Debian 12.10 (amd64, arm64, and i386).
+Templates to create Vagrant boxes for Debian 12.11 (amd64, arm64, and i386).
 
 ## Prerequisites
 
@@ -16,15 +16,13 @@ Templates to create Vagrant boxes for Debian 12.10 (amd64, arm64, and i386).
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
     "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
 [Hyper-V]: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/
-    "Introduction to Hyper-V on Windows 10 | Microsoft Docs"
+    "Introduction to Hyper-V on Windows 10"
 [libvirt]: https://libvirt.org/ "libvirt: The virtualization API"
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
-[Parallels]: https://www.parallels.com/products/desktop/ "Run Windows on Mac - Parallels Desktop 18 Virtual Machine for Mac"
+[Parallels]: https://www.parallels.com/ "Run Windows on Mac - Parallels Desktop"
 [QEMU]: https://www.qemu.org/ "QEMU"
-[Vagrant]: https://www.vagrantup.com/ "Vagrant"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
-[VMware]: http://www.vmware.com/
-    "VMware Virtualization for Desktop &amp; Server, Application, Public &amp; Hybrid Clouds"
+[VMware]: http://www.vmware.com/ "VMware Virtualization for Desktop & Server, Application, Public & Hybrid Clouds"
 
 ## Provisioned software tools
 
@@ -45,13 +43,13 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-12-amd64-minimal-v12.10.20250315-virtualbox.box` in the
+`Debian-12-amd64-minimal-v12.11.20250517-virtualbox.box` in the
 same directory after the command has succeeded.
 
-Then you can add the box named `Debian-12-amd64-minimal-v12.10.20250315`
+Then you can add the box named `Debian-12-amd64-minimal-v12.11.20250517`
 to your box list by the following command:
 
-    vagrant box add Debian-12-amd64-minimal-v12.10.20250315-virtualbox.box --name Debian-12-amd64-minimal-v12.10.20250315 --provider virtualbox
+    vagrant box add Debian-12-amd64-minimal-v12.11.20250517-virtualbox.box --name Debian-12-amd64-minimal-v12.11.20250517 --provider virtualbox
 
 VirtualBox build intends to create amd64 box and i386 box on amd64 host.
 
@@ -62,13 +60,13 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-12-amd64-minimal-v12.10.20250315-vmware.box` in the same
+`Debian-12-amd64-minimal-v12.11.20250517-vmware.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-12-amd64-minimal-v12.10.20250315`
+Then you can add the box named `Debian-12-amd64-minimal-v12.11.20250517`
 to your box list by the following command:
 
-    vagrant box add Debian-12-amd64-minimal-v12.10.20250315-vmware.box --name Debian-12-amd64-minimal-v12.10.20250315 --provider vmware_desktop
+    vagrant box add Debian-12-amd64-minimal-v12.11.20250517-vmware.box --name Debian-12-amd64-minimal-v12.11.20250517 --provider vmware_desktop
 
 VMware build intends to create amd64 box or i386 box on amd64 host
 using VMware Workstation, or create arm64 box on Apple Silicon Mac
@@ -84,8 +82,6 @@ environment variables:
 * `ESXI_REMOTE_PASSWORD` - ESXi login password
 * `ESXI_REMOTE_DATASTORE` - ESXi datastore name where a VM image will
   be created
-
-You also have to enable SSH and VNC on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
@@ -104,13 +100,13 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-12-amd64-minimal-v12.10.20250315-libvirt.box` in the same
+`Debian-12-amd64-minimal-v12.11.20250517-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-12-amd64-minimal-v12.10.20250315`
+Then you can add the box named `Debian-12-amd64-minimal-v12.11.20250517`
 to your box list by the following command:
 
-    vagrant box add Debian-12-amd64-minimal-v12.10.20250315-libvirt.box --name Debian-12-amd64-minimal-v12.10.20250315 --provider libvirt
+    vagrant box add Debian-12-amd64-minimal-v12.11.20250517-libvirt.box --name Debian-12-amd64-minimal-v12.11.20250517 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -125,13 +121,13 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-12-amd64-minimal-v12.10.20250315-hyperv.box` in the same
+`Debian-12-amd64-minimal-v12.11.20250517-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-12-amd64-minimal-v12.10.20250315`
+Then you can add the box named `Debian-12-amd64-minimal-v12.11.20250517`
 to your box list by the following command:
 
-    vagrant box add Debian-12-amd64-minimal-v12.10.20250315-hyperv.box --name Debian-12-amd64-minimal-v12.10.20250315 --provider hyperv
+    vagrant box add Debian-12-amd64-minimal-v12.11.20250517-hyperv.box --name Debian-12-amd64-minimal-v12.11.20250517 --provider hyperv
 
 Hyper-V build intends to create amd64 box and i386 box on Windows
 host.
@@ -143,27 +139,27 @@ From the terminal, invoke the following command for Parallels provider:
     packer build -only=parallels-iso.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-12-arm64-minimal-v12.10.20250315-parallels.box` in the same
+`Debian-12-arm64-minimal-v12.11.20250517-parallels.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-12-arm64-minimal-v12.10.20250315`
+Then you can add the box named `Debian-12-arm64-minimal-v12.11.20250517`
 to your box list by the following command:
 
-    vagrant box add Debian-12-arm64-minimal-v12.10.20250315-parallels.box --name Debian-12-arm64-minimal-v12.10.20250315 --provider parallels
+    vagrant box add Debian-12-arm64-minimal-v12.11.20250517-parallels.box --name Debian-12-arm64-minimal-v12.11.20250517 --provider parallels
 
 Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 ## Variants
 
-* `debian-12-minimal.pkr.hcl` - Debian 12.10 minimal installation
-* `debian-12-docker.pkr.hcl` - Debian 12.10 with [Docker][] +
+* `debian-12-minimal.pkr.hcl` - Debian 12.11 minimal installation
+* `debian-12-docker.pkr.hcl` - Debian 12.11 with [Docker][] +
   [Docker Compose][]
-* `debian-12-dwm.pkr.hcl` - Debian 12.10 with [X.org][], [suckless][]
+* `debian-12-dwm.pkr.hcl` - Debian 12.11 with [X.org][], [suckless][]
   tools, [ARandR][], and [xrdp][].
-* `debian-12-desktop.pkr.hcl` - Debian 12.10 with [xrdp][] + various
+* `debian-12-desktop.pkr.hcl` - Debian 12.11 with [xrdp][] + various
   desktop environment such as:
   * `xfce` - [Xfce][] (default)
-  * `cinnamon` [Cinnamon][]
+  * `cinnamon` - [Cinnamon][]
   * `gnome` - [GNOME][]
   * `gnome-flashback` - [GNOME Flashback][]
   * `kde` - [KDE Plasma][]
@@ -189,17 +185,17 @@ Parallels build intends to create arm64 box on Apple Silicon Mac host.
 [LXQt]: https://lxqt-project.org/ "LXQt"
 [MATE]: https://mate-desktop.org/ "MATE Desktop Environment"
 [suckless]: http://suckless.org/ "suckless.org software that sucks less"
-[X.org]: https://www.x.org/wiki/ "X.Org"
 [Xfce]: https://xfce.org/ "Xfce Desktop Environment"
+[X.org]: https://www.x.org/wiki/ "X.Org"
 [xrdp]: http://www.xrdp.org/ "xrdp"
 
 ## Installer CD images
 
 Optional var files are provided to instruct to use alternative
-installer CD images, i.e., `vars-debian-12-amd64-dvd.json` instructs to
-use `debian-12.10.0-amd64-DVD.iso` while
+installer CD images, i.e., `vars-debian-12-amd64-dvd.pkrvars.hcl` instructs to
+use `debian-12.11.0-amd64-DVD-1.iso` while
 `vars-debian-12-amd64-netinst.pkrvars.hcl` does
-`debian-12.10.0-amd64-netinst.iso` respectively.  Without using these
+`debian-12.11.0-amd64-netinst.iso` respectively.  Without using these
 var files, `debian-12-*.pkr.hcl` templates use netboot `mini.iso` for
 amd64.
 
@@ -209,15 +205,15 @@ command line:
     packer build -var-file=vars-debian-12-amd64-full.pkrvars.hcl debian-12-minimal.pkr.hcl
 
 * amd64 ISO images
-  * `vars-debian-12-amd64-dvd.pkrvars.hcl` - `debian-12.10.0-amd64-DVD-1.iso`
-  * `vars-debian-12-amd64-netinst.pkrvars.hcl` - `debian-12.10.0-amd64-netinst.iso`
+  * `vars-debian-12-amd64-dvd.pkrvars.hcl` - `debian-12.11.0-amd64-DVD-1.iso`
+  * `vars-debian-12-amd64-netinst.pkrvars.hcl` - `debian-12.11.0-amd64-netinst.iso`
 * arm64 ISO images
-  * `vars-debian-12-arm64-dvd.pkrvars.hcl` - `debian-12.10.0-arm64-DVD-1.iso`
-  * `vars-debian-12-arm64-netinst.pkrvars.hcl` - `debian-12.10.0-arm64-netinst.iso`
+  * `vars-debian-12-arm64-dvd.pkrvars.hcl` - `debian-12.11.0-arm64-DVD-1.iso`
+  * `vars-debian-12-arm64-netinst.pkrvars.hcl` - `debian-12.11.0-arm64-netinst.iso`
   * `vars-debian-12-arm64-mini.pkrvars.hcl` - netboot CD `mini.iso`
 * i386 ISO images
-  * `vars-debian-12-i386-dvd.pkrvars.hcl` - `debian-12.10.0-i386-DVD-1.iso`
-  * `vars-debian-12-i386-netinst.pkrvars.hcl` - `debian-12.10.0-i386-netinst.iso`
+  * `vars-debian-12-i386-dvd.pkrvars.hcl` - `debian-12.11.0-i386-DVD-1.iso`
+  * `vars-debian-12-i386-netinst.pkrvars.hcl` - `debian-12.11.0-i386-netinst.iso`
   * `vars-debian-12-i386-mini.pkrvars.hcl` - netboot CD `mini.iso`
 
 It is recommended to use "jigdo" to download large iso image file and
@@ -294,4 +290,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2023, 2024 Upperstream.
+Copyright &copy; 2023, 2025, Upperstream.

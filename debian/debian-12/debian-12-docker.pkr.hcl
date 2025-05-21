@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "12.10.20250315"
+  default     = "12.11.20250517"
   description = "Version number of this Vagrant box."
 }
 
@@ -120,7 +120,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:ec7779d1b49ed0ed997e25fdfba4e166c46e37cdd1475b05aa3011929c3ba3fc"
+  default     = "sha256:1c8f5ee61b0bc1da1ee2e32cf9c60f4c381523a468b0ae82170a17592979a783"
   description = "SHA256 checksum of the install media."
 }
 
@@ -132,7 +132,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian12.10/main/installer-amd64/20230607+deb12u10/images/netboot"
+  default     = "Debian12.11/main/installer-amd64/20230607+deb12u11/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -637,7 +637,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "DOCKER_COMPOSE=docker-compose=1.29.2-3",
-      "DOCKER_IO=docker.io=20.10.24+dfsg1-1+deb12u1",
+      "DOCKER_IO=docker.io=20.10.24+dfsg1-1+deb12u1+b1",
       "INSTALL_FROM_DVD=${var.install_from_dvd}",
       "OPTIMISE_REPOS=1",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",

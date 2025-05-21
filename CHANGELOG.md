@@ -5,6 +5,9 @@
 * Added
   * [FreeBSD](freebsd/README.md): Add templates for [FreeBSD 14.3-BETA3](freebsd/freebsd-14.3/README.md).
   * [OpenBSD](openbsd/README.md): Add templates for [OpenBSD 7.7](openbsd/openbsd-7.7/README.md).
+* Changed
+  * [Debian 12](debian/README.md): Upgrade templates to Debian 12.11
+    (Closes #283)
 * Fixed
   * [Ubuntu](ubuntu/README.md): Fixed links for Ubuntu 24.04 in
     README.md. ([#279](https://github.com/upperstream/packer-templates/pull/279))
