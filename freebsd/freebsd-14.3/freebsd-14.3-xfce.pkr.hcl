@@ -58,7 +58,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "3.20250516"
+  default = "4.20250524"
 }
 
 variable "ca_root_nss_version" {
@@ -142,13 +142,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/14.3/CHECKSUM.SHA256-FreeBSD-14.3-BETA3-amd64"
+  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/14.3/CHECKSUM.SHA256-FreeBSD-14.3-BETA4-amd64"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "FreeBSD-14.3-BETA3-amd64-disc1.iso"
+  default     = "FreeBSD-14.3-BETA4-amd64-disc1.iso"
   description = "File name of the install media."
 }
 
@@ -363,6 +363,7 @@ locals {
     "http://ftp11.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}",
     "https://ftp4.tw.freebsd.org/pub/FreeBSD/${var.iso_path}/${var.iso_name}"
   ]
+  vm_name = "${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}"
 }
 
 source "hyperv-iso" "default" {
@@ -395,13 +396,13 @@ source "hyperv-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-hyperv"
+  output_directory = "output/${local.vm_name}-hyperv"
   shutdown_command = "shutdown -p now"
   ssh_password     = var.root_password
   ssh_username     = "root"
   ssh_timeout      = var.ssh_timeout
   switch_name      = var.hyperv_switch_name
-  vm_name          = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name          = local.vm_name
 }
 
 source "parallels-iso" "default" {
@@ -435,14 +436,14 @@ source "parallels-iso" "default" {
   iso_checksum           = "${var.iso_checksum}"
   iso_urls               = local.iso_urls
   memory                 = "${var.mem_size}"
-  output_directory       = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-parallels"
+  output_directory       = "output/${local.vm_name}-parallels"
   parallels_tools_flavor = "other"
   parallels_tools_mode   = "disable"
   shutdown_command       = "shutdown -p now"
   ssh_password           = "${var.root_password}"
   ssh_username           = "root"
   ssh_timeout            = var.ssh_timeout
-  vm_name                = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name                = local.vm_name
 }
 
 source "qemu" "default" {
@@ -482,14 +483,14 @@ source "qemu" "default" {
   machine_type        = var.qemu_machine_type
   memory              = var.mem_size
   net_device          = "virtio-net"
-  output_directory    = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-qemu"
+  output_directory    = "output/${local.vm_name}-qemu"
   qemu_binary         = var.qemu_binary
   shutdown_command    = "shutdown -p now"
   ssh_password        = var.root_password
   ssh_username        = "root"
   ssh_timeout         = var.ssh_timeout
   use_default_display = var.qemu_use_default_display
-  vm_name             = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name             = local.vm_name
 }
 
 source "virtualbox-iso" "default" {
@@ -524,7 +525,7 @@ source "virtualbox-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-virtualbox"
+  output_directory = "output/${local.vm_name}-virtualbox"
   shutdown_command = "shutdown -p now"
   ssh_password     = var.root_password
   ssh_timeout      = var.ssh_timeout
@@ -534,7 +535,7 @@ source "virtualbox-iso" "default" {
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
     ["modifyvm", "{{ .Name }}", "--vram", "16"]
   ]
-  vm_name = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name = local.vm_name
 }
 
 source "vmware-iso" "default" {
@@ -572,14 +573,14 @@ source "vmware-iso" "default" {
   memory               = var.mem_size
   network              = "nat"
   network_adapter_type = var.vmware_network_adapter_type
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-vmware"
+  output_directory     = "output/${local.vm_name}-vmware"
   shutdown_command     = "shutdown -p now"
   ssh_password         = var.root_password
   ssh_timeout          = var.ssh_timeout
   ssh_username         = "root"
   usb                  = true
   version              = var.vmware_hardware_version
-  vm_name              = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
@@ -626,7 +627,7 @@ source "vmware-iso" "esxi" {
   memory               = var.mem_size
   network              = "bridged"
   network_adapter_type = "e1000"
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-esxi"
+  output_directory     = "output/${local.vm_name}-esxi"
   remote_datastore     = var.esxi_remote_datastore
   remote_host          = var.esxi_remote_host
   remote_password      = var.esxi_remote_password
@@ -638,7 +639,7 @@ source "vmware-iso" "esxi" {
   ssh_timeout          = var.ssh_timeout
   ssh_username         = "root"
   version              = var.esxi_hardware_version
-  vm_name              = "${var.vm_name}-${var.variant}-v${var.box_version}"
+  vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.networkName"     = "VM Network"
@@ -739,7 +740,7 @@ build {
       "virtualbox-iso.default",
       "vmware-iso.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2+"
   }
 
@@ -749,7 +750,7 @@ build {
     only = [
       "qemu.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2+"
   }
 }
