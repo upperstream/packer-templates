@@ -85,6 +85,7 @@
     "resolv",
     "rpcbind",
     "rtcuseutc",
+    "runlevels",
     "scfb",
     "SSHDOPTS",
     "sterm",

@@ -3,9 +3,11 @@
 ## [Unreleased][]
 
 * Added
+  * [Alpine](alpine/README.md): Add templates for [Alpine Linux 3.22.0](alpine/alpine-3.22/README.md).
   * [FreeBSD](freebsd/README.md): Add templates for [FreeBSD 14.3-BETA4](freebsd/freebsd-14.3/README.md).
   * [OpenBSD](openbsd/README.md): Add templates for [OpenBSD 7.7](openbsd/openbsd-7.7/README.md).
 * Changed
+  * Updated Alpine Linux package version update instructions in `.clinerules`
   * [Debian 12](debian/README.md): Upgrade templates to Debian 12.11
     (Closes #283)
   * FreeBSD 14.3: Updated Packer templates to use new VM name format:
