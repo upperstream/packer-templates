@@ -7,7 +7,6 @@ ${config_key}=${config_value}
 echo '${config_key}=${config_value}' >> /etc/make.conf
 %{ endfor ~}
 dhclient $${NETIF:=em0}
-cat /etc/resolv.conf || true
 cat >> /etc/rc.conf <<EOF
 ifconfig_$NETIF="DHCP"
 sshd_enable="YES"
@@ -19,9 +18,15 @@ ntpd_enable="YES"
 EOF
 
 mkdir -p /usr/local/etc/pkg/repos/
-cat > /usr/local/etc/pkg/repos/FreeBSD.conf << EOF
+cat << EOF | tee /usr/local/etc/pkg/repos/FreeBSD.conf
 FreeBSD: {
-  url: pkg+http://pkg.freebsd.org/$${ABI}/quarterly,
+  url: pkg+http://pkg.freebsd.org/$${ABI}/release_3,
+  enabled: true
+}
+EOF
+cat << EOF | tee /usr/local/etc/pkg/repos/FreeBSD-kmods.conf
+FreeBSD-kmods: {
+  url: pkg+http://pkg.freebsd.org/$${ABI}/kmods_quarterly_3,
   enabled: true
 }
 EOF

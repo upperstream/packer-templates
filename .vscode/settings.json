@@ -49,6 +49,7 @@
     "keepenv",
     "keymap",
     "KEYMAPOPTS",
+    "kmods",
     "LBUOPTS",
     "linuxmint",
     "localhostreachable",
