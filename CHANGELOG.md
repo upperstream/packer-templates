@@ -8,6 +8,8 @@
   * [OpenBSD](openbsd/README.md): Add templates for [OpenBSD 7.7](openbsd/openbsd-7.7/README.md).
 * Changed
   * Updated Alpine Linux package version update instructions in `.clinerules`
+  * [Arch Linux](archlinux/README.md) Update templates to Arch Linux
+    2025.06.01.
   * [Debian 12](debian/README.md): Upgrade templates to Debian 12.11
     (Closes #283)
   * FreeBSD 14.3: Updated Packer templates to use new VM name format:
