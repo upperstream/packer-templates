@@ -4,7 +4,7 @@
 
 * Added
   * [Alpine](alpine/README.md): Add templates for [Alpine Linux 3.22.0](alpine/alpine-3.22/README.md).
-  * [FreeBSD](freebsd/README.md): Add templates for [FreeBSD 14.3-RC1](freebsd/freebsd-14.3/README.md).
+  * [FreeBSD](freebsd/README.md): Add templates for [FreeBSD 14.3-RELEASE](freebsd/freebsd-14.3/README.md).
   * [OpenBSD](openbsd/README.md): Add templates for [OpenBSD 7.7](openbsd/openbsd-7.7/README.md).
 * Changed
   * Updated Alpine Linux package version update instructions in `.clinerules`

@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 14.3-RC1
+# Packer templates for FreeBSD 14.3-RELEASE
 
-Templates to create Vagrant boxes for FreeBSD 14.3-RC1 on ZFS root
+Templates to create Vagrant boxes for FreeBSD 14.3-RELEASE on ZFS root
 file system.  (amd64, i386, and arm64)
 
 ## Prerequisites
@@ -52,14 +52,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default freebsd-14.3-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-14.3-RC-minimal-v1.20250601-amd64-virtualbox.box` in
+`FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-14.3-RC-minimal-v1.20250601` to your box list by
+`FreeBSD-14.3-RELEASE-minimal-v14.3.20250610` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-14.3-RC-minimal-v1.20250601-virtualbox.box --name FreeBSD-14.3-RC-minimal-v1.20250601 --provider virtualbox
+    vagrant box add FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64-virtualbox.box --name FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64 --provider virtualbox
 
 VirtualBox build intends to create amd64 box and i386 box on amd64 host.
 
@@ -70,14 +70,14 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default freebsd-14.3-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-14.3-RC-minimal-v1.20250601-amd64-vmware.box` in the
+`FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64-vmware.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-14.3-RC-minimal-v1.20250601` to your box list by
+`FreeBSD-14.3-RELEASE-minimal-v14.3.20250610` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-14.3-RC-minimal-v1.20250601-amd64-vmware.box --name FreeBSD-14.3-RC-amd64-minimal-v1.20250601 --provider vmware_desktop
+    vagrant box add FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64-vmware.box --name FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64 --provider vmware_desktop
 
 VMware build intends to create amd64 and i386 boxes on amd64 host, and
 aarch64 box on Apple Silicon Mac host.
@@ -114,14 +114,14 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default freebsd-14.3-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-14.3-RC-minimal-v1.20250601-amd64-libvirt.box` in the
+`FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-14.3-RC-minimal-v1.20250601` to your box list by
+`FreeBSD-14.3-RELEASE-minimal-v14.3.20250610` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-14.3-RC-minimal-v1.20250601-amd64-libvirt.box --name FreeBSD-14.3-RC-amd64-minimal-v1.20250601 --provider libvirt
+    vagrant box add FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64-libvirt.box --name FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -136,14 +136,14 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default freebsd-14.3-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-14.3-RC-minimal-v1.20250601-amd64-hyperv.box` in the
+`FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64-hyperv.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-14.3-RC-minimal-v1.20250601` to your box list by
+`FreeBSD-14.3-RELEASE-minimal-v14.3.20250610` to your box list by
 the following command:
 
-    vagrant box add FreeBSD-14.3-RC-minimal-v1.20250601-amd64-hyperv.box --name FreeBSD-14.3-RC-amd64-minimal-v1.20250601 --provider hyperv
+    vagrant box add FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64-hyperv.box --name FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-amd64 --provider hyperv
 
 Hyper-V build intends to create amd64 box and i386 box on Windows
 host.
@@ -155,14 +155,14 @@ From the terminal, invoke the following command for Parallels provider:
     packer build -only=parallels-iso.default -var-file vars-freebsd-14.3-aarch64.pkrvars.hcl freebsd-14.3-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-14.3-RC-minimal-v1.20250601-aarch64-parallels.box` in the same
+`FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-aarch64-parallels.box` in the same
 directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-14.3-RC-minimal-v1.20250601` to your box list
+`FreeBSD-14.3-RELEASE-minimal-v14.3.20250610` to your box list
 by the following command:
 
-    vagrant box add FreeBSD-14.3-RC-minimal-v1.20250601-aarch64-parallels.box --name FreeBSD-14.3-RC-aarch64-minimal-v1.20250601 --provider parallels
+    vagrant box add FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-aarch64-parallels.box --name FreeBSD-14.3-RELEASE-minimal-v14.3.20250610-aarch64 --provider parallels
 
 Parallels build intends to create aarch64 box on Apple Silicon Mac
 host.
@@ -205,10 +205,10 @@ use `doas`.
 
 ## Variants
 
-* `freebsd-14.3-minimal.pkr.hcl` - FreeBSD 14.3-RC1
-* `freebsd-14.3-dwm.pkr.hcl` - FreeBSD 14.3-RC1 + [X.Org][] +
+* `freebsd-14.3-minimal.pkr.hcl` - FreeBSD 14.3-RELEASE
+* `freebsd-14.3-dwm.pkr.hcl` - FreeBSD 14.3-RELEASE + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-14.3-xfce.pkr.hcl` - FreeBSD 14.3-RC1 + [Xfce][] +
+* `freebsd-14.3-xfce.pkr.hcl` - FreeBSD 14.3-RELEASE + [Xfce][] +
   [SLiM][]
 
 While `freebsd-14.3-*.pkr.hcl` templates generate amd64 boxes by
@@ -287,7 +287,7 @@ or `-var-file` command line options to `packer`:
 * `virtualbox_partition` - Disk name for VirtualBox box.  Defaults to
   `ada0`.
 * `vm_name` - VM name.  This also affects box file name and output
-  directory name. Defaults to `FreeBSD-14.3-RC`.
+  directory name. Defaults to `FreeBSD-14.3-RELEASE`.
 * `vmware_disk_adapter_type` - Disk adapter type for VMware.  Defaults
   to `scsi`.
 * `vmware_hardware_version` - Hardware version for VMware.  Defaults to
