@@ -3,6 +3,15 @@
 ## [Unreleased][]
 
 * Added
+  * [Tiny Core Linux](tinycorelinux/README.md): Add templates for
+    [Tiny Core Linux][] v16.1.
+* Changed
+  * Move [markdownlint][] settings from `.vscode/settings.json` to
+    `.markdownlint.json`
+
+## [20250611][]
+
+* Added
   * [Alpine](alpine/README.md): Add templates for [Alpine Linux 3.22.0](alpine/alpine-3.22/README.md).
   * [FreeBSD](freebsd/README.md): Add templates for [FreeBSD 14.3-RELEASE](freebsd/freebsd-14.3/README.md).
   * [OpenBSD](openbsd/README.md): Add templates for [OpenBSD 7.7](openbsd/openbsd-7.7/README.md).
@@ -10,13 +19,12 @@
   * Updated Alpine Linux package version update instructions in `.clinerules`
   * [Arch Linux](archlinux/README.md) Update templates to Arch Linux
     2025.06.01.
-  * [Debian 12](debian/README.md): Upgrade templates to Debian 12.11
-    (Closes #283)
+  * [Debian 12](debian/README.md): Upgrade templates to Debian 12.11.
   * FreeBSD 14.3: Updated Packer templates to use new VM name format:
-    {OS name and version}-{variant name}-v{box version}-{architecture}
+    {OS name and version}-{variant name}-v{box version}-{architecture}.
 * Fixed
   * [Ubuntu](ubuntu/README.md): Fixed links for Ubuntu 24.04 in
-    README.md. ([#279](https://github.com/upperstream/packer-templates/pull/279))
+    README.md ([GH-279]).
 
 ## [20250410][]
 
@@ -93,7 +101,7 @@
       VMware build.  Default value is `19`.
     * QEMU: Use default display instead of GTK.
     * VMware: Virtual hardware version is now `13` as [Packer Plugin
-      for VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
+      for VMware v1.1.0][]
       requires the virtual hardware version `13` or greater.
 
 ## [20241015][]
@@ -126,7 +134,7 @@
         for VMware build.  Default value is `19`.
     * VMware:
       * Virtual hardware version is now `13` as [Packer Plugin for
-        VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
+        VMware v1.1.0][]
         requires the virtual hardware version `13` or greater.
   * [Ubuntu 24.04](ubuntu/ubuntu-24.04/README.md): Upgrade templates to
     Ubuntu 24.04.1 including the following changes:
@@ -143,7 +151,7 @@
         build.  Default values are `ubuntu-64` and `19` respectively.
     * VMware:
       * Virtual hardware version is now `13` as [Packer Plugin for
-        VMware v1.1.0](https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0)
+        VMware v1.1.0][]
         requires the virtual hardware version `13` or greater.
     * QEMU:
       * Use default display instead of GTK.
@@ -209,8 +217,15 @@
   * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
     Alpine Linux 3.20.2.
 
+[GH-279]: https://github.com/upperstream/packer-templates/pull/279
+[markdownlint]: https://github.com/DavidAnson/markdownlint
+[Packer Plugin for VMware v1.1.0]: https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0
+[Tiny Core Linux]: http://tinycorelinux.net/
+
 [Unreleased]:
-  https://github.com/upperstream/packer-templates/compare/20250410...HEAD
+  https://github.com/upperstream/packer-templates/compare/20250612...HEAD
+[20250611]:
+  https://github.com/upperstream/packer-templates/compare/20250410...20250612
 [20250410]:
   https://github.com/upperstream/packer-templates/compare/20250311...20250410
 [20250311]:
