@@ -8,6 +8,8 @@
 * Changed
   * Move [markdownlint][] settings from `.vscode/settings.json` to
     `.markdownlint.json`
+  * [Alpine 3.19](alpine/alpine-3.19/README.md): Upgrade templates to
+    version 3.19.8
 
 ## [20250611][]
 
