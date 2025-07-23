@@ -1,6 +1,6 @@
 vm_name_base = "Alpine-virt"
-iso_image = "alpine-virt-3.20.6-x86.iso"
-iso_checksum = "file:https://dl-cdn.alpinelinux.org/alpine/v3.20/releases/x86/alpine-virt-3.20.6-x86.iso.sha256"
+iso_image = "alpine-virt-3.20.7-x86.iso"
+iso_checksum = "file:https://dl-cdn.alpinelinux.org/alpine/v3.20/releases/x86/alpine-virt-3.20.7-x86.iso.sha256"
 cpu = "x86"
 virtualbox_guest_os_type = "Linux"
 vmware_guest_os_type = "other5xlinux"
