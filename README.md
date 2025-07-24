@@ -6,7 +6,7 @@
   aarch64)
   * alpine-3.19 - Alpine Linux 3.19.8 templates
   * alpine-3.20 - Alpine Linux 3.20.7 templates
-  * alpine-3.21 - Alpine Linux 3.21.3 templates
+  * alpine-3.21 - Alpine Linux 3.21.4 templates
   * alpine-3.22 - Alpine Linux 3.22.0 templates
   * [more](alpine/README.md)
 * [archlinux](archlinux/README.md) - Arch Linux templates (x86_64)

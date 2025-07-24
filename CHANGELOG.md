@@ -12,6 +12,8 @@
     Alpine Linux 3.19.8
   * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
     Alpine Linux 3.20.7.
+  * [Alpine 3.21](alpine/alpine-3.21/README.md): Upgrade templates to
+    Alpine Linux 3.21.4.
 
 ## [20250611][]
 

@@ -2,24 +2,28 @@ packer {
   required_version = ">= 1.7.0"
   required_plugins {
     hyperv = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.4"
     }
     parallels = {
-      version = ">= 1.0.1"
       source  = "github.com/hashicorp/parallels"
+      version = ">= 1.2.8"
     }
     qemu = {
-      version = ">= 1.0.8"
       source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.3"
+    }
+    vagrant = {
+      source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.5"
     }
     virtualbox = {
-      version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.1.2"
     }
     vmware = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/vmware"
+      version = ">= 1.1.0"
     }
   }
 }
@@ -32,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "21.3.20250213"
+  default     = "21.4.20250715"
   description = "Version number of this Vagrant box."
 }
 
@@ -269,8 +273,8 @@ variable "vmware_guest_os_type" {
 }
 
 variable "vmware_hardware_version" {
-  type        = string
-  default     = "9"
+  type        = number
+  default     = 19
   description = "Virtual hardware version of VMware box."
 }
 
@@ -297,8 +301,8 @@ variable "vmware_usb_xhci_present" {
 }
 
 variable "vmware_vhv_enabled" {
-  type        = string
-  default     = "FALSE"
+  type        = bool
+  default     = false
   description = "Enable nested virtualisation."
 }
 
@@ -488,13 +492,13 @@ source "vmware-iso" "default" {
   ssh_username         = var.ssh_username
   tools_upload_flavor  = ""
   version              = var.vmware_hardware_version
+  vhv_enabled          = var.vmware_vhv_enabled
   vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "vhv.enable"                = var.vmware_vhv_enabled
     "svga.autodetect"           = var.vmware_svga_autodetect
     "usb_xhci.present"          = var.vmware_usb_xhci_present
   }
@@ -536,6 +540,7 @@ source "vmware-iso" "esxi" {
   ssh_timeout             = var.ssh_timeout
   ssh_username            = var.ssh_username
   tools_upload_flavor     = "linux"
+  vhv_enabled             = var.vmware_vhv_enabled
   vm_name                 = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
@@ -543,7 +548,6 @@ source "vmware-iso" "esxi" {
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "vhv.enable"                = "TRUE"
   }
   vnc_over_websocket = var.esxi_vnc_over_websocket
 }
@@ -591,7 +595,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "NFS_UTILS=nfs-utils=2.6.4-r3",
-      "UTIL_LINUX=util-linux=2.40.4-r0"
+      "UTIL_LINUX=util-linux=2.40.4-r1"
     ]
     only = [
       "qemu.default"
