@@ -14,6 +14,8 @@
     Alpine Linux 3.20.7.
   * [Alpine 3.21](alpine/alpine-3.21/README.md): Upgrade templates to
     Alpine Linux 3.21.4.
+  * [Alpine 3.22](alpine/alpine-3.22/README.md): Upgrade templates to
+    Alpine Linux 3.22.1.
 
 ## [20250611][]
 
