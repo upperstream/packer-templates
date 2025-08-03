@@ -1,4 +1,4 @@
-# Packer templates for Arch Linux 2025.06.01
+# Packer templates for Arch Linux 2025.08.01
 
 Templates to create Vagrant boxes for Arch Linux.
 
@@ -34,13 +34,14 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso.default archlinux-minimal.pkr.hcl
 
-You will find a vagrant box file named `ArchLinux-minimal-20250601.0-x86_64-virtualbox.box`
+You will find a vagrant box file named `ArchLinux-minimal-20250801.0-x86_64-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `ArchLinux-minimal-20250601.0-x86_64`
+Then you can add the box named `ArchLinux-minimal-20250801.0-x86_64`
  to your box list by the following command:
 
-    vagrant box add ArchLinux-minimal-20250601.0-x86_64-virtualbox.box --name ArchLinux-minimal-20250601.0-x86_64 --provider virtualbox
+    vagrant box add ArchLinux-minimal-20250801.0-x86_64-virtualbox.box \
+      --name ArchLinux-minimal-20250801.0-x86_64 --provider virtualbox
 
 VirtualBox build intends to create x86_64 box on x86_64 host.
 
@@ -50,13 +51,14 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso.default archlinux-minimal.pkr.hcl
 
-You will find a vagrant box file named `ArchLinux-minimal-20250601.0-x86_64-vmware.box`
+You will find a vagrant box file named `ArchLinux-minimal-20250801.0-x86_64-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `ArchLinux-minimal-20250601.0-x86_64`
+Then you can add the box named `ArchLinux-minimal-20250801.0-x86_64`
 to your box list by the following command:
 
-    vagrant box add ArchLinux-minimal-20250601.0-x86_64-vmware.box --name ArchLinux-minimal-20250601.0-x86_64 --provider vmware_desktop
+    vagrant box add ArchLinux-minimal-20250801.0-x86_64-vmware.box \
+      --name ArchLinux-minimal-20250801.0-x86_64 --provider vmware_desktop
 
 VMware build intends to create x86_64 box on x86_64 host.
 
@@ -92,16 +94,16 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default archlinux-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`ArchLinux-minimal-20250601.0-x86_64-libvirt.box` in the
+`ArchLinux-minimal-20250801.0-x86_64-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`ArchLinux-minimal-20250601.0-x86_64`
+`ArchLinux-minimal-20250801.0-x86_64`
 to your box list by the following command:
 
     vagrant box add \
-      ArchLinux-minimal-20250601.0-x86_64-libvirt.box \
-      --name ArchLinux-minimal-20250601.0-x86_64 \
+      ArchLinux-minimal-20250801.0-x86_64-libvirt.box \
+      --name ArchLinux-minimal-20250801.0-x86_64 \
       --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
@@ -119,16 +121,16 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default archlinux-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`ArchLinux-minimal-20250601.0-x86_64-hyperv.box`
+`ArchLinux-minimal-20250801.0-x86_64-hyperv.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named
-`ArchLinux-minimal-20250601.0-x86_64`
+`ArchLinux-minimal-20250801.0-x86_64`
 to your box list by the following command:
 
     vagrant box add \
-      ArchLinux-minimal-20250601.0-x86_64-hyperv.box \
-      --name ArchLinux-minimal-20250601.0-x86_64 \
+      ArchLinux-minimal-20250801.0-x86_64-hyperv.box \
+      --name ArchLinux-minimal-20250801.0-x86_64 \
       --provider hyperv
 
 Hyper-V build intends to create x86 box and x86_64 box on Windows 10

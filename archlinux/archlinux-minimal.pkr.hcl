@@ -1,24 +1,25 @@
 packer {
+  required_version = ">= 1.7.0"
   required_plugins {
     hyperv = {
       source  = "github.com/hashicorp/hyperv"
-      version = ">= 1.1.3"
+      version = ">= 1.1.4"
     }
     qemu = {
       source  = "github.com/hashicorp/qemu"
-      version = ">= 1.1.0"
+      version = ">= 1.1.3"
     }
     vagrant = {
       source  = "github.com/hashicorp/vagrant"
-      version = ">= 1.1.4"
+      version = ">= 1.1.5"
     }
     virtualbox = {
       source  = "github.com/hashicorp/virtualbox"
-      version = ">= 1.0.5"
+      version = ">= 1.1.2"
     }
     vmware = {
       source  = "github.com/hashicorp/vmware"
-      version = ">= 1.0.11"
+      version = ">= 1.1.0"
     }
   }
 }
@@ -37,7 +38,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "20250601.0"
+  default     = "20250801.0"
   description = "Version number of this Vagrant box."
 }
 
@@ -77,6 +78,12 @@ variable "esxi_remote_username" {
   description = "SSH username for the ESXi server to create this box."
 }
 
+variable "esxi_vhv_enabled" {
+  type        = bool
+  default     = false
+  description = "Enable nested virtualisation on ESXi VM."
+}
+
 variable "esxi_vnc_over_websocket" {
   type        = string
   default     = "true"
@@ -108,19 +115,19 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://geo.mirror.pkgbuild.com/iso/2025.06.01/sha256sums.txt"
+  default     = "file:https://geo.mirror.pkgbuild.com/iso/2025.08.01/sha256sums.txt"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_image" {
   type        = string
-  default     = "archlinux-2025.06.01-x86_64.iso"
+  default     = "archlinux-2025.08.01-x86_64.iso"
   description = "File name of the install media."
 }
 
 variable "iso_path" {
   type        = string
-  default     = "iso/2025.06.01"
+  default     = "iso/2025.08.01"
   description = "Relative path to search the install media."
 }
 
@@ -131,14 +138,14 @@ variable "mem_size" {
 }
 
 variable "mirror_site" {
-  type    = string
-  default = "https://geo.mirror.pkgbuild.com"
+  type        = string
+  default     = "https://geo.mirror.pkgbuild.com"
   description = "Mirror site to download the install media and packages."
 }
 
 variable "num_cpus" {
-  type    = string
-  default = "2"
+  type        = string
+  default     = "2"
   description = "Number of virtual CPUs of this box."
 }
 
@@ -234,9 +241,9 @@ variable "vmware_guest_os_type" {
 }
 
 variable "vmware_hardware_version" {
-  type        = string
-  default     = "9"
-  description = "Hardware version for VMware box."
+  type        = number
+  default     = 13
+  description = "Hardware version of VMware box."
 }
 
 variable "vmware_network" {
@@ -262,15 +269,18 @@ variable "vmware_usb_xhci_present" {
 }
 
 variable "vmware_vhv_enabled" {
-  type        = string
-  default     = "FALSE"
-  description = "Enable nested virtualisation."
+  type        = bool
+  default     = false
+  description = "Enable nested virtualisation on VMware VM."
 }
 
 locals {
   boot_command = [
-    "<enter><wait>",
+    "<tab> <wait>",
+    "net.ifnames=0 <wait>",
+    "biosdevnames=0 <wait><enter>",
     "<wait10><wait10><wait10><wait10><wait10>",
+    "dhcpcd eth0<wait><enter><wait10>",
     "curl -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
     "curl -o /tmp/install-chrooted.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install-chrooted.sh<enter><wait>",
     "sh -ex /tmp/install.sh<enter>"
@@ -317,7 +327,7 @@ source "hyperv-iso" "default" {
   ssh_timeout      = var.ssh_timeout
   ssh_username     = var.vagrant_username
   switch_name      = var.hyperv_switch_name
-  vm_name          = "${local.vm_name}"
+  vm_name          = local.vm_name
 }
 
 source "qemu" "default" {
@@ -360,7 +370,7 @@ source "qemu" "default" {
   ssh_timeout         = var.ssh_timeout
   ssh_username        = var.vagrant_username
   use_default_display = var.qemu_use_default_display
-  vm_name             = "${local.vm_name}"
+  vm_name             = local.vm_name
 }
 
 source "virtualbox-iso" "default" {
@@ -402,7 +412,7 @@ source "virtualbox-iso" "default" {
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"]
   ]
-  vm_name = "${local.vm_name}"
+  vm_name = local.vm_name
 }
 
 source "vmware-iso" "default" {
@@ -444,13 +454,13 @@ source "vmware-iso" "default" {
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.vagrant_username
   version              = var.vmware_hardware_version
-  vm_name              = "${local.vm_name}"
+  vhv_enabled          = var.vmware_vhv_enabled
+  vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "vhv.enable"                = var.vmware_vhv_enabled
     "svga.autodetect"           = var.vmware_svga_autodetect
     "usb_xhci.present"          = var.vmware_usb_xhci_present
   }
@@ -483,30 +493,31 @@ source "vmware-iso" "esxi" {
       }
     })
   }
-  insecure_connection = true
-  iso_checksum        = var.iso_checksum
-  iso_urls            = local.iso_urls
-  memory              = var.mem_size
-  output_directory    = "${local.vm_name}"
-  remote_datastore    = var.esxi_remote_datastore
-  remote_host         = var.esxi_remote_host
-  remote_password     = var.esxi_remote_password
-  remote_type         = "esx5"
-  remote_username     = var.esxi_remote_username
-  shutdown_command    = "sudo poweroff"
-  ssh_password        = var.vagrant_password
-  ssh_timeout         = var.ssh_timeout
-  ssh_username        = var.vagrant_username
-  vm_name             = "${local.vm_name}"
+  insecure_connection     = true
+  iso_checksum            = var.iso_checksum
+  iso_urls                = local.iso_urls
+  memory                  = var.mem_size
+  network                 = "bridged"
+  network_adapter_type    = "e1000"
+  remote_datastore        = var.esxi_remote_datastore
+  remote_host             = var.esxi_remote_host
+  remote_output_directory = local.vm_name
+  remote_password         = var.esxi_remote_password
+  remote_type             = "esx5"
+  remote_username         = var.esxi_remote_username
+  shutdown_command        = "sudo poweroff"
+  skip_export             = true
+  ssh_password            = var.vagrant_password
+  ssh_timeout             = var.ssh_timeout
+  ssh_username            = var.vagrant_username
+  vhv_enabled             = var.esxi_vhv_enabled
+  vm_name                 = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
-    "ethernet0.connectionType"  = "bridged"
     "ethernet0.networkName"     = "VM Network"
     "ethernet0.present"         = "TRUE"
-    "ethernet0.virtualDev"      = "e1000"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "vhv.enable"                = "TRUE"
   }
   vnc_disable_password = true
   vnc_over_websocket   = var.esxi_vnc_over_websocket
@@ -557,10 +568,18 @@ build {
     compression_level = 9
     only = [
       "hyperv-iso.default",
-      "virtualbox-iso.default",
-      "vmware-iso.default"
+      "virtualbox-iso.default"
     ]
     output = "./${local.vm_name}-{{ .Provider }}.box"
+  }
+
+  post-processor "vagrant" {
+    compression_level = 9
+    only = [
+      "vmware-iso.default"
+    ]
+    vagrantfile_template = "vagrantfiles/Vagrantfile.archlinux"
+    output               = "./${local.vm_name}-{{ .Provider }}.box"
   }
 
   post-processor "vagrant" {

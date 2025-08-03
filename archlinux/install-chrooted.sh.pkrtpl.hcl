@@ -9,6 +9,7 @@ echo "127.0.0.1	$${VAGRANT_HOSTNAME}.localdomain	localhost" >> /etc/hosts
 
 echo y | pacman -S grub
 grub-install --target=i386-pc "/dev/$DISK"
+sed -i '/^GRUB_CMDLINE_LINUX_DEFAULT=/s/"$/ net.ifnames=0 biosdevnames=0"/' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 echo y | pacman -S intel-ucode amd-ucode
 
