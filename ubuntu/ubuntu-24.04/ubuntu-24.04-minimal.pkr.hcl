@@ -3,27 +3,27 @@ packer {
   required_plugins {
     hyperv = {
       source  = "github.com/hashicorp/hyperv"
-      version = ">= 1.1.3"
+      version = ">= 1.1.4"
     }
     parallels = {
       source  = "github.com/hashicorp/parallels"
-      version = ">= 1.0.0"
+      version = ">= 1.2.8"
     }
     qemu = {
       source  = "github.com/hashicorp/qemu"
-      version = ">= 1.1.0"
+      version = ">= 1.1.3"
     }
     vagrant = {
       source  = "github.com/hashicorp/vagrant"
-      version = ">= 1.1.4"
+      version = ">= 1.1.5"
     }
     virtualbox = {
       source  = "github.com/hashicorp/virtualbox"
-      version = ">= 1.0.5"
+      version = ">= 1.1.2"
     }
     vmware = {
       source  = "github.com/hashicorp/vmware"
-      version = ">= 1.0.11"
+      version = ">= 1.1.0"
     }
   }
 }
@@ -31,6 +31,11 @@ packer {
 variable "archive_mirror" {
   type    = string
   default = "http://archive.ubuntu.com/ubuntu"
+}
+
+variable "boot_command_prefix" {
+  type    = string
+  default = ""
 }
 
 variable "boot_wait" {
@@ -41,7 +46,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "2404.2.20250220"
+  default     = "2404.3.20250807"
   description = "Version number of this Vagrant box."
 }
 
@@ -98,6 +103,12 @@ variable "esxi_remote_username" {
   description = "SSH username for the ESXi server to create this box."
 }
 
+variable "esxi_vhv_enabled" {
+  type        = bool
+  default     = false
+  description = "Enable nested virtualisation on ESXi VM."
+}
+
 variable "esxi_vnc_over_websocket" {
   type        = string
   default     = "true"
@@ -123,13 +134,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://releases.ubuntu.com/24.04.2/SHA256SUMS"
+  default     = "file:https://releases.ubuntu.com/24.04.3/SHA256SUMS"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "ubuntu-24.04.2-live-server-amd64.iso"
+  default     = "ubuntu-24.04.3-live-server-amd64.iso"
   description = "File name of the install media."
 }
 
@@ -153,7 +164,7 @@ variable "num_cpus" {
 
 variable "os_version" {
   type    = string
-  default = "24.04.2"
+  default = "24.04.3"
 }
 
 variable "parallels_boot_mode" {
@@ -306,8 +317,8 @@ variable "vmware_usb_xhci_present" {
 }
 
 variable "vmware_vhv_enabled" {
-  type        = string
-  default     = "FALSE"
+  type        = bool
+  default     = false
   description = "Enable nested virtualisation."
 }
 
@@ -321,7 +332,7 @@ locals {
     "efi"  = "<f10>"
   }
   boot_command = [
-    "%s<left><left><left><left>autoinstall <wait>ds='nocloud-net;<wait>s=http://{{.HTTPIP}}:<wait>{{.HTTPPort}}/' <wait>net.ifnames=0 biosdevnames=0 <wait5>%s",
+    "%s%s<left><left><left><left>autoinstall <wait>ds='nocloud-net;<wait>s=http://{{.HTTPIP}}:<wait>{{.HTTPPort}}/' <wait>net.ifnames=0 biosdevnames=0 <wait5>%s",
   ]
   iso_urls = compact([
     var.iso_url,
@@ -330,19 +341,10 @@ locals {
     "https://cdimages.ubuntu.com/ubuntu/releases/${var.os_version}/${var.release}/${var.iso_name}"
   ])
   vm_name = coalesce(var.vm_name, "${var.vm_name_base}-minimal")
-  vmware_vmx_data = {
-    "ethernet0.addressType"     = "generated"
-    "ethernet0.present"         = "TRUE"
-    "ethernet0.wakeOnPcktRcv"   = "FALSE"
-    "remotedisplay.vnc.enabled" = "TRUE"
-    "vhv.enable"                = var.vmware_vhv_enabled
-    "svga.autodetect"           = var.vmware_svga_autodetect
-    "usb_xhci.present"          = var.vmware_usb_xhci_present
-  }
 }
 
 source "hyperv-iso" "default" {
-  boot_command         = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.hyperv_boot_mode], local.boot_command_exec[var.hyperv_boot_mode]))
+  boot_command         = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.hyperv_boot_mode], var.boot_command_prefix, local.boot_command_exec[var.hyperv_boot_mode]))
   boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
@@ -374,7 +376,7 @@ source "hyperv-iso" "default" {
 }
 
 source "parallels-iso" "default" {
-  boot_command  = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.parallels_boot_mode], local.boot_command_exec[var.parallels_boot_mode]))
+  boot_command  = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.parallels_boot_mode], var.boot_command_prefix, local.boot_command_exec[var.parallels_boot_mode]))
   boot_wait     = var.boot_wait
   cpus          = var.num_cpus
   disk_size     = var.disk_size
@@ -405,7 +407,7 @@ source "parallels-iso" "default" {
 
 source "qemu" "default" {
   accelerator    = "kvm"
-  boot_command   = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.qemu_boot_mode], local.boot_command_exec[var.qemu_boot_mode]))
+  boot_command   = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.qemu_boot_mode], var.boot_command_prefix, local.boot_command_exec[var.qemu_boot_mode]))
   boot_wait      = var.boot_wait
   cpus           = var.num_cpus
   disk_interface = "virtio"
@@ -438,7 +440,7 @@ source "qemu" "default" {
 }
 
 source "virtualbox-iso" "default" {
-  boot_command         = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.virtualbox_boot_mode], local.boot_command_exec[var.virtualbox_boot_mode]))
+  boot_command         = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.virtualbox_boot_mode], var.boot_command_prefix, local.boot_command_exec[var.virtualbox_boot_mode]))
   boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
@@ -473,7 +475,7 @@ source "virtualbox-iso" "default" {
 }
 
 source "vmware-iso" "default" {
-  boot_command       = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.vmware_boot_mode], local.boot_command_exec[var.vmware_boot_mode]))
+  boot_command       = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.vmware_boot_mode], var.boot_command_prefix, local.boot_command_exec[var.vmware_boot_mode]))
   boot_wait          = var.boot_wait
   cdrom_adapter_type = var.vmware_cdrom_adapter_type
   cpus               = var.num_cpus
@@ -504,12 +506,20 @@ source "vmware-iso" "default" {
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_username
   version              = var.vmware_hardware_version
+  vhv_enabled          = var.vmware_vhv_enabled
   vm_name              = local.vm_name
-  vmx_data             = local.vmware_vmx_data
+  vmx_data = {
+    "ethernet0.addressType"     = "generated"
+    "ethernet0.present"         = "TRUE"
+    "ethernet0.wakeOnPcktRcv"   = "FALSE"
+    "remotedisplay.vnc.enabled" = "TRUE"
+    "svga.autodetect"           = var.vmware_svga_autodetect
+    "usb_xhci.present"          = var.vmware_usb_xhci_present
+  }
 }
 
 source "vmware-iso" "esxi" {
-  boot_command  = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.esxi_boot_mode], local.boot_command_exec[var.esxi_boot_mode]))
+  boot_command  = split("\n", format(join("\n", local.boot_command), local.boot_command_edit[var.esxi_boot_mode], var.boot_command_prefix, local.boot_command_exec[var.esxi_boot_mode]))
   boot_wait     = var.boot_wait
   cpus          = var.num_cpus
   disk_size     = var.disk_size
@@ -545,6 +555,7 @@ source "vmware-iso" "esxi" {
   ssh_timeout             = var.ssh_timeout
   ssh_username            = var.ssh_username
   version                 = var.esxi_hardware_version
+  vhv_enabled             = var.esxi_vhv_enabled
   vm_name                 = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
@@ -552,7 +563,6 @@ source "vmware-iso" "esxi" {
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "vhv.enable"                = "TRUE"
   }
   vnc_disable_password = true
   vnc_over_websocket   = var.esxi_vnc_over_websocket
