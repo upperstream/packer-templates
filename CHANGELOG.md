@@ -241,7 +241,7 @@
 [Unreleased]:
   https://github.com/upperstream/packer-templates/compare/20250612...HEAD
 [20250611]:
-  https://github.com/upperstream/packer-templates/compare/20250410...20250612
+  https://github.com/upperstream/packer-templates/compare/20250410...20250611
 [20250410]:
   https://github.com/upperstream/packer-templates/compare/20250311...20250410
 [20250311]:
