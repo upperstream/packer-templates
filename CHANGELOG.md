@@ -18,6 +18,9 @@
     Alpine Linux 3.22.1.
   * [Ubuntu 24.04](ubuntu/ubuntu-24.04/README.md): Upgrade templates to
     Ubuntu 24.04.3.
+* Fixed
+  * [Debian](debian/README.md): Provisioner for VMware did not work for
+    amd64 VM images.
 
 ## [20250611][]
 
