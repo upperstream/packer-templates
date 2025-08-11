@@ -2,7 +2,13 @@
 set -e
 set -x
 
+if grep -v '^deb http://deb\.debian\.org/debian stable main' /etc/apt/sources.list | tee /tmp/sources.list; then
+	mv /tmp/sources.list /etc/apt/sources.list
+else
+	rm -f /tmp/sources.list
+fi
 if [ "${INSTALL_FROM_DVD:-false}" = "true" ]; then
+	# shellcheck source=/dev/null
 	. /etc/os-release
 	sed -e "/^#deb cdrom:.*$/a\deb http://http.us.debian.org/debian $VERSION_CODENAME main\ndeb-src http://http.us.debian.org/debian $VERSION_CODENAME main" \
 		-e 's/^# deb http:/deb http:/' \

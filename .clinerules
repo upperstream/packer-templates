@@ -202,6 +202,19 @@ available version of the packages, do the following:
    `replace_in_file` tool to update the hardcoded version strings
    within the `environment_vars` in the `.pkr.hcl` files.
 
+### Instructions for Debian templates
+
+SHA256 SUM for netboot ISO image (`mini.iso`) can be obtained from
+https://deb.debian.org/debian/dists/{debian_release}/main/installer-{cpu}/{date}/images/SHA256SUMS,
+where `debian_release` is Debian release version, e.g., `Debian13.0`,
+`cpu` is CPU name, e.g., `amd64`, `date` is the most recent date, which
+may be suffixed by something like `+debian13u1`.  SHA256 SUM for
+`./netboot/mini.iso` is the one to retrieve and put into templates.
+
+Latest package versions can be determined by
+https://packages.debian.org/{debian_codename}/allpackages?format=txt.gz or
+https://packages.debian.org/{debian_codename}/{package_name}.
+
 ### Instructions for OpenBSD templates
 
 This section applies when you are working for templates for OpenBSD

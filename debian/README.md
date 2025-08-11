@@ -2,7 +2,23 @@
 
 ## Current Debian releases
 
-Templates support amd64, arm64, and i386.
+Templates support amd64 and arm64.  Templates for Debian 12 and Debian
+11 also support i386.
+
+* [debian-13](debian-13/README.md) - templates for Debian 13.0
+
+  * Debian 13.0 minimal
+  * Debian 13.0 + Docker + Docker Compose
+  * Debian 13.0 + X.org + suckless tools
+  * Debian 13.0 + choice of desktop environments:
+    * Xfce (default)
+    * Cinnamon
+    * GNOME
+    * GNOME Flashback
+    * KDE Plasma
+    * LXDE
+    * LXQt
+    * MATE
 
 * [debian-12](debian-12/README.md) - templates for Debian 12.11
 
