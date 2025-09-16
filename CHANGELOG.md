@@ -18,6 +18,8 @@
     Alpine Linux 3.21.4.
   * [Alpine 3.22](alpine/alpine-3.22/README.md): Upgrade templates to
     Alpine Linux 3.22.1.
+  * [Debian 12](debian/debian-12/README.md): Upgrade templates to
+    Debian 12.12.
   * [Ubuntu 24.04](ubuntu/ubuntu-24.04/README.md): Upgrade templates to
     Ubuntu 24.04.3.
 * Fixed

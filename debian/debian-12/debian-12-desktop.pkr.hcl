@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "12.11.20250517"
+  default     = "12.12.20250906"
   description = "Version number of this Vagrant box."
 }
 
@@ -64,12 +64,6 @@ variable "esxi_boot_mode" {
   description = "`bios` or `efi` for ESXi box."
 }
 
-variable "esxi_vhv_enabled" {
-  type        = string
-  default     = "TRUE"
-  description = "Enable nested virtualisation."
-}
-
 variable "esxi_remote_datastore" {
   type        = string
   default     = "${env("ESXI_REMOTE_DATASTORE")}"
@@ -92,6 +86,12 @@ variable "esxi_remote_username" {
   type        = string
   default     = "${env("ESXI_REMOTE_USERNAME")}"
   description = "SSH username for the ESXi server to create this box."
+}
+
+variable "esxi_vhv_enabled" {
+  type        = bool
+  default     = true
+  description = "Enable nested virtualisation on ESXi VM."
 }
 
 variable "esxi_vnc_over_websocket" {
@@ -126,7 +126,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:1c8f5ee61b0bc1da1ee2e32cf9c60f4c381523a468b0ae82170a17592979a783"
+  default     = "sha256:8b4545dccf56ae40c51c7827e9ca4d8d16e9740afcf4a8ff89f8bb369540acc2"
   description = "SHA256 checksum of the install media."
 }
 
@@ -138,7 +138,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian12.11/main/installer-amd64/20230607+deb12u11/images/netboot"
+  default     = "Debian12.12/main/installer-amd64/20230607+deb12u12/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -197,8 +197,8 @@ variable "qemu_display" {
 }
 
 variable "qemu_use_default_display" {
-  type        = string
-  default     = "true"
+  type        = bool
+  default     = true
   description = "Use the default display for QEMU box if true."
 }
 
@@ -324,8 +324,8 @@ variable "vmware_usb_xhci_present" {
 }
 
 variable "vmware_vhv_enabled" {
-  type        = string
-  default     = "FALSE"
+  type        = bool
+  default     = false
   description = "Enable nested virtualisation."
 }
 
@@ -363,16 +363,6 @@ locals {
     "user-password-again" = "string ${var.vagrant_password}"
   }
   vm_name = coalesce(var.vm_name, "Debian-12-${var.desktop}-v${var.box_version}-${var.cpu}")
-  vmware_vmx_data = {
-    "ethernet0.addressType"     = "generated"
-    "ethernet0.present"         = "TRUE"
-    "ethernet0.wakeOnPcktRcv"   = "FALSE"
-    "remotedisplay.vnc.enabled" = "TRUE"
-    "svga.vramSize"             = "33554432"
-    "vhv.enable"                = var.vmware_vhv_enabled
-    "svga.autodetect"           = var.vmware_svga_autodetect
-    "usb_xhci.present"          = var.vmware_usb_xhci_present
-  }
 }
 
 source "hyperv-iso" "default" {
@@ -391,6 +381,8 @@ source "hyperv-iso" "default" {
         "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list; \\",
+        "    grep -F '^deb http://deb.debian.org/debian' /target/etc/apt/sources.list > /dev/null || sed -i '/deb cdrom/a deb http://deb.debian.org/debian stable main' /target/etc/apt/sources.list; \\",
+        "    chroot /target apt update; \\",
         "    apt-install hyperv-daemons"
       ],
       passwd = local.passwd,
@@ -572,8 +564,16 @@ source "vmware-iso" "default" {
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
   version              = var.vmware_hardware_version
+  vhv_enabled          = var.vmware_vhv_enabled
   vm_name              = local.vm_name
-  vmx_data             = local.vmware_vmx_data
+  vmx_data = {
+    "ethernet0.addressType"     = "generated"
+    "ethernet0.present"         = "TRUE"
+    "ethernet0.wakeOnPcktRcv"   = "FALSE"
+    "remotedisplay.vnc.enabled" = "TRUE"
+    "svga.autodetect"           = var.vmware_svga_autodetect
+    "usb_xhci.present"          = var.vmware_usb_xhci_present
+  }
 }
 
 source "vmware-iso" "esxi" {
@@ -620,6 +620,7 @@ source "vmware-iso" "esxi" {
   ssh_port             = 22
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
+  vhv_enabled             = var.esxi_vhv_enabled
   vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
@@ -627,7 +628,6 @@ source "vmware-iso" "esxi" {
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
     "svga.vramSize"             = "33554432"
-    "vhv.enable"                = var.esxi_vhv_enabled
   }
   vnc_disable_password = true
   vnc_over_websocket   = var.esxi_vnc_over_websocket
@@ -650,7 +650,7 @@ build {
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}",
       "WGET=wget -O -",
-      "XRDP=xrdp=0.9.21.1-1"
+      "XRDP=xrdp=0.9.21.1-1+deb12u1"
     ]
     scripts = [
       "../provisioners/base_debian11+.sh",
@@ -674,7 +674,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools-desktop=2:12.2.0-1+deb12u2",
+      "OPEN_VM_TOOLS=open-vm-tools-desktop=2:12.2.0-1+deb12u3",
       "VMWARE_WITH_XORG=1",
       "XSERVER_XORG_INPUT_VMMOUSE=xserver-xorg-input-evdev=1:2.10.6-2+b1",
       "XSERVER_XORG_VIDEO_VMWARE=xserver-xorg-video-vmware=1:13.3.0-3.1+b1"

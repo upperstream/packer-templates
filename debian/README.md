@@ -20,12 +20,12 @@ Templates support amd64 and arm64.  Templates for Debian 12 and Debian
     * LXQt
     * MATE
 
-* [debian-12](debian-12/README.md) - templates for Debian 12.11
+* [debian-12](debian-12/README.md) - templates for Debian 12.12
 
-  * Debian 12.11 minimal
-  * Debian 12.11 + Docker + Docker Compose
-  * Debian 12.11 + X.org + suckless tools
-  * Debian 12.11 + choice of desktop environments:
+  * Debian 12.12 minimal
+  * Debian 12.12 + Docker + Docker Compose
+  * Debian 12.12 + X.org + suckless tools
+  * Debian 12.12 + choice of desktop environments:
     * Xfce (default)
     * Cinnamon
     * GNOME
