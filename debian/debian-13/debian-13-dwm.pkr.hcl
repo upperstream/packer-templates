@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "13.0.20250809"
+  default     = "13.1.20250906"
   description = "Version number of this Vagrant box."
 }
 
@@ -125,7 +125,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:65db3a76de52257ca93ed91afce320bc535785d668b55be1b42bab85e7d4f1f6"
+  default     = "sha256:bfc338e671fd5a9f6d4a65cbf728c674c468e87c063f6fb324fc04677dc0d23d"
   description = "SHA256 checksum of the install media."
 }
 
@@ -137,7 +137,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian13.0/main/installer-amd64/20250803/images/netboot"
+  default     = "Debian13.1/main/installer-amd64/20250803+deb13u1/images/netboot"
   description = "Relative path to search the install media."
 }
 

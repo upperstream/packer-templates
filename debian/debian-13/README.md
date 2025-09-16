@@ -1,6 +1,6 @@
-# Packer templates for Debian 13
+# Packer templates for Debian 13.1
 
-Templates to create Vagrant boxes for Debian 13 (amd64 and arm64).
+Templates to create Vagrant boxes for Debian 13.1 (amd64 and arm64).
 
 ## Prerequisites
 
@@ -45,14 +45,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default debian-13-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-13-amd64-minimal-v13.0.20250809-virtualbox.box` in the
+`Debian-13-amd64-minimal-v13.1.20250906-virtualbox.box` in the
 same directory after the command has succeeded.
 
-Then you can add the box named `Debian-13-amd64-minimal-v13.0.20250809`
+Then you can add the box named `Debian-13-amd64-minimal-v13.1.20250906`
 to your box list by the following command:
 
-    vagrant box add Debian-13-amd64-minimal-v13.0.20250809-virtualbox.box \
-      --name Debian-13-amd64-minimal-v13.0.20250809 --provider virtualbox
+    vagrant box add Debian-13-amd64-minimal-v13.1.20250906-virtualbox.box \
+      --name Debian-13-amd64-minimal-v13.1.20250906 --provider virtualbox
 
 VirtualBox build intends to create amd64 box on amd64 host.
 
@@ -63,14 +63,14 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default debian-13-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-13-amd64-minimal-v13.0.20250809-vmware.box` in the same
+`Debian-13-amd64-minimal-v13.1.20250906-vmware.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-13-amd64-minimal-v13.0.20250809`
+Then you can add the box named `Debian-13-amd64-minimal-v13.1.20250906`
 to your box list by the following command:
 
-    vagrant box add Debian-13-amd64-minimal-v13.0.20250809-vmware.box \
-      --name Debian-13-amd64-minimal-v13.0.20250809 --provider vmware_desktop
+    vagrant box add Debian-13-amd64-minimal-v13.1.20250906-vmware.box \
+      --name Debian-13-amd64-minimal-v13.1.20250906 --provider vmware_desktop
 
 VMware build intends to create amd64 box on amd64 host
 using VMware Workstation, or create arm64 box on Apple Silicon Mac
@@ -104,14 +104,14 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default debian-13-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-13-amd64-minimal-v13.0.20250809-libvirt.box` in the same
+`Debian-13-amd64-minimal-v13.1.20250906-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-13-amd64-minimal-v13.0.20250809`
+Then you can add the box named `Debian-13-amd64-minimal-v13.1.20250906`
 to your box list by the following command:
 
-    vagrant box add Debian-13-amd64-minimal-v13.0.20250809-libvirt.box \
-      --name Debian-13-amd64-minimal-v13.0.20250809 --provider libvirt
+    vagrant box add Debian-13-amd64-minimal-v13.1.20250906-libvirt.box \
+      --name Debian-13-amd64-minimal-v13.1.20250906 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -125,14 +125,14 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default debian-13-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-13-amd64-minimal-v13.0.20250809-hyperv.box` in the same
+`Debian-13-amd64-minimal-v13.1.20250906-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-13-amd64-minimal-v13.0.20250809`
+Then you can add the box named `Debian-13-amd64-minimal-v13.1.20250906`
 to your box list by the following command:
 
-    vagrant box add Debian-13-amd64-minimal-v13.0.20250809-hyperv.box \
-      --name Debian-13-amd64-minimal-v13.0.20250809 --provider hyperv
+    vagrant box add Debian-13-amd64-minimal-v13.1.20250906-hyperv.box \
+      --name Debian-13-amd64-minimal-v13.1.20250906 --provider hyperv
 
 Hyper-V build intends to create amd64 box on Windows host.
 
@@ -143,14 +143,14 @@ From the terminal, invoke the following command for Parallels provider:
     packer build -only=parallels-iso.default debian-13-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-13-arm64-minimal-v13.0.20250809-parallels.box` in the same
+`Debian-13-arm64-minimal-v13.1.20250906-parallels.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-13-arm64-minimal-v13.0.20250809`
+Then you can add the box named `Debian-13-arm64-minimal-v13.1.20250906`
 to your box list by the following command:
 
-    vagrant box add Debian-13-arm64-minimal-v13.0.20250809-parallels.box \
-      --name Debian-13-arm64-minimal-v13.0.20250809 --provider parallels
+    vagrant box add Debian-13-arm64-minimal-v13.1.20250906-parallels.box \
+      --name Debian-13-arm64-minimal-v13.1.20250906 --provider parallels
 
 Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
@@ -198,9 +198,9 @@ Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 Optional var files are provided to instruct to use alternative
 installer CD images, i.e., `vars-debian-13-amd64-dvd.pkrvars.hcl` instructs to
-use `debian-13.0.0-amd64-DVD-1.iso` while
+use `debian-13.1.0-amd64-DVD-1.iso` while
 `vars-debian-13-amd64-netinst.pkrvars.hcl` does
-`debian-13.0.0-amd64-netinst.iso` respectively.  Without using these
+`debian-13.1.0-amd64-netinst.iso` respectively.  Without using these
 var files, `debian-13-*.pkr.hcl` templates use netboot `mini.iso` for
 amd64.
 
@@ -210,11 +210,11 @@ command line:
     packer build -var-file=vars-debian-13-amd64-full.pkrvars.hcl debian-13-minimal.pkr.hcl
 
 * amd64 ISO images
-  * `vars-debian-13-amd64-dvd.pkrvars.hcl` - `debian-13.0.0-amd64-DVD-1.iso`
-  * `vars-debian-13-amd64-netinst.pkrvars.hcl` - `debian-13.0.0-amd64-netinst.iso`
+  * `vars-debian-13-amd64-dvd.pkrvars.hcl` - `debian-13.1.0-amd64-DVD-1.iso`
+  * `vars-debian-13-amd64-netinst.pkrvars.hcl` - `debian-13.1.0-amd64-netinst.iso`
 * arm64 ISO images
-  * `vars-debian-13-arm64-dvd.pkrvars.hcl` - `debian-13.0.0-arm64-DVD-1.iso`
-  * `vars-debian-13-arm64-netinst.pkrvars.hcl` - `debian-13.0.0-arm64-netinst.iso`
+  * `vars-debian-13-arm64-dvd.pkrvars.hcl` - `debian-13.1.0-arm64-DVD-1.iso`
+  * `vars-debian-13-arm64-netinst.pkrvars.hcl` - `debian-13.1.0-arm64-netinst.iso`
   * `vars-debian-13-arm64-mini.pkrvars.hcl` - netboot CD `mini.iso`
 
 It is recommended to use "jigdo" to download large iso image file and
@@ -228,7 +228,7 @@ or `-var-file` command line options to `packer`:
 
 * `boot_wait` - Override `boot_wait` default setting, which is `10s`.
 * `desktop` - Specify the desktop environment to install.  Defaults to
-  `xfce`.  (Only valid for `debian-11-desktop.pkr.hcl` variant)
+  `xfce`.  (Only valid for `debian-13-desktop.pkr.hcl` variant)
 * `disk_size` - Disk size of the created box.  Defaults to `51200`,
   which means 50GB.
 * `esxi_boot_mode` - Boot mode for ESXi VM, `bios` or `efi`.  Defaults

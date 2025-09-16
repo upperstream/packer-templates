@@ -1,10 +1,9 @@
 # Changelog
 
-## [Unreleased][]
+## [20250916][]
 
 * Added
-  * [Debian 13](debian/debian-13/README.md): Add templates for Debian 13
-    ([GH-293])
+  * [Debian 13](debian/debian-13/README.md): Add templates for Debian 13.1.
   * [Tiny Core Linux](tinycorelinux/README.md): Add templates for
     [Tiny Core Linux][] v16.1.
 * Changed
@@ -235,13 +234,12 @@
     Alpine Linux 3.20.2.
 
 [GH-279]: https://github.com/upperstream/packer-templates/pull/279
-[GH-293]: https://github.com/upperstream/packer-templates/issues/293
 [markdownlint]: https://github.com/DavidAnson/markdownlint
 [Packer Plugin for VMware v1.1.0]: https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0
 [Tiny Core Linux]: http://tinycorelinux.net/
 
-[Unreleased]:
-  https://github.com/upperstream/packer-templates/compare/20250612...HEAD
+[20250916]:
+  https://github.com/upperstream/packer-templates/compare/20250612...20250916
 [20250611]:
   https://github.com/upperstream/packer-templates/compare/20250410...20250611
 [20250410]:

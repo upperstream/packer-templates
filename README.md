@@ -18,7 +18,7 @@
 * [debian](debian/README.md) - Debian templates (amd64, arm64, and i386)
   * debian-11 - Debian 11.11 templates
   * debian-12 - Debian 12.12 templates
-  * debian-13 - Debian 12.11 templates
+  * debian-13 - Debian 13.1 templates
   * [more](debian/README.md)
 * [devuan](devuan/README.md) - Devuan templates (amd64 and i386)
   * devuan-3 - Devuan 3.1.1 Beowulf templates
