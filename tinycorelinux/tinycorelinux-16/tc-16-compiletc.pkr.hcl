@@ -28,7 +28,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "16.1.20250616"
+  default     = "16.2.20250929"
   description = "Version number of this Vagrant box."
 }
 
@@ -255,7 +255,6 @@ locals {
     "GRUB_ENTRY_NAME='${var.os_name} ${var.os_ver}' sh -x /tmp/install.sh<enter><wait>"
   ]
   disk = {
-    "hyperv" : var.hyperv_disk
     "qemu" : var.qemu_disk
     "virtualbox" : var.virtualbox_disk
     "vmware" : var.vmware_disk

@@ -1,6 +1,6 @@
-# Packer templates for Tiny Core Linux v16.1
+# Packer templates for Tiny Core Linux v16.2
 
-Templates to create Vagrant boxes for Tiny Core Linux v16.1. (x86_64 and
+Templates to create Vagrant boxes for Tiny Core Linux v16.2. (x86_64 and
 x86)
 
 ## Prerequisites
@@ -35,14 +35,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default \
         -var-file=vars-corepure64-16.pkrvars.hcl tc-16-minimal.pkr.hcl
 
-You will find a vagrant box file named `CorePure64-16-minimal-v16.1.20250616-virtualbox.box`
+You will find a vagrant box file named `CorePure64-16-minimal-v16.2.20250929-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `CorePure64-16-minimal-v16.1.20250616`
+Then you can add the box named `CorePure64-16-minimal-v16.2.20250929`
 to your box list by the following command:
 
-    vagrant box add CorePure64-16-minimal-v16.1.20250616-virtualbox.box \
-        --name CorePure64-16-minimal-v16.1.20250616
+    vagrant box add CorePure64-16-minimal-v16.2.20250929-virtualbox.box \
+        --name CorePure64-16-minimal-v16.2.20250929
 
 ### VMware
 
@@ -51,14 +51,14 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default \
         -var-file=vars-corepure64-16.pkrvars.hcl tc-16-minimal.pkr.hcl
 
-You will find a vagrant box file named `CorePure64-16-minimal-v16.1.20250616-vmware.box`
+You will find a vagrant box file named `CorePure64-16-minimal-v16.2.20250929-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `CorePure64-16-minimal-v16.1.20250616`
+Then you can add the box named `CorePure64-16-minimal-v16.2.20250929`
 to your box list by the following command:
 
-    vagrant box add CorePure64-16-minimal-v16.1.20250616-vmware.box \
-        --name CorePure64-16-minimal-v16.1.20250616
+    vagrant box add CorePure64-16-minimal-v16.2.20250929-vmware.box \
+        --name CorePure64-16-minimal-v16.2.20250929
 
 In the `output` directory you will also find a VM image that can be
 directly imported from VMware.
@@ -91,15 +91,15 @@ From the terminal, invoke the following command for Libvirt provider:
         tc-16-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`CorePure64-16-minimal-v16.1.20250616-libvirt.box` in the
+`CorePure64-16-minimal-v16.2.20250929-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`CorePure64-16-minimal-v16.1.20250616` to your box list by
+`CorePure64-16-minimal-v16.2.20250929` to your box list by
 the following command:
 
-    vagrant box add CorePure64-16-minimal-v16.1.20250616-libvirt.box \
-        --name CorePure64-16-minimal-v16.1.20250616
+    vagrant box add CorePure64-16-minimal-v16.2.20250929-libvirt.box \
+        --name CorePure64-16-minimal-v16.2.20250929
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -132,26 +132,26 @@ configured that `tc` is a Vagrant user by default.
 
 * x86_64
   * `packer build -var-file=vars-corepure64-16.pkrvars.hcl tc-16-minimal.pkr.hcl`:
-    CorePure 64 v16.1 (x86_64)
+    CorePure 64 v16.2 (x86_64)
   * `packer build -var-file=vars-corepure64-16.pkrvars.hcl tc-16-compiletc.pkr.hcl`:
-    CorePure 64 v16.1 (x86_64) with build tools
+    CorePure 64 v16.2 (x86_64) with build tools
   * `packer build -var-file=vars-corepure64-16.pkrvars.hcl tc-16-kernel.pkr.hcl`:
-    CorePure 64 v16.1 (x86_64) with kernel source code
+    CorePure 64 v16.2 (x86_64) with kernel source code
   * `packer build -var-file=vars-tinycorepure64-16.pkrvars.hcl tc-16-x11.pkr.hcl`:
-    TinyCorePure 64 v16.1 (x86_64)
+    TinyCorePure 64 v16.2 (x86_64)
   * `packer build -var-file=vars-tinycorepure64-16.pkrvars.hcl tc-16-compiletc+x11.pkr.hcl`:
-    TinyCorePure 64 v16.1 (x86_64) with build tools
+    TinyCorePure 64 v16.2 (x86_64) with build tools
 * x86
   * `packer build -var-file=vars-core-16.pkrvars.hcl tc-16-minimal.json`:
-    Core v16.1 (x86)
+    Core v16.2 (x86)
   * `packer build -var-file=vars-core-16.pkrvars.hcl tc-16-compiletc.pkr.hcl`:
-    Core v16.1 (x86) with build tools
+    Core v16.2 (x86) with build tools
   * `packer build -var-file=vars-core-16.pkrvars.hcl tc-16-kernel.pkr.hcl`:
-    Core v16.1 (x86) with kernel source code
+    Core v16.2 (x86) with kernel source code
   * `packer build -var-file=vars-tinycore-16.pkrvars.hcl tc-16-x11.pkr.hcl`:
-    TinyCore v16.1 (x86)
+    TinyCore v16.2 (x86)
   * `packer build -var-file=vars-tinycore-16.pkrvars.hcl tc-16-compiletc+x11.pkr.hcl`:
-    TinyCore v16.1 (x86) with build tools
+    TinyCore v16.2 (x86) with build tools
 
 Executing `build_all.sh` (or `build_all.bat`) generates all boxes above.
 
@@ -198,4 +198,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2025 Upperstream.
+Copyright &copy; 2025, 2026 Upperstream.

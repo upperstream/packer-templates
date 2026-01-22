@@ -50,7 +50,7 @@
   * tinycorelinux-7 - Tiny Core Linux v7.2 templates
   * tinycorelinux-8 - Tiny Core Linux v8.2.1 templates
   * tinycorelinux-9 - Tiny Core Linux v9.0 templates
-  * tinycorelinux-16 - Tiny Core Linux v16.1 templates
+  * tinycorelinux-16 - Tiny Core Linux v16.2 templates
 * [ubuntu](ubuntu/README.md) - Ubuntu templates (amd64 and arm64)
   * ubuntu-22.04 - Ubuntu 22.04.5 templates
   * ubuntu-24.04 - Ubuntu 24.04.3 templates
@@ -73,4 +73,4 @@ permissions and limitations under the License.
 
 - - -
 
-Copyright &copy; 2014-2025 Upperstream.
+Copyright &copy; 2014-2026 Upperstream.

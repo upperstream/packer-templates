@@ -28,7 +28,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "16.2.20250929"
+  default     = "16.1.20250616"
   description = "Version number of this Vagrant box."
 }
 
@@ -183,7 +183,7 @@ variable "ssh_username" {
 
 variable "variant" {
   type    = string
-  default = "x11"
+  default = "docker"
 }
 
 variable "virtualbox_guest_os_type" {
@@ -255,6 +255,7 @@ locals {
     "GRUB_ENTRY_NAME='${var.os_name} ${var.os_ver}' sh -x /tmp/install.sh<enter><wait>"
   ]
   disk = {
+    "hyperv" : var.hyperv_disk
     "qemu" : var.qemu_disk
     "virtualbox" : var.virtualbox_disk
     "vmware" : var.vmware_disk
@@ -330,8 +331,7 @@ source "virtualbox-iso" "default" {
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
     ["modifyvm", "{{ .Name }}", "--nictype1", "virtio"],
-    ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
-    ["modifyvm", "{{ .Name }}", "--vram", "32"]
+    ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"]
   ]
   virtualbox_version_file = ".vbox_version"
   vm_name                 = local.vm_name
@@ -424,7 +424,6 @@ source "vmware-iso" "esxi" {
     "ethernet0.networkName"     = "VM Network"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "svga.vramSize"             = "33554432"
     "vhv.enable"                = var.esxi_vhv_enabled
   }
   vnc_disable_password = true
@@ -441,7 +440,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools-desktop"
+      "OPEN_VM_TOOLS=open-vm-tools"
     ]
     script = "../provisioners/vmware_tc16.sh"
     only = [
@@ -455,8 +454,8 @@ build {
       "DISK=${local.disk[replace(source.type, "-iso", "")]}"
     ]
     scripts = [
-      "../provisioners/x11.sh",
       "../provisioners/vagrant.sh",
+      "../provisioners/docker.sh",
       "../provisioners/cleanup.sh"
     ]
   }

@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased][]
+
+* Changed
+  * [Tiny Core Linux 16](tinycorelinux/tinycorelinux-16/README.md):
+    Upgrade templates to Tiny Core Linux v16.2.
+
 ## [20250916][]
 
 * Added
@@ -238,6 +244,8 @@
 [Packer Plugin for VMware v1.1.0]: https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0
 [Tiny Core Linux]: http://tinycorelinux.net/
 
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20250916...HEAD
 [20250916]:
   https://github.com/upperstream/packer-templates/compare/20250612...20250916
 [20250611]:
