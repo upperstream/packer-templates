@@ -2,6 +2,8 @@
 
 ## [Unreleased][]
 
+* Added
+  [OpenBSD](openbsd/README.md): Add templates for OpenBSD 7.8.
 * Changed
   * [Tiny Core Linux 16](tinycorelinux/tinycorelinux-16/README.md):
     Upgrade templates to Tiny Core Linux v16.2.
@@ -247,7 +249,7 @@
 [Unreleased]:
   https://github.com/upperstream/packer-templates/compare/20250916...HEAD
 [20250916]:
-  https://github.com/upperstream/packer-templates/compare/20250612...20250916
+  https://github.com/upperstream/packer-templates/compare/20250611...20250916
 [20250611]:
   https://github.com/upperstream/packer-templates/compare/20250410...20250611
 [20250410]:
