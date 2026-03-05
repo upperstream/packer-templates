@@ -4,6 +4,7 @@
 
 * Added
   * [FreeBSD](freebsd/README.md): Add templates for FreeBSD 14.4-RC1.
+  * [NetBSD](netbsd/README.md): Add templates for NetBSD 11.0 RC1.
   * [OpenBSD](openbsd/README.md): Add templates for OpenBSD 7.8.
 * Changed
   * [Tiny Core Linux 16](tinycorelinux/tinycorelinux-16/README.md):
