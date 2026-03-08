@@ -38,7 +38,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "20260201.0"
+  default     = "20260301.0"
   description = "Version number of this Vagrant box."
 }
 
@@ -115,19 +115,19 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://geo.mirror.pkgbuild.com/iso/2026.02.01/sha256sums.txt"
+  default     = "file:https://geo.mirror.pkgbuild.com/iso/2026.03.01/sha256sums.txt"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_image" {
   type        = string
-  default     = "archlinux-2026.02.01-x86_64.iso"
+  default     = "archlinux-2026.03.01-x86_64.iso"
   description = "File name of the install media."
 }
 
 variable "iso_path" {
   type        = string
-  default     = "iso/2026.02.01"
+  default     = "iso/2026.03.01"
   description = "Relative path to search the install media."
 }
 

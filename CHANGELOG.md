@@ -10,7 +10,7 @@
   * [OpenBSD](openbsd/README.md): Add templates for OpenBSD 7.8.
 * Changed
   * [Arch Linux](archlinux/README.md): Upgrade templates to Arch Linux
-    2026.02.01.
+    2026.03.01.
   * [Tiny Core Linux 16](tinycorelinux/tinycorelinux-16/README.md):
     Upgrade templates to Tiny Core Linux v16.2.
 
