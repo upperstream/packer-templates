@@ -41,7 +41,7 @@ variable "boot_wait" {
 
 variable "box_ver" {
   type    = string
-  default = "1.20260206"
+  default = "2.20260306"
 }
 
 variable "disk_size" {
@@ -136,17 +136,17 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/images/11.0_RC1/SHA512"
+  default = "file:https://cdn.netbsd.org/pub/NetBSD/images/11.0_RC2/SHA512"
 }
 
 variable "iso_file_name" {
   type    = string
-  default = "NetBSD-11.0_RC1-amd64.iso"
+  default = "NetBSD-11.0_RC2-amd64.iso"
 }
 
 variable "iso_path" {
   type    = string
-  default = "NetBSD/images/11.0_RC1"
+  default = "NetBSD/images/11.0_RC2"
 }
 
 variable "iso_url" {

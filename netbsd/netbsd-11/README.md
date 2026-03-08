@@ -1,6 +1,6 @@
-# Packer templates for NetBSD 11.0 RC1
+# Packer templates for NetBSD 11.0 RC2
 
-Templates to create Vagrant boxes for NetBSD 11.0 RC1 (amd64, i386, and aarch64).
+Templates to create Vagrant boxes for NetBSD 11.0 RC2 (amd64, i386, and aarch64).
 
 ## Prerequisites
 
@@ -40,14 +40,14 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso.default netbsd-11-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-11_RC-minimal-v1.20260206-amd64-virtualbox.box`
+You will find a vagrant box file named `NetBSD-11_RC-minimal-v2.20260306-amd64-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-11_RC-minimal-v1.20260206`
+Then you can add the box named `NetBSD-11_RC-minimal-v2.20260306`
 to your box list by the following command:
 
-    vagrant box add NetBSD-11_RC-minimal-v1.20260206-amd64-virtualbox.box \
-        --name NetBSD-11_RC-minimal-v1.20260206-amd64 --provider virtualbox
+    vagrant box add NetBSD-11_RC-minimal-v2.20260306-amd64-virtualbox.box \
+        --name NetBSD-11_RC-minimal-v2.20260306-amd64 --provider virtualbox
 
 ### VMware
 
@@ -55,14 +55,14 @@ From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso.default netbsd-11-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-11_RC-minimal-v1.20260206-amd64-vmware.box`
+You will find a vagrant box file named `NetBSD-11_RC-minimal-v2.20260306-amd64-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-11_RC-minimal-v1.20260206`
+Then you can add the box named `NetBSD-11_RC-minimal-v2.20260306`
 to your box list by the following command:
 
-    vagrant box add NetBSD-11_RC-minimal-v1.20260206-amd64-vmware.box \
-        --name NetBSD-11_RC-minimal-v1.20260206-amd64 --provider vmware_desktop
+    vagrant box add NetBSD-11_RC-minimal-v2.20260306-amd64-vmware.box \
+        --name NetBSD-11_RC-minimal-v2.20260306-amd64 --provider vmware_desktop
 
 VMware build is tested with amd64 and i386 guests on amd64 host, and
 evbarm aarch64 guest on Apple Silicon Mac host.
@@ -98,14 +98,14 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu netbsd-11-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-11_RC-minimal-v1.20260206-amd64-libvirt.box`
+You will find a vagrant box file named `NetBSD-11_RC-minimal-v2.20260306-amd64-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-11_RC-minimal-v1.20260206`
+Then you can add the box named `NetBSD-11_RC-minimal-v2.20260306`
 to your box list by the following command:
 
-    vagrant box add NetBSD-11_RC-minimal-v1.20260206-amd64-libvirt.box \
-        --name NetBSD-11_RC-minimal-v1.20260206-amd64 --provider libvirt
+    vagrant box add NetBSD-11_RC-minimal-v2.20260306-amd64-libvirt.box \
+        --name NetBSD-11_RC-minimal-v2.20260306-amd64 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -125,14 +125,44 @@ Because Packer Hyper-V builder cannot detect IP address of a NetBSD VM,
 you must provide static network settings so that the VM is configured to
 have a static IP address.
 
-You will find a vagrant box file named `NetBSD-11_RC-minimal-v1.20260206-amd64-hyperv.box`
+You will find a vagrant box file named `NetBSD-11_RC-minimal-v2.20260306-amd64-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-11_RC-minimal-v1.20260206`
+Then you can add the box named `NetBSD-11_RC-minimal-v2.20260306`
 to your box list by the following command:
 
-    vagrant box add NetBSD-11_RC-minimal-v1.20260206-amd64-hyperv.box \
-        --name NetBSD-11_RC-minimal-v1.20260206-amd64 --provider hyperv
+    vagrant box add NetBSD-11_RC-minimal-v2.20260306-amd64-hyperv.box \
+        --name NetBSD-11_RC-minimal-v2.20260306-amd64 --provider hyperv
+
+### Experimental support for UTM
+
+This release includes a experimental template for [UTM][] using [UTM
+builder for Packer][].
+
+From the terminal, invoke the following command for UTM provider:
+
+    packer build -only=utm-iso.default \
+        -var-file vars-netbsd-11-aarch64.pkrvars.hcl \
+        -var utm_keep_registered=true \
+        netbsd-11-minimal-utm.pkr.hcl
+
+You will find a vagrant box file named `NetBSD-11_RC-minimal-v2.20260306-aarch64-utm.box`
+in the same directory after the command has succeeded.
+
+Set `utm_keep_registered` to `true` if you would like to keed the VM
+registered after build.
+
+Then you can add the box named `NetBSD-11_RC-minimal-v2.20260306`
+to your box list by the following command:
+
+    vagrant box add NetBSD-11_RC-minimal-v2.20260306-aarch64-utm.box \
+        --name NetBSD-11_RC-minimal-v2.20260306 --provider utm
+
+UTM build intends to create an aarch64 VM image on Apple Silicon host.
+
+[UTM]: https://mac.getutm.app/ "UTM | Virtual machines for Mac"
+[UTM builder for Packer]: https://github.com/naveenrajm7/packer-plugin-utm
+  "naveenrajm7/packer-plugin-utm: UTM builder for Packer"
 
 ## Default settings
 
@@ -164,12 +194,13 @@ use `doas`.
 
 ## Variants
 
-* `netbsd-11-minimal.pkr.hcl` - NetBSD 11.0 RC1
-* `netbsd-11-xorg.pkr.hcl` - NetBSD 11.0 RC1 + [X.Org][]
-* `netbsd-11-dwm.pkr.hcl` - NetBSD 11.0 RC1 + X.Org + [dwm][] + [st][] +
+* `netbsd-11-minimal.pkr.hcl` - NetBSD 11.0 RC2
+* `netbsd-11-xorg.pkr.hcl` - NetBSD 11.0 RC2 + [X.Org][]
+* `netbsd-11-dwm.pkr.hcl` - NetBSD 11.0 RC2 + X.Org + [dwm][] + [st][] +
   [dmenu][], with [XDM] enabled
-* `netbsd-11-xfce.pkr.hcl` - NetBSD 11.0 RC1 + [Xfce][], with XDM
+* `netbsd-11-xfce.pkr.hcl` - NetBSD 11.0 RC2 + [Xfce][], with XDM
   enabled
+* `netbsd-11-minimal-utm.pkr.hcl` - NetBSD 11.0 RC2 for UTM
 
 While `netbsd-11-*.pkr.hcl` templates generate amd64 boxes by
 default, using `vars-netbsd-11-aarch64.pkrvars.hcl` generates

@@ -4,7 +4,9 @@
 
 * Added
   * [FreeBSD](freebsd/README.md): Add templates for FreeBSD 14.4-RC1.
-  * [NetBSD](netbsd/README.md): Add templates for NetBSD 11.0 RC1.
+  * [NetBSD](netbsd/README.md):
+    * Add templates for NetBSD 11.0 RC2.
+    * Add experimental template to create an image for [UTM][].
   * [OpenBSD](openbsd/README.md): Add templates for OpenBSD 7.8.
 * Changed
   * [Arch Linux](archlinux/README.md): Upgrade templates to Arch Linux
@@ -249,6 +251,7 @@
 [markdownlint]: https://github.com/DavidAnson/markdownlint
 [Packer Plugin for VMware v1.1.0]: https://github.com/hashicorp/packer-plugin-vmware/releases/tag/v1.1.0
 [Tiny Core Linux]: http://tinycorelinux.net/
+[UTM]: https://mac.getutm.app/ "UTM | Virtual machines for Mac"
 
 [Unreleased]:
   https://github.com/upperstream/packer-templates/compare/20250916...HEAD
