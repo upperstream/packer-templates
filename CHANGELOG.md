@@ -1,9 +1,9 @@
 # Changelog
 
-## [Unreleased][]
+## [20260310][]
 
 * Added
-  * [FreeBSD](freebsd/README.md): Add templates for FreeBSD 14.4-RC1.
+  * [FreeBSD](freebsd/README.md): Add templates for FreeBSD 14.4-RELEASE.
   * [NetBSD](netbsd/README.md):
     * Add templates for NetBSD 11.0 RC2.
     * Add experimental template to create an image for [UTM][].
@@ -253,8 +253,8 @@
 [Tiny Core Linux]: http://tinycorelinux.net/
 [UTM]: https://mac.getutm.app/ "UTM | Virtual machines for Mac"
 
-[Unreleased]:
-  https://github.com/upperstream/packer-templates/compare/20250916...HEAD
+[20260310]:
+  https://github.com/upperstream/packer-templates/compare/20250916...20260310
 [20250916]:
   https://github.com/upperstream/packer-templates/compare/20250611...20250916
 [20250611]:
