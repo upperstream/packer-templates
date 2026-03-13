@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased]
+
+* Added
+  * [FreeBSD](freebsd/README.md): Add templates for FreeBSD 15.0-RELEASE.
+
 ## [20260310][]
 
 * Added
@@ -253,6 +258,8 @@
 [Tiny Core Linux]: http://tinycorelinux.net/
 [UTM]: https://mac.getutm.app/ "UTM | Virtual machines for Mac"
 
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20260310...HEAD
 [20260310]:
   https://github.com/upperstream/packer-templates/compare/20250916...20260310
 [20250916]:

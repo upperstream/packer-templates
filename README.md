@@ -30,6 +30,7 @@
   * freebsd-13.5 - FreeBSD 13.5 templates
   * freebsd-14.3 - FreeBSD 14.3 templates
   * freebsd-14.4 - FreeBSD 14.4 templates
+  * freebsd-15 - FreeBSD 15.0 templates
   * [more](freebsd/README.md)
 * [netbsd](netbsd/README.md) - NetBSD templates (amd64, i386, and
   aarch64)

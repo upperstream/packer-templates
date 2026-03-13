@@ -4,6 +4,11 @@
 
 All templates support amd64, i386, and arm64 architectures.
 
+* [freebsd-15.0](freebsd-15/README.md) - templates for FreeBSD 15.0-RELEASE
+  on ZFS root file system
+  * FreeBSD 15.0-RELEASE
+  * FreeBSD 15.0-RELEASE + X.Org + dwm + dmenu + st
+  * FreeBSD 15.0-RELEASE + Xfce
 * [freebsd-14.4](freebsd-14.4/README.md) - templates for FreeBSD 14.4-RELEASE
   on ZFS root file system
   * FreeBSD 14.4-RELEASE
