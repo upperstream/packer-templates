@@ -188,15 +188,21 @@ available version of the packages, do the following:
    * Determine the target Alpine version (e.g., `v3.21`), repository
      (usually `main` or `community`), and relevant architecture
      (e.g., `x86_64`, `aarch64`) based on the template context.
-   * Use one of the following methods to obtain the latest package version:
+   * Use one of the following methods to obtain the latest package
+     version:
      a) If working directly on an Alpine Linux system:
         * Use `apk search` to query the package index
         * Example: `apk search -v --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/v3.21/main <package-name>`
      b) For remote or cross-platform version checking:
-        * Visit the Alpine Linux package website: `https://pkgs.alpinelinux.org/package/<branch>/<repo>/<arch>/<package-name>`
+        * Visit the Alpine Linux package website:
+          `https://pkgs.alpinelinux.org/package/<branch>/<repo>/<arch>/<package-name>`,
+          where `<branch>` denotes the Alpine Linux release version such
+          as `v3.21` and `<repo>` can be either `main` or `community`
         * Manually check the latest version
-        * Use web scraping tools or API calls to extract the version if needed
-   * Verify the extracted version is compatible with the target Alpine Linux version
+        * Use web scraping tools or API calls to extract the version if
+          needed
+   * Verify the extracted version is compatible with the target Alpine
+     Linux version
    * Note the extracted version number.
 4. Once all necessary latest versions are gathered, use the
    `replace_in_file` tool to update the hardcoded version strings

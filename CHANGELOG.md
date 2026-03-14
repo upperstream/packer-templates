@@ -4,6 +4,9 @@
 
 * Added
   * [FreeBSD](freebsd/README.md): Add templates for FreeBSD 15.0-RELEASE.
+* Changed
+  * [Alpine 3.19](alpine/alpine-3.19/README.md): Upgrade templates to
+    Alpine Linux 3.19.9.
 
 ## [20260310][]
 

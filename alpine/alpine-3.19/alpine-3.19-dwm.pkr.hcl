@@ -36,13 +36,13 @@ variable "boot_wait" {
 
 variable "alpine_version" {
   type        = string
-  default     = "3.19.8"
-  description = "Full Alpine Linux version (e.g., 3.19.8)."
+  default     = "3.19.9"
+  description = "Full Alpine Linux version (e.g., 3.19.9)."
 }
 
 variable "box_version" {
   type        = string
-  default     = "19.8.20250715"
+  default     = "19.9.20251018"
   description = "Version number of this Vagrant box."
 }
 
@@ -280,7 +280,7 @@ variable "vmware_guest_os_type" {
 
 variable "vmware_hardware_version" {
   type        = string
-  default     = "9"
+  default     = "13"
   description = "Virtual hardware version of VMware box."
 }
 
