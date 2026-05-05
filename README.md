@@ -18,7 +18,7 @@
 * [debian](debian/README.md) - Debian templates (amd64, arm64, and i386)
   * debian-11 - Debian 11.11 templates
   * debian-12 - Debian 12.12 templates
-  * debian-13 - Debian 13.1 templates
+  * debian-13 - Debian 13.4 templates
   * [more](debian/README.md)
 * [devuan](devuan/README.md) - Devuan templates (amd64)
   * devuan-4 - Devuan 4.0 Chimaera templates (amd64, i386, and arm64)
@@ -30,7 +30,7 @@
   * freebsd-13.5 - FreeBSD 13.5 templates
   * freebsd-14.3 - FreeBSD 14.3 templates
   * freebsd-14.4 - FreeBSD 14.4 templates
-  * freebsd-15 - FreeBSD 15.0 templates
+  * freebsd-15.0 - FreeBSD 15.0 templates
   * [more](freebsd/README.md)
 * [netbsd](netbsd/README.md) - NetBSD templates (amd64, i386, and
   aarch64)

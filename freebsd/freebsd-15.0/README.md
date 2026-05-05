@@ -49,7 +49,7 @@ Note that `sudo` is not installed while `doas` is.
 
 From the terminal, invoke the following command for VirtualBox provider:
 
-    packer build -only=virtualbox-iso.default freebsd-15-minimal.pkr.hcl
+    packer build -only=virtualbox-iso.default freebsd-15.0-minimal.pkr.hcl
 
 You will find a vagrant box file named
 `FreeBSD-15.0-RELEASE-minimal-v15.0.20251202-amd64-virtualbox.box` in
@@ -67,7 +67,7 @@ VirtualBox build intends to create amd64 box.
 
 From the terminal, invoke the following command for VMware provider:
 
-    packer build -only=vmware-iso.default freebsd-15-minimal.pkr.hcl
+    packer build -only=vmware-iso.default freebsd-15.0-minimal.pkr.hcl
 
 You will find a vagrant box file named
 `FreeBSD-15.0-RELEASE-minimal-v15.0.20251202-amd64-vmware.box` in the
@@ -96,7 +96,7 @@ You also have to enable SSH on ESXi host.
 
 The following command will build a VM image on your ESXi:
 
-    packer build -only=vmware-iso.esxi freebsd-15-minimal.pkr.hcl
+    packer build -only=vmware-iso.esxi freebsd-15.0-minimal.pkr.hcl
 
 (Note that created VM will be unregistered from your Inventory.)
 
@@ -104,13 +104,13 @@ When you create a box on ESXi host version prior to 6.7, you need to
 enable VNC on the host and need to disable Packer's VNC over WebSocket
 feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
-    packer build -only=vmware-iso.esxi -var esxi_vnc_over_websocket=false freebsd-15-minimal.pkr.hcl
+    packer build -only=vmware-iso.esxi -var esxi_vnc_over_websocket=false freebsd-15.0-minimal.pkr.hcl
 
 ### QEMU/libvirt
 
 From the terminal, invoke the following command for Libvirt provider:
 
-    packer build -only=qemu.default freebsd-15-minimal.pkr.hcl
+    packer build -only=qemu.default freebsd-15.0-minimal.pkr.hcl
 
 You will find a vagrant box file named
 `FreeBSD-15.0-RELEASE-minimal-v15.0.20251202-amd64-libvirt.box` in the
@@ -131,7 +131,7 @@ QEMU build intends to create amd64 box.
 
 From the terminal, invoke the following command for Hyper-V provider:
 
-    packer build -only=hyperv-iso.default freebsd-15-minimal.pkr.hcl
+    packer build -only=hyperv-iso.default freebsd-15.0-minimal.pkr.hcl
 
 You will find a vagrant box file named
 `FreeBSD-15.0-RELEASE-minimal-v15.0.20251202-amd64-hyperv.box` in the
@@ -149,7 +149,7 @@ Hyper-V build intends to create amd64 box.
 
 From the terminal, invoke the following command for Parallels provider:
 
-    packer build -only=parallels-iso.default -var-file vars-freebsd-15-aarch64.pkrvars.hcl freebsd-15-minimal.pkr.hcl
+    packer build -only=parallels-iso.default -var-file vars-freebsd-15.0-aarch64.pkrvars.hcl freebsd-15.0-minimal.pkr.hcl
 
 You will find a vagrant box file named
 `FreeBSD-15.0-RELEASE-minimal-v15.0.20251202-aarch64-parallels.box` in the same
@@ -202,17 +202,17 @@ use `doas`.
 
 ## Variants
 
-* `freebsd-15-minimal.pkr.hcl` - FreeBSD 15.0-RELEASE
-* `freebsd-15-dwm.pkr.hcl` - FreeBSD 15.0-RELEASE + [X.Org][] +
+* `freebsd-15.0-minimal.pkr.hcl` - FreeBSD 15.0-RELEASE
+* `freebsd-15.0-dwm.pkr.hcl` - FreeBSD 15.0-RELEASE + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-15-xfce.pkr.hcl` - FreeBSD 15.0-RELEASE + [Xfce][] +
+* `freebsd-15.0-xfce.pkr.hcl` - FreeBSD 15.0-RELEASE + [Xfce][] +
   [SLiM][]
 
-While `freebsd-15-*.pkr.hcl` templates generate amd64 boxes by
-default, using `vars-freebsd-15-aarch64.pkrvars.hcl` generates
+While `freebsd-15.0-*.pkr.hcl` templates generate amd64 boxes by
+default, using `vars-freebsd-15.0-aarch64.pkrvars.hcl` generates
 aarch64 boxes:
 
-    packer build -var-file=vars-freebsd-15-aarch64.pkrvars.hcl freebsd-15-minimal.pkr.hcl
+    packer build -var-file=vars-freebsd-15.0-aarch64.pkrvars.hcl freebsd-15.0-minimal.pkr.hcl
 
 [dmenu]: http://tools.suckless.org/dmenu/ "dmenu | suckless.org tools"
 [dwm]: http://dwm.suckless.org/
