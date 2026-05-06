@@ -7,7 +7,9 @@
     script for collecting package version numbers.
   * [Alpine](alpine/README.md): Add templates for Alpine Linux 3.23.3.
   * [Devuan](devuan/README.md): Add templates for Devuan 6.1.
-  * [FreeBSD](freebsd/README.md): Add templates for FreeBSD 15.0-RELEASE.
+  * [FreeBSD](freebsd/README.md):
+    * Add templates for FreeBSD 15.0-RELEASE.
+    * Add templates for FreeBSD 15.1-BETA1.
 * Changed
   * [AGENTS.md](AGENTS.md): Update the instruction for Alpine Linux.
   * [Alpine 3.19](alpine/alpine-3.19/README.md): Upgrade templates to

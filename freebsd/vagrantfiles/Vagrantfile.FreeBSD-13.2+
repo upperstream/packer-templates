@@ -74,6 +74,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     prl.check_guest_tools = false
   end
 
+  config.vm.provider "libvirt" do |lv|
+    lv.video_type = "virtio"
+    lv.graphics_type = "spice"
+  end
+
   # Enable provisioning with CFEngine. CFEngine Community packages are
   # automatically installed. For example, configure the host as a
   # policy server and optionally a policy file to run:

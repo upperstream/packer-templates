@@ -2,10 +2,16 @@
 
 ## Current FreeBSD releases
 
-All templates support amd64, i386, and arm64 architectures.
+All templates support amd64, i386, and aarch64 architectures unless
+otherwise noted.
 
+* [freebsd-15.1](freebsd-15.1/README.md) - templates for FreeBSD 15.1-BETA1
+  on ZFS root file system (amd64 and aarch64)
+  * FreeBSD 15.1-BETA1
+  * FreeBSD 15.1-BETA1 + X.Org + dwm + dmenu + st
+  * FreeBSD 15.1-BETA1 + Xfce
 * [freebsd-15.0](freebsd-15.0/README.md) - templates for FreeBSD 15.0-RELEASE
-  on ZFS root file system
+  on ZFS root file system (amd64 and aarch64)
   * FreeBSD 15.0-RELEASE
   * FreeBSD 15.0-RELEASE + X.Org + dwm + dmenu + st
   * FreeBSD 15.0-RELEASE + Xfce
@@ -27,20 +33,21 @@ All templates support amd64, i386, and arm64 architectures.
 
 ## Outdated FreeBSD releases
 
-All templates support amd64 and i386 architectures unless otherwise noted.
+All templates support amd64 and i386 architectures unless otherwise
+noted.
 
 * [freebsd-14.2](freebsd-14.2/README.md) - templates for FreeBSD 14.2-RELEASE
-  on ZFS root file system (amd64, i386, and arm64)
+  on ZFS root file system (amd64, i386, and aarch64)
 * [freebsd-14.1](freebsd-14.1/README.md) - templates for FreeBSD 14.1-RELEASE
-  on ZFS root file system (amd64, i386, and arm64)
+  on ZFS root file system (amd64, i386, and aarch64)
 * [freebsd-14.0](freebsd-14.0/README.md) - templates for FreeBSD 14.0-RELEASE
-  on ZFS root file system (amd64, i386, and arm64)
+  on ZFS root file system (amd64, i386, and aarch64)
 * [freebsd-13.4](freebsd-13.4/README.md) - templates for FreeBSD 13.4-RELEASE
-  (amd64, i386, and arm64)
+  (amd64, i386, and aarch64)
 * [freebsd-13.3](freebsd-13.3/README.md) - templates for FreeBSD 13.3-RELEASE
-  (amd64, i386, and arm64)
+  (amd64, i386, and aarch64)
 * [freebsd-13.2](freebsd-13.2/README.md) - templates for FreeBSD 13.2-RELEASE
-  (amd64, i386, and arm64)
+  (amd64, i386, and aarch64)
 * [freebsd-13.1](freebsd-13.1/README.md) - templates for FreeBSD 13.1-RELEASE
 * [freebsd-13.0](freebsd-13.0/README.md) - templates for FreeBSD 13.0-RELEASE
 * [freebsd-12.4](freebsd-12.4/README.md) - templates for FreeBSD 12.4-RELEASE
