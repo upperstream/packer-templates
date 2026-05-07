@@ -6,9 +6,11 @@ ${config_key}=${config_value}
 %{ for config_key, config_value in make_conf }
 echo '${config_key}=${config_value}' >> /etc/make.conf
 %{ endfor ~}
-dhclient $${NETIF:=em0}
+for netif in $NETIF; do dhclient $netif; done
 cat >> /etc/rc.conf <<EOF
-ifconfig_$NETIF="DHCP"
+%{ for netif in split(" ", trim(variables["export NETIF"], "\"")) }
+ifconfig_${netif}="DHCP"
+%{ endfor ~}
 sshd_enable="YES"
 dumpdev="AUTO"
 rpcbind_enable="YES"

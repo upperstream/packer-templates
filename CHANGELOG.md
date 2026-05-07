@@ -9,7 +9,8 @@
   * [Devuan](devuan/README.md): Add templates for Devuan 6.1.
   * [FreeBSD](freebsd/README.md):
     * Add templates for FreeBSD 15.0-RELEASE.
-    * Add templates for FreeBSD 15.1-BETA1.
+    * Add templates for FreeBSD 15.1-BETA1.  Now [UTM][] builder is
+      supported.
 * Changed
   * [AGENTS.md](AGENTS.md): Update the instruction for Alpine Linux.
   * [Alpine 3.19](alpine/alpine-3.19/README.md): Upgrade templates to

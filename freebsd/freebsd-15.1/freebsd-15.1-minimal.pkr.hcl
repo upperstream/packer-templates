@@ -13,6 +13,10 @@ packer {
       source  = "github.com/hashicorp/qemu"
       version = ">= 1.1.0"
     }
+    utm = {
+      source  = "github.com/naveenrajm7/utm"
+      version = ">= v4.0.0"
+    }
     vagrant = {
       source  = "github.com/hashicorp/vagrant"
       version = ">= 1.1.4"
@@ -123,8 +127,8 @@ variable "headless" {
 }
 
 variable "hyperv_netif" {
-  type        = string
-  default     = "hn0"
+  type        = list(string)
+  default     = ["hn0"]
   description = "Network interface for Hyper-V box."
 }
 
@@ -183,8 +187,8 @@ variable "os_version" {
 }
 
 variable "parallels_netif" {
-  type        = string
-  default     = "vtnet0"
+  type        = list(string)
+  default     = ["vtnet0"]
   description = "Network interface for Parallels box."
 }
 
@@ -217,8 +221,8 @@ variable "qemu_machine_type" {
 }
 
 variable "qemu_netif" {
-  type        = string
-  default     = "vtnet0"
+  type        = list(string)
+  default     = ["vtnet0"]
   description = "Network interface for QEMU box."
 }
 
@@ -245,6 +249,24 @@ variable "ssh_timeout" {
   type        = string
   default     = "60m"
   description = "SSH timeout to connect this box being created."
+}
+
+variable "utm_keep_registered" {
+  type        = bool
+  default     = false
+  description = "Set this to true to keep the VM registered with UTM."
+}
+
+variable "utm_netif" {
+  type        = list(string)
+  default     = ["vtnet0", "vtnet1"]
+  description = "Network interfaces for UTM box."
+}
+
+variable "utm_partition" {
+  type        = string
+  default     = "vtbd0"
+  description = "Disk name for UTM box."
 }
 
 variable "vagrant_group" {
@@ -278,8 +300,8 @@ variable "virtualbox_guest_os_type" {
 }
 
 variable "virtualbox_netif" {
-  type        = string
-  default     = "em0"
+  type        = list(string)
+  default     = ["em0"]
   description = "Network interface for VirtualBox box."
 }
 
@@ -314,8 +336,8 @@ variable "vmware_hardware_version" {
 }
 
 variable "vmware_netif" {
-  type        = string
-  default     = "em0"
+  type        = list(string)
+  default     = ["em0"]
   description = "Network interface name for VMware box."
 }
 
@@ -336,7 +358,7 @@ locals {
     "<wait10><wait10><wait10><wait10>",
     "s",
     "<wait5>",
-    "dhclient %s<enter><wait5>",
+    "%s",
     "fetch -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter>",
     "<wait>",
     "bsdinstall script /tmp/install.sh<enter>",
@@ -356,7 +378,7 @@ locals {
 }
 
 source "hyperv-iso" "default" {
-  boot_command = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.hyperv_netif))
+  boot_command = split("\n", format(join("\n", local.boot_command), local.first_boot_command, join("", [for netif in var.hyperv_netif : "dhclient ${netif}<enter><wait5>"])))
   boot_wait    = var.boot_wait
   cpus         = var.num_cpus
   disk_size    = var.disk_size
@@ -372,7 +394,7 @@ source "hyperv-iso" "default" {
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
         "export DOAS"             = var.doas_version
-        "export NETIF"            = var.hyperv_netif
+        "export NETIF"            = "\"${join(" ", var.hyperv_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
         "export VAGRANT_PASSWORD" = var.vagrant_password
@@ -396,7 +418,7 @@ source "hyperv-iso" "default" {
 }
 
 source "parallels-iso" "default" {
-  boot_command  = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.parallels_netif))
+  boot_command  = split("\n", format(join("\n", local.boot_command), local.first_boot_command, join("", [for netif in var.parallels_netif : "dhclient ${netif}<enter><wait5>"])))
   boot_wait     = var.boot_wait
   cpus          = "${var.num_cpus}"
   disk_size     = "${var.disk_size}"
@@ -413,7 +435,7 @@ source "parallels-iso" "default" {
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
         "export DOAS"             = var.doas_version
-        "export NETIF"            = var.parallels_netif
+        "export NETIF"            = "\"${join(" ", var.parallels_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
         "export VAGRANT_PASSWORD" = var.vagrant_password
@@ -439,7 +461,7 @@ source "parallels-iso" "default" {
 
 source "qemu" "default" {
   accelerator      = var.qemu_accelerator
-  boot_command     = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.qemu_netif))
+  boot_command     = split("\n", format(join("\n", local.boot_command), local.first_boot_command, join("", [for netif in var.qemu_netif : "dhclient ${netif}<enter><wait5>"])))
   boot_wait        = var.boot_wait
   cpus             = var.num_cpus
   disk_compression = true
@@ -459,7 +481,7 @@ source "qemu" "default" {
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
         "export DOAS"             = var.doas_version
-        "export NETIF"            = var.qemu_netif
+        "export NETIF"            = "\"${join(" ", var.qemu_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
         "export VAGRANT_PASSWORD" = var.vagrant_password
@@ -485,8 +507,56 @@ source "qemu" "default" {
   vm_name             = local.vm_name
 }
 
+source "utm-iso" "default" {
+  boot_command          = split("\n", format(join("\n", local.boot_command), local.first_boot_command, join("", [for netif in var.utm_netif : "dhclient ${netif}<enter><wait5>"])))
+  boot_nopause          = true
+  boot_wait             = var.boot_wait
+  cpus                  = var.num_cpus
+  disk_size             = var.disk_size
+  display_hardware_type = "virtio-gpu-pci"
+  display_nopause       = true
+  export_nopause        = true
+  guest_additions_mode  = "disable"
+  http_content = {
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      "variables" = {
+        "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
+        "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
+        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export ZFSBOOT_DISKS"    = var.utm_partition
+        "export nonInteractive"   = "YES"
+        "export ABI"              = var.ABI
+        "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
+        "export DOAS"             = var.doas_version
+        "export NETIF"            = "\"${join(" ", var.utm_netif)}\""
+        "export ROOT_PASSWORD"    = var.root_password
+        "export VAGRANT_USER"     = var.vagrant_username
+        "export VAGRANT_PASSWORD" = var.vagrant_password
+        "export VAGRANT_GROUP"    = var.vagrant_group
+      },
+      "make_conf" = {
+        "WITHOUT_X11" = "YES"
+      }
+    })
+  }
+  hypervisor       = true
+  iso_checksum     = var.iso_checksum
+  iso_urls         = local.iso_urls
+  keep_registered  = var.utm_keep_registered
+  memory           = var.mem_size
+  output_directory = "output/${local.vm_name}-utm"
+  shutdown_command = "shutdown -p now"
+  ssh_password     = var.root_password
+  ssh_timeout      = var.ssh_timeout
+  ssh_username     = "root"
+  uefi_boot        = true
+  vm_backend       = "qemu"
+  vm_icon          = "freebsd"
+  vm_name          = local.vm_name
+}
+
 source "virtualbox-iso" "default" {
-  boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.virtualbox_netif))
+  boot_command         = split("\n", format(join("\n", local.boot_command), local.first_boot_command, join("", [for netif in var.virtualbox_netif : "dhclient ${netif}<enter><wait5>"])))
   boot_wait            = var.boot_wait
   cpus                 = var.num_cpus
   disk_size            = var.disk_size
@@ -504,7 +574,7 @@ source "virtualbox-iso" "default" {
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
         "export DOAS"             = var.doas_version
-        "export NETIF"            = var.virtualbox_netif
+        "export NETIF"            = "\"${join(" ", var.virtualbox_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
         "export VAGRANT_PASSWORD" = var.vagrant_password
@@ -531,7 +601,7 @@ source "virtualbox-iso" "default" {
 }
 
 source "vmware-iso" "default" {
-  boot_command      = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.vmware_netif))
+  boot_command      = split("\n", format(join("\n", local.boot_command), local.first_boot_command, join("", [for netif in var.vmware_netif : "dhclient ${netif}<enter><wait5>"])))
   boot_wait         = var.boot_wait
   cpus              = var.num_cpus
   disk_adapter_type = var.vmware_disk_adapter_type
@@ -550,7 +620,7 @@ source "vmware-iso" "default" {
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
         "export DOAS"             = var.doas_version
-        "export NETIF"            = var.vmware_netif
+        "export NETIF"            = "\"${join(" ", var.vmware_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
         "export VAGRANT_PASSWORD" = var.vagrant_password
@@ -584,7 +654,7 @@ source "vmware-iso" "default" {
 }
 
 source "vmware-iso" "esxi" {
-  boot_command  = split("\n", format(join("\n", local.boot_command), local.first_boot_command, var.vmware_netif))
+  boot_command  = split("\n", format(join("\n", local.boot_command), local.first_boot_command, join("", [for netif in var.vmware_netif : "dhclient ${netif}<enter><wait5>"])))
   boot_wait     = var.boot_wait
   cpus          = var.num_cpus
   disk_size     = var.disk_size
@@ -602,7 +672,7 @@ source "vmware-iso" "esxi" {
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
         "export DOAS"             = var.doas_version
-        "export NETIF"            = var.vmware_netif
+        "export NETIF"            = "\"${join(" ", var.vmware_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
         "export VAGRANT_PASSWORD" = var.vagrant_password
@@ -648,6 +718,7 @@ build {
     "source.hyperv-iso.default",
     "source.parallels-iso.default",
     "source.qemu.default",
+    "source.utm-iso.default",
     "source.virtualbox-iso.default",
     "source.vmware-iso.default",
     "source.vmware-iso.esxi"
@@ -679,6 +750,17 @@ build {
       "qemu.default"
     ]
     script = "../provisioners/qemu.sh"
+  }
+
+  provisioner "shell" {
+    environment_vars = [
+      "QEMU_GUEST_AGENT=qemu-guest-agent-10.2.2"
+    ]
+    execute_command = "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
+    only = [
+      "utm-iso.default"
+    ]
+    script = "../provisioners/utm.sh"
   }
 
   provisioner "shell" {
@@ -727,6 +809,15 @@ build {
     compression_level   = 9
     only = [
       "qemu.default"
+    ]
+    output               = "./${local.vm_name}-{{ .Provider }}.box"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2+"
+  }
+
+  post-processor "utm-vagrant" {
+    compression_level = 9
+    only = [
+      "utm-iso.default"
     ]
     output               = "./${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.FreeBSD-13.2+"

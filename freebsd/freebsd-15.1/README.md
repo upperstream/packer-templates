@@ -13,6 +13,7 @@ file system.  (amd64 and arm64)
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
 * [Parallels][] Desktop 19+
+* [UTM][] v4.0+ (macOS only)
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
   "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
@@ -29,6 +30,8 @@ file system.  (amd64 and arm64)
 [VMware]: http://www.vmware.com/
   "VMware Virtualization for Desktop & Server, Application,
   Public & Hybrid Clouds"
+[UTM]: https://mac.getutm.app/
+  "UTM - Universal Virtual Machine Host for macOS"
 
 ## Provisioned software tools
 
@@ -177,6 +180,28 @@ by the following command:
 Parallels build intends to create aarch64 box on Apple Silicon Mac
 host.
 
+### UTM
+
+From the terminal, invoke the following command for UTM provider:
+
+	packer build -only=utm-iso.default \
+		-var-file vars-freebsd-15.1-aarch64.pkrvars.hcl \
+		freebsd-15.1-minimal.pkr.hcl
+
+You will find a vagrant box file named
+`FreeBSD-15.1-BETA-minimal-v1.20260501-aarch64-utm.box` in the
+same directory after the command has succeeded.
+
+Then you can add the box named
+`FreeBSD-15.1-BETA-minimal-v1.20260501-aarch64` to your box list
+by the following command:
+
+	vagrant box add FreeBSD-15.1-BETA-minimal-v1.20260501-aarch64-utm.box \
+		--name FreeBSD-15.1-BETA-minimal-v1.20260501-aarch64 \
+		--provider utm
+
+UTM build intends to create aarch64 box on Apple Silicon Mac host.
+
 ## Default settings
 
 These default settings are done by the file `Vagrantfile.FreeBSD-13.2+`
@@ -303,6 +328,9 @@ or `-var-file` command line options to `packer`:
 * `vmware_network_adapter_type` - Network adapter type for VMware.
   Defaults to `e1000`.
 * `vmware_partition` - Disk name for VMware box.  Defaults to `da0`.
+* `utm_keep_registered` - Set this to true to keep the VM registered
+  with UTM after build completion.  Defaults to `false`.
+* `utm_partition` - Disk name for UTM box.  Defaults to `vtbd0`.
 
 - - -
 
