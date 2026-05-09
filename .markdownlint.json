@@ -1,4 +1,7 @@
 {
+  "MD010": {
+    "code_blocks": false
+  },
   "MD034": false,
   "MD040": false,
   "MD059": false
