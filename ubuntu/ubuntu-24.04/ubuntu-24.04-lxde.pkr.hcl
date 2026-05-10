@@ -46,7 +46,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "2404.3.20250807"
+  default     = "2404.4.20260212"
   description = "Version number of this Vagrant box."
 }
 
@@ -134,13 +134,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://releases.ubuntu.com/24.04.3/SHA256SUMS"
+  default     = "file:https://releases.ubuntu.com/24.04.4/SHA256SUMS"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "ubuntu-24.04.3-live-server-amd64.iso"
+  default     = "ubuntu-24.04.4-live-server-amd64.iso"
   description = "File name of the install media."
 }
 
@@ -164,7 +164,7 @@ variable "num_cpus" {
 
 variable "os_version" {
   type    = string
-  default = "24.04.3"
+  default = "24.04.4"
 }
 
 variable "parallels_boot_mode" {

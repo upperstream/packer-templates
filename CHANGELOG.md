@@ -28,6 +28,8 @@
     * Merge standalone [UTM][] template into the main minimal template,
       making UTM builder available alongside other builders.
     * Update README document with new build parameters.
+  * [Ubuntu 24.04](ubuntu/ubuntu-24.04/README.md): Upgrade templates to
+    Ubuntu 24.04.4.
 
 ## [20260310][]
 
