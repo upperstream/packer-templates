@@ -55,6 +55,7 @@
 * [ubuntu](ubuntu/README.md) - Ubuntu templates (amd64 and arm64)
   * ubuntu-22.04 - Ubuntu 22.04.5 templates
   * ubuntu-24.04 - Ubuntu 24.04.4 templates
+  * ubuntu-26.04 - Ubuntu 26.04 templates
   * [more](ubuntu/README.md)
 
 ## Licensing

@@ -4,6 +4,11 @@
 
 Templates support amd64 and arm64 unless otherwise noted.
 
+* [ubuntu-26.04](ubuntu-26.04/README.md) - templates for Ubuntu 26.04
+  * Ubuntu Server 26.04 LTS
+  * Ubuntu 26.04 LTS + X.org + dwm + suckless tools
+  * Ubuntu 26.04 LTS + LXQt
+  * Ubuntu 26.04 LTS + Xfce
 * [ubuntu-24.04](ubuntu-24.04/README.md) - templates for Ubuntu 24.04.4
   * Ubuntu Server 24.04.4 LTS
   * Ubuntu 24.04.4 LTS + X.org + dwm + suckless tools
