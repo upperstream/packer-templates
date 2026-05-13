@@ -24,7 +24,9 @@
   * [Debian 13](debian/debian-13/README.md): Upgrade templates to Debian
     13.4.
   * [NetBSD 11.0](netbsd/netbsd-11/README.md):
-    * Upgrade templates to NetBSD 11.0_RC3.
+    * Upgrade templates to NetBSD 11.0_RC4.
+    * Rename `box_ver` variable to `box_version` for consistency with
+      other OS templates.
     * Merge standalone [UTM][] template into the main minimal template,
       making UTM builder available alongside other builders.
     * Update README document with new build parameters.

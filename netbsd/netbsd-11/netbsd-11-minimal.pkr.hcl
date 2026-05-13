@@ -43,9 +43,9 @@ variable "boot_wait" {
   description = "Override `boot_wait` default setting (10s)"
 }
 
-variable "box_ver" {
+variable "box_version" {
   type    = string
-  default = "3.20260404"
+  default = "4.20260512"
 }
 
 variable "disk_size" {
@@ -140,17 +140,17 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/images/11.0_RC3/SHA512"
+  default = "file:https://cdn.netbsd.org/pub/NetBSD/images/11.0_RC4/SHA512"
 }
 
 variable "iso_file_name" {
   type    = string
-  default = "NetBSD-11.0_RC3-amd64.iso"
+  default = "NetBSD-11.0_RC4-amd64.iso"
 }
 
 variable "iso_path" {
   type    = string
-  default = "NetBSD/images/11.0_RC3"
+  default = "NetBSD/images/11.0_RC4"
 }
 
 variable "iso_url" {
@@ -250,8 +250,8 @@ variable "ssh_username" {
 }
 
 variable "utm_disk_name" {
-  type = string
-  default = "ld4"
+  type        = string
+  default     = "ld4"
   description = "Disk name for UTM box"
 }
 
@@ -320,7 +320,7 @@ variable "vmware_guest_os_type" {
 
 variable "vmware_hardware_version" {
   type        = string
-  default     = "13"
+  default     = "19"
   description = "Hardware version for VMware box."
 }
 
@@ -345,14 +345,17 @@ locals {
     "b<enter><wait10><wait10><wait10>",               # Shall we continue? - Yes
     "${local.selector_bootblocks[var.arch]}",         # Select bootblocks - Use BIOS console; skip for aarch64
     "d<wait><enter><wait>",                           # Select distribution - Custom installation
-    "${local.selector_manual_pages[var.arch]}",       # Distribution sets - Manual pages - i (i386: h)
-    "${local.selector_text_processors[var.arch]}",    # Distribution sets - Text processing tools - m (i386: l)
+    "${local.selector_manual_pages[var.arch]}",       # Distribution sets - Manual pages - i (i386: h, aarch64: i)
+    "${local.selector_text_processors[var.arch]}",    # Distribution sets - Text processing tools - m (i386: l, aarch64: n))
     "x<wait><enter><wait>",                           # Distribution sets - Install selected sets
     "a<enter><wait10><wait10><wait10><wait10>",       # Install from - CD-ROM
+    "%s",                                             # Finished /bin/sh MAKEDEV all
+    "%s",                                             # Finished /usr/sbin/certctl rehash
     "<wait5><enter><wait5>",                          # The extraction of the selected sets for NetBSD is complete - Hit Enter to continue
     "${var.ssh_password}<wait><enter><wait>",         # New password - root password
     "${var.ssh_password}<wait><enter><wait>",         # Weak password warning - root password
     "${var.ssh_password}<wait><enter><wait><wait>",   # Retype new password - root password
+    "%s",                                             # local.selector_random_number_generator[join(",", var.arch, "${source.type}.${source.name}"]}", # Random number generator; not now - only for aarch64
     "g<wait><enter><wait>",                           # Configure the additional items - Enable sshd
     "h<wait><enter><wait>",                           # Configure the additional items - Enable ntpd
     "x<wait><enter><wait>",                           # Configure the additional items - Finished configuring
@@ -393,6 +396,11 @@ locals {
     "amd64" : "o<wait><enter><wait>",
     "i386" : "m<wait><enter><wait>",
     "aarch64" : "n<wait><enter><wait>"
+  }
+  selector_random_number_generator = {
+    "amd64" : "",
+    "i386" : "",
+    "aarch64" : "a<enter><wait>${uuidv4()}<enter>"
   }
   selector_install_script = {
     "generic" : [
@@ -440,18 +448,35 @@ locals {
       "	dhcpcd_flags=\"-4\"",
       "	EOF",
       "fi"
+    ],
+    "vmware" : [
+      "cat >> /mnt/etc/rc.conf << EOF",
+      "#critical_filesystems_local=/var",
+      "dhcpcd=YES",
+      "rpcbind=YES",
+      "#nfs_client=YES",
+      "no_swap=YES",
+      "lockd=YES",
+      "statd=YES",
+      "hostname=\"$HOSTNAME\"",
+      "EOF",
+      "if [ -f /tmp/dhcpcd.conf.new ]; then",
+      "  mv /tmp/dhcpcd.conf.new /mnt/etc/dhcpcd.conf",
+      "fi"
     ]
   }
-  vm_name = "${var.vm_name}-${var.variant}-v${var.box_ver}-${var.arch}"
+  vm_name = "${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}"
 }
 
 source "hyperv-iso" "default" {
-  boot_command = concat(local.boot_command_common, [
-    "ifconfig ${var.hyperv_netif} inet ${var.hyperv_host_cidr}<enter><wait5>",
-    "ifconfig ${var.hyperv_netif} up<enter><wait10>",
-    "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<wait><enter><wait5>",
-    "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} DISK=${var.hyperv_disk_name} PARTITION=${var.partition_name} HOSTNAME=${var.hostname} HOST_CIDR=${var.hyperv_host_cidr} GATEWAY=${var.hyperv_gateway} NETIF=${var.hyperv_netif} sh /tmp/install.sh<wait><enter><wait5>"
-  ])
+  boot_command = concat(
+    split("\n", format(join("\n", local.boot_command_common), "", "", "")), [
+      "ifconfig ${var.hyperv_netif} inet ${var.hyperv_host_cidr}<enter><wait5>",
+      "ifconfig ${var.hyperv_netif} up<enter><wait10>",
+      "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<wait><enter><wait5>",
+      "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} DISK=${var.hyperv_disk_name} PARTITION=${var.partition_name} HOSTNAME=${var.hostname} HOST_CIDR=${var.hyperv_host_cidr} GATEWAY=${var.hyperv_gateway} NETIF=${var.hyperv_netif} sh /tmp/install.sh<wait><enter><wait5>"
+    ]
+  )
   boot_wait = var.boot_wait
   cpus      = var.num_cpus
   disk_size = var.disk_size
@@ -476,7 +501,7 @@ source "hyperv-iso" "default" {
 
 source "parallels-iso" "default" {
   boot_command = concat(
-    local.boot_command_common,
+    split("\n", format(join("\n", local.boot_command_common), "", "", local.selector_random_number_generator[var.arch])),
     split("\n", format(join("\n", local.install_script_common), var.parallels_disk_name, var.partition_name))
   )
   boot_wait     = var.boot_wait
@@ -505,11 +530,12 @@ source "parallels-iso" "default" {
 source "qemu" "default" {
   accelerator = var.qemu_accelerator
   boot_command = concat(
-    local.boot_command_common, [
+    split("\n", format(join("\n", local.boot_command_common), "", "", "")), [
       "dhcpcd<wait><enter><wait10><wait5>",
       "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<wait><enter><wait5>",
       "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} DISK=${var.qemu_disk_name} PARTITION=${var.partition_name} HOSTNAME=${var.hostname} QEMU_IPV4_PREFER=${var.qemu_ipv4_prefer} sh /tmp/install.sh<wait><enter><wait5>"
-  ])
+    ]
+  )
   boot_wait      = var.boot_wait
   disk_interface = "virtio-scsi"
   display        = var.qemu_display
@@ -543,11 +569,12 @@ source "qemu" "default" {
 
 source "utm-iso" "default" {
   boot_command = concat(
-    local.boot_command_common, [
+    split("\n", format(join("\n", local.boot_command_common), "", "", "")), [
       "dhcpcd<wait><enter><wait10><wait5>",
       "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<wait><enter><wait5>",
       "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} DISK=${var.utm_disk_name} PARTITION=${var.partition_name} HOSTNAME=${var.hostname} QEMU_IPV4_PREFER=${var.qemu_ipv4_prefer} sh /tmp/install.sh<wait><enter><wait5>"
-  ])
+    ]
+  )
   boot_nopause          = true
   boot_wait             = var.boot_wait
   cpus                  = var.num_cpus
@@ -578,7 +605,7 @@ source "utm-iso" "default" {
 
 source "virtualbox-iso" "default" {
   boot_command = concat(
-    local.boot_command_common,
+    split("\n", format(join("\n", local.boot_command_common), "", "", "")),
     split("\n", format(join("\n", local.install_script_common), var.virtualbox_disk_name, var.partition_name))
   )
   boot_wait            = var.boot_wait
@@ -612,8 +639,13 @@ source "virtualbox-iso" "default" {
 
 source "vmware-iso" "default" {
   boot_command = concat(
-    local.boot_command_common,
-    split("\n", format(join("\n", local.install_script_common), var.vmware_disk_name, var.partition_name))
+    split("\n", format(join("\n", local.boot_command_common), "<enter><wait5>", "<enter><wait5>", local.selector_random_number_generator[var.arch])),
+    split("\n", format(join("\n", [
+      "sed 's/^#clientid/clientid/;s/^duid/#duid/' /etc/dhcpcd.conf > /tmp/dhcpcd.conf.new<wait><enter>",
+      "dhcpcd -f /tmp/dhcpcd.conf.new<wait><enter><wait10><wait5>",
+      "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<wait><enter><wait5>",
+      "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} DISK=%s PARTITION=%s HOSTNAME=${var.hostname} sh /tmp/install.sh<wait><enter><wait5>"
+    ]), var.vmware_disk_name, var.partition_name))
   )
   boot_wait          = var.boot_wait
   cdrom_adapter_type = var.vmware_cdrom_adapter_type
@@ -625,7 +657,7 @@ source "vmware-iso" "default" {
   headless           = var.headless
   http_content = {
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
-      lines = local.selector_install_script["generic"]
+      lines = local.selector_install_script["vmware"]
     })
   }
   iso_checksum         = var.iso_checksum
@@ -654,8 +686,13 @@ source "vmware-iso" "default" {
 
 source "vmware-iso" "esxi" {
   boot_command = concat(
-    local.boot_command_common,
-    split("\n", format(join("\n", local.install_script_common), var.esxi_disk_name, var.partition_name))
+    split("\n", format(join("\n", local.boot_command_common), "", "", "")),
+    split("\n", format(join("\n", [
+      "sed 's/^#clientid$/clientid/;s/^duid$/#duid/' /etc/dhcpcd.conf > /tmp/dhcpcd.conf.new<wait><enter>",
+      "dhcpcd -f /tmp/dhcpcd.conf.new<wait><enter><wait10><wait5>",
+      "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<wait><enter><wait5>",
+      "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} DISK=%s PARTITION=%s HOSTNAME=${var.hostname} sh /tmp/install.sh<wait><enter><wait5>"
+    ]), var.vmware_disk_name, var.partition_name))
   )
   boot_wait     = var.boot_wait
   cpus          = var.num_cpus
@@ -665,7 +702,7 @@ source "vmware-iso" "esxi" {
   headless      = var.headless
   http_content = {
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
-      lines = local.selector_install_script["generic"]
+      lines = local.selector_install_script["vmware"]
     })
   }
   insecure_connection  = true

@@ -1,6 +1,6 @@
 arch = "i386"
-iso_file_name = "NetBSD-11.0_RC3-i386.iso"
-iso_checksum = "file:https://cdn.netbsd.org/pub/NetBSD/images/11.0_RC3/SHA512"
+iso_file_name = "NetBSD-11.0_RC4-i386.iso"
+iso_checksum = "file:https://cdn.netbsd.org/pub/NetBSD/images/11.0_RC4/SHA512"
 package_arch = "i386"
 qemu_binary = "qemu-system-i386"
 virtualbox_guest_os_type = "NetBSD"
