@@ -56,12 +56,12 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "2.20260508"
+  default = "3.20260516"
 }
 
 variable "ca_root_nss_version" {
   type        = string
-  default     = "3.117_2"
+  default     = "3.124"
   description = "Version of `ca_root_nss` package."
 }
 
@@ -146,13 +146,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/15.1/CHECKSUM.SHA256-FreeBSD-15.1-BETA2-amd64"
+  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/15.1/CHECKSUM.SHA256-FreeBSD-15.1-BETA3-amd64"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "FreeBSD-15.1-BETA2-amd64-dvd1.iso"
+  default     = "FreeBSD-15.1-BETA3-amd64-dvd1.iso"
   description = "File name of the install media."
 }
 
@@ -182,7 +182,7 @@ variable "open_vm_tools_version" {
 
 variable "os_version" {
   type        = string
-  default     = "15.1-BETA2"
+  default     = "15.1-BETA3"
   description = "OS version"
 }
 
@@ -388,7 +388,7 @@ source "hyperv-iso" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.hyperv_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -429,7 +429,7 @@ source "parallels-iso" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.parallels_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -475,7 +475,7 @@ source "qemu" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.qemu_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -522,7 +522,7 @@ source "utm-iso" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.utm_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -568,7 +568,7 @@ source "virtualbox-iso" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.virtualbox_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -614,7 +614,7 @@ source "vmware-iso" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.vmware_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -666,7 +666,7 @@ source "vmware-iso" "esxi" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.vmware_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -784,7 +784,7 @@ build {
       "vmware-iso.default",
       "vmware-iso.esxi"
     ]
-    script = "../provisioners/vmware-guest.sh"
+    script = "../provisioners/vmware-guest_freebsd15.1.sh"
   }
 
   provisioner "shell" {

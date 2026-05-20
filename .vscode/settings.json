@@ -94,6 +94,7 @@
     "KEYMAPOPTS",
     "kmods",
     "LBUOPTS",
+    "libinput",
     "liblvm",
     "lilo",
     "linuxmint",

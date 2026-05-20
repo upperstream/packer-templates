@@ -62,12 +62,12 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "2.20260508"
+  default = "3.20260516"
 }
 
 variable "ca_root_nss_version" {
   type        = string
-  default     = "3.117_2"
+  default     = "3.124"
   description = "Version of `ca_root_nss` package."
 }
 
@@ -152,13 +152,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/15.1/CHECKSUM.SHA256-FreeBSD-15.1-BETA2-amd64"
+  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/15.1/CHECKSUM.SHA256-FreeBSD-15.1-BETA3-amd64"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "FreeBSD-15.1-BETA2-amd64-dvd1.iso"
+  default     = "FreeBSD-15.1-BETA3-amd64-dvd1.iso"
   description = "File name of the install media."
 }
 
@@ -188,7 +188,7 @@ variable "open_vm_tools_version" {
 
 variable "os_version" {
   type        = string
-  default     = "15.1-BETA2"
+  default     = "15.1-BETA3"
   description = "OS version"
 }
 
@@ -347,6 +347,12 @@ variable "vmware_hardware_version" {
   description = "Hardware version for VMware box."
 }
 
+variable "vmware_mouse_driver" {
+  type = string
+  default = "vmmouse"
+  description = "X.Org vmmouse input driver name"
+}
+
 variable "vmware_netif" {
   type        = list(string)
   default     = ["em0"]
@@ -362,6 +368,24 @@ variable "vmware_network_adapter_type" {
 variable "vmware_partition" {
   type    = string
   default = "da0"
+}
+
+variable "vmware_video_driver" {
+  type = string
+  default = "vmware"
+  description = "X.Org vmware video driver name"
+}
+
+variable "xf86_input_vmmouse" {
+  type = string
+  default = "xf86-input-vmmouse-13.1.0_7"
+  description = "Package for X.Org vmmouse input driver"
+}
+
+variable "xf86_video_vmware" {
+  type = string
+  default = "xf86-video-vmware-13.3.0_9"
+  description = "Package for X.Org vmware display driver"
 }
 
 variable "xrdp_version" {
@@ -412,7 +436,7 @@ source "hyperv-iso" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.hyperv_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -453,7 +477,7 @@ source "parallels-iso" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.parallels_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -499,7 +523,7 @@ source "qemu" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.qemu_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -546,7 +570,7 @@ source "utm-iso" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.utm_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -592,7 +616,7 @@ source "virtualbox-iso" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.virtualbox_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -639,7 +663,7 @@ source "vmware-iso" "default" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.vmware_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -693,7 +717,7 @@ source "vmware-iso" "esxi" {
       "variables" = {
         "BSDINSTALL_DISTDIR"      = "/usr/freebsd-dist"
         "BSDINSTALL_DISTSITE"     = local.bsdinstall_distsite
-        "DISTRIBUTIONS"           = var.DISTRIBUTIONS
+        "export DISTRIBUTIONS"    = var.DISTRIBUTIONS
         "export ZFSBOOT_DISKS"    = var.vmware_partition
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
@@ -758,7 +782,7 @@ build {
       "VAGRANT_USER=${var.vagrant_username}"
     ]
     execute_command = "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
-    script = "../provisioners/vagrant-11.1+.sh"
+    script          = "../provisioners/vagrant-11.1+.sh"
   }
 
   provisioner "shell" {
@@ -814,15 +838,17 @@ build {
     environment_vars = [
       "OPEN_VM_TOOLS=open-vm-tools-${var.open_vm_tools_version}",
       "VMWARE_WITH_XORG=1",
-      "XF86_INPUT_VMMOUSE=xf86-input-vmmouse-13.1.0_7",
-      "XF86_VIDEO_VMWARE=xf86-video-vmware-13.3.0_9"
+      "VMWARE_MOUSE_DRIVER=${var.vmware_mouse_driver}",
+      "VMWARE_VIDEO_DRIVER=${var.vmware_video_driver}",
+      "XF86_INPUT_VMMOUSE=${var.xf86_input_vmmouse}",
+      "XF86_VIDEO_VMWARE=${var.xf86_video_vmware}"
     ]
     execute_command = "chmod +x {{ .Path }}; env {{ .Vars }} {{ .Path }}"
     only = [
       "vmware-iso.default",
       "vmware-iso.esxi"
     ]
-    script = "../provisioners/vmware-guest.sh"
+    script = "../provisioners/vmware-guest_freebsd15.1.sh"
   }
 
   provisioner "shell" {
