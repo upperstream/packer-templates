@@ -145,12 +145,14 @@
     "OSVERSION",
     "other5xlinux",
     "otherlinux",
+    "packagesite",
     "pacman",
     "pacstrap",
     "partman",
     "pcislotnumber",
     "pkgsel",
     "pkgsrc",
+    "pkgver",
     "pkrtpl",
     "pkrvars",
     "poweroff",
@@ -237,6 +239,7 @@
     "xterm",
     "Xubuntu",
     "ZFSBOOT",
-    "zoneinfo"
+    "zoneinfo",
+    "zstd"
   ]
 }

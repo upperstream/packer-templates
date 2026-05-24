@@ -3,6 +3,8 @@
 ## [Unreleased]
 
 * Added
+  * Add an instruction to Cline to respect agent-independent prompt and
+    skills.
   * [Alpine](alpine/README.md): Add `fetch_package_version.sh` shell
     script for collecting package version numbers.
   * [Alpine](alpine/README.md): Add templates for Alpine Linux 3.23.3.
@@ -11,6 +13,8 @@
     * Add templates for FreeBSD 15.0-RELEASE.
     * Add templates for FreeBSD 15.1-BETA3.  Now [UTM][] builder is
       supported.
+    * Add an agent skill to update package versions referred to in
+      templates for FreeBSD.
 * Changed
   * [AGENTS.md](AGENTS.md): Update the instruction for Alpine Linux.
   * [Alpine 3.19](alpine/alpine-3.19/README.md): Upgrade templates to
