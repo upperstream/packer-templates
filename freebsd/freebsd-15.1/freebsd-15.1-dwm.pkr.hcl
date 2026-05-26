@@ -44,7 +44,7 @@ variable "DISTRIBUTIONS" {
 
 variable "arandr_version" {
   type        = string
-  default     = "1.5.3"
+  default     = "0.1.11_2"
   description = "Version of `arandr` package."
 }
 
@@ -62,7 +62,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "3.20260516"
+  default = "1.20260523"
 }
 
 variable "ca_root_nss_version" {
@@ -83,7 +83,7 @@ variable "dist_site" {
   description = "Distribution site URL"
 }
 
-variable "doas_version" {
+variable "doas" {
   type        = string
   default     = "opendoas-6.8.2"
   description = "Version of `doas` package."
@@ -152,13 +152,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/15.1/CHECKSUM.SHA256-FreeBSD-15.1-BETA3-amd64"
+  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/15.1/CHECKSUM.SHA256-FreeBSD-15.1-RC1-amd64"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "FreeBSD-15.1-BETA3-amd64-dvd1.iso"
+  default     = "FreeBSD-15.1-RC1-amd64-dvd1.iso"
   description = "File name of the install media."
 }
 
@@ -194,7 +194,7 @@ variable "open_vm_tools_version" {
 
 variable "os_version" {
   type        = string
-  default     = "15.1-BETA3"
+  default     = "15.1-RC1"
   description = "OS version"
 }
 
@@ -325,7 +325,7 @@ variable "virtualbox_partition" {
 
 variable "vm_name" {
   type        = string
-  default     = "FreeBSD-15.1-BETA"
+  default     = "FreeBSD-15.1-RC"
   description = "VM name of the creating box."
 }
 
@@ -441,7 +441,7 @@ source "hyperv-iso" "default" {
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
-        "export DOAS"             = var.doas_version
+        "export DOAS"             = var.doas
         "export NETIF"            = "\"${join(" ", var.hyperv_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
@@ -482,7 +482,7 @@ source "parallels-iso" "default" {
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
-        "export DOAS"             = var.doas_version
+        "export DOAS"             = var.doas
         "export NETIF"            = "\"${join(" ", var.parallels_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
@@ -528,7 +528,7 @@ source "qemu" "default" {
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
-        "export DOAS"             = var.doas_version
+        "export DOAS"             = var.doas
         "export NETIF"            = "\"${join(" ", var.qemu_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
@@ -575,7 +575,7 @@ source "utm-iso" "default" {
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
-        "export DOAS"             = var.doas_version
+        "export DOAS"             = var.doas
         "export NETIF"            = "\"${join(" ", var.utm_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
@@ -621,7 +621,7 @@ source "virtualbox-iso" "default" {
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
-        "export DOAS"             = var.doas_version
+        "export DOAS"             = var.doas
         "export NETIF"            = "\"${join(" ", var.virtualbox_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
@@ -668,7 +668,7 @@ source "vmware-iso" "default" {
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
-        "export DOAS"             = var.doas_version
+        "export DOAS"             = var.doas
         "export NETIF"            = "\"${join(" ", var.vmware_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username
@@ -722,7 +722,7 @@ source "vmware-iso" "esxi" {
         "export nonInteractive"   = "YES"
         "export ABI"              = var.ABI
         "export CA_ROOT_NSS"      = "ca_root_nss-${var.ca_root_nss_version}"
-        "export DOAS"             = var.doas_version
+        "export DOAS"             = var.doas
         "export NETIF"            = "\"${join(" ", var.vmware_netif)}\""
         "export ROOT_PASSWORD"    = var.root_password
         "export VAGRANT_USER"     = var.vagrant_username

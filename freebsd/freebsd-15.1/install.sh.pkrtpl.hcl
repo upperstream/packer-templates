@@ -22,13 +22,13 @@ EOF
 mkdir -p /usr/local/etc/pkg/repos/
 cat << EOF | tee /usr/local/etc/pkg/repos/FreeBSD.conf
 FreeBSD-ports: {
-  url: pkg+http://pkg.freebsd.org/$${ABI}/quarterly,
+  url: pkg+http://pkg.freebsd.org/$${ABI}/release_1,
   enabled: true
 }
 EOF
 cat << EOF | tee /usr/local/etc/pkg/repos/FreeBSD-kmods.conf
 FreeBSD-ports-kmods: {
-  url: pkg+http://pkg.freebsd.org/$${ABI}/kmods_quarterly,
+  url: pkg+http://pkg.freebsd.org/$${ABI}/kmods_latest_1,
   enabled: true
 }
 EOF

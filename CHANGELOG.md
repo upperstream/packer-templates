@@ -11,7 +11,7 @@
   * [Devuan](devuan/README.md): Add templates for Devuan 6.1.
   * [FreeBSD](freebsd/README.md):
     * Add templates for FreeBSD 15.0-RELEASE.
-    * Add templates for FreeBSD 15.1-BETA3.  Now [UTM][] builder is
+    * Add templates for FreeBSD 15.1-RC1.  Now [UTM][] builder is
       supported.
     * Add an agent skill to update package versions referred to in
       templates for FreeBSD.
