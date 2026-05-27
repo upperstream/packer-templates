@@ -34,6 +34,9 @@
     * Merge standalone [UTM][] template into the main minimal template,
       making UTM builder available alongside other builders.
     * Update README document with new build parameters.
+  * [OpenBSD](openbsd/README.md): Convert the agent skill to update
+    package versions referred to in templates for OpenBSD into an agent
+    skill.
   * [Ubuntu 24.04](ubuntu/ubuntu-24.04/README.md): Upgrade templates to
     Ubuntu 24.04.4.
 
