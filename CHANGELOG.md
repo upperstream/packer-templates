@@ -15,8 +15,10 @@
       supported.
     * Add an agent skill to update package versions referred to in
       templates for FreeBSD.
-  * [OpenBSD](openbsd/README.md): Add agent skill to create new version
-    templates based on existing version templates.
+  * [OpenBSD](openbsd/README.md):
+    * Add agent skill to create new version templates based on existing
+      version templates.
+    * Add templates for OpenBSD 7.9.
 * Changed
   * [AGENTS.md](AGENTS.md): Update the instruction for Alpine Linux.
   * [Alpine 3.19](alpine/alpine-3.19/README.md): Upgrade templates to
