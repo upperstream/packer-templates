@@ -13,6 +13,7 @@ arm64).
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
 * [Parallels][] Desktop 19+
+* [UTM][] v4.0+
 
 [ESXi]:
   http://www.vmware.com/products/vsphere-hypervisor
@@ -28,6 +29,9 @@ arm64).
   https://www.parallels.com/products/desktop/ "Run Windows on Mac - Parallels Desktop 19 Virtual Machine for Mac"
 [QEMU]:
   https://www.qemu.org/ "QEMU"
+[UTM]:
+  https://mac.getutm.app/
+  "UTM - Universal Virtual Machine Host for macOS"
 [Vagrant]:
   https://www.vagrantup.com/ "Vagrant"
 [VirtualBox]:
@@ -163,6 +167,26 @@ your box list by the following command:
       --name OpenBSD-7.9-minimal-v7.9.20260519 --provider parallels
 
 Parallels build intends to create arm64 box on Apple Silicon Mac host.
+
+### UTM
+
+From the terminal, invoke the following command for UTM provider:
+
+    packer build -only=utm-iso.default \
+      -var-file vars-openbsd-7.9-arm64.pkrvars.hcl \
+      openbsd-7.9-minimal.pkr.hcl
+
+You will find a vagrant box file named
+`OpenBSD-7.9-minimal-v7.9.20260519-arm64-utm.box` in the same
+directory after the command has succeeded.
+
+Then you can add the box named `OpenBSD-7.9-minimal-v7.9.20260519` to
+your box list by the following command:
+
+    vagrant box add OpenBSD-7.9-minimal-v7.9.20260519-arm64-utm.box \
+      --name OpenBSD-7.9-minimal-v7.9.20260519 --provider utm
+
+UTM build intends to create arm64 box on Apple Silicon Mac host.
 
 ## Default settings
 

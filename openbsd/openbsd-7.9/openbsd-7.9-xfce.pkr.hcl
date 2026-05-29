@@ -13,6 +13,10 @@ packer {
       source  = "github.com/hashicorp/qemu"
       version = ">= 1.1.0"
     }
+    utm = {
+      source  = "github.com/naveenrajm7/utm"
+      version = ">= v4.0.0"
+    }
     vagrant = {
       source  = "github.com/hashicorp/vagrant"
       version = ">= 1.1.4"
@@ -217,6 +221,18 @@ variable "vmware_network_adapter_type" {
   description = "Network adapter type for VMware box."
 }
 
+variable "utm_keep_registered" {
+  type        = bool
+  default     = false
+  description = "Set this to true to keep the VM registered with UTM."
+}
+
+variable "utm_partition" {
+  type        = string
+  default     = "sd0"
+  description = "Disk name for UTM box."
+}
+
 locals {
   boot_command = [
     "<wait5>a<wait><enter>",
@@ -241,17 +257,11 @@ source "hyperv-iso" "default" {
   headless     = var.headless
   http_content = {
     "/install.conf" = templatefile("${path.root}/install.conf.pkrtpl.hcl", {
-      install_x11 = {
+      configurations = {
         "Do you expect to run the X Window System" = "yes"
-      },
-      location_of_sets = {
-        "Location of sets" = "cd0"
-      },
-      server_directory = {
-        "Server directory" = "${var.os_ver}/${var.cpu}"
-      },
-      set_names = {
-        "Set name(s)" = "-c* -game*"
+        "Location of sets"                         = "cd0"
+        "Pathname to the sets"                     = "${var.os_ver}/${var.cpu}"
+        "Set name(s)"                              = "-c* -game*"
       }
     })
   }
@@ -276,17 +286,11 @@ source "parallels-iso" "default" {
   guest_os_type = "other"
   http_content = {
     "/install.conf" = templatefile("${path.root}/install.conf.pkrtpl.hcl", {
-      install_x11 = {
+      configurations = {
         "Do you expect to run the X Window System" = "yes"
-      },
-      location_of_sets = {
-        "Location of sets" = "cd0"
-      },
-      server_directory = {
-        "Server directory" = "${var.os_ver}/${var.cpu}"
-      },
-      set_names = {
-        "Set name(s)" = "-c* -game*"
+        "Location of sets"                         = "cd0"
+        "Pathname to the sets"                     = "${var.os_ver}/${var.cpu}"
+        "Set name(s)"                              = "-c* -game*"
       }
     })
   }
@@ -316,17 +320,11 @@ source "qemu" "default" {
   headless         = var.headless
   http_content = {
     "/install.conf" = templatefile("${path.root}/install.conf.pkrtpl.hcl", {
-      install_x11 = {
+      configurations = {
         "Do you expect to run the X Window System" = "yes"
-      },
-      location_of_sets = {
-        "Location of sets" = "cd0"
-      },
-      server_directory = {
-        "Server directory" = "${var.os_ver}/${var.cpu}"
-      },
-      set_names = {
-        "Set name(s)" = "-c* -game*"
+        "Location of sets"                         = "cd0"
+        "Pathname to the sets"                     = "${var.os_ver}/${var.cpu}"
+        "Set name(s)"                              = "-c* -game*"
       }
     })
   }
@@ -344,6 +342,50 @@ source "qemu" "default" {
   vm_name             = local.vm_name
 }
 
+source "utm-iso" "default" {
+  boot_command = [
+    "<wait5>a<wait><enter><wait5>",
+    "vio1<wait><enter><wait10>",
+    "http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.conf<enter><wait>",
+    "<wait5>"
+  ]
+  boot_nopause          = true
+  boot_wait             = var.boot_wait
+  cpus                  = var.num_cpus
+  disk_size             = var.disk_size
+  display_hardware_type = "virtio-gpu-pci"
+  display_nopause       = true
+  export_nopause        = true
+  guest_additions_mode  = "disable"
+  http_content = {
+    "/install.conf" = templatefile("${path.root}/install.conf.pkrtpl.hcl", {
+      configurations = {
+        "Network interface to configure"           = "vio1"
+        "IPv4 address for vio1"                    = "autoconf"
+        "IPv6 address for vio1"                    = "none"
+        "Do you expect to run the X Window System" = "yes"
+        "Location of sets"                         = "cd0"
+        "Pathname to the sets"                     = "${var.os_ver}/${var.cpu}"
+        "Set name(s)"                              = "-c* -game*"
+      }
+    })
+  }
+  hypervisor       = true
+  iso_checksum     = var.iso_checksum
+  iso_urls         = local.iso_urls
+  keep_registered  = var.utm_keep_registered
+  memory           = var.mem_size
+  output_directory = "output/${local.vm_name}-utm"
+  shutdown_command = "/sbin/shutdown -h -p now"
+  ssh_password     = var.root_password
+  ssh_timeout      = "10000s"
+  ssh_username     = "root"
+  uefi_boot        = true
+  vm_backend       = "qemu"
+  vm_icon          = "openbsd"
+  vm_name          = local.vm_name
+}
+
 source "virtualbox-iso" "default" {
   boot_command         = local.boot_command
   boot_wait            = var.boot_wait
@@ -355,17 +397,11 @@ source "virtualbox-iso" "default" {
   headless             = var.headless
   http_content = {
     "/install.conf" = templatefile("${path.root}/install.conf.pkrtpl.hcl", {
-      install_x11 = {
+      configurations = {
         "Do you expect to run the X Window System" = "yes"
-      },
-      location_of_sets = {
-        "Location of sets" = "cd0"
-      },
-      server_directory = {
-        "Server directory" = "${var.os_ver}/${var.cpu}"
-      },
-      set_names = {
-        "Set name(s)" = "-c* -game*"
+        "Location of sets"                         = "cd0"
+        "Pathname to the sets"                     = "${var.os_ver}/${var.cpu}"
+        "Set name(s)"                              = "-c* -game*"
       }
     })
   }
@@ -396,17 +432,11 @@ source "vmware-iso" "default" {
   headless          = var.headless
   http_content = {
     "/install.conf" = templatefile("${path.root}/install.conf.pkrtpl.hcl", {
-      install_x11 = {
+      configurations = {
         "Do you expect to run the X Window System" = "yes"
-      },
-      location_of_sets = {
-        "Location of sets" = "cd0"
-      },
-      server_directory = {
-        "Server directory" = "${var.os_ver}/${var.cpu}"
-      },
-      set_names = {
-        "Set name(s)" = "-c* -game*"
+        "Location of sets"                         = "cd0"
+        "Pathname to the sets"                     = "${var.os_ver}/${var.cpu}"
+        "Set name(s)"                              = "-c* -game*"
       }
     })
   }
@@ -444,17 +474,11 @@ source "vmware-iso" "esxi" {
   headless      = var.headless
   http_content = {
     "/install.conf" = templatefile("${path.root}/install.conf.pkrtpl.hcl", {
-      install_x11 = {
+      configurations = {
         "Do you expect to run the X Window System" = "yes"
-      },
-      location_of_sets = {
-        "Location of sets" = "cd0"
-      },
-      server_directory = {
-        "Server directory" = "${var.os_ver}/${var.cpu}"
-      },
-      set_names = {
-        "Set name(s)" = "-c* -game*"
+        "Location of sets"                         = "cd0"
+        "Pathname to the sets"                     = "${var.os_ver}/${var.cpu}"
+        "Set name(s)"                              = "-c* -game*"
       }
     })
   }
@@ -492,6 +516,7 @@ build {
     "source.hyperv-iso.default",
     "source.parallels-iso.default",
     "source.qemu.default",
+    "source.utm-iso.default",
     "source.virtualbox-iso.default",
     "source.vmware-iso.default",
     "source.vmware-iso.esxi"
@@ -525,6 +550,13 @@ build {
   }
 
   provisioner "shell" {
+    only = [
+      "utm-iso.default"
+    ]
+    script = "../provisioners/utm.sh"
+  }
+
+  provisioner "shell" {
     except = [
       "vmware-iso.esxi"
     ]
@@ -552,6 +584,15 @@ build {
     compression_level   = 9
     only = [
       "qemu.default"
+    ]
+    output               = "${local.vm_name}-{{ .Provider }}.box"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.OpenBSD-7.5+"
+  }
+
+  post-processor "utm-vagrant" {
+    compression_level = 9
+    only = [
+      "utm-iso.default"
     ]
     output               = "${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.OpenBSD-7.5+"

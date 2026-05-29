@@ -18,7 +18,7 @@
   * [OpenBSD](openbsd/README.md):
     * Add agent skill to create new version templates based on existing
       version templates.
-    * Add templates for OpenBSD 7.9.
+    * Add templates for OpenBSD 7.9.  Now [UTM][] builder is supported.
 * Changed
   * [AGENTS.md](AGENTS.md): Update the instruction for Alpine Linux.
   * [Alpine 3.19](alpine/alpine-3.19/README.md): Upgrade templates to
