@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [20260604][]
 
 * Added
   * Add an instruction to Cline to respect agent-independent prompt and
@@ -19,6 +19,8 @@
     * Add agent skill to create new version templates based on existing
       version templates.
     * Add templates for OpenBSD 7.9.  Now [UTM][] builder is supported.
+  * [Ubuntu](ubuntu/README.md): Add templates for
+    [Ubuntu 26.04](ubuntu/ubuntu-26.04/README.md).
 * Changed
   * [AGENTS.md](AGENTS.md): Update the instruction for Alpine Linux.
   * [Alpine 3.19](alpine/alpine-3.19/README.md): Upgrade templates to
@@ -297,8 +299,8 @@
 [Tiny Core Linux]: http://tinycorelinux.net/
 [UTM]: https://mac.getutm.app/ "UTM | Virtual machines for Mac"
 
-[Unreleased]:
-  https://github.com/upperstream/packer-templates/compare/20260310...HEAD
+[20260604]:
+  https://github.com/upperstream/packer-templates/compare/20260310...20260604
 [20260310]:
   https://github.com/upperstream/packer-templates/compare/20250916...20260310
 [20250916]:

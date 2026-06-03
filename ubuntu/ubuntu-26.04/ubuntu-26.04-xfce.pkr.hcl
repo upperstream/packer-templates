@@ -687,7 +687,7 @@ build {
       "DEBIAN_FRONTEND=noninteractive",
       "QEMU_GUEST_AGENT=qemu-guest-agent=1:10.2.1+ds-1ubuntu3"
     ]
-    execute_command = "echo '${var.vagrant_password}' | {{ .Vars }} sudo --preserve-env=DEBIAN_FRONTEND,QENU_GUEST_AGENT -S sh -ex '{{ .Path }}'"
+    execute_command = "echo '${var.vagrant_password}' | {{ .Vars }} sudo --preserve-env=DEBIAN_FRONTEND,QEMU_GUEST_AGENT -S sh -ex '{{ .Path }}'"
     only = [
       "qemu.default",
       "utm-iso.default"
