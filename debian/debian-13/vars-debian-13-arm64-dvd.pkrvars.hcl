@@ -1,9 +1,9 @@
 cpu = "arm64"
 dwm_version = "6.5-1+b1"
 install_from_dvd = true
-iso_name = "debian-13.4.0-arm64-DVD-1.iso"
-iso_path = "13.4.0/arm64/iso-dvd"
-iso_checksum = "file:https://cdimage.debian.org/debian-cd/13.4.0/arm64/iso-dvd/SHA256SUMS"
+iso_name = "debian-13.5.0-arm64-DVD-1.iso"
+iso_path = "13.5.0/arm64/iso-dvd"
+iso_checksum = "file:https://cdimage.debian.org/debian-cd/13.5.0/arm64/iso-dvd/SHA256SUMS"
 parallels_tools_flavor = "lin-arm"
 qemu_binary = "qemu-system-aarch64"
 suckless_tools_version = "48-1"

@@ -18,7 +18,7 @@
 * [debian](debian/README.md) - Debian templates (amd64, arm64, and i386)
   * debian-11 - Debian 11.11 templates
   * debian-12 - Debian 12.12 templates
-  * debian-13 - Debian 13.4 templates
+  * debian-13 - Debian 13.5 templates
   * [more](debian/README.md)
 * [devuan](devuan/README.md) - Devuan templates (amd64)
   * devuan-4 - Devuan 4.0 Chimaera templates (amd64, i386, and arm64)

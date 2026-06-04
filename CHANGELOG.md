@@ -5,6 +5,8 @@
 * Changed
   * [Debian](debian/README.md): Convert the agent instructions for
     Debian into an agent skill `debian-upgrade-release`.
+  * [Debian 13](debian/debian-13/README.md): Upgrade templates to Debian
+    13.5.
 
 ## [20260604][]
 

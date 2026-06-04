@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "13.4.20260314"
+  default     = "13.5.20260516"
   description = "Version number of this Vagrant box."
 }
 
@@ -125,7 +125,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:bbabd5db47f0eec53a3f8b310586eb708f7d4ea28d9c23e78bde5369e04c08ef"
+  default     = "sha256:32c6ccde10426cfc278613aea55df6a4e49b2c73883e04fe13bdb61d402a2370"
   description = "SHA256 checksum of the install media."
 }
 
@@ -137,7 +137,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian13.4/main/installer-amd64/20250803+deb13u4/images/netboot"
+  default     = "Debian13.5/main/installer-amd64/20250803+deb13u5/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -374,10 +374,10 @@ source "hyperv-iso" "default" {
     local.boot_parameter_edit[var.hyperv_boot_mode],
     local.boot_parameter_submit[var.hyperv_boot_mode]
   ))
-  boot_wait        = var.boot_wait
-  cpus             = var.num_cpus
-  disk_size        = var.disk_size
-  headless         = var.headless
+  boot_wait = var.boot_wait
+  cpus      = var.num_cpus
+  disk_size = var.disk_size
+  headless  = var.headless
   http_content = {
     "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
       late_command = [
@@ -413,9 +413,9 @@ source "parallels-iso" "default" {
     local.boot_parameter_edit[var.parallels_boot_mode],
     local.boot_parameter_submit[var.parallels_boot_mode]
   ))
-  boot_wait              = var.boot_wait
-  cpus                   = var.num_cpus
-  disk_size              = var.disk_size
+  boot_wait = var.boot_wait
+  cpus      = var.num_cpus
+  disk_size = var.disk_size
   http_content = {
     "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
       late_command = [
@@ -449,14 +449,14 @@ source "qemu" "default" {
     local.boot_parameter_edit[var.qemu_boot_mode],
     local.boot_parameter_submit[var.qemu_boot_mode]
   ))
-  boot_wait           = var.boot_wait
-  cpus                = var.num_cpus
-  disk_compression    = true
-  disk_interface      = "virtio"
-  disk_size           = var.disk_size
-  display             = var.qemu_display
-  format              = "qcow2"
-  headless            = var.headless
+  boot_wait        = var.boot_wait
+  cpus             = var.num_cpus
+  disk_compression = true
+  disk_interface   = "virtio"
+  disk_size        = var.disk_size
+  display          = var.qemu_display
+  format           = "qcow2"
+  headless         = var.headless
   http_content = {
     "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
       late_command = [
@@ -511,15 +511,15 @@ source "virtualbox-iso" "default" {
       }
     })
   }
-  iso_checksum         = var.iso_checksum
-  iso_urls             = local.iso_urls
-  memory               = var.mem_size
-  output_directory     = "output/${local.vm_name}-virtualbox"
-  shutdown_command     = "sudo /sbin/shutdown -h now"
-  ssh_password         = var.ssh_pass
-  ssh_port             = 22
-  ssh_timeout          = var.ssh_timeout
-  ssh_username         = var.ssh_user
+  iso_checksum     = var.iso_checksum
+  iso_urls         = local.iso_urls
+  memory           = var.mem_size
+  output_directory = "output/${local.vm_name}-virtualbox"
+  shutdown_command = "sudo /sbin/shutdown -h now"
+  ssh_password     = var.ssh_pass
+  ssh_port         = 22
+  ssh_timeout      = var.ssh_timeout
+  ssh_username     = var.ssh_user
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
@@ -534,14 +534,14 @@ source "vmware-iso" "default" {
     local.boot_parameter_edit[var.vmware_boot_mode],
     local.boot_parameter_submit[var.vmware_boot_mode]
   ))
-  boot_wait            = var.boot_wait
-  cdrom_adapter_type   = var.vmware_cdrom_adapter_type
-  cpus                 = var.num_cpus
-  disk_adapter_type    = var.vmware_disk_adapter_type
-  disk_size            = var.disk_size
-  disk_type_id         = "0"
-  guest_os_type        = var.vmware_guest_os_type
-  headless             = var.headless
+  boot_wait          = var.boot_wait
+  cdrom_adapter_type = var.vmware_cdrom_adapter_type
+  cpus               = var.num_cpus
+  disk_adapter_type  = var.vmware_disk_adapter_type
+  disk_size          = var.disk_size
+  disk_type_id       = "0"
+  guest_os_type      = var.vmware_guest_os_type
+  headless           = var.headless
   http_content = {
     "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
       late_command = [
@@ -585,12 +585,12 @@ source "vmware-iso" "esxi" {
     local.boot_parameter_edit[var.esxi_boot_mode],
     local.boot_parameter_submit[var.esxi_boot_mode]
   ))
-  boot_wait            = var.boot_wait
-  cpus                 = var.num_cpus
-  disk_size            = var.disk_size
-  disk_type_id         = "thin"
-  guest_os_type        = var.vmware_guest_os_type
-  headless             = var.headless
+  boot_wait     = var.boot_wait
+  cpus          = var.num_cpus
+  disk_size     = var.disk_size
+  disk_type_id  = "thin"
+  guest_os_type = var.vmware_guest_os_type
+  headless      = var.headless
   http_content = {
     "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
       late_command = [
@@ -624,7 +624,7 @@ source "vmware-iso" "esxi" {
   ssh_port             = 22
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_user
-  vhv_enabled             = var.esxi_vhv_enabled
+  vhv_enabled          = var.esxi_vhv_enabled
   vm_name              = local.vm_name
   vmx_data = {
     "ethernet0.addressType"     = "generated"
@@ -649,21 +649,28 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "ARANDR=arandr=0.1.11-2",
-      "DWM=dwm=${var.dwm_version}",
       "INSTALL_FROM_DVD=${var.install_from_dvd}",
       "OPTIMISE_REPOS=1",
-      "STTERM=stterm=0.9.2-1",
-      "SUCKLESS_TOOLS=suckless-tools=${var.suckless_tools_version}",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}",
-      "WGET=wget -O -",
+      "WGET=wget -O -"
+    ]
+    scripts = [
+      "../provisioners/base_debian11+.sh",
+      "../provisioners/vagrant.sh"
+    ]
+  }
+
+  provisioner "shell" {
+    environment_vars = [
+      "ARANDR=arandr=0.1.11-2",
+      "DWM=dwm=${var.dwm_version}",
+      "STTERM=stterm=0.9.2-1",
+      "SUCKLESS_TOOLS=suckless-tools=${var.suckless_tools_version}",
       "XORG=xorg=1:7.7+24+deb13u1",
       "XRDP=xrdp=0.10.1-3.1+deb13u1"
     ]
     scripts = [
-      "../provisioners/base_debian11+.sh",
-      "../provisioners/vagrant.sh",
       "../provisioners/dwm.sh",
       "../provisioners/xrdp.sh"
     ]

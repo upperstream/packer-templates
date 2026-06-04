@@ -5,12 +5,12 @@
 Templates support amd64 and arm64.  Templates for Debian 12 and Debian
 11 also support i386.
 
-* [debian-13](debian-13/README.md) - templates for Debian 13.1
+* [debian-13](debian-13/README.md) - templates for Debian 13.5
 
-  * Debian 13.1 minimal
-  * Debian 13.1 + Docker + Docker Compose
-  * Debian 13.1 + X.org + suckless tools
-  * Debian 13.1 + choice of desktop environments:
+  * Debian 13.5 minimal
+  * Debian 13.5 + Docker + Docker Compose
+  * Debian 13.5 + X.org + suckless tools
+  * Debian 13.5 + choice of desktop environments:
     * Xfce (default)
     * Cinnamon
     * GNOME
@@ -71,4 +71,4 @@ Templates support amd64 only.
 
 - - -
 
-Copyright &copy; 2015-2021, 2023-2025 Upperstream.
+Copyright &copy; 2015-2021, 2023-2026 Upperstream.

@@ -1,6 +1,6 @@
-# Packer templates for Debian 13.4
+# Packer templates for Debian 13.5
 
-Templates to create Vagrant boxes for Debian 13.4 (amd64 and arm64).
+Templates to create Vagrant boxes for Debian 13.5 (amd64 and arm64).
 
 ## Prerequisites
 
@@ -45,14 +45,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default debian-13-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-13-amd64-minimal-v13.4.20260314-virtualbox.box` in the
+`Debian-13-amd64-minimal-v13.5.20260516-virtualbox.box` in the
 same directory after the command has succeeded.
 
-Then you can add the box named `Debian-13-amd64-minimal-v13.4.20260314`
+Then you can add the box named `Debian-13-amd64-minimal-v13.5.20260516`
 to your box list by the following command:
 
-    vagrant box add Debian-13-amd64-minimal-v13.4.20260314-virtualbox.box \
-      --name Debian-13-amd64-minimal-v13.4.20260314 --provider virtualbox
+    vagrant box add Debian-13-amd64-minimal-v13.5.20260516-virtualbox.box \
+      --name Debian-13-amd64-minimal-v13.5.20260516 --provider virtualbox
 
 VirtualBox build intends to create amd64 box on amd64 host.
 
@@ -63,14 +63,14 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default debian-13-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-13-amd64-minimal-v13.4.20260314-vmware.box` in the same
+`Debian-13-amd64-minimal-v13.5.20260516-vmware.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-13-amd64-minimal-v13.4.20260314`
+Then you can add the box named `Debian-13-amd64-minimal-v13.5.20260516`
 to your box list by the following command:
 
-    vagrant box add Debian-13-amd64-minimal-v13.4.20260314-vmware.box \
-      --name Debian-13-amd64-minimal-v13.4.20260314 --provider vmware_desktop
+    vagrant box add Debian-13-amd64-minimal-v13.5.20260516-vmware.box \
+      --name Debian-13-amd64-minimal-v13.5.20260516 --provider vmware_desktop
 
 VMware build intends to create amd64 box on amd64 host
 using VMware Workstation, or create arm64 box on Apple Silicon Mac
@@ -104,14 +104,14 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default debian-13-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-13-amd64-minimal-v13.4.20260314-libvirt.box` in the same
+`Debian-13-amd64-minimal-v13.5.20260516-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-13-amd64-minimal-v13.4.20260314`
+Then you can add the box named `Debian-13-amd64-minimal-v13.5.20260516`
 to your box list by the following command:
 
-    vagrant box add Debian-13-amd64-minimal-v13.4.20260314-libvirt.box \
-      --name Debian-13-amd64-minimal-v13.4.20260314 --provider libvirt
+    vagrant box add Debian-13-amd64-minimal-v13.5.20260516-libvirt.box \
+      --name Debian-13-amd64-minimal-v13.5.20260516 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -125,14 +125,14 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default debian-13-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-13-amd64-minimal-v13.4.20260314-hyperv.box` in the same
+`Debian-13-amd64-minimal-v13.5.20260516-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-13-amd64-minimal-v13.4.20260314`
+Then you can add the box named `Debian-13-amd64-minimal-v13.5.20260516`
 to your box list by the following command:
 
-    vagrant box add Debian-13-amd64-minimal-v13.4.20260314-hyperv.box \
-      --name Debian-13-amd64-minimal-v13.4.20260314 --provider hyperv
+    vagrant box add Debian-13-amd64-minimal-v13.5.20260516-hyperv.box \
+      --name Debian-13-amd64-minimal-v13.5.20260516 --provider hyperv
 
 Hyper-V build intends to create amd64 box on Windows host.
 
@@ -143,14 +143,14 @@ From the terminal, invoke the following command for Parallels provider:
     packer build -only=parallels-iso.default debian-13-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-13-arm64-minimal-v13.4.20260314-parallels.box` in the same
+`Debian-13-arm64-minimal-v13.5.20260516-parallels.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-13-arm64-minimal-v13.4.20260314`
+Then you can add the box named `Debian-13-arm64-minimal-v13.5.20260516`
 to your box list by the following command:
 
-    vagrant box add Debian-13-arm64-minimal-v13.4.20260314-parallels.box \
-      --name Debian-13-arm64-minimal-v13.4.20260314 --provider parallels
+    vagrant box add Debian-13-arm64-minimal-v13.5.20260516-parallels.box \
+      --name Debian-13-arm64-minimal-v13.5.20260516 --provider parallels
 
 Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
@@ -210,11 +210,11 @@ command line:
     packer build -var-file=vars-debian-13-amd64-full.pkrvars.hcl debian-13-minimal.pkr.hcl
 
 * amd64 ISO images
-  * `vars-debian-13-amd64-dvd.pkrvars.hcl` - `debian-13.4.0-amd64-DVD-1.iso`
-  * `vars-debian-13-amd64-netinst.pkrvars.hcl` - `debian-13.4.0-amd64-netinst.iso`
+  * `vars-debian-13-amd64-dvd.pkrvars.hcl` - `debian-13.5.0-amd64-DVD-1.iso`
+  * `vars-debian-13-amd64-netinst.pkrvars.hcl` - `debian-13.5.0-amd64-netinst.iso`
 * arm64 ISO images
-  * `vars-debian-13-arm64-dvd.pkrvars.hcl` - `debian-13.4.0-arm64-DVD-1.iso`
-  * `vars-debian-13-arm64-netinst.pkrvars.hcl` - `debian-13.4.0-arm64-netinst.iso`
+  * `vars-debian-13-arm64-dvd.pkrvars.hcl` - `debian-13.5.0-arm64-DVD-1.iso`
+  * `vars-debian-13-arm64-netinst.pkrvars.hcl` - `debian-13.5.0-arm64-netinst.iso`
   * `vars-debian-13-arm64-mini.pkrvars.hcl` - netboot CD `mini.iso`
 
 It is recommended to use "jigdo" to download large iso image file and
@@ -291,4 +291,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2025, Upperstream.
+Copyright &copy; 2025, 2026 Upperstream.
