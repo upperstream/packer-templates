@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased][]
+
+* Changed
+  * [Debian](debian/README.md): Convert the agent instructions for
+    Debian into an agent skill `debian-upgrade-release`.
+
 ## [20260604][]
 
 * Added
@@ -299,6 +305,8 @@
 [Tiny Core Linux]: http://tinycorelinux.net/
 [UTM]: https://mac.getutm.app/ "UTM | Virtual machines for Mac"
 
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20260604...HEAD
 [20260604]:
   https://github.com/upperstream/packer-templates/compare/20260310...20260604
 [20260310]:
