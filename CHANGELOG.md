@@ -10,6 +10,8 @@
     Debian into an agent skill `debian-upgrade-release`.
   * [Debian 13](debian/debian-13/README.md): Upgrade templates to Debian
     13.5.
+  * [FreeBSD 15.1](freebsd/freebsd-15.1/README.md): Upgrade templates to
+    FreeBSD 15.1-RC3.
 
 ## [20260604][]
 

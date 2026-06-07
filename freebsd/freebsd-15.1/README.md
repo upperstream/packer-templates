@@ -1,6 +1,6 @@
-# Packer templates for FreeBSD 15.1-RC2
+# Packer templates for FreeBSD 15.1-RC3
 
-Templates to create Vagrant boxes for FreeBSD 15.1-RC2 on ZFS root
+Templates to create Vagrant boxes for FreeBSD 15.1-RC3 on ZFS root
 file system.  (amd64 and arm64)
 
 ## Prerequisites
@@ -55,15 +55,15 @@ From the terminal, invoke the following command for VirtualBox provider:
 	packer build -only=virtualbox-iso.default freebsd-15.1-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.1-RC-minimal-v2.20260601-amd64-virtualbox.box` in
+`FreeBSD-15.1-RC-minimal-v3.20260606-amd64-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.1-RC-minimal-v2.20260601-amd64` to your box list by
+`FreeBSD-15.1-RC-minimal-v3.20260606-amd64` to your box list by
 the following command:
 
-	vagrant box add FreeBSD-15.1-RC-minimal-v2.20260601-amd64-virtualbox.box \
-		--name FreeBSD-15.1-RC-minimal-v2.20260601-amd64 \
+	vagrant box add FreeBSD-15.1-RC-minimal-v3.20260606-amd64-virtualbox.box \
+		--name FreeBSD-15.1-RC-minimal-v3.20260606-amd64 \
 		--provider virtualbox
 
 VirtualBox build intends to create amd64 box.
@@ -75,15 +75,15 @@ From the terminal, invoke the following command for VMware provider:
 	packer build -only=vmware-iso.default freebsd-15.1-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.1-RC-minimal-v2.20260601-amd64-vmware.box` in the
+`FreeBSD-15.1-RC-minimal-v3.20260606-amd64-vmware.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.1-RC-minimal-v2.20260601-amd64` to your box list by
+`FreeBSD-15.1-RC-minimal-v3.20260606-amd64` to your box list by
 the following command:
 
-	vagrant box add FreeBSD-15.1-RC-minimal-v2.20260601-amd64-vmware.box \
-		--name FreeBSD-15.1-RC-minimal-v2.20260601-amd64 \
+	vagrant box add FreeBSD-15.1-RC-minimal-v3.20260606-amd64-vmware.box \
+		--name FreeBSD-15.1-RC-minimal-v3.20260606-amd64 \
 		--provider vmware_desktop
 
 VMware build intends to create amd64 and aarch64 boxes.
@@ -121,15 +121,15 @@ From the terminal, invoke the following command for Libvirt provider:
 	packer build -only=qemu.default freebsd-15.1-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.1-RC-minimal-v2.20260601-amd64-libvirt.box` in the
+`FreeBSD-15.1-RC-minimal-v3.20260606-amd64-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.1-RC-minimal-v2.20260601-amd64` to your box list by
+`FreeBSD-15.1-RC-minimal-v3.20260606-amd64` to your box list by
 the following command:
 
-	vagrant box add FreeBSD-15.1-RC-minimal-v2.20260601-amd64-libvirt.box \
-		--name FreeBSD-15.1-RC-minimal-v2.20260601-amd64 \
+	vagrant box add FreeBSD-15.1-RC-minimal-v3.20260606-amd64-libvirt.box \
+		--name FreeBSD-15.1-RC-minimal-v3.20260606-amd64 \
 		--provider libvirt
 
 In the `output` directory you will also find a VM image that can be
@@ -144,15 +144,15 @@ From the terminal, invoke the following command for Hyper-V provider:
 	packer build -only=hyperv-iso.default freebsd-15.1-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.1-RC-minimal-v1.20260523-amd64-hyperv.box` in
+`FreeBSD-15.1-RC-minimal-v3.20260606-amd64-hyperv.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.1-RC-minimal-v1.20260523-amd64` to your box list by
+`FreeBSD-15.1-RC-minimal-v3.20260606-amd64` to your box list by
 the following command:
 
-	vagrant box add FreeBSD-15.1-RC-minimal-v1.20260523-amd64-hyperv.box \
-		--name FreeBSD-15.1-RC-minimal-v1.20260523-amd64 \
+	vagrant box add FreeBSD-15.1-RC-minimal-v3.20260606-amd64-hyperv.box \
+		--name FreeBSD-15.1-RC-minimal-v3.20260606-amd64 \
 		--provider hyperv
 
 Hyper-V build intends to create amd64 box.
@@ -166,15 +166,15 @@ From the terminal, invoke the following command for Parallels provider:
 		freebsd-15.1-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.1-RC-minimal-v2.20260601-aarch64-parallels.box` in the
+`FreeBSD-15.1-RC-minimal-v3.20260606-aarch64-parallels.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.1-RC-minimal-v2.20260601-aarch64` to your box list
+`FreeBSD-15.1-RC-minimal-v3.20260606-aarch64` to your box list
 by the following command:
 
-	vagrant box add FreeBSD-15.1-RC-minimal-v2.20260601-aarch64-parallels.box \
-		--name FreeBSD-15.1-RC-minimal-v2.20260601-aarch64 \
+	vagrant box add FreeBSD-15.1-RC-minimal-v3.20260606-aarch64-parallels.box \
+		--name FreeBSD-15.1-RC-minimal-v3.20260606-aarch64 \
 		--provider parallels
 
 Parallels build intends to create aarch64 box on Apple Silicon Mac
@@ -189,15 +189,15 @@ From the terminal, invoke the following command for UTM provider:
 		freebsd-15.1-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.1-RC-minimal-v2.20260601-aarch64-utm.box` in the
+`FreeBSD-15.1-RC-minimal-v3.20260606-aarch64-utm.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.1-RC-minimal-v2.20260601-aarch64` to your box list
+`FreeBSD-15.1-RC-minimal-v3.20260606-aarch64` to your box list
 by the following command:
 
-	vagrant box add FreeBSD-15.1-RC-minimal-v2.20260601-aarch64-utm.box \
-		--name FreeBSD-15.1-RC-minimal-v2.20260601-aarch64 \
+	vagrant box add FreeBSD-15.1-RC-minimal-v3.20260606-aarch64-utm.box \
+		--name FreeBSD-15.1-RC-minimal-v3.20260606-aarch64 \
 		--provider utm
 
 UTM build intends to create aarch64 box on Apple Silicon Mac host.
@@ -240,10 +240,10 @@ use `doas`.
 
 ## Variants
 
-* `freebsd-15.1-minimal.pkr.hcl` - FreeBSD 15.1-RC2
-* `freebsd-15.1-dwm.pkr.hcl` - FreeBSD 15.1-RC2 + [X.Org][] +
+* `freebsd-15.1-minimal.pkr.hcl` - FreeBSD 15.1-RC3
+* `freebsd-15.1-dwm.pkr.hcl` - FreeBSD 15.1-RC3 + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-15.1-xfce.pkr.hcl` - FreeBSD 15.1-RC2 + [Xfce][] +
+* `freebsd-15.1-xfce.pkr.hcl` - FreeBSD 15.1-RC3 + [Xfce][] +
   [SLiM][]
 
 While `freebsd-15.1-*.pkr.hcl` templates generate amd64 boxes by

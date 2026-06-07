@@ -5,11 +5,11 @@
 All templates support amd64, i386, and aarch64 architectures unless
 otherwise noted.
 
-* [freebsd-15.1](freebsd-15.1/README.md) - templates for FreeBSD 15.1-RC2
+* [freebsd-15.1](freebsd-15.1/README.md) - templates for FreeBSD 15.1-RC3
   on ZFS root file system (amd64 and aarch64)
-  * FreeBSD 15.1-RC2
-  * FreeBSD 15.1-RC2 + X.Org + dwm + dmenu + st
-  * FreeBSD 15.1-RC2 + Xfce
+  * FreeBSD 15.1-RC3
+  * FreeBSD 15.1-RC3 + X.Org + dwm + dmenu + st
+  * FreeBSD 15.1-RC3 + Xfce
 * [freebsd-15.0](freebsd-15.0/README.md) - templates for FreeBSD 15.0-RELEASE
   on ZFS root file system (amd64 and aarch64)
   * FreeBSD 15.0-RELEASE
