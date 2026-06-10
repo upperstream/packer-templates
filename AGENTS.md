@@ -169,42 +169,11 @@ Before submitting changes, ensure:
 * Generated VMs boot and function as expected
 * All provisioning scripts execute without errors
 
-### Special instruction for Alpine Linux templates
+### Special instructions for particular operating systems
 
-This section applies when you are working for templates for Alpine
-Linux (sitting in any directories in `alpine/`).
+Some operating systems have specific instructions in @/.agents directory.
 
-When you are instructed to update the template files to use the latest
-available version of the packages, do the following:
-
-1. Examine the `provisioner "shell"` blocks within the relevant
-   `.pkr.hcl` files.
-2. Identify any packages installed with **hardcoded versions** specified
-   in the `environment_vars` (e.g., `PACKAGE_NAME=package=1.2.3-r0`).
-   Packages installed without an explicit version (e.g., `apk add package`)
-   do not need manual version updates, as `apk` will fetch the latest
-   during the build.
-3. For each package with a hardcoded version:
-   * Determine the target Alpine version (e.g., `v3.21`), repository
-     (usually `main` or `community`), and relevant architecture
-     (e.g., `x86_64`, `aarch64`) based on the template context.
-   * Use one of the following methods to obtain the latest package
-     version:
-
-     a) If working directly on an Alpine Linux system:
-        * Use `apk search` to query the package index
-        * Example: `apk search -v --no-cache --repository
-          https://dl-cdn.alpinelinux.org/alpine/v3.21/main <package-name>`
-
-     b) For remote or cross-platform version checking:
-        * Use the shell script @/alpine/fetch_package_version.sh to
-          collect package version numbers
-   * Verify the extracted version is compatible with the target Alpine
-     Linux version
-   * Note the extracted version number.
-4. Once all necessary latest versions are gathered, use the
-   `replace_in_file` tool to update the hardcoded version strings
-   within the `environment_vars` in the `.pkr.hcl` files.
+* [Alpine Linux](.agents/alpine.md)
 
 ## Common Patterns and Best Practices
 

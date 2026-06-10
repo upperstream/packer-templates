@@ -6,6 +6,9 @@
   * [FreeBSD](freebsd/README.md): Add an agent skill that updates
     templates for new FreeBSD release
 * Changed
+  * [Alpine](alpine/README.md): Convert the agent instructions for
+    handling Alpine templates into an agent skill
+    `alpine-update-packages`.
   * [Debian](debian/README.md): Convert the agent instructions for
     Debian into an agent skill `debian-upgrade-release`.
   * [Debian 13](debian/debian-13/README.md): Upgrade templates to Debian
