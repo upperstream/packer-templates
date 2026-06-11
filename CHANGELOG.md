@@ -9,6 +9,9 @@
   * [Alpine](alpine/README.md): Convert the agent instructions for
     handling Alpine templates into an agent skill
     `alpine-update-packages`.
+  * [Alpine 3.20](alpine/alpine-3.20/README.md): Upgrade templates to
+    Alpine Linux 3.20.10.  The `box_version` value is now led by `3`,
+    which is the major version number of Alpine Linux releases.
   * [Debian](debian/README.md): Convert the agent instructions for
     Debian into an agent skill `debian-upgrade-release`.
   * [Debian 13](debian/debian-13/README.md): Upgrade templates to Debian
