@@ -169,12 +169,6 @@ Before submitting changes, ensure:
 * Generated VMs boot and function as expected
 * All provisioning scripts execute without errors
 
-### Special instructions for particular operating systems
-
-Some operating systems have specific instructions in @/.agents directory.
-
-* [Alpine Linux](.agents/alpine.md)
-
 ## Common Patterns and Best Practices
 
 ### Template organization
