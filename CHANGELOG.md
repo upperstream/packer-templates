@@ -7,6 +7,8 @@
     templates for new FreeBSD release
   * Add `vcs-commit-message-attribution` agent skill to include
     attribution in commit messages.
+  * Add `document-standards` agent skill version 1.1.0 to define
+    documentation writing standards.
 * Changed
   * [Alpine](alpine/README.md): Convert the agent instructions for
     handling Alpine templates into an agent skill
