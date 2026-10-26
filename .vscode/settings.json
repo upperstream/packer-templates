@@ -99,6 +99,7 @@
     "LBUOPTS",
     "libinput",
     "liblvm",
+    "libpixman",
     "lilo",
     "linuxmint",
     "localdomain",

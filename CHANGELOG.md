@@ -1,8 +1,14 @@
 # Changelog
 
-## [Unreleased][]
+## [20261027][]
 
 * Added
+  * [OpenBSD](openbsd/README.md): Add templates for OpenBSD 8.0 (#324),
+    with box version `8.0.20261020`, official installation media,
+    updated package pins, and UTM support.  Skip QEMU guest-agent
+    installation on i386, where the package is unavailable, and
+    include the X11 base set required by the agent in minimal QEMU
+    builds on other architectures.
   * [FreeBSD](freebsd/README.md): Add an agent skill that updates
     templates for new FreeBSD release
   * Add `vcs-commit-message-attribution` agent skill to include
@@ -325,8 +331,8 @@
 [Tiny Core Linux]: http://tinycorelinux.net/
 [UTM]: https://mac.getutm.app/ "UTM | Virtual machines for Mac"
 
-[Unreleased]:
-  https://github.com/upperstream/packer-templates/compare/20260604...HEAD
+[20261027]:
+  https://github.com/upperstream/packer-templates/compare/20260604...20261027
 [20260604]:
   https://github.com/upperstream/packer-templates/compare/20260310...20260604
 [20260310]:
