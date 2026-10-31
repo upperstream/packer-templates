@@ -15,17 +15,16 @@ otherwise noted.
   * NetBSD 10.1 + X.Org
   * NetBSD 10.1 + X.Org + XDM + dwm + dmenu + st
   * NetBSD 10.1 + Xfce + XDM
-* [netbsd-9.4](netbsd-9/README.md) - templates for NetBSD 9.4 (amd64 and
-  i386)
-  * NetBSD 9.4
-  * NetBSD 9.4 + X.Org
-  * NetBSD 9.4 + X.Org + XDM + dwm + dmenu + st
-  * NetBSD 9.4 + Xfce + XDM
 
 ## Outdated NetBSD releases
 
-Templates support amd64 and i386 architectures.
+Templates support amd64 and i386 architectures unless otherwise noted.
 
+* [netbsd-9.5](netbsd-9/README.md) - templates for NetBSD 9.5
+  * NetBSD 9.5
+  * NetBSD 9.5 + X.Org
+  * NetBSD 9.5 + X.Org + XDM + dwm + dmenu + st
+  * NetBSD 9.5 + Xfce + XDM (amd64 only)
 * [netbsd-8.3](netbsd-8/README.md) - templates for NetBSD 8.3
   * NetBSD 8.3
   * NetBSD 8.3 + X.Org

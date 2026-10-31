@@ -1,29 +1,30 @@
 packer {
-  required_version = ">= 1.7.0"
+  required_version = ">= 1.14.0"
   required_plugins {
     hyperv = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.5"
     }
     parallels = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/parallels"
+      version = ">= 1.2.8"
     }
     qemu = {
-      version = ">= 1.0.10"
       source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.7"
     }
     vagrant = {
-      version = ">= 1.1.0"
       source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.7"
     }
     virtualbox = {
-      version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.1.5"
     }
+    # VMware 2.x removed the legacy ESXi builder.
     vmware = {
-      version = ">= 1.0.11"
-      source  = "github.com/hashicorp/vmware"
+      source  = "github.com/vmware/vmware"
+      version = ">= 1.2.0, < 2.0.0"
     }
   }
 }
@@ -39,9 +40,10 @@ variable "boot_wait" {
   description = "Override `boot_wait` default setting (10s)"
 }
 
-variable "box_ver" {
-  type    = string
-  default = "9.4.20240420"
+variable "box_version" {
+  type        = string
+  default     = "9.5.20260831"
+  description = "Vagrant box version."
 }
 
 variable "disk_size" {
@@ -134,19 +136,25 @@ variable "hyperv_switch_name" {
   description = "Network switch name on Hyper-V builder"
 }
 
+variable "extraction_wait" {
+  type        = string
+  default     = ""
+  description = "Extra wait for extraction"
+}
+
 variable "iso_checksum" {
   type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-9.4/iso/SHA512"
+  default = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-9.5/iso/SHA512"
 }
 
 variable "iso_file_name" {
   type    = string
-  default = "NetBSD-9.4-amd64.iso"
+  default = "NetBSD-9.5-amd64.iso"
 }
 
 variable "iso_path" {
   type    = string
-  default = "NetBSD/NetBSD-9.4/images"
+  default = "NetBSD/NetBSD-9.5/images"
 }
 
 variable "mem_size" {
@@ -161,7 +169,7 @@ variable "num_cpus" {
 
 variable "os_ver" {
   type    = string
-  default = "9.4"
+  default = "9.5"
 }
 
 variable "package_arch" {
@@ -172,13 +180,13 @@ variable "package_arch" {
 
 variable "package_branch" {
   type        = string
-  default     = "9.0_2023Q4"
+  default     = "9.0_2026Q2"
   description = "pkgsrc branch name for binary packages."
 }
 
 variable "package_server" {
   type    = string
-  default = "http://cdn.netbsd.org"
+  default = "https://archive.netbsd.org"
 }
 
 variable parallels_disk_name {
@@ -216,6 +224,12 @@ variable "qemu_disk_name" {
 variable "qemu_display" {
   type    = string
   default = ""
+}
+
+variable "qemu_ipv4_prefer" {
+  type        = string
+  default     = "YES"
+  description = "Prefer IPv4 over IPv6 for QEMU and UTM box"
 }
 
 variable "qemu_use_default_display" {
@@ -270,8 +284,9 @@ variable "virtualbox_guest_os_type" {
 }
 
 variable "vm_name" {
-  type    = string
-  default = "NetBSD-9-amd64"
+  type        = string
+  default     = "NetBSD-9"
+  description = "Base VM name; variant, box version and architecture are appended."
 }
 
 variable "vmware_cdrom_adapter_type" {
@@ -298,7 +313,7 @@ variable "vmware_guest_os_type" {
 
 variable "vmware_hardware_version" {
   type        = string
-  default     = "9"
+  default     = "13"
   description = "Hardware version for VMware box."
 }
 
@@ -309,11 +324,13 @@ variable "vmware_network_adapter_type" {
 }
 
 locals {
+  vm_name = "${var.vm_name}-${var.variant}-v${var.box_version}-${var.arch}"
+
   boot_command_common = [
     "1<wait10><wait10><wait10><wait10>",                        # Welcome message
     "a<enter><wait>",                                           # Installation messages in English
     "${local.selector_keyboard_type[var.arch]}",                # Keyboard type - unchanged; skip for aarch64
-    "a<enter><wait>",                                           # NetBSD-9.4 Install System - Install NewtBSD to hard disk
+    "a<enter><wait>",                                           # NetBSD-9.5 Install System - Install NewtBSD to hard disk
     "b<enter><wait>",                                           # Shall we continue? - Yes
     "a<enter><wait>",                                           # Available disks - sd0
     "a<enter><wait>",                                           # Select a partitioning scheme - GPT
@@ -332,7 +349,10 @@ locals {
     "x<enter><wait>",                                           # Distribution sets - X11 sets - Install selected X11 sets
     "x<enter><wait>",                                           # Distribution sets - Install selected sets
     "a<enter><wait10><wait10><wait10><wait10><wait10><wait10>", # Install from - CD-ROM
-    "<wait10><wait10><wait10><wait10><wait10><wait10><wait10>", # Wait for installation
+    "<wait10><wait10><wait10><wait10><wait10><wait10>",         # Wait for installation
+    "<wait10><wait10><wait10><wait10><wait10><wait10>",
+    "<wait10><wait10><wait10><wait10><wait10><wait10>",
+    "${var.extraction_wait}",                                   # Extra wait for extraction
     "<enter><wait5>",                                           # Installation complete - Hit enter to continue
     "d<enter><wait>",                                           # Change root password
     "a<enter><wait>",                                           # Change root password - Yes
@@ -423,6 +443,25 @@ locals {
       "defaultroute=$GATEWAY",
       "EOF",
       "echo \"nameserver $GATEWAY\" > /mnt/etc/resolv.conf"
+    ],
+    "qemu" : [
+      "cat << EOF >> /mnt/etc/rc.conf",
+      "#critical_filesystems_local=/var",
+      "dhcpcd=YES",
+      "rpcbind=YES",
+      "#nfs_client=YES",
+      "no_swap=YES",
+      "lockd=YES",
+      "statd=YES",
+      "hostname=\"$HOSTNAME\"",
+      "EOF",
+      "if [ \"$QEMU_IPV4_PREFER\" = \"YES\" ]; then",
+      "	cat <<-EOF >> /mnt/etc/rc.conf",
+      "	ip6addrctl=YES",
+      "	ip6addrctl_policy=\"ipv4_prefer\"",
+      "	dhcpcd_flags=\"-4\"",
+      "	EOF",
+      "fi"
     ]
   }
 }
@@ -434,10 +473,10 @@ source "hyperv-iso" "default" {
     "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<wait><enter><wait5>",
     "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} DISK=${var.hyperv_disk_name} PARTITION=${var.partition_name} HOSTNAME=${var.hostname} HOST_CIDR=${var.hyperv_host_cidr} GATEWAY=${var.hyperv_gateway} NETIF=${var.hyperv_netif} sh /tmp/install.sh<wait><enter><wait5>"
   ])
-  boot_wait        = var.boot_wait
-  cpus             = var.num_cpus
-  disk_size        = var.disk_size
-  headless         = var.headless
+  boot_wait = var.boot_wait
+  cpus      = var.num_cpus
+  disk_size = var.disk_size
+  headless  = var.headless
   http_content = {
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       lines = local.selector_install_script["hyperv"]
@@ -446,14 +485,14 @@ source "hyperv-iso" "default" {
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-hyperv"
+  output_directory = "output/${local.vm_name}-hyperv"
   shutdown_command = "/sbin/shutdown -p now"
   ssh_host         = var.hyperv_ssh_host
   ssh_password     = var.ssh_password
   ssh_timeout      = var.ssh_timeout
   ssh_username     = var.ssh_username
   switch_name      = var.hyperv_switch_name
-  vm_name          = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name          = "${local.vm_name}"
 }
 
 source "parallels-iso" "default" {
@@ -461,11 +500,11 @@ source "parallels-iso" "default" {
     local.boot_command_common,
     split("\n", format(join("\n", local.install_script_common), var.parallels_disk_name, var.partition_name))
   )
-  boot_wait              = var.boot_wait
-  cpus                   = var.num_cpus
-  disk_size              = var.disk_size
-  disk_type              = "expand"
-  guest_os_type          = "other"
+  boot_wait     = var.boot_wait
+  cpus          = var.num_cpus
+  disk_size     = var.disk_size
+  disk_type     = "expand"
+  guest_os_type = "other"
   http_content = {
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       lines = local.selector_install_script["generic"]
@@ -474,37 +513,40 @@ source "parallels-iso" "default" {
   iso_checksum           = var.iso_checksum
   iso_urls               = local.iso_urls
   memory                 = var.mem_size
-  output_directory       = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-parallels"
+  output_directory       = "output/${local.vm_name}-parallels"
   parallels_tools_flavor = "other"
   parallels_tools_mode   = "disable"
   shutdown_command       = "/sbin/shutdown -p now"
   ssh_password           = var.ssh_password
   ssh_timeout            = var.ssh_timeout
   ssh_username           = var.ssh_username
-  vm_name                = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name                = "${local.vm_name}"
 }
 
 source "qemu" "default" {
   accelerator = var.qemu_accelerator
   boot_command = concat(
-    local.boot_command_common,
-    split("\n", format(join("\n", local.install_script_common), var.qemu_disk_name, var.partition_name))
+    local.boot_command_common, [
+      "dhcpcd<wait><enter><wait10><wait5>",
+      "ftp -o /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<wait><enter><wait5>",
+      "HTTPSERVER={{ .HTTPIP }}:{{ .HTTPPort }} DISK=${var.qemu_disk_name} PARTITION=${var.partition_name} HOSTNAME=${var.hostname} QEMU_IPV4_PREFER=${var.qemu_ipv4_prefer} sh /tmp/install.sh<wait><enter><wait5>"
+    ]
   )
-  boot_wait        = var.boot_wait
-  disk_interface   = "virtio-scsi"
-  display          = var.qemu_display
-  format           = "qcow2"
-  headless         = var.headless
+  boot_wait      = var.boot_wait
+  disk_interface = "virtio-scsi"
+  display        = var.qemu_display
+  format         = "qcow2"
+  headless       = var.headless
   http_content = {
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
-      lines = local.selector_install_script["generic"]
+      lines = local.selector_install_script["qemu"]
     })
   }
   iso_checksum     = var.iso_checksum
   iso_urls         = local.iso_urls
   memory           = var.mem_size
   net_device       = "virtio-net-pci"
-  output_directory = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-qemu"
+  output_directory = "output/${local.vm_name}-qemu"
   qemu_binary      = var.qemu_binary
   qemuargs = [
     ["-smp", "cpus=1,maxcpus=${var.num_cpus},threads=${var.num_cpus}"],
@@ -518,7 +560,7 @@ source "qemu" "default" {
   ssh_timeout         = var.ssh_timeout
   ssh_username        = var.ssh_username
   use_default_display = var.qemu_use_default_display
-  vm_name             = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name             = "${local.vm_name}"
 }
 
 source "virtualbox-iso" "default" {
@@ -537,22 +579,22 @@ source "virtualbox-iso" "default" {
       lines = local.selector_install_script["generic"]
     })
   }
-  iso_checksum         = var.iso_checksum
-  iso_urls             = local.iso_urls
-  memory               = var.mem_size
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-virtualbox"
-  shutdown_command     = "/sbin/shutdown -p now"
-  ssh_password         = var.ssh_password
-  ssh_port             = 22
-  ssh_timeout          = var.ssh_timeout
-  ssh_username         = var.ssh_username
+  iso_checksum     = var.iso_checksum
+  iso_urls         = local.iso_urls
+  memory           = var.mem_size
+  output_directory = "output/${local.vm_name}-virtualbox"
+  shutdown_command = "/sbin/shutdown -p now"
+  ssh_password     = var.ssh_password
+  ssh_port         = 22
+  ssh_timeout      = var.ssh_timeout
+  ssh_username     = var.ssh_username
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--nat-localhostreachable1", "on"],
     ["modifyvm", "{{ .Name }}", "--natdnsproxy1", "on"],
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"]
   ]
   virtualbox_version_file = ".vbox_version"
-  vm_name                 = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vm_name                 = "${local.vm_name}"
 }
 
 source "vmware-iso" "default" {
@@ -560,14 +602,14 @@ source "vmware-iso" "default" {
     local.boot_command_common,
     split("\n", format(join("\n", local.install_script_common), var.vmware_disk_name, var.partition_name))
   )
-  boot_wait            = var.boot_wait
-  cdrom_adapter_type   = var.vmware_cdrom_adapter_type
-  cpus                 = var.num_cpus
-  disk_adapter_type    = var.vmware_disk_adapter_type
-  disk_size            = var.disk_size
-  disk_type_id         = "0"
-  guest_os_type        = var.vmware_guest_os_type
-  headless             = var.headless
+  boot_wait          = var.boot_wait
+  cdrom_adapter_type = var.vmware_cdrom_adapter_type
+  cpus               = var.num_cpus
+  disk_adapter_type  = var.vmware_disk_adapter_type
+  disk_size          = var.disk_size
+  disk_type_id       = "0"
+  guest_os_type      = var.vmware_guest_os_type
+  headless           = var.headless
   http_content = {
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       lines = local.selector_install_script["generic"]
@@ -578,7 +620,7 @@ source "vmware-iso" "default" {
   memory               = var.mem_size
   network              = "nat"
   network_adapter_type = var.vmware_network_adapter_type
-  output_directory     = "output/${var.vm_name}-${var.variant}-v${var.box_ver}-vmware"
+  output_directory     = "output/${local.vm_name}-vmware"
   shutdown_command     = "/sbin/shutdown -p now"
   ssh_password         = var.ssh_password
   ssh_port             = 22
@@ -586,14 +628,14 @@ source "vmware-iso" "default" {
   ssh_username         = var.ssh_username
   usb                  = true
   version              = var.vmware_hardware_version
-  vm_name              = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vhv_enabled          = true
+  vm_name              = "${local.vm_name}"
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
     "usb_xhci.present"          = "TRUE"
-    "vhv.enable"                = "TRUE"
   }
 }
 
@@ -602,12 +644,12 @@ source "vmware-iso" "esxi" {
     local.boot_command_common,
     split("\n", format(join("\n", local.install_script_common), var.esxi_disk_name, var.partition_name))
   )
-  boot_wait            = var.boot_wait
-  cpus                 = var.num_cpus
-  disk_size            = var.disk_size
-  disk_type_id         = "thin"
-  guest_os_type        = var.vmware_guest_os_type
-  headless             = var.headless
+  boot_wait     = var.boot_wait
+  cpus          = var.num_cpus
+  disk_size     = var.disk_size
+  disk_type_id  = "thin"
+  guest_os_type = var.vmware_guest_os_type
+  headless      = var.headless
   http_content = {
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       lines = local.selector_install_script["generic"]
@@ -619,11 +661,11 @@ source "vmware-iso" "esxi" {
   memory               = var.mem_size
   network              = "bridged"
   network_adapter_type = "e1000"
-  output_directory     = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  output_directory     = "${local.vm_name}"
   remote_datastore     = var.esxi_remote_datastore
   remote_host          = var.esxi_remote_host
   remote_password      = var.esxi_remote_password
-  remote_type          = "esx5"
+  remote_type          = "esxi"
   remote_username      = var.esxi_remote_username
   shutdown_command     = "/sbin/shutdown -p now"
   skip_export          = true
@@ -631,14 +673,14 @@ source "vmware-iso" "esxi" {
   ssh_port             = 22
   ssh_timeout          = var.ssh_timeout
   ssh_username         = var.ssh_username
-  vm_name              = "${var.vm_name}-${var.variant}-v${var.box_ver}"
+  vhv_enabled          = true
+  vm_name              = "${local.vm_name}"
   vmx_data = {
     "ethernet0.addressType"     = "generated"
     "ethernet0.networkName"     = "VM Network"
     "ethernet0.present"         = "TRUE"
     "ethernet0.wakeOnPcktRcv"   = "FALSE"
     "remotedisplay.vnc.enabled" = "TRUE"
-    "vhv.enable"                = "TRUE"
   }
   vnc_over_websocket = "${var.esxi_vnc_over_websocket}"
 }
@@ -655,16 +697,17 @@ build {
 
   provisioner "shell" {
     inline = [
-      "echo \"PKG_PATH=${var.package_server}/pub/pkgsrc/packages/NetBSD/${var.package_arch}/${var.package_branch}/All\" > /etc/pkg_install.conf"
+      "echo \"PKG_PATH=${var.package_server}/pub/pkgsrc-archive/packages/NetBSD/${var.package_arch}/${var.package_branch}/All\" > /etc/pkg_install.conf"
     ]
     inline_shebang = "/bin/sh -ex"
   }
 
+  # Native X11 sets already include the VMware video and mouse drivers.
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools-12.1.5nb1",
-      "XF86_INPUT_VMMOUSE=xf86-input-vmmouse",
-      "XF86_VIDEO_VMWARE=xf86-video-vmware"
+      "OPEN_VM_TOOLS=open-vm-tools-12.5.4nb3",
+      "XF86_INPUT_VMMOUSE=",
+      "XF86_VIDEO_VMWARE="
     ]
     execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
     only = [
@@ -675,16 +718,16 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "DOAS=doas-6.3p2nb1",
-      "DMENU=dmenu-5.2nb2",
-      "DWM=dwm-6.4nb2",
-      "RSYNC=rsync-3.2.7nb2",
-      "ST_TERM=st-term-0.9nb2",
+      "DOAS=doas-6.3p2nb2",
+      "DMENU=dmenu-5.4",
+      "DWM=dwm-6.8",
+      "RSYNC=rsync-3.4.4",
+      "ST_TERM=st-term-0.9.3",
       "VAGRANT_GROUP=${var.vagrant_group}",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_USER=${var.vagrant_username}",
-      "X11VNC=x11vnc-0.9.16nb15",
-      "XRANDR=xrandr-1.5.2"
+      "X11VNC=x11vnc-0.9.17nb4",
+      "XRANDR=xrandr-1.5.4"
     ]
     execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
     scripts = [
@@ -715,7 +758,7 @@ build {
       "virtualbox-iso.default",
       "vmware-iso.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_ver}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-8.3+"
   }
 
@@ -725,7 +768,7 @@ build {
     only = [
       "qemu.default"
     ]
-    output               = "./${var.vm_name}-${var.variant}-v${var.box_ver}-{{ .Provider }}.box"
+    output               = "./${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.NetBSD-8.3+"
   }
 }

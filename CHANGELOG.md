@@ -1,5 +1,32 @@
 # Changelog
 
+## [Unreleased][]
+
+* Changed
+  * [NetBSD 9.5](netbsd/netbsd-9/README.md):
+    * Upgrade all four variants and amd64, i386 and aarch64 installation
+      media to NetBSD 9.5 (#327), with box version `9.5.20260831`.
+      Rename `box_ver` to `box_version` and standardise VM, output and
+      box names.  Upgrade Packer plugins, retaining VMware 1.2.0 (below
+      2.0.0) for ESXi support, and raise the VMware virtual hardware
+      default to 13.  Use archived binary packages and native VMware X11
+      drivers.  Restrict Xfce to amd64, where its archived packages are
+      available, and start its session with D-Bus without patching
+      packaged files.  Allow more time for desktop distribution sets to
+      extract before configuring passwords and services, and expose
+      `extraction_wait` for slower hosts in all variants.
+    * Document the end of support for NetBSD 9.x.
+    * Document that VMware and ESXi builds are no longer tested.
+    * Prefer IPv4 and use IPv4-only DHCP in installed QEMU guests by
+      default, controlled by the new `qemu_ipv4_prefer` parameter.
+      Pass the preference to the QEMU-specific installation script.
+    * Changed VM naming convention to `NetBSD-9`-{variant}-{box_version}-{architecture}.
+    * Enable nested virtualisation for VMware and ESXi through the
+      VMware plugin's `vhv_enabled` setting rather than `vmx_data`.
+* Fixed
+  * NetBSD 9.5: Correct the i386 and aarch64 variable file extensions to
+    `.pkrvars.hcl`.
+
 ## [20261027][]
 
 * Added
@@ -331,6 +358,8 @@
 [Tiny Core Linux]: http://tinycorelinux.net/
 [UTM]: https://mac.getutm.app/ "UTM | Virtual machines for Mac"
 
+[Unreleased]:
+  https://github.com/upperstream/packer-templates/compare/20261027...HEAD
 [20261027]:
   https://github.com/upperstream/packer-templates/compare/20260604...20261027
 [20260604]:

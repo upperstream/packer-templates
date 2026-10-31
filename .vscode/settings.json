@@ -39,6 +39,7 @@
     "contrib",
     "corepure",
     "crypted",
+    "dbus",
     "debconf",
     "debootstrap",
     "defaultroute",

@@ -1,14 +1,14 @@
-# Packer templates for NetBSD 9.4
+# Packer templates for NetBSD 9.5
 
-Templates to create Vagrant boxes for NetBSD 9.4 (amd64 and i386).
+Templates to create Vagrant boxes for NetBSD 9.5 (amd64 and i386).
 
 ## Prerequisites
 
-* [Packer][] v1.8.5+
+* [Packer][] v1.14.0+
 * [Vagrant][] v2.2.18+
 * [VirtualBox][] v7.0+
-* [VMware][] Workstation v17.0+ / VMware Fusion v10.0+
-* [ESXi][] (vSphere Hypervisor) v5.5+
+* [VMware][] Workstation v17.0+
+* [ESXi][] (vSphere Hypervisor) v6.5+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
 
@@ -24,6 +24,28 @@ Templates to create Vagrant boxes for NetBSD 9.4 (amd64 and i386).
 [VMware]: http://www.vmware.com/
   "VMware Virtualization for Desktop &amp; Server, Application, Public &amp; Hybrid Clouds"
 
+Initialise plugins separately for each template before building:
+
+    packer init -upgrade netbsd-9-minimal.pkr.hcl
+
+Plugin minimum versions are Hyper-V 1.1.5, QEMU 1.1.7, Vagrant 1.1.7
+and VirtualBox 1.1.5.  VMware requires at least 1.2.0 and
+excludes 2.x to retain ESXi support; VMware 2.x removed that builder.  The
+VMware virtual hardware default is now 13, as required by plugin 1.2.0.
+
+NetBSD 9.5 is the final 9.x release and is no longer supported.  Use a
+newer release series for production systems.  Binary packages must be
+retrieved from the NetBSD archive rather than the live package CDN.
+The minimal, X.Org and dwm variants use `9.0_2026Q2`; Xfce uses
+`9.0_2026Q1` and supports amd64 only because archived Xfce desktop
+packages are unavailable for other architectures.
+VMware X.Org builds use the native X11 video and mouse drivers rather
+than unavailable pkgsrc driver packages.  The Xfce session starts with
+`dbus-run-session` without modifying packaged startup files.
+Desktop variants include a three-minute distribution-set extraction
+wait before configuring the root password and services.  All variants
+accept `extraction_wait` to extend the wait on slower hosts.
+
 ## Provisioned software tools
 
 * sshd
@@ -34,6 +56,9 @@ Templates to create Vagrant boxes for NetBSD 9.4 (amd64 and i386).
 
 ## How to create a box
 
+Run commands from this directory and select one template at a time;
+the variants contain duplicate variable and source declarations.
+
 ### VirtualBox
 
 From the terminal, invoke the following command for VirtualBox provider:
@@ -41,38 +66,45 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default netbsd-9-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`NetBSD-9-amd64-minimal-v9.4.20240420-virtualbox.box` in the same
+`NetBSD-9-minimal-v9.5.20260831-amd64-virtualbox.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9-amd64-minimal-v9.4.20240420`
+Then you can add the box named `NetBSD-9-minimal-v9.5.20260831-amd64`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9-amd64-minimal-v9.4.20240420-virtualbox.box \
-        --name NetBSD-9-amd64-minimal-v9.4.20240420 --provider virtualbox
+    vagrant box add NetBSD-9-minimal-v9.5.20260831-amd64-virtualbox.box \
+        --name NetBSD-9-minimal-v9.5.20260831-amd64 --provider virtualbox
 
-VirtualBox build intends to create amd64 box and i386 box on amd64 device.
+VirtualBox build intends to create amd64 box and i386 box on amd64
+device.
 
 ### VMware
+
+**VMware build is no longer tested.**
 
 From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso.default netbsd-9-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`NetBSD-9-amd64-minimal-v9.4.20240420-vmware.box` in the same
+`NetBSD-9-minimal-v9.5.20260831-amd64-vmware.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9-amd64-minimal-v9.4.20240420`
+Then you can add the box named `NetBSD-9-minimal-v9.5.20260831-amd64`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9-amd64-minimal-v9.4.20240420-vmware.box \
-        --name NetBSD-9-amd64-minimal-v9.4.20240420 --provider vmware_desktop
+    vagrant box add NetBSD-9-minimal-v9.5.20260831-amd64-vmware.box \
+        --name NetBSD-9-minimal-v9.5.20260831-amd64 --provider vmware_desktop
 
 VMware build intends to create amd64 box or i386 box on amd64 device
-using VMware Workstation, or create arm64 box on Apple Silicon Mac
-device using VMware Fusion.
+using VMware Workstation.
+
+VMware and ESXi builds enable nested virtualisation through the
+VMware plugin's `vhv_enabled` setting.
 
 ### ESXi
+
+**ESXi build is no longer tested.**
 
 In order to build a VM image on ESXi, you need to provide the following
 environment variables:
@@ -104,20 +136,26 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default netbsd-9-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`NetBSD-9-amd64-minimal-v9.4.20240420-libvirt.box` in the same
+`NetBSD-9-minimal-v9.5.20260831-amd64-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9-amd64-minimal-v9.4.20240420`
+Then you can add the box named `NetBSD-9-minimal-v9.5.20260831-amd64`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9-amd64-minimal-v9.4.20240420-libvirt.box \
-        --name NetBSD-9-amd64-minimal-v9.4.20240420 --provider libvirt
+    vagrant box add NetBSD-9-minimal-v9.5.20260831-amd64-libvirt.box \
+        --name NetBSD-9-minimal-v9.5.20260831-amd64 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
 
 QEMU build intends to create amd64 box and i386 box on amd64 Linux
 device.
+
+QEMU builds configure the installed guest to prefer IPv4 over IPv6
+and restrict DHCP to IPv4 by default.  To retain the default address
+selection policy and allow DHCP over IPv6, use:
+
+    packer build -only=qemu.default -var qemu_ipv4_prefer=NO netbsd-9-minimal.pkr.hcl
 
 ### Hyper-V
 
@@ -132,14 +170,14 @@ you must provide static network settings so that the VM is configured to
 have a static IP address.
 
 You will find a vagrant box file named
-`NetBSD-9-amd64-minimal-v9.4.20240420-hyperv.box` in the same
+`NetBSD-9-minimal-v9.5.20260831-amd64-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-9-amd64-minimal-v9.4.20240420`
+Then you can add the box named `NetBSD-9-minimal-v9.5.20260831-amd64`
 to your box list by the following command:
 
-    vagrant box add NetBSD-9-amd64-minimal-v9.4.20240420-hyperv.box \
-        --name NetBSD-9-amd64-minimal-v9.4.20240420 --provider hyperv
+    vagrant box add NetBSD-9-minimal-v9.5.20260831-amd64-hyperv.box \
+        --name NetBSD-9-minimal-v9.5.20260831-amd64 --provider hyperv
 
 ## Default settings
 
@@ -171,16 +209,27 @@ use `doas`.
 
 ## Variants
 
-* `netbsd-9-minimal.pkr.hcl` - NetBSD 9.4
-* `netbsd-9-xorg.pkr.hcl` - NetBSD 9.4 + [X.Org][]
-* `netbsd-9-dwm.pkr.hcl` - NetBSD 9.4 + X.Org + [dwm][] + [st][] +
+* `netbsd-9-minimal.pkr.hcl` - NetBSD 9.5
+* `netbsd-9-xorg.pkr.hcl` - NetBSD 9.5 + [X.Org][]
+* `netbsd-9-dwm.pkr.hcl` - NetBSD 9.5 + X.Org + [dwm][] + [st][] +
   [dmenu][], with [XDM] enabled
-* `netbsd-9-xfce.pkr.hcl` - NetBSD 9.4 + [Xfce][], with XDM enabled
+* `netbsd-9-xfce.pkr.hcl` - NetBSD 9.5 + [Xfce][], with XDM enabled
+  (amd64 only)
 
 While `netbsd-9-*.pkr.hcl` templates generate amd64 boxes by default,
-using `vars-netbsd-9-i386.pkrvars.hcl` templates generate i386 boxes:
+using `vars-netbsd-9-i386.pkrvars.hcl` generates i386 boxes for all
+variants except Xfce:
 
-    packer build -var-file=vars-netbsd-9-i386.pkrvars.hcl netbsd-9-minimal.okr.hcl
+    packer build -var-file=vars-netbsd-9-i386.pkrvars.hcl netbsd-9-minimal.pkr.hcl
+
+VM names use `{vm_name}-{variant}-v{box_version}-{arch}`.  Output
+directories under `output` append the builder name; box filenames
+append the provider and `.box`.  ESXi builds instead use the VM name
+as their output directory in the current directory and do not create
+a Vagrant box.  The `box_ver` parameter has been renamed `box_version`.
+
+The default base VM name is `NetBSD-9` for all architectures; the
+NetBSD 9.5 release is identified by `box_version`.
 
 [dmenu]: http://tools.suckless.org/dmenu/ "dmenu | suckless.org tools"
 [dwm]: http://dwm.suckless.org/
@@ -196,11 +245,16 @@ The following parameters can be set at build time by supplying `-var`
 or `-var-file` command line options to `packer`:
 
 * `boot_wait` - Override `boot_wait` default setting, which is `20s`.
+* `box_version` - Vagrant box version.  Defaults to `9.5.20260831`.
 * `disk_size` - Disk size of the created VM.  Default value is `40960`
   which means 40GB.
 * `esxi_vnc_over_websocket` - Controls whether or not to use VNC over
   WebSocket feature for ESXi.  Defaults to `true`.  Set to `false` if
   your ESXi host version is prior to 6.7 which supports VNC server.
+* `extraction_wait` - Additional Packer boot-command wait tokens after
+  distribution-set extraction.  Defaults to an empty string.  For
+  example, `-var 'extraction_wait=<wait10><wait10>'` adds 20 seconds to
+  the existing wait before configuring passwords and services.
 * `headless` - Launch the virtual machine in headless mode if set to
   `true`.  Default value is `false`.
 * `hostname` - Host name of the created VM.  Default value is `vagrant`.
@@ -218,8 +272,11 @@ or `-var-file` command line options to `packer`:
 * `mem_size` - RAM size of the created VM.  Default value is `512`
   which means 512MB.
 * `num_cpus` - Number of virtual CPUs.  Default value is 2.
+* `package_branch` - Archived pkgsrc branch.  Defaults to
+  `9.0_2026Q2`, or `9.0_2026Q1` for Xfce.
 * `package_server` - Host name to download packages from.  Default
-  value is `http://cdn.netbsd.org`.
+  value is `https://archive.netbsd.org`; the package path is
+  `/pub/pkgsrc-archive/packages/NetBSD/{package_arch}/{package_branch}/All`.
 * `qemu_accelerator` - Accelerator type to run the VM with.  Default
   value is `kvm`.
 * `qemu_binary` - Name of QEMU binary to invoke. Default value is
@@ -227,6 +284,9 @@ or `-var-file` command line options to `packer`:
   boxes.
 * `qemu_display` - Value for `-display` option for QEMU.  Default value
   is an empty string.
+* `qemu_ipv4_prefer` - Prefer IPv4 over IPv6 in the installed QEMU
+  guest and restrict DHCP to IPv4.  Defaults to `YES`.  Set to `NO`
+  to leave the address selection policy and DHCP flags unchanged.
 * `qemu_use_default_display` - Do not pass `-display` option to QEMU if
   `true`.  Default value is `false`.
 * `ssh_password` - SSH password for `ssh_user` during build time.
@@ -246,12 +306,13 @@ or `-var-file` command line options to `packer`:
 * `vmware_disk_adapter_type` - Disk adapter type for VMware box.
   Defaults to `scsi`.
 * `vmware_hardware_version` - Virtual hardware version of VMware box.
-  Defaults to `9`.
+  Defaults to `13`.
 * `vmware_network_adapter_type` - Network adapter type of VMware box.
   Defaults to `e1000`.
-* `vm_name` - VM name.  This also affects box file name and output
-  directory name.
+* `vm_name` - Base VM name.  Defaults to `NetBSD-9`; the variant,
+  box version and architecture are appended.  This also affects box
+  filenames and output directory names.
 
 - - -
 
-Copyright &copy; 2023, 2024 Upperstream.
+Copyright &copy; 2023, 2024, 2026 Upperstream.
