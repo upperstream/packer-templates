@@ -14,6 +14,9 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet dhcp
 	hostname localhost
+%{ for line in additional_netif ~}
+${line}
+%{ endfor ~}
 "
 
 # Search domain of example.com, Google public nameserver
@@ -38,7 +41,7 @@ SSHDOPTS="-c none"
 NTPOPTS="-c chrony"
 
 # Use /dev/sda as a data disk
-DISKOPTS="-m sys /dev/${DISK:-sda}"
+DISKOPTS="-m sys /dev/$${DISK:-sda}"
 
 # Setup in /media/sdb1
 LBUOPTS="/media/sdb1"

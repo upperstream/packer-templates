@@ -13,6 +13,10 @@ packer {
       source  = "github.com/hashicorp/qemu"
       version = ">= 1.1.3"
     }
+    utm = {
+      source  = "github.com/naveenrajm7/utm"
+      version = ">= v4.0.0"
+    }
     vagrant = {
       source  = "github.com/hashicorp/vagrant"
       version = ">= 1.1.5"
@@ -208,6 +212,18 @@ variable "ssh_username" {
   description = "SSH username to connect this box being created."
 }
 
+variable "utm_disk_name" {
+  type        = string
+  default     = "vda"
+  description = "Disk name for UTM box"
+}
+
+variable "utm_keep_registered" {
+  type        = bool
+  default     = false
+  description = "Set this to true to keep the VM registered with UTM after build."
+}
+
 variable "vagrant_password" {
   type        = string
   default     = "vagrant"
@@ -356,7 +372,9 @@ source "hyperv-iso" "default" {
   disk_size        = var.disk_size
   headless         = var.headless
   http_content = {
-    "/answers.txt" = file("${path.root}/answers.txt")
+    "/answers.txt" = templatefile("${path.root}/answers.txt.pkrtpl.hcl", {
+      additional_netif = []
+    })
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       additional_lines = [
         "apk add --root=/mnt hvtools",
@@ -389,7 +407,9 @@ source "parallels-iso" "default" {
   disk_type            = "expand"
   guest_os_type        = "linux"
   http_content = {
-    "/answers.txt" = file("${path.root}/answers.txt")
+    "/answers.txt" = templatefile("${path.root}/answers.txt.pkrtpl.hcl", {
+      additional_netif = []
+    })
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       additional_lines = []
     })
@@ -420,7 +440,9 @@ source "qemu" "default" {
   format              = "qcow2"
   headless            = var.headless
   http_content = {
-    "/answers.txt" = file("${path.root}/answers.txt")
+    "/answers.txt" = templatefile("${path.root}/answers.txt.pkrtpl.hcl", {
+      additional_netif = []
+    })
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       additional_lines = []
     })
@@ -439,6 +461,68 @@ source "qemu" "default" {
   vm_name             = local.vm_name
 }
 
+source "utm-iso" "default" {
+  boot_command = [
+    "root<enter><wait>",
+    "/usr/sbin/setup-interfaces -i << EOF<enter>",
+    "auto lo<enter>",
+    "iface lo inet loopback<enter>",
+    "<enter>",
+    "auto eth0<enter>",
+    "iface eth0 inet dhcp<enter>",
+    "<tab>hostname localhost<enter>",
+    "<enter>",
+    "auto eth1<enter>",
+    "iface eth1 inet dhcp<enter>",
+    "<tab>hostname localhost<enter>",
+    "EOF<enter><wait>",
+    "/etc/init.d/networking --quiet start<enter><wait10><wait10>",
+    "wget -O /tmp/answers.txt http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers.txt<enter><wait>",
+    format("DISK=%s ERASE_DISKS=/dev/%s /usr/sbin/setup-alpine -f /tmp/answers.txt<enter><wait><wait10>", var.utm_disk_name, var.utm_disk_name),
+    "${var.root_password}<enter><wait>",
+    "${var.root_password}<enter><wait>",
+    "<wait10><wait10><wait10>",
+    "<wait10><wait10><wait10><wait10><wait10><wait10>",
+    "<wait10><wait10><wait10><wait10><wait10><wait10>",
+    "wget -O /tmp/install.sh http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait>",
+    format("DISK=%s sh /tmp/install.sh<enter><wait>", var.utm_disk_name)
+  ]
+  boot_nopause          = true
+  boot_wait             = var.boot_wait
+  cpus                  = var.num_cpus
+  display_hardware_type = "virtio-gpu-pci"
+  display_nopause       = true
+  disk_size             = var.disk_size
+  export_nopause        = true
+  http_content = {
+    "/answers.txt" = templatefile("${path.root}/answers.txt.pkrtpl.hcl", {
+      additional_netif = [
+        "",
+        "auto eth1",
+        "iface eth1 inet dhcp",
+        "hostname localhost"
+      ]
+    })
+    "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
+      additional_lines = []
+    })
+  }
+  hypervisor       = true
+  iso_checksum     = var.iso_checksum
+  iso_urls         = local.iso_urls
+  keep_registered  = var.utm_keep_registered
+  memory           = var.mem_size
+  output_directory = "output/${local.vm_name}-utm"
+  shutdown_command = "poweroff"
+  ssh_password     = var.ssh_password
+  ssh_port         = 22
+  ssh_timeout      = var.ssh_timeout
+  ssh_username     = var.ssh_username
+  uefi_boot        = true
+  vm_backend       = "qemu"
+  vm_name          = local.vm_name
+}
+
 source "virtualbox-iso" "default" {
   boot_command = split("\n", format(
     join("\n", local.boot_command), var.virtualbox_disk_name, var.virtualbox_disk_name, var.virtualbox_disk_name
@@ -450,7 +534,9 @@ source "virtualbox-iso" "default" {
   guest_os_type        = var.virtualbox_guest_os_type
   headless             = var.headless
   http_content = {
-    "/answers.txt" = file("${path.root}/answers.txt")
+    "/answers.txt" = templatefile("${path.root}/answers.txt.pkrtpl.hcl", {
+      additional_netif = []
+    })
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       additional_lines = []
     })
@@ -486,7 +572,9 @@ source "vmware-iso" "default" {
   guest_os_type        = var.vmware_guest_os_type
   headless             = var.headless
   http_content = {
-    "/answers.txt" = file("${path.root}/answers.txt")
+    "/answers.txt" = templatefile("${path.root}/answers.txt.pkrtpl.hcl", {
+      additional_netif = []
+    })
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       additional_lines = []
     })
@@ -527,7 +615,9 @@ source "vmware-iso" "esxi" {
   guest_os_type           = var.esxi_guest_os_type
   headless                = var.headless
   http_content = {
-    "/answers.txt" = file("${path.root}/answers.txt")
+    "/answers.txt" = templatefile("${path.root}/answers.txt.pkrtpl.hcl", {
+      additional_netif = []
+    })
     "/install.sh" = templatefile("${path.root}/install.sh.pkrtpl.hcl", {
       additional_lines = []
     })
@@ -569,6 +659,7 @@ build {
     "source.hyperv-iso.default",
     "source.parallels-iso.default",
     "source.qemu.default",
+    "source.utm-iso.default",
     "source.virtualbox-iso.default",
     "source.vmware-iso.default",
     "source.vmware-iso.esxi"
@@ -610,7 +701,8 @@ build {
       "UTIL_LINUX=util-linux=2.40.4-r1"
     ]
     only = [
-      "qemu.default"
+      "qemu.default",
+      "utm-iso.default"
     ]
     script = "../provisioners/nfs.sh"
   }
@@ -639,6 +731,7 @@ build {
     only = [
       "parallels-iso.default",
       "qemu.default",
+      "utm-iso.default",
       "virtualbox-iso.default",
       "vmware-iso.default"
     ]
@@ -670,5 +763,15 @@ build {
     ]
     output               = "${local.vm_name}-{{ .Provider }}.box"
     vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.15+"
+  }
+
+  post-processor "utm-vagrant" {
+    compression_level = 9
+    only = [
+      "utm-iso.default"
+    ]
+    output               = "${local.vm_name}-{{ .Provider }}.box"
+    vagrantfile_template = "../vagrantfiles/Vagrantfile.Alpine3.15+"
+    architecture         = "arm64"
   }
 }

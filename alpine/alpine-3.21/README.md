@@ -13,6 +13,7 @@ x86, and aarch64)
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
 * [Parallels][] version 18.0+
+* [UTM][] version 4.0+
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
   "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
@@ -24,6 +25,8 @@ x86, and aarch64)
   "Packer by HashiCorp"
 [Parallels]: https://www.parallels.com/products/desktop/
   "Parallels Desktop18 for Mac"
+[UTM]: https://mac.getutm.app/
+  "UTM: Virtual machines for Mac"
 [QEMU]: https://www.qemu.org/
   "QEMU"
 [Vagrant]: https://www.vagrantup.com/
@@ -225,6 +228,33 @@ vagrant box add \
 
 Parallels build intends to create aarch64 box on Apple Silicon Mac host.
 
+### UTM
+
+From the terminal, invoke the following command for UTM provider:
+
+```
+packer build -only=utm-iso.default \
+  -var-file=vars-alpine-standard-3.21-aarch64.pkrvars.hcl \
+  alpine-3.21-minimal.pkr.hcl
+```
+
+You will find a vagrant box file named
+`Alpine-standard-3.21-minimal-v321.7.20260415-aarch64-utm.box` in
+the same directory after the command has succeeded.
+
+Then you can add the box named
+`Alpine-standard-3.21-minimal-v321.7.20260415-aarch64`
+to your box list by the following command:
+
+```
+vagrant box add \
+  Alpine-standard-3.21-minimal-v321.7.20260415-aarch64-utm.box \
+  --name Alpine-standard-3.21-minimal-v321.7.20260415-aarch64 \
+  --provider utm
+```
+
+UTM build intends to create aarch64 box on Apple Silicon Mac host.
+
 ## Default settings
 
 These default settings are done by the file `Vagrantfile.Alpine3.15+`
@@ -330,6 +360,9 @@ or `-var-file` command line options to `packer`:
 * `num_cpus` - The number of CPUs.  Defaults to `2`.
 * `parallels_disk_name` - Disk name for Parallels box.
 * `qemu_disk_name` - Disk name for QEMU box.
+* `utm_disk_name` - Disk name for UTM box.  Defaults to `vda`.
+* `utm_keep_registered` - Instructs whether build artefact should be kept
+  registered in UTM after build.  Defaults to `false`.
 * `qemu_display` - Value for `-display` option for QEMU.  Defaults to an
   empty string.
 * `qemu_use_default_display` - Do not pass `-display` option to QEMU if

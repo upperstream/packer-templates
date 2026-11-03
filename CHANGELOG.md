@@ -3,6 +3,8 @@
 ## [Unreleased][]
 
 * Changed
+  * [Alpine 3.21](alpine/alpine-3.21/README.md): Add support for [UTM][]
+    builder.
   * [NetBSD 9.5](netbsd/netbsd-9/README.md):
     * Upgrade all four variants and amd64, i386 and aarch64 installation
       media to NetBSD 9.5 (#327), with box version `9.5.20260831`.
