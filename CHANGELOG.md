@@ -3,8 +3,11 @@
 ## [Unreleased][]
 
 * Changed
-  * [Alpine 3.21](alpine/alpine-3.21/README.md): Add support for [UTM][]
-    builder.
+  * [Alpine 3.21](alpine/alpine-3.21/README.md):
+    * Upgrade templates to Alpine Linux 3.21.9, with box version
+      `321.9.20261021`.  The `box_version` value is now led by `3`,
+      which is the major version number of Alpine Linux releases.
+    * Add support for [UTM][] builder.
   * [NetBSD 9.5](netbsd/netbsd-9/README.md):
     * Upgrade all four variants and amd64, i386 and aarch64 installation
       media to NetBSD 9.5 (#327), with box version `9.5.20260831`.

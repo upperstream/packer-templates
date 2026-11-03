@@ -1,6 +1,6 @@
-# Packer templates for Alpine Linux 3.21.6
+# Packer templates for Alpine Linux 3.21.9
 
-Templates to create Vagrant boxes for Alpine Linux 3.21.6. (x86_64,
+Templates to create Vagrant boxes for Alpine Linux 3.21.9.  (x86_64,
 x86, and aarch64)
 
 ## Prerequisites
@@ -64,17 +64,17 @@ packer build -only=virtualbox-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.21-minimal-v21.6.20260127-x86_64-virtualbox.box` in
+`Alpine-standard-3.21-minimal-v321.9.20261021-x86_64-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.21-minimal-v21.6.20260127-x86_64`
+`Alpine-standard-3.21-minimal-v321.9.20261021-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.21-minimal-v21.6.20260127-x86_64-virtualbox.box \
-  --name Alpine-standard-3.21-minimal-v21.6.20260127-x86_64 \
+  Alpine-standard-3.21-minimal-v321.9.20261021-x86_64-virtualbox.box \
+  --name Alpine-standard-3.21-minimal-v321.9.20261021-x86_64 \
   --provider virtualbox
 ```
 
@@ -92,17 +92,17 @@ packer build -only=vmware-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.21-minimal-v21.6.20260127-x86_64-vmware.box` in the
+`Alpine-standard-3.21-minimal-v321.9.20261021-x86_64-vmware.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.21-minimal-v21.6.20260127-x86_64` to your box list
+`Alpine-standard-3.21-minimal-v321.9.20261021-x86_64` to your box list
 by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.21-minimal-v21.6.20260127-x86_64-vmware.box \
-  --name Alpine-standard-3.21-minimal-v21.6.20260127-x86_64 \
+  Alpine-standard-3.21-minimal-v321.9.20261021-x86_64-vmware.box \
+  --name Alpine-standard-3.21-minimal-v321.9.20261021-x86_64 \
   --provider vmware
 ```
 
@@ -153,17 +153,17 @@ packer build -only=qemu.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.21-minimal-v21.6.20260127-x86_64-libvirt.box` in the
+`Alpine-standard-3.21-minimal-v321.9.20261021-x86_64-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.21-minimal-v21.6.20260127-x86_64`
+`Alpine-standard-3.21-minimal-v321.9.20261021-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.21-minimal-v21.6.20260127-x86_64-libvirt.box \
-  --name Alpine-standard-3.21-minimal-v21.6.20260127-x86_64 \
+  Alpine-standard-3.21-minimal-v321.9.20261021-x86_64-libvirt.box \
+  --name Alpine-standard-3.21-minimal-v321.9.20261021-x86_64 \
   --provider libvirt
 ```
 
@@ -184,17 +184,17 @@ packer build -only=hyperv-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.21-minimal-v21.6.20260127-x86_64-hyperv.box`
+`Alpine-standard-3.21-minimal-v321.9.20261021-x86_64-hyperv.box`
 in the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.21-minimal-v21.6.20260127-x86_64`
+`Alpine-standard-3.21-minimal-v321.9.20261021-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.21-minimal-v21.6.20260127-x86_64-hyperv.box \
-  --name Alpine-standard-3.21-minimal-v21.6.20260127-x86_64 \
+  Alpine-standard-3.21-minimal-v321.9.20261021-x86_64-hyperv.box \
+  --name Alpine-standard-3.21-minimal-v321.9.20261021-x86_64 \
   --provider hyperv
 ```
 
@@ -212,17 +212,17 @@ packer build -only=parallels-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.21-minimal-v21.6.20260127-x86_64-parallels.box` in
+`Alpine-standard-3.21-minimal-v321.9.20261021-x86_64-parallels.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.21-minimal-v21.6.20260127-x86_64`
+`Alpine-standard-3.21-minimal-v321.9.20261021-x86_64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.21-minimal-v21.6.20260127-x86_64-parallels.box \
-  --name Alpine-standard-3.21-minimal-v21.6.20260127-x86_64 \
+  Alpine-standard-3.21-minimal-v321.9.20261021-x86_64-parallels.box \
+  --name Alpine-standard-3.21-minimal-v321.9.20261021-x86_64 \
   --provider parallels
 ```
 
@@ -239,17 +239,17 @@ packer build -only=utm-iso.default \
 ```
 
 You will find a vagrant box file named
-`Alpine-standard-3.21-minimal-v321.7.20260415-aarch64-utm.box` in
+`Alpine-standard-3.21-minimal-v321.9.20261021-aarch64-utm.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`Alpine-standard-3.21-minimal-v321.7.20260415-aarch64`
+`Alpine-standard-3.21-minimal-v321.9.20261021-aarch64`
 to your box list by the following command:
 
 ```
 vagrant box add \
-  Alpine-standard-3.21-minimal-v321.7.20260415-aarch64-utm.box \
-  --name Alpine-standard-3.21-minimal-v321.7.20260415-aarch64 \
+  Alpine-standard-3.21-minimal-v321.9.20261021-aarch64-utm.box \
+  --name Alpine-standard-3.21-minimal-v321.9.20261021-aarch64 \
   --provider utm
 ```
 
@@ -286,12 +286,12 @@ use `doas`.
 
 ## Variants
 
-* `alpine-3.21-minimal.pkr.hcl` - Alpine Linux 3.21.4
-* `alpine-3.21-docker.pkr.hcl` - Alpine Linux 3.21.4 with [Docker] and
+* `alpine-3.21-minimal.pkr.hcl` - Alpine Linux 3.21.9
+* `alpine-3.21-docker.pkr.hcl` - Alpine Linux 3.21.9 with [Docker] and
   [Docker Compose]
-* `alpine-3.21-dwm.pkr.hcl` - Alpine Linux 3.21.4 with [X.org][],
+* `alpine-3.21-dwm.pkr.hcl` - Alpine Linux 3.21.9 with [X.org][],
   [dwm][], [dmenu][], [st][], [SLiM][], and [xrdp][].
-* `alpine-3.21-xfce.pkr.hcl` - Alpine Linux 3.21.4 with [Xfce][] and
+* `alpine-3.21-xfce.pkr.hcl` - Alpine Linux 3.21.9 with [Xfce][] and
   [xrdp][].
 
 [dmenu]: http://tools.suckless.org/dmenu/
@@ -333,12 +333,12 @@ or `-var-file` command line options to `packer`:
   minutes while `15s` denotes 15 seconds.  Defaults to 30 seconds.
 * `disk_size` - Disk size of the created VM.  Defaults to `40960`
   which means 40GB.
-* `docker_version` - Version of the Docker package to install. Varies
-  by architecture. Defaults to `27.3.1-r3` for x86_64 and `27.3.1-r4`
-  for aarch64 and x86.
+* `docker_version` - Version of the Docker package to install. Defaults
+  to `27.3.1-r5` for x86_64, x86, and aarch64. This version can be
+  overridden at build time.
 * `docker_compose_version` - Version of the docker-cli-compose package
-  to install. Varies by architecture. Defaults to `2.31.0-r3` for
-  x86_64 and `2.31.0-r4` for aarch64 and x86.
+  to install. Defaults to `2.31.0-r5` for x86_64, x86, and aarch64. This
+  version can be overridden at build time.
 * `esxi_disk_name` - Disk name for ESXi box.
 * `esxi_keep_registered` - instructs whether build artefact should be
   kept in the inventory on ESXi.  Defaults to `false`.
