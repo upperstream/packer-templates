@@ -218,6 +218,7 @@
     "usermodmap",
     "USEROPTS",
     "userresources",
+    "uuidv4",
     "vagrantfiles",
     "vars",
     "vesa",

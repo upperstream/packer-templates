@@ -5,11 +5,11 @@
 Templates support amd64, i386, and aarch64 architectures unless
 otherwise noted.
 
-* [netbsd-11](netbsd-11/README.md) - templates for NetBSD 11.0 RC3
-  * NetBSD 11.0 RC3
-  * NetBSD 11.0 RC3 + X.Org
-  * NetBSD 11.0 RC3 + X.Org + XDM + dwm + dmenu + st
-  * NetBSD 11.0 RC3 + Xfce + XDM
+* [netbsd-11](netbsd-11/README.md) - templates for NetBSD 11.0
+  * NetBSD 11.0
+  * NetBSD 11.0 + X.Org
+  * NetBSD 11.0 + X.Org + XDM + dwm + dmenu + st
+  * NetBSD 11.0 + Xfce + XDM
 * [netbsd-10](netbsd-10/README.md) - templates for NetBSD 10.1
   * NetBSD 10.1
   * NetBSD 10.1 + X.Org

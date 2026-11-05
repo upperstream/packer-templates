@@ -1,33 +1,34 @@
 packer {
-  required_version = ">= 1.7.0"
+  required_version = ">= 1.14.0"
   required_plugins {
     hyperv = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/hyperv"
+      version = ">= 1.1.5"
     }
     parallels = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/parallels"
+      version = ">= 1.2.8"
     }
     qemu = {
-      version = ">= 1.0.10"
       source  = "github.com/hashicorp/qemu"
+      version = ">= 1.1.7"
     }
     vagrant = {
-      version = ">= 1.1.0"
       source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.7"
     }
     virtualbox = {
-      version = ">= 0.0.1"
       source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.1.5"
     }
+    # VMware 2.x removed the legacy ESXi builder.
     vmware = {
-      version = ">= 1.0.11"
-      source  = "github.com/hashicorp/vmware"
+      source  = "github.com/vmware/vmware"
+      version = ">= 1.2.0, < 2.0.0"
     }
     utm = {
-      version = ">=v4.0.0"
       source  = "github.com/naveenrajm7/utm"
+      version = ">= v4.0.0"
     }
   }
 }
@@ -45,7 +46,8 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "4.20260512"
+  default = "11.0.20260730"
+  description = "Vagrant box version."
 }
 
 variable "disk_size" {
@@ -138,19 +140,25 @@ variable "hyperv_switch_name" {
   description = "Network switch name on Hyper-V builder"
 }
 
+variable "extraction_wait" {
+  type        = string
+  default     = ""
+  description = "Extra wait for extraction"
+}
+
 variable "iso_checksum" {
   type    = string
-  default = "file:https://cdn.netbsd.org/pub/NetBSD/images/11.0_RC4/SHA512"
+  default = "file:https://cdn.netbsd.org/pub/NetBSD/images/11.0/SHA512"
 }
 
 variable "iso_file_name" {
   type    = string
-  default = "NetBSD-11.0_RC4-amd64.iso"
+  default = "NetBSD-11.0-amd64.iso"
 }
 
 variable "iso_path" {
   type    = string
-  default = "NetBSD/images/11.0_RC4"
+  default = "NetBSD/images/11.0"
 }
 
 variable "iso_url" {
@@ -182,7 +190,7 @@ variable "package_arch" {
 
 variable "package_branch" {
   type        = string
-  default     = "11.0_2025Q4"
+  default     = "11.0_2026Q2"
   description = "pkgsrc branch name for binary packages."
 }
 
@@ -293,7 +301,7 @@ variable "virtualbox_guest_os_type" {
 
 variable "vm_name" {
   type    = string
-  default = "NetBSD-11_RC"
+  default = "NetBSD-11.0"
 }
 
 variable "vmware_cdrom_adapter_type" {
@@ -348,12 +356,13 @@ locals {
     "${local.selector_compiler_tools[var.arch]}",                               # Distribution sets - Compiler tools - g (i386: e, aarch64: f)
     "${local.selector_manual_pages[var.arch]}",                                 # Distribution sets - Manual pages - i (i386: h, aarch64: i)
     "${local.selector_text_processors[var.arch]}",                              # Distribution sets - Text processing tools - m (i386: l, aarch64: n))
-    "${local.selector_x11[var.arch]}",                                          # Distribution sets - X11 sets - n (i386: m)
+    "${local.selector_x11[var.arch]}",                                          # Distribution sets - X11 sets - n (i386: m, aarch64: o)
     "f<wait><enter><wait>",                                                     # Distribution sets - X11 sets - Select all the above sets
     "b<wait><enter><wait>",                                                     # Distribution sets - X11 sets - but X11 programming
     "x<wait><enter><wait>",                                                     # Distribution sets - X11 sets - Install selected X11 sets
     "x<wait><enter><wait>",                                                     # Distribution sets - Install selected sets
     "a<enter><wait10><wait10><wait10><wait10><wait10><wait10><wait10><wait10>", # Install from - CD-ROM
+    "${var.extraction_wait}",                                                   # Extra wait for extraction
     "%s",                                                                       # Finisn sh MAKEDEV
     "%s",                                                                       # Finish /usr/sbin/certctl
     "<wait5><enter><wait5>",                                                    # The extraction of the selected sets for NetBSD is complete - Hit Enter to continue
@@ -411,7 +420,7 @@ locals {
   selector_random_number_generator = {
     "amd64" : "",
     "i386" : "",
-    "aarch64" : "a<enter><wait>${uuidv4()}<enter>"
+    "aarch64" : "a<enter><wait>${uuidv4()}<enter><wait10>"
   }
   selector_x11 = {
     "amd64" : "p<wait><enter><wait>",
@@ -771,8 +780,8 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "DOAS=doas-6.3p2nb1",
-      "RSYNC=rsync-3.4.1",
+      "DOAS=doas-6.3p2nb2",
+      "RSYNC=rsync-3.4.4",
       "VAGRANT_GROUP=${var.vagrant_group}",
       "VAGRANT_PASSWORD=${var.vagrant_password}",
       "VAGRANT_USER=${var.vagrant_username}"
@@ -783,7 +792,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "QEMU_GUEST_AGENT=qemu-guest-agent-10.1.3"
+      "QEMU_GUEST_AGENT=qemu-guest-agent-11.0.1nb1"
     ]
     execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
     only = [
@@ -795,7 +804,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools-12.5.4"
+      "OPEN_VM_TOOLS=open-vm-tools-12.5.4nb3"
       #      "XF86_INPUT_VMMOUSE=xf86-input-vmmouse",
       #      "XF86_VIDEO_VMWARE=xf86-video-vmware"
     ]
@@ -809,12 +818,12 @@ build {
   provisioner "shell" {
     environment_vars = [
       "DMENU=dmenu-5.4",
-      "DWM=dwm-6.6",
+      "DWM=dwm-6.8",
       "ST_TERM=st-term-0.9.3",
       "VAGRANT_GROUP=${var.vagrant_group}",
       "VAGRANT_USER=${var.vagrant_username}",
-      "X11VNC=x11vnc-0.9.17nb1",
-      "XRANDR=xrandr-1.5.3"
+      "X11VNC=x11vnc-0.9.17nb4",
+      "XRANDR=xrandr-1.5.4"
     ]
     execute_command = "chmod +x {{ .Path }}; {{ .Vars }} PATH=$PATH:/usr/sbin {{ .Path }}"
     script          = "../provisioners/dwm+st+dmenu_netbsd9.3+.sh"

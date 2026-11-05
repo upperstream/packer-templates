@@ -8,7 +8,7 @@
       `321.9.20261021`.  The `box_version` value is now led by `3`,
       which is the major version number of Alpine Linux releases.
     * Add support for [UTM][] builder.
-  * [NetBSD 9.5](netbsd/netbsd-9/README.md):
+  * [NetBSD 9](netbsd/netbsd-9/README.md):
     * Upgrade all four variants and amd64, i386 and aarch64 installation
       media to NetBSD 9.5 (#327), with box version `9.5.20260831`.
       Rename `box_ver` to `box_version` and standardise VM, output and
@@ -28,8 +28,25 @@
     * Changed VM naming convention to `NetBSD-9`-{variant}-{box_version}-{architecture}.
     * Enable nested virtualisation for VMware and ESXi through the
       VMware plugin's `vhv_enabled` setting rather than `vmx_data`.
+  * [NetBSD 11](netbsd/netbsd-11/README.md):
+    * Upgrade templates to NetBSD 11.0 final release, with box version
+      `11.0.20260730` and updated installation media references for
+      amd64, i386, and aarch64.  Use the available pkgsrc `11.0_2026Q2`
+      repository and matching package versions.
+    * Raise minimum Packer plugin versions for Hyper-V, Parallels,
+      QEMU, Vagrant, and VirtualBox.
+    * Update documented prerequisites to Packer 1.16+, Vagrant 2.4+,
+      VirtualBox 7.2+, UTM 4.7.5, and Hyper-V on Windows 11+.
+      Mark VMware and ESXi builds as no longer tested.
+    * Add `extraction_wait` to all four variants to allow extra time for
+      distribution-set extraction on slower machines.
 * Fixed
-  * NetBSD 9.5: Correct the i386 and aarch64 variable file extensions to
+  * NetBSD 11:
+    * Constrain the VMware plugin to versions below 2.0.0 to retain the
+      ESXi builder support required by the templates.
+    * Add a wait after entering the aarch64 random seed in the installer
+      and correct the documented legacy ESXi build command.
+  * NetBSD 9: Correct the i386 and aarch64 variable file extensions to
     `.pkrvars.hcl`.
 
 ## [20261027][]
@@ -97,7 +114,7 @@
     Alpine Linux 3.22.3.
   * [Debian 13](debian/debian-13/README.md): Upgrade templates to Debian
     13.4.
-  * [NetBSD 11.0](netbsd/netbsd-11/README.md):
+  * NetBSD 11:
     * Upgrade templates to NetBSD 11.0_RC4.
     * Rename `box_ver` variable to `box_version` for consistency with
       other OS templates.

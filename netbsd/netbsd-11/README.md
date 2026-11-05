@@ -1,17 +1,35 @@
-# Packer templates for NetBSD 11.0 RC4
+# Packer templates for NetBSD 11.0
 
-Templates to create Vagrant boxes for NetBSD 11.0 RC4 (amd64, i386, and aarch64).
+Templates to create Vagrant boxes for NetBSD 11.0 (amd64, i386, and aarch64).
 
 ## Prerequisites
 
-* [Packer][] v1.10+
-* [Vagrant][] v2.3+
-* [VirtualBox][] version 7.0+
+* [Packer][] v1.16+
+* [Vagrant][] v2.4+
+* [VirtualBox][] version 7.2+
 * [VMware][] Workstation version 17.0+ / VMware Fusion v13.0+
 * [ESXi][] (vSphere Hypervisor) version 7.0+
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
-* [UTM][] v4.7+
-* [Hyper-V][] on Windows 10
+* [UTM][] v4.7.5
+* [Hyper-V][] on Windows 11+
+
+Initialize the required Packer plugins before building a template:
+
+    packer init netbsd-11-minimal.pkr.hcl
+
+Run `packer init` with the template for the variant you intend to build.
+The templates require these minimum Packer plugin versions:
+
+* Hyper-V: 1.1.5
+* Parallels: 1.2.8
+* QEMU: 1.1.7
+* Vagrant: 1.1.7
+* VirtualBox: 1.1.5
+* VMware: 1.0.11
+* UTM: 4.0.0
+
+The VMware plugin is constrained to versions below 2.0.0 because these
+templates retain the ESXi builder, which was removed in version 2.0.0.
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
   "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
@@ -42,34 +60,38 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso.default netbsd-11-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-11_RC-minimal-v4.20260512-amd64-virtualbox.box`
+You will find a vagrant box file named `NetBSD-11.0-minimal-v11.0.20260730-amd64-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-11_RC-minimal-v4.20260512`
+Then you can add the box named `NetBSD-11.0-minimal-v11.0.20260730`
 to your box list by the following command:
 
-    vagrant box add NetBSD-11_RC-minimal-v4.20260512-amd64-virtualbox.box \
-        --name NetBSD-11_RC-minimal-v4.20260512 --provider virtualbox
+    vagrant box add NetBSD-11.0-minimal-v11.0.20260730-amd64-virtualbox.box \
+        --name NetBSD-11.0-minimal-v11.0.20260730 --provider virtualbox
 
 ### VMware
+
+**VMware build is no longer tested!!!**
 
 From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso.default netbsd-11-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-11_RC-minimal-v4.20260512-amd64-vmware.box`
+You will find a vagrant box file named `NetBSD-11.0-minimal-v11.0.20260730-amd64-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-11_RC-minimal-v4.20260512`
+Then you can add the box named `NetBSD-11.0-minimal-v11.0.20260730`
 to your box list by the following command:
 
-    vagrant box add NetBSD-11_RC-minimal-v4.20260512-amd64-vmware.box \
-        --name NetBSD-11_RC-minimal-v4.20260512 --provider vmware_desktop
+    vagrant box add NetBSD-11.0-minimal-v11.0.20260730-amd64-vmware.box \
+        --name NetBSD-11.0-minimal-v11.0.20260730 --provider vmware_desktop
 
-VMware build is tested with amd64 and i386 guests on amd64 host, and
-evbarm aarch64 guest on Apple Silicon Mac host.
+VMware builds were previously tested with amd64 and i386 guests on an
+amd64 host, and evbarm aarch64 guests on an Apple Silicon Mac host.
 
 ### ESXi
+
+**ESXi build is no longer tested!!!**
 
 In order to build a VM image on ESXi, you need to provide the following
 environment variables:
@@ -92,7 +114,8 @@ When you create a box on ESXi host version prior to 6.7, you need to
 enable VNC on the host and need to disable Packer's VNC over WebSocket
 feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
-    packer build -only=esxi-iso.default -var esxi_vnc_over_websocket=false netbsd-11-minimal.pkr.hcl
+    packer build -only=vmware-iso.esxi \
+        -var esxi_vnc_over_websocket=false netbsd-11-minimal.pkr.hcl
 
 ### QEMU/libvirt
 
@@ -100,14 +123,14 @@ From the terminal, invoke the following command for Libvirt provider:
 
     packer build -only=qemu.default netbsd-11-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-11_RC-minimal-v4.20260512-amd64-libvirt.box`
+You will find a vagrant box file named `NetBSD-11.0-minimal-v11.0.20260730-amd64-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-11_RC-minimal-v4.20260512`
+Then you can add the box named `NetBSD-11.0-minimal-v11.0.20260730`
 to your box list by the following command:
 
-    vagrant box add NetBSD-11_RC-minimal-v4.20260512-amd64-libvirt.box \
-        --name NetBSD-11_RC-minimal-v4.20260512 --provider libvirt
+    vagrant box add NetBSD-11.0-minimal-v11.0.20260730-amd64-libvirt.box \
+        --name NetBSD-11.0-minimal-v11.0.20260730 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -127,14 +150,14 @@ Because Packer Hyper-V builder cannot detect IP address of a NetBSD VM,
 you must provide static network settings so that the VM is configured to
 have a static IP address.
 
-You will find a vagrant box file named `NetBSD-11_RC-minimal-v4.20260512-amd64-hyperv.box`
+You will find a vagrant box file named `NetBSD-11.0-minimal-v11.0.20260730-amd64-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-11_RC-minimal-v4.20260512`
+Then you can add the box named `NetBSD-11.0-minimal-v11.0.20260730`
 to your box list by the following command:
 
-    vagrant box add NetBSD-11_RC-minimal-v4.20260512-amd64-hyperv.box \
-        --name NetBSD-11_RC-minimal-v4.20260512 --provider hyperv
+    vagrant box add NetBSD-11.0-minimal-v11.0.20260730-amd64-hyperv.box \
+        --name NetBSD-11.0-minimal-v11.0.20260730 --provider hyperv
 
 ### UTM
 
@@ -152,10 +175,10 @@ You can also use the same command with `netbsd-11-xorg.pkr.hcl`,
 Set `utm_keep_registered` to `true` if you would like to keep the VM
 registered after build.
 
-Then add the box named `NetBSD-11_RC-minimal-v4.20260512`:
+Then add the box named `NetBSD-11.0-minimal-v11.0.20260730`:
 
-    vagrant box add NetBSD-11_RC-minimal-v4.20260512-aarch64-utm.box \
-        --name NetBSD-11_RC-minimal-v4.20260512 --provider utm
+    vagrant box add NetBSD-11.0-minimal-v11.0.20260730-aarch64-utm.box \
+        --name NetBSD-11.0-minimal-v11.0.20260730 --provider utm
 
 Note: UTM builds are intended for aarch64 images on Apple Silicon hosts.
 
@@ -195,11 +218,11 @@ use `doas`.
 Each template supports the following builders: VirtualBox, VMware, ESXi,
 Hyper-V, QEMU/libvirt, and UTM.
 
-* `netbsd-11-minimal.pkr.hcl` - NetBSD 11.0 RC4
-* `netbsd-11-xorg.pkr.hcl` - NetBSD 11.0 RC4 + [X.Org][]
-* `netbsd-11-dwm.pkr.hcl` - NetBSD 11.0 RC4 + X.Org + [dwm][] + [st][] +
+* `netbsd-11-minimal.pkr.hcl` - NetBSD 11.0
+* `netbsd-11-xorg.pkr.hcl` - NetBSD 11.0 + [X.Org][]
+* `netbsd-11-dwm.pkr.hcl` - NetBSD 11.0 + X.Org + [dwm][] + [st][] +
   [dmenu][], with [XDM] enabled
-* `netbsd-11-xfce.pkr.hcl` - NetBSD 11.0 RC4 + [Xfce][], with XDM
+* `netbsd-11-xfce.pkr.hcl` - NetBSD 11.0 + [Xfce][], with XDM
   enabled
 
 While `netbsd-11-*.pkr.hcl` templates generate amd64 boxes by
@@ -229,7 +252,7 @@ or `-var-file` command line options to `packer`:
 * `arch` - Target architecture.  Default value is `amd64`.  Valid values
   are `amd64`, `i386`, and `aarch64`.
 * `boot_wait` - Override `boot_wait` default setting, which is `10s`.
-* `box_version` - Vagrant box version.  Default value is `4.20260512`.
+* `box_version` - Vagrant box version.  Default value is `11.0.20260730`.
 * `disk_size` - Disk size of the created VM.  Default value is `40960`
   which means 40GB.
 * `dist_server` - Distribution server for ISO downloads.  Default value
@@ -244,6 +267,15 @@ or `-var-file` command line options to `packer`:
 * `esxi_vnc_over_websocket` - Controls whether or not to use VNC over
   WebSocket feature for ESXi.  Defaults to `true`.  Set to `false` if
   your ESXi host version is prior to 6.7 which supports VNC server.
+* `extraction_wait` - Extra Packer boot-command wait sequence after
+  distribution-set extraction starts, in addition to the template's
+  existing wait.  Defaults to an empty string.  For slower machines,
+  use a value such as `<wait10><wait10><wait10>` to add 30 seconds:
+
+      packer build -only=virtualbox-iso.default \
+          -var 'extraction_wait=<wait10><wait10><wait10>' \
+          netbsd-11-minimal.pkr.hcl
+
 * `hostname` - Host name of the created VM.  Default value is `vagrant`.
 * `headless` - Launch the virtual machine in headless mode if set to
   `true`.  Defaults to `false`.
@@ -260,12 +292,12 @@ or `-var-file` command line options to `packer`:
 * `hyperv_switch_name` - Network switch name on Hyper-V builder.
   Default value is `Default Switch`.
 * `iso_checksum` - ISO checksum value or URL.  Default value is
-  `file:https://cdn.netbsd.org/pub/NetBSD/images/11.0_RC4/SHA512`.
+  `file:https://cdn.netbsd.org/pub/NetBSD/images/11.0/SHA512`.
 * `iso_file_name` - ISO filename.  Default value depends on architecture:
-  `NetBSD-11.0_RC4-amd64.iso`, `NetBSD-11.0_RC4-i386.iso`, or
-  `NetBSD-11.0_RC4-evbarm-aarch64.iso`.
+  `NetBSD-11.0-amd64.iso`, `NetBSD-11.0-i386.iso`, or
+  `NetBSD-11.0-evbarm-aarch64.iso`.
 * `iso_path` - ISO path on the distribution server.  Default value is
-  `NetBSD/images/11.0_RC4`.
+  `NetBSD/images/11.0`.
 * `iso_url` - Full path to the install media.  This URL will be the
    first preference if set.
 * `mem_size` - RAM size of the created VM.  Default value is `512`
@@ -275,7 +307,9 @@ or `-var-file` command line options to `packer`:
 * `package_arch` - Architecture for binary packages.  Default value is
   `amd64`.
 * `package_branch` - pkgsrc branch name for binary packages to install.
-  Default value is `11.0_2025Q4`.
+  Default value is `11.0_2026Q2`.  This branch provides the pinned
+  packages for all three architectures, including the Xfce metapackage
+  on aarch64.
 * `package_server` - Host name to download packages from.  Default value
   is `http://cdn.netbsd.org`.
 * `parallels_disk_name` - Disk name for Parallels box.  Default value is
@@ -310,8 +344,9 @@ or `-var-file` command line options to `packer`:
   for this user.  Default value is `vagrant`.
 * `variant` - Box variant.  Valid values are `minimal`, `xorg`, `dwm`,
   and `xfce`.  Default depends on the template file used.
-* `vm_name` - VM name.  This also affects box file name and output
-  directory name.
+* `vm_name` - Base VM name.  Default value is `NetBSD-11.0`.  The full
+  name is `{vm_name}-{variant}-v{box_version}-{arch}`.  This also affects
+  box file name and output directory name.
 * `vmware_cdrom_adapter_type` - CD-ROM adapter type for VMware box.
 * `vmware_disk_adapter_type` - Disk adapter type for VMware.  Defaults
   to `scsi`.
