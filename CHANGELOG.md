@@ -8,6 +8,9 @@
       `321.9.20261021`.  The `box_version` value is now led by `3`,
       which is the major version number of Alpine Linux releases.
     * Add support for [UTM][] builder.
+  * [FreeBSD 15.1](freebsd/freebsd-15.1/README.md): Upgrade templates to
+    FreeBSD 15.1-RELEASE, with box version `15.1.20260616` and updated
+    amd64 and aarch64 installation media references.
   * [NetBSD 9](netbsd/netbsd-9/README.md):
     * Upgrade all four variants and amd64, i386 and aarch64 installation
       media to NetBSD 9.5 (#327), with box version `9.5.20260831`.

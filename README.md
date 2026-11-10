@@ -27,8 +27,6 @@
   * [more](devaun/README.md)
 * [freebsd](freebsd/README.md) - FreeBSD templates (amd64, i386, and
   arm64)
-  * freebsd-13.5 - FreeBSD 13.5 templates
-  * freebsd-14.3 - FreeBSD 14.3 templates
   * freebsd-14.4 - FreeBSD 14.4 templates
   * freebsd-15.0 - FreeBSD 15.0 templates
   * freebsd-15.1 - FreeBSD 15.1 templates

@@ -3,31 +3,31 @@ packer {
   required_plugins {
     hyperv = {
       source  = "github.com/hashicorp/hyperv"
-      version = ">= 1.1.3"
+      version = ">= 1.1.5"
     }
     parallels = {
       source  = "github.com/hashicorp/parallels"
-      version = ">= 1.0.0"
+      version = ">= 1.2.8"
     }
     qemu = {
       source  = "github.com/hashicorp/qemu"
-      version = ">= 1.1.0"
+      version = ">= 1.1.7"
+    }
+    vagrant = {
+      source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.1.7"
+    }
+    virtualbox = {
+      source  = "github.com/hashicorp/virtualbox"
+      version = ">= 1.1.5"
+    }
+    vmware = {
+      source  = "github.com/hashicorp/vmware"
+      version = ">= 1.0.11, < 2.0.0"
     }
     utm = {
       source  = "github.com/naveenrajm7/utm"
       version = ">= v4.0.0"
-    }
-    vagrant = {
-      source  = "github.com/hashicorp/vagrant"
-      version = ">= 1.1.4"
-    }
-    virtualbox = {
-      source  = "github.com/hashicorp/virtualbox"
-      version = ">= 1.0.5"
-    }
-    vmware = {
-      source  = "github.com/hashicorp/vmware"
-      version = ">= 1.0.11"
     }
   }
 }
@@ -62,7 +62,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type    = string
-  default = "3.20260606"
+  default = "15.1.20260616"
 }
 
 variable "ca_root_nss_version" {
@@ -152,13 +152,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/15.1/CHECKSUM.SHA256-FreeBSD-15.1-RC3-amd64"
+  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/15.1/CHECKSUM.SHA256-FreeBSD-15.1-RELEASE-amd64"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "FreeBSD-15.1-RC3-amd64-dvd1.iso"
+  default     = "FreeBSD-15.1-RELEASE-amd64-dvd1.iso"
   description = "File name of the install media."
 }
 
@@ -194,7 +194,7 @@ variable "open_vm_tools_version" {
 
 variable "os_version" {
   type        = string
-  default     = "15.1-RC3"
+  default     = "15.1-RELEASE"
   description = "OS version"
 }
 
@@ -325,7 +325,7 @@ variable "virtualbox_partition" {
 
 variable "vm_name" {
   type        = string
-  default     = "FreeBSD-15.1-RC"
+  default     = "FreeBSD-15.1-RELEASE"
   description = "VM name of the creating box."
 }
 
