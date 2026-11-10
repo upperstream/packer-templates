@@ -29,6 +29,16 @@ UNIX-style commands can be properly executed.
   *.pkrvars.hcl files.  These files usually specify filename, URL, and
   checksum for the ISO image to download.
 
+## Agent Skills
+
+Project-local skills are stored in `.agents/skills/`.  Read the relevant
+`SKILL.md` files before performing a task.  For commits, follow the
+[commit attribution skill][] for the attribution trailer format and
+the email-address exception for Antigravity and Hermes Agent.
+
+[commit attribution skill]:
+  .agents/skills/vcs-commit-message-attribution/SKILL.md
+
 ## Documentation
 
 When modifying any implementation, update the `README.md` document,

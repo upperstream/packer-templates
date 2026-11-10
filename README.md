@@ -59,6 +59,17 @@
   * ubuntu-26.04 - Ubuntu 26.04 templates
   * [more](ubuntu/README.md)
 
+## Contributing
+
+Read [AGENTS.md](AGENTS.md) and the relevant project-local skills in
+`.agents/skills/` before making changes.  The
+[commit attribution skill][] defines the attribution trailer for
+agent-assisted commits, including the email-address exception for
+Antigravity and Hermes Agent.
+
+[commit attribution skill]:
+  .agents/skills/vcs-commit-message-attribution/SKILL.md
+
 ## Licensing
 
 All the files in this directory and descendants are provided under the

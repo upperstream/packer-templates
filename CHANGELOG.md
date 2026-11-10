@@ -65,6 +65,9 @@
   * Add `document-standards` agent skill version 1.1.0 to define
     documentation writing standards.
 * Changed
+  * Move `vcs-commit-message-attribution` into `.agents/skills/`
+    and document its use in `README.md` and `AGENTS.md`, including
+    the email-address exception for Antigravity and Hermes Agent.
   * [Alpine](alpine/README.md): Convert the agent instructions for
     handling Alpine templates into an agent skill
     `alpine-update-packages`.
