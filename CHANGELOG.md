@@ -9,6 +9,8 @@
     repository while `release_2` is not published.  Use the selected
     VMware display driver for the configured screen, retaining default
     display and mouse drivers when package overrides are unset or empty.
+  * [Tiny Core Linux](tinycorelinux/README.md): Add templates for [Tiny
+    Core Linux v17.1](tinycorelinux/tinycorelinux-17/README.md) (#325).
 * Changed
   * [Alpine 3.21](alpine/alpine-3.21/README.md):
     * Upgrade templates to Alpine Linux 3.21.9, with box version

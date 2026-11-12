@@ -48,10 +48,9 @@
   * leap-42.3 - openSUSE Leap 42.3 templates
 * [tinycorelinux](tinycorelinux/README.md) - Tiny Core Linux
   templates (x86_64 and x86)
-  * tinycorelinux-7 - Tiny Core Linux v7.2 templates
-  * tinycorelinux-8 - Tiny Core Linux v8.2.1 templates
-  * tinycorelinux-9 - Tiny Core Linux v9.0 templates
   * tinycorelinux-16 - Tiny Core Linux v16.2 templates
+  * tinycorelinux-17 - Tiny Core Linux v17.1 templates
+  * [more](tinycorelinux/README.md)
 * [ubuntu](ubuntu/README.md) - Ubuntu templates (amd64 and arm64)
   * ubuntu-22.04 - Ubuntu 22.04.5 templates
   * ubuntu-24.04 - Ubuntu 24.04.4 templates
