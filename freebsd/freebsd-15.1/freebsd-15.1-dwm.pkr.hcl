@@ -347,12 +347,6 @@ variable "vmware_hardware_version" {
   description = "Hardware version for VMware box."
 }
 
-variable "vmware_mouse_driver" {
-  type = string
-  default = "vmmouse"
-  description = "X.Org vmmouse input driver name"
-}
-
 variable "vmware_netif" {
   type        = list(string)
   default     = ["em0"]
@@ -368,12 +362,6 @@ variable "vmware_network_adapter_type" {
 variable "vmware_partition" {
   type    = string
   default = "da0"
-}
-
-variable "vmware_video_driver" {
-  type = string
-  default = "vmware"
-  description = "X.Org vmware video driver name"
 }
 
 variable "xf86_input_vmmouse" {
@@ -838,8 +826,6 @@ build {
     environment_vars = [
       "OPEN_VM_TOOLS=open-vm-tools-${var.open_vm_tools_version}",
       "VMWARE_WITH_XORG=1",
-      "VMWARE_MOUSE_DRIVER=${var.vmware_mouse_driver}",
-      "VMWARE_VIDEO_DRIVER=${var.vmware_video_driver}",
       "XF86_INPUT_VMMOUSE=${var.xf86_input_vmmouse}",
       "XF86_VIDEO_VMWARE=${var.xf86_video_vmware}"
     ]
@@ -848,7 +834,7 @@ build {
       "vmware-iso.default",
       "vmware-iso.esxi"
     ]
-    script = "../provisioners/vmware-guest_freebsd15.1.sh"
+    script = "../provisioners/vmware-guest.sh"
   }
 
   provisioner "shell" {

@@ -784,7 +784,7 @@ build {
       "vmware-iso.default",
       "vmware-iso.esxi"
     ]
-    script = "../provisioners/vmware-guest_freebsd15.1.sh"
+    script = "../provisioners/vmware-guest.sh"
   }
 
   provisioner "shell" {

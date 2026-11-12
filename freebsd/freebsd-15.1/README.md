@@ -46,6 +46,13 @@ file system.  (amd64 and arm64)
 
 Note that `sudo` is not installed while `doas` is.
 
+All variants use the shared `../provisioners/vmware-guest.sh` script.
+For graphical VMware guests, it derives X.Org driver names from the
+`xf86_video_vmware` and `xf86_input_vmmouse` package selections.  The
+defaults select `vmware` and `vmmouse`; the aarch64 variable file selects
+`scfb` and `libinput`.  The separate `vmware_video_driver` and
+`vmware_mouse_driver` settings are no longer used.
+
 ## How to create a box
 
 ### VirtualBox

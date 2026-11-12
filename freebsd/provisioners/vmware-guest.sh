@@ -2,6 +2,9 @@
 
 if [ "$VMWARE_WITH_XORG" = "1" ]; then
 
+	: "${XF86_VIDEO_VMWARE:=xf86-video-vmware}"
+	: "${XF86_INPUT_VMMOUSE:=xf86-input-vmmouse}"
+
 	pkg install -y "${OPEN_VM_TOOLS:-"open-vm-tools"}" "${XF86_VIDEO_VMWARE:-"xf86-video-vmware"}" "${XF86_INPUT_VMMOUSE:-"xf86-input-vmmouse"}" || true
 
 	cat >> /etc/rc.conf <<-EOF
@@ -9,6 +12,11 @@ if [ "$VMWARE_WITH_XORG" = "1" ]; then
 		dbus_enable="YES"
 		moused_enable="YES"
 	EOF
+
+	VIDEO_DRIVER_TEMP=${XF86_VIDEO_VMWARE#xf86-video-}
+	VIDEO_DRIVER=${VIDEO_DRIVER_TEMP%-[0-9]*}
+	MOUSE_DRIVER_TEMP=${XF86_INPUT_VMMOUSE#xf86-input-}
+	MOUSE_DRIVER=${MOUSE_DRIVER_TEMP%-[0-9]*}
 
 	cat >> /etc/X11/xorg.conf <<-EOF
 	Section "ServerLayout"
@@ -20,7 +28,7 @@ if [ "$VMWARE_WITH_XORG" = "1" ]; then
 
 	Section "Device"
 		Identifier "Card0"
-		Driver "vmware"
+		Driver "$VIDEO_DRIVER"
 	EndSection
 
 	Section "InputDevice"
@@ -30,14 +38,14 @@ if [ "$VMWARE_WITH_XORG" = "1" ]; then
 
 	Section "InputDevice"
 		Identifier "Mouse0"
-		Driver "vmmouse"
+		Driver "$MOUSE_DRIVER"
 	EndSection
 	EOF
 
 	cat > /usr/local/etc/X11/xorg.conf.d/mouse.conf <<-EOF
 	Section "InputClass"
 		Identifier "Mouse Defaults"
-		Driver "vmmouse"
+		Driver "$MOUSE_DRIVER"
 		MatchIsPointer "on"
 	EndSection
 	EOF
