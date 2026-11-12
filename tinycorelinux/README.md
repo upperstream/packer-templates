@@ -10,6 +10,8 @@
   * Tiny Core Linux v9.0 (x86_64 and x86)
 * [tinycorelinux-16](tinycorelinux-16/README.md)
   * Tiny Core Linux v16.2 (x86_64 and x86)
+* [tinycorelinux-17](tinycorelinux-17/README.md)
+  * Tiny Core Linux v17.1 (x86_64 and x86)
 
 - - -
 
