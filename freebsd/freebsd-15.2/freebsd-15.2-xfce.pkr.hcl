@@ -64,7 +64,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "1.20261106"
+  default     = "2.20261113"
   description = "Version of the Vagrant box."
 }
 
@@ -155,13 +155,13 @@ variable "hyperv_switch_name" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/15.2/CHECKSUM.SHA256-FreeBSD-15.2-BETA1-amd64"
+  default     = "file:https://download.freebsd.org/releases/ISO-IMAGES/15.2/CHECKSUM.SHA256-FreeBSD-15.2-BETA2-amd64"
   description = "SHA256 checksum of the install media."
 }
 
 variable "iso_name" {
   type        = string
-  default     = "FreeBSD-15.2-BETA1-amd64-dvd1.iso"
+  default     = "FreeBSD-15.2-BETA2-amd64-dvd1.iso"
   description = "File name of the install media."
 }
 
@@ -191,7 +191,7 @@ variable "open_vm_tools_version" {
 
 variable "os_version" {
   type        = string
-  default     = "15.2-BETA1"
+  default     = "15.2-BETA2"
   description = "OS version"
 }
 

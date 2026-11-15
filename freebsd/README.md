@@ -5,10 +5,10 @@
 The following templates feature ZFS root file system and support amd64
 and aarch64 architectures.  These pre-release images are for testing:
 
-* [freebsd-15.2](freebsd-15.2/README.md) - templates for FreeBSD 15.2-BETA1
-  * FreeBSD 15.2-BETA1
-  * FreeBSD 15.2-BETA1 + X.Org + dwm + dmenu + st
-  * FreeBSD 15.2-BETA1 + Xfce
+* [freebsd-15.2](freebsd-15.2/README.md) - templates for FreeBSD 15.2-BETA2
+  * FreeBSD 15.2-BETA2
+  * FreeBSD 15.2-BETA2 + X.Org + dwm + dmenu + st
+  * FreeBSD 15.2-BETA2 + Xfce
 
 ## Current FreeBSD releases
 

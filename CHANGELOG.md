@@ -3,8 +3,8 @@
 ## [Unreleased][]
 
 * Added
-  * [FreeBSD](freebsd/README.md): Add templates for FreeBSD 15.2-BETA1
-    (#322), with box version `1.20261106`, amd64 and aarch64 media,
+  * [FreeBSD](freebsd/README.md): Add templates for FreeBSD 15.2-BETA2
+    (#322), with box version `2.20261113`, amd64 and aarch64 media,
     minimal, dwm and Xfce variants.  Use the available quarterly package
     repository while `release_2` is not published.  Use the selected
     VMware display driver for the configured screen, retaining default

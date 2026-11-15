@@ -1,11 +1,11 @@
-# Packer templates for FreeBSD 15.2-BETA1
+# Packer templates for FreeBSD 15.2-BETA2
 
-Templates to create Vagrant boxes for FreeBSD 15.2-BETA1 on ZFS root
+Templates to create Vagrant boxes for FreeBSD 15.2-BETA2 on ZFS root
 file system.  (amd64 and arm64)
 
 These are pre-release templates for testing, not production use.  The
-default box version is `1.20261106`, based on the BETA1 announcement on
-6 November 2026.  VM and box names use `FreeBSD-15.2-BETA` so the base
+default box version is `2.20261113`, based on the BETA2 build date of
+13 November 2026.  VM and box names use `FreeBSD-15.2-BETA` so the base
 name remains stable across beta revisions.
 
 The installer uses the `quarterly` ports and `kmods_quarterly` kernel
@@ -69,16 +69,16 @@ From the terminal, invoke the following command for VirtualBox provider:
 	packer build -only=virtualbox-iso.default freebsd-15.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-amd64-virtualbox.box` in
+`FreeBSD-15.2-BETA-minimal-v2.20261113-amd64-virtualbox.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-amd64` to your box list by
+`FreeBSD-15.2-BETA-minimal-v2.20261113-amd64` to your box list by
 the following command:
 
 	vagrant box add \
-		FreeBSD-15.2-BETA-minimal-v1.20261106-amd64-virtualbox.box \
-		--name FreeBSD-15.2-BETA-minimal-v1.20261106-amd64 \
+		FreeBSD-15.2-BETA-minimal-v2.20261113-amd64-virtualbox.box \
+		--name FreeBSD-15.2-BETA-minimal-v2.20261113-amd64 \
 		--provider virtualbox
 
 VirtualBox build intends to create amd64 box.
@@ -92,15 +92,15 @@ From the terminal, invoke the following command for VMware provider:
 	packer build -only=vmware-iso.default freebsd-15.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-amd64-vmware.box` in the
+`FreeBSD-15.2-BETA-minimal-v2.20261113-amd64-vmware.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-amd64` to your box list by
+`FreeBSD-15.2-BETA-minimal-v2.20261113-amd64` to your box list by
 the following command:
 
-	vagrant box add FreeBSD-15.2-BETA-minimal-v1.20261106-amd64-vmware.box \
-		--name FreeBSD-15.2-BETA-minimal-v1.20261106-amd64 \
+	vagrant box add FreeBSD-15.2-BETA-minimal-v2.20261113-amd64-vmware.box \
+		--name FreeBSD-15.2-BETA-minimal-v2.20261113-amd64 \
 		--provider vmware_desktop
 
 VMware build intends to create amd64 and aarch64 boxes.
@@ -140,15 +140,15 @@ From the terminal, invoke the following command for Libvirt provider:
 	packer build -only=qemu.default freebsd-15.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-amd64-libvirt.box` in the
+`FreeBSD-15.2-BETA-minimal-v2.20261113-amd64-libvirt.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-amd64` to your box list by
+`FreeBSD-15.2-BETA-minimal-v2.20261113-amd64` to your box list by
 the following command:
 
-	vagrant box add FreeBSD-15.2-BETA-minimal-v1.20261106-amd64-libvirt.box \
-		--name FreeBSD-15.2-BETA-minimal-v1.20261106-amd64 \
+	vagrant box add FreeBSD-15.2-BETA-minimal-v2.20261113-amd64-libvirt.box \
+		--name FreeBSD-15.2-BETA-minimal-v2.20261113-amd64 \
 		--provider libvirt
 
 In the `output` directory you will also find a VM image that can be
@@ -163,15 +163,15 @@ From the terminal, invoke the following command for Hyper-V provider:
 	packer build -only=hyperv-iso.default freebsd-15.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-amd64-hyperv.box` in
+`FreeBSD-15.2-BETA-minimal-v2.20261113-amd64-hyperv.box` in
 the same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-amd64` to your box list by
+`FreeBSD-15.2-BETA-minimal-v2.20261113-amd64` to your box list by
 the following command:
 
-	vagrant box add FreeBSD-15.2-BETA-minimal-v1.20261106-amd64-hyperv.box \
-		--name FreeBSD-15.2-BETA-minimal-v1.20261106-amd64 \
+	vagrant box add FreeBSD-15.2-BETA-minimal-v2.20261113-amd64-hyperv.box \
+		--name FreeBSD-15.2-BETA-minimal-v2.20261113-amd64 \
 		--provider hyperv
 
 Hyper-V build intends to create amd64 box.
@@ -185,16 +185,16 @@ From the terminal, invoke the following command for Parallels provider:
 		freebsd-15.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-aarch64-parallels.box` in the
+`FreeBSD-15.2-BETA-minimal-v2.20261113-aarch64-parallels.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-aarch64` to your box list
+`FreeBSD-15.2-BETA-minimal-v2.20261113-aarch64` to your box list
 by the following command:
 
 	vagrant box add \
-		FreeBSD-15.2-BETA-minimal-v1.20261106-aarch64-parallels.box \
-		--name FreeBSD-15.2-BETA-minimal-v1.20261106-aarch64 \
+		FreeBSD-15.2-BETA-minimal-v2.20261113-aarch64-parallels.box \
+		--name FreeBSD-15.2-BETA-minimal-v2.20261113-aarch64 \
 		--provider parallels
 
 Parallels build intends to create aarch64 box on Apple Silicon Mac
@@ -209,15 +209,15 @@ From the terminal, invoke the following command for UTM provider:
 		freebsd-15.2-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-aarch64-utm.box` in the
+`FreeBSD-15.2-BETA-minimal-v2.20261113-aarch64-utm.box` in the
 same directory after the command has succeeded.
 
 Then you can add the box named
-`FreeBSD-15.2-BETA-minimal-v1.20261106-aarch64` to your box list
+`FreeBSD-15.2-BETA-minimal-v2.20261113-aarch64` to your box list
 by the following command:
 
-	vagrant box add FreeBSD-15.2-BETA-minimal-v1.20261106-aarch64-utm.box \
-		--name FreeBSD-15.2-BETA-minimal-v1.20261106-aarch64 \
+	vagrant box add FreeBSD-15.2-BETA-minimal-v2.20261113-aarch64-utm.box \
+		--name FreeBSD-15.2-BETA-minimal-v2.20261113-aarch64 \
 		--provider utm
 
 UTM build intends to create aarch64 box on Apple Silicon Mac host.
@@ -260,10 +260,10 @@ use `doas`.
 
 ## Variants
 
-* `freebsd-15.2-minimal.pkr.hcl` - FreeBSD 15.2-BETA1
-* `freebsd-15.2-dwm.pkr.hcl` - FreeBSD 15.2-BETA1 + [X.Org][] +
+* `freebsd-15.2-minimal.pkr.hcl` - FreeBSD 15.2-BETA2
+* `freebsd-15.2-dwm.pkr.hcl` - FreeBSD 15.2-BETA2 + [X.Org][] +
   [dwm][] + [dmenu][] + [st][]
-* `freebsd-15.2-xfce.pkr.hcl` - FreeBSD 15.2-BETA1 + [Xfce][] +
+* `freebsd-15.2-xfce.pkr.hcl` - FreeBSD 15.2-BETA2 + [Xfce][] +
   [SLiM][]
 
 While `freebsd-15.2-*.pkr.hcl` templates generate amd64 boxes by
@@ -288,7 +288,7 @@ The following parameters can be set at build time by supplying `-var`
 or `-var-file` command line options to `packer`:
 
 * `boot_wait` - Override `boot_wait` default setting, which is `10s`.
-* `box_version` - Vagrant box version.  Defaults to `1.20261106`.
+* `box_version` - Vagrant box version.  Defaults to `2.20261113`.
 * `disk_size` - Disk size of the creating VM.  Defaults to `51200`
   which means 50GB.
 * `esxi_hardware_version` - Virtual hardware version of ESXi box.
