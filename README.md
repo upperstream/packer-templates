@@ -28,6 +28,7 @@
 * [freebsd](freebsd/README.md) - FreeBSD templates (amd64, i386, and
   arm64)
   * freebsd-14.4 - FreeBSD 14.4 templates
+  * freebsd-14.5 - FreeBSD 14.5 templates
   * freebsd-15.0 - FreeBSD 15.0 templates
   * freebsd-15.1 - FreeBSD 15.1 templates
   * freebsd-15.2 - FreeBSD 15.2 templates

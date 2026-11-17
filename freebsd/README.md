@@ -23,6 +23,11 @@ aarch64 architectures unless otherwise noted.
   * FreeBSD 15.0-RELEASE
   * FreeBSD 15.0-RELEASE + X.Org + dwm + dmenu + st
   * FreeBSD 15.0-RELEASE + Xfce
+* [freebsd-14.5](freebsd-14.5/README.md) - templates for FreeBSD 14.5-RELEASE
+  (amd64, i386 and aarch64)
+  * FreeBSD 14.5-RELEASE
+  * FreeBSD 14.5-RELEASE + X.Org + dwm + dmenu + st
+  * FreeBSD 14.5-RELEASE + Xfce
 * [freebsd-14.4](freebsd-14.4/README.md) - templates for FreeBSD 14.4-RELEASE
   (amd64, i386 and aarch64)
   * FreeBSD 14.4-RELEASE
