@@ -22,10 +22,15 @@
       `321.9.20261021`.  The `box_version` value is now led by `3`,
       which is the major version number of Alpine Linux releases.
     * Add support for [UTM][] builder.
-  * [Debian 13](debian/debian-13/README.md): Upgrade templates to Debian
-    13.7 (#320), with box version `13.7.20260912` and updated amd64
-    and arm64 installation media paths and checksums.  Refresh the
-    `docker.io` and `xrdp` package pins to available trixie versions.
+  * [Debian 13](debian/debian-13/README.md):
+    * Upgrade templates to Debian 13.7 (#320), with box version
+      `13.7.20260912` and updated amd64 and arm64 installation media
+      paths and checksums.  Refresh the `docker.io` and `xrdp` package
+      pins to available trixie versions.
+    * Add [UTM][] support to the minimal, Docker, dwm and desktop
+      variants, with UEFI boot, dual-interface DHCP, QEMU guest-agent
+      provisioning and Vagrant box exports.  Document UTM prerequisites,
+      build commands and configuration.
   * [FreeBSD 15.1](freebsd/freebsd-15.1/README.md):
     * Upgrade templates to FreeBSD 15.1-RELEASE, with box version
       `15.1.20260616` and updated amd64 and aarch64 installation media

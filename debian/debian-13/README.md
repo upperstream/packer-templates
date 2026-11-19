@@ -16,6 +16,8 @@ variants pin `xrdp` to `0.10.1-3.1+deb13u2`.
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
 * [Parallels][] Desktop 18+
+* [UTM][] on macOS, with [packer-plugin-utm][] v4.0.0+ and
+  [vagrant-utm][] for Vagrant usage
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
     "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
@@ -25,6 +27,11 @@ variants pin `xrdp` to `0.10.1-3.1+deb13u2`.
 [Packer]: https://www.packer.io/ "Packer by HashiCorp"
 [Parallels]: https://www.parallels.com/ "Run Windows on Mac - Parallels Desktop"
 [QEMU]: https://www.qemu.org/ "QEMU"
+[UTM]: https://mac.getutm.app/ "UTM"
+[packer-plugin-utm]: https://github.com/naveenrajm7/packer-plugin-utm
+    "Packer plugin for UTM"
+[vagrant-utm]: https://github.com/naveenrajm7/vagrant_utm
+    "Vagrant provider for UTM"
 [Vagrant]: https://developer.hashicorp.com/vagrant
     "Vagrant | HashiCorp Developer"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
@@ -34,6 +41,7 @@ variants pin `xrdp` to `0.10.1-3.1+deb13u2`.
 
 * VirtualBox Guest Additions, [open-vm-tools][], or Parallels Tools
 * sshd
+* QEMU guest agent for UTM builds
 * sudo
 * `vagrant` user and its insecure public key
 
@@ -159,6 +167,49 @@ to your box list by the following command:
 
 Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
+### UTM
+
+Use a UTM version supported by the Packer plugin.  Plugin v4.0.0
+supports UTM 4.5, 4.6 and 4.7.  Put `utmctl` on `PATH` and allow the
+terminal to control UTM through macOS Automation permissions.
+
+All four variants support the UTM QEMU backend with native hardware
+virtualisation and UEFI boot.  Build an arm64 guest on an Apple Silicon
+Mac using an arm64 installer variable file:
+
+    packer init debian-13-minimal.pkr.hcl
+    packer build -only=utm-iso.default \
+      -var-file=vars-debian-13-arm64-netinst.pkrvars.hcl \
+      debian-13-minimal.pkr.hcl
+
+Replace the template filename with the Docker, dwm or desktop variant
+to build that variant.  The UTM boot mode is always UEFI; changing
+`qemu_boot_mode` does not affect UTM builds.
+
+For an Intel Mac, use an amd64 installer variable file instead.  The
+guest architecture must match the host for hardware virtualisation.
+
+Installation uses `eth1`, the emulated VLAN interface used for HTTP
+preseeding and forwarded SSH.  The installed guest also enables DHCP
+on `eth0`, the shared-network interface.  The QEMU guest agent is
+installed and started for Vagrant integration.
+
+The build produces `Debian-13-minimal-v{box_version}-arm64-utm.box`,
+where `{box_version}` is the template's `box_version` value.  The VM
+is exported to
+`output/Debian-13-minimal-v{box_version}-arm64-utm/`.
+The `vm_name` parameter overrides the base name of both outputs.
+
+Install the Vagrant provider and add the generated box:
+
+    vagrant plugin install vagrant_utm
+    vagrant box add ./Debian-13-minimal-v*-arm64-utm.box \
+      --name debian-13-minimal --provider utm
+
+Use the exact box filename if multiple matching boxes exist.  Set
+`utm_keep_registered=true` to retain the VM in UTM after the build;
+by default, it is unregistered after export.
+
 ## Variants
 
 * `debian-13-minimal.pkr.hcl` - Debian 13 minimal installation
@@ -271,6 +322,8 @@ or `-var-file` command line options to `packer`:
   Set `sensitive` attribute to `true` when you change this password.
 * `ssh_timeout` - SSH timeout to connect this box being created.
   Defaults to `60m`.
+* `utm_keep_registered` - Keep the VM registered with UTM after the
+  build.  Defaults to `false`.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to
   `vagrant`.  Set `sensitive` attribute to `true` when you change this
   password.
