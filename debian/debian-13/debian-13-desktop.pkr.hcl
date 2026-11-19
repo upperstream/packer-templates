@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "13.5.20260516"
+  default     = "13.7.20260912"
   description = "Version number of this Vagrant box."
 }
 
@@ -126,7 +126,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:32c6ccde10426cfc278613aea55df6a4e49b2c73883e04fe13bdb61d402a2370"
+  default     = "sha256:34e4af5d0aa0886a4b7338dce796b9bc27ef1e6dcf44cdcc4b22c100eb492388"
   description = "SHA256 checksum of the install media."
 }
 
@@ -138,7 +138,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian13.5/main/installer-amd64/20250803+deb13u5/images/netboot"
+  default     = "Debian13.7/main/installer-amd64/20250803+deb13u7/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -659,7 +659,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "XRDP=xrdp=0.10.1-3.1+deb13u1"
+      "XRDP=xrdp=0.10.1-3.1+deb13u2"
     ]
     script = "../provisioners/xrdp.sh"
   }
