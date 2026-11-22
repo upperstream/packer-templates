@@ -7,8 +7,8 @@
     * Add templates for [FreeBSD 14.5-RELEASE](freebsd/freebsd-14.5/README.md),
       with box version `14.5.20260908` and package pins from the
       `release_5` repository (#311), including UTM support. (#311)
-    * Add templates for [FreeBSD 15.2-BETA2](freebsd/freebsd-15.2/README.md)
-      with box version `2.20261113`, amd64 and aarch64 media, minimal,
+    * Add templates for [FreeBSD 15.2-BETA3](freebsd/freebsd-15.2/README.md)
+      with box version `3.20261120`, amd64 and aarch64 media, minimal,
       dwm and Xfce variants.  Use the available quarterly package
       repository while `release_2` is not published.  Use the selected
       VMware display driver for the configured screen, retaining default
