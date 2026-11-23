@@ -21,9 +21,11 @@
     `Contributing with AI Agents`, broaden its scope to any agent work
     in the repo, and drop the commit attribution skill footnote.
   * [Alpine 3.21](alpine/alpine-3.21/README.md):
-    * Upgrade templates to Alpine Linux 3.21.9, with box version
-      `321.9.20261021`.  The `box_version` value is now led by `3`,
-      which is the major version number of Alpine Linux releases.
+    * Upgrade all four variants to Alpine Linux 3.21.10 (#328), with
+      box version `321.10.20261105` and updated standard and virt ISO
+      references for x86_64, x86, and aarch64.  The `box_version` value
+      is now led by `3`, which is the major version number of Alpine
+      Linux releases.
     * Add support for [UTM][] builder.
   * [Debian 13](debian/debian-13/README.md):
     * Upgrade templates to Debian 13.7 (#320), with box version
