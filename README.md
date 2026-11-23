@@ -58,16 +58,13 @@
   * ubuntu-26.04 - Ubuntu 26.04 templates
   * [more](ubuntu/README.md)
 
-## Contributing
+## Contributing with AI Agents
 
-Read [AGENTS.md](AGENTS.md) and the relevant project-local skills in
-`.agents/skills/` before making changes.  The
-[commit attribution skill][] defines the attribution trailer for
-agent-assisted commits, including the email-address exception for
-Antigravity and Hermes Agent.
+This applies to any work an agent does in this repo -- code,
+documentation, and project scaffolding/maintenance.
 
-[commit attribution skill]:
-  .agents/skills/vcs-commit-message-attribution/SKILL.md
+Have your agent read [AGENTS.md](./AGENTS.md) first; project-specific
+skills live in [`.agents/skills/`](./.agents/skills/).
 
 ## Licensing
 

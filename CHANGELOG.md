@@ -17,6 +17,9 @@
   * [Tiny Core Linux](tinycorelinux/README.md): Add templates for [Tiny
     Core Linux v17.1](tinycorelinux/tinycorelinux-17/README.md) (#325).
 * Changed
+  * [README.md](README.md): Rename the `Contributing` section to
+    `Contributing with AI Agents`, broaden its scope to any agent work
+    in the repo, and drop the commit attribution skill footnote.
   * [Alpine 3.21](alpine/alpine-3.21/README.md):
     * Upgrade templates to Alpine Linux 3.21.9, with box version
       `321.9.20261021`.  The `box_version` value is now led by `3`,
