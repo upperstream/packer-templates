@@ -28,8 +28,8 @@
       Linux releases.
     * Add support for [UTM][] builder.
   * [Alpine 3.22](alpine/alpine-3.22/README.md):
-    * Upgrade templates to Alpine Linux 3.22.7 (#315), with box version
-      `322.7.20261021` and updated standard and virt ISO references for
+    * Upgrade templates to Alpine Linux 3.22.8 (#315), with box version
+      `322.8.20261105` and updated standard and virt ISO references for
       all three architectures.  The `box_version` value is now led by `3`,
       which is the major version number of Alpine Linux releases.
     * Add UTM support for Apple Silicon Macs.
