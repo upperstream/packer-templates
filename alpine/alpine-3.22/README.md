@@ -16,6 +16,18 @@ The default box version is `322.7.20261021`.  The QEMU variants pin
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
 * [Parallels][] version 18.0+
+* [UTM][] on an Apple Silicon Mac, with the `vagrant-utm` Vagrant plugin
+
+Initialise the required Packer plugins for the variant you intend to
+build.  The UTM builder requires the
+[`naveenrajm7/utm`](https://github.com/naveenrajm7/packer-plugin-utm)
+Packer plugin version 4.0.0 or later:
+
+    packer init alpine-3.22-minimal.pkr.hcl
+
+For UTM builds, also install the Vagrant provider plugin:
+
+    vagrant plugin install vagrant-utm
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
   "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
@@ -29,6 +41,7 @@ The default box version is `322.7.20261021`.  The QEMU variants pin
   "Parallels Desktop18 for Mac"
 [QEMU]: https://www.qemu.org/
   "QEMU"
+[UTM]: https://mac.getutm.app/ "UTM | Virtual machines for Mac"
 [Vagrant]: https://www.vagrantup.com/
   "Vagrant"
 [VirtualBox]: https://www.virtualbox.org/ "Oracle VM VirtualBox"
@@ -228,6 +241,36 @@ vagrant box add \
 
 Parallels build intends to create aarch64 box on Apple Silicon Mac host.
 
+### UTM
+
+From this directory on an Apple Silicon Mac, build the aarch64 box:
+
+    packer build -only=utm-iso.default \
+      -var-file=vars-alpine-standard-3.22-aarch64.pkrvars.hcl \
+      alpine-3.22-minimal.pkr.hcl
+
+The resulting box file is
+`Alpine-standard-3.22-minimal-v322.6.20260917-aarch64-utm.box`.
+Add it to Vagrant with:
+
+    vagrant box add \
+      Alpine-standard-3.22-minimal-v322.6.20260917-aarch64-utm.box \
+      --name Alpine-standard-3.22-minimal-v322.6.20260917-aarch64 \
+      --provider utm
+
+UTM uses the QEMU backend with hardware virtualisation and UEFI boot.
+The box architecture is recorded as `arm64` for Vagrant.  Use an
+`aarch64` variable file, not an x86 or x86_64 variable file.
+
+The installer configures both `eth0` and `eth1` with DHCP through
+`answers.txt.pkrtpl.hcl`.  Other builders use the same answer template
+without the additional interface.  UTM builds also install NFS support
+and run disk cleanup before packaging.
+
+Replace `minimal` with `docker`, `dwm`, or `xfce` in the template name
+to build another variant.  The corresponding box filename contains
+that variant name instead of `minimal`.
+
 ## Default settings
 
 These default settings are done by the file `Vagrantfile.Alpine3.15+`
@@ -333,6 +376,9 @@ or `-var-file` command line options to `packer`:
   `true`.  Defaults to `false`.
 * `root_password` - Password for `root` user.  Defaults to `vagrant`.
 * `ssh_timeout` - Timeout for SSH connection.  Defaults to `1800s`.
+* `utm_disk_name` - Disk name for UTM boxes.  Defaults to `vda`.
+* `utm_keep_registered` - Keep the VM registered with UTM after the
+  build when set to `true`.  Defaults to `false`.
 * `vagrant_password` - Password for `vagrant_username`.  Defaults to
   `vagrant`.  This is also used for SSH password during build time.
 * `vagrant_ssh_public_key` - SSH public key for Vagrant user.  Defaults

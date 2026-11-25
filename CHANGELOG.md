@@ -27,11 +27,12 @@
       is now led by `3`, which is the major version number of Alpine
       Linux releases.
     * Add support for [UTM][] builder.
-  * [Alpine 3.22](alpine/alpine-3.22/README.md): Upgrade templates to
-    Alpine Linux 3.22.7 (#315), with box version `322.7.20261021` and
-    updated standard and virt ISO references for all three architectures.
-    The `box_version` value is now led by `3`, which is the major version
-    number of Alpine Linux releases.
+  * [Alpine 3.22](alpine/alpine-3.22/README.md):
+    * Upgrade templates to Alpine Linux 3.22.7 (#315), with box version
+      `322.7.20261021` and updated standard and virt ISO references for
+      all three architectures.  The `box_version` value is now led by `3`,
+      which is the major version number of Alpine Linux releases.
+    * Add UTM support for Apple Silicon Macs.
   * [Debian 13](debian/debian-13/README.md):
     * Upgrade templates to Debian 13.7 (#320), with box version
       `13.7.20260912` and updated amd64 and arm64 installation media
@@ -108,6 +109,10 @@
   * Move `vcs-commit-message-attribution` into `.agents/skills/`
     and document its use in `README.md` and `AGENTS.md`, including
     the email-address exception for Antigravity and Hermes Agent.
+  * [Alpine 3.22](alpine/alpine-3.22/README.md): Render installer
+    answers from a shared template, adding a second DHCP interface
+    for UTM builds.  Increase the pre-password installer wait for
+    existing builders.
   * [Alpine](alpine/README.md): Convert the agent instructions for
     handling Alpine templates into an agent skill
     `alpine-update-packages`.
