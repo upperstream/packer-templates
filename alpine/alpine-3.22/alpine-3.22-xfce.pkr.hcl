@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "22.3.20260127"
+  default     = "322.7.20261021"
   description = "Version number of this Vagrant box."
 }
 
@@ -597,7 +597,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "NFS_UTILS=nfs-utils=2.6.4-r4",
-      "UTIL_LINUX=util-linux=2.41-r9"
+      "UTIL_LINUX=util-linux=2.41.6-r1"
     ]
     only = [
       "qemu.default"

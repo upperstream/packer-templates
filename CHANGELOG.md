@@ -27,6 +27,11 @@
       is now led by `3`, which is the major version number of Alpine
       Linux releases.
     * Add support for [UTM][] builder.
+  * [Alpine 3.22](alpine/alpine-3.22/README.md): Upgrade templates to
+    Alpine Linux 3.22.7 (#315), with box version `322.7.20261021` and
+    updated standard and virt ISO references for all three architectures.
+    The `box_version` value is now led by `3`, which is the major version
+    number of Alpine Linux releases.
   * [Debian 13](debian/debian-13/README.md):
     * Upgrade templates to Debian 13.7 (#320), with box version
       `13.7.20260912` and updated amd64 and arm64 installation media
@@ -148,8 +153,7 @@
     Alpine Linux 3.20.9.
   * [Alpine 3.21](alpine/alpine-3.21/README.md): Upgrade templates to
     Alpine Linux 3.21.6.
-  * [Alpine 3.22](alpine/alpine-3.22/README.md): Upgrade templates to
-    Alpine Linux 3.22.3.
+  * Alpine 3.22: Upgrade templates to Alpine Linux 3.22.3.
   * [Debian 13](debian/debian-13/README.md): Upgrade templates to Debian
     13.4.
   * NetBSD 11:
