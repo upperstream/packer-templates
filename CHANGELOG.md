@@ -69,6 +69,16 @@
     * Changed VM naming convention to `NetBSD-9`-{variant}-{box_version}-{architecture}.
     * Enable nested virtualisation for VMware and ESXi through the
       VMware plugin's `vhv_enabled` setting rather than `vmx_data`.
+  * [NetBSD 10](netbsd/netbsd-10/README.md):
+    * Upgrade all four variants to NetBSD 10.2 (#323), with box version
+      `10.2.20260915` and updated amd64, i386 and aarch64 installation
+      media and checksum manifests.  Refresh package pins against the
+      common `10.0_2026Q3` repository for all builders and architectures,
+      including UTM.  Use the shared Xfce provisioner to start a private
+      D-Bus session without patching packaged files.
+    * Constrain the VMware plugin below 2.0.0 to retain ESXi support
+      when initialising plugins.  Mark VMware and ESXi builds as no
+      longer tested, and correct build selectors and documented defaults.
   * [NetBSD 11](netbsd/netbsd-11/README.md):
     * Upgrade templates to NetBSD 11.0 final release, with box version
       `11.0.20260730` and updated installation media references for
@@ -82,6 +92,9 @@
     * Add `extraction_wait` to all four variants to allow extra time for
       distribution-set extraction on slower machines.
 * Fixed
+  * NetBSD 10: Correct ESXi boot-command references and disk selection
+    in all four variants, and synchronise documented variable names,
+    defaults and Packer prerequisites.
   * NetBSD 11:
     * Constrain the VMware plugin to versions below 2.0.0 to retain the
       ESXi builder support required by the templates.

@@ -10,11 +10,11 @@ otherwise noted.
   * NetBSD 11.0 + X.Org
   * NetBSD 11.0 + X.Org + XDM + dwm + dmenu + st
   * NetBSD 11.0 + Xfce + XDM
-* [netbsd-10](netbsd-10/README.md) - templates for NetBSD 10.1
-  * NetBSD 10.1
-  * NetBSD 10.1 + X.Org
-  * NetBSD 10.1 + X.Org + XDM + dwm + dmenu + st
-  * NetBSD 10.1 + Xfce + XDM
+* [netbsd-10](netbsd-10/README.md) - templates for NetBSD 10.2
+  * NetBSD 10.2
+  * NetBSD 10.2 + X.Org
+  * NetBSD 10.2 + X.Org + XDM + dwm + dmenu + st
+  * NetBSD 10.2 + Xfce + XDM
 
 ## Outdated NetBSD releases
 

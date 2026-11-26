@@ -37,7 +37,7 @@
   aarch64)
   * netbsd-9 - NetBSD 9.5 templates (amd64 and i386;
     Xfce on amd64 only; end of support)
-  * netbsd-10 - NetBSD 10.1 templates
+  * netbsd-10 - NetBSD 10.2 templates
   * netbsd-11 - NetBSD 11.0 templates
   * [more](netbsd/README.md)
 * [openbsd](openbsd/README.md) - OpenBSD templates (amd64, i386, and

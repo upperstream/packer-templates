@@ -1,10 +1,10 @@
-# Packer templates for NetBSD 10.1
+# Packer templates for NetBSD 10.2
 
-Templates to create Vagrant boxes for NetBSD 10.1 (amd64, i386, and aarch64).
+Templates to create Vagrant boxes for NetBSD 10.2 (amd64, i386, and aarch64).
 
 ## Prerequisites
 
-* [Packer][] v1.10+
+* [Packer][] v1.14+
 * [Vagrant][] v2.3+
 * [VirtualBox][] version 7.0+
 * [VMware][] Workstation version 17.0+ / VMware Fusion v13.0+
@@ -40,34 +40,38 @@ From the terminal, invoke the following command for VirtualBox provider:
 
     packer build -only=virtualbox-iso.default netbsd-10-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-10-minimal-v10.1.20241216-amd64-virtualbox.box`
+You will find a vagrant box file named `NetBSD-10-minimal-v10.2.20260915-amd64-virtualbox.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10-minimal-v10.1.20241216`
+Then you can add the box named `NetBSD-10-minimal-v10.2.20260915-amd64`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10-minimal-v10.1.20241216-amd64-virtualbox.box \
-        --name NetBSD-10-minimal-v10.1.20241216-amd64 --provider virtualbox
+    vagrant box add NetBSD-10-minimal-v10.2.20260915-amd64-virtualbox.box \
+        --name NetBSD-10-minimal-v10.2.20260915-amd64 --provider virtualbox
 
 ### VMware
+
+**VMware build is no longer tested.**
 
 From the terminal, invoke the following command for VMware provider:
 
     packer build -only=vmware-iso.default netbsd-10-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-10-minimal-v10.1.20241216-amd64-vmware.box`
+You will find a vagrant box file named `NetBSD-10-minimal-v10.2.20260915-amd64-vmware.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10-minimal-v10.1.20241216`
+Then you can add the box named `NetBSD-10-minimal-v10.2.20260915-amd64`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10-minimal-v10.1.20241216-amd64-vmware.box \
-        --name NetBSD-10-minimal-v10.1.20241216-amd64 --provider vmware_desktop
+    vagrant box add NetBSD-10-minimal-v10.2.20260915-amd64-vmware.box \
+        --name NetBSD-10-minimal-v10.2.20260915-amd64 --provider vmware_desktop
 
-VMware build is tested with amd64 and i386 guests on amd64 host, and
-evbarm aarch64 guest on Apple Silicon Mac host.
+VMware builds were previously tested with amd64 and i386 guests on an
+amd64 host, and evbarm aarch64 guests on an Apple Silicon Mac host.
 
 ### ESXi
+
+**ESXi build is no longer tested.**
 
 In order to build a VM image on ESXi, you need to provide the following
 environment variables:
@@ -90,22 +94,23 @@ When you create a box on ESXi host version prior to 6.7, you need to
 enable VNC on the host and need to disable Packer's VNC over WebSocket
 feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
-    packer build -only=esxi-iso -var esxi_vnc_over_websocket=false netbsd-10-minimal.pkr.hcl
+    packer build -only=vmware-iso.esxi \
+        -var esxi_vnc_over_websocket=false netbsd-10-minimal.pkr.hcl
 
 ### QEMU/libvirt
 
 From the terminal, invoke the following command for Libvirt provider:
 
-    packer build -only=qemu netbsd-10-minimal.pkr.hcl
+    packer build -only=qemu.default netbsd-10-minimal.pkr.hcl
 
-You will find a vagrant box file named `NetBSD-10-minimal-v10.1.20241216-amd64-libvirt.box`
+You will find a vagrant box file named `NetBSD-10-minimal-v10.2.20260915-amd64-libvirt.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10-minimal-v10.1.20241216`
+Then you can add the box named `NetBSD-10-minimal-v10.2.20260915-amd64`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10-minimal-v10.1.20241216-amd64-libvirt.box \
-        --name NetBSD-10-minimal-v10.1.20241216-amd64 --provider libvirt
+    vagrant box add NetBSD-10-minimal-v10.2.20260915-amd64-libvirt.box \
+        --name NetBSD-10-minimal-v10.2.20260915-amd64 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -117,7 +122,7 @@ host.
 
 From the terminal, invoke the following command for Hyper-V provider:
 
-    packer build -only=hyperv-iso -var hyperv_ssh_host=192.168.1.2 \
+    packer build -only=hyperv-iso.default -var hyperv_ssh_host=192.168.1.2 \
         -var hyperv_host_cidr=192.168.1.2/24 \
         -var hyperv_gateway=192.168.1.1 netbsd-10-minimal.pkr.hcl
 
@@ -125,14 +130,14 @@ Because Packer Hyper-V builder cannot detect IP address of a NetBSD VM,
 you must provide static network settings so that the VM is configured to
 have a static IP address.
 
-You will find a vagrant box file named `NetBSD-10-minimal-v10.1.20241216-amd64-hyperv.box`
+You will find a vagrant box file named `NetBSD-10-minimal-v10.2.20260915-amd64-hyperv.box`
 in the same directory after the command has succeeded.
 
-Then you can add the box named `NetBSD-10-minimal-v10.1.20241216`
+Then you can add the box named `NetBSD-10-minimal-v10.2.20260915-amd64`
 to your box list by the following command:
 
-    vagrant box add NetBSD-10-minimal-v10.1.20241216-amd64-hyperv.box \
-        --name NetBSD-10-minimal-v10.1.20241216-amd64 --provider hyperv
+    vagrant box add NetBSD-10-minimal-v10.2.20260915-amd64-hyperv.box \
+        --name NetBSD-10-minimal-v10.2.20260915-amd64 --provider hyperv
 
 ## Default settings
 
@@ -164,11 +169,11 @@ use `doas`.
 
 ## Variants
 
-* `netbsd-10-minimal.pkr.hcl` - NetBSD 10.0
-* `netbsd-10-xorg.pkr.hcl` - NetBSD 10.0 + [X.Org][]
-* `netbsd-10-dwm.pkr.hcl` - NetBSD 10.0 + X.Org + [dwm][] + [st][] +
+* `netbsd-10-minimal.pkr.hcl` - NetBSD 10.2
+* `netbsd-10-xorg.pkr.hcl` - NetBSD 10.2 + [X.Org][]
+* `netbsd-10-dwm.pkr.hcl` - NetBSD 10.2 + X.Org + [dwm][] + [st][] +
   [dmenu][], with [XDM] enabled
-* `netbsd-10-xfce.pkr.hcl` - NetBSD 10.0 + [Xfce][], with XDM
+* `netbsd-10-xfce.pkr.hcl` - NetBSD 10.2 + [Xfce][], with XDM
   enabled
 
 While `netbsd-10-*.pkr.hcl` templates generate amd64 boxes by
@@ -196,8 +201,11 @@ The following parameters can be set at build time by supplying `-var`
 or `-var-file` command line options to `packer`:
 
 * `boot_wait` - Override `boot_wait` default setting, which is `10s`.
+* `box_version` - Vagrant box version.  Defaults to `10.2.20260915`.
 * `disk_size` - Disk size of the created VM.  Default value is `40960`
   which means 40GB.
+* `dist_server` - ISO download server.  Defaults to
+  `https://cdn.netbsd.org` for NetBSD 10.2 installation media.
 * `esxi_disk_name`
 * `esxi_remote_datastore` - ESXi datastore name where a VM image will
   be created.
@@ -207,6 +215,8 @@ or `-var-file` command line options to `packer`:
 * `esxi_vnc_over_websocket` - Controls whether or not to use VNC over
   WebSocket feature for ESXi.  Defaults to `true`.  Set to `false` if
   your ESXi host version is prior to 6.7 which supports VNC server.
+* `extraction_wait` - Extra installer wait for distribution-set extraction
+  on slower hosts.  Defaults to an empty string.
 * `hostname` - Host name of the created VM.  Default value is `vagrant`.
 * `headless` - Launch the virtual machine in headless mode if set to
   `true`.  Defaults to `false`.
@@ -222,13 +232,17 @@ or `-var-file` command line options to `packer`:
   builder.  You must provide an appropriate value.
 * `hyperv_switch_name` - Network switch name on Hyper-V builder.
   Default value is `Default Switch`.
+* `iso_checksum` - ISO checksum or checksum manifest URL.  Defaults to
+  `file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.2/images/SHA512`.
+* `iso_path` - ISO directory below the server's `/pub/` directory.
+  Defaults to `NetBSD/NetBSD-10.2/images`.
 * `mem_size` - RAM size of the created VM.  Default value is `512`
   which means 512MB.
 * `num_cpus` - Number of virtual CPUs.  Default value is 2.
 * `package_branch` - pkgsrc branch name for binary packages to install.
-  Default value is `10.0_2023Q4`.
+  Default value is `10.0_2026Q3`.
 * `package_server` - Host name to download packages from.  Default value
-  is `http://cdn.netbsd.org`.
+  is `https://cdn.netbsd.org`.
 * `partition_name` - Partition name of which NetBSD is install on.
 * `qemu_accelerator` - Accelerator type to run the VM with.  Default
   value is `kvm`.
@@ -238,10 +252,14 @@ or `-var-file` command line options to `packer`:
 * `qemu_disk_name`
 * `qemu_display` - Value for `-display` option for QEMU.  Default value
   is an empty string.
+* `qemu_ipv4_prefer` - Prefer IPv4 and use IPv4-only DHCP in QEMU boxes.
+  Defaults to `YES`.  Set to `NO` to leave the address policy unchanged.
 * `qemu_use_default_display` - Do not pass `-display` option to QEMU if
-  `true`.  Default value is `false`.
+  `true`.  Default value is `true`.
 * `ssh_password` - SSH password for `ssh_user` during build time.
   Default value is `vagrant`.
+* `ssh_timeout` - Timeout for connecting to the guest during the build.
+  Defaults to `60m`.
 * `ssh_username` - User name to login via SSH during build time.
   Default value is `root`.
 * `vagrant_group` - Group name that `vagrant_username` belongs to.
@@ -258,10 +276,10 @@ or `-var-file` command line options to `packer`:
   to `scsi`.
 * `vmware_disk_name`
 * `vmware_hardware_version` - Hardware version for VMware.  Defaults to
-  `9`.
+  `19`.
 * `vmware_network_adapter_type` - Network adapter type for VMware.
   Defaults to `e1000`.
 
 - - -
 
-Copyright &copy; 2024, 2025 Upperstream.
+Copyright &copy; 2024-2026 Upperstream.

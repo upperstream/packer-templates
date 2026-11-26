@@ -1,6 +1,6 @@
 arch = "aarch64"
-iso_file_name = "NetBSD-10.1-evbarm-aarch64.iso"
-iso_checksum = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.1/iso/SHA512"
+iso_file_name = "NetBSD-10.2-evbarm-aarch64.iso"
+iso_checksum = "file:https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.2/images/SHA512"
 package_arch = "aarch64"
 partition_name = "dk1"
 virtualbox_guest_os_type = "NetBSD"
