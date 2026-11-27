@@ -5,7 +5,12 @@ set -x
 # shellcheck source=/dev/null
 . /etc/os-release
 
-if grep -v '^deb http://deb\.debian\.org/debian stable main' /etc/apt/sources.list | tee /tmp/sources.list; then
+repo_suites=stable
+# Only DVD installs reconstruct the release-codename main repository.
+if [ "${INSTALL_FROM_DVD:-false}" = "true" ]; then
+	repo_suites="$repo_suites|$VERSION_CODENAME"
+fi
+if grep -Ev "^deb http://.*\.debian\.(net|org)/debian ($repo_suites) main" /etc/apt/sources.list | tee /tmp/sources.list; then
 	mv /tmp/sources.list /etc/apt/sources.list
 else
 	rm -f /tmp/sources.list
@@ -18,7 +23,8 @@ if [ "${INSTALL_FROM_DVD:-false}" = "true" ]; then
 fi
 
 if [ "${OPTIMISE_REPOS:-0}" -eq 1 ]; then
-	sed 's=http://http\.us\.debian\.org/=http://cdn.debian.net/=' /etc/apt/sources.list > /tmp/sources.list
+	sed -e 's=http://http\.us\.debian\.org/=http://cdn.debian.net/=' \
+		-e 's=http://deb\.debian\.org/=http://cdn.debian.net/=' /etc/apt/sources.list > /tmp/sources.list
 	mv /tmp/sources.list /etc/apt/sources.list
 fi
 

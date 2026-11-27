@@ -107,6 +107,14 @@
     * Add `extraction_wait` to all four variants to allow extra time for
       distribution-set extraction on slower machines.
 * Fixed
+  * [Debian 12](debian/debian-12/README.md): Use `bookworm` rather than
+    `stable` for the Hyper-V installation repository in all four
+    variants.  Update the shared Debian base provisioner to remove
+    temporary `stable` main-repository entries across Debian mirrors,
+    preserving release-codename main repositories for non-DVD installs.
+    Remove codename main entries only for DVD installs, which rebuild
+    them.  Include `deb.debian.org` in repository optimisation through
+    `cdn.debian.net`.
   * NetBSD 10: Correct ESXi boot-command references and disk selection
     in all four variants, and synchronise documented variable names,
     defaults and Packer prerequisites.

@@ -63,6 +63,14 @@ Package pins use Docker `20.10.24+dfsg1-1+deb12u1+b6`, Docker Compose
 the Bookworm security repository during provisioning so that security
 updates, including the pinned xrdp package, are available.
 
+Hyper-V installation uses the `bookworm` repository rather than the
+moving `stable` alias.  The shared Debian base provisioner removes
+temporary `stable` main-repository entries from Debian mirrors, while
+preserving release-codename main repositories for non-DVD installs.
+DVD installs also remove codename main entries before rebuilding them.
+Repository optimisation rewrites HTTP URLs for both `http.us.debian.org`
+and `deb.debian.org` to `cdn.debian.net`.
+
 [open-vm-tools]: https://github.com/vmware/open-vm-tools
     "Official repository of VMware open-vm-tools project"
 

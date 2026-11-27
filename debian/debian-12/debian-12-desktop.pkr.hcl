@@ -391,7 +391,7 @@ source "hyperv-iso" "default" {
         "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
         "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list; \\",
-        "    grep -F '^deb http://deb.debian.org/debian' /target/etc/apt/sources.list > /dev/null || sed -i '/deb cdrom/a deb http://deb.debian.org/debian stable main' /target/etc/apt/sources.list; \\",
+        "    grep -F '^deb http://deb.debian.org/debian' /target/etc/apt/sources.list > /dev/null || sed -i '/deb cdrom/a deb http://deb.debian.org/debian bookworm main' /target/etc/apt/sources.list; \\",
         "    chroot /target apt update; \\",
         "    apt-install hyperv-daemons"
       ],
