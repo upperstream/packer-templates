@@ -33,15 +33,21 @@
       all three architectures.  The `box_version` value is now led by `3`,
       which is the major version number of Alpine Linux releases.
     * Add UTM support for Apple Silicon Macs.
-  * [Debian 12](debian/debian-12/README.md): Upgrade all four variants
-    to Debian 12.15 (#321), with box version `12.15.20260711` and
-    updated amd64, arm64 and i386 installation media and checksums.
-    Refresh Docker, xrdp and VMware tools package pins against the
-    Bookworm repositories, and enable the Bookworm security repository
-    during provisioning.  Raise minimum Packer plugin versions and
-    document the manual VMware plugin constraint needed for ESXi support.
-    Correct documented box filenames, installation-media examples, build
-    parameter defaults and the legacy ESXi command.
+  * [Debian 12](debian/debian-12/README.md):
+    * Add [UTM][] support to the minimal, Docker, dwm and desktop
+      variants for Debian 12.15, with UEFI boot, VirtIO storage, dual-
+      interface DHCP, QEMU guest-agent provisioning and Vagrant box
+      exports.  Document macOS prerequisites, amd64 and arm64 build
+      commands, output names and VM registration.
+    * Upgrade all four variants to Debian 12.15 (#321), with box version
+      `12.15.20260711` and updated amd64, arm64 and i386 installation
+      media and checksums.  Refresh Docker, xrdp and VMware tools
+      package pins against the Bookworm repositories, and enable the
+      Bookworm security repository during provisioning.  Raise minimum
+      Packer plugin versions and document the manual VMware plugin
+      constraint needed for ESXi support.  Correct documented box
+      filenames, installation-media examples, build parameter defaults
+      and the legacy ESXi command.
   * [Debian 13](debian/debian-13/README.md):
     * Upgrade templates to Debian 13.7 (#320), with box version
       `13.7.20260912` and updated amd64 and arm64 installation media

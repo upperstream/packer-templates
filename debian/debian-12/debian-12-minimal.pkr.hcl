@@ -13,6 +13,10 @@ packer {
       source  = "github.com/hashicorp/qemu"
       version = ">= 1.1.3"
     }
+    utm = {
+      source  = "github.com/naveenrajm7/utm"
+      version = ">= 4.0.0"
+    }
     vagrant = {
       source  = "github.com/hashicorp/vagrant"
       version = ">= 1.1.5"
@@ -220,6 +224,12 @@ variable "ssh_user" {
   type        = string
   default     = "root"
   description = "SSH username to connect this box being created."
+}
+
+variable "utm_keep_registered" {
+  type        = bool
+  default     = false
+  description = "Set this to true to keep the VM registered with UTM after build."
 }
 
 variable "vagrant_password" {
@@ -476,6 +486,53 @@ source "qemu" "default" {
   vm_name             = local.vm_name
 }
 
+source "utm-iso" "default" {
+  boot_command = split("\n", format(join("\n", local.boot_command),
+    local.boot_parameter_edit["efi"],
+    format("netcfg/choose_interface=eth1 %s", local.boot_parameter_submit["efi"])
+  ))
+  boot_nopause          = true
+  boot_wait             = var.boot_wait
+  cpus                  = var.num_cpus
+  display_hardware_type = "virtio-gpu-pci"
+  display_nopause       = true
+  disk_size             = var.disk_size
+  export_nopause        = true
+  guest_additions_mode  = "disable"
+  hard_drive_interface  = "virtio"
+  http_content = {
+    "/preseed.cfg" = templatefile("${path.root}/preseed.cfg.pkrtpl.hcl", {
+      late_command = [
+        "d-i preseed/late_command string \\",
+        "    sed -i 's/^#PermitRootLogin /PermitRootLogin /' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^PermitRootLogin .*$/PermitRootLogin yes/' /target/etc/ssh/sshd_config; \\",
+        "    sed -i 's/^\\(deb cdrom:.*\\)$/#\\1/' /target/etc/apt/sources.list; \\",
+        "    printf '%s\\n' '' 'auto eth0' 'iface eth0 inet dhcp' >> /target/etc/network/interfaces"
+      ],
+      passwd = local.passwd,
+      grub-installer = {
+        "bootdev" = "string /dev/vda"
+      }
+    })
+  }
+  hypervisor       = true
+  iso_checksum     = var.iso_checksum
+  iso_urls         = local.iso_urls
+  keep_registered  = var.utm_keep_registered
+  memory           = var.mem_size
+  output_directory = "output/${local.vm_name}-utm"
+  shutdown_command = "sudo /sbin/shutdown -h now"
+  ssh_password     = var.ssh_pass
+  ssh_port         = 22
+  ssh_timeout      = var.ssh_timeout
+  ssh_username     = var.ssh_user
+  uefi_boot        = true
+  vm_arch          = var.cpu == "arm64" ? "aarch64" : "x86_64"
+  vm_backend       = "qemu"
+  vm_icon          = "debian"
+  vm_name          = local.vm_name
+}
+
 source "virtualbox-iso" "default" {
   boot_command = split("\n", format(join("\n", local.boot_command),
     local.boot_parameter_edit[var.virtualbox_boot_mode],
@@ -630,6 +687,7 @@ build {
     "source.hyperv-iso.default",
     "source.parallels-iso.default",
     "source.qemu.default",
+    "source.utm-iso.default",
     "source.virtualbox-iso.default",
     "source.vmware-iso.default",
     "source.vmware-iso.esxi"
@@ -684,6 +742,14 @@ build {
   }
 
   provisioner "shell" {
+    only = ["utm-iso.default"]
+    inline = [
+      "apt-get install -y qemu-guest-agent",
+      "systemctl enable --now qemu-guest-agent"
+    ]
+  }
+
+  provisioner "shell" {
     except = [
       "vmware-iso.esxi"
     ]
@@ -723,6 +789,18 @@ build {
     keep_input_artifact = true
     compression_level   = 9
     only                = ["qemu.default"]
+    output = join("", [
+      coalesce(var.vm_name, "./${local.vm_name}"),
+      "-{{ .Provider }}.box"
+    ])
+  }
+
+  post-processor "utm-vagrant" {
+    architecture      = var.cpu
+    compression_level = 9
+    only = [
+      "utm-iso.default"
+    ]
     output = join("", [
       coalesce(var.vm_name, "./${local.vm_name}"),
       "-{{ .Provider }}.box"
