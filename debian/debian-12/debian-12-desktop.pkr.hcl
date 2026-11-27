@@ -3,27 +3,27 @@ packer {
   required_plugins {
     hyperv = {
       source  = "github.com/hashicorp/hyperv"
-      version = ">= 1.1.3"
+      version = ">= 1.1.4"
     }
     parallels = {
-      version = ">= 1.0.0"
       source  = "github.com/hashicorp/parallels"
+      version = ">= 1.2.8"
     }
     qemu = {
       source  = "github.com/hashicorp/qemu"
-      version = ">= 1.1.0"
+      version = ">= 1.1.3"
     }
     vagrant = {
       source  = "github.com/hashicorp/vagrant"
-      version = ">= 1.1.4"
+      version = ">= 1.1.5"
     }
     virtualbox = {
       source  = "github.com/hashicorp/virtualbox"
-      version = ">= 1.0.5"
+      version = ">= 1.1.2"
     }
     vmware = {
       source  = "github.com/hashicorp/vmware"
-      version = ">= 1.0.11"
+      version = ">= 1.1.0"
     }
   }
 }
@@ -36,7 +36,7 @@ variable "boot_wait" {
 
 variable "box_version" {
   type        = string
-  default     = "12.12.20250906"
+  default     = "12.15.20260711"
   description = "Version number of this Vagrant box."
 }
 
@@ -126,7 +126,7 @@ variable "install_from_dvd" {
 
 variable "iso_checksum" {
   type        = string
-  default     = "sha256:8b4545dccf56ae40c51c7827e9ca4d8d16e9740afcf4a8ff89f8bb369540acc2"
+  default     = "sha256:c9a88f81bfe7c20e62bcb3d1347e723e45ad5e35254af9f77f2686a52aee880d"
   description = "SHA256 checksum of the install media."
 }
 
@@ -138,7 +138,7 @@ variable "iso_name" {
 
 variable "iso_path" {
   type        = string
-  default     = "Debian12.12/main/installer-amd64/20230607+deb12u12/images/netboot"
+  default     = "Debian12.15/main/installer-amd64/20230607+deb12u15/images/netboot"
   description = "Relative path to search the install media."
 }
 
@@ -645,12 +645,13 @@ build {
 
   provisioner "shell" {
     environment_vars = [
+      "ADD_SECURITY_REPO=yes",
       "INSTALL_FROM_DVD=${var.install_from_dvd}",
       "OPTIMISE_REPOS=1",
       "VAGRANT_SSH_PUBLIC_KEY=${var.vagrant_ssh_public_key}",
       "VAGRANT_USERNAME=${var.vagrant_username}",
       "WGET=wget -O -",
-      "XRDP=xrdp=0.9.21.1-1+deb12u1"
+      "XRDP=xrdp=0.9.21.1-1+deb12u3"
     ]
     scripts = [
       "../provisioners/base_debian11+.sh",
@@ -674,7 +675,7 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "OPEN_VM_TOOLS=open-vm-tools-desktop=2:12.2.0-1+deb12u3",
+      "OPEN_VM_TOOLS=open-vm-tools-desktop=2:12.2.0-1+deb12u4",
       "VMWARE_WITH_XORG=1",
       "XSERVER_XORG_INPUT_VMMOUSE=xserver-xorg-input-evdev=1:2.10.6-2+b1",
       "XSERVER_XORG_VIDEO_VMWARE=xserver-xorg-video-vmware=1:13.3.0-3.1+b1"

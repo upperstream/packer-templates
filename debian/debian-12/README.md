@@ -1,6 +1,13 @@
-# Packer templates for Debian 12.12
+# Packer templates for Debian 12.15
 
-Templates to create Vagrant boxes for Debian 12.12 (amd64, arm64, and i386).
+Templates to create Vagrant boxes for Debian 12.15 (amd64, arm64, and i386).
+The default box version is `12.15.20260711`.
+
+Debian 12.15 is the final point release of bookworm.  Regular Debian
+support has ended; ongoing support for some architectures is provided
+by Debian LTS.  See the [release announcement][].
+
+[release announcement]: https://www.debian.org/News/2026/2026071102
 
 ## Prerequisites
 
@@ -12,6 +19,15 @@ Templates to create Vagrant boxes for Debian 12.12 (amd64, arm64, and i386).
 * [QEMU][] version 4.2+ / [libvirt][] 6.0+
 * [Hyper-V][] on Windows 10
 * [Parallels][] Desktop 18+
+
+VMware and ESXi builds require compatible VMware plugins.  ESXi
+support was removed in plugin 2.0.0, but the templates do not impose an
+upper version bound.  For ESXi builds, change the VMware plugin
+constraint to `>= 1.1.0, < 2.0.0` before initialising plugins.
+
+Initialise the required plugins for the chosen variant before building:
+
+    packer init debian-12-minimal.pkr.hcl
 
 [ESXi]: http://www.vmware.com/products/vsphere-hypervisor
     "Free VMware vSphere Hypervisor, Free Virtualization (ESXi)"
@@ -33,6 +49,12 @@ Templates to create Vagrant boxes for Debian 12.12 (amd64, arm64, and i386).
 * sudo
 * `vagrant` user and its insecure public key
 
+Package pins use Docker `20.10.24+dfsg1-1+deb12u1+b6`, Docker Compose
+`1.29.2-3`, xrdp `0.9.21.1-1+deb12u3` and VMware tools
+`2:12.2.0-1+deb12u4` in the relevant variants.  All variants enable
+the Bookworm security repository during provisioning so that security
+updates, including the pinned xrdp package, are available.
+
 [open-vm-tools]: https://github.com/vmware/open-vm-tools
     "Official repository of VMware open-vm-tools project"
 
@@ -45,14 +67,14 @@ From the terminal, invoke the following command for VirtualBox provider:
     packer build -only=virtualbox-iso.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-12-amd64-minimal-v12.12.20250906-virtualbox.box` in the
+`Debian-12-minimal-v12.15.20260711-amd64-virtualbox.box` in the
 same directory after the command has succeeded.
 
-Then you can add the box named `Debian-12-amd64-minimal-v12.12.20250906`
+Then you can add the box named `Debian-12-minimal-v12.15.20260711-amd64`
 to your box list by the following command:
 
-    vagrant box add Debian-12-amd64-minimal-v12.12.20250906-virtualbox.box \
-      --name Debian-12-amd64-minimal-v12.12.20250906 --provider virtualbox
+    vagrant box add Debian-12-minimal-v12.15.20260711-amd64-virtualbox.box \
+      --name Debian-12-minimal-v12.15.20260711-amd64 --provider virtualbox
 
 VirtualBox build intends to create amd64 box and i386 box on amd64 host.
 
@@ -63,14 +85,14 @@ From the terminal, invoke the following command for VMware provider:
     packer build -only=vmware-iso.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-12-amd64-minimal-v12.12.20250906-vmware.box` in the same
+`Debian-12-minimal-v12.15.20260711-amd64-vmware.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-12-amd64-minimal-v12.12.20250906`
+Then you can add the box named `Debian-12-minimal-v12.15.20260711-amd64`
 to your box list by the following command:
 
-    vagrant box add Debian-12-amd64-minimal-v12.12.20250906-vmware.box \
-      --name Debian-12-amd64-minimal-v12.12.20250906 --provider vmware_desktop
+    vagrant box add Debian-12-minimal-v12.15.20260711-amd64-vmware.box \
+      --name Debian-12-minimal-v12.15.20260711-amd64 --provider vmware_desktop
 
 VMware build intends to create amd64 box or i386 box on amd64 host
 using VMware Workstation, or create arm64 box on Apple Silicon Mac
@@ -95,7 +117,7 @@ When you create a box on ESXi host version prior to 6.7, you need to
 enable VNC on the host and need to disable Packer's VNC over WebSocket
 feature by adding `-var esxi_vnc_over_websocket=false` parameter:
 
-    packer build -only=vmware-iso.esxi -var esxi-vnc-over-websocket=false debian-12-minimal.pkr.hcl
+    packer build -only=vmware-iso.esxi -var esxi_vnc_over_websocket=false debian-12-minimal.pkr.hcl
 
 ### QEMU/libvirt
 
@@ -104,14 +126,14 @@ From the terminal, invoke the following command for Libvirt provider:
     packer build -only=qemu.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-12-amd64-minimal-v12.12.20250906-libvirt.box` in the same
+`Debian-12-minimal-v12.15.20260711-amd64-libvirt.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-12-amd64-minimal-v12.12.20250906`
+Then you can add the box named `Debian-12-minimal-v12.15.20260711-amd64`
 to your box list by the following command:
 
-    vagrant box add Debian-12-amd64-minimal-v12.12.20250906-libvirt.box \
-      --name Debian-12-amd64-minimal-v12.12.20250906 --provider libvirt
+    vagrant box add Debian-12-minimal-v12.15.20260711-amd64-libvirt.box \
+      --name Debian-12-minimal-v12.15.20260711-amd64 --provider libvirt
 
 In the `output` directory you will also find a VM image that can be
 directly imported to QEMU.
@@ -126,14 +148,14 @@ From the terminal, invoke the following command for Hyper-V provider:
     packer build -only=hyperv-iso.default debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-12-amd64-minimal-v12.12.20250906-hyperv.box` in the same
+`Debian-12-minimal-v12.15.20260711-amd64-hyperv.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-12-amd64-minimal-v12.12.20250906`
+Then you can add the box named `Debian-12-minimal-v12.15.20260711-amd64`
 to your box list by the following command:
 
-    vagrant box add Debian-12-amd64-minimal-v12.12.20250906-hyperv.box \
-      --name Debian-12-amd64-minimal-v12.12.20250906 --provider hyperv
+    vagrant box add Debian-12-minimal-v12.15.20260711-amd64-hyperv.box \
+      --name Debian-12-minimal-v12.15.20260711-amd64 --provider hyperv
 
 Hyper-V build intends to create amd64 box and i386 box on Windows
 host.
@@ -142,28 +164,28 @@ host.
 
 From the terminal, invoke the following command for Parallels provider:
 
-    packer build -only=parallels-iso.default debian-12-minimal.pkr.hcl
+    packer build -only=parallels-iso.default -var-file=vars-debian-12-arm64-mini.pkrvars.hcl debian-12-minimal.pkr.hcl
 
 You will find a vagrant box file named
-`Debian-12-arm64-minimal-v12.12.20250906-parallels.box` in the same
+`Debian-12-minimal-v12.15.20260711-arm64-parallels.box` in the same
 directory after the command has succeeded.
 
-Then you can add the box named `Debian-12-arm64-minimal-v12.12.20250906`
+Then you can add the box named `Debian-12-minimal-v12.15.20260711-arm64`
 to your box list by the following command:
 
-    vagrant box add Debian-12-arm64-minimal-v12.12.20250906-parallels.box \
-      --name Debian-12-arm64-minimal-v12.12.20250906 --provider parallels
+    vagrant box add Debian-12-minimal-v12.15.20260711-arm64-parallels.box \
+      --name Debian-12-minimal-v12.15.20260711-arm64 --provider parallels
 
 Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 ## Variants
 
-* `debian-12-minimal.pkr.hcl` - Debian 12.12 minimal installation
-* `debian-12-docker.pkr.hcl` - Debian 12.12 with [Docker][] +
+* `debian-12-minimal.pkr.hcl` - Debian 12.15 minimal installation
+* `debian-12-docker.pkr.hcl` - Debian 12.15 with [Docker][] +
   [Docker Compose][]
-* `debian-12-dwm.pkr.hcl` - Debian 12.12 with [X.org][], [suckless][]
+* `debian-12-dwm.pkr.hcl` - Debian 12.15 with [X.org][], [suckless][]
   tools, [ARandR][], and [xrdp][].
-* `debian-12-desktop.pkr.hcl` - Debian 12.12 with [xrdp][] + various
+* `debian-12-desktop.pkr.hcl` - Debian 12.15 with [xrdp][] + various
   desktop environment such as:
   * `xfce` - [Xfce][] (default)
   * `cinnamon` - [Cinnamon][]
@@ -200,27 +222,27 @@ Parallels build intends to create arm64 box on Apple Silicon Mac host.
 
 Optional var files are provided to instruct to use alternative
 installer CD images, i.e., `vars-debian-12-amd64-dvd.pkrvars.hcl` instructs to
-use `debian-12.12.0-amd64-DVD-1.iso` while
+use `debian-12.15.0-amd64-DVD-1.iso` while
 `vars-debian-12-amd64-netinst.pkrvars.hcl` does
-`debian-12.12.0-amd64-netinst.iso` respectively.  Without using these
+`debian-12.15.0-amd64-netinst.iso` respectively.  Without using these
 var files, `debian-12-*.pkr.hcl` templates use netboot `mini.iso` for
 amd64.
 
 Depending on situation you can specify either of var files on the
 command line:
 
-    packer build -var-file=vars-debian-12-amd64-full.pkrvars.hcl debian-12-minimal.pkr.hcl
+    packer build -var-file=vars-debian-12-amd64-dvd.pkrvars.hcl debian-12-minimal.pkr.hcl
 
 * amd64 ISO images
-  * `vars-debian-12-amd64-dvd.pkrvars.hcl` - `debian-12.12.0-amd64-DVD-1.iso`
-  * `vars-debian-12-amd64-netinst.pkrvars.hcl` - `debian-12.12.0-amd64-netinst.iso`
+  * `vars-debian-12-amd64-dvd.pkrvars.hcl` - `debian-12.15.0-amd64-DVD-1.iso`
+  * `vars-debian-12-amd64-netinst.pkrvars.hcl` - `debian-12.15.0-amd64-netinst.iso`
 * arm64 ISO images
-  * `vars-debian-12-arm64-dvd.pkrvars.hcl` - `debian-12.12.0-arm64-DVD-1.iso`
-  * `vars-debian-12-arm64-netinst.pkrvars.hcl` - `debian-12.12.0-arm64-netinst.iso`
+  * `vars-debian-12-arm64-dvd.pkrvars.hcl` - `debian-12.15.0-arm64-DVD-1.iso`
+  * `vars-debian-12-arm64-netinst.pkrvars.hcl` - `debian-12.15.0-arm64-netinst.iso`
   * `vars-debian-12-arm64-mini.pkrvars.hcl` - netboot CD `mini.iso`
 * i386 ISO images
-  * `vars-debian-12-i386-dvd.pkrvars.hcl` - `debian-12.12.0-i386-DVD-1.iso`
-  * `vars-debian-12-i386-netinst.pkrvars.hcl` - `debian-12.12.0-i386-netinst.iso`
+  * `vars-debian-12-i386-dvd.pkrvars.hcl` - `debian-12.15.0-i386-DVD-1.iso`
+  * `vars-debian-12-i386-netinst.pkrvars.hcl` - `debian-12.15.0-i386-netinst.iso`
   * `vars-debian-12-i386-mini.pkrvars.hcl` - netboot CD `mini.iso`
 
 It is recommended to use "jigdo" to download large iso image file and
@@ -232,9 +254,9 @@ image file rather than downloading an image from a mirror site.
 The following parameters can be set at build time by supplying `-var`
 or `-var-file` command line options to `packer`:
 
-* `boot_wait` - Override `boot_wait` default setting, which is `10s`.
+* `boot_wait` - Override `boot_wait` default setting, which is `20s`.
 * `desktop` - Specify the desktop environment to install.  Defaults to
-  `xfce`.  (Only valid for `debian-11-desktop.pkr.hcl` variant)
+  `xfce`.  (Only valid for `debian-12-desktop.pkr.hcl` variant)
 * `disk_size` - Disk size of the created box.  Defaults to `51200`,
   which means 50GB.
 * `esxi_boot_mode` - Boot mode for ESXi VM, `bios` or `efi`.  Defaults
@@ -251,7 +273,7 @@ or `-var-file` command line options to `packer`:
 * `hyperv_switch_name` - Network switch name on Packer Hyper-V builder.
   Default value is `Default Switch`.
 * `mem_size` - RAM size of the created box.  Defaults to `1024`, `1536`
-  for `dwm` variant, and `2048` for `xfce` variant.
+  for the `dwm` variant, and `2048` for the `desktop` variant.
 * `num_cpus` - The number of CPUs of the box.  Defaults to `2`.
 * `parallels_boot_mode` - Boot mode for Parallels VM, `bios` or `efi`.
   Defaults to `efi`.
@@ -262,7 +284,7 @@ or `-var-file` command line options to `packer`:
 * `qemu_display` - What QEMU `-display` option to use.  Defaults to an
   empty string.
 * `qemu_use_default_display` - Determines to pass a `-display` option
-  to QEMU or not.  Defaults to `false`.
+  to QEMU or not.  Defaults to `true`, which uses QEMU's default display.
 * `root_password` - Password for `root` user.  Defaults to `vagrant`.
   Set `sensitive` attribute to `true` when you change this password.
 * `ssh_timeout` - SSH timeout to connect this box being created.
@@ -271,7 +293,8 @@ or `-var-file` command line options to `packer`:
   `vagrant`.  Set `sensitive` attribute to `true` when you change this
   password.
 * `vagrant_ssh_public_key` - SSH public key for Vagrant user.  Defaults
-  to the public key for the Vagrant insecure private key.
+  to an empty string, which makes the provisioner download the public
+  key for the Vagrant insecure private key.
 * `vagrant_username` - User name used for run time.  Vagrant box is set
   for this user.  Default value is `vagrant`.
 * `virtualbox_boot_mode` - Boot mode for VirtualBox VM, `bios` or
@@ -285,7 +308,7 @@ or `-var-file` command line options to `packer`:
 * `vmware_disk_adapter_type` - Disk adapter type for VMware box.
   Defaults to `scsi`.
 * `vmware_hardware_version` - Virtual hardware version of VMware box.
-  Defaults to `9`.
+  Defaults to `13`.
 * `vmware_network` - Network type of VMware box.  Defaults to `nat`.
 * `vmware_network_adapter_type` - Network adapter type of VMware box.
   Defaults to `e1000`.
@@ -297,4 +320,4 @@ or `-var-file` command line options to `packer`:
 
 - - -
 
-Copyright &copy; 2023, 2025, Upperstream.
+Copyright &copy; 2023, 2025-2026, Upperstream.
